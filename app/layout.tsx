@@ -1,12 +1,48 @@
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
+import { AuthProvider } from '@/contexts/auth-context'
+import { CartProvider } from '@/contexts/cart-context'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Linka - Zambian E-Commerce Platform',
+  description: 'Connecting local businesses with customers across Zambia. Discover amazing products and services from verified retailers.',
+  keywords: ['Zambia', 'e-commerce', 'local business', 'online shopping', 'African marketplace'],
+  authors: [{ name: 'Linka Team' }],
+  creator: 'Linka',
+  publisher: 'Linka',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://linka.zm'),
+  openGraph: {
+    title: 'Linka - Zambian E-Commerce Platform',
+    description: 'Connecting local businesses with customers across Zambia',
+    url: 'https://linka.zm',
+    siteName: 'Linka',
+    locale: 'en_ZM',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Linka - Zambian E-Commerce Platform',
+    description: 'Connecting local businesses with customers across Zambia',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({
@@ -25,7 +61,20 @@ html {
 }
         `}</style>
       </head>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            <CartProvider>
+              {children}
+            </CartProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
