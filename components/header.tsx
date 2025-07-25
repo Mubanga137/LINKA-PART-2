@@ -26,7 +26,46 @@ export function Header() {
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
-            {["Shop", "About", "For Retailers", "Contact", "Industries"].map((item) => (
+            <Link
+              href="/shop"
+              className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
+            >
+              Shop
+              <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+            </Link>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2 flex items-center">
+                Categories
+                <ChevronDown className="h-4 w-4 ml-1" />
+                <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <Link href="/categories/jewelry-accessories">Jewelry & Accessories</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/categories/art-culture">Art & Culture</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/categories/tools-hardware">Tools & Hardware</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/categories/agriculture-natural">Agriculture & Natural</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/categories/food-beverages">Food & Beverages</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/categories/fashion-textiles">Fashion & Textiles</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/categories/traditional-crafts">Traditional Crafts</Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {["About", "For Retailers", "Contact", "Industries"].map((item) => (
               <Link
                 key={item}
                 href={`/${item.toLowerCase().replace(" ", "-")}`}
