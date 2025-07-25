@@ -16,6 +16,8 @@ import {
   Users,
   TrendingUp,
   Star,
+  Package,
+  Truck,
 } from "lucide-react"
 import Link from "next/link"
 
