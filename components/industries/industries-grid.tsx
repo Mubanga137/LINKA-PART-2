@@ -416,6 +416,10 @@ export function IndustriesGrid() {
                   return "/categories/tools-hardware"
                 case "Agriculture & Natural":
                   return "/categories/agriculture-natural"
+                case "Wholesale":
+                  return "/industries/wholesale"
+                case "Transport":
+                  return "/industries/transport"
                 default:
                   return "#"
               }
