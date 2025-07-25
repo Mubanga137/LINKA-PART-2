@@ -110,9 +110,12 @@ const trendingStats = [
 
 export function TrendingNow() {
   const [selectedCategory, setSelectedCategory] = useState("All")
-  const [currentTime, setCurrentTime] = useState(new Date())
+  const [currentTime, setCurrentTime] = useState<Date | null>(null)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
+    setCurrentTime(new Date())
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 1000)
@@ -272,7 +275,7 @@ export function TrendingNow() {
                           </div>
                           <div className="flex items-center">
                             <Clock className="h-4 w-4 mr-1" />
-                            <span className="text-sm">Updated {Math.floor(Math.random() * 30)} min ago</span>
+                            <span className="text-sm">Updated {isClient ? Math.floor(Math.random() * 30) : 15} min ago</span>
                           </div>
                         </div>
                       </div>
@@ -325,7 +328,7 @@ export function TrendingNow() {
         <div className="text-center mt-12">
           <div className="inline-flex items-center rounded-full bg-white/80 backdrop-blur-sm px-6 py-3 text-slate-600 border border-slate-200/50 shadow-lg">
             <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-            <span className="text-sm">Last updated: {currentTime.toLocaleTimeString()}</span>
+            <span className="text-sm">Last updated: {currentTime?.toLocaleTimeString() || '--:--:--'}</span>
             <Button size="sm" variant="ghost" className="ml-4 text-red-600 hover:text-red-700 hover:bg-red-50">
               <TrendingUp className="h-4 w-4 mr-1" />
               Refresh
