@@ -479,12 +479,20 @@ export function IndustriesGrid() {
                     {/* Stats */}
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div className="text-center p-3 bg-slate-50 rounded-lg group-hover:bg-slate-100 transition-colors">
-                        <div className="font-bold text-slate-900">{industry.stats.products}</div>
-                        <div className="text-xs text-slate-500">Products</div>
+                        <div className="font-bold text-slate-900">
+                          {industry.stats.products || industry.stats.providers || "N/A"}
+                        </div>
+                        <div className="text-xs text-slate-500">
+                          {industry.stats.products ? "Products" : "Providers"}
+                        </div>
                       </div>
                       <div className="text-center p-3 bg-slate-50 rounded-lg group-hover:bg-slate-100 transition-colors">
-                        <div className="font-bold text-slate-900">{industry.stats.sales}</div>
-                        <div className="text-xs text-slate-500">Monthly Sales</div>
+                        <div className="font-bold text-slate-900">
+                          {industry.stats.sales || industry.stats.routes || "N/A"}
+                        </div>
+                        <div className="text-xs text-slate-500">
+                          {industry.stats.sales ? "Monthly Sales" : "Routes"}
+                        </div>
                       </div>
                     </div>
 
