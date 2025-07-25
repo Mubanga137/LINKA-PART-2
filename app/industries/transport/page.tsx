@@ -162,12 +162,12 @@ export default function TransportPage() {
             <div className="text-center">
               <div className="inline-flex items-center rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-sm px-6 py-3 text-green-700 border border-green-200/50 mb-8">
                 <Truck className="mr-2 h-5 w-5 text-green-600" />
-                <span className="text-sm font-medium">Transport & Logistics</span>
+                <span className="text-sm font-medium">Logistics & Courier Services</span>
               </div>
 
               <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
                 <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                  Reliable Transport
+                  Reliable Logistics
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
@@ -176,8 +176,8 @@ export default function TransportPage() {
               </h1>
 
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-                Connect with trusted transport providers for deliveries, cargo, and logistics services. 
-                From local deliveries to inter-city transport, we've got you covered.
+                Connect with trusted logistics and courier providers for deliveries, cargo, and courier services.
+                From local deliveries to inter-city logistics, we've got you covered.
               </p>
 
               {/* User Type Toggle */}
@@ -189,7 +189,7 @@ export default function TransportPage() {
                     className="px-8 py-3 rounded-xl"
                   >
                     <Package className="mr-2 h-5 w-5" />
-                    I Need Transport
+                    I Need Logistics
                   </Button>
                   <Button
                     variant={userType === "provider" ? "default" : "ghost"}
@@ -197,7 +197,7 @@ export default function TransportPage() {
                     className="px-8 py-3 rounded-xl"
                   >
                     <Truck className="mr-2 h-5 w-5" />
-                    I Provide Transport
+                    I Provide Logistics
                   </Button>
                 </div>
               </div>
@@ -210,12 +210,12 @@ export default function TransportPage() {
                   {userType === "shipper" ? (
                     <>
                       <Navigation className="mr-3 h-5 w-5" />
-                      Book Transport Now
+                      Book Logistics Now
                     </>
                   ) : (
                     <>
                       <Truck className="mr-3 h-5 w-5" />
-                      Join as Provider
+                      Join as Logistics Provider
                     </>
                   )}
                 </Button>

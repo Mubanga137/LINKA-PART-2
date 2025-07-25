@@ -65,7 +65,7 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {["About", "For Retailers", "Contact", "Industries"].map((item) => (
+            {["About", "For Retailers", "Contact", "Services"].map((item) => (
               <Link
                 key={item}
                 href={`/${item.toLowerCase().replace(" ", "-")}`}

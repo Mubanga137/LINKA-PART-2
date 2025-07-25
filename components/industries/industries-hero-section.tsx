@@ -39,7 +39,7 @@ export function IndustriesHeroSection() {
         <div className="text-center">
           <div className="inline-flex items-center rounded-full bg-white/60 backdrop-blur-sm px-6 py-3 text-sm text-slate-700 shadow-lg shadow-slate-900/5 border border-white/20 mb-8 hover:shadow-xl hover:scale-105 transition-all duration-300">
             <Sparkles className="mr-2 h-4 w-4 text-purple-500 animate-spin-slow" />
-            Empowering Zambian Industries
+            Empowering Zambian Services
           </div>
 
           <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight">
@@ -57,7 +57,7 @@ export function IndustriesHeroSection() {
           </h1>
 
           <p className="text-xl text-slate-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Discover how Linka supports diverse industries across Zambia, from traditional crafts to modern retail,
+            Discover how Linka supports diverse services across Zambia, from traditional crafts to modern retail,
             helping businesses thrive in the digital marketplace.
           </p>
 
@@ -68,7 +68,7 @@ export function IndustriesHeroSection() {
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-10 py-4 text-lg shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:shadow-purple-500/30 transition-all hover:-translate-y-1 hover:scale-105 group"
               >
                 <TrendingUp className="mr-3 h-5 w-5 group-hover:animate-bounce" />
-                Explore Industries
+                Explore Services
               </Button>
             </Link>
             <Link href="/about">

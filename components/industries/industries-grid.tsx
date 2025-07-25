@@ -141,7 +141,7 @@ const industries = [
   },
   {
     id: 11,
-    name: "Transport",
+    name: "Logistics & Courier",
     icon: Truck,
     description: "Logistics, delivery services, and transportation solutions",
     retailers: 45,
@@ -177,12 +177,12 @@ export function IndustriesGrid() {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Industries We{" "}
+              Services We{" "}
             </span>
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Serve</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Supporting diverse sectors of the Zambian economy with tailored e-commerce solutions
+            Supporting diverse sectors of the Zambian economy with tailored e-commerce services
           </p>
         </div>
 
@@ -420,7 +420,7 @@ export function IndustriesGrid() {
                   return "/categories/agriculture-natural"
                 case "Wholesale":
                   return "/industries/wholesale"
-                case "Transport":
+                case "Logistics & Courier":
                   return "/industries/transport"
                 default:
                   return "#"
@@ -551,7 +551,7 @@ export function IndustriesGrid() {
         <div className="text-center mt-16">
           <div className="inline-flex items-center rounded-full bg-gradient-to-r from-purple-100 to-pink-100 px-8 py-4 text-purple-700 border border-purple-200/50 shadow-lg backdrop-blur-sm hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer group">
             <Users className="mr-3 h-6 w-6 group-hover:animate-bounce" />
-            <span className="text-lg font-medium">Join 300+ retailers across all industries</span>
+            <span className="text-lg font-medium">Join 300+ retailers across all services</span>
           </div>
         </div>
       </div>
