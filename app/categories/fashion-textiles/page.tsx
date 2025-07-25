@@ -225,7 +225,7 @@ export default function FashionTextilesPage() {
                   onClick={() => setSelectedCategory(category.name.toLowerCase())}
                 >
                   <CardContent className="p-6 text-center">
-                    <div className={`w-12 h-12 bg-gradient-to-br from-${category.color}-500 to-${category.color}-600 rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                       <category.icon className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="font-bold text-slate-900 mb-2">{category.name}</h3>
