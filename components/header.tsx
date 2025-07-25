@@ -78,14 +78,16 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
-            >
-              <ShoppingCart className="h-4 w-4 mr-2" />
-              Cart
-            </Button>
+            <Link href="/cart">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Cart
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="sm"
