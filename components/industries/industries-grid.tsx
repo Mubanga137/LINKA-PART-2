@@ -374,19 +374,40 @@ export function IndustriesGrid() {
                 </Link>
               )
             }
+            const getIndustryLink = (industryName: string) => {
+              switch (industryName) {
+                case "Traditional Crafts":
+                  return "/categories/traditional-crafts"
+                case "Fashion & Textiles":
+                  return "/categories/fashion-textiles"
+                case "Food & Beverages":
+                  return "/categories/food-beverages"
+                case "Jewelry & Accessories":
+                  return "/categories/jewelry-accessories"
+                case "Art & Culture":
+                  return "/categories/art-culture"
+                case "Tools & Hardware":
+                  return "/categories/tools-hardware"
+                case "Agriculture & Natural":
+                  return "/categories/agriculture-natural"
+                default:
+                  return "#"
+              }
+            }
+
             return (
-              <Card
-                key={industry.id}
-                className={`group cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:scale-105 bg-white/80 backdrop-blur-sm border-white/20 overflow-hidden ${
-                  selectedIndustry === industry.id
-                    ? "ring-2 ring-purple-500 shadow-2xl"
-                    : "hover:shadow-2xl hover:shadow-slate-900/10"
-                }`}
-                style={{ animationDelay: `${index * 100}ms` }}
-                onClick={() => setSelectedIndustry(selectedIndustry === industry.id ? null : industry.id)}
-                onMouseEnter={() => setHoveredCard(industry.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
+              <Link href={getIndustryLink(industry.name)} key={industry.id}>
+                <Card
+                  className={`group cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:scale-105 bg-white/80 backdrop-blur-sm border-white/20 overflow-hidden ${
+                    selectedIndustry === industry.id
+                      ? "ring-2 ring-purple-500 shadow-2xl"
+                      : "hover:shadow-2xl hover:shadow-slate-900/10"
+                  }`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                  onClick={() => setSelectedIndustry(selectedIndustry === industry.id ? null : industry.id)}
+                  onMouseEnter={() => setHoveredCard(industry.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
                 <CardContent className="p-0">
                   {/* Header */}
                   <div className={`p-6 bg-gradient-to-br ${industry.bgGradient} relative overflow-hidden`}>
@@ -480,7 +501,8 @@ export function IndustriesGrid() {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+                </Card>
+              </Link>
             )
           })}
         </div>
