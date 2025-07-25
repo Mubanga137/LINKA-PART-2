@@ -45,7 +45,7 @@ export function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-4">
-              {["Shop", "About Us", "Industries", "Contact", "Help Center"].map((item) => (
+              {["Shop", "About Us", "Services", "Contact", "Help Center"].map((item) => (
                 <li key={item}>
                   <Link
                     href={`/${item.toLowerCase().replace(" ", "-")}`}

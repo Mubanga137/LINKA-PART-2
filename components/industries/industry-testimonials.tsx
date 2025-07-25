@@ -127,7 +127,7 @@ export function IndustryTestimonials() {
           </h2>
           <p className="text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">
             Real businesses, real growth. See how Linka transformed these Zambian enterprises across different
-            industries
+            services
           </p>
         </div>
 
@@ -204,7 +204,7 @@ export function IndustryTestimonials() {
         <div className="text-center mt-16">
           <div className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-8 py-4 text-white border border-white/30 shadow-lg hover:bg-white/30 hover:scale-105 transition-all duration-300 cursor-pointer group">
             <Star className="mr-3 h-6 w-6 group-hover:animate-bounce" />
-            <span className="text-lg font-medium">Join 300+ successful retailers across all industries</span>
+            <span className="text-lg font-medium">Join 300+ successful retailers across all services</span>
           </div>
         </div>
       </div>
