@@ -118,7 +118,10 @@ export function ForRetailersHero() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center">
-                      <liveStats[currentStat].icon className="h-6 w-6 text-white" />
+                      {(() => {
+                        const IconComponent = liveStats[currentStat].icon
+                        return <IconComponent className="h-6 w-6 text-white" />
+                      })()}
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-slate-900">{liveStats[currentStat].value}</div>
