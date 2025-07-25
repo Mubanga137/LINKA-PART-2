@@ -129,7 +129,7 @@ const industries = [
   {
     id: 10,
     name: "Wholesale",
-    icon: Hammer,
+    icon: Package,
     description: "Bulk products, B2B marketplace, and wholesale distribution",
     retailers: 78,
     growth: "+42%",
@@ -142,7 +142,7 @@ const industries = [
   {
     id: 11,
     name: "Transport",
-    icon: Hammer,
+    icon: Truck,
     description: "Logistics, delivery services, and transportation solutions",
     retailers: 45,
     growth: "+28%",
