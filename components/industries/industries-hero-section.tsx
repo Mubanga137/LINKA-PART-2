@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles, TrendingUp } from "lucide-react"
+import Link from "next/link"
 
 const industries = [
   "Traditional Crafts",
