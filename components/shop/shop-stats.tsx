@@ -1,0 +1,58 @@
+import { TrendingUp, Users, MapPin, Award } from "lucide-react"
+
+const stats = [
+  {
+    icon: Users,
+    label: "Local Vendors",
+    value: "150+",
+    description: "Trusted businesses",
+    gradient: "from-emerald-500 to-green-600",
+  },
+  {
+    icon: MapPin,
+    label: "Delivery Areas",
+    value: "25+",
+    description: "Across Lusaka",
+    gradient: "from-orange-500 to-red-500",
+  },
+  {
+    icon: TrendingUp,
+    label: "Products Sold",
+    value: "10K+",
+    description: "This month",
+    gradient: "from-blue-500 to-indigo-600",
+  },
+  {
+    icon: Award,
+    label: "Customer Rating",
+    value: "4.9★",
+    description: "Average rating",
+    gradient: "from-purple-500 to-pink-600",
+  },
+]
+
+export function ShopStats() {
+  return (
+    <div className="mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {stats.map((stat, index) => (
+          <div
+            key={index}
+            className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg shadow-slate-900/5 border border-white/20 hover:shadow-xl hover:shadow-slate-900/10 transition-all duration-300 group"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div
+                className={`w-12 h-12 bg-gradient-to-br ${stat.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
+              >
+                <stat.icon className="h-6 w-6 text-white" />
+              </div>
+            </div>
+            <div className="text-2xl font-bold text-slate-900 mb-1">{stat.value}</div>
+            <div className="text-sm font-medium text-slate-700 mb-1">{stat.label}</div>
+            <div className="text-xs text-slate-500">{stat.description}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
