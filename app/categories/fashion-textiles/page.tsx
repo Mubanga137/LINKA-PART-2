@@ -229,7 +229,7 @@ export default function FashionTextilesPage() {
                       <category.icon className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="font-bold text-slate-900 mb-2">{category.name}</h3>
-                    <Badge variant="secondary" className={`bg-${category.color}-100 text-${category.color}-700`}>
+                    <Badge variant="secondary" className="bg-purple-100 text-purple-700">
                       {category.count} items
                     </Badge>
                   </CardContent>
