@@ -1,14 +1,42 @@
+"use client"
+
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
-import { LinkIcon, ShoppingCart, User, ChevronDown } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3 } from "lucide-react"
+import { useAuth } from "@/contexts/auth-context"
+import { useCart } from "@/contexts/cart-context"
 
 export function Header() {
+  const { user, logout } = useAuth()
+  const { totalItems } = useCart()
+  const router = useRouter()
+
+  const handleLogout = () => {
+    logout()
+    router.push('/')
+  }
+
+  const getUserDashboardLink = () => {
+    if (!user) return '/'
+    switch (user.role) {
+      case 'retailer':
+        return '/retailer-dashboard'
+      case 'admin':
+        return '/admin-dashboard'
+      default:
+        return '/profile'
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200/50 shadow-sm">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -96,27 +124,100 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
+            {/* Cart */}
             <Link href="/cart">
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
+                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
               >
                 <ShoppingCart className="h-4 w-4 mr-2" />
                 Cart
+                {totalItems > 0 && (
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center bg-red-500 text-white text-xs">
+                    {totalItems}
+                  </Badge>
+                )}
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
-            >
-              <User className="h-4 w-4 mr-2" />
-              Login
-            </Button>
-            <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 transition-all">
-              Sell on Linka
-            </Button>
+
+            {/* User Authentication */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    {user.name}
+                    <ChevronDown className="h-3 w-3 ml-1" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem onClick={() => router.push(getUserDashboardLink())}>
+                    {user.role === 'retailer' ? (
+                      <>
+                        <BarChart3 className="mr-2 h-4 w-4" />
+                        Dashboard
+                      </>
+                    ) : user.role === 'admin' ? (
+                      <>
+                        <Settings className="mr-2 h-4 w-4" />
+                        Admin Panel
+                      </>
+                    ) : (
+                      <>
+                        <User className="mr-2 h-4 w-4" />
+                        Profile
+                      </>
+                    )}
+                  </DropdownMenuItem>
+                  {user.role === 'customer' && (
+                    <DropdownMenuItem onClick={() => router.push('/orders')}>
+                      <Package className="mr-2 h-4 w-4" />
+                      My Orders
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem onClick={() => router.push('/settings')}>
+                    <Settings className="mr-2 h-4 w-4" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/login">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Login
+                </Button>
+              </Link>
+            )}
+
+            {/* CTA Button */}
+            {user?.role === 'retailer' ? (
+              <Link href="/retailer-dashboard">
+                <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/30 transition-all">
+                  My Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <Link href={user ? "/become-retailer" : "/signup?role=retailer"}>
+                <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 transition-all">
+                  Sell on Linka
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
