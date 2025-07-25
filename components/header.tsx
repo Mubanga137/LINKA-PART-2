@@ -1,6 +1,12 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { LinkIcon, ShoppingCart, User } from "lucide-react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { LinkIcon, ShoppingCart, User, ChevronDown } from "lucide-react"
 
 export function Header() {
   return (
