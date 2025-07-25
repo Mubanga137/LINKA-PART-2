@@ -62,21 +62,25 @@ export function IndustriesHeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-10 py-4 text-lg shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:shadow-purple-500/30 transition-all hover:-translate-y-1 hover:scale-105 group"
-            >
-              <TrendingUp className="mr-3 h-5 w-5 group-hover:animate-bounce" />
-              Explore Industries
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 px-10 py-4 text-lg bg-white/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 hover:scale-105"
-            >
-              Success Stories
-              <ArrowRight className="ml-3 h-5 w-5" />
-            </Button>
+            <Link href="/for-retailers">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-10 py-4 text-lg shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:shadow-purple-500/30 transition-all hover:-translate-y-1 hover:scale-105 group"
+              >
+                <TrendingUp className="mr-3 h-5 w-5 group-hover:animate-bounce" />
+                Explore Industries
+              </Button>
+            </Link>
+            <Link href="/about">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 px-10 py-4 text-lg bg-white/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 hover:scale-105"
+              >
+                Success Stories
+                <ArrowRight className="ml-3 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
 
           {/* Industry Indicators */}
