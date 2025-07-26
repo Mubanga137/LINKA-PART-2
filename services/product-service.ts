@@ -177,7 +177,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'art-001',
     name: 'Wooden Sculpture - Elephant',
     price: 450,
-    image: '/placeholder.svg?height=400&width=400&text=Elephant+Sculpture',
+    image: 'https://images.pexels.com/photos/19652771/pexels-photo-19652771.jpeg',
     category: 'art-culture',
     subcategory: 'sculptures',
     description: 'Hand-carved wooden elephant sculpture by renowned Zambian artist. Made from sustainable mukwa wood.',
