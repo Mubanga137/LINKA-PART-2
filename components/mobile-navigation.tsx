@@ -1,0 +1,312 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { useRouter, usePathname } from "next/navigation"
+import { motion, AnimatePresence } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import {
+  Menu,
+  X,
+  Home,
+  ShoppingBag,
+  Briefcase,
+  User,
+  Search,
+  Heart,
+  Settings,
+  LogOut,
+  Phone,
+  Info,
+  Store,
+  ChevronRight,
+  ShoppingCart,
+  Bell,
+  Package
+} from "lucide-react"
+import { useAuth } from "@/contexts/auth-context"
+import { useCart } from "@/contexts/cart-context"
+
+export function MobileNavigation() {
+  const [isOpen, setIsOpen] = useState(false)
+  const { user, logout } = useAuth()
+  const { totalItems } = useCart()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const handleLogout = () => {
+    logout()
+    router.push('/')
+    setIsOpen(false)
+  }
+
+  const closeSheet = () => setIsOpen(false)
+
+  // Primary navigation items
+  const primaryItems = [
+    {
+      name: "Home",
+      href: "/",
+      icon: Home,
+      active: pathname === "/"
+    },
+    {
+      name: "Marketplace",
+      href: "/marketplace",
+      icon: ShoppingBag,
+      active: pathname?.includes("/marketplace")
+    },
+    {
+      name: "Services",
+      href: "/industries",
+      icon: Briefcase,
+      active: pathname?.includes("/industries") || pathname?.includes("/services")
+    }
+  ]
+
+  // Secondary navigation items
+  const secondaryItems = [
+    { name: "About", href: "/about", icon: Info },
+    { name: "For Retailers", href: "/for-retailers", icon: Store },
+    { name: "Contact", href: "/contact", icon: Phone }
+  ]
+
+  // User-specific items
+  const getUserItems = () => {
+    if (!user) return []
+    
+    const baseItems = [
+      { name: "Profile", href: "/profile", icon: User },
+      { name: "Orders", href: "/orders", icon: Package },
+      { name: "Wishlist", href: "/wishlist", icon: Heart },
+      { name: "Settings", href: "/settings", icon: Settings }
+    ]
+
+    if (user.role === 'retailer') {
+      return [
+        { name: "Dashboard", href: "/retailer-dashboard", icon: Settings },
+        ...baseItems.slice(1) // Remove Profile, keep others
+      ]
+    }
+
+    return baseItems
+  }
+
+  return (
+    <div className="md:hidden">
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetTrigger asChild>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="relative p-2 text-current hover:bg-current/10 transition-colors"
+          >
+            <Menu className="h-6 w-6" />
+            {totalItems > 0 && (
+              <Badge className="absolute -top-1 -right-1 h-5 w-5 p-0 text-xs bg-orange-500 hover:bg-orange-500">
+                {totalItems}
+              </Badge>
+            )}
+          </Button>
+        </SheetTrigger>
+        
+        <SheetContent 
+          side="right" 
+          className="w-full max-w-sm p-0 bg-gradient-to-br from-slate-50 to-white border-l border-slate-200/50"
+        >
+          <div className="flex flex-col h-full">
+            {/* Header */}
+            <SheetHeader className="p-6 pb-4 border-b border-slate-100">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span className="text-white font-bold text-lg">L</span>
+                  </div>
+                  <div>
+                    <SheetTitle className="text-lg font-bold text-slate-900">Linka</SheetTitle>
+                    <SheetDescription className="text-sm text-slate-500">
+                      Your local marketplace
+                    </SheetDescription>
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={closeSheet}
+                  className="h-8 w-8 p-0 text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </div>
+            </SheetHeader>
+
+            {/* User Info */}
+            {user && (
+              <div className="p-6 pb-4">
+                <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100">
+                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                    <User className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-slate-900 truncate">{user.name}</p>
+                    <p className="text-sm text-indigo-600 capitalize">{user.role}</p>
+                  </div>
+                  {user.role === 'customer' && totalItems > 0 && (
+                    <Badge className="bg-orange-500 text-white">
+                      {totalItems}
+                    </Badge>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Main Navigation */}
+            <nav className="flex-1 px-6 space-y-2">
+              {/* Primary Items */}
+              <div className="space-y-1">
+                {primaryItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={closeSheet}
+                    className={`
+                      flex items-center space-x-4 p-4 rounded-2xl transition-all duration-200 group
+                      ${item.active 
+                        ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/20' 
+                        : 'text-slate-700 hover:bg-slate-100 hover:text-indigo-600'
+                      }
+                    `}
+                  >
+                    <div className={`
+                      w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200
+                      ${item.active 
+                        ? 'bg-white/20' 
+                        : 'bg-slate-100 group-hover:bg-indigo-100'
+                      }
+                    `}>
+                      <item.icon className={`h-5 w-5 ${item.active ? 'text-white' : 'text-slate-600 group-hover:text-indigo-600'}`} />
+                    </div>
+                    <span className="font-medium">{item.name}</span>
+                    <ChevronRight className={`h-4 w-4 ml-auto ${item.active ? 'text-white/70' : 'text-slate-400'}`} />
+                  </Link>
+                ))}
+              </div>
+
+              {/* Cart (for customers) */}
+              {user?.role === 'customer' && (
+                <Link
+                  href="/cart"
+                  onClick={closeSheet}
+                  className="flex items-center space-x-4 p-4 rounded-2xl text-slate-700 hover:bg-slate-100 hover:text-indigo-600 transition-all duration-200 group"
+                >
+                  <div className="w-10 h-10 bg-slate-100 group-hover:bg-indigo-100 rounded-xl flex items-center justify-center transition-all duration-200">
+                    <ShoppingCart className="h-5 w-5 text-slate-600 group-hover:text-indigo-600" />
+                  </div>
+                  <span className="font-medium">Cart</span>
+                  {totalItems > 0 && (
+                    <Badge className="bg-orange-500 text-white ml-auto">
+                      {totalItems}
+                    </Badge>
+                  )}
+                </Link>
+              )}
+
+              {/* Divider */}
+              <div className="py-4">
+                <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+              </div>
+
+              {/* Secondary Items */}
+              <div className="space-y-1">
+                {secondaryItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={closeSheet}
+                    className="flex items-center space-x-4 p-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all duration-200 group"
+                  >
+                    <item.icon className="h-5 w-5" />
+                    <span className="font-medium">{item.name}</span>
+                    <ChevronRight className="h-3 w-3 ml-auto text-slate-400" />
+                  </Link>
+                ))}
+              </div>
+
+              {/* User-specific items */}
+              {user && (
+                <>
+                  <div className="py-2">
+                    <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+                  </div>
+                  <div className="space-y-1">
+                    {getUserItems().map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={closeSheet}
+                        className="flex items-center space-x-4 p-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all duration-200 group"
+                      >
+                        <item.icon className="h-5 w-5" />
+                        <span className="font-medium">{item.name}</span>
+                        <ChevronRight className="h-3 w-3 ml-auto text-slate-400" />
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+            </nav>
+
+            {/* Footer */}
+            <div className="p-6 pt-4 border-t border-slate-100 space-y-3">
+              {user ? (
+                <>
+                  {user.role !== 'retailer' && (
+                    <Link href="/become-retailer" onClick={closeSheet}>
+                      <Button className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/20 font-semibold rounded-xl h-11">
+                        Become a Retailer
+                      </Button>
+                    </Link>
+                  )}
+                  <Button
+                    onClick={handleLogout}
+                    variant="outline"
+                    className="w-full border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-red-600 hover:border-red-200 transition-all duration-200 rounded-xl h-11"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <div className="space-y-3">
+                  <Link href="/login" onClick={closeSheet}>
+                    <Button
+                      variant="outline"
+                      className="w-full border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-indigo-600 hover:border-indigo-200 transition-all duration-200 rounded-xl h-11"
+                    >
+                      <User className="h-4 w-4 mr-2" />
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/signup" onClick={closeSheet}>
+                    <Button className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/20 font-semibold rounded-xl h-11">
+                      Get Started
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </div>
+  )
+}
