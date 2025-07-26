@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { memo, useState, useEffect, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
