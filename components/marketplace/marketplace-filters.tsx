@@ -145,22 +145,40 @@ export function MarketplaceFilters({ filters, onFiltersChange, isLoading }: Mark
           <CardContent className="pt-0">
             <div className="space-y-3">
               {CATEGORIES.map((category) => (
-                <div key={category.id} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={category.id}
-                    checked={filters.category === category.id}
-                    onCheckedChange={(checked) => 
-                      handleCategoryChange(category.id, checked as boolean)
-                    }
-                    disabled={isLoading}
-                  />
-                  <Label 
-                    htmlFor={category.id} 
-                    className="text-sm cursor-pointer flex items-center gap-2"
-                  >
-                    <span>{category.emoji}</span>
-                    <span>{category.name}</span>
-                  </Label>
+                <div key={category.id} className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id={category.id}
+                      checked={filters.category === category.id}
+                      onCheckedChange={(checked) =>
+                        handleCategoryChange(category.id, checked as boolean)
+                      }
+                      disabled={isLoading}
+                    />
+                    <Label
+                      htmlFor={category.id}
+                      className="text-sm cursor-pointer flex items-center gap-2"
+                    >
+                      <span>{category.emoji}</span>
+                      <span>{category.name}</span>
+                    </Label>
+                  </div>
+
+                  {/* Fashion subcategories */}
+                  {category.id === 'fashion' && category.subcategories && (
+                    <div className="ml-6 space-y-1">
+                      {category.subcategories.map((sub) => (
+                        <Link
+                          key={sub.id}
+                          href={sub.path}
+                          className="flex items-center text-xs text-slate-600 hover:text-indigo-600 transition-colors p-1 rounded hover:bg-slate-50"
+                        >
+                          <span className="w-2 h-2 bg-slate-300 rounded-full mr-2"></span>
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
