@@ -378,7 +378,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'service-006',
     name: 'Medicine Delivery Service',
     price: 25,
-    image: 'https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg',
+    image: 'https://images.pexels.com/photos/14027298/pexels-photo-14027298.jpeg',
     category: 'services',
     subcategory: 'pharmacies',
     description: 'Fast and reliable medicine delivery service. Upload your prescription and get medicines delivered to your doorstep.',
