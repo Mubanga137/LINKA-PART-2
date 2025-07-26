@@ -272,18 +272,35 @@ export function MarketplaceGrid({
                     <span className="truncate">{product.retailerLocation}</span>
                   </div>
 
-                  {/* Shipping Info */}
+                  {/* Shipping/Service Info */}
                   <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
-                    <div className="flex items-center gap-1">
-                      <Truck className="h-3 w-3" />
-                      <span>
-                        {product.shippingInfo.freeShipping ? 'Free' : `K${product.shippingInfo.shippingCost}`}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      <span>{product.shippingInfo.estimatedDays} days</span>
-                    </div>
+                    {product.category === 'services' ? (
+                      <>
+                        <div className="flex items-center gap-1">
+                          <span>📅</span>
+                          <span>Bookable</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          <span>
+                            {product.shippingInfo.estimatedDays === 0 ? 'Same day' : `${product.shippingInfo.estimatedDays} days`}
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex items-center gap-1">
+                          <Truck className="h-3 w-3" />
+                          <span>
+                            {product.shippingInfo.freeShipping ? 'Free' : `K${product.shippingInfo.shippingCost}`}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          <span>{product.shippingInfo.estimatedDays} days</span>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   {/* Add to Cart Button */}
