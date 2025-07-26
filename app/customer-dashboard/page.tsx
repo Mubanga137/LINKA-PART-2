@@ -70,8 +70,15 @@ export default function CustomerDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
-      <Header />
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-indigo-300/20 to-purple-400/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-gradient-to-br from-pink-300/20 to-orange-400/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-gradient-to-br from-purple-300/20 to-blue-400/20 rounded-full blur-3xl animate-bounce-slow" style={{ animationDelay: '4s' }}></div>
+      </div>
+
+      <CustomerHeader />
       
       <main className="pb-16">
         {/* Welcome Message for New Users */}
