@@ -554,6 +554,18 @@ export function MarketplaceMainHeader() {
                         transition={{ duration: 0.4, delay: 0.3 }}
                       >
                         <Link
+                          href="/marketplace?category=services"
+                          className="flex items-center justify-between py-4 text-white hover:text-orange-300 hover:bg-white/10 rounded-xl px-4 transition-all duration-300"
+                          onClick={closeMobileMenu}
+                        >
+                          <span className="flex items-center">
+                            <Briefcase className="h-5 w-5 mr-3 text-orange-400" />
+                            Browse Services
+                          </span>
+                          <ChevronRight className="h-4 w-4" />
+                        </Link>
+
+                        <Link
                           href="/cart"
                           className="flex items-center justify-between py-4 text-white hover:text-orange-300 hover:bg-white/10 rounded-xl px-4 transition-all duration-300"
                           onClick={closeMobileMenu}
