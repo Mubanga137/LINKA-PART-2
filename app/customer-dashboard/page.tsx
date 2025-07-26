@@ -97,7 +97,7 @@ export default function CustomerDashboard() {
         )}
 
         {/* Welcome Section */}
-        <CustomerWelcome user={user} />
+        <EnhancedCustomerWelcome user={user} />
 
         {/* Quick Actions */}
         <QuickActions />
