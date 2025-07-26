@@ -1,41 +1,40 @@
 import { TrendingUp, Users, MapPin, Award } from "lucide-react"
 
-const stats = [
-  {
-    icon: Users,
-    label: "Local Vendors",
-    value: "150+",
-    description: "Trusted businesses",
-    gradient: "from-emerald-500 to-green-600",
-  },
-  {
-    icon: MapPin,
-    label: "Delivery Areas",
-    value: "25+",
-    description: "Across Lusaka",
-    gradient: "from-orange-500 to-red-500",
-  },
-  {
-    icon: TrendingUp,
-    label: "Available Products",
-    value: totalProducts ? `${totalProducts.toLocaleString()}` : "Loading...",
-    description: "Ready to ship",
-    gradient: "from-blue-500 to-indigo-600",
-  },
-  {
-    icon: Award,
-    label: "Customer Rating",
-    value: "4.9★",
-    description: "Average rating",
-    gradient: "from-purple-500 to-pink-600",
-  },
-]
-
 interface ShopStatsProps {
   totalProducts?: number
 }
 
 export function ShopStats({ totalProducts }: ShopStatsProps) {
+  const stats = [
+    {
+      icon: Users,
+      label: "Local Vendors",
+      value: "150+",
+      description: "Trusted businesses",
+      gradient: "from-emerald-500 to-green-600",
+    },
+    {
+      icon: MapPin,
+      label: "Delivery Areas",
+      value: "25+",
+      description: "Across Lusaka",
+      gradient: "from-orange-500 to-red-500",
+    },
+    {
+      icon: TrendingUp,
+      label: "Available Products",
+      value: totalProducts ? `${totalProducts.toLocaleString()}` : "Loading...",
+      description: "Ready to ship",
+      gradient: "from-blue-500 to-indigo-600",
+    },
+    {
+      icon: Award,
+      label: "Customer Rating",
+      value: "4.9��",
+      description: "Average rating",
+      gradient: "from-purple-500 to-pink-600",
+    },
+  ]
   return (
     <div className="mb-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
