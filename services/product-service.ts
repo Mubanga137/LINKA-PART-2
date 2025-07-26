@@ -205,7 +205,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'crafts-001',
     name: 'Handwoven Basket Set',
     price: 220,
-    image: '/placeholder.svg?height=400&width=400&text=Basket+Set',
+    image: 'https://images.pexels.com/photos/20943320/pexels-photo-20943320.jpeg',
     category: 'traditional-crafts',
     subcategory: 'baskets',
     description: 'Set of three handwoven baskets made from traditional materials. Perfect for storage and decoration.',
