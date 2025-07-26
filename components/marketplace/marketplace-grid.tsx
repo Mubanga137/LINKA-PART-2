@@ -395,7 +395,7 @@ export function MarketplaceGrid({
                             <>
                               {[...Array(3)].map((_, i) => (
                                 <motion.div
-                                  key={i}
+                                  key={`${product.id}-particle-${i}`}
                                   className="absolute w-2 h-2 bg-orange-400 rounded-full"
                                   initial={{ 
                                     x: Math.random() * 100,
