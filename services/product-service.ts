@@ -305,19 +305,26 @@ class ProductService {
     // Apply sorting
     filteredProducts.sort((a, b) => {
       let comparison = 0
-      
+
       switch (sort.sortBy) {
         case 'name':
           comparison = a.name.localeCompare(b.name)
           break
         case 'price':
+        case 'price-low':
           comparison = a.price - b.price
+          break
+        case 'price-high':
+          comparison = b.price - a.price
           break
         case 'rating':
           comparison = a.rating - b.rating
           break
-        case 'popularity':
+        case 'popular':
           comparison = a.reviewCount - b.reviewCount
+          break
+        case 'recommended':
+          comparison = a.rating - b.rating
           break
         case 'newest':
         default:
