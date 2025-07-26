@@ -349,7 +349,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Event Photography',
     price: 300,
     originalPrice: 400,
-    image: 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg',
+    image: 'https://images.pexels.com/photos/4276830/pexels-photo-4276830.jpeg',
     category: 'services',
     subcategory: 'entertainment',
     description: 'Professional event photography services for weddings, parties, and corporate events. High-quality photos delivered digitally.',
