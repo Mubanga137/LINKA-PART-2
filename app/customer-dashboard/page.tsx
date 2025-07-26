@@ -317,7 +317,7 @@ export default function CustomerDashboard() {
           </div>
 
           {/* Category Grid */}
-          <CategoryGrid />
+          <EnhancedCategoryGrid />
 
           {/* Trending Products */}
           <TrendingProducts
