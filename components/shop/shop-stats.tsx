@@ -1,4 +1,4 @@
-import { TrendingUp, Users, MapPin, Award } from "lucide-react"
+import { Package, ShoppingBag, Truck, Star } from "lucide-react"
 
 interface ShopStatsProps {
   totalProducts?: number
@@ -7,34 +7,35 @@ interface ShopStatsProps {
 export function ShopStats({ totalProducts }: ShopStatsProps) {
   const stats = [
     {
-      icon: Users,
-      label: "Local Vendors",
-      value: "150+",
-      description: "Trusted businesses",
+      icon: Package,
+      label: "Available Products",
+      value: totalProducts ? `${totalProducts.toLocaleString()}` : "Loading...",
+      description: "Ready to purchase",
       gradient: "from-emerald-500 to-green-600",
     },
     {
-      icon: MapPin,
-      label: "Delivery Areas",
-      value: "25+",
-      description: "Across Lusaka",
-      gradient: "from-orange-500 to-red-500",
-    },
-    {
-      icon: TrendingUp,
-      label: "Available Products",
-      value: totalProducts ? `${totalProducts.toLocaleString()}` : "Loading...",
-      description: "Ready to ship",
+      icon: ShoppingBag,
+      label: "Product Categories",
+      value: "12+",
+      description: "Different categories",
       gradient: "from-blue-500 to-indigo-600",
     },
     {
-      icon: Award,
-      label: "Customer Rating",
-      value: "4.9��",
-      description: "Average rating",
+      icon: Truck,
+      label: "Fast Delivery",
+      value: "24hrs",
+      description: "Average delivery time",
+      gradient: "from-orange-500 to-red-500",
+    },
+    {
+      icon: Star,
+      label: "Product Rating",
+      value: "4.8⭐",
+      description: "Customer satisfaction",
       gradient: "from-purple-500 to-pink-600",
     },
   ]
+  
   return (
     <div className="mb-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

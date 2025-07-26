@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { CustomerHeader } from "@/components/customer-header"
+import { ShopCustomerHeader } from "@/components/shop/shop-customer-header"
 import { ShopFilters } from "@/components/shop/shop-filters"
 import { ProductGrid } from "@/components/shop/product-grid"
 import { ShopStats } from "@/components/shop/shop-stats"
@@ -102,7 +102,7 @@ export default function ShopPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
-      <CustomerHeader />
+      <ShopCustomerHeader />
       
       {/* Hero Section - Focused on Shopping */}
       <div className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white relative overflow-hidden">
@@ -112,11 +112,11 @@ export default function ShopPage() {
             <div className="flex items-center justify-center mb-4">
               <ShoppingBag className="h-12 w-12 text-yellow-400 mr-4" />
               <h1 className="text-4xl md:text-5xl font-bold">
-                Shop Local Products
+                Shop Premium Products
               </h1>
             </div>
             <p className="text-xl text-white/90 max-w-2xl mx-auto mb-8">
-              Discover amazing products from verified Zambian retailers. Support local businesses and find unique items.
+              Browse our curated collection of quality products from trusted local vendors. Find exactly what you need with easy search and filtering.
             </p>
             
             {/* Prominent Search Bar */}
@@ -124,7 +124,7 @@ export default function ShopPage() {
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
                 <Input
-                  placeholder="Search for products, brands, or categories..."
+                  placeholder="Search for products, brands, categories, or vendors..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={handleSearchKeyPress}
