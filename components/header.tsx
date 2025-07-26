@@ -134,12 +134,28 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
-            {/* Cart */}
-            <Link href="/cart">
+            {/* Mobile Cart Button */}
+            <Link href="/cart" className="md:hidden">
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+                className="text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative p-2"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                {totalItems > 0 && (
+                  <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center bg-red-500 text-white text-xs">
+                    {totalItems}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+
+            {/* Desktop Cart */}
+            <Link href="/cart" className="hidden md:block">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
               >
                 <ShoppingCart className="h-4 w-4 mr-2" />
                 Cart
@@ -150,6 +166,16 @@ export function Header() {
                 )}
               </Button>
             </Link>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 p-2"
+              onClick={toggleMobileMenu}
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
 
             {/* User Authentication */}
             {user ? (
