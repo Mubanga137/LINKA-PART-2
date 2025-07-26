@@ -17,9 +17,9 @@ const stats = [
   },
   {
     icon: TrendingUp,
-    label: "Products Sold",
-    value: "10K+",
-    description: "This month",
+    label: "Available Products",
+    value: totalProducts ? `${totalProducts.toLocaleString()}` : "Loading...",
+    description: "Ready to ship",
     gradient: "from-blue-500 to-indigo-600",
   },
   {
