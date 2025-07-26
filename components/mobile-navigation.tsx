@@ -266,23 +266,14 @@ export function MobileNavigation() {
             {/* Footer */}
             <div className="p-6 pt-4 border-t border-slate-100 space-y-3">
               {user ? (
-                <>
-                  {user.role !== 'retailer' && (
-                    <Link href="/become-retailer" onClick={closeSheet}>
-                      <Button className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/20 font-semibold rounded-xl h-11">
-                        Become a Retailer
-                      </Button>
-                    </Link>
-                  )}
-                  <Button
-                    onClick={handleLogout}
-                    variant="outline"
-                    className="w-full border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-red-600 hover:border-red-200 transition-all duration-200 rounded-xl h-11"
-                  >
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Logout
-                  </Button>
-                </>
+                <Button
+                  onClick={handleLogout}
+                  variant="outline"
+                  className="w-full border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-red-600 hover:border-red-200 transition-all duration-200 rounded-xl h-11"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
               ) : (
                 <div className="space-y-3">
                   <Link href="/login" onClick={closeSheet}>
