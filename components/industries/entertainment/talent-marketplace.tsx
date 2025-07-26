@@ -40,9 +40,9 @@ const talents = [
     languages: ["English", "Bemba", "Nyanja"],
     equipment: ["Professional Sound System", "Lighting", "Microphones"],
     portfolio: [
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=150&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200&h=150&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=150&fit=crop&crop=center",
     ],
   },
   {
@@ -64,9 +64,9 @@ const talents = [
     languages: ["English", "Bemba"],
     equipment: ["Full Band Setup", "Vocals", "Acoustic Guitar"],
     portfolio: [
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200&h=150&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=150&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=150&fit=crop&crop=center",
     ],
   },
   {
@@ -88,9 +88,9 @@ const talents = [
     languages: ["English", "Bemba", "Lozi"],
     equipment: ["Traditional Costumes", "Props", "Sound System"],
     portfolio: [
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=150&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=200&h=150&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1546535094-34b9fc1f4b37?w=200&h=150&fit=crop&crop=center",
     ],
   },
   {
@@ -112,9 +112,9 @@ const talents = [
     languages: ["English", "Bemba", "Nyanja", "Tonga"],
     equipment: ["Wireless Microphone", "Professional Attire"],
     portfolio: [
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
+      "https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=200&h=150&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200&h=150&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=150&fit=crop&crop=center",
     ],
   },
 ]
