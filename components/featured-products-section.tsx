@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { memo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Star, MapPin, Heart, ShoppingCart, Eye, Zap } from "lucide-react"
@@ -60,7 +60,7 @@ const products = [
   },
 ]
 
-export function FeaturedProductsSection() {
+export const FeaturedProductsSection = memo(function FeaturedProductsSection() {
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null)
 
   return (
@@ -186,4 +186,4 @@ export function FeaturedProductsSection() {
       </div>
     </section>
   )
-}
+})
