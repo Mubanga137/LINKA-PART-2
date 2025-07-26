@@ -149,7 +149,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'tools-001',
     name: 'Professional Hammer Set',
     price: 180,
-    image: '/placeholder.svg?height=400&width=400&text=Hammer+Set',
+    image: 'https://images.pexels.com/photos/9607005/pexels-photo-9607005.jpeg',
     category: 'tools-hardware',
     subcategory: 'hand-tools',
     description: 'Professional quality hammer set for construction and woodworking. Durable steel construction with ergonomic handles.',
