@@ -150,6 +150,98 @@ export function MarketplaceMainHeader() {
                 />
               </Link>
             </motion.div>
+
+            {/* Services Dropdown Menu */}
+            {user && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      variant="ghost"
+                      className="text-white hover:text-orange-300 font-semibold transition-all duration-300 relative group py-2 px-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 overflow-hidden"
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 opacity-0 group-hover:opacity-100"
+                        transition={{ duration: 0.3 }}
+                      />
+                      <span className="relative flex items-center">
+                        <Briefcase className="h-4 w-4 mr-2" />
+                        Services
+                        <ChevronDown className="h-3 w-3 ml-2" />
+                      </span>
+                    </Button>
+                  </motion.div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="start"
+                  className="w-80 bg-white/95 backdrop-blur-sm border-white/20 shadow-2xl shadow-blue-900/20 rounded-2xl p-4"
+                >
+                  <div className="space-y-1">
+                    <div className="px-3 py-2 mb-3">
+                      <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Service Categories</h3>
+                      <p className="text-xs text-slate-500 mt-1">Browse and book local services</p>
+                    </div>
+
+                    {/* Service Categories */}
+                    {[
+                      { icon: Stethoscope, name: "Health & Wellness", path: "/services/health-wellness", description: "Medical, fitness & wellness" },
+                      { icon: Home, name: "Home Services", path: "/industries/home-decor", description: "Cleaning, repairs & improvement" },
+                      { icon: Car, name: "Transport & Logistics", path: "/industries/transport", description: "Delivery & transportation" },
+                      { icon: Camera, name: "Entertainment", path: "/industries/entertainment", description: "Photography & events" },
+                      { icon: GraduationCap, name: "Education & Training", path: "/marketplace?category=education", description: "Tutoring & skill development" },
+                      { icon: Wrench, name: "Professional Services", path: "/marketplace?category=professional", description: "Legal, accounting & consulting" },
+                      { icon: Heart, name: "Beauty & Wellness", path: "/marketplace?category=beauty", description: "Salon, spa & beauty services" },
+                      { icon: Building, name: "Real Estate", path: "/marketplace?category=real-estate", description: "Property & rental services" }
+                    ].map((service) => (
+                      <DropdownMenuItem key={service.name} asChild>
+                        <Link
+                          href={service.path}
+                          className="flex items-center justify-between p-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 group cursor-pointer"
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center group-hover:from-blue-200 group-hover:to-indigo-200 transition-all duration-300">
+                              <service.icon className="h-5 w-5 text-blue-600" />
+                            </div>
+                            <div>
+                              <div className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors">{service.name}</div>
+                              <div className="text-xs text-slate-500 group-hover:text-blue-500 transition-colors">{service.description}</div>
+                            </div>
+                          </div>
+                          <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+
+                    <DropdownMenuSeparator className="my-3" />
+
+                    {/* Quick Actions */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/marketplace?category=services"
+                          className="flex items-center justify-center p-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white transition-all duration-300 group"
+                        >
+                          <Search className="h-4 w-4 mr-2" />
+                          Browse All
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/become-retailer?type=service"
+                          className="flex items-center justify-center p-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white transition-all duration-300 group"
+                        >
+                          <Shield className="h-4 w-4 mr-2" />
+                          List Service
+                        </Link>
+                      </DropdownMenuItem>
+                    </div>
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </motion.nav>
 
           <motion.div 
