@@ -257,6 +257,252 @@ export function Header() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Navigation Overlay */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+            onClick={closeMobileMenu}
+          />
+
+          {/* Mobile Menu Panel */}
+          <div className="fixed top-0 right-0 z-50 h-full w-80 max-w-sm bg-white shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden">
+            <div className="flex flex-col h-full">
+              {/* Mobile Menu Header */}
+              <div className="flex items-center justify-between p-6 border-b border-slate-200">
+                <div className="flex items-center space-x-3">
+                  <LinkIcon className="h-8 w-8 text-indigo-600" />
+                  <span className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                    Linka
+                  </span>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-slate-600 hover:text-slate-900 p-2"
+                  onClick={closeMobileMenu}
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+              </div>
+
+              {/* Mobile Navigation Links */}
+              <nav className="flex-1 overflow-y-auto py-6">
+                <div className="space-y-1 px-6">
+                  {/* Main Navigation */}
+                  <Link
+                    href="/shop"
+                    className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    <span className="font-medium">Shop</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+
+                  {/* Categories Section */}
+                  <div className="py-3">
+                    <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
+                      Categories
+                    </h3>
+                    <div className="space-y-1">
+                      <Link
+                        href="/categories/jewelry-accessories"
+                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        Jewelry & Accessories
+                      </Link>
+                      <Link
+                        href="/categories/art-culture"
+                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        Art & Culture
+                      </Link>
+                      <Link
+                        href="/categories/tools-hardware"
+                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        Tools & Hardware
+                      </Link>
+                      <Link
+                        href="/categories/agriculture-natural"
+                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        Agriculture & Natural
+                      </Link>
+                      <Link
+                        href="/categories/food-beverages"
+                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        Food & Beverages
+                      </Link>
+                      <Link
+                        href="/categories/fashion-textiles"
+                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        Fashion & Textiles
+                      </Link>
+                      <Link
+                        href="/categories/traditional-crafts"
+                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        Traditional Crafts
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Other Navigation Items */}
+                  <Link
+                    href="/about"
+                    className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    <span className="font-medium">About</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+
+                  <Link
+                    href="/for-retailers"
+                    className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    <span className="font-medium">For Retailers</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+
+                  <Link
+                    href="/contact"
+                    className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    <span className="font-medium">Contact</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+
+                  <Link
+                    href="/industries"
+                    className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    <span className="font-medium">Services</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </nav>
+
+              {/* Mobile Menu Footer */}
+              <div className="border-t border-slate-200 p-6 space-y-4">
+                {/* User Authentication for Mobile */}
+                {user ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
+                      <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center">
+                        <User className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-slate-900">{user.name}</p>
+                        <p className="text-xs text-slate-500 capitalize">{user.role}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Link
+                        href={getUserDashboardLink()}
+                        className="flex items-center space-x-3 py-2 text-slate-700 hover:text-indigo-600 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        {user.role === 'retailer' ? (
+                          <BarChart3 className="h-4 w-4" />
+                        ) : user.role === 'admin' ? (
+                          <Settings className="h-4 w-4" />
+                        ) : (
+                          <User className="h-4 w-4" />
+                        )}
+                        <span>
+                          {user.role === 'retailer' ? 'Dashboard' : user.role === 'admin' ? 'Admin Panel' : 'Profile'}
+                        </span>
+                      </Link>
+
+                      {user.role === 'customer' && (
+                        <Link
+                          href="/orders"
+                          className="flex items-center space-x-3 py-2 text-slate-700 hover:text-indigo-600 transition-colors"
+                          onClick={closeMobileMenu}
+                        >
+                          <Package className="h-4 w-4" />
+                          <span>My Orders</span>
+                        </Link>
+                      )}
+
+                      <Link
+                        href="/settings"
+                        className="flex items-center space-x-3 py-2 text-slate-700 hover:text-indigo-600 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        <Settings className="h-4 w-4" />
+                        <span>Settings</span>
+                      </Link>
+
+                      <button
+                        onClick={() => {
+                          handleLogout()
+                          closeMobileMenu()
+                        }}
+                        className="flex items-center space-x-3 py-2 text-red-600 hover:text-red-700 transition-colors w-full text-left"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <Link href="/login" onClick={closeMobileMenu}>
+                      <Button
+                        variant="outline"
+                        className="w-full justify-center"
+                      >
+                        <User className="h-4 w-4 mr-2" />
+                        Login
+                      </Button>
+                    </Link>
+                    <Link href="/signup" onClick={closeMobileMenu}>
+                      <Button className="w-full justify-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700">
+                        Get Started
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+
+                {/* CTA Button for Mobile */}
+                <div className="pt-3 border-t border-slate-200">
+                  {user?.role === 'retailer' ? (
+                    <Link href="/retailer-dashboard" onClick={closeMobileMenu}>
+                      <Button className="w-full justify-center bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white">
+                        My Dashboard
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Link href={user ? "/become-retailer" : "/signup?role=retailer"} onClick={closeMobileMenu}>
+                      <Button className="w-full justify-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white">
+                        Sell on Linka
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </header>
   )
 }
