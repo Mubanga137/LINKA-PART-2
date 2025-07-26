@@ -1,4 +1,4 @@
-import { TrendingUp, Users, MapPin, Award } from "lucide-react"
+import { Package, ShoppingBag, Truck, Star } from "lucide-react"
 
 interface ShopStatsProps {
   totalProducts?: number
