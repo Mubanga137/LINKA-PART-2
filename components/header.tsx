@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -21,6 +21,14 @@ export function Header() {
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
   const router = useRouter()
+  const pathname = usePathname()
+
+  // Show cart only on shopping-related pages
+  const isShoppingPage = pathname?.includes('/marketplace') ||
+                        pathname?.includes('/shop') ||
+                        pathname?.includes('/cart') ||
+                        pathname?.includes('/checkout') ||
+                        pathname?.includes('/products')
 
   const handleLogout = () => {
     logout()
@@ -95,34 +103,24 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
-            {/* Services Button */}
-            <Link href="/marketplace?category=services">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
-              >
-                <Briefcase className="h-4 w-4 mr-2" />
-                Services
-              </Button>
-            </Link>
-
-            {/* Shopping Cart */}
-            <Link href="/cart">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
-              >
-                <ShoppingCart className="h-4 w-4 mr-2" />
-                Cart
-                {totalItems > 0 && (
-                  <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
-                    {totalItems}
-                  </Badge>
-                )}
-              </Button>
-            </Link>
+            {/* Shopping Cart - Only show on shopping pages */}
+            {isShoppingPage && (
+              <Link href="/cart">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+                >
+                  <ShoppingCart className="h-4 w-4 mr-2" />
+                  Cart
+                  {totalItems > 0 && (
+                    <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                      {totalItems}
+                    </Badge>
+                  )}
+                </Button>
+              </Link>
+            )}
 
             {/* Mobile Menu Button */}
             <Button
@@ -285,43 +283,45 @@ export function Header() {
                     <ChevronRight className="h-4 w-4" />
                   </Link>
 
-                  {/* Quick Access Section */}
-                  <div className="border-t border-slate-200 pt-4 mt-4">
-                    <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
-                      Quick Access
-                    </h3>
+                  {/* Quick Access Section - Only show on shopping pages */}
+                  {isShoppingPage && (
+                    <div className="border-t border-slate-200 pt-4 mt-4">
+                      <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
+                        Quick Access
+                      </h3>
 
-                    <Link
-                      href="/marketplace?category=services"
-                      className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                      onClick={closeMobileMenu}
-                    >
-                      <span className="flex items-center">
-                        <Briefcase className="h-5 w-5 mr-3" />
-                        <span className="font-medium">Browse Services</span>
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
-                    </Link>
-
-                    <Link
-                      href="/cart"
-                      className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                      onClick={closeMobileMenu}
-                    >
-                      <span className="flex items-center">
-                        <ShoppingCart className="h-5 w-5 mr-3" />
-                        <span className="font-medium">Shopping Cart</span>
-                      </span>
-                      <div className="flex items-center space-x-2">
-                        {totalItems > 0 && (
-                          <Badge className="bg-orange-500 text-white text-xs px-2 py-0.5">
-                            {totalItems}
-                          </Badge>
-                        )}
+                      <Link
+                        href="/marketplace?category=services"
+                        className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        <span className="flex items-center">
+                          <Briefcase className="h-5 w-5 mr-3" />
+                          <span className="font-medium">Browse Services</span>
+                        </span>
                         <ChevronRight className="h-4 w-4" />
-                      </div>
-                    </Link>
-                  </div>
+                      </Link>
+
+                      <Link
+                        href="/cart"
+                        className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                        onClick={closeMobileMenu}
+                      >
+                        <span className="flex items-center">
+                          <ShoppingCart className="h-5 w-5 mr-3" />
+                          <span className="font-medium">Shopping Cart</span>
+                        </span>
+                        <div className="flex items-center space-x-2">
+                          {totalItems > 0 && (
+                            <Badge className="bg-orange-500 text-white text-xs px-2 py-0.5">
+                              {totalItems}
+                            </Badge>
+                          )}
+                          <ChevronRight className="h-4 w-4" />
+                        </div>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </nav>
 
