@@ -112,11 +112,11 @@ export default function ShopPage() {
             <div className="flex items-center justify-center mb-4">
               <ShoppingBag className="h-12 w-12 text-yellow-400 mr-4" />
               <h1 className="text-4xl md:text-5xl font-bold">
-                Shop Local Products
+                Shop Premium Products
               </h1>
             </div>
             <p className="text-xl text-white/90 max-w-2xl mx-auto mb-8">
-              Discover amazing products from verified Zambian retailers. Support local businesses and find unique items.
+              Browse our curated collection of quality products from trusted local vendors. Find exactly what you need with easy search and filtering.
             </p>
             
             {/* Prominent Search Bar */}
