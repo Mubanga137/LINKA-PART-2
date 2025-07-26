@@ -72,11 +72,37 @@ Remember, consistency is key. Small daily habits can lead to significant improve
     trending: true
   },
   {
-    id: "tip-2", 
+    id: "tip-2",
     title: "Mental Health: Managing Stress in Daily Life",
     category: "Mental Health",
     excerpt: "Learn effective strategies to cope with stress and maintain good mental health in our busy world.",
-    content: "Stress is a normal part of life, but chronic stress can impact your health. Here's how to manage it...",
+    content: `Stress is a normal part of life, but chronic stress can impact your health. Here's how to manage it effectively:
+
+**Understanding Stress**
+Stress is your body's response to challenges or demands. While short-term stress can be motivating, prolonged stress can lead to health problems including anxiety, depression, and physical ailments.
+
+**Effective Stress Management Techniques:**
+
+1. **Deep Breathing Exercises**: Practice the 4-7-8 technique - inhale for 4 counts, hold for 7, exhale for 8. This activates your body's relaxation response.
+
+2. **Regular Physical Activity**: Exercise releases endorphins, natural mood boosters. Even a 10-minute walk can reduce stress levels.
+
+3. **Mindfulness and Meditation**: Spend 5-10 minutes daily focusing on the present moment. Apps like meditation guides can help you get started.
+
+4. **Time Management**: Break large tasks into smaller, manageable steps. Use calendars and to-do lists to stay organized.
+
+5. **Social Support**: Talk to friends, family, or a counselor. Sharing your concerns can provide relief and new perspectives.
+
+6. **Healthy Sleep Habits**: Maintain a regular sleep schedule and create a relaxing bedtime routine.
+
+7. **Limit Caffeine and Alcohol**: These can increase anxiety and disrupt sleep patterns.
+
+8. **Practice Gratitude**: Keep a gratitude journal. Writing down three things you're grateful for each day can improve your mood.
+
+**When to Seek Professional Help:**
+If stress significantly impacts your daily life, work, or relationships, consider speaking with a mental health professional. In Zambia, services are available through hospitals, private clinics, and mental health organizations.
+
+Remember, seeking help is a sign of strength, not weakness.`,
     icon: Brain,
     color: "from-purple-500 to-pink-600",
     readTime: "7 min read",
