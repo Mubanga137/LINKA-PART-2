@@ -241,7 +241,7 @@ export interface ProductFilters {
 }
 
 export interface ProductSortOptions {
-  sortBy: 'name' | 'price' | 'rating' | 'newest' | 'popularity'
+  sortBy: 'name' | 'price' | 'rating' | 'newest' | 'popular' | 'price-low' | 'price-high' | 'recommended'
   order: 'asc' | 'desc'
 }
 
