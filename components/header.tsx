@@ -218,65 +218,7 @@ export function Header() {
               {/* Mobile Navigation Links */}
               <nav className="flex-1 overflow-y-auto py-6">
                 <div className="space-y-1 px-6">
-                  {/* Categories Section */}
-                  <div className="py-3">
-                    <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
-                      Categories
-                    </h3>
-                    <div className="space-y-1">
-                      <Link
-                        href="/categories/jewelry-accessories"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Jewelry & Accessories
-                      </Link>
-                      <Link
-                        href="/categories/art-culture"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Art & Culture
-                      </Link>
-                      <Link
-                        href="/categories/tools-hardware"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Tools & Hardware
-                      </Link>
-                      <Link
-                        href="/categories/agriculture-natural"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Agriculture & Natural
-                      </Link>
-                      <Link
-                        href="/categories/food-beverages"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Food & Beverages
-                      </Link>
-                      <Link
-                        href="/categories/fashion-textiles"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Fashion & Textiles
-                      </Link>
-                      <Link
-                        href="/categories/traditional-crafts"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Traditional Crafts
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Other Navigation Items */}
+                  {/* Navigation Items */}
                   <Link
                     href="/about"
                     className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
