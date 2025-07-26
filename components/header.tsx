@@ -12,12 +12,14 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
-import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Menu, X, ChevronRight } from "lucide-react"
+import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Menu, X, ChevronRight, Briefcase } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
+import { useCart } from "@/contexts/cart-context"
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { user, logout } = useAuth()
+  const { totalItems } = useCart()
   const router = useRouter()
 
   const handleLogout = () => {
@@ -62,37 +64,6 @@ export function Header() {
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2 flex items-center">
-                Categories
-                <ChevronDown className="h-4 w-4 ml-1" />
-                <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Link href="/categories/jewelry-accessories">Jewelry & Accessories</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/categories/art-culture">Art & Culture</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/categories/tools-hardware">Tools & Hardware</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/categories/agriculture-natural">Agriculture & Natural</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/categories/food-beverages">Food & Beverages</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/categories/fashion-textiles">Fashion & Textiles</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/categories/traditional-crafts">Traditional Crafts</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
             <Link
               href="/about"
               className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
@@ -124,6 +95,34 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
+            {/* Services Button */}
+            <Link href="/marketplace?category=services">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
+              >
+                <Briefcase className="h-4 w-4 mr-2" />
+                Services
+              </Button>
+            </Link>
+
+            {/* Shopping Cart */}
+            <Link href="/cart">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Cart
+                {totalItems > 0 && (
+                  <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                    {totalItems}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
 
             {/* Mobile Menu Button */}
             <Button
@@ -249,65 +248,7 @@ export function Header() {
               {/* Mobile Navigation Links */}
               <nav className="flex-1 overflow-y-auto py-6">
                 <div className="space-y-1 px-6">
-                  {/* Categories Section */}
-                  <div className="py-3">
-                    <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
-                      Categories
-                    </h3>
-                    <div className="space-y-1">
-                      <Link
-                        href="/categories/jewelry-accessories"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Jewelry & Accessories
-                      </Link>
-                      <Link
-                        href="/categories/art-culture"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Art & Culture
-                      </Link>
-                      <Link
-                        href="/categories/tools-hardware"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Tools & Hardware
-                      </Link>
-                      <Link
-                        href="/categories/agriculture-natural"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Agriculture & Natural
-                      </Link>
-                      <Link
-                        href="/categories/food-beverages"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Food & Beverages
-                      </Link>
-                      <Link
-                        href="/categories/fashion-textiles"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Fashion & Textiles
-                      </Link>
-                      <Link
-                        href="/categories/traditional-crafts"
-                        className="flex items-center py-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        Traditional Crafts
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Other Navigation Items */}
+                  {/* Navigation Items */}
                   <Link
                     href="/about"
                     className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
@@ -343,6 +284,44 @@ export function Header() {
                     <span className="font-medium">Services</span>
                     <ChevronRight className="h-4 w-4" />
                   </Link>
+
+                  {/* Quick Access Section */}
+                  <div className="border-t border-slate-200 pt-4 mt-4">
+                    <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
+                      Quick Access
+                    </h3>
+
+                    <Link
+                      href="/marketplace?category=services"
+                      className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                      onClick={closeMobileMenu}
+                    >
+                      <span className="flex items-center">
+                        <Briefcase className="h-5 w-5 mr-3" />
+                        <span className="font-medium">Browse Services</span>
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
+
+                    <Link
+                      href="/cart"
+                      className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                      onClick={closeMobileMenu}
+                    >
+                      <span className="flex items-center">
+                        <ShoppingCart className="h-5 w-5 mr-3" />
+                        <span className="font-medium">Shopping Cart</span>
+                      </span>
+                      <div className="flex items-center space-x-2">
+                        {totalItems > 0 && (
+                          <Badge className="bg-orange-500 text-white text-xs px-2 py-0.5">
+                            {totalItems}
+                          </Badge>
+                        )}
+                        <ChevronRight className="h-4 w-4" />
+                      </div>
+                    </Link>
+                  </div>
                 </div>
               </nav>
 

@@ -1,7 +1,6 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { PersonalizedProductCarousel } from "@/components/personalized-product-carousel"
-import { DynamicCategoryGrid } from "@/components/dynamic-category-grid"
 import { VendorShowcase } from "@/components/vendor-showcase"
 import { TrendingOffers } from "@/components/trending-offers"
 import { FeaturesSection } from "@/components/features-section"
@@ -19,12 +18,6 @@ export default function HomePage() {
           title="Recommended for You"
           subtitle="Curated products based on your location and browsing history"
           maxItems={8}
-        />
-        <DynamicCategoryGrid
-          title="Shop by Category"
-          subtitle="Discover local products tailored to your location"
-          maxCategories={8}
-          showFilters={true}
         />
         <VendorShowcase
           title="Featured Local Vendors"

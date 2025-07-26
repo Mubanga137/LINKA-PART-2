@@ -8,7 +8,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Handcrafted Copper Bracelet',
     price: 150,
     originalPrice: 200,
-    image: '/placeholder.svg?height=400&width=400&text=Copper+Bracelet',
+    image: 'https://images.pexels.com/photos/12026051/pexels-photo-12026051.jpeg',
     category: 'jewelry-accessories',
     subcategory: 'bracelets',
     description: 'Beautiful handcrafted copper bracelet with traditional Zambian patterns. Made by local artisans using traditional techniques.',
@@ -35,7 +35,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'jewelry-002',
     name: 'Malachite Stone Necklace',
     price: 350,
-    image: '/placeholder.svg?height=400&width=400&text=Malachite+Necklace',
+    image: 'https://images.pexels.com/photos/12026053/pexels-photo-12026053.jpeg',
     category: 'jewelry-accessories',
     subcategory: 'necklaces',
     description: 'Stunning necklace featuring genuine Zambian malachite stones. Each piece is unique with natural stone patterns.',
@@ -64,7 +64,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Traditional Chitenge Dress',
     price: 280,
     originalPrice: 350,
-    image: '/placeholder.svg?height=400&width=400&text=Chitenge+Dress',
+    image: 'https://images.pexels.com/photos/14538746/pexels-photo-14538746.jpeg',
     category: 'fashion-textiles',
     subcategory: 'dresses',
     description: 'Beautiful traditional chitenge dress with modern cut. Perfect for special occasions and cultural events.',
@@ -93,7 +93,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'food-001',
     name: 'Pure Zambian Honey',
     price: 120,
-    image: '/placeholder.svg?height=400&width=400&text=Zambian+Honey',
+    image: 'https://images.pexels.com/photos/9228574/pexels-photo-9228574.jpeg',
     category: 'food-beverages',
     subcategory: 'honey',
     description: 'Pure, raw honey sourced from Zambian beekeepers. Rich in flavor and completely natural.',
@@ -121,7 +121,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'agriculture-001',
     name: 'Organic Maize Seeds',
     price: 85,
-    image: '/placeholder.svg?height=400&width=400&text=Maize+Seeds',
+    image: 'https://images.pexels.com/photos/18142958/pexels-photo-18142958.jpeg',
     category: 'agriculture-natural',
     subcategory: 'seeds',
     description: 'High-quality organic maize seeds with excellent germination rate. Perfect for small to medium farms.',
@@ -149,7 +149,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'tools-001',
     name: 'Professional Hammer Set',
     price: 180,
-    image: '/placeholder.svg?height=400&width=400&text=Hammer+Set',
+    image: 'https://images.pexels.com/photos/9607005/pexels-photo-9607005.jpeg',
     category: 'tools-hardware',
     subcategory: 'hand-tools',
     description: 'Professional quality hammer set for construction and woodworking. Durable steel construction with ergonomic handles.',
@@ -177,7 +177,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'art-001',
     name: 'Wooden Sculpture - Elephant',
     price: 450,
-    image: '/placeholder.svg?height=400&width=400&text=Elephant+Sculpture',
+    image: 'https://images.pexels.com/photos/19652771/pexels-photo-19652771.jpeg',
     category: 'art-culture',
     subcategory: 'sculptures',
     description: 'Hand-carved wooden elephant sculpture by renowned Zambian artist. Made from sustainable mukwa wood.',
@@ -205,7 +205,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'crafts-001',
     name: 'Handwoven Basket Set',
     price: 220,
-    image: '/placeholder.svg?height=400&width=400&text=Basket+Set',
+    image: 'https://images.pexels.com/photos/20943320/pexels-photo-20943320.jpeg',
     category: 'traditional-crafts',
     subcategory: 'baskets',
     description: 'Set of three handwoven baskets made from traditional materials. Perfect for storage and decoration.',
@@ -226,6 +226,179 @@ const MOCK_PRODUCTS: Product[] = [
       shippingCost: 18
     },
     tags: ['baskets', 'handwoven', 'traditional', 'storage', 'decoration']
+  },
+
+  // Health & Wellness Services
+  {
+    id: 'service-001',
+    name: 'General Health Consultation',
+    price: 50,
+    image: 'https://images.pexels.com/photos/20860586/pexels-photo-20860586.jpeg',
+    category: 'services',
+    subcategory: 'health-wellness',
+    description: 'Professional medical consultation with experienced doctors. Available for routine checkups and general health concerns.',
+    inStock: true,
+    stockQuantity: 100,
+    retailerId: 'srv-001',
+    retailerName: 'Lusaka Medical Center',
+    retailerLocation: 'CBD, Lusaka',
+    rating: 4.9,
+    reviewCount: 245,
+    features: ['Licensed Doctors', '30min Consultation', 'Health Report Included', 'Follow-up Available'],
+    variants: {
+      duration: ['30 minutes', '45 minutes', '60 minutes']
+    },
+    shippingInfo: {
+      freeShipping: true,
+      estimatedDays: 0,
+      shippingCost: 0
+    },
+    tags: ['healthcare', 'consultation', 'medical', 'professional']
+  },
+
+  // Fitness Services
+  {
+    id: 'service-002',
+    name: 'Personal Fitness Training',
+    price: 75,
+    originalPrice: 100,
+    image: 'https://images.pexels.com/photos/5209197/pexels-photo-5209197.jpeg',
+    category: 'services',
+    subcategory: 'fitness-yoga',
+    description: 'One-on-one personal training sessions with certified fitness trainers. Customized workout plans for your goals.',
+    inStock: true,
+    stockQuantity: 50,
+    retailerId: 'srv-002',
+    retailerName: 'FitLife Gym',
+    retailerLocation: 'Kabulonga, Lusaka',
+    rating: 4.8,
+    reviewCount: 189,
+    features: ['Certified Trainer', 'Custom Workout Plan', 'Nutrition Guidance', 'Progress Tracking'],
+    variants: {
+      duration: ['1 Hour', '1.5 Hours'],
+      type: ['Weight Training', 'Cardio Focus', 'Mixed Training']
+    },
+    shippingInfo: {
+      freeShipping: true,
+      estimatedDays: 0,
+      shippingCost: 0
+    },
+    tags: ['fitness', 'training', 'health', 'personal']
+  },
+
+  // Rental Services
+  {
+    id: 'service-003',
+    name: 'Short-term Apartment Rental',
+    price: 200,
+    image: 'https://images.pexels.com/photos/20260779/pexels-photo-20260779.jpeg',
+    category: 'services',
+    subcategory: 'short-term-rentals',
+    description: 'Fully furnished apartment available for short-term stays. Perfect for business travelers and visitors.',
+    inStock: true,
+    stockQuantity: 5,
+    retailerId: 'srv-003',
+    retailerName: 'Lusaka Stay Rentals',
+    retailerLocation: 'Woodlands, Lusaka',
+    rating: 4.7,
+    reviewCount: 156,
+    features: ['Fully Furnished', 'WiFi Included', 'Kitchen Access', '24/7 Security'],
+    variants: {
+      duration: ['Per Night', 'Per Week', 'Per Month'],
+      type: ['Studio', '1 Bedroom', '2 Bedroom']
+    },
+    shippingInfo: {
+      freeShipping: true,
+      estimatedDays: 0,
+      shippingCost: 0
+    },
+    tags: ['rental', 'accommodation', 'furnished', 'temporary']
+  },
+
+  // Home Decor Services
+  {
+    id: 'service-004',
+    name: 'Interior Design Consultation',
+    price: 150,
+    image: 'https://images.pexels.com/photos/20607077/pexels-photo-20607077.jpeg',
+    category: 'services',
+    subcategory: 'home-decor',
+    description: 'Professional interior design consultation to transform your living space. Includes design concepts and shopping list.',
+    inStock: true,
+    stockQuantity: 20,
+    retailerId: 'srv-004',
+    retailerName: 'Creative Spaces Design',
+    retailerLocation: 'Olympia, Lusaka',
+    rating: 4.9,
+    reviewCount: 98,
+    features: ['Design Consultation', '3D Visualization', 'Shopping List', 'Style Guide'],
+    variants: {
+      scope: ['Single Room', 'Multiple Rooms', 'Full House']
+    },
+    shippingInfo: {
+      freeShipping: true,
+      estimatedDays: 0,
+      shippingCost: 0
+    },
+    tags: ['interior', 'design', 'consultation', 'home']
+  },
+
+  // Entertainment Services
+  {
+    id: 'service-005',
+    name: 'Event Photography',
+    price: 300,
+    originalPrice: 400,
+    image: 'https://images.pexels.com/photos/4276830/pexels-photo-4276830.jpeg',
+    category: 'services',
+    subcategory: 'entertainment',
+    description: 'Professional event photography services for weddings, parties, and corporate events. High-quality photos delivered digitally.',
+    inStock: true,
+    stockQuantity: 15,
+    retailerId: 'srv-005',
+    retailerName: 'Capture Moments Photography',
+    retailerLocation: 'Chelstone, Lusaka',
+    rating: 4.8,
+    reviewCount: 134,
+    features: ['Professional Equipment', 'Digital Delivery', 'Photo Editing', 'Same Day Preview'],
+    variants: {
+      duration: ['4 Hours', '6 Hours', '8 Hours', 'Full Day'],
+      type: ['Wedding', 'Corporate', 'Party', 'Portrait']
+    },
+    shippingInfo: {
+      freeShipping: true,
+      estimatedDays: 3,
+      shippingCost: 0
+    },
+    tags: ['photography', 'events', 'professional', 'wedding']
+  },
+
+  // Pharmacy Services
+  {
+    id: 'service-006',
+    name: 'Medicine Delivery Service',
+    price: 25,
+    image: 'https://images.pexels.com/photos/14027298/pexels-photo-14027298.jpeg',
+    category: 'services',
+    subcategory: 'pharmacies',
+    description: 'Fast and reliable medicine delivery service. Upload your prescription and get medicines delivered to your doorstep.',
+    inStock: true,
+    stockQuantity: 200,
+    retailerId: 'srv-006',
+    retailerName: 'QuickMed Pharmacy',
+    retailerLocation: 'Various Locations, Lusaka',
+    rating: 4.6,
+    reviewCount: 287,
+    features: ['Prescription Upload', 'Licensed Pharmacist', 'Same Day Delivery', 'Medicine Verification'],
+    variants: {
+      delivery: ['Same Day', 'Next Day', 'Express (2 Hours)']
+    },
+    shippingInfo: {
+      freeShipping: false,
+      estimatedDays: 0,
+      shippingCost: 25
+    },
+    tags: ['pharmacy', 'medicine', 'delivery', 'healthcare']
   }
 ]
 
@@ -241,7 +414,7 @@ export interface ProductFilters {
 }
 
 export interface ProductSortOptions {
-  sortBy: 'name' | 'price' | 'rating' | 'newest' | 'popularity'
+  sortBy: 'name' | 'price' | 'rating' | 'newest' | 'popular' | 'price-low' | 'price-high' | 'recommended'
   order: 'asc' | 'desc'
 }
 
@@ -305,19 +478,26 @@ class ProductService {
     // Apply sorting
     filteredProducts.sort((a, b) => {
       let comparison = 0
-      
+
       switch (sort.sortBy) {
         case 'name':
           comparison = a.name.localeCompare(b.name)
           break
         case 'price':
+        case 'price-low':
           comparison = a.price - b.price
+          break
+        case 'price-high':
+          comparison = b.price - a.price
           break
         case 'rating':
           comparison = a.rating - b.rating
           break
-        case 'popularity':
+        case 'popular':
           comparison = a.reviewCount - b.reviewCount
+          break
+        case 'recommended':
+          comparison = a.rating - b.rating
           break
         case 'newest':
         default:
