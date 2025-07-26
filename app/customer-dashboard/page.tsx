@@ -5,9 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { CustomerHeader } from "@/components/customer-header"
 import { Footer } from "@/components/footer"
 import { EnhancedCustomerWelcome } from "@/components/customer/enhanced-customer-welcome"
-import { EnhancedCategoryGrid } from "@/components/customer/enhanced-category-grid"
-import { TrendingProducts } from "@/components/customer/trending-products"
-import { RecommendedServices } from "@/components/customer/recommended-services"
+import { PersonalizedProductCarousel } from "@/components/personalized-product-carousel"
+import { DynamicCategoryGrid } from "@/components/dynamic-category-grid"
+import { VendorShowcase } from "@/components/vendor-showcase"
+import { TrendingOffers } from "@/components/trending-offers"
 import { RecentActivity } from "@/components/customer/recent-activity"
 import { QuickActions } from "@/components/customer/quick-actions"
 import { Alert, AlertDescription } from "@/components/ui/alert"
@@ -316,19 +317,41 @@ export default function CustomerDashboard() {
             </div>
           </div>
 
-          {/* Category Grid */}
-          <EnhancedCategoryGrid />
-
-          {/* Trending Products */}
-          <TrendingProducts
-            products={trendingProducts}
-            isLoading={isLoading}
+          {/* Trending Offers */}
+          <TrendingOffers
+            title="⚡ Flash Deals Near You"
+            subtitle="Limited-time offers from local vendors"
+            maxOffers={4}
+            layout="grid"
           />
 
-          {/* Recommended Services */}
-          <RecommendedServices
-            products={recommendedProducts}
-            isLoading={isLoading}
+          {/* Category Grid */}
+          <DynamicCategoryGrid
+            title="Shop by Category"
+            subtitle="Discover products in your area"
+            maxCategories={6}
+            showFilters={true}
+          />
+
+          {/* Personalized Recommendations */}
+          <PersonalizedProductCarousel
+            title="Recommended for You"
+            subtitle="Based on your browsing history and location"
+            maxItems={6}
+          />
+
+          {/* Local Vendors */}
+          <VendorShowcase
+            title="Vendors Near You"
+            subtitle="Support local businesses in your community"
+            maxVendors={4}
+          />
+
+          {/* Recently Viewed */}
+          <PersonalizedProductCarousel
+            title="Continue Shopping"
+            subtitle="Items you viewed recently"
+            maxItems={6}
           />
 
           {/* Recent Activity */}
