@@ -102,7 +102,7 @@ export default function ShopPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
-      <CustomerHeader />
+      <ShopCustomerHeader />
       
       {/* Hero Section - Focused on Shopping */}
       <div className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white relative overflow-hidden">
