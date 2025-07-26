@@ -18,8 +18,18 @@ interface MarketplaceFiltersProps {
 }
 
 const CATEGORIES = [
+  {
+    id: 'fashion',
+    name: 'Fashion & Style',
+    emoji: '👗',
+    subcategories: [
+      { id: 'fashion-men', name: 'Men\'s Fashion', path: '/categories/fashion#men' },
+      { id: 'fashion-women', name: 'Women\'s Fashion', path: '/categories/fashion#women' },
+      { id: 'fashion-kids', name: 'Kids\' Fashion', path: '/categories/fashion#kids' },
+      { id: 'fashion-textiles', name: 'Textiles & Tailoring', path: '/categories/fashion/textiles' }
+    ]
+  },
   { id: 'jewelry-accessories', name: 'Jewelry & Accessories', emoji: '💍' },
-  { id: 'fashion-textiles', name: 'Fashion & Textiles', emoji: '👗' },
   { id: 'food-beverages', name: 'Food & Beverages', emoji: '🍯' },
   { id: 'agriculture-natural', name: 'Agriculture & Natural', emoji: '🌱' },
   { id: 'tools-hardware', name: 'Tools & Hardware', emoji: '🔨' },
