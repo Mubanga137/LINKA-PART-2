@@ -34,7 +34,7 @@ export function HomeDecorHero() {
         <div className="text-center mb-12">
           {/* Breadcrumb */}
           <div className="flex items-center justify-center gap-2 text-sm text-slate-600 mb-8">
-            <span className="hover:text-blue-600 transition-colors cursor-pointer">Industries</span>
+            <span className="hover:text-blue-600 transition-colors cursor-pointer">Services</span>
             <span>/</span>
             <span className="text-blue-600 font-medium">Home & Decor</span>
           </div>

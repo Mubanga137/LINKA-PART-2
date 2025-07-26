@@ -45,16 +45,46 @@ export function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-4">
-              {["Shop", "About Us", "Industries", "Contact", "Help Center"].map((item) => (
-                <li key={item}>
-                  <Link
-                    href={`/${item.toLowerCase().replace(" ", "-")}`}
-                    className="text-slate-400 hover:text-white transition-colors text-lg hover:translate-x-1 inline-block transition-transform"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/shop"
+                  className="text-slate-400 hover:text-white transition-colors text-lg hover:translate-x-1 inline-block transition-transform"
+                >
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="text-slate-400 hover:text-white transition-colors text-lg hover:translate-x-1 inline-block transition-transform"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/industries"
+                  className="text-slate-400 hover:text-white transition-colors text-lg hover:translate-x-1 inline-block transition-transform"
+                >
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-slate-400 hover:text-white transition-colors text-lg hover:translate-x-1 inline-block transition-transform"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/help-center"
+                  className="text-slate-400 hover:text-white transition-colors text-lg hover:translate-x-1 inline-block transition-transform"
+                >
+                  Help Center
+                </Link>
+              </li>
             </ul>
           </div>
 

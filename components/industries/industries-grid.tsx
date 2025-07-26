@@ -16,6 +16,8 @@ import {
   Users,
   TrendingUp,
   Star,
+  Package,
+  Truck,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -125,6 +127,32 @@ const industries = [
     features: ["Organic Certified", "Seasonal Products", "Farmer Direct"],
   },
   {
+    id: 10,
+    name: "Wholesale",
+    icon: Package,
+    description: "Bulk products, B2B marketplace, and wholesale distribution",
+    retailers: 78,
+    growth: "+42%",
+    rating: 4.8,
+    gradient: "from-indigo-500 to-blue-600",
+    bgGradient: "from-indigo-50 to-blue-50",
+    stats: { products: "3,200+", sales: "ZMW 1.2M" },
+    features: ["Bulk Pricing", "B2B Network", "Volume Discounts"],
+  },
+  {
+    id: 11,
+    name: "Logistics & Courier",
+    icon: Truck,
+    description: "Logistics, delivery services, and transportation solutions",
+    retailers: 45,
+    growth: "+28%",
+    rating: 4.6,
+    gradient: "from-teal-500 to-emerald-600",
+    bgGradient: "from-teal-50 to-emerald-50",
+    stats: { providers: "120+", routes: "50+" },
+    features: ["Same-day Delivery", "Nationwide Coverage", "Real-time Tracking"],
+  },
+  {
     id: 9,
     name: "Entertainment",
     icon: Music,
@@ -149,12 +177,12 @@ export function IndustriesGrid() {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Industries We{" "}
+              Services We{" "}
             </span>
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Serve</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Supporting diverse sectors of the Zambian economy with tailored e-commerce solutions
+            Supporting diverse sectors of the Zambian economy with tailored e-commerce services
           </p>
         </div>
 
@@ -374,19 +402,44 @@ export function IndustriesGrid() {
                 </Link>
               )
             }
+            const getIndustryLink = (industryName: string) => {
+              switch (industryName) {
+                case "Traditional Crafts":
+                  return "/categories/traditional-crafts"
+                case "Fashion & Textiles":
+                  return "/categories/fashion-textiles"
+                case "Food & Beverages":
+                  return "/categories/food-beverages"
+                case "Jewelry & Accessories":
+                  return "/categories/jewelry-accessories"
+                case "Art & Culture":
+                  return "/categories/art-culture"
+                case "Tools & Hardware":
+                  return "/categories/tools-hardware"
+                case "Agriculture & Natural":
+                  return "/categories/agriculture-natural"
+                case "Wholesale":
+                  return "/industries/wholesale"
+                case "Logistics & Courier":
+                  return "/industries/transport"
+                default:
+                  return "#"
+              }
+            }
+
             return (
-              <Card
-                key={industry.id}
-                className={`group cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:scale-105 bg-white/80 backdrop-blur-sm border-white/20 overflow-hidden ${
-                  selectedIndustry === industry.id
-                    ? "ring-2 ring-purple-500 shadow-2xl"
-                    : "hover:shadow-2xl hover:shadow-slate-900/10"
-                }`}
-                style={{ animationDelay: `${index * 100}ms` }}
-                onClick={() => setSelectedIndustry(selectedIndustry === industry.id ? null : industry.id)}
-                onMouseEnter={() => setHoveredCard(industry.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
+              <Link href={getIndustryLink(industry.name)} key={industry.id}>
+                <Card
+                  className={`group cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:scale-105 bg-white/80 backdrop-blur-sm border-white/20 overflow-hidden ${
+                    selectedIndustry === industry.id
+                      ? "ring-2 ring-purple-500 shadow-2xl"
+                      : "hover:shadow-2xl hover:shadow-slate-900/10"
+                  }`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                  onClick={() => setSelectedIndustry(selectedIndustry === industry.id ? null : industry.id)}
+                  onMouseEnter={() => setHoveredCard(industry.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
                 <CardContent className="p-0">
                   {/* Header */}
                   <div className={`p-6 bg-gradient-to-br ${industry.bgGradient} relative overflow-hidden`}>
@@ -426,12 +479,20 @@ export function IndustriesGrid() {
                     {/* Stats */}
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div className="text-center p-3 bg-slate-50 rounded-lg group-hover:bg-slate-100 transition-colors">
-                        <div className="font-bold text-slate-900">{industry.stats.products}</div>
-                        <div className="text-xs text-slate-500">Products</div>
+                        <div className="font-bold text-slate-900">
+                          {industry.stats.products || industry.stats.providers || "N/A"}
+                        </div>
+                        <div className="text-xs text-slate-500">
+                          {industry.stats.products ? "Products" : "Providers"}
+                        </div>
                       </div>
                       <div className="text-center p-3 bg-slate-50 rounded-lg group-hover:bg-slate-100 transition-colors">
-                        <div className="font-bold text-slate-900">{industry.stats.sales}</div>
-                        <div className="text-xs text-slate-500">Monthly Sales</div>
+                        <div className="font-bold text-slate-900">
+                          {industry.stats.sales || industry.stats.routes || "N/A"}
+                        </div>
+                        <div className="text-xs text-slate-500">
+                          {industry.stats.sales ? "Monthly Sales" : "Routes"}
+                        </div>
                       </div>
                     </div>
 
@@ -480,7 +541,8 @@ export function IndustriesGrid() {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+                </Card>
+              </Link>
             )
           })}
         </div>
@@ -489,7 +551,7 @@ export function IndustriesGrid() {
         <div className="text-center mt-16">
           <div className="inline-flex items-center rounded-full bg-gradient-to-r from-purple-100 to-pink-100 px-8 py-4 text-purple-700 border border-purple-200/50 shadow-lg backdrop-blur-sm hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer group">
             <Users className="mr-3 h-6 w-6 group-hover:animate-bounce" />
-            <span className="text-lg font-medium">Join 300+ retailers across all industries</span>
+            <span className="text-lg font-medium">Join 300+ retailers across all services</span>
           </div>
         </div>
       </div>

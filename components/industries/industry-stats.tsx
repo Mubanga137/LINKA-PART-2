@@ -52,12 +52,12 @@ export function IndustryStats() {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Industry{" "}
+              Service{" "}
             </span>
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Impact</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Real numbers showing how Linka is transforming Zambian industries
+            Real numbers showing how Linka is transforming Zambian services
           </p>
         </div>
 
