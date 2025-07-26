@@ -15,6 +15,7 @@ import {
 import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Menu, X, Search, Sparkles, Briefcase, Stethoscope, Home, Car, Camera, GraduationCap, Wrench, Heart, Shield, Building, ChevronRight } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context"
+import { MobileNavigation } from "@/components/mobile-navigation"
 
 export function MarketplaceMainHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
