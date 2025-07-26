@@ -26,6 +26,7 @@ const CATEGORIES = [
   { id: 'art-culture', name: 'Art & Culture', emoji: '🎨' },
   { id: 'traditional-crafts', name: 'Traditional Crafts', emoji: '🏺' },
   { id: 'home-decor', name: 'Home & Decor', emoji: '🏠' },
+  { id: 'services', name: 'Services', emoji: '🛎️' },
 ]
 
 export function MarketplaceFilters({ filters, onFiltersChange, isLoading }: MarketplaceFiltersProps) {
