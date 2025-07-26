@@ -18,6 +18,7 @@ import {
   Star,
   Package,
   Truck,
+  Heart,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -164,6 +165,19 @@ const industries = [
     bgColor: "from-pink-50 to-purple-50",
     stats: { products: "2,500+", sales: "ZMW 890K" },
     features: ["Live Streaming", "Creator Tools", "Digital Content"],
+  },
+  {
+    id: 12,
+    name: "Health & Wellness",
+    icon: Heart,
+    description: "Healthcare services, medical consultations, ambulance booking, and wellness programs",
+    retailers: 95,
+    growth: "+54%",
+    rating: 4.9,
+    gradient: "from-red-500 to-pink-600",
+    bgGradient: "from-red-50 to-pink-50",
+    stats: { providers: "95+", appointments: "500+" },
+    features: ["24/7 Emergency", "Telemedicine", "Home Visits"],
   },
 ]
 
@@ -422,6 +436,8 @@ export function IndustriesGrid() {
                   return "/industries/wholesale"
                 case "Logistics & Courier":
                   return "/industries/transport"
+                case "Health & Wellness":
+                  return "/services/health-wellness"
                 default:
                   return "#"
               }
