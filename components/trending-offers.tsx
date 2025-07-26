@@ -144,7 +144,7 @@ const formatTimeLeft = (minutes: number): string => {
 
 const getOfferTypeConfig = (type: string) => {
   const configs = {
-    'flash-sale': { icon: Lightning, color: 'text-red-500', bg: 'bg-red-500', label: '⚡ Flash Sale' },
+    'flash-sale': { icon: Bolt, color: 'text-red-500', bg: 'bg-red-500', label: '⚡ Flash Sale' },
     'daily-deal': { icon: Clock, color: 'text-blue-500', bg: 'bg-blue-500', label: '🎯 Daily Deal' },
     'weekend-special': { icon: Star, color: 'text-purple-500', bg: 'bg-purple-500', label: '✨ Weekend Special' },
     'clearance': { icon: Zap, color: 'text-orange-500', bg: 'bg-orange-500', label: '🔥 Clearance' },
