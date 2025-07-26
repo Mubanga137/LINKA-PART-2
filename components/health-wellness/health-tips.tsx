@@ -441,6 +441,104 @@ export function HealthTips() {
           </Button>
         </div>
       </div>
+
+      {/* Full Article Modal */}
+      {showFullArticle && selectedTip && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-slate-200">
+              <div className="flex items-center space-x-3">
+                <div className={`w-12 h-12 bg-gradient-to-br ${selectedTip.color} rounded-full flex items-center justify-center`}>
+                  <selectedTip.icon className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <Badge className="mb-1" variant="secondary">{selectedTip.category}</Badge>
+                  <h2 className="text-2xl font-bold text-slate-900">{selectedTip.title}</h2>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                onClick={() => setShowFullArticle(false)}
+                className="rounded-full"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </Button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+              {/* Article Meta */}
+              <div className="flex items-center justify-between mb-6 text-sm text-slate-500">
+                <div className="flex items-center space-x-4">
+                  <span>By {selectedTip.author}</span>
+                  <span>•</span>
+                  <span>{selectedTip.readTime}</span>
+                  <span>•</span>
+                  <span>{selectedTip.publishDate}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  {selectedTip.trending && (
+                    <Badge className="bg-orange-100 text-orange-700">
+                      🔥 Trending
+                    </Badge>
+                  )}
+                  <Button variant="ghost" size="sm">
+                    <Heart className="h-4 w-4 mr-1" />
+                    Save
+                  </Button>
+                </div>
+              </div>
+
+              {/* Article Content */}
+              <div className="prose prose-slate max-w-none">
+                <div className="whitespace-pre-line text-slate-700 leading-relaxed">
+                  {selectedTip.content}
+                </div>
+              </div>
+
+              {/* Article Tags */}
+              <div className="mt-8 pt-6 border-t border-slate-200">
+                <p className="text-sm font-medium text-slate-700 mb-3">Tags:</p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedTip.tags.map((tag, index) => (
+                    <Badge key={index} variant="outline" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Related Articles */}
+              <div className="mt-8 pt-6 border-t border-slate-200">
+                <h3 className="text-lg font-bold text-slate-900 mb-4">Related Articles</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {healthTips.filter(tip => tip.id !== selectedTip.id && tip.category === selectedTip.category).slice(0, 2).map((relatedTip) => (
+                    <div
+                      key={relatedTip.id}
+                      className="p-4 border border-slate-200 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer"
+                      onClick={() => {
+                        setSelectedTip(relatedTip)
+                      }}
+                    >
+                      <h4 className="font-medium text-slate-900 mb-2">{relatedTip.title}</h4>
+                      <p className="text-sm text-slate-600 line-clamp-2">{relatedTip.excerpt}</p>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-xs text-slate-500">{relatedTip.readTime}</span>
+                        <Button variant="ghost" size="sm" className="text-blue-600 p-0">
+                          Read →
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
