@@ -233,7 +233,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'service-001',
     name: 'General Health Consultation',
     price: 50,
-    image: 'https://images.pexels.com/photos/4167541/pexels-photo-4167541.jpeg',
+    image: 'https://images.pexels.com/photos/20860586/pexels-photo-20860586.jpeg',
     category: 'services',
     subcategory: 'health-wellness',
     description: 'Professional medical consultation with experienced doctors. Available for routine checkups and general health concerns.',
