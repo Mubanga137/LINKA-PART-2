@@ -143,7 +143,7 @@ interface ProviderChatProps {
   providerType?: 'healthcare' | 'fitness' | 'pharmacy'
 }
 
-export function ProviderChat({ isOpen, onClose, selectedProviderId }: ProviderChatProps) {
+export function ProviderChat({ isOpen, onClose, selectedProviderId, providerType = 'healthcare' }: ProviderChatProps) {
   const { user } = useAuth()
   const [selectedChat, setSelectedChat] = useState<ChatSession | null>(null)
   const [newMessage, setNewMessage] = useState("")
