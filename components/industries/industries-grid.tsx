@@ -18,6 +18,7 @@ import {
   Star,
   Package,
   Truck,
+  Heart,
 } from "lucide-react"
 import Link from "next/link"
 
