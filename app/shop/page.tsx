@@ -124,7 +124,7 @@ export default function ShopPage() {
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
                 <Input
-                  placeholder="Search for products, brands, or categories..."
+                  placeholder="Search for products, brands, categories, or vendors..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={handleSearchKeyPress}
