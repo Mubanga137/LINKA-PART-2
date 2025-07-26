@@ -22,6 +22,9 @@ export default function HealthWellnessPage() {
   const { user } = useAuth()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(true)
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [showDocuments, setShowDocuments] = useState(false)
+  const [showBooking, setShowBooking] = useState(false)
 
   useEffect(() => {
     // Redirect non-customers or unauthenticated users
