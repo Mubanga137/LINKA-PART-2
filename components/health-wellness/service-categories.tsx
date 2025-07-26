@@ -172,10 +172,27 @@ export function ServiceCategories() {
   })
 
   const handleCategorySelect = async (categoryId: string) => {
+    // Route to dedicated service pages for specific categories
+    if (categoryId === 'fitness') {
+      window.location.href = '/services/fitness-yoga'
+      return
+    }
+    if (categoryId === 'pharmacies') {
+      window.location.href = '/services/pharmacies'
+      return
+    }
+    if (categoryId === 'emergency') {
+      // Scroll to ambulance booking section
+      document.getElementById('ambulance-booking')?.scrollIntoView({
+        behavior: 'smooth'
+      })
+      return
+    }
+
     setSelectedCategory(categoryId)
     setIsLoading(true)
-    
-    // Simulate API call
+
+    // Simulate API call for other categories
     setTimeout(() => {
       const userLocation = user?.location || "Lusaka"
       const mockServices = generateMockServices(categoryId, userLocation)
