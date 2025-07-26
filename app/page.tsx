@@ -19,12 +19,6 @@ export default function HomePage() {
           subtitle="Curated products based on your location and browsing history"
           maxItems={8}
         />
-        <DynamicCategoryGrid
-          title="Shop by Category"
-          subtitle="Discover local products tailored to your location"
-          maxCategories={8}
-          showFilters={true}
-        />
         <VendorShowcase
           title="Featured Local Vendors"
           subtitle="Support amazing businesses in your community"
