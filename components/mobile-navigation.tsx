@@ -73,10 +73,8 @@ export function MobileNavigation() {
     }
   ]
 
-  // Secondary navigation items
+  // Secondary navigation items (customer-focused only)
   const secondaryItems = [
-    { name: "About", href: "/about", icon: Info },
-    { name: "For Retailers", href: "/for-retailers", icon: Store },
     { name: "Contact", href: "/contact", icon: Phone }
   ]
 
