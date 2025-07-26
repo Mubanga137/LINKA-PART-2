@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -18,8 +19,18 @@ interface MarketplaceFiltersProps {
 }
 
 const CATEGORIES = [
+  {
+    id: 'fashion',
+    name: 'Fashion & Style',
+    emoji: '👗',
+    subcategories: [
+      { id: 'fashion-men', name: 'Men\'s Fashion', path: '/categories/fashion#men' },
+      { id: 'fashion-women', name: 'Women\'s Fashion', path: '/categories/fashion#women' },
+      { id: 'fashion-kids', name: 'Kids\' Fashion', path: '/categories/fashion#kids' },
+      { id: 'fashion-textiles', name: 'Textiles & Tailoring', path: '/categories/fashion/textiles' }
+    ]
+  },
   { id: 'jewelry-accessories', name: 'Jewelry & Accessories', emoji: '💍' },
-  { id: 'fashion-textiles', name: 'Fashion & Textiles', emoji: '👗' },
   { id: 'food-beverages', name: 'Food & Beverages', emoji: '🍯' },
   { id: 'agriculture-natural', name: 'Agriculture & Natural', emoji: '🌱' },
   { id: 'tools-hardware', name: 'Tools & Hardware', emoji: '🔨' },
@@ -134,22 +145,40 @@ export function MarketplaceFilters({ filters, onFiltersChange, isLoading }: Mark
           <CardContent className="pt-0">
             <div className="space-y-3">
               {CATEGORIES.map((category) => (
-                <div key={category.id} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={category.id}
-                    checked={filters.category === category.id}
-                    onCheckedChange={(checked) => 
-                      handleCategoryChange(category.id, checked as boolean)
-                    }
-                    disabled={isLoading}
-                  />
-                  <Label 
-                    htmlFor={category.id} 
-                    className="text-sm cursor-pointer flex items-center gap-2"
-                  >
-                    <span>{category.emoji}</span>
-                    <span>{category.name}</span>
-                  </Label>
+                <div key={category.id} className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id={category.id}
+                      checked={filters.category === category.id}
+                      onCheckedChange={(checked) =>
+                        handleCategoryChange(category.id, checked as boolean)
+                      }
+                      disabled={isLoading}
+                    />
+                    <Label
+                      htmlFor={category.id}
+                      className="text-sm cursor-pointer flex items-center gap-2"
+                    >
+                      <span>{category.emoji}</span>
+                      <span>{category.name}</span>
+                    </Label>
+                  </div>
+
+                  {/* Fashion subcategories */}
+                  {category.id === 'fashion' && category.subcategories && (
+                    <div className="ml-6 space-y-1">
+                      {category.subcategories.map((sub) => (
+                        <Link
+                          key={sub.id}
+                          href={sub.path}
+                          className="flex items-center text-xs text-slate-600 hover:text-indigo-600 transition-colors p-1 rounded hover:bg-slate-50"
+                        >
+                          <span className="w-2 h-2 bg-slate-300 rounded-full mr-2"></span>
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

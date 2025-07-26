@@ -12,12 +12,12 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
-import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Menu, X, Search, Sparkles } from "lucide-react"
+import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Menu, X, Search, Sparkles, Briefcase, Stethoscope, Home, Car, Camera, GraduationCap, Wrench, Heart, Shield, Building, ChevronRight } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context"
+import { MobileNavigation } from "@/components/mobile-navigation"
 
 export function MarketplaceMainHeader() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
   const router = useRouter()
@@ -25,14 +25,6 @@ export function MarketplaceMainHeader() {
   const handleLogout = () => {
     logout()
     router.push('/')
-  }
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false)
   }
 
   const getUserDashboardLink = () => {
@@ -150,6 +142,98 @@ export function MarketplaceMainHeader() {
                 />
               </Link>
             </motion.div>
+
+            {/* Services Dropdown Menu */}
+            {user && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      variant="ghost"
+                      className="text-white hover:text-orange-300 font-semibold transition-all duration-300 relative group py-2 px-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 overflow-hidden"
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 opacity-0 group-hover:opacity-100"
+                        transition={{ duration: 0.3 }}
+                      />
+                      <span className="relative flex items-center">
+                        <Briefcase className="h-4 w-4 mr-2" />
+                        Services
+                        <ChevronDown className="h-3 w-3 ml-2" />
+                      </span>
+                    </Button>
+                  </motion.div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="start"
+                  className="w-80 bg-white/95 backdrop-blur-sm border-white/20 shadow-2xl shadow-blue-900/20 rounded-2xl p-4"
+                >
+                  <div className="space-y-1">
+                    <div className="px-3 py-2 mb-3">
+                      <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Service Categories</h3>
+                      <p className="text-xs text-slate-500 mt-1">Browse and book local services</p>
+                    </div>
+
+                    {/* Service Categories */}
+                    {[
+                      { icon: Stethoscope, name: "Health & Wellness", path: "/services/health-wellness", description: "Medical, fitness & wellness" },
+                      { icon: Home, name: "Home Services", path: "/industries/home-decor", description: "Cleaning, repairs & improvement" },
+                      { icon: Car, name: "Transport & Logistics", path: "/industries/transport", description: "Delivery & transportation" },
+                      { icon: Camera, name: "Entertainment", path: "/industries/entertainment", description: "Photography & events" },
+                      { icon: GraduationCap, name: "Education & Training", path: "/marketplace?category=education", description: "Tutoring & skill development" },
+                      { icon: Wrench, name: "Professional Services", path: "/marketplace?category=professional", description: "Legal, accounting & consulting" },
+                      { icon: Heart, name: "Beauty & Wellness", path: "/marketplace?category=beauty", description: "Salon, spa & beauty services" },
+                      { icon: Building, name: "Real Estate", path: "/marketplace?category=real-estate", description: "Property & rental services" }
+                    ].map((service) => (
+                      <DropdownMenuItem key={service.name} asChild>
+                        <Link
+                          href={service.path}
+                          className="flex items-center justify-between p-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 group cursor-pointer"
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center group-hover:from-blue-200 group-hover:to-indigo-200 transition-all duration-300">
+                              <service.icon className="h-5 w-5 text-blue-600" />
+                            </div>
+                            <div>
+                              <div className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors">{service.name}</div>
+                              <div className="text-xs text-slate-500 group-hover:text-blue-500 transition-colors">{service.description}</div>
+                            </div>
+                          </div>
+                          <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+
+                    <DropdownMenuSeparator className="my-3" />
+
+                    {/* Quick Actions */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/marketplace?category=services"
+                          className="flex items-center justify-center p-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white transition-all duration-300 group"
+                        >
+                          <Search className="h-4 w-4 mr-2" />
+                          Browse All
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link
+                          href="/become-retailer?type=service"
+                          className="flex items-center justify-center p-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white transition-all duration-300 group"
+                        >
+                          <Shield className="h-4 w-4 mr-2" />
+                          List Service
+                        </Link>
+                      </DropdownMenuItem>
+                    </div>
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </motion.nav>
 
           <motion.div 
@@ -205,42 +289,10 @@ export function MarketplaceMainHeader() {
               </motion.div>
             )}
 
-            {/* Mobile Menu Button */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                variant="ghost"
-                size="sm"
-                className="md:hidden text-white hover:text-orange-300 hover:bg-white/10 p-2 transition-all duration-300"
-                onClick={toggleMobileMenu}
-              >
-                <AnimatePresence mode="wait">
-                  {isMobileMenuOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X className="h-6 w-6" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu className="h-6 w-6" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </Button>
-            </motion.div>
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <MobileNavigation />
+            </div>
 
             {/* User Authentication */}
             {user ? (
@@ -385,186 +437,7 @@ export function MarketplaceMainHeader() {
         />
       </div>
 
-      {/* Mobile Navigation Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={closeMobileMenu}
-            />
 
-            {/* Mobile Menu Panel */}
-            <motion.div
-              className="fixed top-0 right-0 z-50 h-full w-80 max-w-sm bg-gradient-to-br from-blue-600 to-blue-800 shadow-2xl md:hidden"
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <div className="flex flex-col h-full">
-                {/* Mobile Menu Header */}
-                <motion.div 
-                  className="flex items-center justify-between p-6 border-b border-white/20"
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                >
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <LinkIcon className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg font-bold text-white">
-                      Linka
-                      <span className="text-orange-400 ml-1">Market</span>
-                    </span>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-white hover:text-orange-300 p-2"
-                    onClick={closeMobileMenu}
-                  >
-                    <X className="h-5 w-5" />
-                  </Button>
-                </motion.div>
-
-                {/* Mobile Navigation Links */}
-                <nav className="flex-1 overflow-y-auto py-6">
-                  <div className="space-y-2 px-6">
-                    <motion.div
-                      initial={{ x: -20, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ duration: 0.4, delay: 0.2 }}
-                    >
-                      <Link
-                        href="/marketplace"
-                        className="flex items-center justify-between py-4 text-white bg-white/10 rounded-xl px-4 font-semibold border border-white/20 transition-all duration-300 hover:bg-white/20"
-                        onClick={closeMobileMenu}
-                      >
-                        <span className="flex items-center">
-                          <Search className="h-5 w-5 mr-3 text-orange-400" />
-                          Browse Products
-                        </span>
-                      </Link>
-                    </motion.div>
-
-                    {user && (
-                      <motion.div
-                        className="space-y-2"
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.4, delay: 0.3 }}
-                      >
-                        <Link
-                          href="/cart"
-                          className="flex items-center justify-between py-4 text-white hover:text-orange-300 hover:bg-white/10 rounded-xl px-4 transition-all duration-300"
-                          onClick={closeMobileMenu}
-                        >
-                          <span className="flex items-center">
-                            <ShoppingCart className="h-5 w-5 mr-3" />
-                            Shopping Cart
-                          </span>
-                          {totalItems > 0 && (
-                            <span className="bg-orange-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold">
-                              {totalItems}
-                            </span>
-                          )}
-                        </Link>
-                      </motion.div>
-                    )}
-                  </div>
-                </nav>
-
-                {/* Mobile Menu Footer */}
-                <motion.div 
-                  className="border-t border-white/20 p-6 space-y-4"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.4 }}
-                >
-                  {user ? (
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-3 p-4 bg-white/10 rounded-xl">
-                        <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
-                          <User className="h-5 w-5 text-white" />
-                        </div>
-                        <div>
-                          <p className="font-medium text-white">{user.name}</p>
-                          <p className="text-xs text-blue-200 capitalize">{user.role}</p>
-                        </div>
-                      </div>
-
-                      <Button
-                        onClick={() => {
-                          handleLogout()
-                          closeMobileMenu()
-                        }}
-                        variant="outline"
-                        className="w-full justify-center bg-white/10 text-white border-white/20 hover:bg-white/20"
-                      >
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Logout
-                      </Button>
-                    </div>
-                  ) : (
-                    <div className="space-y-3">
-                      <Link href="/login" onClick={closeMobileMenu}>
-                        <Button
-                          variant="outline"
-                          className="w-full justify-center bg-white/10 text-white border-white/20 hover:bg-white/20"
-                        >
-                          <User className="h-4 w-4 mr-2" />
-                          Login
-                        </Button>
-                      </Link>
-                      <Link href="/signup" onClick={closeMobileMenu}>
-                        <Button className="w-full justify-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white">
-                          Sign Up
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </motion.div>
-              </div>
-
-              {/* Mobile Menu Animated Background */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <motion.div
-                  className="absolute top-1/4 right-0 w-40 h-40 bg-gradient-to-br from-orange-400/10 to-yellow-400/10 rounded-full blur-2xl"
-                  animate={{
-                    x: [0, -20, 0],
-                    y: [0, 20, 0],
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <motion.div
-                  className="absolute bottom-1/3 left-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-purple-500/10 rounded-full blur-2xl"
-                  animate={{
-                    rotate: [0, 180, 360],
-                    scale: [1, 0.8, 1],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </motion.header>
   )
 }

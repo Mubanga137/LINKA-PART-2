@@ -5,13 +5,10 @@ import { TalentMarketplace } from "@/components/industries/entertainment/talent-
 import { TrendingNow } from "@/components/industries/entertainment/trending-now"
 import { CreatorSpotlight } from "@/components/industries/entertainment/creator-spotlight"
 import { EntertainmentStats } from "@/components/industries/entertainment/entertainment-stats"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 
 export default function EntertainmentPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
-      <Header />
       <main>
         <EntertainmentHero />
         <EntertainmentCategories />
@@ -21,7 +18,6 @@ export default function EntertainmentPage() {
         <CreatorSpotlight />
         <EntertainmentStats />
       </main>
-      <Footer />
     </div>
   )
 }

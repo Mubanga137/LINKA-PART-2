@@ -14,7 +14,7 @@
     "@radix-ui/react-alert-dialog": "1.1.4",
     "@radix-ui/react-aspect-ratio": "1.1.1",
     "@radix-ui/react-avatar": "1.1.2",
-    "@radix-ui/react-checkbox": "latest",
+    "@radix-ui/react-checkbox": "1.1.4",
     "@radix-ui/react-collapsible": "1.1.2",
     "@radix-ui/react-context-menu": "2.2.4",
     "@radix-ui/react-dialog": "1.1.4",
@@ -28,8 +28,8 @@
     "@radix-ui/react-radio-group": "1.2.2",
     "@radix-ui/react-scroll-area": "1.2.2",
     "@radix-ui/react-select": "2.1.4",
-    "@radix-ui/react-separator": "latest",
-    "@radix-ui/react-slider": "latest",
+    "@radix-ui/react-separator": "1.1.1",
+    "@radix-ui/react-slider": "1.2.2",
     "@radix-ui/react-slot": "1.1.1",
     "@radix-ui/react-switch": "1.1.2",
     "@radix-ui/react-tabs": "1.1.2",
@@ -67,5 +67,6 @@
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
 }
