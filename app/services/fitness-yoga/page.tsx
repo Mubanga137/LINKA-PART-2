@@ -26,7 +26,7 @@ import {
   Target,
   Activity
 } from "lucide-react"
-import { useAuth } from "@/contexts/auth-context"
+
 
 interface FitnessProvider {
   id: string
@@ -113,24 +113,11 @@ const fitnessProviders: FitnessProvider[] = [
 ]
 
 export default function FitnessYogaPage() {
-  const { user } = useAuth()
   const router = useRouter()
   const [selectedProvider, setSelectedProvider] = useState<FitnessProvider | null>(null)
   const [showBooking, setShowBooking] = useState(false)
   const [showChat, setShowChat] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/login?redirect=/services/fitness-yoga')
-      return
-    }
-    
-    if (user.role !== 'customer') {
-      router.push('/')
-      return
-    }
-  }, [user, router])
 
   const filteredProviders = selectedCategory === "all" 
     ? fitnessProviders 
@@ -146,9 +133,7 @@ export default function FitnessYogaPage() {
     setShowChat(true)
   }
 
-  if (!user || user.role !== 'customer') {
-    return null
-  }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-green-50">

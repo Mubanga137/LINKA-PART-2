@@ -124,10 +124,10 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
                   <Sparkles className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
                 
-                <Button 
+                <Button
                   onClick={() => router.push('/orders')}
                   variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10 px-8 py-4 transition-all duration-300 hover:scale-105"
+                  className="border-white/30 bg-white/10 text-white hover:bg-white/20 px-8 py-4 transition-all duration-300 hover:scale-105"
                   size="lg"
                 >
                   <Package className="h-5 w-5 mr-3" />

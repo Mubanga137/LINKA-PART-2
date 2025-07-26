@@ -62,14 +62,6 @@ export function Header() {
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/shop"
-              className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
-            >
-              Shop
-              <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-            </Link>
-
             <DropdownMenu>
               <DropdownMenuTrigger className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2 flex items-center">
                 Categories
@@ -257,16 +249,6 @@ export function Header() {
               {/* Mobile Navigation Links */}
               <nav className="flex-1 overflow-y-auto py-6">
                 <div className="space-y-1 px-6">
-                  {/* Main Navigation */}
-                  <Link
-                    href="/shop"
-                    className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                    onClick={closeMobileMenu}
-                  >
-                    <span className="font-medium">Shop</span>
-                    <ChevronRight className="h-4 w-4" />
-                  </Link>
-
                   {/* Categories Section */}
                   <div className="py-3">
                     <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
