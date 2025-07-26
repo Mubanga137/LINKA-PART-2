@@ -181,10 +181,13 @@ export function MarketplaceGrid({
                 <div className="relative">
                   {/* Product Image */}
                   <Link href={`/products/${product.id}`}>
-                    <div className="aspect-square bg-gray-50 flex items-center justify-center p-4 cursor-pointer hover:bg-gray-100 transition-colors">
-                      <span className="text-4xl md:text-5xl">
-                        {getCategoryEmoji(product.category)}
-                      </span>
+                    <div className="aspect-square bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
                     </div>
                   </Link>
 
