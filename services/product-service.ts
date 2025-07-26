@@ -93,7 +93,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'food-001',
     name: 'Pure Zambian Honey',
     price: 120,
-    image: '/placeholder.svg?height=400&width=400&text=Zambian+Honey',
+    image: 'https://images.pexels.com/photos/9228574/pexels-photo-9228574.jpeg',
     category: 'food-beverages',
     subcategory: 'honey',
     description: 'Pure, raw honey sourced from Zambian beekeepers. Rich in flavor and completely natural.',
