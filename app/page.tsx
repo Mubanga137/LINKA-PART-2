@@ -14,22 +14,13 @@ export default function HomePage() {
       <Header />
       <main>
         <HeroSection />
-        <TrendingOffers maxOffers={6} layout="grid" />
-        <PersonalizedProductCarousel
-          title="Recommended for You"
-          subtitle="Curated products based on your location and browsing history"
-          maxItems={8}
-        />
         <VendorShowcase
           title="Featured Local Vendors"
           subtitle="Support amazing businesses in your community"
           maxVendors={6}
         />
-        <PersonalizedProductCarousel
-          title="Recently Viewed"
-          subtitle="Continue shopping from where you left off"
-          maxItems={6}
-        />
+        <ServicesPreviewSection />
+        <TrendingOffers maxOffers={6} layout="grid" />
         <FeaturesSection />
         <HowItWorksSection />
       </main>
