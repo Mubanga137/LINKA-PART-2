@@ -98,11 +98,7 @@ const config: Config = {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
-  			'gradient-x': 'gradient-x 3s ease infinite',
-  			'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
-  			'spin-slow': 'spin-slow 3s linear infinite',
-  			'float': 'float 3s ease-in-out infinite',
-  			'bounce-slow': 'bounce-slow 3s infinite'
+  			'float': 'float 6s ease-in-out infinite'
   		}
   	}
   },
