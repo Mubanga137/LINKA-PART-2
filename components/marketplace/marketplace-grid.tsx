@@ -18,7 +18,7 @@ import {
   List,
   SlidersHorizontal,
   Eye,
-  Compare,
+  GitCompare,
   Share
 } from "lucide-react"
 import { Product } from "@/contexts/cart-context"
