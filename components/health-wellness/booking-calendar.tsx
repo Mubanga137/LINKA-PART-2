@@ -120,7 +120,7 @@ interface BookingCalendarProps {
   serviceType?: 'healthcare' | 'fitness' | 'pharmacy'
 }
 
-export function BookingCalendar({ provider = mockProvider, onBookingComplete }: BookingCalendarProps) {
+export function BookingCalendar({ provider = mockProvider, onBookingComplete, serviceType = 'healthcare' }: BookingCalendarProps) {
   const { user } = useAuth()
   const [currentDate, setCurrentDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
