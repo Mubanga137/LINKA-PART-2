@@ -249,16 +249,6 @@ export function Header() {
               {/* Mobile Navigation Links */}
               <nav className="flex-1 overflow-y-auto py-6">
                 <div className="space-y-1 px-6">
-                  {/* Main Navigation */}
-                  <Link
-                    href="/shop"
-                    className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
-                    onClick={closeMobileMenu}
-                  >
-                    <span className="font-medium">Shop</span>
-                    <ChevronRight className="h-4 w-4" />
-                  </Link>
-
                   {/* Categories Section */}
                   <div className="py-3">
                     <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
