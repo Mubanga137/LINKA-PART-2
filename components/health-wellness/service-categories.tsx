@@ -97,7 +97,7 @@ const serviceCategories = [
   {
     id: "spa-massage",
     name: "Massage & Spa",
-    icon: Spa,
+    icon: Flower,
     color: "from-pink-500 to-rose-600",
     description: "Spa treatments, home service massage therapists",
     count: 23
