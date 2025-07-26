@@ -35,7 +35,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'jewelry-002',
     name: 'Malachite Stone Necklace',
     price: 350,
-    image: '/placeholder.svg?height=400&width=400&text=Malachite+Necklace',
+    image: 'https://images.pexels.com/photos/12026053/pexels-photo-12026053.jpeg',
     category: 'jewelry-accessories',
     subcategory: 'necklaces',
     description: 'Stunning necklace featuring genuine Zambian malachite stones. Each piece is unique with natural stone patterns.',
