@@ -19,7 +19,11 @@ import {
   SlidersHorizontal,
   Eye,
   GitCompare,
-  Share
+  Share,
+  Zap,
+  Clock,
+  TrendingUp,
+  Sparkles
 } from "lucide-react"
 import { Product } from "@/contexts/cart-context"
 import { useCart } from "@/contexts/cart-context"
@@ -48,387 +52,344 @@ export function MarketplaceGrid({
   totalProducts,
   itemsPerPage
 }: MarketplaceGridProps) {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
-  const [favorites, setFavorites] = useState<Set<string>>(new Set())
-  const [compareList, setGitCompareList] = useState<Set<string>>(new Set())
-  const { addToCart, getItemQuantity } = useCart()
-
-  const handleSortChange = (value: string) => {
-    const [sortBy, order] = value.split('-') as [ProductSortOptions['sortBy'], ProductSortOptions['order']]
-    onSortChange({ sortBy, order })
-  }
-
-  const toggleFavorite = (productId: string) => {
-    setFavorites(prev => {
-      const newFavorites = new Set(prev)
-      if (newFavorites.has(productId)) {
-        newFavorites.delete(productId)
-      } else {
-        newFavorites.add(productId)
-      }
-      return newFavorites
-    })
-  }
-
-  const toggleGitCompare = (productId: string) => {
-    setGitCompareList(prev => {
-      const newGitCompareList = new Set(prev)
-      if (newGitCompareList.has(productId)) {
-        newGitCompareList.delete(productId)
-      } else if (newGitCompareList.size < 4) { // Limit to 4 items for comparison
-        newGitCompareList.add(productId)
-      }
-      return newGitCompareList
-    })
-  }
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  const [hoveredProduct, setHoveredProduct] = useState<string | null>(null)
+  const { addToCart } = useCart()
 
   const handleAddToCart = (product: Product) => {
-    addToCart(product, 1)
+    addToCart(product)
   }
+
+  const sortOptions_array = [
+    { value: 'newest', label: 'Newest First', icon: '🆕' },
+    { value: 'popular', label: 'Most Popular', icon: '🔥' },
+    { value: 'price-low', label: 'Price: Low to High', icon: '💰' },
+    { value: 'price-high', label: 'Price: High to Low', icon: '💎' },
+    { value: 'rating', label: 'Highest Rated', icon: '⭐' },
+    { value: 'recommended', label: 'Recommended', icon: '✨' },
+  ]
+
+  // Mock product enhancements
+  const enhanceProduct = (product: Product) => ({
+    ...product,
+    isNew: Math.random() > 0.7,
+    isTrending: Math.random() > 0.8,
+    hasFreeship: Math.random() > 0.6,
+    fastDelivery: Math.random() > 0.5,
+    discount: Math.random() > 0.7 ? Math.floor(Math.random() * 30) + 10 : null,
+    originalPrice: product.price * (1 + Math.random() * 0.5),
+  })
 
   if (isLoading) {
     return (
       <div className="space-y-6">
-        {/* Loading skeleton */}
-        <div className="flex items-center justify-between">
-          <div className="h-6 bg-slate-200 rounded w-32 animate-pulse"></div>
-          <div className="h-10 bg-slate-200 rounded w-48 animate-pulse"></div>
-        </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Card key={i} className="animate-pulse">
-              <CardContent className="p-0">
-                <div className="h-64 bg-slate-200 rounded-t-lg"></div>
-                <div className="p-4 space-y-3">
-                  <div className="h-4 bg-slate-200 rounded w-3/4"></div>
-                  <div className="h-4 bg-slate-200 rounded w-1/2"></div>
-                  <div className="h-8 bg-slate-200 rounded w-full"></div>
+        {/* Loading Skeleton */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-white/50">
+          <div className="animate-pulse space-y-4">
+            <div className="h-6 bg-gradient-to-r from-blue-200 to-orange-200 rounded-lg w-1/3"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="bg-gradient-to-br from-blue-100 to-orange-100 rounded-2xl p-6 space-y-4">
+                  <div className="h-48 bg-gradient-to-br from-blue-200 to-orange-200 rounded-xl"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gradient-to-r from-blue-200 to-orange-200 rounded"></div>
+                    <div className="h-4 bg-gradient-to-r from-blue-200 to-orange-200 rounded w-2/3"></div>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 
-  const startItem = (currentPage - 1) * itemsPerPage + 1
-  const endItem = Math.min(currentPage * itemsPerPage, totalProducts)
-
   return (
-    <div className="space-y-6">
-      {/* Header with controls */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex items-center space-x-4">
-          <p className="text-slate-600">
-            Showing {startItem}-{endItem} of {totalProducts.toLocaleString()} products
-          </p>
-        </div>
-
-        <div className="flex items-center space-x-3">
-          {/* View mode toggle */}
-          <div className="flex items-center border border-slate-200 rounded-lg p-1">
-            <Button
-              variant={viewMode === 'grid' ? 'default' : 'ghost'}
-              size="sm"
-              onClick={() => setViewMode('grid')}
-              className="p-2"
-            >
-              <Grid3X3 className="h-4 w-4" />
-            </Button>
-            <Button
-              variant={viewMode === 'list' ? 'default' : 'ghost'}
-              size="sm"
-              onClick={() => setViewMode('list')}
-              className="p-2"
-            >
-              <List className="h-4 w-4" />
-            </Button>
-          </div>
-
-          {/* Sort dropdown */}
-          <Select value={`${sortOptions.sortBy}-${sortOptions.order}`} onValueChange={handleSortChange}>
-            <SelectTrigger className="w-48">
-              <SlidersHorizontal className="h-4 w-4 mr-2" />
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="newest-desc">Newest First</SelectItem>
-              <SelectItem value="price-asc">Price: Low to High</SelectItem>
-              <SelectItem value="price-desc">Price: High to Low</SelectItem>
-              <SelectItem value="rating-desc">Highest Rated</SelectItem>
-              <SelectItem value="popularity-desc">Most Popular</SelectItem>
-              <SelectItem value="name-asc">Name: A to Z</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      {/* GitCompare Bar */}
-      {compareList.size > 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <GitCompare className="h-5 w-5 text-blue-600" />
-              <span className="font-medium text-blue-900">
-                {compareList.size} item{compareList.size !== 1 ? 's' : ''} selected for comparison
-              </span>
+    <div className="space-y-8">
+      {/* Enhanced Control Bar */}
+      <Card className="bg-gradient-to-r from-white/90 to-blue-50/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-blue-500/10">
+        <CardContent className="p-6">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <TrendingUp className="h-5 w-5 text-orange-500" />
+                <span className="font-semibold text-blue-900">
+                  {totalProducts.toLocaleString()} 
+                  <span className="text-blue-600 ml-1">products found</span>
+                </span>
+              </div>
+              <div className="text-sm text-blue-600">
+                Page {currentPage} of {totalPages}
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                GitCompare Now
-              </Button>
-              <Button variant="outline" size="sm" onClick={() => setGitCompareList(new Set())}>
-                Clear
-              </Button>
+
+            <div className="flex items-center space-x-4">
+              {/* Sort Dropdown */}
+              <Select value={sortOptions.sortBy} onValueChange={(value) => onSortChange({ ...sortOptions, sortBy: value as any })}>
+                <SelectTrigger className="w-48 bg-white/80 border-white/50 hover:bg-white transition-all duration-300">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-white/95 backdrop-blur-sm">
+                  {sortOptions_array.map((option) => (
+                    <SelectItem key={option.value} value={option.value} className="hover:bg-blue-50">
+                      <span className="flex items-center">
+                        <span className="mr-2">{option.icon}</span>
+                        {option.label}
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* View Mode Toggle */}
+              <div className="flex bg-white/80 rounded-xl overflow-hidden border border-white/50">
+                <Button
+                  variant={viewMode === "grid" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setViewMode("grid")}
+                  className={`px-4 py-2 transition-all duration-300 ${
+                    viewMode === "grid" 
+                      ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg" 
+                      : "hover:bg-blue-50"
+                  }`}
+                >
+                  <Grid3X3 className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant={viewMode === "list" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setViewMode("list")}
+                  className={`px-4 py-2 transition-all duration-300 ${
+                    viewMode === "list" 
+                      ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg" 
+                      : "hover:bg-blue-50"
+                  }`}
+                >
+                  <List className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        </CardContent>
+      </Card>
 
-      {/* Products */}
-      {products.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-xl font-semibold text-slate-900 mb-2">No products found</h3>
-          <p className="text-slate-600">Try adjusting your filters or search terms</p>
-        </div>
-      ) : (
-        <div className={viewMode === 'grid' 
-          ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" 
-          : "space-y-4"
-        }>
-          {products.map((product) => (
-            <Card 
-              key={product.id} 
-              className={`group bg-white/80 backdrop-blur-sm border-white/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden ${
-                viewMode === 'list' ? 'flex' : ''
-              }`}
+      {/* Products Grid */}
+      <div className={viewMode === "grid" 
+        ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
+        : "space-y-6"
+      }>
+        {products.map((product) => {
+          const enhanced = enhanceProduct(product)
+          return (
+            <Card
+              key={product.id}
+              className="group relative bg-white/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-blue-500/10 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+              onMouseEnter={() => setHoveredProduct(product.id)}
+              onMouseLeave={() => setHoveredProduct(null)}
             >
-              <CardContent className={`p-0 ${viewMode === 'list' ? 'flex w-full' : ''}`}>
-                {/* Product Image */}
-                <div className={`relative ${viewMode === 'list' ? 'w-48 flex-shrink-0' : ''}`}>
-                  <Link href={`/products/${product.id}`}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-500 ${
-                        viewMode === 'list' ? 'h-full' : 'h-64'
-                      }`}
-                    />
-                  </Link>
+              {/* Product Badges */}
+              <div className="absolute top-4 left-4 z-10 flex flex-col space-y-2">
+                {enhanced.isNew && (
+                  <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg animate-pulse">
+                    <Sparkles className="h-3 w-3 mr-1" />
+                    New
+                  </Badge>
+                )}
+                {enhanced.isTrending && (
+                  <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg">
+                    🔥 Trending
+                  </Badge>
+                )}
+                {enhanced.discount && (
+                  <Badge className="bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg font-bold">
+                    -{enhanced.discount}%
+                  </Badge>
+                )}
+              </div>
 
-                  {/* Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-2">
-                    {product.originalPrice && (
-                      <Badge variant="destructive" className="bg-red-500 text-white">
-                        {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-                      </Badge>
-                    )}
-                    {!product.inStock && (
-                      <Badge variant="secondary" className="bg-slate-500 text-white">
-                        Out of Stock
-                      </Badge>
-                    )}
+              {/* Quick Actions */}
+              <div className={`absolute top-4 right-4 z-10 flex flex-col space-y-2 transition-all duration-300 ${
+                hoveredProduct === product.id ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
+              }`}>
+                <Button size="sm" variant="ghost" className="bg-white/90 hover:bg-white shadow-lg hover:scale-110 transition-all duration-300">
+                  <Heart className="h-4 w-4 text-orange-500" />
+                </Button>
+                <Button size="sm" variant="ghost" className="bg-white/90 hover:bg-white shadow-lg hover:scale-110 transition-all duration-300">
+                  <Eye className="h-4 w-4 text-blue-500" />
+                </Button>
+                <Button size="sm" variant="ghost" className="bg-white/90 hover:bg-white shadow-lg hover:scale-110 transition-all duration-300">
+                  <Share className="h-4 w-4 text-purple-500" />
+                </Button>
+              </div>
+
+              {/* Product Image */}
+              <div className="relative overflow-hidden">
+                <div className="aspect-square bg-gradient-to-br from-blue-100 to-orange-100 p-8 group-hover:scale-110 transition-transform duration-500">
+                  <div className="w-full h-full bg-white rounded-2xl shadow-inner flex items-center justify-center">
+                    <span className="text-6xl">{enhanced.category === 'jewelry-accessories' ? '💍' : enhanced.category === 'fashion-textiles' ? '👗' : enhanced.category === 'food-beverages' ? '🍯' : '📦'}</span>
                   </div>
-
-                  {/* Action buttons */}
-                  <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="p-2 bg-white/80 backdrop-blur-sm hover:bg-white/90"
-                      onClick={() => toggleFavorite(product.id)}
+                </div>
+                {/* Overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-300 ${
+                  hoveredProduct === product.id ? 'opacity-100' : 'opacity-0'
+                }`}>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <Button 
+                      onClick={() => handleAddToCart(enhanced)}
+                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                     >
-                      <Heart 
-                        className={`h-4 w-4 ${
-                          favorites.has(product.id) 
-                            ? 'fill-red-500 text-red-500' 
-                            : 'text-slate-600'
-                        }`} 
-                      />
-                    </Button>
-                    
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="p-2 bg-white/80 backdrop-blur-sm hover:bg-white/90"
-                      onClick={() => toggleGitCompare(product.id)}
-                      disabled={compareList.size >= 4 && !compareList.has(product.id)}
-                    >
-                      <GitCompare 
-                        className={`h-4 w-4 ${
-                          compareList.has(product.id) 
-                            ? 'text-blue-600' 
-                            : 'text-slate-600'
-                        }`} 
-                      />
-                    </Button>
-
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="p-2 bg-white/80 backdrop-blur-sm hover:bg-white/90"
-                    >
-                      <Share className="h-4 w-4 text-slate-600" />
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      Add to Cart
                     </Button>
                   </div>
+                </div>
+              </div>
 
-                  {/* Quick view button */}
-                  {product.inStock && (
-                    <Button
-                      size="sm"
-                      className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-emerald-600 hover:bg-emerald-700"
-                      onClick={() => handleAddToCart(product)}
-                    >
-                      <ShoppingCart className="h-4 w-4" />
-                    </Button>
+              <CardContent className="p-6">
+                {/* Vendor Info */}
+                <div className="flex items-center space-x-2 mb-3">
+                  <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">V</span>
+                  </div>
+                  <span className="text-sm text-blue-600 font-medium">{enhanced.vendor || 'Local Vendor'}</span>
+                  <Badge variant="outline" className="text-xs border-green-200 text-green-700">
+                    Verified
+                  </Badge>
+                </div>
+
+                {/* Product Title */}
+                <h3 className="font-bold text-blue-900 mb-2 group-hover:text-orange-600 transition-colors duration-300">
+                  {enhanced.name}
+                </h3>
+
+                {/* Rating */}
+                <div className="flex items-center space-x-2 mb-3">
+                  <div className="flex">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${
+                          i < Math.floor(enhanced.rating || 4.5)
+                            ? 'text-yellow-400 fill-current'
+                            : 'text-gray-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm text-blue-600">
+                    {(enhanced.rating || 4.5).toFixed(1)} ({Math.floor(Math.random() * 200) + 50})
+                  </span>
+                </div>
+
+                {/* Price */}
+                <div className="flex items-center space-x-2 mb-4">
+                  <span className="text-2xl font-bold text-blue-900">
+                    K{enhanced.price.toLocaleString()}
+                  </span>
+                  {enhanced.discount && (
+                    <span className="text-sm text-gray-500 line-through">
+                      K{enhanced.originalPrice.toLocaleString()}
+                    </span>
                   )}
                 </div>
 
-                {/* Product Info */}
-                <div className={`p-4 ${viewMode === 'list' ? 'flex-1 flex flex-col justify-between' : ''}`}>
-                  <div>
-                    <Link href={`/products/${product.id}`}>
-                      <h3 className="font-semibold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors line-clamp-2">
-                        {product.name}
-                      </h3>
-                    </Link>
-
-                    {/* Retailer */}
-                    <div className="flex items-center text-sm text-slate-600 mb-2">
-                      <MapPin className="h-3 w-3 mr-1" />
-                      <span>{product.retailerName}, {product.retailerLocation}</span>
-                    </div>
-
-                    {/* Rating */}
-                    <div className="flex items-center space-x-2 mb-3">
-                      <div className="flex">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`h-4 w-4 ${
-                              i < Math.floor(product.rating)
-                                ? 'text-yellow-400 fill-current'
-                                : 'text-slate-300'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                      <span className="text-sm text-slate-600">
-                        {product.rating} ({product.reviewCount})
-                      </span>
-                    </div>
-
-                    {/* Price */}
-                    <div className="flex items-baseline space-x-2 mb-3">
-                      <span className="text-2xl font-bold text-emerald-600">
-                        ZMW {product.price.toLocaleString()}
-                      </span>
-                      {product.originalPrice && (
-                        <span className="text-sm text-slate-500 line-through">
-                          ZMW {product.originalPrice.toLocaleString()}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Shipping */}
-                    <div className="flex items-center text-sm text-slate-600 mb-4">
+                {/* Features */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {enhanced.hasFreeship && (
+                    <Badge variant="outline" className="text-xs border-green-200 text-green-700">
                       <Truck className="h-3 w-3 mr-1" />
-                      {product.shippingInfo.freeShipping ? (
-                        <span className="text-green-600 font-medium">Free Shipping</span>
-                      ) : (
-                        <span>Shipping: ZMW {product.shippingInfo.shippingCost}</span>
-                      )}
-                      <span className="ml-2">• {product.shippingInfo.estimatedDays} days</span>
-                    </div>
+                      Free Ship
+                    </Badge>
+                  )}
+                  {enhanced.fastDelivery && (
+                    <Badge variant="outline" className="text-xs border-orange-200 text-orange-700">
+                      <Zap className="h-3 w-3 mr-1" />
+                      Fast
+                    </Badge>
+                  )}
+                  <Badge variant="outline" className="text-xs border-blue-200 text-blue-700">
+                    <MapPin className="h-3 w-3 mr-1" />
+                    Local
+                  </Badge>
+                </div>
 
-                    {/* Features */}
-                    {viewMode === 'list' && (
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {product.features.slice(0, 3).map((feature, index) => (
-                          <Badge key={index} variant="outline" className="text-xs">
-                            {feature}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-2">
-                    {product.inStock ? (
-                      <>
-                        <Button
-                          className="flex-1 bg-emerald-600 hover:bg-emerald-700"
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          <ShoppingCart className="h-4 w-4 mr-2" />
-                          {getItemQuantity(product.id) > 0 ? (
-                            `In Cart (${getItemQuantity(product.id)})`
-                          ) : (
-                            'Add to Cart'
-                          )}
-                        </Button>
-                        <Link href={`/products/${product.id}`}>
-                          <Button variant="outline" size="sm">
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                        </Link>
-                      </>
-                    ) : (
-                      <Button disabled className="flex-1">
-                        Out of Stock
-                      </Button>
-                    )}
-                  </div>
+                {/* Action Buttons */}
+                <div className="flex space-x-2">
+                  <Link href={`/products/${enhanced.id}`} className="flex-1">
+                    <Button variant="outline" className="w-full border-blue-200 text-blue-700 hover:bg-blue-50 transition-all duration-300">
+                      View Details
+                    </Button>
+                  </Link>
+                  <Button 
+                    onClick={() => handleAddToCart(enhanced)}
+                    className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    <ShoppingCart className="h-4 w-4" />
+                  </Button>
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
-      )}
+          )
+        })}
+      </div>
 
-      {/* Pagination */}
+      {/* Enhanced Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center space-x-2 pt-8">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onPageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            <ChevronLeft className="h-4 w-4" />
-            Previous
-          </Button>
-
-          {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-            const pageNum = i + Math.max(1, currentPage - 2)
-            if (pageNum > totalPages) return null
-            
-            return (
-              <Button
-                key={pageNum}
-                variant={currentPage === pageNum ? "default" : "outline"}
-                size="sm"
-                onClick={() => onPageChange(pageNum)}
-              >
-                {pageNum}
-              </Button>
-            )
-          })}
-
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onPageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
+        <Card className="bg-gradient-to-r from-white/90 to-blue-50/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-blue-500/10">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-blue-600">
+                Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, totalProducts)} of {totalProducts.toLocaleString()} products
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => onPageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="hover:bg-blue-50 transition-all duration-300 disabled:opacity-50"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Previous
+                </Button>
+                
+                {/* Page Numbers */}
+                <div className="flex space-x-1">
+                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                    const page = i + Math.max(1, currentPage - 2)
+                    return (
+                      <Button
+                        key={page}
+                        variant={page === currentPage ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => onPageChange(page)}
+                        className={`transition-all duration-300 ${
+                          page === currentPage
+                            ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg"
+                            : "hover:bg-blue-50"
+                        }`}
+                      >
+                        {page}
+                      </Button>
+                    )
+                  })}
+                </div>
+                
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => onPageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="hover:bg-blue-50 transition-all duration-300 disabled:opacity-50"
+                >
+                  Next
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   )
