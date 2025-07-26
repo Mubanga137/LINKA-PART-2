@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
-import { Header } from "@/components/header"
+import { MarketplaceMainHeader } from "@/components/marketplace/marketplace-main-header"
 import { Footer } from "@/components/footer"
 import { MarketplaceFilters } from "@/components/marketplace/marketplace-filters"
 import { MarketplaceGrid } from "@/components/marketplace/marketplace-grid"
