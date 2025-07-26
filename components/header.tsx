@@ -284,6 +284,44 @@ export function Header() {
                     <span className="font-medium">Services</span>
                     <ChevronRight className="h-4 w-4" />
                   </Link>
+
+                  {/* Quick Access Section */}
+                  <div className="border-t border-slate-200 pt-4 mt-4">
+                    <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
+                      Quick Access
+                    </h3>
+
+                    <Link
+                      href="/services"
+                      className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                      onClick={closeMobileMenu}
+                    >
+                      <span className="flex items-center">
+                        <Briefcase className="h-5 w-5 mr-3" />
+                        <span className="font-medium">Browse Services</span>
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
+
+                    <Link
+                      href="/cart"
+                      className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
+                      onClick={closeMobileMenu}
+                    >
+                      <span className="flex items-center">
+                        <ShoppingCart className="h-5 w-5 mr-3" />
+                        <span className="font-medium">Shopping Cart</span>
+                      </span>
+                      <div className="flex items-center space-x-2">
+                        {totalItems > 0 && (
+                          <Badge className="bg-orange-500 text-white text-xs px-2 py-0.5">
+                            {totalItems}
+                          </Badge>
+                        )}
+                        <ChevronRight className="h-4 w-4" />
+                      </div>
+                    </Link>
+                  </div>
                 </div>
               </nav>
 
