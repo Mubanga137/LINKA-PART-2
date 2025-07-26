@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { MarketplaceMainHeader } from "@/components/marketplace/marketplace-main-header"
 import { Footer } from "@/components/footer"
 import { MarketplaceFilters } from "@/components/marketplace/marketplace-filters"
