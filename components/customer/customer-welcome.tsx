@@ -97,7 +97,10 @@ export function CustomerWelcome({ user }: CustomerWelcomeProps) {
         {/* Status Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
           {/* Loyalty Points */}
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+          <Card
+            className="bg-white/10 backdrop-blur-sm border-white/20 cursor-pointer hover:bg-white/20 transition-all hover:scale-105"
+            onClick={() => router.push('/profile')}
+          >
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -115,7 +118,10 @@ export function CustomerWelcome({ user }: CustomerWelcomeProps) {
           </Card>
 
           {/* Active Orders */}
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+          <Card
+            className="bg-white/10 backdrop-blur-sm border-white/20 cursor-pointer hover:bg-white/20 transition-all hover:scale-105"
+            onClick={() => router.push('/orders')}
+          >
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -133,7 +139,10 @@ export function CustomerWelcome({ user }: CustomerWelcomeProps) {
           </Card>
 
           {/* Saved Items */}
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+          <Card
+            className="bg-white/10 backdrop-blur-sm border-white/20 cursor-pointer hover:bg-white/20 transition-all hover:scale-105"
+            onClick={() => router.push('/wishlist')}
+          >
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -151,7 +160,10 @@ export function CustomerWelcome({ user }: CustomerWelcomeProps) {
           </Card>
 
           {/* Recent Activity */}
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+          <Card
+            className="bg-white/10 backdrop-blur-sm border-white/20 cursor-pointer hover:bg-white/20 transition-all hover:scale-105"
+            onClick={() => router.push('/profile')}
+          >
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
