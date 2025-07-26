@@ -40,8 +40,12 @@ export default function LoginPage() {
         } else if (email.includes('retailer')) {
           router.push('/retailer-dashboard')
         } else {
-          // Customer redirect
-          router.push(redirectUrl || '/customer-dashboard')
+          // Customer redirect - always go to dashboard for demo accounts
+          if (email === 'customer@demo.com') {
+            router.push('/customer-dashboard')
+          } else {
+            router.push(redirectUrl || '/customer-dashboard')
+          }
         }
       } else {
         setError(result.error || "Login failed")
