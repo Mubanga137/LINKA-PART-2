@@ -204,50 +204,114 @@ export default function CustomerDashboard() {
           </div>
 
           {/* Recent Order Status */}
-          <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-slate-900">Recent Orders</h2>
-              <button
-                onClick={() => router.push('/orders')}
-                className="text-indigo-600 hover:text-indigo-700 font-medium text-sm"
-              >
-                View all orders →
-              </button>
-            </div>
+          <div className="relative">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/50 p-8 shadow-xl relative overflow-hidden">
+              {/* Background Animation */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-600/10 rounded-full blur-xl animate-pulse-slow"></div>
 
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <div className="relative">
+                <div className="flex items-center justify-between mb-8">
+                  <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                      </svg>
+                    </div>
+                    Recent Orders
+                  </h2>
+                  <button
+                    onClick={() => router.push('/orders')}
+                    className="group flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-semibold text-sm transition-all duration-300 hover:gap-3"
+                  >
+                    View all orders
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="group relative overflow-hidden bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="relative flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="font-semibold text-slate-900 group-hover:text-green-700 transition-colors">Order #ORD-2024-001</p>
+                          <p className="text-sm text-slate-600">Delivered • ZMW 450.00</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                            <span className="text-xs text-green-600 font-medium">Package delivered successfully</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => router.push('/orders')}
+                        className="group/btn bg-green-100 hover:bg-green-200 text-green-700 hover:text-green-800 font-medium text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
+                      >
+                        View Details
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium text-slate-900">Order #ORD-2024-001</p>
-                    <p className="text-sm text-slate-600">Delivered • ZMW 450.00</p>
+
+                  <div className="group relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="relative flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors">Order #ORD-2024-002</p>
+                          <p className="text-sm text-slate-600">Shipped • ZMW 280.00</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                            <span className="text-xs text-blue-600 font-medium">Arriving today</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => router.push('/orders')}
+                        className="group/btn bg-blue-100 hover:bg-blue-200 text-blue-700 hover:text-blue-800 font-medium text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
+                      >
+                        Track Package
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="group relative overflow-hidden bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="relative flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-yellow-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="font-semibold text-slate-900 group-hover:text-orange-700 transition-colors">Order #ORD-2024-003</p>
+                          <p className="text-sm text-slate-600">Processing • ZMW 195.00</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                            <span className="text-xs text-orange-600 font-medium">Being prepared</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => router.push('/orders')}
+                        className="group/btn bg-orange-100 hover:bg-orange-200 text-orange-700 hover:text-orange-800 font-medium text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
+                      >
+                        View Status
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <button className="text-green-600 hover:text-green-700 font-medium text-sm">
-                  View Details
-                </button>
-              </div>
-
-              <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">Order #ORD-2024-002</p>
-                    <p className="text-sm text-slate-600">Shipped • ZMW 280.00</p>
-                  </div>
-                </div>
-                <button className="text-blue-600 hover:text-blue-700 font-medium text-sm">
-                  Track Package
-                </button>
               </div>
             </div>
           </div>
