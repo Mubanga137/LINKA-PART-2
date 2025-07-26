@@ -133,6 +133,7 @@ const categories = [
 export function HealthTips() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedTip, setSelectedTip] = useState<HealthTip | null>(null)
+  const [showFullArticle, setShowFullArticle] = useState(false)
 
   const filteredTips = selectedCategory === "All" 
     ? healthTips 
