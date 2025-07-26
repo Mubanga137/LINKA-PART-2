@@ -64,7 +64,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Traditional Chitenge Dress',
     price: 280,
     originalPrice: 350,
-    image: '/placeholder.svg?height=400&width=400&text=Chitenge+Dress',
+    image: 'https://images.pexels.com/photos/14538746/pexels-photo-14538746.jpeg',
     category: 'fashion-textiles',
     subcategory: 'dresses',
     description: 'Beautiful traditional chitenge dress with modern cut. Perfect for special occasions and cultural events.',
