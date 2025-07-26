@@ -188,6 +188,11 @@ export function ServiceCategories() {
       })
       return
     }
+    if (categoryId === 'general-practitioners' || categoryId === 'mental-health' ||
+        categoryId === 'home-care' || categoryId === 'diagnostic-labs') {
+      window.location.href = '/services/general-health'
+      return
+    }
 
     setSelectedCategory(categoryId)
     setIsLoading(true)
