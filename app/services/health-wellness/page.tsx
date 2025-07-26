@@ -14,47 +14,15 @@ import { ProviderChat } from "@/components/health-wellness/provider-chat"
 import { MedicalDocuments } from "@/components/health-wellness/medical-documents"
 import { BookingCalendar } from "@/components/health-wellness/booking-calendar"
 import { Button } from "@/components/ui/button"
-import { useAuth } from "@/contexts/auth-context"
+
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { AlertTriangle } from "lucide-react"
 
 export default function HealthWellnessPage() {
-  const { user } = useAuth()
   const router = useRouter()
-  const [isLoading, setIsLoading] = useState(true)
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [showDocuments, setShowDocuments] = useState(false)
   const [showBooking, setShowBooking] = useState(false)
-
-  useEffect(() => {
-    // Redirect non-customers or unauthenticated users
-    if (!user) {
-      router.push('/login?redirect=/services/health-wellness')
-      return
-    }
-    
-    if (user.role !== 'customer') {
-      router.push('/')
-      return
-    }
-
-    setIsLoading(false)
-  }, [user, router])
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-teal-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600">Loading Health & Wellness Services...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (!user || user.role !== 'customer') {
-    return null
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-teal-50">

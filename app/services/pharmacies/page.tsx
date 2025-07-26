@@ -28,7 +28,7 @@ import {
   Heart,
   Package
 } from "lucide-react"
-import { useAuth } from "@/contexts/auth-context"
+
 
 interface Pharmacy {
   id: string
@@ -159,25 +159,12 @@ const medications: Medication[] = [
 ]
 
 export default function PharmaciesPage() {
-  const { user } = useAuth()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'pharmacies' | 'medications'>('pharmacies')
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [cart, setCart] = useState<{[key: string]: number}>({})
   const [selectedPharmacy, setSelectedPharmacy] = useState<Pharmacy | null>(null)
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/login?redirect=/services/pharmacies')
-      return
-    }
-    
-    if (user.role !== 'customer') {
-      router.push('/')
-      return
-    }
-  }, [user, router])
 
   const filteredPharmacies = pharmacies.filter(pharmacy => 
     pharmacy.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -217,9 +204,7 @@ export default function PharmaciesPage() {
     }, 0)
   }
 
-  if (!user || user.role !== 'customer') {
-    return null
-  }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-teal-50">
