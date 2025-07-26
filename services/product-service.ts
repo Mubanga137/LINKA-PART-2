@@ -320,7 +320,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'service-004',
     name: 'Interior Design Consultation',
     price: 150,
-    image: 'https://images.pexels.com/photos/6492400/pexels-photo-6492400.jpeg',
+    image: 'https://images.pexels.com/photos/20607077/pexels-photo-20607077.jpeg',
     category: 'services',
     subcategory: 'home-decor',
     description: 'Professional interior design consultation to transform your living space. Includes design concepts and shopping list.',
