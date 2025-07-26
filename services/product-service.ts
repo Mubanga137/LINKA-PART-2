@@ -262,7 +262,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Personal Fitness Training',
     price: 75,
     originalPrice: 100,
-    image: 'https://images.pexels.com/photos/6456299/pexels-photo-6456299.jpeg',
+    image: 'https://images.pexels.com/photos/5209197/pexels-photo-5209197.jpeg',
     category: 'services',
     subcategory: 'fitness-yoga',
     description: 'One-on-one personal training sessions with certified fitness trainers. Customized workout plans for your goals.',
