@@ -195,6 +195,11 @@ export function MarketplaceGrid({
 
                   {/* Badges */}
                   <div className="absolute top-2 left-2 flex flex-col gap-1">
+                    {product.category === 'services' && (
+                      <Badge className="bg-blue-500 text-white text-xs px-1.5 py-0.5">
+                        Service
+                      </Badge>
+                    )}
                     {discount && (
                       <Badge className="bg-red-500 text-white text-xs px-1.5 py-0.5">
                         -{discount}%
