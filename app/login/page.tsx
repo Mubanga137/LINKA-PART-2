@@ -32,11 +32,16 @@ export default function LoginPage() {
       const result = await login(email, password)
       
       if (result.success) {
-        // Redirect to dashboard or home based on user role
-        if (email.includes('retailer') || email.includes('admin')) {
+        // Redirect based on user role
+        const redirectUrl = new URLSearchParams(window.location.search).get('redirect')
+
+        if (email.includes('admin')) {
+          router.push('/admin-dashboard')
+        } else if (email.includes('retailer')) {
           router.push('/retailer-dashboard')
         } else {
-          router.push('/')
+          // Customer redirect
+          router.push(redirectUrl || '/customer-dashboard')
         }
       } else {
         setError(result.error || "Login failed")
