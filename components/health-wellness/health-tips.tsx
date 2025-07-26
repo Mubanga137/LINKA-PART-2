@@ -269,7 +269,15 @@ export function HealthTips() {
                           <div className="text-xs text-slate-500">
                             By {tip.author}
                           </div>
-                          <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 p-0">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-blue-600 hover:text-blue-700 p-0"
+                            onClick={() => {
+                              setSelectedTip(tip)
+                              setShowFullArticle(true)
+                            }}
+                          >
                             Read More
                             <ArrowRight className="h-3 w-3 ml-1" />
                           </Button>
