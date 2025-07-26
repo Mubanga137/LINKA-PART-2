@@ -31,7 +31,11 @@ const stats = [
   },
 ]
 
-export function ShopStats() {
+interface ShopStatsProps {
+  totalProducts?: number
+}
+
+export function ShopStats({ totalProducts }: ShopStatsProps) {
   return (
     <div className="mb-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
