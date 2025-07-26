@@ -27,6 +27,14 @@ export function Header() {
     router.push('/')
   }
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+  }
+
   const getUserDashboardLink = () => {
     if (!user) return '/'
     switch (user.role) {
