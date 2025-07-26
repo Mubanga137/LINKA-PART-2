@@ -292,7 +292,7 @@ export function Header() {
                     </h3>
 
                     <Link
-                      href="/services"
+                      href="/marketplace?category=services"
                       className="flex items-center justify-between py-3 text-slate-700 hover:text-indigo-600 hover:bg-slate-50 rounded-lg px-3 transition-colors"
                       onClick={closeMobileMenu}
                     >
