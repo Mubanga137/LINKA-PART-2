@@ -83,7 +83,8 @@ export function CustomerWelcome({ user }: CustomerWelcomeProps) {
             </div>
 
             {/* CTA Button */}
-            <Button 
+            <Button
+              onClick={() => router.push('/marketplace')}
               className="bg-white text-emerald-600 hover:bg-emerald-50 font-semibold px-6 py-3"
               size="lg"
             >
