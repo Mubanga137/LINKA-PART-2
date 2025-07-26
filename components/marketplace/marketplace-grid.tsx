@@ -303,14 +303,14 @@ export function MarketplaceGrid({
                     )}
                   </div>
 
-                  {/* Add to Cart Button */}
+                  {/* Add to Cart/Book Button */}
                   <Button
                     onClick={() => addToCart(product)}
                     className="w-full bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 h-8"
                     size="sm"
                   >
                     <ShoppingCart className="h-3 w-3 mr-1" />
-                    Add to Cart
+                    {product.category === 'services' ? 'Book Now' : 'Add to Cart'}
                   </Button>
                 </CardContent>
               </Card>
