@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { memo } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ShoppingBag, Sparkles, Star } from "lucide-react"
 
@@ -30,7 +30,7 @@ function FloatingParticles() {
   )
 }
 
-export function HeroSection() {
+export const HeroSection = memo(function HeroSection() {
   // Removed mouse tracking for better performance
 
   return (
@@ -123,4 +123,4 @@ export function HeroSection() {
       </div>
     </section>
   )
-}
+})
