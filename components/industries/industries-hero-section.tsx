@@ -16,8 +16,10 @@ const industries = [
 
 export function IndustriesHeroSection() {
   const [currentIndustry, setCurrentIndustry] = useState(0)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
     const interval = setInterval(() => {
       setCurrentIndustry((prev) => (prev + 1) % industries.length)
     }, 2000)
@@ -48,7 +50,7 @@ export function IndustriesHeroSection() {
             </span>
             <br />
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient-x min-h-[1.2em] inline-block">
-              {industries[currentIndustry]}
+              {isClient ? industries[currentIndustry] : industries[0]}
             </span>
             <br />
             <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
