@@ -64,34 +64,64 @@ export function Header() {
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/about"
-              className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
-            >
-              About
-              <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-            </Link>
-            <Link
-              href="/for-retailers"
-              className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
-            >
-              For Retailers
-              <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-            </Link>
-            <Link
-              href="/contact"
-              className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
-            >
-              Contact
-              <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-            </Link>
-            <Link
-              href="/industries"
-              className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
-            >
-              Services
-              <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-            </Link>
+            {/* Show customer-focused navigation */}
+            {user?.role === 'customer' ? (
+              <>
+                <Link
+                  href="/marketplace"
+                  className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
+                >
+                  Shop
+                  <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+                </Link>
+                <Link
+                  href="/industries"
+                  className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
+                >
+                  Services
+                  <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
+                >
+                  Contact
+                  <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+                </Link>
+              </>
+            ) : (
+              /* Default navigation for non-customers/homepage */
+              <>
+                <Link
+                  href="/about"
+                  className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
+                >
+                  About
+                  <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+                </Link>
+                <Link
+                  href="/for-retailers"
+                  className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
+                >
+                  For Retailers
+                  <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
+                >
+                  Contact
+                  <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+                </Link>
+                <Link
+                  href="/industries"
+                  className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
+                >
+                  Services
+                  <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
+                </Link>
+              </>
+            )}
           </nav>
 
           <div className="flex items-center space-x-3">
