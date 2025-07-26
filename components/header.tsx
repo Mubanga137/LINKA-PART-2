@@ -95,6 +95,34 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
+            {/* Services Button */}
+            <Link href="/services">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
+              >
+                <Briefcase className="h-4 w-4 mr-2" />
+                Services
+              </Button>
+            </Link>
+
+            {/* Shopping Cart */}
+            <Link href="/cart">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Cart
+                {totalItems > 0 && (
+                  <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                    {totalItems}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
 
             {/* Mobile Menu Button */}
             <Button
