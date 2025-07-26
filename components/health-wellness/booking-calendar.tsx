@@ -115,8 +115,9 @@ const generateAvailability = (): { [date: string]: TimeSlot[] } => {
 }
 
 interface BookingCalendarProps {
-  provider?: Provider
+  provider?: Provider | any
   onBookingComplete?: (booking: BookingData) => void
+  serviceType?: 'healthcare' | 'fitness' | 'pharmacy'
 }
 
 export function BookingCalendar({ provider = mockProvider, onBookingComplete }: BookingCalendarProps) {
