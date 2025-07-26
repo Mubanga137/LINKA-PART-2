@@ -18,9 +18,7 @@ export default function MarketplacePage() {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 12
 
-  const { scrollY } = useScroll()
-  const headerY = useTransform(scrollY, [0, 300], [0, -50])
-  const headerOpacity = useTransform(scrollY, [0, 300], [1, 0.8])
+
 
   // Initialize filters from URL params
   const [filters, setFilters] = useState<ProductFilters>({
