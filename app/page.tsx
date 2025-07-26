@@ -1,7 +1,6 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { PersonalizedProductCarousel } from "@/components/personalized-product-carousel"
-import { DynamicCategoryGrid } from "@/components/dynamic-category-grid"
 import { VendorShowcase } from "@/components/vendor-showcase"
 import { TrendingOffers } from "@/components/trending-offers"
 import { FeaturesSection } from "@/components/features-section"
