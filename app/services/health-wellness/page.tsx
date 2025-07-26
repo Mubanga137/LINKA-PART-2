@@ -161,6 +161,54 @@ export default function HealthWellnessPage() {
       </main>
 
       <Footer />
+
+      {/* Floating Chat Widget */}
+      <ProviderChat
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+      />
+
+      {/* Medical Documents Modal */}
+      {showDocuments && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-slate-200">
+              <h2 className="text-2xl font-bold text-slate-900">Medical Documents</h2>
+              <Button variant="ghost" onClick={() => setShowDocuments(false)}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </Button>
+            </div>
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+              <MedicalDocuments />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Booking Calendar Modal */}
+      {showBooking && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="mb-4">
+              <Button
+                variant="outline"
+                onClick={() => setShowBooking(false)}
+                className="bg-white/90 backdrop-blur-sm"
+              >
+                ← Back to Health Services
+              </Button>
+            </div>
+            <BookingCalendar
+              onBookingComplete={() => {
+                setShowBooking(false)
+                alert('Appointment booked successfully!')
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
