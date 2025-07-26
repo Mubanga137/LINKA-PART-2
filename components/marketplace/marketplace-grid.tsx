@@ -70,6 +70,7 @@ export function MarketplaceGrid({
       'art-culture': '🎨',
       'traditional-crafts': '🏺',
       'home-decor': '🏠',
+      'services': '🛎️',
     }
     return emojis[category || ''] || '📦'
   }
