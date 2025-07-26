@@ -350,7 +350,7 @@ export function MarketplaceGrid({
                           { icon: Share, color: 'text-purple-500', bg: 'hover:bg-purple-50' }
                         ].map((action, idx) => (
                           <motion.div
-                            key={idx}
+                            key={`${product.id}-action-${idx}`}
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             transition={{ duration: 0.2, delay: idx * 0.05 }}
