@@ -291,7 +291,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'service-003',
     name: 'Short-term Apartment Rental',
     price: 200,
-    image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+    image: 'https://images.pexels.com/photos/20260779/pexels-photo-20260779.jpeg',
     category: 'services',
     subcategory: 'short-term-rentals',
     description: 'Fully furnished apartment available for short-term stays. Perfect for business travelers and visitors.',
