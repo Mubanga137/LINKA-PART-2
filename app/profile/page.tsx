@@ -121,8 +121,8 @@ export default function CustomerProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
-      <Header />
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      <CustomerHeader />
       
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Header */}
