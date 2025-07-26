@@ -123,15 +123,8 @@ export function Header() {
               </Link>
             )}
 
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="md:hidden text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 p-2"
-              onClick={toggleMobileMenu}
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+            {/* Mobile Navigation */}
+            <MobileNavigation />
 
             {/* User Authentication */}
             {user ? (
