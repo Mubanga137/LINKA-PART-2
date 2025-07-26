@@ -40,7 +40,29 @@ const healthTips: HealthTip[] = [
     title: "10 Simple Ways to Boost Your Immune System",
     category: "Wellness",
     excerpt: "Discover natural methods to strengthen your body's defense mechanisms and stay healthy year-round.",
-    content: "Your immune system is your body's natural defense against illness. Here are 10 evidence-based ways to boost it...",
+    content: `Your immune system is your body's natural defense against illness. Here are 10 evidence-based ways to boost it:
+
+1. **Get Adequate Sleep**: Aim for 7-9 hours of quality sleep each night. During sleep, your body produces infection-fighting cells and antibodies.
+
+2. **Eat a Balanced Diet**: Include plenty of fruits, vegetables, lean proteins, and whole grains. Foods rich in vitamin C, vitamin D, zinc, and antioxidants are particularly beneficial.
+
+3. **Exercise Regularly**: Moderate exercise for 30 minutes most days can boost your immune system. Activities like walking, swimming, or cycling are excellent choices.
+
+4. **Manage Stress**: Chronic stress weakens your immune system. Practice relaxation techniques like meditation, deep breathing, or yoga.
+
+5. **Stay Hydrated**: Drink plenty of water to help your body function optimally and flush out toxins.
+
+6. **Maintain Good Hygiene**: Wash your hands frequently, especially before eating and after being in public places.
+
+7. **Get Vaccinated**: Stay up-to-date with recommended vaccines to protect against preventable diseases.
+
+8. **Avoid Smoking and Limit Alcohol**: These substances can weaken your immune response and make you more susceptible to infections.
+
+9. **Spend Time in Sunlight**: Vitamin D from sunlight exposure supports immune function. Aim for 10-15 minutes daily.
+
+10. **Consider Probiotics**: Healthy gut bacteria support immune function. Include yogurt, kefir, or probiotic supplements in your diet.
+
+Remember, consistency is key. Small daily habits can lead to significant improvements in your overall health and immunity.`,
     icon: Shield,
     color: "from-green-500 to-emerald-600",
     readTime: "5 min read",
