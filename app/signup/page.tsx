@@ -97,7 +97,7 @@ export default function SignupPage() {
         if (formData.role === 'retailer') {
           router.push('/retailer-dashboard?welcome=true')
         } else {
-          router.push('/?welcome=true')
+          router.push('/customer-dashboard?welcome=true')
         }
       } else {
         setError(result.error || "Signup failed")
