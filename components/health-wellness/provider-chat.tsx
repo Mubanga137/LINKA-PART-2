@@ -140,6 +140,7 @@ interface ProviderChatProps {
   isOpen: boolean
   onClose: () => void
   selectedProviderId?: string
+  providerType?: 'healthcare' | 'fitness' | 'pharmacy'
 }
 
 export function ProviderChat({ isOpen, onClose, selectedProviderId }: ProviderChatProps) {
