@@ -96,9 +96,9 @@ export function IndustriesHeroSection() {
               <div
                 key={index}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  index === currentIndustry ? "w-8 bg-purple-500" : "w-2 bg-slate-300 hover:bg-slate-400"
+                  isClient && index === currentIndustry ? "w-8 bg-purple-500" : "w-2 bg-slate-300 hover:bg-slate-400"
                 }`}
-                onClick={() => setCurrentIndustry(index)}
+                onClick={() => isClient && setCurrentIndustry(index)}
               />
             ))}
           </div>
