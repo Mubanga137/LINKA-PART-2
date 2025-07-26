@@ -210,15 +210,21 @@ export function Header() {
               </Link>
             )}
 
-            {/* CTA Button */}
+            {/* CTA Button - Role specific */}
             {user?.role === 'retailer' ? (
               <Link href="/retailer-dashboard">
                 <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/30 transition-all">
                   My Dashboard
                 </Button>
               </Link>
+            ) : user?.role === 'customer' ? (
+              <Link href="/customer-dashboard">
+                <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all">
+                  My Account
+                </Button>
+              </Link>
             ) : (
-              <Link href={user ? "/become-retailer" : "/signup?role=retailer"}>
+              <Link href="/signup?role=retailer">
                 <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 transition-all">
                   Sell on Linka
                 </Button>
