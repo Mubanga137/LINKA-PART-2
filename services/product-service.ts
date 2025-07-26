@@ -121,7 +121,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'agriculture-001',
     name: 'Organic Maize Seeds',
     price: 85,
-    image: '/placeholder.svg?height=400&width=400&text=Maize+Seeds',
+    image: 'https://images.pexels.com/photos/18142958/pexels-photo-18142958.jpeg',
     category: 'agriculture-natural',
     subcategory: 'seeds',
     description: 'High-quality organic maize seeds with excellent germination rate. Perfect for small to medium farms.',
