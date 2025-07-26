@@ -86,48 +86,12 @@ const config: Config = {
   					height: '0'
   				}
   			},
-  			'gradient-x': {
-  				'0%, 100%': {
-  					'background-size': '200% 200%',
-  					'background-position': 'left center'
-  				},
-  				'50%': {
-  					'background-size': '200% 200%',
-  					'background-position': 'right center'
-  				}
-  			},
-  			'pulse-slow': {
-  				'0%, 100%': {
-  					opacity: '1'
-  				},
-  				'50%': {
-  					opacity: '0.5'
-  				}
-  			},
-  			'spin-slow': {
-  				'0%': {
-  					transform: 'rotate(0deg)'
-  				},
-  				'100%': {
-  					transform: 'rotate(360deg)'
-  				}
-  			},
   			'float': {
   				'0%, 100%': {
   					transform: 'translateY(0px)'
   				},
   				'50%': {
-  					transform: 'translateY(-10px)'
-  				}
-  			},
-  			'bounce-slow': {
-  				'0%, 100%': {
-  					transform: 'translateY(-25%)',
-  					'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)'
-  				},
-  				'50%': {
-  					transform: 'translateY(0)',
-  					'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)'
+  					transform: 'translateY(-5px)'
   				}
   			}
   		},
