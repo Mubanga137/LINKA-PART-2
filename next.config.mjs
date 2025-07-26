@@ -9,6 +9,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  allowedDevOrigins: [
+    '*.projects.builder.codes',
+    '*.fly.dev'
+  ],
 }
 
 export default nextConfig
