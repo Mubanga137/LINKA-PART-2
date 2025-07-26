@@ -102,14 +102,7 @@ const serviceCategories = [
     description: "Spa treatments, home service massage therapists",
     count: 23
   },
-  {
-    id: "traditional-healing",
-    name: "Herbal/Traditional Healing",
-    icon: Leaf,
-    color: "from-green-600 to-emerald-600",
-    description: "Certified herbalists and wellness experts", 
-    count: 18
-  },
+
   {
     id: "home-care",
     name: "Nurses & Home Care",
