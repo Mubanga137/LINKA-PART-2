@@ -18,7 +18,7 @@ import {
   List,
   SlidersHorizontal,
   Eye,
-  GitCompare,
+  GitGitCompare,
   Share
 } from "lucide-react"
 import { Product } from "@/contexts/cart-context"
@@ -50,7 +50,7 @@ export function MarketplaceGrid({
 }: MarketplaceGridProps) {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
-  const [compareList, setCompareList] = useState<Set<string>>(new Set())
+  const [compareList, setGitCompareList] = useState<Set<string>>(new Set())
   const { addToCart, getItemQuantity } = useCart()
 
   const handleSortChange = (value: string) => {
@@ -70,15 +70,15 @@ export function MarketplaceGrid({
     })
   }
 
-  const toggleCompare = (productId: string) => {
-    setCompareList(prev => {
-      const newCompareList = new Set(prev)
-      if (newCompareList.has(productId)) {
-        newCompareList.delete(productId)
-      } else if (newCompareList.size < 4) { // Limit to 4 items for comparison
-        newCompareList.add(productId)
+  const toggleGitCompare = (productId: string) => {
+    setGitCompareList(prev => {
+      const newGitCompareList = new Set(prev)
+      if (newGitCompareList.has(productId)) {
+        newGitCompareList.delete(productId)
+      } else if (newGitCompareList.size < 4) { // Limit to 4 items for comparison
+        newGitCompareList.add(productId)
       }
-      return newCompareList
+      return newGitCompareList
     })
   }
 
@@ -165,21 +165,21 @@ export function MarketplaceGrid({
         </div>
       </div>
 
-      {/* Compare Bar */}
+      {/* GitCompare Bar */}
       {compareList.size > 0 && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Compare className="h-5 w-5 text-blue-600" />
+              <GitCompare className="h-5 w-5 text-blue-600" />
               <span className="font-medium text-blue-900">
                 {compareList.size} item{compareList.size !== 1 ? 's' : ''} selected for comparison
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                Compare Now
+                GitCompare Now
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setCompareList(new Set())}>
+              <Button variant="outline" size="sm" onClick={() => setGitCompareList(new Set())}>
                 Clear
               </Button>
             </div>
@@ -254,10 +254,10 @@ export function MarketplaceGrid({
                       variant="ghost"
                       size="sm"
                       className="p-2 bg-white/80 backdrop-blur-sm hover:bg-white/90"
-                      onClick={() => toggleCompare(product.id)}
+                      onClick={() => toggleGitCompare(product.id)}
                       disabled={compareList.size >= 4 && !compareList.has(product.id)}
                     >
-                      <Compare 
+                      <GitCompare 
                         className={`h-4 w-4 ${
                           compareList.has(product.id) 
                             ? 'text-blue-600' 
