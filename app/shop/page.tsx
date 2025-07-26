@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { CustomerHeader } from "@/components/customer-header"
+import { ShopCustomerHeader } from "@/components/shop/shop-customer-header"
 import { ShopFilters } from "@/components/shop/shop-filters"
 import { ProductGrid } from "@/components/shop/product-grid"
 import { ShopStats } from "@/components/shop/shop-stats"
