@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
-import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Menu, X, Search, Sparkles } from "lucide-react"
+import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Menu, X, Search, Sparkles, Briefcase, Stethoscope, Home, Car, Camera, GraduationCap, Wrench, Heart, Shield, Building, ChevronRight } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context"
 
