@@ -1,5 +1,10 @@
 import { EntertainmentHero } from "@/components/industries/entertainment/entertainment-hero"
 import { EntertainmentCategories } from "@/components/industries/entertainment/entertainment-categories"
+import { FeaturedContent } from "@/components/industries/entertainment/featured-content"
+import { TalentMarketplace } from "@/components/industries/entertainment/talent-marketplace"
+import { TrendingNow } from "@/components/industries/entertainment/trending-now"
+import { CreatorSpotlight } from "@/components/industries/entertainment/creator-spotlight"
+import { EntertainmentStats } from "@/components/industries/entertainment/entertainment-stats"
 
 export default function EntertainmentPage() {
   return (
@@ -7,6 +12,11 @@ export default function EntertainmentPage() {
       <main>
         <EntertainmentHero />
         <EntertainmentCategories />
+        <FeaturedContent />
+        <TalentMarketplace />
+        <TrendingNow />
+        <CreatorSpotlight />
+        <EntertainmentStats />
       </main>
     </div>
   )
