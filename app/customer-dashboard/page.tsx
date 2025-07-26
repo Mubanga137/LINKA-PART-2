@@ -97,17 +97,142 @@ export default function CustomerDashboard() {
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-6 py-8 space-y-12">
+          {/* Quick Access Navigation */}
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div
+              onClick={() => router.push('/marketplace')}
+              className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+              </div>
+              <span className="text-sm font-medium text-slate-900">Marketplace</span>
+            </div>
+
+            <div
+              onClick={() => router.push('/orders')}
+              className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              </div>
+              <span className="text-sm font-medium text-slate-900">My Orders</span>
+            </div>
+
+            <div
+              onClick={() => router.push('/wishlist')}
+              className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <span className="text-sm font-medium text-slate-900">Wishlist</span>
+            </div>
+
+            <div
+              onClick={() => router.push('/profile')}
+              className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <span className="text-sm font-medium text-slate-900">Profile</span>
+            </div>
+
+            <div
+              onClick={() => router.push('/cart')}
+              className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293A1 1 0 005 16v0a1 1 0 001 1h11M9 19a2 2 0 104 0 2 2 0 00-4 0z" />
+                </svg>
+              </div>
+              <span className="text-sm font-medium text-slate-900">Cart</span>
+            </div>
+
+            <div
+              onClick={() => router.push('/settings')}
+              className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-md hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <span className="text-sm font-medium text-slate-900">Settings</span>
+            </div>
+          </div>
+
+          {/* Recent Order Status */}
+          <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold text-slate-900">Recent Orders</h2>
+              <button
+                onClick={() => router.push('/orders')}
+                className="text-indigo-600 hover:text-indigo-700 font-medium text-sm"
+              >
+                View all orders →
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900">Order #ORD-2024-001</p>
+                    <p className="text-sm text-slate-600">Delivered • ZMW 450.00</p>
+                  </div>
+                </div>
+                <button className="text-green-600 hover:text-green-700 font-medium text-sm">
+                  View Details
+                </button>
+              </div>
+
+              <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900">Order #ORD-2024-002</p>
+                    <p className="text-sm text-slate-600">Shipped • ZMW 280.00</p>
+                  </div>
+                </div>
+                <button className="text-blue-600 hover:text-blue-700 font-medium text-sm">
+                  Track Package
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Category Grid */}
           <CategoryGrid />
 
           {/* Trending Products */}
-          <TrendingProducts 
-            products={trendingProducts} 
+          <TrendingProducts
+            products={trendingProducts}
             isLoading={isLoading}
           />
 
           {/* Recommended Services */}
-          <RecommendedServices 
+          <RecommendedServices
             products={recommendedProducts}
             isLoading={isLoading}
           />
