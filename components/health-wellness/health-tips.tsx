@@ -373,7 +373,15 @@ export function HealthTips() {
                         <div className="text-xs text-slate-500">
                           {tip.author}
                         </div>
-                        <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 p-0 group-hover:translate-x-1 transition-transform duration-300">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-blue-600 hover:text-blue-700 p-0 group-hover:translate-x-1 transition-transform duration-300"
+                          onClick={() => {
+                            setSelectedTip(tip)
+                            setShowFullArticle(true)
+                          }}
+                        >
                           <BookOpen className="h-3 w-3 mr-1" />
                           Read
                         </Button>
