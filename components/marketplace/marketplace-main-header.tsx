@@ -18,7 +18,6 @@ import { useCart } from "@/contexts/cart-context"
 import { MobileNavigation } from "@/components/mobile-navigation"
 
 export function MarketplaceMainHeader() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
   const router = useRouter()
@@ -26,14 +25,6 @@ export function MarketplaceMainHeader() {
   const handleLogout = () => {
     logout()
     router.push('/')
-  }
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false)
   }
 
   const getUserDashboardLink = () => {
