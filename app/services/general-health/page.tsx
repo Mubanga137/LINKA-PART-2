@@ -28,7 +28,7 @@ import {
   Search,
   Filter
 } from "lucide-react"
-import { useAuth } from "@/contexts/auth-context"
+
 
 interface HealthProvider {
   id: string
@@ -133,25 +133,12 @@ const serviceCategories = [
 ]
 
 export default function GeneralHealthPage() {
-  const { user } = useAuth()
   const router = useRouter()
   const [selectedProvider, setSelectedProvider] = useState<HealthProvider | null>(null)
   const [showBooking, setShowBooking] = useState(false)
   const [showChat, setShowChat] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/login?redirect=/services/general-health')
-      return
-    }
-    
-    if (user.role !== 'customer') {
-      router.push('/')
-      return
-    }
-  }, [user, router])
 
   const filteredProviders = healthProviders.filter(provider => {
     const matchesCategory = selectedCategory === "all" || provider.type === selectedCategory
@@ -173,9 +160,7 @@ export default function GeneralHealthPage() {
     setShowChat(true)
   }
 
-  if (!user || user.role !== 'customer') {
-    return null
-  }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-teal-50">
