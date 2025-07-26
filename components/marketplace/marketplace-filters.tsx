@@ -10,7 +10,7 @@ import { Slider } from "@/components/ui/slider"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
-import { X, Filter, Search, Star, MapPin, Truck, Clock, Sparkles, Zap, Heart } from "lucide-react"
+import { X, Filter, Search, Star, MapPin, Truck, Clock, ChevronDown } from "lucide-react"
 import { ProductFilters } from "@/services/product-service"
 
 interface MarketplaceFiltersProps {
@@ -20,36 +20,26 @@ interface MarketplaceFiltersProps {
 }
 
 const CATEGORIES = [
-  { id: 'jewelry-accessories', name: 'Jewelry & Accessories', count: 680, emoji: '💍' },
-  { id: 'fashion-textiles', name: 'Fashion & Textiles', count: 2100, emoji: '👗' },
-  { id: 'food-beverages', name: 'Food & Beverages', count: 1800, emoji: '🍯' },
-  { id: 'agriculture-natural', name: 'Agriculture & Natural', count: 1350, emoji: '🌱' },
-  { id: 'tools-hardware', name: 'Tools & Hardware', count: 1100, emoji: '🔨' },
-  { id: 'art-culture', name: 'Art & Culture', count: 420, emoji: '🎨' },
-  { id: 'traditional-crafts', name: 'Traditional Crafts', count: 1200, emoji: '🏺' },
-  { id: 'home-decor', name: 'Home & Decor', count: 950, emoji: '🏠' },
+  { id: 'jewelry-accessories', name: 'Jewelry & Accessories', count: 680 },
+  { id: 'fashion-textiles', name: 'Fashion & Textiles', count: 2100 },
+  { id: 'food-beverages', name: 'Food & Beverages', count: 1800 },
+  { id: 'agriculture-natural', name: 'Agriculture & Natural', count: 1350 },
+  { id: 'tools-hardware', name: 'Tools & Hardware', count: 1100 },
+  { id: 'art-culture', name: 'Art & Culture', count: 420 },
+  { id: 'traditional-crafts', name: 'Traditional Crafts', count: 1200 },
+  { id: 'home-decor', name: 'Home & Decor', count: 950 },
 ]
 
 const POPULAR_TAGS = [
-  { id: 'handmade', label: 'Handmade', emoji: '🔥' },
-  { id: 'organic', label: 'Organic', emoji: '🌿' },
-  { id: 'traditional', label: 'Traditional', emoji: '⭐' },
-  { id: 'premium', label: 'Premium', emoji: '💎' },
-  { id: 'local', label: 'Local', emoji: '📍' },
-  { id: 'certified', label: 'Certified', emoji: '✅' },
-  { id: 'sustainable', label: 'Sustainable', emoji: '♻️' },
-  { id: 'artisan', label: 'Artisan', emoji: '👨‍🎨' },
-  { id: 'trending', label: 'Trending', emoji: '📈' },
-  { id: 'new', label: 'New', emoji: '✨' },
-  { id: 'bestseller', label: 'Bestseller', emoji: '🏆' },
-  { id: 'eco-friendly', label: 'Eco-Friendly', emoji: '🌍' }
+  'handmade', 'organic', 'traditional', 'premium', 'local', 'certified', 
+  'sustainable', 'artisan', 'trending', 'new', 'bestseller', 'eco-friendly'
 ]
 
 const DELIVERY_OPTIONS = [
-  { id: 'same-day', label: 'Same Day', icon: Zap, color: 'text-orange-600' },
-  { id: 'next-day', label: 'Next Day', icon: Truck, color: 'text-blue-600' },
-  { id: 'free-shipping', label: 'Free Shipping', icon: Heart, color: 'text-green-600' },
-  { id: 'pickup', label: 'Store Pickup', icon: MapPin, color: 'text-purple-600' },
+  { id: 'same-day', label: 'Same Day Delivery' },
+  { id: 'next-day', label: 'Next Day Delivery' },
+  { id: 'free-shipping', label: 'Free Shipping' },
+  { id: 'pickup', label: 'Store Pickup Available' },
 ]
 
 export function MarketplaceFilters({ 
@@ -63,8 +53,8 @@ export function MarketplaceFilters({
     categories: true,
     price: true,
     rating: true,
-    delivery: true,
-    tags: true
+    delivery: false,
+    tags: false
   })
 
   useEffect(() => {
@@ -98,16 +88,16 @@ export function MarketplaceFilters({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Filter Header */}
-      <Card className="bg-gradient-to-br from-white/90 to-blue-50/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-blue-500/10 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500">
+      <Card className="bg-white shadow-sm border border-gray-200">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center text-blue-900">
-              <Filter className="h-5 w-5 mr-2 text-orange-500" />
+            <CardTitle className="flex items-center text-gray-900 text-lg">
+              <Filter className="h-5 w-5 mr-2" />
               Filters
               {activeFiltersCount > 0 && (
-                <Badge className="ml-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white animate-pulse">
+                <Badge className="ml-2 bg-blue-100 text-blue-800">
                   {activeFiltersCount}
                 </Badge>
               )}
@@ -117,10 +107,10 @@ export function MarketplaceFilters({
                 variant="ghost"
                 size="sm"
                 onClick={clearAllFilters}
-                className="text-orange-600 hover:text-orange-700 hover:bg-orange-50 transition-all duration-300"
+                className="text-gray-600 hover:text-gray-800"
               >
                 <X className="h-4 w-4 mr-1" />
-                Clear All
+                Clear
               </Button>
             )}
           </div>
@@ -128,19 +118,14 @@ export function MarketplaceFilters({
       </Card>
 
       {/* Categories Filter */}
-      <Card className="bg-gradient-to-br from-white/90 to-blue-50/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-blue-500/10 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500">
+      <Card className="bg-white shadow-sm border border-gray-200">
         <CardHeader 
           className="pb-3 cursor-pointer"
           onClick={() => toggleSection('categories')}
         >
-          <CardTitle className="flex items-center justify-between text-blue-900">
-            <span className="flex items-center">
-              <Sparkles className="h-5 w-5 mr-2 text-orange-500" />
-              Categories
-            </span>
-            <span className={`transition-transform duration-300 ${expandedSections.categories ? 'rotate-180' : ''}`}>
-              ↓
-            </span>
+          <CardTitle className="flex items-center justify-between text-gray-900">
+            <span>Categories</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${expandedSections.categories ? 'rotate-180' : ''}`} />
           </CardTitle>
         </CardHeader>
         {expandedSections.categories && (
@@ -149,20 +134,19 @@ export function MarketplaceFilters({
               {CATEGORIES.map((category) => (
                 <div 
                   key={category.id}
-                  className="group flex items-center justify-between p-3 rounded-xl hover:bg-blue-50 transition-all duration-300 cursor-pointer"
+                  className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                   onClick={() => updateFilters({ category: category.id === localFilters.category ? undefined : category.id })}
                 >
                   <div className="flex items-center space-x-3">
                     <Checkbox
                       checked={localFilters.category === category.id}
-                      className="data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500"
+                      className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
                     />
-                    <span className="text-2xl">{category.emoji}</span>
                     <div>
-                      <div className="font-medium text-blue-900 group-hover:text-orange-600 transition-colors">
+                      <div className="font-medium text-gray-900">
                         {category.name}
                       </div>
-                      <div className="text-xs text-blue-600">
+                      <div className="text-xs text-gray-500">
                         {category.count.toLocaleString()} items
                       </div>
                     </div>
@@ -175,18 +159,14 @@ export function MarketplaceFilters({
       </Card>
 
       {/* Price Range Filter */}
-      <Card className="bg-gradient-to-br from-white/90 to-orange-50/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-orange-500/10 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-500">
+      <Card className="bg-white shadow-sm border border-gray-200">
         <CardHeader 
           className="pb-3 cursor-pointer"
           onClick={() => toggleSection('price')}
         >
-          <CardTitle className="flex items-center justify-between text-blue-900">
-            <span className="flex items-center">
-              💰 Price Range
-            </span>
-            <span className={`transition-transform duration-300 ${expandedSections.price ? 'rotate-180' : ''}`}>
-              ↓
-            </span>
+          <CardTitle className="flex items-center justify-between text-gray-900">
+            <span>Price Range</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${expandedSections.price ? 'rotate-180' : ''}`} />
           </CardTitle>
         </CardHeader>
         {expandedSections.price && (
@@ -202,12 +182,12 @@ export function MarketplaceFilters({
                   className="w-full"
                 />
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-blue-700">K0</span>
-                <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded-full font-semibold">
-                  Up to K{priceRange[0].toLocaleString()}
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <span>K0</span>
+                <div className="bg-blue-600 text-white px-3 py-1 rounded-lg font-medium text-sm">
+                  K{priceRange[0].toLocaleString()}
                 </div>
-                <span className="text-blue-700">K10,000+</span>
+                <span>K10,000+</span>
               </div>
             </div>
           </CardContent>
@@ -215,19 +195,14 @@ export function MarketplaceFilters({
       </Card>
 
       {/* Rating Filter */}
-      <Card className="bg-gradient-to-br from-white/90 to-blue-50/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-blue-500/10 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500">
+      <Card className="bg-white shadow-sm border border-gray-200">
         <CardHeader 
           className="pb-3 cursor-pointer"
           onClick={() => toggleSection('rating')}
         >
-          <CardTitle className="flex items-center justify-between text-blue-900">
-            <span className="flex items-center">
-              <Star className="h-5 w-5 mr-2 text-yellow-500" />
-              Customer Rating
-            </span>
-            <span className={`transition-transform duration-300 ${expandedSections.rating ? 'rotate-180' : ''}`}>
-              ↓
-            </span>
+          <CardTitle className="flex items-center justify-between text-gray-900">
+            <span>Customer Rating</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${expandedSections.rating ? 'rotate-180' : ''}`} />
           </CardTitle>
         </CardHeader>
         {expandedSections.rating && (
@@ -236,12 +211,12 @@ export function MarketplaceFilters({
               {[5, 4, 3, 2, 1].map((rating) => (
                 <div 
                   key={rating}
-                  className="flex items-center space-x-3 p-2 rounded-lg hover:bg-blue-50 cursor-pointer transition-all duration-300"
+                  className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                   onClick={() => updateFilters({ rating: rating === localFilters.rating ? undefined : rating })}
                 >
                   <Checkbox
                     checked={localFilters.rating === rating}
-                    className="data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500"
+                    className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
                   />
                   <div className="flex items-center space-x-1">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -254,7 +229,7 @@ export function MarketplaceFilters({
                         }`}
                       />
                     ))}
-                    <span className="text-sm text-blue-700 ml-2">& up</span>
+                    <span className="text-sm text-gray-600 ml-2">& up</span>
                   </div>
                 </div>
               ))}
@@ -264,32 +239,26 @@ export function MarketplaceFilters({
       </Card>
 
       {/* Delivery Options */}
-      <Card className="bg-gradient-to-br from-white/90 to-orange-50/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-orange-500/10 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-500">
+      <Card className="bg-white shadow-sm border border-gray-200">
         <CardHeader 
           className="pb-3 cursor-pointer"
           onClick={() => toggleSection('delivery')}
         >
-          <CardTitle className="flex items-center justify-between text-blue-900">
-            <span className="flex items-center">
-              <Truck className="h-5 w-5 mr-2 text-orange-500" />
-              Delivery
-            </span>
-            <span className={`transition-transform duration-300 ${expandedSections.delivery ? 'rotate-180' : ''}`}>
-              ↓
-            </span>
+          <CardTitle className="flex items-center justify-between text-gray-900">
+            <span>Delivery</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${expandedSections.delivery ? 'rotate-180' : ''}`} />
           </CardTitle>
         </CardHeader>
         {expandedSections.delivery && (
           <CardContent className="pt-0">
-            <div className="grid grid-cols-1 gap-3">
+            <div className="space-y-3">
               {DELIVERY_OPTIONS.map((option) => (
                 <div 
                   key={option.id}
-                  className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-orange-50 cursor-pointer transition-all duration-300 group"
+                  className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                 >
-                  <Checkbox className="data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500" />
-                  <option.icon className={`h-5 w-5 ${option.color} group-hover:scale-110 transition-transform duration-300`} />
-                  <span className="font-medium text-blue-900 group-hover:text-orange-600 transition-colors">
+                  <Checkbox className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600" />
+                  <span className="font-medium text-gray-900">
                     {option.label}
                   </span>
                 </div>
@@ -300,19 +269,14 @@ export function MarketplaceFilters({
       </Card>
 
       {/* Popular Tags */}
-      <Card className="bg-gradient-to-br from-white/90 to-blue-50/90 backdrop-blur-sm border border-white/50 shadow-lg shadow-blue-500/10 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500">
+      <Card className="bg-white shadow-sm border border-gray-200">
         <CardHeader 
           className="pb-3 cursor-pointer"
           onClick={() => toggleSection('tags')}
         >
-          <CardTitle className="flex items-center justify-between text-blue-900">
-            <span className="flex items-center">
-              <Sparkles className="h-5 w-5 mr-2 text-orange-500" />
-              Popular Tags
-            </span>
-            <span className={`transition-transform duration-300 ${expandedSections.tags ? 'rotate-180' : ''}`}>
-              ↓
-            </span>
+          <CardTitle className="flex items-center justify-between text-gray-900">
+            <span>Popular Tags</span>
+            <ChevronDown className={`h-4 w-4 transition-transform ${expandedSections.tags ? 'rotate-180' : ''}`} />
           </CardTitle>
         </CardHeader>
         {expandedSections.tags && (
@@ -320,23 +284,22 @@ export function MarketplaceFilters({
             <div className="flex flex-wrap gap-2">
               {POPULAR_TAGS.map((tag) => (
                 <Badge
-                  key={tag.id}
-                  variant={localFilters.tags?.includes(tag.id) ? "default" : "outline"}
-                  className={`cursor-pointer transition-all duration-300 hover:scale-105 ${
-                    localFilters.tags?.includes(tag.id)
-                      ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-                      : 'hover:bg-blue-50 hover:border-orange-300 hover:text-orange-600'
+                  key={tag}
+                  variant={localFilters.tags?.includes(tag) ? "default" : "outline"}
+                  className={`cursor-pointer transition-colors ${
+                    localFilters.tags?.includes(tag)
+                      ? 'bg-blue-600 text-white'
+                      : 'hover:bg-gray-50 border-gray-200'
                   }`}
                   onClick={() => {
                     const currentTags = localFilters.tags || []
-                    const newTags = currentTags.includes(tag.id)
-                      ? currentTags.filter(t => t !== tag.id)
-                      : [...currentTags, tag.id]
+                    const newTags = currentTags.includes(tag)
+                      ? currentTags.filter(t => t !== tag)
+                      : [...currentTags, tag]
                     updateFilters({ tags: newTags.length > 0 ? newTags : undefined })
                   }}
                 >
-                  <span className="mr-1">{tag.emoji}</span>
-                  {tag.label}
+                  {tag}
                 </Badge>
               ))}
             </div>
