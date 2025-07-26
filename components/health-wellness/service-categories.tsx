@@ -6,16 +6,16 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { 
-  Stethoscope, 
-  Brain, 
-  Dumbbell, 
-  Ambulance, 
-  Heart, 
-  Spa, 
-  Leaf, 
-  Home, 
-  TestTube, 
+import {
+  Stethoscope,
+  Brain,
+  Dumbbell,
+  Ambulance,
+  Heart,
+  Flower,
+  Leaf,
+  Home,
+  TestTube,
   Pill,
   Search,
   Filter,
