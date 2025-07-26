@@ -20,11 +20,16 @@ export function IndustriesHeroSection() {
 
   useEffect(() => {
     setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isClient) return
+
     const interval = setInterval(() => {
       setCurrentIndustry((prev) => (prev + 1) % industries.length)
     }, 2000)
     return () => clearInterval(interval)
-  }, [])
+  }, [isClient])
 
   return (
     <section className="relative py-32 overflow-hidden">
