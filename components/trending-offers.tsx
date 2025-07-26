@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { Clock, Flame, Zap, TrendingUp, Users, ShoppingCart, Heart, Timer, Lightning, Star, MapPin, ArrowRight } from "lucide-react"
+import { Clock, Flame, Zap, TrendingUp, Users, ShoppingCart, Heart, Timer, Bolt, Star, MapPin, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { useAuth } from "@/contexts/auth-context"
 
