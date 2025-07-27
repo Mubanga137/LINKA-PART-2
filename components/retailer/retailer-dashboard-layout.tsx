@@ -161,11 +161,11 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
-                    isActive
-                      ? 'bg-blue-100 text-blue-700 font-medium'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                  }`}
+                  className={`flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-all duration-200 ${
+                  isActive
+                    ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg font-medium transform scale-105'
+                    : 'text-indigo-200 hover:bg-indigo-800/50 hover:text-white hover:transform hover:scale-102'
+                }`}
                 >
                   <div className="flex items-center space-x-3">
                     <Icon className="h-5 w-5" />
