@@ -115,6 +115,7 @@ const sidebarItems = [
 export default function RetailerDashboardLayout({ children }: RetailerDashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const { user, store, logout } = useRetailerAuth();
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
