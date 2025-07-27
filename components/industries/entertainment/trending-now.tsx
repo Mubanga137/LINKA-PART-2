@@ -205,7 +205,7 @@ export function TrendingNow() {
                   {/* Thumbnail */}
                   <div className="relative md:w-80 h-48 md:h-auto overflow-hidden">
                     <img
-                      src={item.thumbnail || "/placeholder.svg"}
+                      src={getCategoryImage(item.category).replace("w=400&h=300", "w=300&h=200")}
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
