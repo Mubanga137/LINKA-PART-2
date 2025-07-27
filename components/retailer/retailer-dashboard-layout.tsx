@@ -239,9 +239,9 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
                     New Order
                   </Button>
 
-                  <Button variant="ghost" size="sm" className="relative">
-                    <Bell className="h-5 w-5" />
-                    <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-red-500 text-white text-xs">
+                  <Button variant="ghost" size="sm" className="relative hover:bg-indigo-50">
+                    <Bell className="h-5 w-5 text-indigo-600" />
+                    <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs animate-bounce shadow-lg">
                       1
                     </Badge>
                   </Button>
