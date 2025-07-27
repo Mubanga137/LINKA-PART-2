@@ -147,7 +147,7 @@ export function EntertainmentHero() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="relative group">
                 <img
-                  src={currentContent.thumbnail || "/placeholder.svg"}
+                  src={getCategoryImage(currentContent.category).replace("w=400&h=300", "w=300&h=200")}
                   alt={currentContent.title}
                   className="w-full h-64 object-cover rounded-2xl shadow-2xl group-hover:scale-105 transition-transform duration-300"
                 />
