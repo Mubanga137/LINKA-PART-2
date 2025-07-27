@@ -141,7 +141,7 @@ export function FeaturedContent() {
                 {/* Thumbnail */}
                 <div className="relative overflow-hidden">
                   <img
-                    src={item.thumbnail || "/placeholder.svg"}
+                    src={getCategoryImage(item.category)}
                     alt={item.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
