@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import { validateEntertainmentImage, getCategoryImage } from '@/lib/entertainment-image-mapping'
 
 /**
@@ -10,42 +10,48 @@ export function useEntertainmentImages() {
   /**
    * Validate an image URL for a specific entertainment category
    */
-  const validateImage = (category: string, imageUrl: string): boolean => {
+  const validateImage = useCallback((category: string, imageUrl: string): boolean => {
     const isValid = validateEntertainmentImage(category, imageUrl)
-    
+
     if (!isValid) {
       const errorMessage = `Invalid image for ${category}: ${imageUrl}`
-      setValidationErrors(prev => [...prev.filter(err => err !== errorMessage), errorMessage])
+      setValidationErrors(prev => {
+        // Only add if not already present to prevent duplicates
+        if (prev.includes(errorMessage)) return prev
+        return [...prev, errorMessage]
+      })
     }
-    
+
     return isValid
-  }
+  }, [])
 
   /**
    * Get a validated image for entertainment category
    */
-  const getValidatedImage = (category: string, fallbackCategory?: string): string => {
+  const getValidatedImage = useCallback((category: string, fallbackCategory?: string): string => {
     try {
       return getCategoryImage(category)
     } catch (error) {
       console.warn(`Failed to get image for category: ${category}`, error)
       return fallbackCategory ? getCategoryImage(fallbackCategory) : getCategoryImage('music')
     }
-  }
+  }, [])
 
   /**
    * Clear validation errors
    */
-  const clearErrors = () => {
+  const clearErrors = useCallback(() => {
     setValidationErrors([])
-  }
+  }, [])
+
+  const hasErrors = useMemo(() => validationErrors.length > 0, [validationErrors])
 
   return {
     validateImage,
     getValidatedImage,
     validationErrors,
     clearErrors,
-    hasErrors: validationErrors.length > 0
+    hasErrors
   }
 }
 
@@ -61,7 +67,16 @@ export function useResponsiveEntertainmentImage(
   }
 ) {
   const [currentBreakpoint, setCurrentBreakpoint] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
-  const { getValidatedImage } = useEntertainmentImages()
+
+  // Memoize the getValidatedImage call to prevent unnecessary re-computation
+  const baseImageUrl = useMemo(() => {
+    try {
+      return getCategoryImage(category)
+    } catch (error) {
+      console.warn(`Failed to get image for category: ${category}`, error)
+      return getCategoryImage('music')
+    }
+  }, [category])
 
   useEffect(() => {
     const checkBreakpoint = () => {
@@ -79,11 +94,12 @@ export function useResponsiveEntertainmentImage(
     return () => window.removeEventListener('resize', checkBreakpoint)
   }, [])
 
-  const baseImageUrl = getValidatedImage(category)
-  const responsiveImageUrl = baseImageUrl.replace(
-    /w=\d+&h=\d+/,
-    breakpoints[currentBreakpoint]
-  )
+  const responsiveImageUrl = useMemo(() => {
+    return baseImageUrl.replace(
+      /w=\d+&h=\d+/,
+      breakpoints[currentBreakpoint]
+    )
+  }, [baseImageUrl, breakpoints, currentBreakpoint])
 
   return {
     imageUrl: responsiveImageUrl,
