@@ -201,7 +201,7 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
         {/* Main content */}
         <div className="lg:pl-64">
           {/* Top header */}
-          <header className="bg-white shadow-sm border-b border-gray-200">
+          <header className="bg-white/80 backdrop-blur-lg shadow-xl border-b border-indigo-200">
             <div className="px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center space-x-4">
