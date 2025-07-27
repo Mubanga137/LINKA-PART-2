@@ -229,10 +229,19 @@ export function validateEntertainmentImage(category: string, imageUrl: string): 
   return false
 }
 
+// Cache for category images to prevent re-computation
+const categoryImageCache = new Map<string, string>()
+
 /**
  * Get category-specific image based on entertainment type
  */
 export function getCategoryImage(entertainmentType: string): string {
+  // Check cache first
+  const cacheKey = entertainmentType.toLowerCase()
+  if (categoryImageCache.has(cacheKey)) {
+    return categoryImageCache.get(cacheKey)!
+  }
+
   const typeMapping: Record<string, string> = {
     'dj': 'dj',
     'music': 'music',
@@ -258,6 +267,11 @@ export function getCategoryImage(entertainmentType: string): string {
     'emcee': 'mc_hosting'
   }
 
-  const category = typeMapping[entertainmentType.toLowerCase()] || 'music'
-  return getEntertainmentImage(category)
+  const category = typeMapping[cacheKey] || 'music'
+  const imageUrl = getEntertainmentImage(category)
+
+  // Cache the result
+  categoryImageCache.set(cacheKey, imageUrl)
+
+  return imageUrl
 }
