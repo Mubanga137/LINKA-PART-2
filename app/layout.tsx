@@ -3,6 +3,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { AuthProvider } from '@/contexts/auth-context'
 import { CartProvider } from '@/contexts/cart-context'
+import { RetailerAuthProvider } from '@/contexts/retailer-auth-context'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
