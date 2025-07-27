@@ -192,8 +192,10 @@ export default function RetailerDashboardPage() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
-            <p className="text-gray-600 mt-1">Welcome back! Here's your business performance at a glance.</p>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-900 bg-clip-text text-transparent">
+              Retailer Dashboard Overview
+            </h1>
+            <p className="text-indigo-700 mt-1 font-medium">Welcome back! Here's your business performance at a glance.</p>
           </div>
           <div className="flex items-center space-x-3 mt-4 md:mt-0">
             <Button variant="outline" size="sm">
