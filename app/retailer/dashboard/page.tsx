@@ -198,11 +198,11 @@ export default function RetailerDashboardPage() {
             <p className="text-indigo-700 mt-1 font-medium">Welcome back! Here's your business performance at a glance.</p>
           </div>
           <div className="flex items-center space-x-3 mt-4 md:mt-0">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="border-indigo-300 text-indigo-700 hover:bg-indigo-50">
               <Download className="h-4 w-4 mr-2" />
               Export Data
             </Button>
-            <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+            <Button size="sm" className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg transform hover:scale-105 transition-all">
               <Plus className="h-4 w-4 mr-2" />
               New Order
             </Button>
