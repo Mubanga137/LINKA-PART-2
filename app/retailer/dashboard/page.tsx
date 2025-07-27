@@ -221,29 +221,29 @@ export default function RetailerDashboardPage() {
           <TabsContent value="overview" className="space-y-6">
             {/* Key Metrics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card>
+              <Card className="bg-gradient-to-br from-emerald-50 to-green-100 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="flex items-center space-x-2 mb-2">
-                        <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                          <DollarSign className="h-5 w-5 text-green-600" />
+                        <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
+                          <DollarSign className="h-6 w-6 text-white" />
                         </div>
                       </div>
-                      <p className="text-sm font-medium text-gray-600 mb-1">Total Revenue</p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-sm font-medium text-emerald-700 mb-1">Total Revenue</p>
+                      <p className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-green-600 bg-clip-text text-transparent">
                         ZMW {dashboardStats.totalRevenue.toLocaleString()}
                       </p>
                       <div className="flex items-center mt-2">
-                        <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-                        <span className="text-sm text-green-600 font-medium">
+                        <TrendingUp className="h-4 w-4 text-emerald-600 mr-1" />
+                        <span className="text-sm text-emerald-700 font-bold">
                           +{dashboardStats.revenueChange}% vs last month
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="mt-4">
-                    <Progress value={75} className="h-2" />
+                    <Progress value={75} className="h-3 bg-emerald-200" />
                   </div>
                 </CardContent>
               </Card>
