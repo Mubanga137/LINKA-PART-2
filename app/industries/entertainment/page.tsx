@@ -7,16 +7,16 @@ import { CreatorSpotlight } from "@/components/industries/entertainment/creator-
 import { EntertainmentStats } from "@/components/industries/entertainment/entertainment-stats"
 import { EntertainmentImageValidator } from "@/components/ui/entertainment-image-validator"
 
-export default function EntertainmentPage() {
-  // Sample validation data - in a real app, this would come from your data source
-  const validationItems = [
-    { category: "music", imageUrl: "sample-music-url", title: "Music Content" },
-    { category: "dj", imageUrl: "sample-dj-url", title: "DJ Services" },
-    { category: "comedy", imageUrl: "sample-comedy-url", title: "Comedy Shows" },
-    { category: "gaming", imageUrl: "sample-gaming-url", title: "Gaming Events" },
-    { category: "dance", imageUrl: "sample-dance-url", title: "Dance Performances" }
-  ]
+// Static validation items to prevent re-creation on every render
+const VALIDATION_ITEMS = [
+  { category: "music", imageUrl: "sample-music-url", title: "Music Content" },
+  { category: "dj", imageUrl: "sample-dj-url", title: "DJ Services" },
+  { category: "comedy", imageUrl: "sample-comedy-url", title: "Comedy Shows" },
+  { category: "gaming", imageUrl: "sample-gaming-url", title: "Gaming Events" },
+  { category: "dance", imageUrl: "sample-dance-url", title: "Dance Performances" }
+]
 
+export default function EntertainmentPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
       <main>
@@ -30,7 +30,9 @@ export default function EntertainmentPage() {
       </main>
 
       {/* Image Validation Component - only shows in development or when errors exist */}
-      <EntertainmentImageValidator items={validationItems} />
+      {process.env.NODE_ENV === 'development' && (
+        <EntertainmentImageValidator items={VALIDATION_ITEMS} />
+      )}
     </div>
   )
 }
