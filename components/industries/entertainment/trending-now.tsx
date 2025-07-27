@@ -17,6 +17,7 @@ import {
   Music,
   Gamepad2,
 } from "lucide-react"
+import { getCategoryImage } from "@/lib/entertainment-image-mapping"
 
 const trendingContent = [
   {
@@ -24,7 +25,7 @@ const trendingContent = [
     title: "Zamrock Revival Mix",
     creator: "DJ Vintage",
     type: "Music",
-    thumbnail: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=200&fit=crop&crop=center",
+    thumbnail: getCategoryImage("DJ").replace("w=400&h=300", "w=300&h=200"),
     views: "89.2K",
     likes: "12.3K",
     shares: "2.1K",
@@ -40,7 +41,7 @@ const trendingContent = [
     title: "FIFA 24 Championship Live",
     creator: "Zambia Gaming League",
     type: "Gaming",
-    thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&h=200&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Gaming").replace("w=400&h=300", "w=300&h=200"),
     views: "45.7K",
     likes: "8.9K",
     shares: "1.5K",
@@ -56,7 +57,7 @@ const trendingContent = [
     title: "Comedy Gold: Best of 2024",
     creator: "Lusaka Comedy Club",
     type: "Comedy",
-    thumbnail: "https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=300&h=200&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Comedy").replace("w=400&h=300", "w=300&h=200"),
     views: "67.4K",
     likes: "9.8K",
     shares: "3.2K",
@@ -72,7 +73,7 @@ const trendingContent = [
     title: "Traditional Wedding Dance",
     creator: "Cultural Heritage Zambia",
     type: "Cultural",
-    thumbnail: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Traditional Dance").replace("w=400&h=300", "w=300&h=200"),
     views: "34.1K",
     likes: "5.6K",
     shares: "890",
@@ -88,7 +89,7 @@ const trendingContent = [
     title: "Gospel Praise Night",
     creator: "Worship Together",
     type: "Religious",
-    thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Gospel").replace("w=400&h=300", "w=300&h=200"),
     views: "52.8K",
     likes: "7.2K",
     shares: "1.8K",
