@@ -248,29 +248,29 @@ export default function RetailerDashboardPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="flex items-center space-x-2 mb-2">
-                        <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                          <ShoppingCart className="h-5 w-5 text-blue-600" />
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
+                          <ShoppingCart className="h-6 w-6 text-white" />
                         </div>
                       </div>
-                      <p className="text-sm font-medium text-gray-600 mb-1">Total Orders</p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-sm font-medium text-indigo-700 mb-1">Total Orders</p>
+                      <p className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-600 bg-clip-text text-transparent">
                         {dashboardStats.totalOrders.toLocaleString()}
                       </p>
                       <div className="flex items-center mt-2">
-                        <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-                        <span className="text-sm text-green-600 font-medium">
+                        <TrendingUp className="h-4 w-4 text-blue-600 mr-1" />
+                        <span className="text-sm text-blue-700 font-bold">
                           +{dashboardStats.ordersChange}% {dashboardStats.pendingOrders} pending
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="mt-4">
-                    <Progress value={68} className="h-2" />
+                    <Progress value={68} className="h-3 bg-blue-200" />
                   </div>
                 </CardContent>
               </Card>
