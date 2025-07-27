@@ -184,12 +184,14 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
         <div className="p-4 border-t border-gray-200">
           <div className="flex items-center space-x-3">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="/placeholder-avatar.jpg" />
-              <AvatarFallback>JD</AvatarFallback>
+              <AvatarImage src={user?.avatar} />
+              <AvatarFallback>
+                {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
+              </AvatarFallback>
             </Avatar>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">John Doe</p>
-              <p className="text-xs text-gray-500 truncate">Administrator</p>
+              <p className="text-sm font-medium text-gray-900 truncate">{user?.name || 'User'}</p>
+              <p className="text-xs text-gray-500 truncate">{store?.name || 'Store Owner'}</p>
             </div>
           </div>
         </div>
