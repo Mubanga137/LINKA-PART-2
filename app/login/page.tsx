@@ -38,7 +38,7 @@ export default function LoginPage() {
         if (email.includes('admin')) {
           router.push('/admin-dashboard')
         } else if (email.includes('retailer')) {
-          router.push('/retailer-dashboard')
+          router.push('/retailer/dashboard')
         } else {
           // Customer redirect - always go to dashboard for demo accounts
           if (email === 'customer@demo.com') {
