@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useRetailerAuth } from '@/contexts/retailer-auth-context';
+import ProtectedRoute from './protected-route';
 import { 
   LayoutDashboard, 
   Package, 
