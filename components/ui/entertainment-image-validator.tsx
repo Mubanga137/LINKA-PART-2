@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { AlertTriangle, CheckCircle } from "lucide-react"
 import { useEntertainmentImages } from "@/hooks/use-entertainment-images"
@@ -10,20 +10,27 @@ interface EntertainmentImageValidatorProps {
   showValidation?: boolean
 }
 
-export function EntertainmentImageValidator({ 
-  items, 
-  showValidation = process.env.NODE_ENV === 'development' 
+export function EntertainmentImageValidator({
+  items,
+  showValidation = process.env.NODE_ENV === 'development'
 }: EntertainmentImageValidatorProps) {
   const { validateImage, validationErrors, hasErrors, clearErrors } = useEntertainmentImages()
 
-  useEffect(() => {
+  // Memoize items to prevent unnecessary re-validation
+  const memoizedItems = useMemo(() => items, [JSON.stringify(items)])
+
+  const validateAllImages = useCallback(() => {
     clearErrors()
-    
+
     // Validate all images
-    items.forEach(item => {
+    memoizedItems.forEach(item => {
       validateImage(item.category, item.imageUrl)
     })
-  }, [items, validateImage, clearErrors])
+  }, [memoizedItems, validateImage, clearErrors])
+
+  useEffect(() => {
+    validateAllImages()
+  }, [validateAllImages])
 
   if (!showValidation || !hasErrors) {
     return (
@@ -81,12 +88,14 @@ export function ValidatedEntertainmentImage({
   fallbackCategory = "music"
 }: ValidatedEntertainmentImageProps) {
   const { getValidatedImage } = useEntertainmentImages()
-  
-  const imageUrl = getValidatedImage(category, fallbackCategory)
-  const responsiveImageUrl = imageUrl.replace(
-    /w=\d+&h=\d+/,
-    `w=${width}&h=${height}`
-  )
+
+  const responsiveImageUrl = useMemo(() => {
+    const imageUrl = getValidatedImage(category, fallbackCategory)
+    return imageUrl.replace(
+      /w=\d+&h=\d+/,
+      `w=${width}&h=${height}`
+    )
+  }, [category, fallbackCategory, width, height, getValidatedImage])
 
   return (
     <img
