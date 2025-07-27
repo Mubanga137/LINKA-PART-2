@@ -56,9 +56,9 @@ export default function LoginPage() {
   }
 
   const handleDemoLogin = async (role: 'customer' | 'retailer' | 'admin') => {
-    // For retailer, redirect directly to retailer homepage
+    // For retailer, redirect directly to retailer dashboard
     if (role === 'retailer') {
-      router.push('/retailer')
+      router.push('/retailer/dashboard')
       return
     }
 
