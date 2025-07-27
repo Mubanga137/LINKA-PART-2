@@ -151,7 +151,7 @@ export function EntertainmentCategories() {
                 <img
                   src={
                     currentCategory.id === "streaming"
-                      ? "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&h=300&fit=crop&crop=center"
+                      ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=300&fit=crop&crop=center"
                       : currentCategory.id === "local-content"
                       ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=300&fit=crop&crop=center"
                       : currentCategory.id === "talent-booking"
