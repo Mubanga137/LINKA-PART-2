@@ -274,7 +274,10 @@ export default function ElectronicsIndustryPage() {
             <Card className="mt-8">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <electronicCategories[selectedCategory].icon className="h-6 w-6 mr-3 text-blue-600" />
+                  {(() => {
+                    const IconComponent = electronicCategories[selectedCategory].icon;
+                    return <IconComponent className="h-6 w-6 mr-3 text-blue-600" />;
+                  })()}
                   {electronicCategories[selectedCategory].name} - Advanced Features
                 </CardTitle>
               </CardHeader>
