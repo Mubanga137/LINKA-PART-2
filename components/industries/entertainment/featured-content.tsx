@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Play, Heart, Share2, Star, TrendingUp, Eye, Download, Bookmark } from "lucide-react"
+import { getCategoryImage } from "@/lib/entertainment-image-mapping"
 
 const featuredItems = [
   {
@@ -12,7 +13,7 @@ const featuredItems = [
     title: "Zambian Beats Compilation 2024",
     creator: "Various Artists",
     type: "Music Album",
-    thumbnail: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Music Album"),
     duration: "2h 15m",
     views: "45.2K",
     likes: "3.8K",
@@ -28,7 +29,7 @@ const featuredItems = [
     title: "The Copper Chronicles",
     creator: "Lusaka Film Studios",
     type: "Short Film Series",
-    thumbnail: "https://images.unsplash.com/photo-1489599510067-e6327c8e4b9b?w=400&h=300&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Short Film"),
     duration: "6 episodes",
     views: "28.7K",
     likes: "2.1K",
@@ -44,7 +45,7 @@ const featuredItems = [
     title: "Comedy Night Live",
     creator: "Zambian Comedy Club",
     type: "Live Show",
-    thumbnail: "https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=400&h=300&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Comedy"),
     duration: "1h 30m",
     views: "19.3K",
     likes: "1.9K",
@@ -60,7 +61,7 @@ const featuredItems = [
     title: "Traditional Dance Masterclass",
     creator: "Cultural Heritage Foundation",
     type: "Educational",
-    thumbnail: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Traditional Dance"),
     duration: "45m",
     views: "12.8K",
     likes: "1.2K",
@@ -76,7 +77,7 @@ const featuredItems = [
     title: "Esports Championship Finals",
     creator: "Zambia Gaming League",
     type: "Gaming Event",
-    thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=300&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Gaming Event"),
     duration: "Live",
     views: "8.5K",
     likes: "890",
@@ -92,7 +93,7 @@ const featuredItems = [
     title: "Gospel Praise Session",
     creator: "Worship Together Zambia",
     type: "Religious",
-    thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Gospel"),
     duration: "1h 45m",
     views: "22.1K",
     likes: "2.8K",
