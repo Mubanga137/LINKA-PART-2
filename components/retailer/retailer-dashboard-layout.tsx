@@ -131,15 +131,15 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
         )}
 
         {/* Sidebar */}
-        <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0`}>
-          <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
+        <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-indigo-900 via-purple-900 to-indigo-900 shadow-2xl transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0`}>
+          <div className="flex items-center justify-between h-16 px-6 border-b border-indigo-700/50">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-sm">L</span>
               </div>
               <div>
-                <h1 className="text-lg font-bold text-gray-900">LINKA</h1>
-                <p className="text-xs text-gray-500">Business Intelligence</p>
+                <h1 className="text-lg font-bold text-white">LINKA</h1>
+                <p className="text-xs text-indigo-300">Retailer Portal</p>
               </div>
             </div>
             <Button
