@@ -70,9 +70,11 @@ html {
           disableTransitionOnChange
         >
           <AuthProvider>
-            <CartProvider>
-              {children}
-            </CartProvider>
+            <RetailerAuthProvider>
+              <CartProvider>
+                {children}
+              </CartProvider>
+            </RetailerAuthProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
