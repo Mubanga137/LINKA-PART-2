@@ -32,17 +32,12 @@ export function EntertainmentImageValidator({
     validateAllImages()
   }, [validateAllImages])
 
-  if (!showValidation || !hasErrors) {
-    return (
-      <div className="fixed bottom-4 right-4 z-50">
-        <Alert className="bg-green-50 border-green-200 text-green-800 shadow-lg">
-          <CheckCircle className="h-4 w-4" />
-          <AlertDescription>
-            All entertainment images validated ✓
-          </AlertDescription>
-        </Alert>
-      </div>
-    )
+  if (!showValidation) {
+    return null
+  }
+
+  if (!hasErrors) {
+    return null
   }
 
   return (
