@@ -4,13 +4,14 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Play, Music, Gamepad2, Video, Mic, Search, TrendingUp, Users, Star, Zap } from "lucide-react"
+import { getCategoryImage } from "@/lib/entertainment-image-mapping"
 
 const featuredContent = [
   {
     id: 1,
     title: "DJ Mo - Afroset 3",
     type: "Music",
-    thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop&crop=center",
+    thumbnail: getCategoryImage("DJ").replace("w=400&h=300", "w=300&h=200"),
     duration: "45 min",
     views: "12.3K",
     rating: 4.9,
@@ -21,7 +22,7 @@ const featuredContent = [
     id: 2,
     title: "The Great Lusaka Heist",
     type: "Short Film",
-    thumbnail: "https://images.unsplash.com/photo-1489599510067-e6327c8e4b9b?w=300&h=200&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Short Film").replace("w=400&h=300", "w=300&h=200"),
     duration: "12 min",
     views: "8.7K",
     rating: 4.6,
@@ -32,7 +33,7 @@ const featuredContent = [
     id: 3,
     title: "FIFA 24 Tournament",
     type: "Gaming",
-    thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&h=200&fit=crop&crop=center",
+    thumbnail: getCategoryImage("Gaming").replace("w=400&h=300", "w=300&h=200"),
     duration: "Live",
     views: "2.1K",
     rating: 4.8,
