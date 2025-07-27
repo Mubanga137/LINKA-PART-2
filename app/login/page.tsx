@@ -58,16 +58,21 @@ export default function LoginPage() {
   }
 
   const handleDemoLogin = async (role: 'customer' | 'retailer' | 'admin') => {
+    // For retailer, redirect directly to retailer login page
+    if (role === 'retailer') {
+      router.push('/login/retailer')
+      return
+    }
+
     const demoCredentials = {
       customer: { email: 'customer@demo.com', password: 'demo123' },
-      retailer: { email: 'retailer@demo.com', password: 'demo123' },
       admin: { email: 'admin@demo.com', password: 'demo123' }
     }
-    
-    const creds = demoCredentials[role]
+
+    const creds = demoCredentials[role as 'customer' | 'admin']
     setEmail(creds.email)
     setPassword(creds.password)
-    
+
     // Auto-submit after brief delay
     setTimeout(() => {
       handleSubmit(new Event('submit') as any)
