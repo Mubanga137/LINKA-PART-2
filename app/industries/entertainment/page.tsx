@@ -5,7 +5,6 @@ import { TalentMarketplace } from "@/components/industries/entertainment/talent-
 import { TrendingNow } from "@/components/industries/entertainment/trending-now"
 import { CreatorSpotlight } from "@/components/industries/entertainment/creator-spotlight"
 import { EntertainmentStats } from "@/components/industries/entertainment/entertainment-stats"
-import { EntertainmentImageValidator } from "@/components/ui/entertainment-image-validator"
 
 // Static validation items to prevent re-creation on every render
 const VALIDATION_ITEMS = [
