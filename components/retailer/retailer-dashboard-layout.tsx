@@ -121,7 +121,7 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50">
         {/* Mobile sidebar overlay */}
         {sidebarOpen && (
           <div
