@@ -182,20 +182,20 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
           </nav>
 
           {/* User info at bottom */}
-          <div className="p-4 border-t border-gray-200">
-            <div className="flex items-center space-x-3">
-              <Avatar className="h-8 w-8">
-                <AvatarImage src={user?.avatar} />
-                <AvatarFallback>
-                  {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">{user?.name || 'User'}</p>
-                <p className="text-xs text-gray-500 truncate">{store?.name || 'Store Owner'}</p>
-              </div>
+        <div className="p-4 border-t border-indigo-700/50 bg-indigo-800/30">
+          <div className="flex items-center space-x-3">
+            <Avatar className="h-8 w-8 ring-2 ring-yellow-400">
+              <AvatarImage src={user?.avatar} />
+              <AvatarFallback className="bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold">
+                {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">{user?.name || 'User'}</p>
+              <p className="text-xs text-indigo-300 truncate">{store?.name || 'Store Owner'}</p>
             </div>
           </div>
+        </div>
         </div>
 
         {/* Main content */}
