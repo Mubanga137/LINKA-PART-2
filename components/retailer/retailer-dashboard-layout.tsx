@@ -172,9 +172,9 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
                     <span>{item.title}</span>
                   </div>
                   {item.badge && (
-                    <Badge variant="secondary" className="bg-orange-100 text-orange-700 text-xs">
-                      {item.badge}
-                    </Badge>
+                    <Badge variant="secondary" className="bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs shadow-md animate-pulse">
+                    {item.badge}
+                  </Badge>
                   )}
                 </Link>
               );
