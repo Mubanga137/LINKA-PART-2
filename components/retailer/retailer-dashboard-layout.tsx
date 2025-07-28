@@ -43,72 +43,103 @@ interface RetailerDashboardLayoutProps {
   children: React.ReactNode;
 }
 
-const sidebarItems = [
+const sidebarSections = [
   {
-    title: 'Dashboard',
-    href: '/retailer/dashboard',
-    icon: LayoutDashboard,
-    badge: null
+    title: 'Overview',
+    items: [
+      {
+        title: 'Dashboard',
+        href: '/retailer/dashboard',
+        icon: LayoutDashboard,
+        badge: null,
+        description: 'Business overview and metrics'
+      }
+    ]
   },
   {
-    title: 'Orders',
-    href: '/retailer/orders',
-    icon: ShoppingCart,
-    badge: 23
+    title: 'Store Management',
+    items: [
+      {
+        title: 'My Storefront',
+        href: '/retailer/store',
+        icon: Store,
+        badge: null,
+        description: 'Customize your online store'
+      },
+      {
+        title: 'Products',
+        href: '/retailer/products',
+        icon: Package,
+        badge: 8,
+        description: 'Manage inventory and listings'
+      },
+      {
+        title: 'Services',
+        href: '/retailer/services',
+        icon: Upload,
+        badge: null,
+        description: 'Service offerings and bookings'
+      },
+      {
+        title: 'Store Settings',
+        href: '/retailer/store-settings',
+        icon: Settings,
+        badge: null,
+        description: 'Store configuration and preferences'
+      }
+    ]
   },
   {
-    title: 'Products',
-    href: '/retailer/products',
-    icon: Package,
-    badge: 8
+    title: 'Business Operations',
+    items: [
+      {
+        title: 'Orders',
+        href: '/retailer/orders',
+        icon: ShoppingCart,
+        badge: 23,
+        description: 'Track and manage orders'
+      },
+      {
+        title: 'Customers',
+        href: '/retailer/customers',
+        icon: Users,
+        badge: null,
+        description: 'Customer database and insights'
+      },
+      {
+        title: 'Messages',
+        href: '/retailer/messages',
+        icon: MessageSquare,
+        badge: 5,
+        description: 'Customer communications'
+      }
+    ]
   },
   {
-    title: 'Services',
-    href: '/retailer/services',
-    icon: Store,
-    badge: null
-  },
-  {
-    title: 'Customers',
-    href: '/retailer/customers',
-    icon: Users,
-    badge: null
-  },
-  {
-    title: 'Messages',
-    href: '/retailer/messages',
-    icon: MessageSquare,
-    badge: 5
-  },
-  {
-    title: 'Analytics',
-    href: '/retailer/analytics',
-    icon: BarChart3,
-    badge: null
-  },
-  {
-    title: 'Earnings',
-    href: '/retailer/earnings',
-    icon: DollarSign,
-    badge: null
-  },
-  {
-    title: 'Reports',
-    href: '/retailer/reports',
-    icon: FileText,
-    badge: null
-  },
-  {
-    title: 'Upload Center',
-    href: '/retailer/upload',
-    icon: Upload,
-    badge: null
-  },
-  {
-    title: 'Store Settings',
-    href: '/retailer/store-settings',
-    icon: Settings,
-    badge: null
+    title: 'Analytics & Finance',
+    items: [
+      {
+        title: 'Analytics',
+        href: '/retailer/analytics',
+        icon: BarChart3,
+        badge: null,
+        description: 'Business insights and metrics'
+      },
+      {
+        title: 'Earnings',
+        href: '/retailer/earnings',
+        icon: DollarSign,
+        badge: null,
+        description: 'Revenue and financial reports'
+      },
+      {
+        title: 'Reports',
+        href: '/retailer/reports',
+        icon: FileText,
+        badge: null,
+        description: 'Detailed business reports'
+      }
+    ]
   }
 ];
 
@@ -152,33 +183,57 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
             </Button>
           </div>
 
-          <nav className="flex-1 px-4 py-6 space-y-2">
-            {sidebarItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = pathname === item.href;
+          <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
+            {sidebarSections.map((section, sectionIndex) => (
+              <div key={sectionIndex} className="space-y-3">
+                <h3 className="text-xs font-semibold text-indigo-300 uppercase tracking-wider px-3">
+                  {section.title}
+                </h3>
+                <div className="space-y-1">
+                  {section.items.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = pathname === item.href;
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-all duration-200 ${
-                  isActive
-                    ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg font-medium transform scale-105'
-                    : 'text-indigo-200 hover:bg-indigo-800/50 hover:text-white hover:transform hover:scale-102'
-                }`}
-                >
-                  <div className="flex items-center space-x-3">
-                    <Icon className="h-5 w-5" />
-                    <span>{item.title}</span>
-                  </div>
-                  {item.badge && (
-                    <Badge variant="secondary" className="bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs shadow-md animate-pulse">
-                    {item.badge}
-                  </Badge>
-                  )}
-                </Link>
-              );
-            })}
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`group flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 ${
+                          isActive
+                            ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg transform scale-105'
+                            : 'text-indigo-200 hover:bg-indigo-800/50 hover:text-white hover:transform hover:scale-102'
+                        }`}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className={`p-2 rounded-lg transition-colors ${
+                            isActive
+                              ? 'bg-white/20'
+                              : 'bg-indigo-800/50 group-hover:bg-indigo-700/70'
+                          }`}>
+                            <Icon className="h-4 w-4" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-sm font-medium">{item.title}</p>
+                            <p className={`text-xs ${
+                              isActive
+                                ? 'text-white/80'
+                                : 'text-indigo-300 group-hover:text-indigo-200'
+                            }`}>
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                        {item.badge && (
+                          <Badge className="bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs shadow-md animate-pulse ml-2">
+                            {item.badge}
+                          </Badge>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </nav>
 
           {/* User info at bottom */}
