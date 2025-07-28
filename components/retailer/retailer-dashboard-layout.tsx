@@ -60,11 +60,18 @@ const sidebarSections = [
     title: 'Store Management',
     items: [
       {
-        title: 'My Storefront',
-        href: '/retailer/store',
+        title: 'Storefront Manager',
+        href: '/retailer/storefront',
         icon: Store,
         badge: null,
-        description: 'Customize your online store'
+        description: 'Design your professional storefront'
+      },
+      {
+        title: 'Store Configuration',
+        href: '/retailer/store',
+        icon: Settings,
+        badge: null,
+        description: 'Basic store settings and info'
       },
       {
         title: 'Products',
