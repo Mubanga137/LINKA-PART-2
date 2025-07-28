@@ -68,7 +68,7 @@ const sidebarSections = [
       },
       {
         title: 'Store Configuration',
-        href: '/retailer/store',
+        href: '/retailer/store-config',
         icon: Settings,
         badge: null,
         description: 'Basic store settings and info'
