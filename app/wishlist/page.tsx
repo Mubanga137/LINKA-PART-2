@@ -1,445 +1,650 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { CustomerHeader } from "@/components/customer-header"
-import { Footer } from "@/components/footer"
+import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 import { 
-  Heart,
-  ShoppingCart,
-  Search,
-  ArrowLeft,
-  Star,
-  Trash2,
-  Share2,
-  Package,
+  Heart, 
+  ShoppingCart, 
+  Star, 
+  Trash2, 
+  Share2, 
+  Eye,
+  ShoppingBag,
   Filter,
+  SortAsc,
   Grid3X3,
-  List
+  List,
+  Plus,
+  TrendingDown,
+  TrendingUp,
+  Clock,
+  AlertCircle,
+  Gift,
+  Zap,
+  Package,
+  Truck,
+  MapPin
 } from "lucide-react"
-import { useAuth } from "@/contexts/auth-context"
-import { useCart, Product } from "@/contexts/cart-context"
-import { productService } from "@/services/product-service"
+import { MarketplaceMainHeader } from "@/components/marketplace/marketplace-main-header"
+import { Footer } from "@/components/footer"
+import { useCart } from "@/contexts/cart-context"
+import { Product } from "@/contexts/cart-context"
 
-const mockWishlistItems: Product[] = [
+// Mock wishlist data - in real app this would come from API/context
+const MOCK_WISHLIST_ITEMS: (Product & { 
+  addedDate: string, 
+  priceAlert?: boolean,
+  inStock: boolean,
+  priceChange?: { type: 'increase' | 'decrease', percentage: number }
+})[] = [
   {
     id: "1",
-    name: "Traditional Chitenge Fabric",
-    price: 150.00,
-    originalPrice: 200.00,
+    name: "Traditional Maasai Beaded Necklace - Handcrafted African Jewelry",
+    price: 1250,
+    originalPrice: 2500,
     image: "/placeholder.svg",
-    category: "fashion-textiles",
-    tags: ["traditional", "fabric"],
+    category: "jewelry-accessories",
     rating: 4.8,
-    inStock: true
+    reviewCount: 156,
+    retailerName: "AfriCrafts Kenya",
+    retailerLocation: "Nairobi, Kenya",
+    shippingInfo: {
+      freeShipping: true,
+      shippingCost: 0,
+      estimatedDays: 2
+    },
+    tags: ["handmade", "traditional"],
+    addedDate: "2024-01-15",
+    priceAlert: true,
+    inStock: true,
+    priceChange: { type: 'decrease', percentage: 15 }
   },
   {
     id: "2",
-    name: "Handmade Copper Jewelry Set",
-    price: 250.00,
+    name: "Ankara Print Women's Dress - Modern African Fashion",
+    price: 1920,
+    originalPrice: 3200,
     image: "/placeholder.svg",
-    category: "jewelry-accessories",
-    tags: ["handmade", "copper"],
+    category: "fashion-textiles",
     rating: 4.9,
+    reviewCount: 203,
+    retailerName: "Afro Fashion House",
+    retailerLocation: "Lagos, Nigeria",
+    shippingInfo: {
+      freeShipping: false,
+      shippingCost: 300,
+      estimatedDays: 5
+    },
+    tags: ["trending", "fashion"],
+    addedDate: "2024-01-10",
     inStock: true
   },
   {
     id: "3",
-    name: "Organic Zambian Honey",
-    price: 80.00,
-    originalPrice: 100.00,
+    name: "Handwoven Kiondo Basket - Traditional Storage",
+    price: 990,
+    originalPrice: 1800,
     image: "/placeholder.svg",
-    category: "food-beverages",
-    tags: ["organic", "honey"],
+    category: "traditional-crafts",
     rating: 4.7,
-    inStock: false
+    reviewCount: 89,
+    retailerName: "Kenyan Crafts Co.",
+    retailerLocation: "Mombasa, Kenya",
+    shippingInfo: {
+      freeShipping: true,
+      shippingCost: 0,
+      estimatedDays: 3
+    },
+    tags: ["handmade", "eco-friendly"],
+    addedDate: "2024-01-08",
+    inStock: false,
+    priceChange: { type: 'increase', percentage: 5 }
   },
   {
     id: "4",
-    name: "Traditional Wood Carving",
-    price: 320.00,
+    name: "Organic Kenyan Coffee Beans 1kg - Premium Single Origin",
+    price: 840,
+    originalPrice: 1200,
+    image: "/placeholder.svg",
+    category: "food-beverages",
+    rating: 4.9,
+    reviewCount: 334,
+    retailerName: "Highland Coffee Co.",
+    retailerLocation: "Eldoret, Kenya",
+    shippingInfo: {
+      freeShipping: true,
+      shippingCost: 0,
+      estimatedDays: 1
+    },
+    tags: ["organic", "premium"],
+    addedDate: "2024-01-05",
+    priceAlert: true,
+    inStock: true
+  },
+  {
+    id: "5",
+    name: "Wood Carved African Mask - Authentic Art Piece",
+    price: 2700,
+    originalPrice: 4500,
     image: "/placeholder.svg",
     category: "art-culture",
-    tags: ["traditional", "wood"],
     rating: 4.6,
+    reviewCount: 45,
+    retailerName: "African Art Gallery",
+    retailerLocation: "Cape Town, South Africa",
+    shippingInfo: {
+      freeShipping: false,
+      shippingCost: 500,
+      estimatedDays: 7
+    },
+    tags: ["handmade", "art"],
+    addedDate: "2024-01-03",
     inStock: true
   }
 ]
 
-export default function CustomerWishlist() {
-  const { user } = useAuth()
+type SortOption = 'date-added' | 'price-low' | 'price-high' | 'name' | 'rating'
+type ViewMode = 'grid' | 'list'
+
+export default function WishlistPage() {
+  const [wishlistItems, setWishlistItems] = useState(MOCK_WISHLIST_ITEMS)
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set())
+  const [sortBy, setSortBy] = useState<SortOption>('date-added')
+  const [viewMode, setViewMode] = useState<ViewMode>('grid')
+  const [showPriceAlerts, setShowPriceAlerts] = useState(false)
   const { addToCart } = useCart()
-  const router = useRouter()
-  const [wishlistItems, setWishlistItems] = useState<Product[]>([])
-  const [filteredItems, setFilteredItems] = useState<Product[]>([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [isLoading, setIsLoading] = useState(true)
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
-  // Redirect if not logged in
-  useEffect(() => {
-    if (!user) {
-      router.push('/login?redirect=/wishlist')
-      return
-    }
-  }, [user, router])
-
-  // Load wishlist items
-  useEffect(() => {
-    const loadWishlist = async () => {
-      setIsLoading(true)
-      try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        setWishlistItems(mockWishlistItems)
-        setFilteredItems(mockWishlistItems)
-      } catch (error) {
-        console.error('Error loading wishlist:', error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    if (user) {
-      loadWishlist()
-    }
-  }, [user])
-
-  // Filter items by search term
-  useEffect(() => {
-    if (searchTerm) {
-      const filtered = wishlistItems.filter(item =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-      )
-      setFilteredItems(filtered)
-    } else {
-      setFilteredItems(wishlistItems)
-    }
-  }, [wishlistItems, searchTerm])
-
-  const removeFromWishlist = (productId: string) => {
-    const updated = wishlistItems.filter(item => item.id !== productId)
-    setWishlistItems(updated)
-    setFilteredItems(updated.filter(item =>
-      !searchTerm || 
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    ))
-  }
-
-  const handleAddToCart = (product: Product) => {
-    addToCart(product, 1)
-  }
-
-  const moveAllToCart = () => {
-    filteredItems.forEach(item => {
-      if (item.inStock) {
-        addToCart(item, 1)
-      }
+  const formatPrice = (price: number) => `K${price.toLocaleString()}`
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric',
+      year: 'numeric'
     })
   }
 
-  const clearWishlist = () => {
-    if (confirm("Are you sure you want to clear your entire wishlist?")) {
-      setWishlistItems([])
-      setFilteredItems([])
+  const handleRemoveItem = (itemId: string) => {
+    setWishlistItems(prev => prev.filter(item => item.id !== itemId))
+    setSelectedItems(prev => {
+      const newSet = new Set(prev)
+      newSet.delete(itemId)
+      return newSet
+    })
+  }
+
+  const handleSelectItem = (itemId: string) => {
+    setSelectedItems(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(itemId)) {
+        newSet.delete(itemId)
+      } else {
+        newSet.add(itemId)
+      }
+      return newSet
+    })
+  }
+
+  const handleSelectAll = () => {
+    if (selectedItems.size === wishlistItems.length) {
+      setSelectedItems(new Set())
+    } else {
+      setSelectedItems(new Set(wishlistItems.map(item => item.id)))
     }
   }
 
-  if (!user) {
-    return null
+  const handleAddSelectedToCart = () => {
+    const itemsToAdd = wishlistItems.filter(item => 
+      selectedItems.has(item.id) && item.inStock
+    )
+    itemsToAdd.forEach(item => addToCart(item))
+    setSelectedItems(new Set())
   }
 
+  const handleRemoveSelected = () => {
+    setWishlistItems(prev => prev.filter(item => !selectedItems.has(item.id)))
+    setSelectedItems(new Set())
+  }
+
+  const sortedItems = [...wishlistItems].sort((a, b) => {
+    switch (sortBy) {
+      case 'date-added':
+        return new Date(b.addedDate).getTime() - new Date(a.addedDate).getTime()
+      case 'price-low':
+        return a.price - b.price
+      case 'price-high':
+        return b.price - a.price
+      case 'name':
+        return a.name.localeCompare(b.name)
+      case 'rating':
+        return b.rating - a.rating
+      default:
+        return 0
+    }
+  })
+
+  const totalValue = wishlistItems.reduce((sum, item) => sum + item.price, 0)
+  const totalSavings = wishlistItems.reduce((sum, item) => {
+    return sum + (item.originalPrice ? item.originalPrice - item.price : 0)
+  }, 0)
+
+  const inStockCount = wishlistItems.filter(item => item.inStock).length
+  const selectedInStockCount = wishlistItems.filter(item => 
+    selectedItems.has(item.id) && item.inStock
+  ).length
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
-      <CustomerHeader />
-      
-      <main className="max-w-6xl mx-auto px-6 py-8">
-        {/* Page Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={() => router.push('/customer-dashboard')}
-              className="gap-2"
+    <div className="min-h-screen bg-gray-50">
+      <MarketplaceMainHeader />
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <motion.div
+              animate={{ 
+                scale: [1, 1.2, 1],
+                rotate: [0, 10, -10, 0]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg"
             >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Dashboard
-            </Button>
-          </div>
-          
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <Heart className="h-8 w-8 text-red-500" />
-              <div>
-                <h1 className="text-3xl font-bold text-slate-900">My Wishlist</h1>
-                <p className="text-slate-600">
-                  {filteredItems.length} {filteredItems.length === 1 ? 'item' : 'items'} saved
-                </p>
-              </div>
+              <Heart className="h-6 w-6 text-white fill-current" />
+            </motion.div>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">My Wishlist</h1>
+              <p className="text-gray-600">
+                {wishlistItems.length} items • {inStockCount} in stock
+              </p>
             </div>
-            
-            {filteredItems.length > 0 && (
-              <div className="flex gap-2">
-                <Button 
-                  variant="outline" 
-                  onClick={moveAllToCart}
-                  className="gap-2"
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                  Add All to Cart
-                </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={clearWishlist}
-                  className="gap-2 text-red-600 hover:text-red-700"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  Clear All
-                </Button>
-              </div>
-            )}
           </div>
-        </div>
 
-        {/* Search and Controls */}
-        {wishlistItems.length > 0 && (
-          <Card className="mb-6">
-            <CardContent className="pt-6">
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                  <Input
-                    placeholder="Search your wishlist..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Card>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-orange-600">
+                  {formatPrice(totalValue)}
                 </div>
-                
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant={viewMode === 'grid' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                  >
-                    <Grid3X3 className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant={viewMode === 'list' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setViewMode('list')}
-                  >
-                    <List className="h-4 w-4" />
-                  </Button>
+                <div className="text-sm text-gray-600">Total Value</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-green-600">
+                  {formatPrice(totalSavings)}
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Wishlist Items */}
-        {isLoading ? (
-          <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <Card key={i} className="animate-pulse">
-                <CardContent className="p-0">
-                  <div className="aspect-square bg-slate-200 rounded-t-lg"></div>
-                  <div className="p-4 space-y-2">
-                    <div className="h-4 bg-slate-200 rounded w-3/4"></div>
-                    <div className="h-3 bg-slate-200 rounded w-1/2"></div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                <div className="text-sm text-gray-600">Total Savings</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-blue-600">
+                  {inStockCount}
+                </div>
+                <div className="text-sm text-gray-600">Available</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-purple-600">
+                  {wishlistItems.filter(item => item.priceAlert).length}
+                </div>
+                <div className="text-sm text-gray-600">Price Alerts</div>
+              </CardContent>
+            </Card>
           </div>
-        ) : filteredItems.length === 0 ? (
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-center py-12">
-                <Heart className="h-16 w-16 text-slate-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">
-                  {searchTerm ? 'No items found' : 'Your wishlist is empty'}
-                </h3>
-                <p className="text-slate-600 mb-6">
-                  {searchTerm 
-                    ? 'Try searching with different keywords' 
-                    : 'Start adding products to your wishlist to see them here'
-                  }
-                </p>
-                {!searchTerm && (
-                  <Button onClick={() => router.push('/marketplace')}>
-                    Browse Products
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+        </motion.div>
+
+        {wishlistItems.length === 0 ? (
+          // Empty State
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-16"
+          >
+            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Heart className="h-12 w-12 text-gray-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+              Your wishlist is empty
+            </h2>
+            <p className="text-gray-600 mb-8 max-w-md mx-auto">
+              Start adding items you love to your wishlist and keep track of your favorites.
+            </p>
+            <Link href="/marketplace">
+              <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+                <ShoppingBag className="h-4 w-4 mr-2" />
+                Start Shopping
+              </Button>
+            </Link>
+          </motion.div>
         ) : (
-          <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-            {filteredItems.map((item) => (
-              <Card key={item.id} className="group hover:shadow-lg transition-shadow">
-                <CardContent className="p-0">
-                  {viewMode === 'grid' ? (
-                    <>
-                      {/* Grid View */}
-                      <div className="relative aspect-square overflow-hidden rounded-t-lg">
-                        <img 
-                          src={item.image} 
-                          alt={item.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                        />
-                        
-                        {/* Overlay Actions */}
-                        <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="bg-white/90 hover:bg-white"
-                            onClick={() => removeFromWishlist(item.id)}
-                          >
-                            <Trash2 className="h-3 w-3" />
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="bg-white/90 hover:bg-white"
-                          >
-                            <Share2 className="h-3 w-3" />
-                          </Button>
-                        </div>
-
-                        {/* Stock Status */}
-                        {!item.inStock && (
-                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                            <Badge variant="destructive">Out of Stock</Badge>
-                          </div>
-                        )}
-
-                        {/* Discount Badge */}
-                        {item.originalPrice && item.originalPrice > item.price && (
-                          <Badge className="absolute top-2 left-2" variant="destructive">
-                            {Math.round((1 - item.price / item.originalPrice) * 100)}% OFF
-                          </Badge>
-                        )}
-                      </div>
-                      
-                      <div className="p-4">
-                        <h3 className="font-medium text-slate-900 mb-2 line-clamp-2">
-                          {item.name}
-                        </h3>
-                        
-                        <div className="flex items-center gap-1 mb-2">
-                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                          <span className="text-sm text-slate-600">{item.rating}</span>
-                        </div>
-                        
-                        <div className="flex items-center gap-2 mb-4">
-                          <span className="text-lg font-bold text-slate-900">
-                            ZMW {item.price.toFixed(2)}
-                          </span>
-                          {item.originalPrice && item.originalPrice > item.price && (
-                            <span className="text-sm text-slate-500 line-through">
-                              ZMW {item.originalPrice.toFixed(2)}
-                            </span>
-                          )}
-                        </div>
-                        
-                        <div className="flex gap-2">
-                          <Button 
-                            size="sm" 
-                            className="flex-1"
-                            onClick={() => handleAddToCart(item)}
-                            disabled={!item.inStock}
-                          >
-                            <ShoppingCart className="h-3 w-3 mr-1" />
-                            Add to Cart
-                          </Button>
-                          <Button 
-                            size="sm" 
-                            variant="outline"
-                            onClick={() => removeFromWishlist(item.id)}
-                          >
-                            <Heart className="h-3 w-3 fill-current text-red-500" />
-                          </Button>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    /* List View */
-                    <div className="flex gap-4 p-4">
-                      <div className="relative w-24 h-24 flex-shrink-0">
-                        <img 
-                          src={item.image} 
-                          alt={item.name}
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                        {!item.inStock && (
-                          <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center">
-                            <Badge variant="destructive" className="text-xs">Out of Stock</Badge>
-                          </div>
-                        )}
-                      </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-medium text-slate-900 mb-1 truncate">
-                          {item.name}
-                        </h3>
-                        
-                        <div className="flex items-center gap-1 mb-2">
-                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                          <span className="text-sm text-slate-600">{item.rating}</span>
-                        </div>
-                        
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-lg font-bold text-slate-900">
-                            ZMW {item.price.toFixed(2)}
-                          </span>
-                          {item.originalPrice && item.originalPrice > item.price && (
-                            <>
-                              <span className="text-sm text-slate-500 line-through">
-                                ZMW {item.originalPrice.toFixed(2)}
-                              </span>
-                              <Badge variant="destructive" className="text-xs">
-                                {Math.round((1 - item.price / item.originalPrice) * 100)}% OFF
-                              </Badge>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                      
-                      <div className="flex flex-col gap-2 justify-center">
-                        <Button 
-                          size="sm"
-                          onClick={() => handleAddToCart(item)}
-                          disabled={!item.inStock}
-                          className="whitespace-nowrap"
-                        >
-                          <ShoppingCart className="h-3 w-3 mr-1" />
-                          Add to Cart
-                        </Button>
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          onClick={() => removeFromWishlist(item.id)}
-                          className="whitespace-nowrap"
-                        >
-                          <Trash2 className="h-3 w-3 mr-1" />
-                          Remove
-                        </Button>
-                      </div>
+          <>
+            {/* Controls */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-white rounded-lg border p-4 mb-6"
+            >
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleSelectAll}
+                    className="flex items-center gap-2"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedItems.size === wishlistItems.length}
+                      onChange={() => {}}
+                      className="rounded"
+                    />
+                    Select All ({wishlistItems.length})
+                  </Button>
+                  
+                  {selectedItems.size > 0 && (
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary">
+                        {selectedItems.size} selected
+                      </Badge>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleAddSelectedToCart}
+                        disabled={selectedInStockCount === 0}
+                        className="flex items-center gap-1"
+                      >
+                        <ShoppingCart className="h-4 w-4" />
+                        Add to Cart ({selectedInStockCount})
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleRemoveSelected}
+                        className="flex items-center gap-1 text-red-600 hover:text-red-700"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        Remove
+                      </Button>
                     </div>
                   )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  {/* Sort */}
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as SortOption)}
+                    className="border border-gray-200 rounded-md px-3 py-1.5 text-sm"
+                  >
+                    <option value="date-added">Recently Added</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name A-Z</option>
+                    <option value="rating">Highest Rated</option>
+                  </select>
+
+                  {/* View Mode */}
+                  <div className="flex bg-gray-100 rounded-lg overflow-hidden">
+                    <Button
+                      variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                      size="sm"
+                      onClick={() => setViewMode('grid')}
+                      className="rounded-none px-3"
+                    >
+                      <Grid3X3 className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant={viewMode === 'list' ? 'default' : 'ghost'}
+                      size="sm"
+                      onClick={() => setViewMode('list')}
+                      className="rounded-none px-3"
+                    >
+                      <List className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Price Alerts */}
+            {wishlistItems.some(item => item.priceChange) && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6"
+              >
+                <div className="flex items-start gap-3">
+                  <AlertCircle className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold text-blue-900 mb-1">Price Changes Detected</h3>
+                    <p className="text-blue-700 text-sm mb-3">
+                      Some items in your wishlist have had price changes. Review them below!
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {wishlistItems
+                        .filter(item => item.priceChange)
+                        .map(item => (
+                          <Badge 
+                            key={item.id}
+                            className={`${
+                              item.priceChange?.type === 'decrease' 
+                                ? 'bg-green-100 text-green-800' 
+                                : 'bg-red-100 text-red-800'
+                            }`}
+                          >
+                            {item.priceChange?.type === 'decrease' ? (
+                              <TrendingDown className="h-3 w-3 mr-1" />
+                            ) : (
+                              <TrendingUp className="h-3 w-3 mr-1" />
+                            )}
+                            {item.name.slice(0, 20)}... {item.priceChange?.percentage}%
+                          </Badge>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Items Grid/List */}
+            <div className={`grid gap-6 ${
+              viewMode === 'grid' 
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+                : 'grid-cols-1'
+            }`}>
+              <AnimatePresence>
+                {sortedItems.map((item, index) => (
+                  <motion.div
+                    key={item.id}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`${viewMode === 'list' ? 'max-w-none' : ''}`}
+                  >
+                    <Card className={`overflow-hidden hover:shadow-lg transition-all duration-300 ${
+                      !item.inStock ? 'opacity-75' : ''
+                    } ${
+                      selectedItems.has(item.id) ? 'ring-2 ring-orange-500' : ''
+                    }`}>
+                      <div className="relative">
+                        {/* Selection Checkbox */}
+                        <div className="absolute top-2 left-2 z-10">
+                          <input
+                            type="checkbox"
+                            checked={selectedItems.has(item.id)}
+                            onChange={() => handleSelectItem(item.id)}
+                            className="w-5 h-5 rounded border-2 border-white shadow-lg"
+                          />
+                        </div>
+
+                        {/* Product Image */}
+                        <Link href={`/products/${item.id}`}>
+                          <div className={`${viewMode === 'list' ? 'aspect-square md:aspect-video' : 'aspect-square'} bg-gray-50 cursor-pointer overflow-hidden`}>
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                        </Link>
+
+                        {/* Badges */}
+                        <div className="absolute top-2 right-2 flex flex-col gap-1">
+                          {!item.inStock && (
+                            <Badge className="bg-red-500 text-white">
+                              Out of Stock
+                            </Badge>
+                          )}
+                          {item.priceChange && (
+                            <Badge className={`${
+                              item.priceChange.type === 'decrease' 
+                                ? 'bg-green-500 text-white' 
+                                : 'bg-red-500 text-white'
+                            }`}>
+                              {item.priceChange.type === 'decrease' ? (
+                                <TrendingDown className="h-3 w-3 mr-1" />
+                              ) : (
+                                <TrendingUp className="h-3 w-3 mr-1" />
+                              )}
+                              {item.priceChange.percentage}%
+                            </Badge>
+                          )}
+                          {item.originalPrice && item.originalPrice > item.price && (
+                            <Badge className="bg-orange-500 text-white">
+                              -{Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
+                            </Badge>
+                          )}
+                        </div>
+
+                        {/* Remove Button */}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleRemoveItem(item.id)}
+                          className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-2 bg-white/80 hover:bg-white rounded-full"
+                        >
+                          <Trash2 className="h-4 w-4 text-red-600" />
+                        </Button>
+                      </div>
+
+                      <CardContent className="p-4">
+                        {/* Product Info */}
+                        <div className="space-y-3">
+                          {/* Title */}
+                          <Link href={`/products/${item.id}`}>
+                            <h3 className="font-semibold text-gray-900 line-clamp-2 hover:text-orange-600 transition-colors cursor-pointer">
+                              {item.name}
+                            </h3>
+                          </Link>
+
+                          {/* Price */}
+                          <div className="flex items-center gap-2">
+                            <span className="text-xl font-bold text-orange-600">
+                              {formatPrice(item.price)}
+                            </span>
+                            {item.originalPrice && item.originalPrice > item.price && (
+                              <span className="text-sm text-gray-400 line-through">
+                                {formatPrice(item.originalPrice)}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Rating & Seller */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-1">
+                              <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                              <span className="text-sm font-medium">{item.rating}</span>
+                              <span className="text-sm text-gray-500">({item.reviewCount})</span>
+                            </div>
+                            <div className="flex items-center gap-1 text-sm text-gray-500">
+                              <MapPin className="h-3 w-3" />
+                              <span className="truncate">{item.retailerLocation}</span>
+                            </div>
+                          </div>
+
+                          {/* Shipping Info */}
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="flex items-center gap-1 text-green-600">
+                              <Truck className="h-3 w-3" />
+                              <span>
+                                {item.shippingInfo.freeShipping ? 'Free shipping' : `K${item.shippingInfo.shippingCost} shipping`}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1 text-gray-500">
+                              <Clock className="h-3 w-3" />
+                              <span>Added {formatDate(item.addedDate)}</span>
+                            </div>
+                          </div>
+
+                          <Separator />
+
+                          {/* Actions */}
+                          <div className="flex gap-2">
+                            <Button
+                              onClick={() => addToCart(item)}
+                              disabled={!item.inStock}
+                              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white disabled:bg-gray-300"
+                            >
+                              <ShoppingCart className="h-4 w-4 mr-2" />
+                              {item.inStock ? 'Add to Cart' : 'Out of Stock'}
+                            </Button>
+                            <Button variant="outline" size="sm" className="px-3">
+                              <Share2 className="h-4 w-4" />
+                            </Button>
+                            <Button variant="outline" size="sm" className="px-3">
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+
+            {/* Bottom CTA */}
+            {inStockCount > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mt-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-8 text-center text-white"
+              >
+                <Gift className="h-12 w-12 mx-auto mb-4 text-orange-200" />
+                <h2 className="text-2xl font-bold mb-2">Ready to Make a Purchase?</h2>
+                <p className="text-orange-100 mb-6">
+                  You have {inStockCount} items available in your wishlist worth {formatPrice(totalValue)}
+                </p>
+                <Button
+                  onClick={() => {
+                    wishlistItems.filter(item => item.inStock).forEach(item => addToCart(item))
+                  }}
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white text-orange-600 hover:bg-gray-100"
+                >
+                  <ShoppingCart className="h-5 w-5 mr-2" />
+                  Add All Available to Cart
+                </Button>
+              </motion.div>
+            )}
+          </>
         )}
       </main>
 
