@@ -145,8 +145,31 @@ export function EntertainmentCategories() {
         {currentCategory && (
           <div className="space-y-8">
             {/* Category Header */}
-            <div className={`bg-gradient-to-br ${currentCategory.bgColor} rounded-3xl p-8 border border-slate-200/50`}>
-              <div className="flex items-center justify-between">
+            <div className="relative rounded-3xl p-8 border border-slate-200/50 overflow-hidden">
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <img
+                  src={
+                    currentCategory.id === "streaming"
+                      ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=300&fit=crop&crop=center"
+                      : currentCategory.id === "local-content"
+                      ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=300&fit=crop&crop=center"
+                      : currentCategory.id === "talent-booking"
+                      ? "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=300&fit=crop&crop=center"
+                      : currentCategory.id === "gaming"
+                      ? "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=300&fit=crop&crop=center"
+                      : currentCategory.id === "media-services"
+                      ? "https://images.unsplash.com/photo-1489599510067-e6327c8e4b9b?w=800&h=300&fit=crop&crop=center"
+                      : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=300&fit=crop&crop=center"
+                  }
+                  alt={currentCategory.name}
+                  className="w-full h-full object-cover opacity-20"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-br ${currentCategory.bgColor} opacity-90`}></div>
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div
                     className={`w-16 h-16 bg-gradient-to-br ${currentCategory.color} rounded-2xl flex items-center justify-center shadow-lg`}

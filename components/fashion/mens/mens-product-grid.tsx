@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { memo, useState, useEffect, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -185,7 +185,7 @@ const mensProducts: Product[] = [
   }
 ]
 
-export function MensProductGrid({ filters, sortBy, onFiltersChange, onSortChange }: MensProductGridProps) {
+export const MensProductGrid = memo(function MensProductGrid({ filters, sortBy, onFiltersChange, onSortChange }: MensProductGridProps) {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(mensProducts)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [searchQuery, setSearchQuery] = useState("")
@@ -521,4 +521,4 @@ export function MensProductGrid({ filters, sortBy, onFiltersChange, onSortChange
       </div>
     </section>
   )
-}
+})

@@ -325,7 +325,17 @@ export function IndustriesGrid() {
                   >
                     <CardContent className="p-0">
                       {/* Header */}
-                      <div className={`p-6 bg-gradient-to-br from-pink-50 to-purple-50 relative overflow-hidden`}>
+                      <div className={`p-6 relative overflow-hidden`}>
+                        {/* Background Image */}
+                        <div className="absolute inset-0">
+                          <img
+                            src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=200&fit=crop&crop=center"
+                            alt="Entertainment background"
+                            className="w-full h-full object-cover opacity-30"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-br from-pink-50/90 to-purple-50/90"></div>
+                        </div>
+
                         {/* Animated Background Elements */}
                         <div className="absolute inset-0 opacity-20">
                           <div className="absolute top-2 right-2 w-8 h-8 bg-white/30 rounded-full animate-float"></div>

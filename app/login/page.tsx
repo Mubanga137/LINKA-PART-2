@@ -37,8 +37,6 @@ export default function LoginPage() {
 
         if (email.includes('admin')) {
           router.push('/admin-dashboard')
-        } else if (email.includes('retailer')) {
-          router.push('/retailer-dashboard')
         } else {
           // Customer redirect - always go to dashboard for demo accounts
           if (email === 'customer@demo.com') {
@@ -58,16 +56,21 @@ export default function LoginPage() {
   }
 
   const handleDemoLogin = async (role: 'customer' | 'retailer' | 'admin') => {
+    // For retailer, redirect directly to retailer dashboard
+    if (role === 'retailer') {
+      router.push('/retailer/dashboard')
+      return
+    }
+
     const demoCredentials = {
       customer: { email: 'customer@demo.com', password: 'demo123' },
-      retailer: { email: 'retailer@demo.com', password: 'demo123' },
       admin: { email: 'admin@demo.com', password: 'demo123' }
     }
-    
-    const creds = demoCredentials[role]
+
+    const creds = demoCredentials[role as 'customer' | 'admin']
     setEmail(creds.email)
     setPassword(creds.password)
-    
+
     // Auto-submit after brief delay
     setTimeout(() => {
       handleSubmit(new Event('submit') as any)

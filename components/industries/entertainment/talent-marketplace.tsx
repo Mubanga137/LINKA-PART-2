@@ -19,13 +19,14 @@ import {
   Search,
   Verified,
 } from "lucide-react"
+import { getEntertainmentImage } from "@/lib/entertainment-image-mapping"
 
 const talents = [
   {
     id: 1,
     name: "DJ Mo",
     profession: "Professional DJ",
-    avatar: "/placeholder.svg?height=100&width=100",
+    avatar: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=face",
     rating: 4.9,
     reviews: 127,
     hourlyRate: "ZMW 250-400",
@@ -40,16 +41,16 @@ const talents = [
     languages: ["English", "Bemba", "Nyanja"],
     equipment: ["Professional Sound System", "Lighting", "Microphones"],
     portfolio: [
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
+      getEntertainmentImage("dj", "primary", 0).replace("w=400&h=300", "w=200&h=150"),
+      getEntertainmentImage("dj", "primary", 1).replace("w=400&h=300", "w=200&h=150"),
+      getEntertainmentImage("dj", "primary", 2).replace("w=400&h=300", "w=200&h=150"),
     ],
   },
   {
     id: 2,
     name: "Sarah Mwanza",
     profession: "Live Band & Vocalist",
-    avatar: "/placeholder.svg?height=100&width=100",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b3c0?w=100&h=100&fit=crop&crop=face",
     rating: 4.8,
     reviews: 89,
     hourlyRate: "ZMW 300-500",
@@ -64,16 +65,16 @@ const talents = [
     languages: ["English", "Bemba"],
     equipment: ["Full Band Setup", "Vocals", "Acoustic Guitar"],
     portfolio: [
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
+      getEntertainmentImage("live_band", "primary", 0).replace("w=400&h=300", "w=200&h=150"),
+      getEntertainmentImage("live_band", "primary", 1).replace("w=400&h=300", "w=200&h=150"),
+      getEntertainmentImage("live_band", "primary", 2).replace("w=400&h=300", "w=200&h=150"),
     ],
   },
   {
     id: 3,
     name: "Chanda Dance Crew",
     profession: "Traditional & Modern Dance",
-    avatar: "/placeholder.svg?height=100&width=100",
+    avatar: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=100&h=100&fit=crop&crop=center",
     rating: 4.7,
     reviews: 64,
     hourlyRate: "ZMW 200-350",
@@ -88,16 +89,16 @@ const talents = [
     languages: ["English", "Bemba", "Lozi"],
     equipment: ["Traditional Costumes", "Props", "Sound System"],
     portfolio: [
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
+      getEntertainmentImage("dance", "primary", 0).replace("w=400&h=300", "w=200&h=150"),
+      getEntertainmentImage("dance", "primary", 1).replace("w=400&h=300", "w=200&h=150"),
+      getEntertainmentImage("dance", "primary", 2).replace("w=400&h=300", "w=200&h=150"),
     ],
   },
   {
     id: 4,
     name: "James Phiri",
     profession: "Event MC & Host",
-    avatar: "/placeholder.svg?height=100&width=100",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
     rating: 4.9,
     reviews: 156,
     hourlyRate: "ZMW 180-300",
@@ -112,9 +113,9 @@ const talents = [
     languages: ["English", "Bemba", "Nyanja", "Tonga"],
     equipment: ["Wireless Microphone", "Professional Attire"],
     portfolio: [
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
-      "/placeholder.svg?height=150&width=200",
+      getEntertainmentImage("mc_hosting", "primary", 0).replace("w=400&h=300", "w=200&h=150"),
+      getEntertainmentImage("mc_hosting", "primary", 1).replace("w=400&h=300", "w=200&h=150"),
+      getEntertainmentImage("mc_hosting", "primary", 2).replace("w=400&h=300", "w=200&h=150"),
     ],
   },
 ]

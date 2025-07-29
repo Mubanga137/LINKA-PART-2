@@ -4,13 +4,14 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Play, Music, Gamepad2, Video, Mic, Search, TrendingUp, Users, Star, Zap } from "lucide-react"
+import { getCategoryImage } from "@/lib/entertainment-image-mapping"
 
 const featuredContent = [
   {
     id: 1,
     title: "DJ Mo - Afroset 3",
     type: "Music",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    category: "DJ",
     duration: "45 min",
     views: "12.3K",
     rating: 4.9,
@@ -21,7 +22,7 @@ const featuredContent = [
     id: 2,
     title: "The Great Lusaka Heist",
     type: "Short Film",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    category: "Short Film",
     duration: "12 min",
     views: "8.7K",
     rating: 4.6,
@@ -32,7 +33,7 @@ const featuredContent = [
     id: 3,
     title: "FIFA 24 Tournament",
     type: "Gaming",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    category: "Gaming",
     duration: "Live",
     views: "2.1K",
     rating: 4.8,
@@ -146,7 +147,7 @@ export function EntertainmentHero() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="relative group">
                 <img
-                  src={currentContent.thumbnail || "/placeholder.svg"}
+                  src={getCategoryImage(currentContent.category).replace("w=400&h=300", "w=300&h=200")}
                   alt={currentContent.title}
                   className="w-full h-64 object-cover rounded-2xl shadow-2xl group-hover:scale-105 transition-transform duration-300"
                 />

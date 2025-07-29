@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Play, Heart, Share2, Star, TrendingUp, Eye, Download, Bookmark } from "lucide-react"
+import { getCategoryImage } from "@/lib/entertainment-image-mapping"
 
 const featuredItems = [
   {
@@ -12,7 +13,7 @@ const featuredItems = [
     title: "Zambian Beats Compilation 2024",
     creator: "Various Artists",
     type: "Music Album",
-    thumbnail: "/placeholder.svg?height=300&width=400",
+    category: "Music Album",
     duration: "2h 15m",
     views: "45.2K",
     likes: "3.8K",
@@ -28,7 +29,7 @@ const featuredItems = [
     title: "The Copper Chronicles",
     creator: "Lusaka Film Studios",
     type: "Short Film Series",
-    thumbnail: "/placeholder.svg?height=300&width=400",
+    category: "Short Film",
     duration: "6 episodes",
     views: "28.7K",
     likes: "2.1K",
@@ -44,7 +45,7 @@ const featuredItems = [
     title: "Comedy Night Live",
     creator: "Zambian Comedy Club",
     type: "Live Show",
-    thumbnail: "/placeholder.svg?height=300&width=400",
+    category: "Comedy",
     duration: "1h 30m",
     views: "19.3K",
     likes: "1.9K",
@@ -60,7 +61,7 @@ const featuredItems = [
     title: "Traditional Dance Masterclass",
     creator: "Cultural Heritage Foundation",
     type: "Educational",
-    thumbnail: "/placeholder.svg?height=300&width=400",
+    category: "Traditional Dance",
     duration: "45m",
     views: "12.8K",
     likes: "1.2K",
@@ -76,7 +77,7 @@ const featuredItems = [
     title: "Esports Championship Finals",
     creator: "Zambia Gaming League",
     type: "Gaming Event",
-    thumbnail: "/placeholder.svg?height=300&width=400",
+    category: "Gaming Event",
     duration: "Live",
     views: "8.5K",
     likes: "890",
@@ -92,7 +93,7 @@ const featuredItems = [
     title: "Gospel Praise Session",
     creator: "Worship Together Zambia",
     type: "Religious",
-    thumbnail: "/placeholder.svg?height=300&width=400",
+    category: "Gospel",
     duration: "1h 45m",
     views: "22.1K",
     likes: "2.8K",
@@ -140,7 +141,7 @@ export function FeaturedContent() {
                 {/* Thumbnail */}
                 <div className="relative overflow-hidden">
                   <img
-                    src={item.thumbnail || "/placeholder.svg"}
+                    src={getCategoryImage(item.category)}
                     alt={item.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                   />

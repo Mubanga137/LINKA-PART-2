@@ -17,6 +17,7 @@ import {
   Music,
   Gamepad2,
 } from "lucide-react"
+import { getCategoryImage } from "@/lib/entertainment-image-mapping"
 
 const trendingContent = [
   {
@@ -24,7 +25,7 @@ const trendingContent = [
     title: "Zamrock Revival Mix",
     creator: "DJ Vintage",
     type: "Music",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    category: "DJ",
     views: "89.2K",
     likes: "12.3K",
     shares: "2.1K",
@@ -40,7 +41,7 @@ const trendingContent = [
     title: "FIFA 24 Championship Live",
     creator: "Zambia Gaming League",
     type: "Gaming",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    category: "Gaming",
     views: "45.7K",
     likes: "8.9K",
     shares: "1.5K",
@@ -56,7 +57,7 @@ const trendingContent = [
     title: "Comedy Gold: Best of 2024",
     creator: "Lusaka Comedy Club",
     type: "Comedy",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    category: "Comedy",
     views: "67.4K",
     likes: "9.8K",
     shares: "3.2K",
@@ -72,7 +73,7 @@ const trendingContent = [
     title: "Traditional Wedding Dance",
     creator: "Cultural Heritage Zambia",
     type: "Cultural",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    category: "Traditional Dance",
     views: "34.1K",
     likes: "5.6K",
     shares: "890",
@@ -88,7 +89,7 @@ const trendingContent = [
     title: "Gospel Praise Night",
     creator: "Worship Together",
     type: "Religious",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    category: "Gospel",
     views: "52.8K",
     likes: "7.2K",
     shares: "1.8K",
@@ -204,7 +205,7 @@ export function TrendingNow() {
                   {/* Thumbnail */}
                   <div className="relative md:w-80 h-48 md:h-auto overflow-hidden">
                     <img
-                      src={item.thumbnail || "/placeholder.svg"}
+                      src={getCategoryImage(item.category).replace("w=400&h=300", "w=300&h=200")}
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
