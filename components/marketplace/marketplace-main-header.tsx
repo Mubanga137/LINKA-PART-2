@@ -1,10 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,15 +14,58 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
-import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Menu, X, Search, Sparkles, Briefcase, Stethoscope, Home, Car, Camera, GraduationCap, Wrench, Heart, Shield, Building, ChevronRight } from "lucide-react"
+import { 
+  LinkIcon, 
+  ShoppingCart, 
+  User, 
+  ChevronDown, 
+  LogOut, 
+  Settings, 
+  Package, 
+  BarChart3, 
+  Menu, 
+  X, 
+  Search, 
+  Sparkles, 
+  Heart,
+  Bell,
+  Globe,
+  Shield,
+  Zap,
+  Camera,
+  Truck,
+  Clock,
+  Star,
+  Filter,
+  MapPin,
+  Mic,
+  ArrowLeft
+} from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context"
-import { MobileNavigation } from "@/components/mobile-navigation"
+
+const TRENDING_SEARCHES = [
+  "African fashion", "Traditional crafts", "Local jewelry", "Organic foods", "Handmade items"
+]
+
+const CATEGORIES = [
+  { id: "fashion", name: "Fashion", icon: "👗", color: "bg-pink-100 text-pink-700" },
+  { id: "electronics", name: "Electronics", icon: "📱", color: "bg-blue-100 text-blue-700" },
+  { id: "jewelry", name: "Jewelry", icon: "💍", color: "bg-purple-100 text-purple-700" },
+  { id: "food", name: "Food", icon: "🍯", color: "bg-yellow-100 text-yellow-700" },
+  { id: "crafts", name: "Crafts", icon: "🎨", color: "bg-green-100 text-green-700" },
+  { id: "services", name: "Services", icon: "🛎️", color: "bg-orange-100 text-orange-700" }
+]
 
 export function MarketplaceMainHeader() {
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
   const router = useRouter()
+  const [isSearchFocused, setIsSearchFocused] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const searchRef = useRef<HTMLInputElement>(null)
 
   const handleLogout = () => {
     logout()
@@ -41,403 +86,492 @@ export function MarketplaceMainHeader() {
     }
   }
 
+  const handleSearch = (query: string) => {
+    if (query.trim()) {
+      router.push(`/marketplace?q=${encodeURIComponent(query)}`)
+      setShowSuggestions(false)
+      setIsSearchFocused(false)
+    }
+  }
+
+  const handleVoiceSearch = () => {
+    // Placeholder for voice search functionality
+    console.log("Voice search activated")
+  }
+
+  const handleCameraSearch = () => {
+    // Placeholder for visual search functionality
+    console.log("Camera search activated")
+  }
+
   return (
-    <motion.header 
-      className="sticky top-0 z-50 backdrop-blur-xl bg-gradient-to-r from-blue-600/95 via-blue-700/95 to-blue-800/95 border-b border-white/20 shadow-lg shadow-blue-900/20"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <motion.div 
-            className="flex items-center"
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <Link href="/" className="flex items-center space-x-3 group">
-              <motion.div 
-                className="relative"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.div
-                  className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30"
-                  animate={{
-                    boxShadow: [
-                      "0 4px 6px rgba(249, 115, 22, 0.3)",
-                      "0 8px 25px rgba(249, 115, 22, 0.4)",
-                      "0 4px 6px rgba(249, 115, 22, 0.3)"
-                    ]
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  <LinkIcon className="h-5 w-5 text-white" />
-                  <motion.div
-                    className="absolute -top-1 -right-1"
-                    animate={{ 
-                      rotate: [0, 360],
-                      scale: [1, 1.2, 1]
-                    }}
-                    transition={{ 
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <Sparkles className="h-3 w-3 text-yellow-300" />
-                  </motion.div>
-                </motion.div>
-                <motion.div
-                  className="absolute inset-0 bg-orange-500/30 rounded-xl blur-xl"
-                  animate={{
-                    opacity: [0.3, 0.6, 0.3],
-                    scale: [1, 1.2, 1]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-              </motion.div>
-              <span className="text-xl font-bold text-white">
-                Linka
-                <span className="bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent ml-1">
-                  Marketplace
-                </span>
-              </span>
+    <>
+      {/* Mobile Header */}
+      <motion.header 
+        className="lg:hidden sticky top-0 z-50 bg-white border-b shadow-sm"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Top Bar */}
+        <div className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600">
+          <div className="flex items-center justify-between text-white text-xs">
+            <div className="flex items-center gap-1">
+              <MapPin className="h-3 w-3" />
+              <span>Deliver to: Nairobi</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                <span>100% Secure</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Truck className="h-3 w-3" />
+                <span>Free shipping</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Header */}
+        <div className="px-4 py-3">
+          <div className="flex items-center gap-3">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                <LinkIcon className="h-4 w-4 text-white" />
+              </div>
+              <span className="font-bold text-gray-900">Linka</span>
             </Link>
-          </motion.div>
 
-          {/* Navigation */}
-          <motion.nav 
-            className="hidden md:flex items-center space-x-6"
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                href="/marketplace"
-                className="text-white hover:text-orange-300 font-semibold transition-all duration-300 relative group py-2 px-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 overflow-hidden"
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
+            {/* Search Bar */}
+            <div className="flex-1 relative">
+              <div className={`relative bg-gray-50 rounded-full transition-all duration-200 ${
+                isSearchFocused ? 'ring-2 ring-orange-500 bg-white' : ''
+              }`}>
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <Input
+                  ref={searchRef}
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => {
+                    setIsSearchFocused(true)
+                    setShowSuggestions(true)
+                  }}
+                  onBlur={() => {
+                    setTimeout(() => {
+                      setIsSearchFocused(false)
+                      setShowSuggestions(false)
+                    }, 200)
+                  }}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
+                  className="pl-10 pr-20 py-2 bg-transparent border-none focus:ring-0 text-sm"
                 />
-                <span className="relative flex items-center">
-                  <Search className="h-4 w-4 mr-2" />
-                  Browse Products
-                </span>
-                <motion.span 
-                  className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-orange-400 to-yellow-400 scale-x-100"
-                  initial={{ scaleX: 1 }}
-                  whileHover={{ scaleX: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
-            </motion.div>
-
-            {/* Services Dropdown Menu */}
-            {user && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button
-                      variant="ghost"
-                      className="text-white hover:text-orange-300 font-semibold transition-all duration-300 relative group py-2 px-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 overflow-hidden"
-                    >
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 opacity-0 group-hover:opacity-100"
-                        transition={{ duration: 0.3 }}
-                      />
-                      <span className="relative flex items-center">
-                        <Briefcase className="h-4 w-4 mr-2" />
-                        Services
-                        <ChevronDown className="h-3 w-3 ml-2" />
-                      </span>
-                    </Button>
-                  </motion.div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="start"
-                  className="w-80 bg-white/95 backdrop-blur-sm border-white/20 shadow-2xl shadow-blue-900/20 rounded-2xl p-4"
-                >
-                  <div className="space-y-1">
-                    <div className="px-3 py-2 mb-3">
-                      <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Service Categories</h3>
-                      <p className="text-xs text-slate-500 mt-1">Browse and book local services</p>
-                    </div>
-
-                    {/* Service Categories */}
-                    {[
-                      { icon: Stethoscope, name: "Health & Wellness", path: "/services/health-wellness", description: "Medical, fitness & wellness" },
-                      { icon: Home, name: "Home Services", path: "/industries/home-decor", description: "Cleaning, repairs & improvement" },
-                      { icon: Car, name: "Transport & Logistics", path: "/industries/transport", description: "Delivery & transportation" },
-                      { icon: Camera, name: "Entertainment", path: "/industries/entertainment", description: "Photography & events" },
-                      { icon: GraduationCap, name: "Education & Training", path: "/marketplace?category=education", description: "Tutoring & skill development" },
-                      { icon: Wrench, name: "Professional Services", path: "/marketplace?category=professional", description: "Legal, accounting & consulting" },
-                      { icon: Heart, name: "Beauty & Wellness", path: "/marketplace?category=beauty", description: "Salon, spa & beauty services" },
-                      { icon: Building, name: "Real Estate", path: "/marketplace?category=real-estate", description: "Property & rental services" }
-                    ].map((service) => (
-                      <DropdownMenuItem key={service.name} asChild>
-                        <Link
-                          href={service.path}
-                          className="flex items-center justify-between p-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 group cursor-pointer"
-                        >
-                          <div className="flex items-center space-x-3">
-                            <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center group-hover:from-blue-200 group-hover:to-indigo-200 transition-all duration-300">
-                              <service.icon className="h-5 w-5 text-blue-600" />
-                            </div>
-                            <div>
-                              <div className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors">{service.name}</div>
-                              <div className="text-xs text-slate-500 group-hover:text-blue-500 transition-colors">{service.description}</div>
-                            </div>
-                          </div>
-                          <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-
-                    <DropdownMenuSeparator className="my-3" />
-
-                    {/* Quick Actions */}
-                    <div className="grid grid-cols-2 gap-2">
-                      <DropdownMenuItem asChild>
-                        <Link
-                          href="/marketplace?category=services"
-                          className="flex items-center justify-center p-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white transition-all duration-300 group"
-                        >
-                          <Search className="h-4 w-4 mr-2" />
-                          Browse All
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link
-                          href="/become-retailer?type=service"
-                          className="flex items-center justify-center p-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white transition-all duration-300 group"
-                        >
-                          <Shield className="h-4 w-4 mr-2" />
-                          List Service
-                        </Link>
-                      </DropdownMenuItem>
-                    </div>
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
-          </motion.nav>
-
-          <motion.div 
-            className="flex items-center space-x-3"
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {/* Shopping Cart */}
-            {user && (
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link href="/cart">
+                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
                   <Button
-                    variant="ghost"
                     size="sm"
-                    className="text-white hover:text-orange-300 hover:bg-white/10 relative group transition-all duration-300"
+                    variant="ghost"
+                    onClick={handleCameraSearch}
+                    className="p-1 h-6 w-6 hover:bg-orange-100"
                   >
-                    <motion.div
-                      animate={totalItems > 0 ? { 
-                        rotate: [0, -10, 10, -10, 0],
-                        scale: [1, 1.1, 1] 
-                      } : {}}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <ShoppingCart className="h-5 w-5 md:mr-2" />
-                    </motion.div>
-                    <span className="hidden md:inline">Cart</span>
-                    <AnimatePresence>
-                      {totalItems > 0 && (
-                        <motion.span
-                          className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs rounded-full flex items-center justify-center font-bold shadow-lg"
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          exit={{ scale: 0, opacity: 0 }}
-                          whileHover={{ scale: 1.2 }}
-                        >
-                          <motion.span
-                            key={totalItems}
-                            initial={{ y: -10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            {totalItems}
-                          </motion.span>
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
+                    <Camera className="h-3 w-3 text-orange-600" />
                   </Button>
-                </Link>
-              </motion.div>
-            )}
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={handleVoiceSearch}
+                    className="p-1 h-6 w-6 hover:bg-orange-100"
+                  >
+                    <Mic className="h-3 w-3 text-orange-600" />
+                  </Button>
+                </div>
+              </div>
 
-            {/* Mobile Navigation */}
-            <div className="md:hidden">
-              <MobileNavigation />
+              {/* Search Suggestions */}
+              <AnimatePresence>
+                {showSuggestions && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 right-0 bg-white border rounded-lg shadow-lg mt-1 z-50"
+                  >
+                    <div className="p-3">
+                      <div className="text-xs text-gray-500 mb-2">Trending searches</div>
+                      <div className="space-y-2">
+                        {TRENDING_SEARCHES.map((search, i) => (
+                          <button
+                            key={i}
+                            onClick={() => handleSearch(search)}
+                            className="flex items-center gap-2 w-full text-left p-2 hover:bg-gray-50 rounded text-sm"
+                          >
+                            <Search className="h-3 w-3 text-gray-400" />
+                            <span>{search}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            {/* User Authentication */}
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="hidden md:flex text-white hover:text-orange-300 hover:bg-white/10 gap-2 transition-all duration-300"
-                    >
-                      <motion.div 
-                        className="w-7 h-7 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg"
-                        animate={{
-                          boxShadow: [
-                            "0 2px 4px rgba(249, 115, 22, 0.3)",
-                            "0 4px 12px rgba(249, 115, 22, 0.4)",
-                            "0 2px 4px rgba(249, 115, 22, 0.3)"
-                          ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <User className="h-3 w-3 text-white" />
-                      </motion.div>
-                      <span className="hidden lg:inline">{user.name.split(' ')[0]}</span>
-                      <ChevronDown className="h-3 w-3" />
-                    </Button>
-                  </motion.div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-white/95 backdrop-blur-sm border-white/20 shadow-xl">
-                  <DropdownMenuItem onClick={() => router.push(getUserDashboardLink())}>
-                    {user.role === 'retailer' ? (
-                      <>
-                        <BarChart3 className="mr-2 h-4 w-4 text-blue-600" />
-                        Dashboard
-                      </>
-                    ) : user.role === 'admin' ? (
-                      <>
-                        <Settings className="mr-2 h-4 w-4 text-blue-600" />
-                        Admin Panel
-                      </>
-                    ) : (
-                      <>
-                        <User className="mr-2 h-4 w-4 text-blue-600" />
-                        My Dashboard
-                      </>
-                    )}
-                  </DropdownMenuItem>
-                  {user.role === 'customer' && (
-                    <>
-                      <DropdownMenuItem onClick={() => router.push('/shop')}>
-                        <ShoppingCart className="mr-2 h-4 w-4 text-orange-600" />
-                        Shop Products
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => router.push('/orders')}>
-                        <Package className="mr-2 h-4 w-4 text-blue-600" />
-                        My Orders
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => router.push('/wishlist')}>
-                        <User className="mr-2 h-4 w-4 text-orange-600" />
-                        Wishlist
-                      </DropdownMenuItem>
-                    </>
-                  )}
-                  <DropdownMenuItem onClick={() => router.push('/settings')}>
-                    <Settings className="mr-2 h-4 w-4 text-gray-600" />
-                    Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4 text-red-600" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <div className="flex items-center space-x-3">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link href="/login">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="hidden md:flex text-white hover:text-orange-300 hover:bg-white/10 transition-all duration-300"
-                    >
-                      <User className="h-4 w-4 mr-2" />
-                      Login
-                    </Button>
-                  </Link>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link href="/signup">
-                    <Button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300 font-semibold relative overflow-hidden">
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 hover:opacity-100"
-                        transition={{ duration: 0.3 }}
-                      />
-                      <span className="relative">Sign Up</span>
-                    </Button>
-                  </Link>
-                </motion.div>
-              </div>
-            )}
-          </motion.div>
+            {/* Mobile Menu Toggle */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(true)}
+              className="p-2"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
-      </div>
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-400/20 to-yellow-400/20 rounded-full blur-2xl"
-          animate={{
-            x: [0, 20, 0],
-            y: [0, -10, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-1/4 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-purple-500/20 rounded-full blur-2xl"
-          animate={{
-            rotate: [0, 180, 360],
-            scale: [1, 0.8, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      </div>
+        {/* Category Tabs */}
+        <div className="px-4 pb-2">
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+            {CATEGORIES.map((category) => (
+              <Link
+                key={category.id}
+                href={`/marketplace?category=${category.id}`}
+                className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs whitespace-nowrap ${category.color}`}
+              >
+                <span>{category.icon}</span>
+                <span>{category.name}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </motion.header>
 
+      {/* Desktop Header */}
+      <motion.header 
+        className="hidden lg:block sticky top-0 z-50 bg-white border-b shadow-sm"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Top Bar */}
+        <div className="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600">
+          <div className="max-w-7xl mx-auto flex items-center justify-between text-white text-sm">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" />
+                <span>Deliver to: Nairobi, Kenya</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Globe className="h-4 w-4" />
+                <span>English</span>
+                <ChevronDown className="h-3 w-3" />
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4" />
+                <span>100% Secure Payments</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Truck className="h-4 w-4" />
+                <span>Free shipping on orders over K500</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                <span>24/7 Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    </motion.header>
+        {/* Main Header */}
+        <div className="px-6 py-4">
+          <div className="max-w-7xl mx-auto flex items-center gap-6">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+                <LinkIcon className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <span className="text-xl font-bold text-gray-900">Linka</span>
+                <div className="text-xs text-gray-500">Marketplace</div>
+              </div>
+            </Link>
+
+            {/* Search Bar */}
+            <div className="flex-1 max-w-2xl relative">
+              <div className={`relative bg-gray-50 rounded-full transition-all duration-200 ${
+                isSearchFocused ? 'ring-2 ring-orange-500 bg-white shadow-lg' : ''
+              }`}>
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <Input
+                  ref={searchRef}
+                  placeholder="Search for products, brands, and more..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => {
+                    setIsSearchFocused(true)
+                    setShowSuggestions(true)
+                  }}
+                  onBlur={() => {
+                    setTimeout(() => {
+                      setIsSearchFocused(false)
+                      setShowSuggestions(false)
+                    }, 200)
+                  }}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
+                  className="pl-12 pr-24 py-3 bg-transparent border-none focus:ring-0 text-base"
+                />
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={handleCameraSearch}
+                    className="p-2 hover:bg-orange-100 rounded-full"
+                  >
+                    <Camera className="h-4 w-4 text-orange-600" />
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={handleVoiceSearch}
+                    className="p-2 hover:bg-orange-100 rounded-full"
+                  >
+                    <Mic className="h-4 w-4 text-orange-600" />
+                  </Button>
+                  <Button
+                    onClick={() => handleSearch(searchQuery)}
+                    className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full"
+                  >
+                    Search
+                  </Button>
+                </div>
+              </div>
+
+              {/* Desktop Search Suggestions */}
+              <AnimatePresence>
+                {showSuggestions && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 right-0 bg-white border rounded-xl shadow-xl mt-2 z-50"
+                  >
+                    <div className="p-4">
+                      <div className="text-sm text-gray-500 mb-3">Trending searches</div>
+                      <div className="grid grid-cols-2 gap-2">
+                        {TRENDING_SEARCHES.map((search, i) => (
+                          <button
+                            key={i}
+                            onClick={() => handleSearch(search)}
+                            className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg text-left"
+                          >
+                            <Search className="h-4 w-4 text-gray-400" />
+                            <span>{search}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Right Side Actions */}
+            <div className="flex items-center gap-4">
+              {/* Notifications */}
+              {user && (
+                <Button variant="ghost" size="sm" className="relative">
+                  <Bell className="h-5 w-5 text-gray-600" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                </Button>
+              )}
+
+              {/* Wishlist */}
+              {user && (
+                <Link href="/wishlist">
+                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                    <Heart className="h-5 w-5 text-gray-600" />
+                    <span className="hidden xl:inline text-gray-700">Wishlist</span>
+                  </Button>
+                </Link>
+              )}
+
+              {/* Cart */}
+              {user && (
+                <Link href="/cart">
+                  <Button variant="ghost" size="sm" className="relative flex items-center gap-2">
+                    <ShoppingCart className="h-5 w-5 text-gray-600" />
+                    <span className="hidden xl:inline text-gray-700">Cart</span>
+                    {totalItems > 0 && (
+                      <Badge className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs min-w-[18px] h-[18px] flex items-center justify-center rounded-full">
+                        {totalItems}
+                      </Badge>
+                    )}
+                  </Button>
+                </Link>
+              )}
+
+              {/* User Menu */}
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                        <User className="h-4 w-4 text-white" />
+                      </div>
+                      <div className="hidden xl:block text-left">
+                        <div className="text-sm font-medium">{user.name}</div>
+                        <div className="text-xs text-gray-500">{user.role}</div>
+                      </div>
+                      <ChevronDown className="h-4 w-4 text-gray-600" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem onClick={() => router.push(getUserDashboardLink())}>
+                      <BarChart3 className="mr-2 h-4 w-4" />
+                      Dashboard
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/orders')}>
+                      <Package className="mr-2 h-4 w-4" />
+                      My Orders
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/settings')}>
+                      <Settings className="mr-2 h-4 w-4" />
+                      Settings
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout}>
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <Link href="/login">
+                    <Button variant="ghost">Login</Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+                      Sign Up
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Category Navigation */}
+        <div className="px-6 py-3 bg-gray-50 border-t">
+          <div className="max-w-7xl mx-auto flex items-center gap-6 overflow-x-auto">
+            {CATEGORIES.map((category) => (
+              <Link
+                key={category.id}
+                href={`/marketplace?category=${category.id}`}
+                className="flex items-center gap-2 px-4 py-2 hover:bg-white rounded-lg transition-colors whitespace-nowrap"
+              >
+                <span className="text-lg">{category.icon}</span>
+                <span className="font-medium text-gray-700">{category.name}</span>
+              </Link>
+            ))}
+            <Link
+              href="/marketplace"
+              className="flex items-center gap-2 px-4 py-2 hover:bg-white rounded-lg transition-colors text-orange-600 font-medium"
+            >
+              <Filter className="h-4 w-4" />
+              All Categories
+            </Link>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-50 lg:hidden"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              className="absolute right-0 top-0 h-full w-80 bg-white shadow-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-4 border-b flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {user ? (
+                    <>
+                      <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                        <User className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-semibold">{user.name}</div>
+                        <div className="text-sm text-gray-500">{user.role}</div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-lg font-semibold">Menu</div>
+                  )}
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </div>
+
+              <div className="p-4 space-y-4">
+                {user ? (
+                  <>
+                    <Link href={getUserDashboardLink()} className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                      <BarChart3 className="h-5 w-5 text-gray-600" />
+                      <span>Dashboard</span>
+                    </Link>
+                    <Link href="/orders" className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                      <Package className="h-5 w-5 text-gray-600" />
+                      <span>My Orders</span>
+                    </Link>
+                    <Link href="/wishlist" className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                      <Heart className="h-5 w-5 text-gray-600" />
+                      <span>Wishlist</span>
+                    </Link>
+                    <Link href="/cart" className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                      <ShoppingCart className="h-5 w-5 text-gray-600" />
+                      <span>Cart {totalItems > 0 && `(${totalItems})`}</span>
+                    </Link>
+                    <Link href="/settings" className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg">
+                      <Settings className="h-5 w-5 text-gray-600" />
+                      <span>Settings</span>
+                    </Link>
+                    <button onClick={handleLogout} className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg w-full text-left">
+                      <LogOut className="h-5 w-5 text-red-600" />
+                      <span className="text-red-600">Logout</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/login" className="block">
+                      <Button variant="outline" className="w-full">Login</Button>
+                    </Link>
+                    <Link href="/signup" className="block">
+                      <Button className="w-full bg-orange-500 hover:bg-orange-600">Sign Up</Button>
+                    </Link>
+                  </>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
