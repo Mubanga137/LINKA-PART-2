@@ -272,7 +272,7 @@ export function GamingEsports() {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+    <section id="gaming-section" className="py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Hero Section */}
         <div className="text-center mb-16 relative">
