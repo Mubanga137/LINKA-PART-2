@@ -240,6 +240,15 @@ export function EntertainmentCategories() {
                       <Button
                         className={`w-full bg-gradient-to-r ${currentCategory.color} hover:shadow-lg transition-all group-hover:scale-105`}
                         size="sm"
+                        onClick={() => {
+                          if (currentCategory.id === "gaming") {
+                            // Scroll to gaming section on the same page
+                            const gamingSection = document.querySelector('#gaming-section');
+                            if (gamingSection) {
+                              gamingSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                          }
+                        }}
                       >
                         {currentCategory.id === "talent-booking" ? (
                           <>
@@ -251,6 +260,11 @@ export function EntertainmentCategories() {
                             <Download className="mr-2 h-4 w-4" />
                             Get Access
                           </>
+                        ) : currentCategory.id === "gaming" ? (
+                          <>
+                            <Gamepad2 className="mr-2 h-4 w-4" />
+                            Join Tournament
+                          </>
                         ) : (
                           <>
                             <Play className="mr-2 h-4 w-4" />
@@ -259,8 +273,17 @@ export function EntertainmentCategories() {
                         )}
                       </Button>
 
-                      <Button variant="outline" size="sm" className="w-full hover:bg-slate-50 bg-transparent">
-                        Preview
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full hover:bg-slate-50 bg-transparent"
+                        onClick={() => {
+                          if (currentCategory.id === "gaming") {
+                            window.open('/entertainment/gaming', '_blank');
+                          }
+                        }}
+                      >
+                        {currentCategory.id === "gaming" ? "Gaming Hub" : "Preview"}
                       </Button>
                     </div>
 

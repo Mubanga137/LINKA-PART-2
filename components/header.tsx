@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
-import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3 } from "lucide-react"
+import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Heart } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context"
 
@@ -22,6 +22,20 @@ export function Header() {
   const { totalItems } = useCart()
   const router = useRouter()
   const pathname = usePathname()
+
+  // For wishlist functionality - only use on shopping pages
+  let favoritesCount = 0
+  if (typeof window !== 'undefined') {
+    try {
+      // Check if we're in marketplace context
+      const storedFavorites = localStorage.getItem('marketplace-favorites')
+      if (storedFavorites) {
+        favoritesCount = JSON.parse(storedFavorites).length
+      }
+    } catch {
+      // No favorites stored
+    }
+  }
 
   // Show cart only on shopping-related pages
   const isShoppingPage = pathname?.includes('/marketplace') ||
@@ -125,23 +139,40 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
-            {/* Shopping Cart - Only show on shopping pages */}
+            {/* Shopping Cart & Wishlist - Only show on shopping pages */}
             {isShoppingPage && (
-              <Link href="/cart">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
-                >
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  Cart
-                  {totalItems > 0 && (
-                    <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
-                      {totalItems}
-                    </Badge>
-                  )}
-                </Button>
-              </Link>
+              <>
+                <Link href="/wishlist">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+                  >
+                    <Heart className="h-4 w-4 mr-2" />
+                    Wishlist
+                    {favoritesCount > 0 && (
+                      <Badge className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                        {favoritesCount}
+                      </Badge>
+                    )}
+                  </Button>
+                </Link>
+                <Link href="/cart">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+                  >
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Cart
+                    {totalItems > 0 && (
+                      <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                        {totalItems}
+                      </Badge>
+                    )}
+                  </Button>
+                </Link>
+              </>
             )}
 
             {/* Mobile Navigation */}

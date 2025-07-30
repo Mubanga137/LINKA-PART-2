@@ -8,6 +8,10 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: ['images.unsplash.com'],
+  },
+  sassOptions: {
+    includePaths: ['./styles']
   },
   allowedDevOrigins: [
     '*.projects.builder.codes',
