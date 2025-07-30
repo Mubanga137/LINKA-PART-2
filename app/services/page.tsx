@@ -7,101 +7,153 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { 
-  DollarSign, 
   Heart, 
   Stethoscope,
-  CreditCard,
-  Shield,
-  TrendingUp,
+  MapPin,
+  Truck,
+  Scissors,
+  Music,
+  Camera,
+  Gamepad2,
+  Palette,
+  Coffee,
   Users,
   Star,
   ArrowRight,
-  Building,
-  Smartphone,
-  MapPin,
+  ChevronRight,
   Clock,
   Award,
-  ChevronRight
+  Sparkles,
+  Home,
+  DollarSign
 } from "lucide-react"
 
-const services = [
+const platformServices = [
   {
     id: 1,
-    name: "Financial Services",
-    icon: DollarSign,
-    description: "Banking, investments, insurance, and financial advisory services",
-    providers: 95,
-    rating: 4.8,
-    href: "/services/financial-services",
-    gradient: "from-emerald-500 to-blue-600",
-    bgGradient: "from-emerald-50 to-blue-50",
-    features: ["Banking", "Investments", "Insurance", "Financial Planning"],
-    stats: { providers: "95+", volume: "ZMW 2.5M+" }
-  },
-  {
-    id: 2,
     name: "Health & Wellness",
     icon: Heart,
-    description: "Healthcare services, medical consultations, and wellness programs",
+    description: "Medical consultations, fitness training, yoga classes, and wellness programs",
     providers: 120,
     rating: 4.9,
     href: "/services/health-wellness",
     gradient: "from-red-500 to-pink-600",
     bgGradient: "from-red-50 to-pink-50",
     features: ["24/7 Emergency", "Telemedicine", "Wellness Programs", "Home Visits"],
-    stats: { providers: "120+", appointments: "500+/month" }
+    stats: { providers: "120+", appointments: "500+/month" },
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
+  },
+  {
+    id: 2,
+    name: "Courier & Delivery",
+    icon: Truck,
+    description: "Fast and reliable delivery services for packages, documents, and goods",
+    providers: 85,
+    rating: 4.7,
+    href: "/services/courier-delivery",
+    gradient: "from-blue-500 to-indigo-600",
+    bgGradient: "from-blue-50 to-indigo-50",
+    features: ["Same-day Delivery", "Package Tracking", "Nationwide Coverage", "Express Service"],
+    stats: { drivers: "85+", deliveries: "200+/day" },
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop"
   },
   {
     id: 3,
+    name: "Fashion & Tailoring",
+    icon: Scissors,
+    description: "Custom clothing, alterations, fashion design, and tailoring services",
+    providers: 65,
+    rating: 4.8,
+    href: "/services/fashion-tailoring",
+    gradient: "from-purple-500 to-pink-600",
+    bgGradient: "from-purple-50 to-pink-50",
+    features: ["Custom Designs", "Quick Alterations", "Traditional Wear", "Modern Fashion"],
+    stats: { tailors: "65+", orders: "150+/month" },
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
+  },
+  {
+    id: 4,
+    name: "Short-term Rentals",
+    icon: MapPin,
+    description: "Accommodation and short-term rental properties for travelers and visitors",
+    providers: 45,
+    rating: 4.6,
+    href: "/services/short-term-rentals",
+    gradient: "from-orange-500 to-red-600",
+    bgGradient: "from-orange-50 to-red-50",
+    features: ["Daily Rentals", "Weekly Stays", "Furnished Properties", "24/7 Support"],
+    stats: { properties: "45+", bookings: "80+/month" },
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop"
+  },
+  {
+    id: 5,
+    name: "Entertainment & Events",
+    icon: Music,
+    description: "Event planning, live entertainment, DJ services, and party equipment",
+    providers: 55,
+    rating: 4.7,
+    href: "/services/entertainment-events",
+    gradient: "from-pink-500 to-purple-600",
+    bgGradient: "from-pink-50 to-purple-50",
+    features: ["Event Planning", "Live Music", "DJ Services", "Equipment Rental"],
+    stats: { entertainers: "55+", events: "100+/month" },
+    image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400&h=300&fit=crop"
+  },
+  {
+    id: 6,
+    name: "Photography & Video",
+    icon: Camera,
+    description: "Professional photography, videography, and content creation services",
+    providers: 40,
+    rating: 4.8,
+    href: "/services/photography-video",
+    gradient: "from-teal-500 to-cyan-600",
+    bgGradient: "from-teal-50 to-cyan-50",
+    features: ["Event Photography", "Product Shoots", "Video Production", "Editing Services"],
+    stats: { photographers: "40+", shoots: "75+/month" },
+    image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=300&fit=crop"
+  },
+  {
+    id: 7,
     name: "General Health Services",
     icon: Stethoscope,
-    description: "General medical consultations and healthcare support",
-    providers: 85,
+    description: "General medical consultations, health checkups, and medical advice",
+    providers: 75,
     rating: 4.7,
     href: "/services/general-health",
     gradient: "from-blue-500 to-indigo-600",
     bgGradient: "from-blue-50 to-indigo-50",
     features: ["General Consultations", "Health Checkups", "Medical Advice", "Prescription Services"],
-    stats: { doctors: "85+", consultations: "300+/month" }
+    stats: { doctors: "75+", consultations: "300+/month" },
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop"
   },
   {
-    id: 4,
+    id: 8,
     name: "Fitness & Yoga",
     icon: Heart,
-    description: "Fitness training, yoga classes, and wellness coaching",
-    providers: 45,
+    description: "Personal training, yoga classes, group fitness, and wellness coaching",
+    providers: 50,
     rating: 4.6,
     href: "/services/fitness-yoga",
     gradient: "from-green-500 to-teal-600",
     bgGradient: "from-green-50 to-teal-50",
     features: ["Personal Training", "Yoga Classes", "Group Sessions", "Wellness Coaching"],
-    stats: { trainers: "45+", sessions: "200+/month" }
+    stats: { trainers: "50+", sessions: "200+/month" },
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
   },
   {
-    id: 5,
-    name: "Pharmacies",
-    icon: Building,
-    description: "Prescription medications and pharmaceutical services",
+    id: 9,
+    name: "Home Services",
+    icon: Home,
+    description: "Cleaning, maintenance, repairs, and home improvement services",
     providers: 60,
     rating: 4.5,
-    href: "/services/pharmacies",
-    gradient: "from-purple-500 to-violet-600",
-    bgGradient: "from-purple-50 to-violet-50",
-    features: ["Prescription Delivery", "Medication Consultation", "Health Products", "Emergency Supply"],
-    stats: { pharmacies: "60+", deliveries: "150+/day" }
-  },
-  {
-    id: 6,
-    name: "Short-term Rentals",
-    icon: MapPin,
-    description: "Accommodation and short-term rental services",
-    providers: 35,
-    rating: 4.4,
-    href: "/services/short-term-rentals",
-    gradient: "from-orange-500 to-red-600",
-    bgGradient: "from-orange-50 to-red-50",
-    features: ["Daily Rentals", "Weekly Stays", "Furnished Properties", "24/7 Support"],
-    stats: { properties: "35+", bookings: "80+/month" }
+    href: "/services/home-services",
+    gradient: "from-indigo-500 to-blue-600",
+    bgGradient: "from-indigo-50 to-blue-50",
+    features: ["House Cleaning", "Maintenance", "Repairs", "Home Improvement"],
+    stats: { professionals: "60+", jobs: "120+/month" },
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=300&fit=crop"
   }
 ]
 
@@ -113,189 +165,170 @@ export default function ServicesPage() {
       <main className="py-8">
         {/* Hero Section */}
         <section className="py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-emerald-500/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"></div>
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
             <div className="text-center mb-12">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Heart className="h-10 w-10 text-white" />
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Sparkles className="h-10 w-10 text-white" />
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Professional Services
                 </span>
               </h1>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Connect with trusted service providers across finance, healthcare, and lifestyle services in Zambia
+              <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+                Connect with skilled service providers across Zambia for all your personal and business needs. 
+                From health and wellness to entertainment, courier services to home maintenance – find trusted professionals ready to serve you.
               </p>
             </div>
+
+            {/* Overview Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-2xl font-bold text-blue-600">500+</div>
+                <div className="text-sm text-slate-600">Service Providers</div>
+              </div>
+              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-2xl font-bold text-purple-600">9</div>
+                <div className="text-sm text-slate-600">Service Categories</div>
+              </div>
+              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-2xl font-bold text-green-600">1,500+</div>
+                <div className="text-sm text-slate-600">Monthly Bookings</div>
+              </div>
+              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-2xl font-bold text-orange-600">4.7</div>
+                <div className="text-sm text-slate-600">Average Rating</div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Featured Service - Financial Services */}
+        {/* General Overview */}
         <section className="py-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <Badge className="bg-emerald-100 text-emerald-700 mb-4">Featured Service</Badge>
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Financial Services</h2>
-              <p className="text-slate-600">Secure your financial future with comprehensive banking and investment services</p>
-            </div>
-            
-            <Link href="/services/financial-services">
-              <Card className="group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-gradient-to-br from-emerald-50 to-blue-50 border-emerald-200">
-                <CardContent className="p-8">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <div>
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-2xl flex items-center justify-center">
-                          <DollarSign className="h-8 w-8 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-2xl font-bold text-slate-900 mb-2">Complete Financial Solutions</h3>
-                          <div className="flex items-center">
-                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className="ml-1 text-sm font-bold">4.8</span>
-                            <span className="ml-2 text-sm text-slate-500">(1,250+ reviews)</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <p className="text-slate-600 mb-6 leading-relaxed">
-                        Access a complete range of financial services including banking, investments, insurance, 
-                        and professional financial advisory. All providers are licensed and regulated by Zambian authorities.
-                      </p>
-                      
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="text-center p-3 bg-white/80 rounded-lg">
-                          <div className="font-bold text-emerald-600">95+</div>
-                          <div className="text-xs text-slate-500">Licensed Providers</div>
-                        </div>
-                        <div className="text-center p-3 bg-white/80 rounded-lg">
-                          <div className="font-bold text-blue-600">ZMW 2.5M+</div>
-                          <div className="text-xs text-slate-500">Monthly Volume</div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center text-emerald-600 group-hover:text-emerald-700">
-                        <span className="font-medium">Explore Financial Services</span>
-                        <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-4">
-                        <div className="p-4 bg-white/80 rounded-xl border border-emerald-100">
-                          <Building className="h-6 w-6 text-emerald-600 mb-2" />
-                          <h4 className="font-medium text-slate-900 mb-1">Banking</h4>
-                          <p className="text-sm text-slate-600">Savings, loans, mobile banking</p>
-                        </div>
-                        <div className="p-4 bg-white/80 rounded-xl border border-blue-100">
-                          <TrendingUp className="h-6 w-6 text-blue-600 mb-2" />
-                          <h4 className="font-medium text-slate-900 mb-1">Investments</h4>
-                          <p className="text-sm text-slate-600">Stocks, bonds, unit trusts</p>
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <div className="p-4 bg-white/80 rounded-xl border border-purple-100">
-                          <Shield className="h-6 w-6 text-purple-600 mb-2" />
-                          <h4 className="font-medium text-slate-900 mb-1">Insurance</h4>
-                          <p className="text-sm text-slate-600">Life, motor, health coverage</p>
-                        </div>
-                        <div className="p-4 bg-white/80 rounded-xl border border-indigo-100">
-                          <Smartphone className="h-6 w-6 text-indigo-600 mb-2" />
-                          <h4 className="font-medium text-slate-900 mb-1">Mobile Money</h4>
-                          <p className="text-sm text-slate-600">Digital payments, transfers</p>
-                        </div>
-                      </div>
-                    </div>
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 mb-12 border border-blue-100">
+              <h2 className="text-2xl font-bold text-slate-900 mb-4 text-center">How Our Services Work</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Users className="h-6 w-6 text-white" />
                   </div>
-                </CardContent>
-              </Card>
-            </Link>
+                  <h3 className="font-semibold text-slate-900 mb-2">Browse & Choose</h3>
+                  <p className="text-slate-600 text-sm">Explore service categories and find the right professional for your needs</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Clock className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-slate-900 mb-2">Book & Schedule</h3>
+                  <p className="text-slate-600 text-sm">Schedule appointments at your convenience with verified providers</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Award className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-slate-900 mb-2">Get Quality Service</h3>
+                  <p className="text-slate-600 text-sm">Receive professional service from rated and reviewed providers</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* All Services Grid */}
+        {/* Service Categories Grid */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">All Services</h2>
-              <p className="text-slate-600">Browse our complete range of professional services</p>
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">Service Categories</h2>
+              <p className="text-slate-600 max-w-2xl mx-auto">
+                Discover professional services across various categories, all delivered by trusted and verified providers
+              </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((service, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {platformServices.map((service, index) => (
                 <Link href={service.href} key={service.id}>
                   <Card 
-                    className="group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-white/20"
+                    className="group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 bg-white/90 backdrop-blur-sm border-white/20 overflow-hidden"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <CardContent className="p-6">
-                      {/* Header */}
-                      <div className={`p-6 bg-gradient-to-br ${service.bgGradient} rounded-xl mb-4 relative overflow-hidden`}>
-                        <div className="relative z-10">
-                          <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mb-3`}>
+                    <CardContent className="p-0">
+                      {/* Image Header */}
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={service.image}
+                          alt={service.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                        <div className={`absolute inset-0 bg-gradient-to-t ${service.bgGradient} opacity-80`}></div>
+                        <div className="absolute top-4 left-4">
+                          <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
                             <service.icon className="h-6 w-6 text-white" />
                           </div>
-                          <h3 className="font-bold text-lg text-slate-900 mb-1">{service.name}</h3>
-                          <div className="flex items-center text-sm">
-                            <span className="text-slate-600">{service.providers} providers</span>
-                            <div className="flex items-center ml-3">
-                              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                              <span className="ml-1 text-sm font-bold">{service.rating}</span>
+                        </div>
+                        <div className="absolute top-4 right-4">
+                          <Badge className="bg-white/90 text-slate-700">
+                            <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
+                            {service.rating}
+                          </Badge>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-6">
+                        <h3 className="font-bold text-xl text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">
+                          {service.name}
+                        </h3>
+                        
+                        <p className="text-slate-600 mb-4 leading-relaxed">{service.description}</p>
+
+                        {/* Stats */}
+                        <div className="grid grid-cols-2 gap-3 mb-4">
+                          <div className="text-center p-2 bg-slate-50 rounded-lg">
+                            <div className="text-sm font-bold text-slate-900">
+                              {Object.values(service.stats)[0]}
+                            </div>
+                            <div className="text-xs text-slate-500">
+                              {Object.keys(service.stats)[0]}
+                            </div>
+                          </div>
+                          <div className="text-center p-2 bg-slate-50 rounded-lg">
+                            <div className="text-sm font-bold text-slate-900">
+                              {Object.values(service.stats)[1]}
+                            </div>
+                            <div className="text-xs text-slate-500">
+                              {Object.keys(service.stats)[1]}
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Description */}
-                      <p className="text-slate-600 mb-4 leading-relaxed">{service.description}</p>
-
-                      {/* Features */}
-                      <div className="mb-4">
-                        <p className="text-xs text-slate-500 mb-2 font-medium">Key Features:</p>
-                        <div className="flex flex-wrap gap-1">
-                          {service.features.slice(0, 2).map((feature, idx) => (
-                            <Badge key={idx} variant="secondary" className="text-xs">
-                              {feature}
-                            </Badge>
-                          ))}
-                          {service.features.length > 2 && (
-                            <Badge variant="secondary" className="text-xs">
-                              +{service.features.length - 2} more
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Stats */}
-                      <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="text-center p-2 bg-slate-50 rounded-lg">
-                          <div className="text-sm font-bold text-slate-900">
-                            {Object.values(service.stats)[0]}
-                          </div>
-                          <div className="text-xs text-slate-500">
-                            {Object.keys(service.stats)[0]}
+                        {/* Features */}
+                        <div className="mb-4">
+                          <p className="text-xs text-slate-500 mb-2 font-medium">Popular Services:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {service.features.slice(0, 2).map((feature, idx) => (
+                              <Badge key={idx} variant="secondary" className="text-xs">
+                                {feature}
+                              </Badge>
+                            ))}
+                            {service.features.length > 2 && (
+                              <Badge variant="secondary" className="text-xs">
+                                +{service.features.length - 2} more
+                              </Badge>
+                            )}
                           </div>
                         </div>
-                        <div className="text-center p-2 bg-slate-50 rounded-lg">
-                          <div className="text-sm font-bold text-slate-900">
-                            {Object.values(service.stats)[1]}
-                          </div>
-                          <div className="text-xs text-slate-500">
-                            {Object.keys(service.stats)[1]}
-                          </div>
-                        </div>
-                      </div>
 
-                      {/* Action */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center text-blue-600">
-                          <Clock className="h-4 w-4 mr-1" />
-                          <span className="text-sm">Available 24/7</span>
-                        </div>
-                        <div className="flex items-center text-blue-600 group-hover:text-blue-700">
-                          <span className="text-sm font-medium">Explore</span>
-                          <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                        {/* Action */}
+                        <div className="flex items-center justify-between">
+                          <div className="text-sm text-slate-500">
+                            {service.providers} providers
+                          </div>
+                          <div className="flex items-center text-blue-600 group-hover:text-blue-700">
+                            <span className="text-sm font-medium">View Services</span>
+                            <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -306,18 +339,41 @@ export default function ServicesPage() {
           </div>
         </section>
 
+        {/* Financial Services CTA */}
+        <section className="py-16 bg-gradient-to-r from-emerald-100 to-blue-100">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-white/20 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <DollarSign className="h-8 w-8 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-4">Looking for Financial Products?</h2>
+              <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
+                Need banking, loans, insurance, or investment services? Visit our dedicated Financial Services section 
+                for comprehensive financial solutions from licensed providers.
+              </p>
+              <Link href="/financial-services">
+                <Button className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white px-8 py-3">
+                  <DollarSign className="h-5 w-5 mr-2" />
+                  Go to Financial Services
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-blue-100 to-emerald-100">
+        <section className="py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Ready to Get Started?</h2>
             <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
               Join thousands of satisfied customers who trust our platform for their service needs
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/financial-services">
-                <Button className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white px-8">
-                  <DollarSign className="h-5 w-5 mr-2" />
-                  Start with Financial Services
+              <Link href="/services/health-wellness">
+                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8">
+                  <Heart className="h-5 w-5 mr-2" />
+                  Book Health Services
                 </Button>
               </Link>
               <Link href="/contact">
