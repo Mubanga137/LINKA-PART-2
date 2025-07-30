@@ -45,19 +45,12 @@ export function Wishlist({ children, products }: WishlistProps) {
   };
 
   const handleShare = async (product: Product) => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: product.name,
-          text: product.description,
-          url: `/products/${product.id}`,
-        });
-      } catch (err) {
-        navigator.clipboard?.writeText(window.location.origin + `/products/${product.id}`);
-      }
-    } else {
-      navigator.clipboard?.writeText(window.location.origin + `/products/${product.id}`);
-    }
+    const result = await safeShare({
+      title: product.name,
+      text: product.description,
+      url: window.location.origin + `/products/${product.id}`,
+    });
+    showShareFeedback(result);
   };
 
   const WishlistTrigger = children || (
