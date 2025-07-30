@@ -232,6 +232,29 @@ export default function FinancialServicesPage() {
   const [showChat, setShowChat] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [showLoanCalculator, setShowLoanCalculator] = useState(false)
+  const [showInvestmentTracker, setShowInvestmentTracker] = useState(false)
+  const [showSavingsGoal, setShowSavingsGoal] = useState(false)
+  const [showBudgetPlanner, setShowBudgetPlanner] = useState(false)
+
+  // Loan Calculator State
+  const [loanAmount, setLoanAmount] = useState("50000")
+  const [interestRate, setInterestRate] = useState("15")
+  const [loanTerm, setLoanTerm] = useState("5")
+  const [monthlyPayment, setMonthlyPayment] = useState(0)
+  const [totalInterest, setTotalInterest] = useState(0)
+
+  useEffect(() => {
+    const principal = parseFloat(loanAmount) || 0
+    const rate = (parseFloat(interestRate) || 0) / 100 / 12
+    const term = (parseFloat(loanTerm) || 0) * 12
+
+    if (principal && rate && term) {
+      const payment = principal * (rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1)
+      const total = payment * term
+      setMonthlyPayment(payment)
+      setTotalInterest(total - principal)
+    }
+  }, [loanAmount, interestRate, loanTerm])
 
   const filteredProviders = selectedCategory === "all" 
     ? financialProviders 
