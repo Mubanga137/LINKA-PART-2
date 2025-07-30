@@ -77,14 +77,23 @@ export async function safeShare(data: ShareData): Promise<{ success: boolean; me
 
 /**
  * Show user feedback for sharing actions
+ * Note: This is a simple console-based feedback for now
+ * In a real app, you'd integrate with a toast notification system
  */
 export function showShareFeedback(result: { success: boolean; method: 'native' | 'clipboard' | 'failed' }) {
   if (result.success) {
     if (result.method === 'clipboard') {
-      // You could show a toast notification here
       console.log('Link copied to clipboard!');
+      // You can dispatch a custom event here to show a toast
+      window.dispatchEvent(new CustomEvent('toast', {
+        detail: { message: 'Link copied to clipboard!', type: 'success' }
+      }));
     }
+    // Native sharing doesn't need feedback as it shows its own UI
   } else {
     console.warn('Sharing failed - clipboard access may be blocked');
+    window.dispatchEvent(new CustomEvent('toast', {
+      detail: { message: 'Unable to share - please copy the URL manually', type: 'error' }
+    }));
   }
 }
