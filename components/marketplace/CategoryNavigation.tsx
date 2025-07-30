@@ -284,12 +284,12 @@ export function HorizontalCategoryNav({
   className = ""
 }: Omit<CategoryNavigationProps, 'selectedSubcategory' | 'onSubcategorySelect'>) {
   return (
-    <div className={`flex gap-2 overflow-x-auto pb-2 ${className}`}>
+    <div className={`flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide ${className}`}>
       <Button
         variant={!selectedCategory ? "default" : "outline"}
         size="sm"
         onClick={() => onCategorySelect(undefined)}
-        className="whitespace-nowrap"
+        className="whitespace-nowrap flex-shrink-0 px-3 py-1.5 text-sm"
       >
         All
       </Button>
@@ -299,11 +299,12 @@ export function HorizontalCategoryNav({
           variant={selectedCategory === category.id ? "default" : "outline"}
           size="sm"
           onClick={() => onCategorySelect(category.id)}
-          className="whitespace-nowrap"
+          className="whitespace-nowrap flex-shrink-0 px-3 py-1.5 text-sm"
         >
-          {category.icon && <span className="mr-1">{category.icon}</span>}
-          {category.name}
-          <Badge variant="secondary" className="ml-2 h-4 text-xs">
+          {category.icon && <span className="mr-1 text-sm">{category.icon}</span>}
+          <span className="hidden sm:inline">{category.name}</span>
+          <span className="sm:hidden">{category.name.length > 8 ? `${category.name.slice(0, 8)}...` : category.name}</span>
+          <Badge variant="secondary" className="ml-1.5 sm:ml-2 h-4 text-xs px-1.5">
             {category.productCount}
           </Badge>
         </Button>
