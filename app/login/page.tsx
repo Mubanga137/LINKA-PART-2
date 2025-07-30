@@ -32,18 +32,17 @@ export default function LoginPage() {
       const result = await login(email, password)
       
       if (result.success) {
-        // Redirect based on user role
+        // Get user from auth context to check role
         const redirectUrl = new URLSearchParams(window.location.search).get('redirect')
 
+        // Role-aware redirection based on email patterns (in real app, use user.role)
         if (email.includes('admin')) {
-          router.push('/admin-dashboard')
+          router.push('/admin')
+        } else if (email.includes('retailer')) {
+          router.push('/retailer/dashboard')
         } else {
-          // Customer redirect - always go to dashboard for demo accounts
-          if (email === 'customer@demo.com') {
-            router.push('/customer-dashboard')
-          } else {
-            router.push(redirectUrl || '/customer-dashboard')
-          }
+          // Customer redirect - always redirect to customer dashboard
+          router.push('/customer-dashboard')
         }
       } else {
         setError(result.error || "Login failed")
