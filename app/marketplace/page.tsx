@@ -380,7 +380,7 @@ const mockProducts: Product[] = [
     name: "Hiking Backpack 40L",
     description: "Durable hiking backpack perfect for outdoor adventures and camping",
     price: 89.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb172e19abe1c40e585b941cf297b4fde?alt=media&token=e68e3074-d6f1-4229-890e-3ffd0c582ad7&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"],
     category: "Sports & Outdoors",
     inStock: true,
     stockQuantity: 23,
