@@ -76,22 +76,24 @@ export function OptimizedProductCard({
         />
         
         {/* Top Badges */}
-        <div className="absolute top-2 left-2 right-2 sm:top-3 sm:left-3 sm:right-3 flex justify-between items-start z-10">
+        <div className="absolute top-2 left-2 right-2 flex justify-between items-start z-10">
           <div className="flex flex-col gap-1">
             {product.freeShipping && (
-              <Badge className="bg-green-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center gap-1 shadow-lg">
-                <Truck className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-                Free Shipping
+              <Badge className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+                <Truck className="h-3 w-3" />
+                <span className="hidden sm:inline">Free Shipping</span>
+                <span className="sm:hidden">Free</span>
               </Badge>
             )}
             {product.featured && (
-              <Badge className="bg-blue-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center gap-1 shadow-lg">
-                <Zap className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-                Top Rated
+              <Badge className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+                <Zap className="h-3 w-3" />
+                <span className="hidden sm:inline">Top Rated</span>
+                <span className="sm:hidden">Top</span>
               </Badge>
             )}
             {product.discountPercentage && (
-              <Badge className="bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full shadow-lg animate-pulse">
+              <Badge className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-md shadow-sm">
                 -{product.discountPercentage}%
               </Badge>
             )}
