@@ -17,8 +17,8 @@ import {
   Clock
 } from "lucide-react";
 
-// Enhanced vendor data with realistic information
-const vendors: Vendor[] = [
+// Simple vendor data for testing
+const testVendors = [
   {
     id: "artisan-baskets-co",
     name: "Artisan Baskets Co.",
