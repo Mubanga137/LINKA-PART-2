@@ -374,21 +374,22 @@ export default function ServicesPage() {
                     >
                       <CardContent className="p-0">
                         {/* Image Header */}
-                        <div className="relative h-48 overflow-hidden">
+                        <div className="relative h-48 overflow-hidden rounded-t-3xl">
                           <img
                             src={service.image}
                             alt={service.name}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
-                          <div className={`absolute inset-0 bg-gradient-to-t ${service.bgGradient} opacity-80`}></div>
+                          <div className={`absolute inset-0 bg-gradient-to-t ${service.bgGradient} opacity-70 group-hover:opacity-60 transition-opacity duration-300`}></div>
+                          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-500/5 to-blue-500/10 group-hover:via-purple-500/10 transition-colors duration-300"></div>
                           <div className="absolute top-4 left-4">
-                            <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
-                              <service.icon className="h-6 w-6 text-white" />
+                            <div className={`w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl hover:scale-110 hover:rotate-6 transition-all duration-300`}>
+                              <service.icon className="h-7 w-7 text-white group-hover:animate-pulse" />
                             </div>
                           </div>
                           <div className="absolute top-4 right-4">
-                            <Badge className="bg-white/90 text-slate-700">
-                              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
+                            <Badge className="bg-white/95 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1 animate-pulse" />
                               {service.rating}
                             </Badge>
                           </div>
