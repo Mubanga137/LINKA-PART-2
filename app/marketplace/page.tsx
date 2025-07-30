@@ -702,6 +702,15 @@ function MarketplaceContent() {
   });
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
+
+  // Handle URL parameters for filters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hotDealParam = urlParams.get('filter');
+    if (hotDealParam === 'hotDeal') {
+      setFilters(prev => ({ ...prev, hotDeal: true }));
+    }
+  }, []);
   
   const { cart, addToCart, getCartItemCount } = useCart();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
