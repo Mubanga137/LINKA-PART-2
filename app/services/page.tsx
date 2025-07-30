@@ -206,21 +206,21 @@ export default function ServicesPage() {
 
             {/* Overview Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-blue-600">550+</div>
-                <div className="text-sm text-slate-600">Service Providers</div>
+              <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-indigo-100 backdrop-blur-sm rounded-2xl border border-blue-200/50 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">550+</div>
+                <div className="text-sm text-slate-700 font-medium">Service Providers</div>
               </div>
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-purple-600">9</div>
-                <div className="text-sm text-slate-600">Service Categories</div>
+              <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-violet-100 backdrop-blur-sm rounded-2xl border border-purple-200/50 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">9</div>
+                <div className="text-sm text-slate-700 font-medium">Service Categories</div>
               </div>
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-green-600">1,500+</div>
-                <div className="text-sm text-slate-600">Monthly Bookings</div>
+              <div className="text-center p-6 bg-gradient-to-br from-emerald-50 to-green-100 backdrop-blur-sm rounded-2xl border border-emerald-200/50 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">1,500+</div>
+                <div className="text-sm text-slate-700 font-medium">Monthly Bookings</div>
               </div>
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-orange-600">4.7</div>
-                <div className="text-sm text-slate-600">Average Rating</div>
+              <div className="text-center p-6 bg-gradient-to-br from-orange-50 to-amber-100 backdrop-blur-sm rounded-2xl border border-orange-200/50 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                <div className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">4.7</div>
+                <div className="text-sm text-slate-700 font-medium">Average Rating</div>
               </div>
             </div>
           </div>
