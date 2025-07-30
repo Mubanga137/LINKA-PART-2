@@ -116,72 +116,63 @@ export function OptimizedProductCard({
       </div>
 
       {/* Product Content */}
-      <div className="p-3 sm:p-4 flex-1 flex flex-col">
+      <div className="p-3 flex-1 flex flex-col">
         {/* Vendor Info Header */}
-        <div className="flex items-center justify-between mb-2 sm:mb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
               {product.vendor.name.charAt(0)}
             </div>
-            <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-medium text-gray-900 truncate">
                 {product.vendor.name}
               </p>
-              <div className="flex items-center gap-0.5 text-xs text-gray-500">
-                <MapPin className="h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0" />
+              <div className="flex items-center gap-1 text-xs text-gray-500">
+                <MapPin className="h-3 w-3 flex-shrink-0" />
                 <span className="truncate">Lusaka</span>
               </div>
             </div>
           </div>
-          
+
           {/* Rating */}
-          <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
-            <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
-            <span className="text-xs sm:text-sm font-semibold text-gray-700">
+          <div className="flex items-center gap-1 flex-shrink-0">
+            <Star className="h-3 w-3 text-yellow-400 fill-current" />
+            <span className="text-xs font-semibold text-gray-700">
               {product.rating?.toFixed(1)}
             </span>
           </div>
         </div>
 
         {/* Product Name */}
-        <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-2 line-clamp-2 leading-snug">
+        <h3 className="text-sm font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
           {product.name}
         </h3>
 
         {/* Price Section */}
-        <div className="mb-2 sm:mb-3">
+        <div className="mb-2">
           <div className="flex items-baseline gap-2">
-            <span className="text-lg sm:text-xl font-bold text-gray-900">
+            <span className="text-base font-bold text-gray-900">
               K{product.price.toFixed(2)}
             </span>
             {product.originalPrice && (
-              <span className="text-sm text-gray-400 line-through">
+              <span className="text-xs text-gray-400 line-through">
                 K{product.originalPrice.toFixed(2)}
               </span>
             )}
           </div>
           {product.originalPrice && (
-            <p className="text-xs text-green-600 font-medium mt-0.5">
-              You save K{(product.originalPrice - product.price).toFixed(2)}
+            <p className="text-xs text-green-600 font-medium">
+              Save K{(product.originalPrice - product.price).toFixed(2)}
             </p>
           )}
         </div>
 
-        {/* Product Tags */}
-        <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
-          {product.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
-
         {/* Stock Status */}
-        <div className="mb-3 sm:mb-4">
+        <div className="mb-3">
           <div className={`flex items-center gap-1 text-xs ${
             product.inStock ? 'text-green-600' : 'text-red-600'
           }`}>
-            <Package className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+            <Package className="h-3 w-3" />
             <span>{product.inStock ? 'In Stock' : 'Out of Stock'}</span>
             {product.inStock && product.stockQuantity && product.stockQuantity <= 10 && (
               <span className="text-orange-600 ml-1">
