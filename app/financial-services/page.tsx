@@ -149,7 +149,7 @@ export default function FinancialServicesPage() {
   const navigationSections = [
     { id: "overview", name: "Overview", icon: DollarSign },
     { id: "calculators", name: "Calculators", icon: Calculator },
-    { id: "comparison", name: "Compare", icon: Compare },
+    { id: "comparison", name: "Compare", icon: GitCompare },
     { id: "eligibility", name: "Eligibility", icon: FileText },
     { id: "agents", name: "Find Agents", icon: MapPin },
     { id: "market-data", name: "Live Data", icon: Activity },
