@@ -881,7 +881,7 @@ function MarketplaceContent() {
         {/* CTA Section */}
         <section className="mt-8 sm:mt-12 lg:mt-16 bg-gradient-to-r from-blue-600 via-blue-700 to-green-600 text-white relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center">
           <div className="absolute inset-0 bg-black/10"></div>
-          <div className="relative z-10 space-y-6">
+          <div className="relative z-10 space-y-4 sm:space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold">
               Join Our Marketplace
             </h2>
