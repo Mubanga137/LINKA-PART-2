@@ -757,149 +757,82 @@ function MarketplaceContent() {
           </div>
         </section>
 
-        {/* Products Grid */}
-        <section className="space-y-6">
-          <div className={viewMode === 'grid' 
-            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            : "space-y-4"
-          }>
-            {filteredProducts.map((product) => (
-              <div
-                key={product.id}
-                className={`group bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-blue-200 ${
-                  viewMode === 'list' ? 'flex' : 'flex flex-col'
-                }`}
-              >
-                {/* Product Image */}
-                <div className={`relative ${
-                  viewMode === 'list' ? 'w-48 flex-shrink-0' : 'aspect-square'
-                } overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100`}>
-                  <Image
-                    src={product.images[0]}
-                    alt={product.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-
-                  {/* Top Badges Row */}
-                  <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
-                    <div className="flex flex-col gap-1.5">
-                      {product.freeShipping && (
-                        <div className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                          <Truck className="h-3 w-3" />
-                          Free Shipping
-                        </div>
-                      )}
-                      {product.featured && (
-                        <div className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                          <Zap className="h-3 w-3" />
-                          Top Rated
-                        </div>
-                      )}
-                      {product.discountPercentage && (
-                        <div className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-pulse">
-                          -{product.discountPercentage}%
-                        </div>
-                      )}
-                    </div>
-
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="w-8 h-8 p-0 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300"
-                      onClick={() => toggleFavorite(product.id)}
-                    >
-                      <Heart
-                        className={`h-4 w-4 transition-colors ${
-                          isFavorite(product.id) ? 'fill-red-500 text-red-500' : 'hover:text-red-400'
-                        }`}
-                      />
-                    </Button>
+        {/* Optimized Products Grid */}
+        <section className="space-y-24">
+          {viewMode === 'grid' ? (
+            <div className="grid grid-cols-2 gap-16 landscape:grid-cols-3 landscape:gap-6 sm:grid-cols-2 sm:gap-20 md:grid-cols-3 md:gap-24 lg:grid-cols-4 lg:gap-24">
+              {filteredProducts.map((product, index) => (
+                <OptimizedProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={handleAddToCart}
+                  onToggleFavorite={toggleFavorite}
+                  isFavorite={isFavorite(product.id)}
+                  priority={index < 4} // LCP optimization for first 4 products
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-16">
+              {filteredProducts.map((product, index) => (
+                <div
+                  key={product.id}
+                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-blue-200 flex flex-col sm:flex-row"
+                >
+                  <div className="aspect-square sm:w-48 sm:flex-shrink-0 overflow-hidden bg-gray-100">
+                    <Image
+                      src={product.images[0]}
+                      alt={`${product.name} - ${product.description}`}
+                      width={300}
+                      height={300}
+                      className="object-cover w-full h-full"
+                      loading={index < 2 ? "eager" : "lazy"}
+                      decoding="async"
+                    />
                   </div>
-                </div>
-
-                {/* Product Content */}
-                <div className={`p-4 flex-1 flex flex-col ${viewMode === 'list' ? 'justify-between' : ''}`}>
-                  {/* Vendor Info Header */}
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
-                        {product.vendor.name.charAt(0)}
-                      </div>
-                      <div>
-                        <p className="text-xs font-medium text-gray-900">{product.vendor.name}</p>
-                        <div className="flex items-center gap-1 text-xs text-gray-500">
-                          <MapPin className="h-3 w-3" />
-                          <span>Lusaka</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Rating */}
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                      <span className="text-sm font-semibold text-gray-700">{product.rating?.toFixed(1)}</span>
-                    </div>
-                  </div>
-
-                  {/* Product Name */}
-                  <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2 leading-snug">
-                    {product.name}
-                  </h3>
-
-                  {/* Price Section */}
-                  <div className="mb-3">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-bold text-gray-900">
-                        K{product.price.toFixed(2)}
-                      </span>
-                      {product.originalPrice && (
-                        <span className="text-sm text-gray-400 line-through">
-                          K{product.originalPrice.toFixed(2)}
-                        </span>
-                      )}
-                    </div>
-                    {product.originalPrice && (
-                      <p className="text-xs text-green-600 font-medium mt-0.5">
-                        You save K{(product.originalPrice - product.price).toFixed(2)}
+                  <div className="p-20 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-clamp-lg font-bold text-gray-900 mb-2">
+                        {product.name}
+                      </h3>
+                      <p className="text-clamp-base text-gray-600 mb-16">
+                        {product.description}
                       </p>
-                    )}
-                  </div>
-
-                  {/* Product Tags */}
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {product.tags.slice(0, 2).map((tag) => (
-                      <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="mt-auto space-y-2">
-                    <Button
-                      onClick={() => handleAddToCart(product)}
-                      disabled={!product.inStock}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50"
-                    >
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      Add to Cart
-                    </Button>
-
-                    <ProductDetailModal product={product}>
+                      <div className="flex items-baseline gap-2 mb-16">
+                        <span className="text-2xl font-bold text-gray-900">
+                          K{product.price.toFixed(2)}
+                        </span>
+                        {product.originalPrice && (
+                          <span className="text-sm text-gray-400 line-through">
+                            K{product.originalPrice.toFixed(2)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex gap-12">
+                      <Button
+                        onClick={() => handleAddToCart(product)}
+                        disabled={!product.inStock}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-24 rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced"
+                      >
+                        <ShoppingCart className="h-4 w-4 mr-2" />
+                        Add to Cart
+                      </Button>
                       <Button
                         variant="outline"
-                        className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 rounded-lg transition-all duration-200"
+                        className="border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 px-16 rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
+                        asChild
                       >
-                        <Package className="h-4 w-4 mr-2" />
-                        View Products
+                        <Link href={`/products/${product.id}`}>
+                          View Details
+                        </Link>
                       </Button>
-                    </ProductDetailModal>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* No Results */}
           {filteredProducts.length === 0 && (
