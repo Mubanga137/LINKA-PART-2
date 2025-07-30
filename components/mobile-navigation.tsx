@@ -74,6 +74,12 @@ export function MobileNavigation() {
     closeSheet();
   }
 
+  // Check if we're in marketplace context for Hot Deals visibility
+  const isMarketplaceContext = pathname?.includes('/marketplace') ||
+                              pathname?.includes('/hot-deals') ||
+                              pathname?.includes('/products') ||
+                              pathname?.includes('/categories');
+
   // Primary navigation items
   const primaryItems = [
     {
@@ -88,13 +94,14 @@ export function MobileNavigation() {
       icon: ShoppingBag,
       active: pathname?.includes("/marketplace")
     },
-    {
+    // Only show Hot Deals in marketplace context
+    ...(isMarketplaceContext ? [{
       name: "Hot Deals",
       href: "/hot-deals",
       icon: Flame,
       active: pathname?.includes("/hot-deals"),
       isSpecial: true
-    },
+    }] : []),
     {
       name: "Services",
       href: "/industries",
