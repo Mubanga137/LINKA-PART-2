@@ -413,5 +413,3 @@ export function FinancialCalculators() {
     </div>
   )
 }
-
-export { FinancialCalculators }
