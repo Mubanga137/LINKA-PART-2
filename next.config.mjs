@@ -11,8 +11,7 @@ const nextConfig = {
     domains: ['images.unsplash.com'],
   },
   sassOptions: {
-    includePaths: ['./styles'],
-    prependData: `@import "./styles/marketplace.module.scss";`
+    includePaths: ['./styles']
   },
   allowedDevOrigins: [
     '*.projects.builder.codes',
