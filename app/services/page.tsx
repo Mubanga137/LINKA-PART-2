@@ -369,8 +369,8 @@ export default function ServicesPage() {
                   ) : (
                     /* Regular Service Card Design */
                     <Card
-                      className="group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 bg-white/90 backdrop-blur-sm border-white/20 overflow-hidden"
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      className="group cursor-pointer transition-all duration-500 hover:shadow-3xl hover:-translate-y-4 bg-gradient-to-br from-white/95 to-blue-50/80 backdrop-blur-sm border border-white/40 hover:border-purple-200/50 rounded-3xl overflow-hidden animate-fade-in-up hover:bg-gradient-to-br hover:from-white hover:to-purple-50/60"
+                      style={{ animationDelay: `${index * 150}ms` }}
                     >
                       <CardContent className="p-0">
                         {/* Image Header */}
