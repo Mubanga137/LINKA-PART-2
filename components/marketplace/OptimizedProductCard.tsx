@@ -102,12 +102,12 @@ export function OptimizedProductCard({
           <Button
             size="sm"
             variant="ghost"
-            className="w-8 h-8 sm:w-10 sm:h-10 p-0 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 tap-target focus-visible-enhanced"
+            className="w-11 h-11 p-0 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 tap-target-sm focus-visible-enhanced"
             onClick={() => onToggleFavorite(product.id)}
             aria-label={`${isFavorite ? 'Remove from' : 'Add to'} favorites`}
           >
             <Heart
-              className={`h-3.5 w-3.5 sm:h-4 sm:w-4 transition-colors ${
+              className={`h-4 w-4 transition-colors ${
                 isFavorite ? 'fill-red-500 text-red-500' : 'hover:text-red-400'
               }`}
             />
