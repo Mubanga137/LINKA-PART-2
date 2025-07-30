@@ -260,19 +260,13 @@ export default function MarketplacePage() {
               </p>
             </div>
 
-            <div className={styles.vendorsGrid}>
-              {featuredVendors.map((vendor) => (
-                <div key={vendor.id} className="relative">
-                  <div className="absolute -top-2 -right-2 z-10">
-                    <Badge className={`${styles.pillFeatured} shadow-lg`}>
-                      <Crown className="h-3 w-3 mr-1" />
-                      Featured
-                    </Badge>
-                  </div>
-                  {/* VendorCard would be rendered here with the vendor data */}
-                </div>
-              ))}
-            </div>
+            <VendorsGrid
+              vendors={featuredVendors}
+              onAddToCart={handleAddToCart}
+              showFilters={false}
+              title=""
+              description=""
+            />
           </section>
         )}
 
