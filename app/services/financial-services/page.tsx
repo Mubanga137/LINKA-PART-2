@@ -364,15 +364,27 @@ export default function FinancialServicesPage() {
                 <Calculator className="h-5 w-5 mr-2" />
                 Loan Calculator
               </Button>
-              <Button variant="outline" className="h-16 border-emerald-200 text-emerald-600 hover:bg-emerald-50">
+              <Button
+                onClick={() => setShowInvestmentTracker(true)}
+                variant="outline"
+                className="h-16 border-emerald-200 text-emerald-600 hover:bg-emerald-50"
+              >
                 <BarChart3 className="h-5 w-5 mr-2" />
                 Investment Tracker
               </Button>
-              <Button variant="outline" className="h-16 border-blue-200 text-blue-600 hover:bg-blue-50">
+              <Button
+                onClick={() => setShowSavingsGoal(true)}
+                variant="outline"
+                className="h-16 border-blue-200 text-blue-600 hover:bg-blue-50"
+              >
                 <PiggyBank className="h-5 w-5 mr-2" />
                 Savings Goal
               </Button>
-              <Button variant="outline" className="h-16 border-indigo-200 text-indigo-600 hover:bg-indigo-50">
+              <Button
+                onClick={() => setShowBudgetPlanner(true)}
+                variant="outline"
+                className="h-16 border-indigo-200 text-indigo-600 hover:bg-indigo-50"
+              >
                 <Target className="h-5 w-5 mr-2" />
                 Budget Planner
               </Button>
