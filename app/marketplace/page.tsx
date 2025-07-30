@@ -755,6 +755,10 @@ function MarketplaceContent() {
       result = result.filter(product => product.featured);
     }
 
+    if ((filters as any).hotDeal) {
+      result = result.filter(product => (product as any).hotDeal);
+    }
+
     // Apply sorting
     switch (filters.sortBy) {
       case 'price_low':
