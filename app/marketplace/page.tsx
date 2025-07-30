@@ -133,7 +133,7 @@ const mockProducts: Product[] = [
     description: "Powerful laptop perfect for work, study, and entertainment",
     price: 799.99,
     originalPrice: 999.99,
-    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F158ea7b2f727420280af035a86e56edc?format=webp&width=800"],
+    images: ["https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80"],
     category: "Electronics",
     inStock: true,
     stockQuantity: 12,
