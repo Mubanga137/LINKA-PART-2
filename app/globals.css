@@ -89,7 +89,12 @@
     .p-mobile-lg { padding: 1.5rem; } /* 24px on sm+ */
   }
 
-  /* Clamped typography */
+  /* Mobile-optimized clamped typography */
+  .text-clamp-xs {
+    font-size: clamp(12px, 1.25vw, 14px);
+    line-height: 1.5;
+  }
+
   .text-clamp-sm {
     font-size: clamp(14px, 1.5vw, 16px);
     line-height: 1.5;
@@ -103,6 +108,11 @@
   .text-clamp-lg {
     font-size: clamp(18px, 2.5vw, 22px);
     line-height: 1.4;
+  }
+
+  .text-clamp-xl {
+    font-size: clamp(20px, 3vw, 28px);
+    line-height: 1.3;
   }
 
   /* Image placeholder and loading states */
