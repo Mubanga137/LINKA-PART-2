@@ -53,6 +53,14 @@ export function MobileNavigation() {
 
   const closeSheet = () => setIsOpen(false)
 
+  // Show cart/wishlist on shopping-related pages
+  const isShoppingPage = pathname?.includes('/marketplace') ||
+                        pathname?.includes('/shop') ||
+                        pathname?.includes('/cart') ||
+                        pathname?.includes('/checkout') ||
+                        pathname?.includes('/products') ||
+                        pathname?.includes('/categories')
+
   // Primary navigation items
   const primaryItems = [
     {
