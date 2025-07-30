@@ -809,7 +809,7 @@ function MarketplaceContent() {
                         )}
                       </div>
                     </div>
-                    <div className="flex gap-12">
+                    <div className="flex gap-2 sm:gap-3">
                       <Button
                         onClick={() => handleAddToCart(product)}
                         disabled={!product.inStock}
