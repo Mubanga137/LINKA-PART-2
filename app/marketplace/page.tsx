@@ -40,8 +40,8 @@ import Link from "next/link";
 
 // Mock data for demonstration
 const mockCategories: Category[] = [
-  { id: "1", name: "Electronics", slug: "electronics", icon: "📱", productCount: 6 },
-  { id: "2", name: "Fashion", slug: "fashion", icon: "👕", productCount: 5 },
+  { id: "1", name: "Electronics", slug: "electronics", icon: "📱", productCount: 9 },
+  { id: "2", name: "Fashion", slug: "fashion", icon: "👕", productCount: 6 },
   { id: "3", name: "Home & Garden", slug: "home-garden", icon: "🏠", productCount: 7 },
   { id: "4", name: "Health & Beauty", slug: "health-beauty", icon: "💄", productCount: 3 },
   { id: "5", name: "Sports & Outdoors", slug: "sports", icon: "⚽", productCount: 4 },
