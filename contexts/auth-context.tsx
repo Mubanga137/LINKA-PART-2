@@ -22,6 +22,7 @@ interface AuthContextType {
   signup: (data: SignupData) => Promise<{ success: boolean; error?: string }>
   logout: () => void
   updateProfile: (data: Partial<User>) => Promise<{ success: boolean; error?: string }>
+  getRoleBasedRedirectUrl: (user: User) => string
 }
 
 interface SignupData {
