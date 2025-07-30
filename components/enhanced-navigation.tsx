@@ -22,6 +22,12 @@ export function EnhancedNavigation() {
 
   const isHomePage = pathname === '/';
 
+  // Only show Hot Deals in marketplace-related pages
+  const isMarketplacePage = pathname?.includes('/marketplace') ||
+                           pathname?.includes('/hot-deals') ||
+                           pathname?.includes('/products') ||
+                           pathname?.includes('/categories');
+
   return (
     <div className="flex items-center gap-2">
       {/* Back Button */}
@@ -50,17 +56,19 @@ export function EnhancedNavigation() {
         </Button>
       )}
 
-      {/* Hot Deals Quick Link */}
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => router.push('/hot-deals')}
-        className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 tap-target-sm bg-gradient-to-r from-red-50 to-orange-50 border border-red-200/50"
-      >
-        <Flame className="h-4 w-4" />
-        <span className="hidden sm:inline font-semibold">Hot Deals</span>
-        <span className="sm:hidden font-semibold">🔥</span>
-      </Button>
+      {/* Hot Deals Quick Link - Only show in marketplace pages */}
+      {isMarketplacePage && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => router.push('/hot-deals')}
+          className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 tap-target-sm bg-gradient-to-r from-red-50 to-orange-50 border border-red-200/50"
+        >
+          <Flame className="h-4 w-4" />
+          <span className="hidden sm:inline font-semibold">Hot Deals</span>
+          <span className="sm:hidden font-semibold">🔥</span>
+        </Button>
+      )}
     </div>
   );
 }
