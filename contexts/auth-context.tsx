@@ -158,7 +158,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       login,
       signup,
       logout,
-      updateProfile
+      updateProfile,
+      getRoleBasedRedirectUrl
     }}>
       {children}
     </AuthContext.Provider>
