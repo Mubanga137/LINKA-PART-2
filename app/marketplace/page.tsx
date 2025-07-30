@@ -254,15 +254,7 @@ function MarketplaceContent() {
   }, [searchQuery, filters]);
 
   const handleAddToCart = (product: Product) => {
-    const cartItem = {
-      id: `cart-${Date.now()}`,
-      productId: product.id,
-      product,
-      quantity: 1,
-      addedAt: new Date()
-    };
-    // Note: This would need to be updated to work with the new cart structure
-    console.log("Adding to cart:", cartItem);
+    addToCart(product, 1);
   };
 
   return (
