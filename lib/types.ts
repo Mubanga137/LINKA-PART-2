@@ -56,6 +56,7 @@ export interface Product {
   discountPercentage?: number;
   fastDelivery?: boolean;
   freeShipping?: boolean;
+  hotDeal?: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
