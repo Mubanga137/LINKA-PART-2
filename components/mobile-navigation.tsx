@@ -31,7 +31,9 @@ import {
   ChevronRight,
   ShoppingCart,
   Bell,
-  Package
+  Package,
+  ArrowLeft,
+  Flame
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context"
