@@ -824,6 +824,199 @@ export default function FinancialServicesPage() {
           </div>
         </div>
       )}
+
+      {/* Investment Tracker Modal */}
+      {showInvestmentTracker && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-slate-200">
+              <h2 className="text-2xl font-bold text-slate-900">Investment Portfolio Tracker</h2>
+              <Button variant="ghost" onClick={() => setShowInvestmentTracker(false)}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </Button>
+            </div>
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <Card className="bg-green-50">
+                  <CardContent className="p-4 text-center">
+                    <TrendingUp className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                    <p className="text-sm text-slate-600">Total Portfolio</p>
+                    <p className="text-2xl font-bold text-green-600">ZMW 125,450</p>
+                    <p className="text-xs text-green-500">+8.2% this month</p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-blue-50">
+                  <CardContent className="p-4 text-center">
+                    <BarChart3 className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                    <p className="text-sm text-slate-600">Monthly Gain</p>
+                    <p className="text-2xl font-bold text-blue-600">ZMW 9,520</p>
+                    <p className="text-xs text-blue-500">+12.3% vs last month</p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-purple-50">
+                  <CardContent className="p-4 text-center">
+                    <Target className="h-8 w-8 text-purple-600 mx-auto mb-2" />
+                    <p className="text-sm text-slate-600">Target Progress</p>
+                    <p className="text-2xl font-bold text-purple-600">68%</p>
+                    <p className="text-xs text-purple-500">On track for goal</p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold text-slate-900">Your Investments</h3>
+                {[
+                  { name: "LuSE All Share Index", value: "ZMW 45,200", change: "+5.2%", color: "green" },
+                  { name: "Government Bonds", value: "ZMW 35,000", change: "+2.1%", color: "blue" },
+                  { name: "Unit Trusts", value: "ZMW 28,500", change: "+7.8%", color: "green" },
+                  { name: "Fixed Deposits", value: "ZMW 16,750", change: "+3.5%", color: "green" }
+                ].map((investment, index) => (
+                  <div key={index} className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+                    <div>
+                      <h4 className="font-medium text-slate-900">{investment.name}</h4>
+                      <p className="text-sm text-slate-600">{investment.value}</p>
+                    </div>
+                    <div className={`text-${investment.color}-600 font-medium`}>
+                      {investment.change}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Savings Goal Modal */}
+      {showSavingsGoal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-slate-200">
+              <h2 className="text-2xl font-bold text-slate-900">Savings Goal Planner</h2>
+              <Button variant="ghost" onClick={() => setShowSavingsGoal(false)}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </Button>
+            </div>
+            <div className="p-6">
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Savings Goal (ZMW)</label>
+                  <input type="number" className="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="100,000" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Target Date</label>
+                  <input type="date" className="w-full px-3 py-2 border border-slate-300 rounded-lg" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Current Savings (ZMW)</label>
+                  <input type="number" className="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="25,000" />
+                </div>
+
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <div className="text-center mb-4">
+                    <p className="text-sm text-slate-600 mb-1">Monthly Savings Needed</p>
+                    <p className="text-3xl font-bold text-blue-600">ZMW 6,250</p>
+                  </div>
+                  <div className="w-full bg-slate-200 rounded-full h-4">
+                    <div className="bg-blue-600 h-4 rounded-full" style={{width: '25%'}}></div>
+                  </div>
+                  <p className="text-center text-sm text-slate-600 mt-2">25% Complete</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 bg-green-50 rounded-lg">
+                    <p className="text-sm text-slate-600">Time Remaining</p>
+                    <p className="text-lg font-bold text-green-600">18 months</p>
+                  </div>
+                  <div className="text-center p-3 bg-purple-50 rounded-lg">
+                    <p className="text-sm text-slate-600">Total to Save</p>
+                    <p className="text-lg font-bold text-purple-600">ZMW 75,000</p>
+                  </div>
+                </div>
+
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                  Set Up Auto-Save
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Budget Planner Modal */}
+      {showBudgetPlanner && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-slate-200">
+              <h2 className="text-2xl font-bold text-slate-900">Monthly Budget Planner</h2>
+              <Button variant="ghost" onClick={() => setShowBudgetPlanner(false)}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </Button>
+            </div>
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-4">Income</h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                      <span className="text-slate-700">Salary</span>
+                      <span className="font-bold text-green-600">ZMW 15,000</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                      <span className="text-slate-700">Side Business</span>
+                      <span className="font-bold text-green-600">ZMW 3,500</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-green-100 rounded-lg border-2 border-green-200">
+                      <span className="font-bold text-slate-900">Total Income</span>
+                      <span className="font-bold text-green-700">ZMW 18,500</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-4">Expenses</h3>
+                  <div className="space-y-3">
+                    {[
+                      { category: "Housing", amount: "ZMW 5,000", color: "red" },
+                      { category: "Food", amount: "ZMW 2,500", color: "orange" },
+                      { category: "Transport", amount: "ZMW 1,200", color: "yellow" },
+                      { category: "Utilities", amount: "ZMW 800", color: "blue" },
+                      { category: "Entertainment", amount: "ZMW 600", color: "purple" }
+                    ].map((expense, index) => (
+                      <div key={index} className={`flex justify-between items-center p-3 bg-${expense.color}-50 rounded-lg`}>
+                        <span className="text-slate-700">{expense.category}</span>
+                        <span className={`font-bold text-${expense.color}-600`}>{expense.amount}</span>
+                      </div>
+                    ))}
+                    <div className="flex justify-between items-center p-3 bg-red-100 rounded-lg border-2 border-red-200">
+                      <span className="font-bold text-slate-900">Total Expenses</span>
+                      <span className="font-bold text-red-700">ZMW 10,100</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 p-4 bg-emerald-50 rounded-lg">
+                <div className="text-center">
+                  <p className="text-sm text-slate-600 mb-1">Available for Savings</p>
+                  <p className="text-3xl font-bold text-emerald-600">ZMW 8,400</p>
+                  <p className="text-sm text-emerald-500">45% of total income</p>
+                </div>
+              </div>
+
+              <Button className="w-full mt-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+                Save Budget Plan
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
