@@ -21,6 +21,7 @@ import {
   Truck
 } from "lucide-react";
 import type { Vendor } from "@/lib/types";
+import { safeShare, showShareFeedback } from "@/lib/clipboard-utils";
 import styles from "@/styles/marketplace.module.scss";
 
 interface VendorCardProps {
