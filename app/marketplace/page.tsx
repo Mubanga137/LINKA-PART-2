@@ -315,35 +315,19 @@ function MarketplaceContent() {
             />
           </div>
 
-          {/* Category Pills */}
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button
-              variant={!filters.category ? "default" : "outline"}
-              size="sm"
-              onClick={() => setFilters(prev => ({ ...prev, category: undefined }))}
-              className="rounded-full"
-            >
-              All Categories
-            </Button>
-            {mockCategories.map((category) => (
-              <Button
-                key={category.id}
-                variant={filters.category === category.name ? "default" : "outline"}
-                size="sm"
-                onClick={() => setFilters(prev => ({ 
-                  ...prev, 
-                  category: filters.category === category.name ? undefined : category.name 
-                }))}
-                className="rounded-full"
-              >
-                <span className="mr-1">{category.icon}</span>
-                {category.name}
-                <Badge variant="secondary" className="ml-2 h-5 text-xs">
-                  {category.productCount}
-                </Badge>
-              </Button>
-            ))}
-          </div>
+          {/* Category Navigation */}
+          <HorizontalCategoryNav
+            categories={mockCategories}
+            selectedCategory={filters.category}
+            onCategorySelect={(categoryId) => {
+              const category = mockCategories.find(c => c.id === categoryId);
+              setFilters(prev => ({
+                ...prev,
+                category: category?.name
+              }));
+            }}
+            className="justify-center"
+          />
 
           {/* Filter and Sort Controls */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
