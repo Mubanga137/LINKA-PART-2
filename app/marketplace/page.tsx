@@ -836,6 +836,34 @@ function MarketplaceContent() {
             </div>
           </div>
 
+          {/* Quick Filters */}
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-center mb-4">
+            <Button
+              variant={filters.featured ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilters(prev => ({ ...prev, featured: !prev.featured }))}
+              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm"
+            >
+              ⭐ Featured
+            </Button>
+            <Button
+              variant={(filters as any).hotDeal ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilters(prev => ({ ...prev, hotDeal: !(prev as any).hotDeal }))}
+              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 text-red-700 hover:from-red-100 hover:to-orange-100"
+            >
+              🔥 Hot Deals
+            </Button>
+            <Button
+              variant={filters.freeShipping ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilters(prev => ({ ...prev, freeShipping: !prev.freeShipping }))}
+              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm"
+            >
+              🚚 Free Ship
+            </Button>
+          </div>
+
           {/* Category Navigation */}
           <HorizontalCategoryNav
             categories={mockCategories}
