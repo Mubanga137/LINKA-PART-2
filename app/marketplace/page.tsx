@@ -285,12 +285,12 @@ function MarketplaceContent() {
 
           {/* Cart and Wishlist indicators */}
           <div className="flex justify-center gap-4">
-            <ShoppingCart>
+            <ShoppingCartComponent>
               <Button variant="outline" className="px-6 py-3 text-sm">
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 Cart ({getCartItemCount()})
               </Button>
-            </ShoppingCart>
+            </ShoppingCartComponent>
 
             <Wishlist products={mockProducts}>
               <Button variant="outline" className="px-6 py-3 text-sm">
