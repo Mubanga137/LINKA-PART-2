@@ -78,6 +78,11 @@ export function OptimizedProductCard({
         {/* Top Badges */}
         <div className="absolute top-2 left-2 right-2 flex justify-between items-start z-10">
           <div className="flex flex-col gap-1">
+            {(product as any).hotDeal && (
+              <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-md shadow-lg animate-pulse">
+                🔥 HOT DEAL
+              </Badge>
+            )}
             {product.freeShipping && (
               <Badge className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
                 <Truck className="h-3 w-3" />
@@ -85,7 +90,7 @@ export function OptimizedProductCard({
                 <span className="sm:hidden">Free</span>
               </Badge>
             )}
-            {product.featured && (
+            {product.featured && !((product as any).hotDeal) && (
               <Badge className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
                 <Zap className="h-3 w-3" />
                 <span className="hidden sm:inline">Top Rated</span>
