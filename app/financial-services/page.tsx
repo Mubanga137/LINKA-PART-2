@@ -472,6 +472,55 @@ export default function FinancialServicesPage() {
           </div>
         </section>
 
+        {/* Why Choose Linka Finance */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">
+                Why Choose Linka Finance?
+              </h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                Your security and success are our top priorities
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {/* Verified Providers */}
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Shield className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Verified Providers</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  All financial service providers are thoroughly vetted and licensed
+                </p>
+              </div>
+
+              {/* Expert Support */}
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Expert Support</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Get guidance from financial experts throughout your journey
+                </p>
+              </div>
+
+              {/* Mobile-First */}
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Smartphone className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Mobile-First</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Access all services seamlessly on any device, anywhere
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Enhanced Tools and Services */}
         <section className="py-16 bg-gradient-to-r from-slate-50 to-gray-50">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
