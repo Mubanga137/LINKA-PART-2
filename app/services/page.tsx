@@ -71,20 +71,7 @@ const platformServices = [
     stats: { tailors: "65+", orders: "150+/month" },
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
   },
-  {
-    id: 4,
-    name: "Short-term Rentals",
-    icon: MapPin,
-    description: "Accommodation and short-term rental properties for travelers and visitors",
-    providers: 45,
-    rating: 4.6,
-    href: "/services/short-term-rentals",
-    gradient: "from-orange-500 to-red-600",
-    bgGradient: "from-orange-50 to-red-50",
-    features: ["Daily Rentals", "Weekly Stays", "Furnished Properties", "24/7 Support"],
-    stats: { properties: "45+", bookings: "80+/month" },
-    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop"
-  },
+
   {
     id: 5,
     name: "Entertainment & Events",
