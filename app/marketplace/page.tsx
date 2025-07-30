@@ -760,7 +760,7 @@ function MarketplaceContent() {
         {/* Optimized Products Grid */}
         <section className="space-y-24">
           {viewMode === 'grid' ? (
-            <div className="grid grid-cols-2 gap-16 landscape:grid-cols-3 landscape:gap-6 sm:grid-cols-2 sm:gap-20 md:grid-cols-3 md:gap-24 lg:grid-cols-4 lg:gap-24">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 md:grid-cols-3 lg:grid-cols-4">
               {filteredProducts.map((product, index) => (
                 <OptimizedProductCard
                   key={product.id}
