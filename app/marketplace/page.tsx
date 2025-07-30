@@ -456,7 +456,7 @@ const mockProducts: Product[] = [
     name: "Educational Children's Books",
     description: "Set of educational children's books featuring African stories and culture",
     price: 29.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F61a3c162d2b04eac8628af7322e53d96?alt=media&token=03ced4dc-3199-4870-a75c-4c5d02250393&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"],
     category: "Books & Media",
     inStock: true,
     stockQuantity: 56,
