@@ -16,10 +16,33 @@
     display: none;
   }
 
-  /* Landscape orientation utilities */
+  /* Mobile-first responsive spacing utilities */
+  @media (max-width: 640px) {
+    .mobile-tight {
+      padding: 0.75rem; /* 12px */
+      gap: 0.75rem; /* 12px */
+    }
+
+    .mobile-grid-spacing {
+      gap: 0.75rem; /* 12px between grid items */
+    }
+
+    .mobile-section-spacing {
+      margin-bottom: 1.5rem; /* 24px */
+    }
+
+    .mobile-content-padding {
+      padding: 1rem; /* 16px */
+    }
+  }
+
+  /* Enhanced landscape orientation utilities */
   @media (orientation: landscape) and (max-width: 768px) {
     .landscape\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .landscape\:gap-3 {
+      gap: 0.75rem;
     }
     .landscape\:gap-6 {
       gap: 1.5rem;
