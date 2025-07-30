@@ -89,6 +89,13 @@ export function MobileNavigation() {
       active: pathname?.includes("/marketplace")
     },
     {
+      name: "Hot Deals",
+      href: "/marketplace?filter=hotDeal",
+      icon: Flame,
+      active: false,
+      isSpecial: true
+    },
+    {
       name: "Services",
       href: "/industries",
       icon: Briefcase,
