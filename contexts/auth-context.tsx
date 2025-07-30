@@ -126,15 +126,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const updateProfile = async (data: Partial<User>): Promise<{ success: boolean; error?: string }> => {
     if (!user) return { success: false, error: 'No user logged in' }
-    
+
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))
-      
+
       setUser({ ...user, ...data })
       return { success: true }
     } catch (error) {
       return { success: false, error: 'Profile update failed. Please try again.' }
+    }
+  }
+
+  const getRoleBasedRedirectUrl = (user: User): string => {
+    switch (user.role) {
+      case 'customer':
+        return '/customer-dashboard'
+      case 'retailer':
+        return '/retailer/dashboard'
+      case 'admin':
+        return '/admin'
+      default:
+        return '/customer-dashboard'
     }
   }
 
