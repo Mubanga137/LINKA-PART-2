@@ -1,365 +1,268 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { CustomerHeader } from "@/components/customer-header"
-import { Footer } from "@/components/footer"
-import { EnhancedCustomerWelcome } from "@/components/customer/enhanced-customer-welcome"
-import { PersonalizedProductCarousel } from "@/components/personalized-product-carousel"
-import { DynamicCategoryGrid } from "@/components/dynamic-category-grid"
-import { VendorShowcase } from "@/components/vendor-showcase"
-import { TrendingOffers } from "@/components/trending-offers"
-import { RecentActivity } from "@/components/customer/recent-activity"
-import { QuickActions } from "@/components/customer/quick-actions"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { CheckCircle } from "lucide-react"
-import { useAuth } from "@/contexts/auth-context"
-import { productService } from "@/services/product-service"
-import { Product } from "@/contexts/cart-context"
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/contexts/auth-context";
+import { useCart } from "@/contexts/cart-context";
+import { useFavorites } from "@/contexts/marketplace-context";
+import Link from "next/link";
+import { 
+  ShoppingBag, 
+  Heart, 
+  Package, 
+  User, 
+  Settings, 
+  CreditCard,
+  MapPin,
+  Bell,
+  TrendingUp,
+  Star,
+  Gift,
+  Clock
+} from "lucide-react";
 
 export default function CustomerDashboard() {
-  const { user } = useAuth()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const isWelcome = searchParams.get('welcome') === 'true'
-  
-  const [trendingProducts, setTrendingProducts] = useState<Product[]>([])
-  const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const { user } = useAuth();
+  const { totalItems, getCartTotal } = useCart();
+  const { favorites } = useFavorites();
 
-  // Redirect if not a customer or not logged in
-  useEffect(() => {
-    if (!user) {
-      router.push('/login?redirect=/customer-dashboard')
-      return
-    }
-    
-    if (user.role !== 'customer') {
-      router.push('/')
-      return
-    }
-  }, [user, router])
-
-  // Load dashboard data
-  useEffect(() => {
-    const loadDashboardData = async () => {
-      setIsLoading(true)
-      try {
-        // Load trending products
-        const trending = await productService.getFeaturedProducts()
-        setTrendingProducts(trending.slice(0, 8))
-
-        // Load recommended products (simulate based on user preferences)
-        const recommended = await productService.getProducts({ 
-          category: 'jewelry-accessories' // Simulate user preference
-        })
-        setRecommendedProducts(recommended.products.slice(0, 6))
-      } catch (error) {
-        console.error('Error loading dashboard data:', error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    if (user?.role === 'customer') {
-      loadDashboardData()
-    }
-  }, [user])
-
-  if (!user || user.role !== 'customer') {
-    return null
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+        <Header />
+        <main className="py-20 text-center">
+          <p className="text-lg text-gray-600">Please log in to access your dashboard.</p>
+          <Link href="/login">
+            <Button className="mt-4">Log In</Button>
+          </Link>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-indigo-300/20 to-purple-400/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute top-1/3 right-0 w-80 h-80 bg-gradient-to-br from-pink-300/20 to-orange-400/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-gradient-to-br from-purple-300/20 to-blue-400/20 rounded-full blur-3xl animate-bounce-slow" style={{ animationDelay: '4s' }}></div>
-      </div>
-
-      <CustomerHeader />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+      <Header />
       
-      <main className="pb-16">
-        {/* Welcome Message for New Users */}
-        {isWelcome && (
-          <div className="bg-emerald-50 border-b">
-            <div className="max-w-7xl mx-auto px-6 py-4">
-              <Alert className="border-emerald-200 bg-emerald-50">
-                <CheckCircle className="h-4 w-4 text-emerald-600" />
-                <AlertDescription className="text-emerald-800">
-                  Welcome to Linka! Your account has been created successfully. 
-                  Start exploring amazing products and services from local Zambian businesses.
-                </AlertDescription>
-              </Alert>
-            </div>
-          </div>
-        )}
-
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
-        <EnhancedCustomerWelcome user={user} />
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Welcome back, {user.name}! 👋
+          </h1>
+          <p className="text-gray-600">
+            Manage your orders, favorites, and account settings from your dashboard.
+          </p>
+        </div>
 
-        {/* Quick Actions */}
-        <QuickActions />
-
-        {/* Main Content */}
-        <div className="relative max-w-7xl mx-auto px-6 py-12 space-y-16">
-          {/* Quick Access Navigation */}
-          <div className="relative">
-            <h2 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              Quick Actions
-            </h2>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              <div
-                onClick={() => router.push('/marketplace')}
-                className="group relative flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                  </svg>
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Cart Items</p>
+                  <p className="text-2xl font-bold text-gray-900">{totalItems}</p>
                 </div>
-                <span className="text-sm font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">Shop</span>
-                <span className="text-xs text-slate-500 mt-1 text-center">Browse products</span>
+                <ShoppingBag className="h-8 w-8 text-blue-500" />
               </div>
+            </CardContent>
+          </Card>
 
-              <div
-                onClick={() => router.push('/orders')}
-                className="group relative flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                  </svg>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Wishlist</p>
+                  <p className="text-2xl font-bold text-gray-900">{favorites.length}</p>
                 </div>
-                <span className="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">Orders</span>
-                <span className="text-xs text-slate-500 mt-1 text-center">Track packages</span>
+                <Heart className="h-8 w-8 text-pink-500" />
               </div>
+            </CardContent>
+          </Card>
 
-              <div
-                onClick={() => router.push('/wishlist')}
-                className="group relative flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Cart Total</p>
+                  <p className="text-2xl font-bold text-gray-900">K{getCartTotal().toFixed(2)}</p>
                 </div>
-                <span className="text-sm font-semibold text-slate-900 group-hover:text-red-600 transition-colors">Wishlist</span>
-                <span className="text-xs text-slate-500 mt-1 text-center">Saved items</span>
+                <CreditCard className="h-8 w-8 text-green-500" />
               </div>
+            </CardContent>
+          </Card>
 
-              <div
-                onClick={() => router.push('/profile')}
-                className="group relative flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Orders</p>
+                  <p className="text-2xl font-bold text-gray-900">12</p>
                 </div>
-                <span className="text-sm font-semibold text-slate-900 group-hover:text-green-600 transition-colors">Profile</span>
-                <span className="text-xs text-slate-500 mt-1 text-center">Personal info</span>
+                <Package className="h-8 w-8 text-orange-500" />
               </div>
+            </CardContent>
+          </Card>
+        </div>
 
-              <div
-                onClick={() => router.push('/cart')}
-                className="group relative flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293A1 1 0 005 16v0a1 1 0 001 1h11M9 19a2 2 0 104 0 2 2 0 00-4 0z" />
-                  </svg>
-                </div>
-                <span className="text-sm font-semibold text-slate-900 group-hover:text-orange-600 transition-colors">Cart</span>
-                <span className="text-xs text-slate-500 mt-1 text-center">Review items</span>
-              </div>
-
-              <div
-                onClick={() => router.push('/settings')}
-                className="group relative flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-500/5 to-slate-700/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="w-14 h-14 bg-gradient-to-br from-slate-500 to-slate-700 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <span className="text-sm font-semibold text-slate-900 group-hover:text-slate-600 transition-colors">Settings</span>
-                <span className="text-xs text-slate-500 mt-1 text-center">Preferences</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Recent Order Status */}
-          <div className="relative">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/50 p-8 shadow-xl relative overflow-hidden">
-              {/* Background Animation */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-600/10 rounded-full blur-xl animate-pulse-slow"></div>
-
-              <div className="relative">
-                <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                      </svg>
-                    </div>
-                    Recent Orders
-                  </h2>
-                  <button
-                    onClick={() => router.push('/orders')}
-                    className="group flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-semibold text-sm transition-all duration-300 hover:gap-3"
-                  >
-                    View all orders
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
-
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Recent Orders */}
+          <div className="lg:col-span-2">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Package className="h-5 w-5" />
+                  Recent Orders
+                </CardTitle>
+                <CardDescription>
+                  Track your recent purchases and delivery status
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
                 <div className="space-y-4">
-                  <div className="group relative overflow-hidden bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-slate-900 group-hover:text-green-700 transition-colors">Order #ORD-2024-001</p>
-                          <p className="text-sm text-slate-600">Delivered • ZMW 450.00</p>
-                          <div className="flex items-center gap-2 mt-1">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span className="text-xs text-green-600 font-medium">Package delivered successfully</span>
-                          </div>
-                        </div>
+                  {[
+                    { id: "ORD-001", status: "Delivered", total: "K245.99", date: "2 days ago" },
+                    { id: "ORD-002", status: "Shipped", total: "K89.99", date: "5 days ago" },
+                    { id: "ORD-003", status: "Processing", total: "K156.50", date: "1 week ago" }
+                  ].map((order) => (
+                    <div key={order.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                      <div>
+                        <p className="font-medium text-gray-900">{order.id}</p>
+                        <p className="text-sm text-gray-500">{order.date}</p>
                       </div>
-                      <button
-                        onClick={() => router.push('/orders')}
-                        className="group/btn bg-green-100 hover:bg-green-200 text-green-700 hover:text-green-800 font-medium text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
-                      >
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="group relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors">Order #ORD-2024-002</p>
-                          <p className="text-sm text-slate-600">Shipped • ZMW 280.00</p>
-                          <div className="flex items-center gap-2 mt-1">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                            <span className="text-xs text-blue-600 font-medium">Arriving today</span>
-                          </div>
-                        </div>
+                      <div className="text-right">
+                        <p className="font-medium text-gray-900">{order.total}</p>
+                        <Badge variant={order.status === 'Delivered' ? 'default' : 'secondary'}>
+                          {order.status}
+                        </Badge>
                       </div>
-                      <button
-                        onClick={() => router.push('/orders')}
-                        className="group/btn bg-blue-100 hover:bg-blue-200 text-blue-700 hover:text-blue-800 font-medium text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
-                      >
-                        Track Package
-                      </button>
                     </div>
-                  </div>
-
-                  <div className="group relative overflow-hidden bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-yellow-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-slate-900 group-hover:text-orange-700 transition-colors">Order #ORD-2024-003</p>
-                          <p className="text-sm text-slate-600">Processing • ZMW 195.00</p>
-                          <div className="flex items-center gap-2 mt-1">
-                            <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                            <span className="text-xs text-orange-600 font-medium">Being prepared</span>
-                          </div>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => router.push('/orders')}
-                        className="group/btn bg-orange-100 hover:bg-orange-200 text-orange-700 hover:text-orange-800 font-medium text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
-                      >
-                        View Status
-                      </button>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              </div>
-            </div>
+                <div className="mt-4">
+                  <Link href="/orders">
+                    <Button variant="outline" className="w-full">
+                      View All Orders
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Trending Offers */}
-          <TrendingOffers
-            title="⚡ Flash Deals Near You"
-            subtitle="Limited-time offers from local vendors"
-            maxOffers={4}
-            layout="grid"
-          />
+          {/* Quick Actions */}
+          <div className="space-y-6">
+            {/* Shopping Actions */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ShoppingBag className="h-5 w-5" />
+                  Quick Shopping
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Link href="/marketplace">
+                  <Button className="w-full justify-start" variant="outline">
+                    <TrendingUp className="h-4 w-4 mr-2" />
+                    Browse Marketplace
+                  </Button>
+                </Link>
+                <Link href="/hot-deals">
+                  <Button className="w-full justify-start bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white">
+                    <Gift className="h-4 w-4 mr-2" />
+                    Hot Deals 🔥
+                  </Button>
+                </Link>
+                <Link href="/wishlist">
+                  <Button className="w-full justify-start" variant="outline">
+                    <Heart className="h-4 w-4 mr-2" />
+                    My Wishlist ({favorites.length})
+                  </Button>
+                </Link>
+                <Link href="/cart">
+                  <Button className="w-full justify-start" variant="outline">
+                    <ShoppingBag className="h-4 w-4 mr-2" />
+                    My Cart ({totalItems})
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
 
-          {/* Category Grid */}
-          <DynamicCategoryGrid
-            title="Shop by Category"
-            subtitle="Discover products in your area"
-            maxCategories={6}
-            showFilters={true}
-          />
+            {/* Account Actions */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Settings className="h-5 w-5" />
+                  Account
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Link href="/profile">
+                  <Button className="w-full justify-start" variant="outline">
+                    <User className="h-4 w-4 mr-2" />
+                    Edit Profile
+                  </Button>
+                </Link>
+                <Link href="/settings">
+                  <Button className="w-full justify-start" variant="outline">
+                    <Settings className="h-4 w-4 mr-2" />
+                    Settings
+                  </Button>
+                </Link>
+                <Link href="/orders">
+                  <Button className="w-full justify-start" variant="outline">
+                    <Package className="h-4 w-4 mr-2" />
+                    Order History
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
 
-          {/* Personalized Recommendations */}
-          <PersonalizedProductCarousel
-            title="Recommended for You"
-            subtitle="Based on your browsing history and location"
-            maxItems={6}
-          />
-
-          {/* Local Vendors */}
-          <VendorShowcase
-            title="Vendors Near You"
-            subtitle="Support local businesses in your community"
-            maxVendors={4}
-          />
-
-          {/* Recently Viewed */}
-          <PersonalizedProductCarousel
-            title="Continue Shopping"
-            subtitle="Items you viewed recently"
-            maxItems={6}
-          />
-
-          {/* Recent Activity */}
-          <RecentActivity user={user} />
+        {/* Recommendations */}
+        <div className="mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Star className="h-5 w-5" />
+                Recommended for You
+              </CardTitle>
+              <CardDescription>
+                Based on your shopping history and preferences
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { name: "Electronics", icon: "📱", count: "25+ items" },
+                  { name: "Fashion", icon: "👕", count: "40+ items" },
+                  { name: "Home & Garden", icon: "🏠", count: "15+ items" },
+                  { name: "Health & Beauty", icon: "💄", count: "20+ items" }
+                ].map((category) => (
+                  <Link key={category.name} href={`/marketplace?category=${category.name}`}>
+                    <Card className="hover:shadow-md transition-shadow cursor-pointer">
+                      <CardContent className="p-4 text-center">
+                        <div className="text-2xl mb-2">{category.icon}</div>
+                        <p className="font-medium text-gray-900">{category.name}</p>
+                        <p className="text-sm text-gray-500">{category.count}</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </main>
 
       <Footer />
     </div>
-  )
+  );
 }

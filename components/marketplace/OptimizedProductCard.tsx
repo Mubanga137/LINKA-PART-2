@@ -53,7 +53,7 @@ export function OptimizedProductCard({
   };
 
   return (
-    <article className="group bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-blue-200 flex flex-col h-full max-w-sm mx-auto">
+    <article className="group bg-white rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blue-200 flex flex-col h-full w-full">
       {/* Product Image Container */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         {imageLoading && !imageError && (
@@ -76,22 +76,29 @@ export function OptimizedProductCard({
         />
         
         {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex justify-between items-start z-10">
-          <div className="flex flex-col gap-1.5">
-            {product.freeShipping && (
-              <Badge className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                <Truck className="h-3 w-3" />
-                Free Shipping
+        <div className="absolute top-2 left-2 right-2 flex justify-between items-start z-10">
+          <div className="flex flex-col gap-1">
+            {(product as any).hotDeal && (
+              <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-md shadow-lg animate-pulse">
+                🔥 HOT DEAL
               </Badge>
             )}
-            {product.featured && (
-              <Badge className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg">
+            {product.freeShipping && (
+              <Badge className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+                <Truck className="h-3 w-3" />
+                <span className="hidden sm:inline">Free Shipping</span>
+                <span className="sm:hidden">Free</span>
+              </Badge>
+            )}
+            {product.featured && !((product as any).hotDeal) && (
+              <Badge className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
                 <Zap className="h-3 w-3" />
-                Top Rated
+                <span className="hidden sm:inline">Top Rated</span>
+                <span className="sm:hidden">Top</span>
               </Badge>
             )}
             {product.discountPercentage && (
-              <Badge className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-pulse">
+              <Badge className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-md shadow-sm">
                 -{product.discountPercentage}%
               </Badge>
             )}
@@ -100,7 +107,7 @@ export function OptimizedProductCard({
           <Button
             size="sm"
             variant="ghost"
-            className="w-11 h-11 p-0 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 tap-target focus-visible-enhanced"
+            className="w-11 h-11 p-0 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 tap-target-sm focus-visible-enhanced"
             onClick={() => onToggleFavorite(product.id)}
             aria-label={`${isFavorite ? 'Remove from' : 'Add to'} favorites`}
           >
@@ -114,15 +121,15 @@ export function OptimizedProductCard({
       </div>
 
       {/* Product Content */}
-      <div className="p-16 flex-1 flex flex-col landscape:p-3">
+      <div className="p-3 flex-1 flex flex-col">
         {/* Vendor Info Header */}
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
               {product.vendor.name.charAt(0)}
             </div>
-            <div className="min-w-0">
-              <p className="text-clamp-sm font-medium text-gray-900 truncate">
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-medium text-gray-900 truncate">
                 {product.vendor.name}
               </p>
               <div className="flex items-center gap-1 text-xs text-gray-500">
@@ -131,51 +138,42 @@ export function OptimizedProductCard({
               </div>
             </div>
           </div>
-          
+
           {/* Rating */}
           <div className="flex items-center gap-1 flex-shrink-0">
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <span className="text-sm font-semibold text-gray-700">
+            <Star className="h-3 w-3 text-yellow-400 fill-current" />
+            <span className="text-xs font-semibold text-gray-700">
               {product.rating?.toFixed(1)}
             </span>
           </div>
         </div>
 
         {/* Product Name */}
-        <h3 className="text-clamp-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-snug">
+        <h3 className="text-sm font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
           {product.name}
         </h3>
 
         {/* Price Section */}
-        <div className="mb-3">
+        <div className="mb-2">
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-base font-bold text-gray-900">
               K{product.price.toFixed(2)}
             </span>
             {product.originalPrice && (
-              <span className="text-sm text-gray-400 line-through">
+              <span className="text-xs text-gray-400 line-through">
                 K{product.originalPrice.toFixed(2)}
               </span>
             )}
           </div>
           {product.originalPrice && (
-            <p className="text-xs text-green-600 font-medium mt-0.5">
-              You save K{(product.originalPrice - product.price).toFixed(2)}
+            <p className="text-xs text-green-600 font-medium">
+              Save K{(product.originalPrice - product.price).toFixed(2)}
             </p>
           )}
         </div>
 
-        {/* Product Tags */}
-        <div className="flex flex-wrap gap-1 mb-16">
-          {product.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
-
         {/* Stock Status */}
-        <div className="mb-16">
+        <div className="mb-3">
           <div className={`flex items-center gap-1 text-xs ${
             product.inStock ? 'text-green-600' : 'text-red-600'
           }`}>
@@ -194,16 +192,16 @@ export function OptimizedProductCard({
           <Button
             onClick={() => onAddToCart(product)}
             disabled={!product.inStock}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced text-clamp-sm"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 text-sm rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced"
             aria-label={`Add ${product.name} to cart`}
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
             Add to Cart
           </Button>
-          
-          <Button 
-            variant="outline" 
-            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 rounded-lg transition-all duration-200 tap-target focus-visible-enhanced text-clamp-sm"
+
+          <Button
+            variant="outline"
+            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-3 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
             asChild
           >
             <Link href={`/products/${product.id}`}>
@@ -211,20 +209,6 @@ export function OptimizedProductCard({
               View Details
             </Link>
           </Button>
-        </div>
-
-        {/* Features Row */}
-        <div className="flex flex-wrap gap-1 mt-2">
-          {product.freeShipping && (
-            <Badge variant="secondary" className="text-xs">
-              Free Shipping
-            </Badge>
-          )}
-          {product.fastDelivery && (
-            <Badge variant="secondary" className="text-xs">
-              Fast Delivery
-            </Badge>
-          )}
         </div>
       </div>
     </article>

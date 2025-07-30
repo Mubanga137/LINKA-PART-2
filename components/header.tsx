@@ -5,6 +5,8 @@ import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { MobileNavigation } from "@/components/mobile-navigation"
+import { MobileCartWishlistFAB } from "@/components/mobile-cart-wishlist-fab"
+import { EnhancedNavigation } from "@/components/enhanced-navigation"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -62,10 +64,11 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200/50 shadow-sm">
+    <>
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200/50 shadow-sm">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative">
                 <LinkIcon className="h-9 w-9 text-indigo-600 group-hover:text-indigo-700 transition-colors" />
@@ -75,6 +78,9 @@ export function Header() {
                 Linka
               </span>
             </Link>
+
+            {/* Enhanced Navigation */}
+            <EnhancedNavigation />
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
@@ -266,6 +272,10 @@ export function Header() {
       </div>
 
 
-    </header>
+      </header>
+
+      {/* Mobile Cart & Wishlist Floating Action Buttons */}
+      <MobileCartWishlistFAB />
+    </>
   )
 }

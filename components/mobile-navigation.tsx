@@ -31,15 +31,19 @@ import {
   ChevronRight,
   ShoppingCart,
   Bell,
-  Package
+  Package,
+  ArrowLeft,
+  Flame
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context"
+import { useFavorites } from "@/contexts/marketplace-context"
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false)
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
+  const { favorites } = useFavorites()
   const router = useRouter()
   const pathname = usePathname()
 
@@ -50,6 +54,31 @@ export function MobileNavigation() {
   }
 
   const closeSheet = () => setIsOpen(false)
+
+  // Show cart/wishlist on shopping-related pages
+  const isShoppingPage = pathname?.includes('/marketplace') ||
+                        pathname?.includes('/shop') ||
+                        pathname?.includes('/cart') ||
+                        pathname?.includes('/checkout') ||
+                        pathname?.includes('/products') ||
+                        pathname?.includes('/categories')
+
+  const isHomePage = pathname === '/'
+
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push('/');
+    }
+    closeSheet();
+  }
+
+  // Check if we're in marketplace context for Hot Deals visibility
+  const isMarketplaceContext = pathname?.includes('/marketplace') ||
+                              pathname?.includes('/hot-deals') ||
+                              pathname?.includes('/products') ||
+                              pathname?.includes('/categories');
 
   // Primary navigation items
   const primaryItems = [
@@ -65,6 +94,14 @@ export function MobileNavigation() {
       icon: ShoppingBag,
       active: pathname?.includes("/marketplace")
     },
+    // Only show Hot Deals in marketplace context
+    ...(isMarketplaceContext ? [{
+      name: "Hot Deals",
+      href: "/hot-deals",
+      icon: Flame,
+      active: pathname?.includes("/hot-deals"),
+      isSpecial: true
+    }] : []),
     {
       name: "Services",
       href: "/industries",
@@ -167,6 +204,87 @@ export function MobileNavigation() {
               </div>
             )}
 
+            {/* Cart & Wishlist Quick Access - Show on shopping pages */}
+            {isShoppingPage && (
+              <div className="px-6 pb-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    href="/cart"
+                    onClick={closeSheet}
+                    className="flex items-center justify-center space-x-2 p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all duration-200 hover:shadow-xl tap-target-sm"
+                  >
+                    <ShoppingCart className="h-5 w-5" />
+                    <span className="font-semibold text-sm">Cart</span>
+                    {totalItems > 0 && (
+                      <Badge className="bg-white text-blue-600 text-xs font-bold px-2 py-0.5 rounded-full ml-1">
+                        {totalItems}
+                      </Badge>
+                    )}
+                  </Link>
+
+                  <Link
+                    href="/wishlist"
+                    onClick={closeSheet}
+                    className="flex items-center justify-center space-x-2 p-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-xl shadow-lg shadow-pink-500/20 transition-all duration-200 hover:shadow-xl tap-target-sm"
+                  >
+                    <Heart className="h-5 w-5" />
+                    <span className="font-semibold text-sm">Wishlist</span>
+                    {favorites.length > 0 && (
+                      <Badge className="bg-white text-pink-600 text-xs font-bold px-2 py-0.5 rounded-full ml-1">
+                        {favorites.length}
+                      </Badge>
+                    )}
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation Controls */}
+            <div className="px-6 pb-4">
+              <div className={`grid gap-2 ${isMarketplaceContext ? 'grid-cols-3' : !isHomePage ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                {/* Back Button */}
+                {!isHomePage && (
+                  <Button
+                    onClick={handleBack}
+                    variant="outline"
+                    className="flex items-center justify-center space-x-1 p-2 border-slate-200 text-slate-700 hover:bg-slate-50 rounded-lg transition-all duration-200 tap-target-sm"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="text-xs font-medium">Back</span>
+                  </Button>
+                )}
+
+                {/* Home Button */}
+                {!isHomePage && (
+                  <Button
+                    onClick={() => {
+                      router.push('/');
+                      closeSheet();
+                    }}
+                    variant="outline"
+                    className="flex items-center justify-center space-x-1 p-2 border-slate-200 text-slate-700 hover:bg-slate-50 rounded-lg transition-all duration-200 tap-target-sm"
+                  >
+                    <Home className="h-4 w-4" />
+                    <span className="text-xs font-medium">Home</span>
+                  </Button>
+                )}
+
+                {/* Hot Deals Button - Only show in marketplace context */}
+                {isMarketplaceContext && (
+                  <Button
+                    onClick={() => {
+                      router.push('/hot-deals');
+                      closeSheet();
+                    }}
+                    className="flex items-center justify-center space-x-1 p-2 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg transition-all duration-200 tap-target-sm"
+                  >
+                    <Flame className="h-4 w-4" />
+                    <span className="text-xs font-bold">Hot Deals</span>
+                  </Button>
+                )}
+              </div>
+            </div>
+
             {/* Main Navigation */}
             <nav className="flex-1 px-6 space-y-2">
               {/* Primary Items */}
@@ -178,20 +296,30 @@ export function MobileNavigation() {
                     onClick={closeSheet}
                     className={`
                       flex items-center space-x-4 p-4 rounded-2xl transition-all duration-200 group
-                      ${item.active 
-                        ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/20' 
+                      ${item.active
+                        ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
+                        : (item as any).isSpecial
+                        ? 'bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 text-red-700 hover:from-red-100 hover:to-orange-100'
                         : 'text-slate-700 hover:bg-slate-100 hover:text-indigo-600'
                       }
                     `}
                   >
                     <div className={`
                       w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200
-                      ${item.active 
-                        ? 'bg-white/20' 
+                      ${item.active
+                        ? 'bg-white/20'
+                        : (item as any).isSpecial
+                        ? 'bg-red-100'
                         : 'bg-slate-100 group-hover:bg-indigo-100'
                       }
                     `}>
-                      <item.icon className={`h-5 w-5 ${item.active ? 'text-white' : 'text-slate-600 group-hover:text-indigo-600'}`} />
+                      <item.icon className={`h-5 w-5 ${
+                        item.active
+                          ? 'text-white'
+                          : (item as any).isSpecial
+                          ? 'text-red-600'
+                          : 'text-slate-600 group-hover:text-indigo-600'
+                      }`} />
                     </div>
                     <span className="font-medium">{item.name}</span>
                     <ChevronRight className={`h-4 w-4 ml-auto ${item.active ? 'text-white/70' : 'text-slate-400'}`} />

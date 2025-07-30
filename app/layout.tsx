@@ -4,7 +4,9 @@ import { GeistMono } from 'geist/font/mono'
 import { AuthProvider } from '@/contexts/auth-context'
 import { CartProvider } from '@/contexts/cart-context'
 import { RetailerAuthProvider } from '@/contexts/retailer-auth-context'
+import { MarketplaceProvider } from '@/contexts/marketplace-context'
 import { ThemeProvider } from '@/components/theme-provider'
+import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -72,7 +74,11 @@ html {
           <AuthProvider>
             <RetailerAuthProvider>
               <CartProvider>
-                {children}
+                <MarketplaceProvider>
+                  <AuthRedirectWrapper>
+                    {children}
+                  </AuthRedirectWrapper>
+                </MarketplaceProvider>
               </CartProvider>
             </RetailerAuthProvider>
           </AuthProvider>

@@ -40,12 +40,13 @@ import Link from "next/link";
 
 // Mock data for demonstration
 const mockCategories: Category[] = [
-  { id: "1", name: "Electronics", slug: "electronics", icon: "📱", productCount: 18 },
-  { id: "2", name: "Fashion", slug: "fashion", icon: "👕", productCount: 12 },
-  { id: "3", name: "Home & Garden", slug: "home-garden", icon: "🏠", productCount: 15 },
-  { id: "4", name: "Health & Beauty", slug: "health-beauty", icon: "💄", productCount: 8 },
-  { id: "5", name: "Sports & Outdoors", slug: "sports", icon: "⚽", productCount: 6 },
-  { id: "6", name: "Books & Media", slug: "books", icon: "📚", productCount: 4 }
+  { id: "1", name: "Electronics", slug: "electronics", icon: "📱", productCount: 9 },
+  { id: "2", name: "Fashion", slug: "fashion", icon: "👕", productCount: 6 },
+  { id: "3", name: "Home & Garden", slug: "home-garden", icon: "🏠", productCount: 7 },
+  { id: "4", name: "Health & Beauty", slug: "health-beauty", icon: "💄", productCount: 3 },
+  { id: "5", name: "Sports & Outdoors", slug: "sports", icon: "⚽", productCount: 4 },
+  { id: "6", name: "Books & Media", slug: "books", icon: "📚", productCount: 3 },
+  { id: "7", name: "Jewelry & Accessories", slug: "jewelry", icon: "💎", productCount: 1 }
 ];
 
 const mockProducts: Product[] = [
@@ -469,6 +470,228 @@ const mockProducts: Product[] = [
     freeShipping: true,
     createdAt: new Date(),
     updatedAt: new Date()
+  },
+
+  // Additional Traditional Crafts
+  {
+    id: "23",
+    name: "Traditional African Headwrap",
+    description: "Authentic colorful African headwrap with beautiful embroidered patterns",
+    price: 32.99,
+    images: ["https://images.pexels.com/photos/3021563/pexels-photo-3021563.jpeg"],
+    category: "Fashion",
+    inStock: true,
+    stockQuantity: 28,
+    rating: 4.8,
+    reviewCount: 56,
+    tags: ["headwrap", "traditional", "colorful", "african"],
+    vendor: { id: "v20", name: "African Heritage Textiles", logo: "" },
+    featured: true,
+    freeShipping: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "24",
+    name: "Handmade Beaded Jewelry Set",
+    description: "Beautiful handcrafted jewelry with traditional African beads and feathers",
+    price: 58.99,
+    originalPrice: 79.99,
+    images: ["https://images.pexels.com/photos/709617/pexels-photo-709617.jpeg"],
+    category: "Jewelry & Accessories",
+    inStock: true,
+    stockQuantity: 15,
+    rating: 4.9,
+    reviewCount: 42,
+    tags: ["jewelry", "handmade", "beads", "traditional"],
+    vendor: { id: "v21", name: "Zambian Artisan Jewelry", logo: "" },
+    discountPercentage: 26,
+    featured: true,
+    freeShipping: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "25",
+    name: "Artisan Ceramic Pottery Collection",
+    description: "Elegant handcrafted ceramic pottery perfect for home decoration",
+    price: 89.99,
+    images: ["https://images.pexels.com/photos/19884207/pexels-photo-19884207.png"],
+    category: "Home & Garden",
+    inStock: true,
+    stockQuantity: 12,
+    rating: 4.7,
+    reviewCount: 38,
+    tags: ["pottery", "ceramic", "handcrafted", "decoration"],
+    vendor: { id: "v22", name: "Pottery Masters Zambia", logo: "" },
+    featured: true,
+    freeShipping: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "26",
+    name: "Wicker Basket Collection",
+    description: "Beautiful handwoven wicker baskets and accessories for storage and decor",
+    price: 45.99,
+    images: ["https://images.pexels.com/photos/9173943/pexels-photo-9173943.jpeg"],
+    category: "Home & Garden",
+    inStock: true,
+    stockQuantity: 24,
+    rating: 4.6,
+    reviewCount: 67,
+    tags: ["wicker", "baskets", "handwoven", "storage"],
+    vendor: { id: "v23", name: "Traditional Weavers Co-op", logo: "" },
+    freeShipping: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "27",
+    name: "Modern Ceramic Dinnerware",
+    description: "Clean, minimalist ceramic dinnerware set perfect for modern dining",
+    price: 129.99,
+    originalPrice: 159.99,
+    images: ["https://images.pexels.com/photos/3756655/pexels-photo-3756655.jpeg"],
+    category: "Home & Garden",
+    inStock: true,
+    stockQuantity: 18,
+    rating: 4.8,
+    reviewCount: 94,
+    tags: ["ceramic", "dinnerware", "modern", "minimalist"],
+    vendor: { id: "v24", name: "Modern Home Essentials", logo: "" },
+    discountPercentage: 19,
+    featured: true,
+    fastDelivery: true,
+    freeShipping: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "28",
+    name: "Professional Stationery Set",
+    description: "Premium office stationery set for professional and creative work",
+    price: 39.99,
+    images: ["https://images.pexels.com/photos/29765803/pexels-photo-29765803.jpeg"],
+    category: "Books & Media",
+    inStock: true,
+    stockQuantity: 45,
+    rating: 4.5,
+    reviewCount: 78,
+    tags: ["stationery", "office", "professional", "workspace"],
+    vendor: { id: "v25", name: "Office Pro Zambia", logo: "" },
+    fastDelivery: true,
+    freeShipping: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "29",
+    name: "Premium Yoga Mat",
+    description: "High-quality cork yoga mat perfect for indoor exercise and meditation",
+    price: 67.99,
+    images: ["https://images.pexels.com/photos/8436582/pexels-photo-8436582.jpeg"],
+    category: "Sports & Outdoors",
+    inStock: true,
+    stockQuantity: 32,
+    rating: 4.7,
+    reviewCount: 156,
+    tags: ["yoga", "exercise", "cork", "meditation"],
+    vendor: { id: "v26", name: "Wellness & Fitness Zambia", logo: "" },
+    featured: true,
+    fastDelivery: true,
+    freeShipping: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+
+  // Hot Deals Products
+  {
+    id: "30",
+    name: "Gaming Headset Pro",
+    description: "Professional gaming headset with 7.1 surround sound and noise cancellation",
+    price: 79.99,
+    originalPrice: 149.99,
+    images: ["https://images.unsplash.com/photo-1585298723682-7115561c51b7?w=800&q=80"],
+    category: "Electronics",
+    inStock: true,
+    stockQuantity: 25,
+    rating: 4.8,
+    reviewCount: 189,
+    tags: ["gaming", "headset", "audio", "pro"],
+    vendor: { id: "v27", name: "Gaming World Zambia", logo: "" },
+    discountPercentage: 47,
+    featured: true,
+    fastDelivery: true,
+    freeShipping: true,
+    hotDeal: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "31",
+    name: "Smart Fitness Watch",
+    description: "Advanced fitness tracker with heart rate monitoring and GPS",
+    price: 159.99,
+    originalPrice: 299.99,
+    images: ["https://images.unsplash.com/photo-1544117519-31a4b719223d?w=800&q=80"],
+    category: "Electronics",
+    inStock: true,
+    stockQuantity: 15,
+    rating: 4.7,
+    reviewCount: 245,
+    tags: ["smartwatch", "fitness", "tracker", "health"],
+    vendor: { id: "v28", name: "Wearable Tech Zambia", logo: "" },
+    discountPercentage: 47,
+    featured: true,
+    fastDelivery: true,
+    freeShipping: true,
+    hotDeal: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "32",
+    name: "Designer Handbag Collection",
+    description: "Luxury designer handbag made from genuine leather",
+    price: 89.99,
+    originalPrice: 179.99,
+    images: ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"],
+    category: "Fashion",
+    inStock: true,
+    stockQuantity: 8,
+    rating: 4.9,
+    reviewCount: 87,
+    tags: ["handbag", "designer", "leather", "luxury"],
+    vendor: { id: "v29", name: "Luxury Fashion Zambia", logo: "" },
+    discountPercentage: 50,
+    featured: true,
+    freeShipping: true,
+    hotDeal: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "33",
+    name: "Wireless Charging Station",
+    description: "Multi-device wireless charging station for phones, watches, and earbuds",
+    price: 49.99,
+    originalPrice: 99.99,
+    images: ["https://images.unsplash.com/photo-1601972602237-8c79241e468b?w=800&q=80"],
+    category: "Electronics",
+    inStock: true,
+    stockQuantity: 30,
+    rating: 4.6,
+    reviewCount: 156,
+    tags: ["wireless", "charging", "station", "multi-device"],
+    vendor: { id: "v30", name: "Tech Accessories Zambia", logo: "" },
+    discountPercentage: 50,
+    featured: true,
+    fastDelivery: true,
+    freeShipping: true,
+    hotDeal: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ];
 
@@ -479,6 +702,15 @@ function MarketplaceContent() {
   });
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
+
+  // Handle URL parameters for filters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hotDealParam = urlParams.get('filter');
+    if (hotDealParam === 'hotDeal') {
+      setFilters(prev => ({ ...prev, hotDeal: true }));
+    }
+  }, []);
   
   const { cart, addToCart, getCartItemCount } = useCart();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
@@ -532,6 +764,10 @@ function MarketplaceContent() {
       result = result.filter(product => product.featured);
     }
 
+    if ((filters as any).hotDeal) {
+      result = result.filter(product => (product as any).hotDeal);
+    }
+
     // Apply sorting
     switch (filters.sortBy) {
       case 'price_low':
@@ -572,23 +808,23 @@ function MarketplaceContent() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
       <Header />
       
-      <main className="mx-auto max-w-screen-xl px-16 landscape:px-6 sm:px-24 lg:px-32 py-32 landscape:py-4">
+      <main className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Enhanced Hero Section */}
-        <section className="text-center space-y-8 mb-16">
-          <div className="space-y-6">
-            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-50 to-green-50 px-6 py-3 text-sm border border-blue-200/50 shadow-sm backdrop-blur-sm animate-fade-in">
+        <section className="text-center space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+          <div className="space-y-4">
+            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-50 to-green-50 px-4 py-2 text-sm border border-blue-200/50">
               <ShoppingBag className="mr-2 h-4 w-4 text-blue-600" />
-              <span className="text-blue-800 font-medium">🛍️ Zambia's Premier E-commerce Platform</span>
+              <span className="text-blue-800 font-medium">Zambia's Premier E-commerce Platform</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight animate-slide-up">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
               Shop Local,
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent animate-gradient">
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
                 Support Zambian Businesses
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed animate-fade-in-delay">
+            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
               Discover amazing products from verified local vendors. From handmade crafts to modern electronics,
               find everything you need while supporting the Zambian economy.
             </p>
@@ -598,20 +834,47 @@ function MarketplaceContent() {
         </section>
 
         {/* Search and Filters */}
-        <section className="space-y-6 mb-8">
+        <section className="space-y-4 mb-6">
           {/* Enhanced Search Bar */}
-          <div className="relative max-w-3xl mx-auto">
+          <div className="relative w-full">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 z-10" />
               <Input
                 type="text"
-                placeholder="Search products, brands, or categories..."
+                placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-4 text-lg rounded-2xl border-2 border-gray-200 focus:border-blue-400 focus:ring-0 bg-white/80 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl focus:shadow-xl"
+                className="w-full pl-12 pr-4 py-3 text-base rounded-lg border border-gray-200 focus:border-blue-400 focus:ring-0 bg-white transition-all duration-200 tap-target"
               />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </div>
+          </div>
+
+          {/* Quick Filters */}
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-center mb-4">
+            <Button
+              variant={filters.featured ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilters(prev => ({ ...prev, featured: !prev.featured }))}
+              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm"
+            >
+              ⭐ Featured
+            </Button>
+            <Button
+              variant={(filters as any).hotDeal ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilters(prev => ({ ...prev, hotDeal: !(prev as any).hotDeal }))}
+              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 text-red-700 hover:from-red-100 hover:to-orange-100"
+            >
+              🔥 Hot Deals
+            </Button>
+            <Button
+              variant={filters.freeShipping ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilters(prev => ({ ...prev, freeShipping: !prev.freeShipping }))}
+              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm"
+            >
+              🚚 Free Ship
+            </Button>
           </div>
 
           {/* Category Navigation */}
@@ -639,7 +902,7 @@ function MarketplaceContent() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-80">
-                  <div className="space-y-6">
+                  <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                     <h3 className="text-lg font-semibold">Filters</h3>
                     
                     {/* Price Range */}
@@ -757,10 +1020,42 @@ function MarketplaceContent() {
           </div>
         </section>
 
+        {/* Hot Deals Section */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white text-2xl">🔥</span>
+              </div>
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Hot Deals</h2>
+                <p className="text-sm text-gray-600">Limited time offers - Up to 50% off!</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-sm text-red-600 font-semibold">⏰ Limited Time</div>
+              <div className="text-xs text-gray-500">Ends soon!</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 sm:gap-4 md:gap-4 lg:gap-4 md:grid-cols-4 lg:grid-cols-4">
+            {mockProducts.filter(product => product.hotDeal).map((product, index) => (
+              <OptimizedProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={handleAddToCart}
+                onToggleFavorite={toggleFavorite}
+                isFavorite={isFavorite(product.id)}
+                priority={index < 2}
+              />
+            ))}
+          </div>
+        </section>
+
         {/* Optimized Products Grid */}
-        <section className="space-y-24">
+        <section className="space-y-6 sm:space-y-8">
           {viewMode === 'grid' ? (
-            <div className="grid grid-cols-2 gap-16 landscape:grid-cols-3 landscape:gap-6 sm:grid-cols-2 sm:gap-20 md:grid-cols-3 md:gap-24 lg:grid-cols-4 lg:gap-24">
+            <div className="grid grid-cols-2 gap-4 sm:gap-4 md:gap-4 lg:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {filteredProducts.map((product, index) => (
                 <OptimizedProductCard
                   key={product.id}
@@ -773,7 +1068,7 @@ function MarketplaceContent() {
               ))}
             </div>
           ) : (
-            <div className="space-y-16">
+            <div className="space-y-4 sm:space-y-6">
               {filteredProducts.map((product, index) => (
                 <div
                   key={product.id}
@@ -790,15 +1085,15 @@ function MarketplaceContent() {
                       decoding="async"
                     />
                   </div>
-                  <div className="p-20 flex-1 flex flex-col justify-between">
+                  <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between">
                     <div>
                       <h3 className="text-clamp-lg font-bold text-gray-900 mb-2">
                         {product.name}
                       </h3>
-                      <p className="text-clamp-base text-gray-600 mb-16">
+                      <p className="text-clamp-base text-gray-600 mb-3 sm:mb-4">
                         {product.description}
                       </p>
-                      <div className="flex items-baseline gap-2 mb-16">
+                      <div className="flex items-baseline gap-2 mb-3 sm:mb-4">
                         <span className="text-2xl font-bold text-gray-900">
                           K{product.price.toFixed(2)}
                         </span>
@@ -809,18 +1104,18 @@ function MarketplaceContent() {
                         )}
                       </div>
                     </div>
-                    <div className="flex gap-12">
+                    <div className="flex gap-2 sm:gap-3">
                       <Button
                         onClick={() => handleAddToCart(product)}
                         disabled={!product.inStock}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-24 rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced"
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 sm:px-6 rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced flex-1"
                       >
                         <ShoppingCart className="h-4 w-4 mr-2" />
                         Add to Cart
                       </Button>
                       <Button
                         variant="outline"
-                        className="border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 px-16 rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
+                        className="border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 px-4 sm:px-6 rounded-lg transition-all duration-200 tap-target focus-visible-enhanced flex-1"
                         asChild
                       >
                         <Link href={`/products/${product.id}`}>
@@ -855,13 +1150,13 @@ function MarketplaceContent() {
         </section>
 
         {/* Featured Categories */}
-        <section className="mt-16 space-y-8">
+        <section className="mt-8 space-y-4">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Shop by Category</h2>
             <p className="text-gray-600">Explore our wide range of product categories</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-16 landscape:grid-cols-3 landscape:gap-6 sm:grid-cols-3 sm:gap-20 md:grid-cols-4 md:gap-24 lg:grid-cols-6 lg:gap-24">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
             {mockCategories.map((category) => (
               <Card
                 key={category.id}
@@ -879,9 +1174,9 @@ function MarketplaceContent() {
         </section>
 
         {/* CTA Section */}
-        <section className="mt-16 bg-gradient-to-r from-blue-600 via-blue-700 to-green-600 text-white relative overflow-hidden rounded-3xl p-8 md:p-12 text-center">
+        <section className="mt-8 bg-gradient-to-r from-blue-600 via-blue-700 to-green-600 text-white relative overflow-hidden rounded-2xl p-6 sm:p-8 text-center">
           <div className="absolute inset-0 bg-black/10"></div>
-          <div className="relative z-10 space-y-6">
+          <div className="relative z-10 space-y-4 sm:space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold">
               Join Our Marketplace
             </h2>

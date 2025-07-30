@@ -56,6 +56,7 @@ export interface Product {
   discountPercentage?: number;
   fastDelivery?: boolean;
   freeShipping?: boolean;
+  hotDeal?: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -90,6 +91,7 @@ export interface MarketplaceFilters {
   freeShipping?: boolean;
   fastDelivery?: boolean;
   featured?: boolean;
+  hotDeal?: boolean;
   tags?: string[];
   vendorId?: string;
   sortBy?: 'relevance' | 'price_low' | 'price_high' | 'rating' | 'name' | 'newest' | 'discount';
