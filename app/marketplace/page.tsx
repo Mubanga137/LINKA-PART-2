@@ -820,7 +820,7 @@ function MarketplaceContent() {
                       </Button>
                       <Button
                         variant="outline"
-                        className="border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 px-16 rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
+                        className="border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 px-4 sm:px-6 rounded-lg transition-all duration-200 tap-target focus-visible-enhanced flex-1"
                         asChild
                       >
                         <Link href={`/products/${product.id}`}>
