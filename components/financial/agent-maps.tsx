@@ -533,5 +533,3 @@ export function AgentMaps() {
     </div>
   )
 }
-
-export { AgentMaps }
