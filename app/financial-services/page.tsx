@@ -14,6 +14,9 @@ import { RealTimeData } from "@/components/financial/real-time-data"
 import { UserReviews } from "@/components/financial/user-reviews"
 import { EligibilityTools } from "@/components/financial/eligibility-tools"
 import { AgentMaps } from "@/components/financial/agent-maps"
+import { EnhancedAgentMaps } from "@/components/financial/enhanced-agent-maps"
+import { LiveChat } from "@/components/financial/live-chat"
+import { DigitalKYC } from "@/components/financial/digital-kyc"
 import {
   CreditCard,
   DollarSign,
@@ -157,6 +160,7 @@ export default function FinancialServicesPage() {
     { id: "comparison", name: "Compare", icon: GitCompare },
     { id: "eligibility", name: "Eligibility", icon: FileText },
     { id: "agents", name: "Find Agents", icon: MapPin },
+    { id: "kyc", name: "Digital KYC", icon: Shield },
     { id: "market-data", name: "Live Data", icon: Activity },
     { id: "reviews", name: "Reviews", icon: MessageCircle }
   ]
@@ -561,6 +565,10 @@ export default function FinancialServicesPage() {
                   <Activity className="h-4 w-4" />
                   <span className="hidden sm:inline">Live Data</span>
                 </TabsTrigger>
+                <TabsTrigger value="kyc" className="flex items-center gap-2">
+                  <Shield className="h-4 w-4" />
+                  <span className="hidden sm:inline">Digital KYC</span>
+                </TabsTrigger>
                 <TabsTrigger value="reviews" className="flex items-center gap-2">
                   <MessageCircle className="h-4 w-4" />
                   <span className="hidden sm:inline">Reviews</span>
@@ -584,11 +592,15 @@ export default function FinancialServicesPage() {
               </TabsContent>
 
               <TabsContent value="agents" id="agents" className="space-y-8">
-                <AgentMaps />
+                <EnhancedAgentMaps />
               </TabsContent>
 
               <TabsContent value="market-data" id="market-data" className="space-y-8">
                 <RealTimeData />
+              </TabsContent>
+
+              <TabsContent value="kyc" id="kyc" className="space-y-8">
+                <DigitalKYC />
               </TabsContent>
 
               <TabsContent value="reviews" id="reviews" className="space-y-8">
@@ -785,6 +797,9 @@ export default function FinancialServicesPage() {
       </main>
 
       <Footer />
+
+      {/* Live Chat Component */}
+      <LiveChat />
     </div>
   )
 }
