@@ -241,7 +241,7 @@ export function MobileNavigation() {
 
             {/* Navigation Controls */}
             <div className="px-6 pb-4">
-              <div className="grid grid-cols-3 gap-2">
+              <div className={`grid gap-2 ${isMarketplaceContext ? 'grid-cols-3' : !isHomePage ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 {/* Back Button */}
                 {!isHomePage && (
                   <Button
@@ -269,17 +269,19 @@ export function MobileNavigation() {
                   </Button>
                 )}
 
-                {/* Hot Deals Button */}
-                <Button
-                  onClick={() => {
-                    router.push('/hot-deals');
-                    closeSheet();
-                  }}
-                  className={`flex items-center justify-center space-x-1 p-2 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg transition-all duration-200 tap-target-sm ${!isHomePage ? 'col-span-1' : 'col-span-3'}`}
-                >
-                  <Flame className="h-4 w-4" />
-                  <span className="text-xs font-bold">Hot Deals</span>
-                </Button>
+                {/* Hot Deals Button - Only show in marketplace context */}
+                {isMarketplaceContext && (
+                  <Button
+                    onClick={() => {
+                      router.push('/hot-deals');
+                      closeSheet();
+                    }}
+                    className="flex items-center justify-center space-x-1 p-2 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg transition-all duration-200 tap-target-sm"
+                  >
+                    <Flame className="h-4 w-4" />
+                    <span className="text-xs font-bold">Hot Deals</span>
+                  </Button>
+                )}
               </div>
             </div>
 
