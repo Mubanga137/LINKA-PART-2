@@ -5,10 +5,10 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  ShoppingBag, 
-  TrendingUp, 
-  Users, 
+import {
+  ShoppingBag,
+  TrendingUp,
+  Users,
   Star,
   MapPin,
   Shield,
@@ -16,10 +16,6 @@ import {
   Truck,
   Clock
 } from "lucide-react";
-import type { Vendor } from "@/lib/types";
-import { VendorsGrid } from "@/components/marketplace/VendorsGrid";
-import { MarketingView } from "@/components/marketing/MarketingView";
-import styles from "@/styles/marketplace.module.scss";
 
 // Enhanced vendor data with realistic information
 const vendors: Vendor[] = [
