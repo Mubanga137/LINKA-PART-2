@@ -141,6 +141,21 @@ const platformServices = [
     features: ["House Cleaning", "Maintenance", "Repairs", "Home Improvement"],
     stats: { professionals: "60+", jobs: "120+/month" },
     image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=300&fit=crop"
+  },
+  {
+    id: 9,
+    name: "Financial Services",
+    icon: DollarSign,
+    description: "Banking, investments, insurance, and comprehensive financial solutions",
+    providers: 95,
+    rating: 4.6,
+    href: "/financial-services",
+    gradient: "from-emerald-500 to-green-600",
+    bgGradient: "from-emerald-50 to-green-50",
+    features: ["Banking Solutions", "Investment Planning", "Insurance Coverage", "+5 more"],
+    stats: { providers: "95+", volume: "ZMW 2.5M+/month" },
+    image: "https://cdn.builder.io/api/v1/image/assets%2Fc72968545b7946109e3f1b305aec7cf3%2F48be576abbc14f709c8001b43acf66f3?format=webp&width=800",
+    isSpecial: true
   }
 ]
 
