@@ -154,7 +154,7 @@ const platformServices = [
     bgGradient: "from-emerald-50 to-green-50",
     features: ["Banking Solutions", "Investment Planning", "Insurance Coverage", "+5 more"],
     stats: { providers: "95+", volume: "ZMW 2.5M+/month" },
-    image: "https://cdn.builder.io/api/v1/image/assets%2Fc72968545b7946109e3f1b305aec7cf3%2F48be576abbc14f709c8001b43acf66f3?format=webp&width=800",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
     isSpecial: true
   }
 ]
