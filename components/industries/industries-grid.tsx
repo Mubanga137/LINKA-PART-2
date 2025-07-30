@@ -19,6 +19,7 @@ import {
   Package,
   Truck,
   Heart,
+  DollarSign,
 } from "lucide-react"
 import Link from "next/link"
 
