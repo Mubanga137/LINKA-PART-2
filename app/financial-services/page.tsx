@@ -40,92 +40,97 @@ import {
   MapPin,
   MessageCircle,
   Menu,
-  X
+  X,
+  Search,
+  ArrowRight,
+  Clock,
+  Target,
+  Percent
 } from "lucide-react"
 
 const financialCategories = [
   {
-    id: "banking",
-    name: "Banking Services",
-    icon: Building,
-    description: "Savings, current accounts, loans, and mobile banking",
+    id: "loans",
+    name: "Loan Services",
+    icon: CreditCard,
+    description: "Microloans, business loans, and personal financing solutions",
     color: "from-blue-500 to-indigo-600",
     bgColor: "from-blue-50 to-indigo-50",
+    stats: { approved: "15K+", rate: "+23%" },
     items: [
-      { name: "Zanaco Savings Account", price: "ZMW 50 min balance", users: "45K", rating: 4.6, discount: "NO FEES" },
-      { name: "Stanbic Personal Loans", price: "15% - 25% APR", users: "12K", rating: 4.5, discount: "FAST APPROVAL" },
-      { name: "FNB Mobile Banking", price: "Free transactions", users: "28K", rating: 4.7, discount: "NEW" },
-      { name: "Barclays Business Account", price: "ZMW 100 monthly", users: "8K", rating: 4.4, discount: null },
+      { name: "QuickCash Uganda", price: "UGX 100K - UGX 10M", users: "45K", rating: 4.8, discount: "FEATURED", processingTime: "< 24 hours", approval: "95%" },
+      { name: "Business Finance Solutions", price: "UGX 1M - UGX 50M", users: "12K", rating: 4.6, discount: "BUSINESS", processingTime: "3-5 days", approval: "87%" },
+      { name: "Community Credit Union", price: "UGX 200K - UGX 5M", users: "28K", rating: 4.7, discount: "COMMUNITY", processingTime: "2-3 days", approval: "92%" },
     ],
   },
   {
-    id: "investments",
-    name: "Investment Services",
-    icon: TrendingUp,
-    description: "Stocks, bonds, unit trusts, and portfolio management",
+    id: "savings",
+    name: "Savings & Investments",
+    icon: PiggyBank,
+    description: "Savings groups, cooperatives, and investment opportunities",
     color: "from-green-500 to-emerald-600",
     bgColor: "from-green-50 to-emerald-50",
+    stats: { approved: "8.5K", rate: "+12%" },
     items: [
-      { name: "LuSE Stock Trading", price: "0.5% - 2% commission", users: "3.2K", rating: 4.8, discount: "TRENDING" },
-      { name: "Unit Trust Funds", price: "ZMW 500 minimum", users: "5.1K", rating: 4.7, discount: "POPULAR" },
-      { name: "Government Bonds", price: "ZMW 1,000 minimum", users: "2.8K", rating: 4.9, discount: "SECURE" },
-      { name: "Portfolio Management", price: "1% - 3% annual fee", users: "890", rating: 4.8, discount: "EXPERT" },
-    ],
-  },
-  {
-    id: "insurance",
-    name: "Insurance Products",
-    icon: Shield,
-    description: "Life, motor, health, and property insurance",
-    color: "from-purple-500 to-violet-600",
-    bgColor: "from-purple-50 to-violet-50",
-    items: [
-      { name: "Motor Insurance", price: "ZMW 800 - 3,500/year", users: "18K", rating: 4.5, discount: "COMPARE" },
-      { name: "Life Insurance", price: "ZMW 200 - 1,000/month", users: "14K", rating: 4.7, discount: "FAMILY" },
-      { name: "Health Insurance", price: "ZMW 300 - 800/month", users: "22K", rating: 4.6, discount: "COVERAGE" },
-      { name: "Property Insurance", price: "ZMW 500 - 2,000/year", users: "9K", rating: 4.4, discount: null },
+      { name: "SACCO Savings Groups", price: "UGX 50K minimum", users: "32K", rating: 4.9, discount: "COOPERATIVE", returns: "12-15% annually" },
+      { name: "Investment Clubs", price: "UGX 100K entry", users: "15K", rating: 4.7, discount: "GROWTH", returns: "18-25% annually" },
+      { name: "Fixed Deposits", price: "UGX 500K minimum", users: "8K", rating: 4.5, discount: "SECURE", returns: "8-10% annually" },
     ],
   },
   {
     id: "mobile-money",
-    name: "Mobile Money",
+    name: "Mobile Money Agents",
     icon: Smartphone,
-    description: "Digital payments, transfers, and mobile banking",
+    description: "Find nearby MTN/Airtel agents for transactions",
+    color: "from-purple-500 to-violet-600",
+    bgColor: "from-purple-50 to-violet-50",
+    stats: { approved: "500+", rate: "+8%" },
+    items: [
+      { name: "MTN Mobile Money", price: "UGX 500 - 15K per transaction", users: "125K", rating: 4.4, discount: "POPULAR", network: "Largest network" },
+      { name: "Airtel Money", price: "UGX 300 - 12K per transaction", users: "98K", rating: 4.6, discount: "LOW FEES", network: "Fast transfers" },
+      { name: "Agent Banking", price: "Free transactions", users: "67K", rating: 4.5, discount: "BANK LINKED", network: "Bank services" },
+    ],
+  },
+  {
+    id: "insurance",
+    name: "Insurance",
+    icon: Shield,
+    description: "Health, motor, life, and SME insurance coverage",
     color: "from-orange-500 to-red-600",
     bgColor: "from-orange-50 to-red-50",
+    stats: { approved: "95%", rate: "+15%" },
     items: [
-      { name: "MTN Mobile Money", price: "ZMW 2 - 15 per transaction", users: "125K", rating: 4.3, discount: "POPULAR" },
-      { name: "Airtel Money", price: "ZMW 1.5 - 12 per transaction", users: "98K", rating: 4.5, discount: "LOW FEES" },
-      { name: "Zamtel Kwacha", price: "ZMW 2 - 10 per transaction", users: "45K", rating: 4.2, discount: null },
-      { name: "Bank Mobile Apps", price: "Free transactions", users: "67K", rating: 4.6, discount: "BANK LINKED" },
+      { name: "Motor Insurance", price: "UGX 200K - 2M/year", users: "18K", rating: 4.5, discount: "COMPARE", coverage: "Comprehensive" },
+      { name: "Health Insurance", price: "UGX 150K - 800K/year", users: "22K", rating: 4.7, discount: "FAMILY", coverage: "Medical & dental" },
+      { name: "Life Insurance", price: "UGX 100K - 500K/year", users: "14K", rating: 4.6, discount: "PROTECTION", coverage: "Life & disability" },
     ],
   },
   {
-    id: "loans",
-    name: "Loans & Credit",
-    icon: CreditCard,
-    description: "Personal loans, business loans, and credit facilities",
-    color: "from-emerald-500 to-teal-600",
-    bgColor: "from-emerald-50 to-teal-50",
-    items: [
-      { name: "Quick Personal Loans", price: "18% - 35% APR", users: "8.5K", rating: 4.3, discount: "FAST" },
-      { name: "Business Loans", price: "15% - 28% APR", users: "3.2K", rating: 4.5, discount: "SME" },
-      { name: "Salary Advances", price: "12% - 25% APR", users: "12K", rating: 4.4, discount: "PAYROLL" },
-      { name: "Asset Finance", price: "14% - 22% APR", users: "1.8K", rating: 4.6, discount: "ASSETS" },
-    ],
-  },
-  {
-    id: "advisory",
-    name: "Financial Advisory",
-    icon: Users,
-    description: "Financial planning, tax advice, and wealth management",
+    id: "tax-accounting",
+    name: "Tax & Accounting",
+    icon: FileText,
+    description: "Professional tax consultants and accounting services",
     color: "from-indigo-500 to-blue-600",
     bgColor: "from-indigo-50 to-blue-50",
+    stats: { approved: "200+", rate: "+18%" },
     items: [
-      { name: "Financial Planning", price: "ZMW 500 - 2,000/session", users: "1.2K", rating: 4.9, discount: "CERTIFIED" },
-      { name: "Tax Consultation", price: "ZMW 300 - 1,500/session", users: "2.8K", rating: 4.7, discount: "TAX SEASON" },
-      { name: "Retirement Planning", price: "ZMW 800 - 3,000/plan", users: "890", rating: 4.8, discount: "FUTURE" },
-      { name: "Business Advisory", price: "ZMW 1,000 - 5,000/project", users: "645", rating: 4.9, discount: "GROWTH" },
+      { name: "Tax Filing Services", price: "UGX 50K - 300K", users: "5.2K", rating: 4.8, discount: "EXPERT", service: "Individual & business" },
+      { name: "Bookkeeping Services", price: "UGX 100K - 500K/month", users: "3.1K", rating: 4.7, discount: "MONTHLY", service: "Full accounting" },
+      { name: "VAT Registration", price: "UGX 200K - 800K", users: "2.8K", rating: 4.6, discount: "COMPLIANCE", service: "Legal registration" },
+    ],
+  },
+  {
+    id: "payments",
+    name: "Payment Gateways",
+    icon: Globe,
+    description: "Integrate payment solutions for your business",
+    color: "from-teal-500 to-cyan-600",
+    bgColor: "from-teal-50 to-cyan-50",
+    stats: { approved: "99.9%", rate: "+30%" },
+    items: [
+      { name: "Flutterwave Integration", price: "2.9% + UGX 100", users: "12K", rating: 4.9, discount: "POPULAR", features: "Multi-channel payments" },
+      { name: "Paystack Uganda", price: "3.2% + UGX 150", users: "8K", rating: 4.7, discount: "RELIABLE", features: "Online & POS" },
+      { name: "MTN MoMo API", price: "1.5% transaction fee", users: "25K", rating: 4.6, discount: "LOCAL", features: "Mobile integration" },
     ],
   },
 ]
@@ -246,40 +251,104 @@ export default function FinancialServicesPage() {
       
       <main className="py-8">
         {/* Hero Section */}
-        <section className="py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/10"></div>
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
-            <div className="text-center mb-12">
-              <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <DollarSign className="h-10 w-10 text-white" />
+        <section className="relative min-h-[70vh] overflow-hidden">
+          {/* Background with gradient matching reference design */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-blue-600 to-green-500"></div>
+          <div className={"absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"2\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"}></div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-16">
+            {/* Trust Badge */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 text-white">
+                <Star className="h-5 w-5 text-yellow-300 fill-current" />
+                <span className="font-medium">Trusted by 50,000+ Ugandans</span>
+                <Star className="h-5 w-5 text-yellow-300 fill-current" />
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
-                  Financial Services
-                </span>
+            </div>
+
+            {/* Main Heading */}
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Your Trusted Financial Solutions
               </h1>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Comprehensive financial solutions for your personal and business needs. All providers are licensed and regulated by Zambian authorities.
+              <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+                All in one place. Secure, verified, and designed for your success.
               </p>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-emerald-600">95+</div>
-                <div className="text-sm text-slate-600">Licensed Providers</div>
+            {/* Live Update Badge */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 text-white">
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium">Live</span>
+                <span className="text-sm">John M. just got approved for UGX 2M loan</span>
+                <CheckCircle className="h-4 w-4 text-green-400" />
               </div>
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-blue-600">6</div>
-                <div className="text-sm text-slate-600">Service Categories</div>
+            </div>
+
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto mb-12">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search by financial service, provider name, or location..."
+                  className="w-full px-6 py-4 rounded-full bg-white/95 backdrop-blur-sm border-0 text-slate-900 placeholder-slate-500 text-lg focus:outline-none focus:ring-4 focus:ring-white/30 shadow-xl"
+                />
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-colors">
+                  <Search className="h-5 w-5" />
+                </button>
               </div>
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-purple-600">ZMW 2.5M+</div>
-                <div className="text-sm text-slate-600">Monthly Volume</div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap justify-center gap-4 mb-16">
+              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-full">
+                <FileText className="mr-2 h-5 w-5" />
+                Apply Now
+              </Button>
+              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-full">
+                <Phone className="mr-2 h-5 w-5" />
+                Request Call
+              </Button>
+              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-full">
+                <MapPin className="mr-2 h-5 w-5" />
+                Locate Agent
+              </Button>
+              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-full">
+                <Calculator className="mr-2 h-5 w-5" />
+                Get a Quote
+              </Button>
+            </div>
+
+            {/* Stats Cards matching reference design */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-6 w-6 text-blue-600" />
+                </div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">500+</div>
+                <div className="text-sm text-slate-600">Verified Providers</div>
               </div>
-              <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-orange-600">4.6</div>
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <FileText className="h-6 w-6 text-green-600" />
+                </div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">10K+</div>
+                <div className="text-sm text-slate-600">Successful Applications</div>
+              </div>
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Star className="h-6 w-6 text-yellow-600" />
+                </div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">4.8</div>
                 <div className="text-sm text-slate-600">Average Rating</div>
+              </div>
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="h-6 w-6 text-purple-600" />
+                </div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">25%</div>
+                <div className="text-sm text-slate-600">Growth Rate</div>
               </div>
             </div>
           </div>
