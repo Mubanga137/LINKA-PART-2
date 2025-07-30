@@ -154,26 +154,10 @@ const testVendors = [
 export default function MarketplacePage() {
   const [cartCount, setCartCount] = useState(0);
 
-  const handleAddToCart = (vendor: Vendor) => {
+  const handleAddToCart = (vendorName: string) => {
     setCartCount(prev => prev + 1);
-    // Here you would integrate with your cart store or API
-    console.log("Added to cart:", vendor.name);
-    
-    // Show a temporary success message (you might want to use a toast library)
-    if (typeof window !== 'undefined') {
-      const notification = document.createElement('div');
-      notification.textContent = `${vendor.name} added to cart!`;
-      notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all';
-      document.body.appendChild(notification);
-      setTimeout(() => {
-        notification.remove();
-      }, 3000);
-    }
+    console.log("Added to cart:", vendorName);
   };
-
-  const featuredVendors = vendors.filter(v => v.isFeatured);
-  const totalReviews = vendors.reduce((sum, vendor) => sum + (vendor.reviewCount || 0), 0);
-  const averageRating = vendors.reduce((sum, vendor) => sum + (vendor.rating || 0), 0) / vendors.length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
