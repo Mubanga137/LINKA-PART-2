@@ -113,7 +113,7 @@ const mockProducts: Product[] = [
     name: "Smartphone 128GB",
     description: "Latest smartphone with advanced camera system and long-lasting battery",
     price: 399.99,
-    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F781161047542425d834cd9572f5323bb?format=webp&width=800"],
+    images: ["https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80"],
     category: "Electronics",
     inStock: true,
     stockQuantity: 28,
