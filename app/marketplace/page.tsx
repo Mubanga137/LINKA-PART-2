@@ -795,7 +795,7 @@ function MarketplaceContent() {
                       <h3 className="text-clamp-lg font-bold text-gray-900 mb-2">
                         {product.name}
                       </h3>
-                      <p className="text-clamp-base text-gray-600 mb-16">
+                      <p className="text-clamp-base text-gray-600 mb-3 sm:mb-4">
                         {product.description}
                       </p>
                       <div className="flex items-baseline gap-2 mb-16">
