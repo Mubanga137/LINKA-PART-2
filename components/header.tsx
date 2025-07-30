@@ -95,7 +95,7 @@ export function Header() {
                   <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
                 </Link>
                 <Link
-                  href="/industries"
+                  href="/services"
                   className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
                 >
                   Services
@@ -134,7 +134,7 @@ export function Header() {
                   <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-indigo-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform"></span>
                 </Link>
                 <Link
-                  href="/industries"
+                  href="/services"
                   className="text-slate-600 hover:text-slate-900 font-medium transition-colors relative group py-2"
                 >
                   Services
