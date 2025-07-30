@@ -151,17 +151,36 @@
     animation: shimmer 2s infinite;
   }
 
+  /* Mobile App Standard Tap Targets */
+  .tap-target-sm {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .tap-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  .tap-target-lg {
+    min-height: 56px;
+    min-width: 56px;
+  }
+
+  /* Mobile Navigation Standards */
+  .mobile-nav-height { height: 56px; } /* Standard mobile nav */
+  .mobile-header-height { height: 64px; } /* Standard mobile header */
+  .mobile-fab {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+  }
+
   /* Focus states for accessibility */
   .focus-visible-enhanced:focus-visible {
     outline: 2px solid #3b82f6;
     outline-offset: 2px;
     border-radius: 0.375rem;
-  }
-
-  /* Tap targets minimum size */
-  .tap-target {
-    min-height: 44px;
-    min-width: 44px;
   }
 
   .line-clamp-1 {
