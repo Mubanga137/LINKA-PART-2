@@ -360,10 +360,9 @@ export function UserReviews() {
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
                 <Avatar className="w-12 h-12">
-                  <AvatarContent className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold">
+                  <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold">
                     {review.user.initials}
-                  </AvatarContent>
-                  <AvatarFallback>{review.user.initials}</AvatarFallback>
+                  </AvatarFallback>
                 </Avatar>
 
                 <div className="flex-1 space-y-3">
