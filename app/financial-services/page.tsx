@@ -366,21 +366,15 @@ export default function FinancialServicesPage() {
           </div>
         </section>
 
-        {/* Financial Categories Section */}
-        <section id="overview" className="py-16 relative">
+        {/* Financial Services Section */}
+        <section id="overview" className="py-20 bg-slate-50 relative">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                  Financial
-                </span>
-                <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
-                  {" "}
-                  Categories
-                </span>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">
+                Financial Services
               </h2>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                Explore comprehensive financial services from trusted and verified providers across Zambia
+                Explore our comprehensive range of financial solutions designed to meet your personal and business needs.
               </p>
             </div>
 
