@@ -379,5 +379,3 @@ export function RealTimeData() {
     </div>
   )
 }
-
-export { RealTimeData }
