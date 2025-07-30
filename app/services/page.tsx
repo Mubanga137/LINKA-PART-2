@@ -229,29 +229,41 @@ export default function ServicesPage() {
         {/* General Overview */}
         <section className="py-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 mb-12 border border-blue-100">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4 text-center">How Our Services Work</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Users className="h-6 w-6 text-white" />
+            <div className="bg-gradient-to-r from-violet-50 via-purple-50 to-pink-50 rounded-3xl p-10 mb-12 border border-purple-200/50 shadow-xl backdrop-blur-sm relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-violet-500/5 via-purple-500/5 to-pink-500/5 animate-pulse"></div>
+              <div className="relative z-10">
+                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">How Our Services Work</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div className="text-center group">
+                    <div className="relative mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
+                        <Users className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-2xl opacity-20 blur-lg group-hover:opacity-40 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 className="font-bold text-slate-900 mb-3 text-lg">Browse & Choose</h3>
+                    <p className="text-slate-600">Explore service categories and find the right professional for your needs</p>
                   </div>
-                  <h3 className="font-semibold text-slate-900 mb-2">Browse & Choose</h3>
-                  <p className="text-slate-600 text-sm">Explore service categories and find the right professional for your needs</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Clock className="h-6 w-6 text-white" />
+                  <div className="text-center group">
+                    <div className="relative mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
+                        <Clock className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-violet-400 rounded-2xl opacity-20 blur-lg group-hover:opacity-40 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 className="font-bold text-slate-900 mb-3 text-lg">Book & Schedule</h3>
+                    <p className="text-slate-600">Schedule appointments at your convenience with verified providers</p>
                   </div>
-                  <h3 className="font-semibold text-slate-900 mb-2">Book & Schedule</h3>
-                  <p className="text-slate-600 text-sm">Schedule appointments at your convenience with verified providers</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Award className="h-6 w-6 text-white" />
+                  <div className="text-center group">
+                    <div className="relative mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
+                        <Award className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="absolute -inset-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-2xl opacity-20 blur-lg group-hover:opacity-40 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 className="font-bold text-slate-900 mb-3 text-lg">Get Quality Service</h3>
+                    <p className="text-slate-600">Receive professional service from rated and reviewed providers</p>
                   </div>
-                  <h3 className="font-semibold text-slate-900 mb-2">Get Quality Service</h3>
-                  <p className="text-slate-600 text-sm">Receive professional service from rated and reviewed providers</p>
                 </div>
               </div>
             </div>
