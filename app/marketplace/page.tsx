@@ -607,11 +607,11 @@ function MarketplaceContent() {
                         <ShoppingCart className="h-4 w-4 mr-2" />
                         Add to Cart
                       </Button>
-                      <Button variant="outline" asChild>
-                        <Link href={`/products/${product.id}`}>
-                          View Details
-                        </Link>
-                      </Button>
+                      <ProductDetailModal product={product}>
+                        <Button variant="outline" className="w-full">
+                          Quick View
+                        </Button>
+                      </ProductDetailModal>
                     </div>
                   </div>
                 </CardContent>
