@@ -96,7 +96,7 @@ const mockProducts: Product[] = [
     description: "High-quality portable Bluetooth speaker with rich bass and crystal clear sound",
     price: 149.99,
     originalPrice: 199.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Ff3e433849be94dcea73b70b52bc48b6c?alt=media&token=ef1766f5-4412-4b9f-b1b2-8559fb9778aa&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F446d5cc72e28434a84adb3fc2ae1765d?format=webp&width=800"],
     category: "Electronics",
     inStock: true,
     stockQuantity: 34,
