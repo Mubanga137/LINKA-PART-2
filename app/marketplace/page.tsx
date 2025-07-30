@@ -57,7 +57,7 @@ const mockProducts: Product[] = [
     description: "Ultra HD Smart TV with built-in streaming apps and crystal clear display",
     price: 599.99,
     originalPrice: 749.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F0293e2bc38f5442f9fb9d22b6313cc75?alt=media&token=6bfbc5db-83f9-4d66-b752-2e5d6c5e566c&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fa9c377c2cdc54e7092356c307bf7eb05?format=webp&width=800"],
     category: "Electronics",
     inStock: true,
     stockQuantity: 15,
