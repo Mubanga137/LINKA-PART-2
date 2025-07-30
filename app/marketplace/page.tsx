@@ -438,7 +438,7 @@ const mockProducts: Product[] = [
     name: "Zambian Literature Collection",
     description: "Comprehensive collection of contemporary Zambian literature and poetry",
     price: 45.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fc8697749d1ff404493568a1d916a0c83?alt=media&token=fd6aecf7-7b7a-471c-be47-9fc55e7975ac&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80"],
     category: "Books & Media",
     inStock: true,
     stockQuantity: 34,
