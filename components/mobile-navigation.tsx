@@ -63,6 +63,17 @@ export function MobileNavigation() {
                         pathname?.includes('/products') ||
                         pathname?.includes('/categories')
 
+  const isHomePage = pathname === '/'
+
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push('/');
+    }
+    closeSheet();
+  }
+
   // Primary navigation items
   const primaryItems = [
     {
