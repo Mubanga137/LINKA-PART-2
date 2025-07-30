@@ -54,7 +54,7 @@ export function EnhancedNavigation() {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => router.push('/marketplace')}
+        onClick={() => router.push('/hot-deals')}
         className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 transition-all duration-200 tap-target-sm bg-gradient-to-r from-red-50 to-orange-50 border border-red-200/50"
       >
         <Flame className="h-4 w-4" />
