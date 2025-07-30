@@ -77,7 +77,7 @@ const mockProducts: Product[] = [
     name: "Wireless Gaming Controller",
     description: "Professional wireless controller with precision controls for gaming",
     price: 79.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F9da134d1ff7b4622b152509a91eb6828?alt=media&token=c5acfe29-f649-4c39-8e4d-5048b7500592&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fa35923a331f74e45a3fb698b57b311bf?format=webp&width=800"],
     category: "Electronics",
     inStock: true,
     stockQuantity: 67,
