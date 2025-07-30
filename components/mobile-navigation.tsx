@@ -265,7 +265,7 @@ export function MobileNavigation() {
                 {/* Hot Deals Button */}
                 <Button
                   onClick={() => {
-                    router.push('/marketplace');
+                    router.push('/hot-deals');
                     closeSheet();
                   }}
                   className={`flex items-center justify-center space-x-1 p-2 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg transition-all duration-200 tap-target-sm ${!isHomePage ? 'col-span-1' : 'col-span-3'}`}
