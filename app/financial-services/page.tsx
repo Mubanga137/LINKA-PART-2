@@ -329,7 +329,8 @@ export default function FinancialServicesPage() {
                       : "hover:bg-slate-50 hover:border-slate-300"
                   }`}
                 >
-                  <category.icon
+                  <FeatureIcon
+                    icon={category.icon}
                     className={`mr-2 h-5 w-5 ${
                       activeCategory === category.id ? "text-white" : "text-slate-600"
                     } group-hover:scale-110 transition-transform`}
