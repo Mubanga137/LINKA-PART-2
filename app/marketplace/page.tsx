@@ -322,7 +322,7 @@ const mockProducts: Product[] = [
     name: "Natural Soap Collection",
     description: "Handmade natural soaps with indigenous ingredients and essential oils",
     price: 24.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F049c0033df1c48acb369ffae87d15775?alt=media&token=1bc58182-9c29-43e8-be7a-38e46ea751e4&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80"],
     category: "Health & Beauty",
     inStock: true,
     stockQuantity: 67,
