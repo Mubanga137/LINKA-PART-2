@@ -31,8 +31,6 @@ import {
   Package
 } from "lucide-react";
 import { MarketplaceProvider, useCart, useFavorites } from "@/contexts/marketplace-context";
-import { ShoppingCart as ShoppingCartComponent } from "@/components/marketplace/ShoppingCart";
-import { Wishlist } from "@/components/marketplace/Wishlist";
 import { ProductDetailModal } from "@/components/marketplace/ProductDetailModal";
 import { CategoryNavigation, HorizontalCategoryNav } from "@/components/marketplace/CategoryNavigation";
 import type { Product, MarketplaceFilters, Category } from "@/lib/types";
