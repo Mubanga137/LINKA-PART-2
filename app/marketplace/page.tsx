@@ -211,7 +211,7 @@ const mockProducts: Product[] = [
     name: "Women's Casual Blouse",
     description: "Comfortable and stylish blouse perfect for everyday wear",
     price: 29.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fac44f54a90274f918483238500b918f2?alt=media&token=6fe6b301-97d3-456e-b6af-75582a63a90e&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F781161047542425d834cd9572f5323bb?format=webp&width=800"],
     category: "Fashion",
     inStock: true,
     stockQuantity: 45,
