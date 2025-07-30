@@ -20,6 +20,16 @@ import { useCart } from "@/contexts/cart-context"
 export function Header() {
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
+
+  // For wishlist functionality - only use on shopping pages
+  let favoritesCount = 0
+  try {
+    const { useFavorites } = require("@/contexts/marketplace-context")
+    const { favorites } = useFavorites()
+    favoritesCount = favorites.length
+  } catch {
+    // Marketplace context not available on this page
+  }
   const router = useRouter()
   const pathname = usePathname()
 
