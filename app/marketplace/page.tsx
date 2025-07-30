@@ -798,7 +798,7 @@ function MarketplaceContent() {
                       <p className="text-clamp-base text-gray-600 mb-3 sm:mb-4">
                         {product.description}
                       </p>
-                      <div className="flex items-baseline gap-2 mb-16">
+                      <div className="flex items-baseline gap-2 mb-3 sm:mb-4">
                         <span className="text-2xl font-bold text-gray-900">
                           K{product.price.toFixed(2)}
                         </span>
