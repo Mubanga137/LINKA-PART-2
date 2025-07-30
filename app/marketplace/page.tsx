@@ -8,8 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { 
-  ShoppingBag, 
+import {
+  ShoppingBag,
   Search,
   Filter,
   Grid3X3,
@@ -27,7 +27,8 @@ import {
   ChevronDown,
   Tag,
   Clock,
-  X
+  X,
+  Package
 } from "lucide-react";
 import { MarketplaceProvider, useCart, useFavorites } from "@/contexts/marketplace-context";
 import { ShoppingCart as ShoppingCartComponent } from "@/components/marketplace/ShoppingCart";
@@ -776,157 +777,140 @@ function MarketplaceContent() {
             : "space-y-4"
           }>
             {filteredProducts.map((product) => (
-              <Card
+              <div
                 key={product.id}
-                className={`group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${
-                  viewMode === 'list' ? 'flex' : ''
+                className={`group bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-blue-200 ${
+                  viewMode === 'list' ? 'flex' : 'flex flex-col'
                 }`}
               >
                 {/* Product Image */}
                 <div className={`relative ${
                   viewMode === 'list' ? 'w-48 flex-shrink-0' : 'aspect-square'
-                } overflow-hidden rounded-t-lg bg-gradient-to-br from-gray-100 to-gray-200`}>
+                } overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100`}>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  
-                  {/* Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-2">
-                    {product.featured && (
-                      <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg">
-                        <Zap className="h-3 w-3 mr-1" />
-                        Featured
-                      </Badge>
-                    )}
-                    {product.discountPercentage && (
-                      <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg">
-                        -{product.discountPercentage}%
-                      </Badge>
-                    )}
-                  </div>
 
-                  {/* Action Buttons */}
-                  <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {/* Top Badges Row */}
+                  <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
+                    <div className="flex flex-col gap-1.5">
+                      {product.freeShipping && (
+                        <div className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                          <Truck className="h-3 w-3" />
+                          Free Shipping
+                        </div>
+                      )}
+                      {product.featured && (
+                        <div className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                          <Zap className="h-3 w-3" />
+                          Top Rated
+                        </div>
+                      )}
+                      {product.discountPercentage && (
+                        <div className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-pulse">
+                          -{product.discountPercentage}%
+                        </div>
+                      )}
+                    </div>
+
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="w-8 h-8 p-0 bg-white/90 hover:bg-white text-gray-700 rounded-full shadow-md"
+                      className="w-8 h-8 p-0 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300"
                       onClick={() => toggleFavorite(product.id)}
                     >
                       <Heart
-                        className={`h-4 w-4 ${
-                          isFavorite(product.id) ? 'fill-red-500 text-red-500' : ''
+                        className={`h-4 w-4 transition-colors ${
+                          isFavorite(product.id) ? 'fill-red-500 text-red-500' : 'hover:text-red-400'
                         }`}
                       />
                     </Button>
                   </div>
-
-                  {/* Quick Info */}
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 border border-white/20 shadow-lg">
-                      <div className="flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-1">
-                          <Star className="h-3 w-3 text-yellow-500 fill-current" />
-                          <span>{product.rating?.toFixed(1)} ({product.reviewCount})</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          {product.freeShipping && (
-                            <div className="flex items-center text-green-600">
-                              <Truck className="h-3 w-3 mr-1" />
-                              <span className="text-xs">Free Ship</span>
-                            </div>
-                          )}
-                          {product.fastDelivery && (
-                            <div className="flex items-center text-blue-600">
-                              <Clock className="h-3 w-3 mr-1" />
-                              <span className="text-xs">Fast</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
-                {/* Product Info */}
-                <CardContent className={`p-4 ${viewMode === 'list' ? 'flex-1' : ''}`}>
-                  <div className="space-y-3">
-                    {/* Vendor */}
+                {/* Product Content */}
+                <div className={`p-4 flex-1 flex flex-col ${viewMode === 'list' ? 'justify-between' : ''}`}>
+                  {/* Vendor Info Header */}
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 bg-gradient-to-br from-blue-100 to-green-100 rounded-full flex items-center justify-center">
-                        <Store className="h-3 w-3 text-blue-600" />
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                        {product.vendor.name.charAt(0)}
                       </div>
-                      <span className="text-xs text-gray-600">{product.vendor.name}</span>
+                      <div>
+                        <p className="text-xs font-medium text-gray-900">{product.vendor.name}</p>
+                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                          <MapPin className="h-3 w-3" />
+                          <span>Lusaka</span>
+                        </div>
+                      </div>
                     </div>
 
-                    {/* Name and Description */}
-                    <div>
-                      <h3 className="font-bold text-lg text-gray-900 line-clamp-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-sm text-gray-600 line-clamp-2 mt-1">
-                        {product.description}
-                      </p>
+                    {/* Rating */}
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                      <span className="text-sm font-semibold text-gray-700">{product.rating?.toFixed(1)}</span>
                     </div>
+                  </div>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1">
-                      {product.tags.slice(0, 3).map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
+                  {/* Product Name */}
+                  <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2 leading-snug">
+                    {product.name}
+                  </h3>
 
-                    {/* Price */}
-                    <div className="flex items-center gap-2">
+                  {/* Price Section */}
+                  <div className="mb-3">
+                    <div className="flex items-baseline gap-2">
                       <span className="text-2xl font-bold text-gray-900">
-                        ZMW {product.price.toFixed(2)}
+                        K{product.price.toFixed(2)}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-sm text-gray-500 line-through">
-                          ZMW {product.originalPrice.toFixed(2)}
+                        <span className="text-sm text-gray-400 line-through">
+                          K{product.originalPrice.toFixed(2)}
                         </span>
                       )}
                     </div>
-
-                    {/* Stock Status */}
-                    <div className="flex items-center gap-2">
-                      <div className={`w-2 h-2 rounded-full ${
-                        product.inStock ? 'bg-green-500' : 'bg-red-500'
-                      }`} />
-                      <span className={`text-sm ${
-                        product.inStock ? 'text-green-600' : 'text-red-600'
-                      }`}>
-                        {product.inStock 
-                          ? `${product.stockQuantity} in stock` 
-                          : 'Out of stock'
-                        }
-                      </span>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="grid grid-cols-2 gap-2 pt-2">
-                      <Button
-                        onClick={() => handleAddToCart(product)}
-                        disabled={!product.inStock}
-                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                      >
-                        <ShoppingCart className="h-4 w-4 mr-2" />
-                        Add to Cart
-                      </Button>
-                      <ProductDetailModal product={product}>
-                        <Button variant="outline" className="w-full">
-                          Quick View
-                        </Button>
-                      </ProductDetailModal>
-                    </div>
+                    {product.originalPrice && (
+                      <p className="text-xs text-green-600 font-medium mt-0.5">
+                        You save K{(product.originalPrice - product.price).toFixed(2)}
+                      </p>
+                    )}
                   </div>
-                </CardContent>
-              </Card>
+
+                  {/* Product Tags */}
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {product.tags.slice(0, 2).map((tag) => (
+                      <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="mt-auto space-y-2">
+                    <Button
+                      onClick={() => handleAddToCart(product)}
+                      disabled={!product.inStock}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50"
+                    >
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      Add to Cart
+                    </Button>
+
+                    <ProductDetailModal product={product}>
+                      <Button
+                        variant="outline"
+                        className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 rounded-lg transition-all duration-200"
+                      >
+                        <Package className="h-4 w-4 mr-2" />
+                        View Products
+                      </Button>
+                    </ProductDetailModal>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
 
