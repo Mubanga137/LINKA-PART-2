@@ -35,7 +35,7 @@ import {
   Award,
   Phone,
   Calendar,
-  Compare,
+  GitCompare,
   Activity,
   MapPin,
   MessageCircle,
