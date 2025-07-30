@@ -378,170 +378,82 @@ export default function FinancialServicesPage() {
               </p>
             </div>
 
-            {/* Category Navigation */}
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              {financialCategories.map((category) => (
-                <Button
+            {/* Service Cards Grid matching reference design */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              {financialCategories.map((category, index) => (
+                <Card
                   key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                  variant={activeCategory === category.id ? "default" : "outline"}
-                  size="lg"
-                  className={`group transition-all duration-300 ${
-                    activeCategory === category.id
-                      ? `bg-gradient-to-r ${category.color} text-white shadow-lg hover:shadow-xl`
-                      : "hover:bg-slate-50 hover:border-slate-300"
+                  className={`group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-pointer border-0 ${
+                    index < 3 ? 'mb-8' : ''
                   }`}
+                  style={{
+                    background: index === 0
+                      ? 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)'
+                      : index === 1
+                      ? 'linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%)'
+                      : index === 2
+                      ? 'linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%)'
+                      : index === 3
+                      ? 'linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%)'
+                      : index === 4
+                      ? 'linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%)'
+                      : 'linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%)'
+                  }}
                 >
-                  <FeatureIcon
-                    icon={category.icon}
-                    className={`mr-2 h-5 w-5 ${
-                      activeCategory === category.id ? "text-white" : "text-slate-600"
-                    } group-hover:scale-110 transition-transform`}
-                  />
-                  {category.name}
-                </Button>
+                  <CardContent className="p-8">
+                    {/* Category Icon and Stats */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${category.color} shadow-lg`}>
+                        <FeatureIcon icon={category.icon} className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 mb-1">
+                          <CheckCircle className="h-4 w-4 text-green-600" />
+                          {category.stats.approved} approved
+                        </div>
+                        <div className="text-xs text-green-600 font-medium">{category.stats.rate}</div>
+                      </div>
+                    </div>
+
+                    {/* Category Title and Description */}
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+                        {category.name}
+                      </h3>
+                      <p className="text-slate-600 leading-relaxed">
+                        {category.description}
+                      </p>
+                    </div>
+
+                    {/* CTA Button */}
+                    <Button
+                      className={`w-full bg-gradient-to-r ${category.color} hover:shadow-lg transition-all duration-300 group-hover:scale-105 rounded-full py-3`}
+                      onClick={() => {
+                        // Navigate to specific service page
+                        window.location.href = `/financial-services/${category.id}`
+                      }}
+                    >
+                      Explore Services
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </CardContent>
+
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Card>
               ))}
             </div>
 
-            {/* Active Category Content */}
-            {currentCategory && (
-              <div className="space-y-8">
-                {/* Category Header */}
-                <div className="relative rounded-3xl p-8 border border-slate-200/50 overflow-hidden">
-                  {/* Background */}
-                  <div className="absolute inset-0">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${currentCategory.bgColor} opacity-80`}></div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative z-10 flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div
-                        className={`w-16 h-16 bg-gradient-to-br ${currentCategory.color} rounded-2xl flex items-center justify-center shadow-lg`}
-                      >
-                        <FeatureIcon icon={currentCategory.icon} className="h-8 w-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-2">{currentCategory.name}</h3>
-                        <p className="text-slate-600">{currentCategory.description}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-slate-900">{currentCategory.items.length}</div>
-                      <div className="text-sm text-slate-500">Available Options</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Category Items Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {currentCategory.items.map((item, index) => (
-                    <Card
-                      key={index}
-                      className="group cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-white/80 backdrop-blur-sm border-white/20 overflow-hidden"
-                      onMouseEnter={() => setHoveredItem(`${currentCategory.id}-${index}`)}
-                      onMouseLeave={() => setHoveredItem(null)}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex-1">
-                            <h4 className="font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">
-                              {item.name}
-                            </h4>
-                            <div className="text-lg font-bold text-emerald-600 mb-2">{item.price}</div>
-                          </div>
-                          {item.discount && (
-                            <Badge
-                              variant="secondary"
-                              className={`${
-                                item.discount === "POPULAR"
-                                  ? "bg-red-100 text-red-700"
-                                  : item.discount === "NEW"
-                                    ? "bg-green-100 text-green-700"
-                                    : item.discount === "TRENDING"
-                                      ? "bg-orange-100 text-orange-700"
-                                      : "bg-blue-100 text-blue-700"
-                              } text-xs font-bold`}
-                            >
-                              {item.discount}
-                            </Badge>
-                          )}
-                        </div>
-
-                        <div className="space-y-3 mb-4">
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center text-slate-600">
-                              <Users className="h-4 w-4 mr-1" />
-                              {item.users} users
-                            </div>
-                            <div className="flex items-center text-slate-600">
-                              <Star className="h-4 w-4 mr-1 text-yellow-400 fill-current" />
-                              {item.rating}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Button
-                            className={`w-full bg-gradient-to-r ${currentCategory.color} hover:shadow-lg transition-all group-hover:scale-105`}
-                            size="sm"
-                          >
-                            {currentCategory.id === "banking" ? (
-                              <>
-                                <Building className="mr-2 h-4 w-4" />
-                                Apply Now
-                              </>
-                            ) : currentCategory.id === "investments" ? (
-                              <>
-                                <TrendingUp className="mr-2 h-4 w-4" />
-                                Invest Now
-                              </>
-                            ) : currentCategory.id === "insurance" ? (
-                              <>
-                                <Shield className="mr-2 h-4 w-4" />
-                                Get Quote
-                              </>
-                            ) : currentCategory.id === "mobile-money" ? (
-                              <>
-                                <Smartphone className="mr-2 h-4 w-4" />
-                                Get Started
-                              </>
-                            ) : currentCategory.id === "loans" ? (
-                              <>
-                                <CreditCard className="mr-2 h-4 w-4" />
-                                Apply Loan
-                              </>
-                            ) : (
-                              <>
-                                <Users className="mr-2 h-4 w-4" />
-                                Book Consultation
-                              </>
-                            )}
-                          </Button>
-
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full hover:bg-slate-50 bg-transparent"
-                          >
-                            {currentCategory.id === "advisory" ? "Schedule Call" : "Learn More"}
-                          </Button>
-                        </div>
-
-                        {/* Progress Bar */}
-                        <div className="mt-4 w-full bg-slate-200 rounded-full h-1 overflow-hidden">
-                          <div
-                            className={`h-full bg-gradient-to-r ${currentCategory.color} transition-all duration-1000 ease-out ${
-                              hoveredItem === `${currentCategory.id}-${index}` ? "w-full" : "w-0"
-                            }`}
-                          />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            )}
+            {/* Explore All Services Button */}
+            <div className="text-center">
+              <Button
+                className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300"
+                onClick={() => scrollToSection('calculators')}
+              >
+                Explore Services
+                <ArrowRight className="ml-3 h-5 w-5" />
+              </Button>
+            </div>
 
             {/* Market Trends */}
             <div className="mt-16 text-center">
