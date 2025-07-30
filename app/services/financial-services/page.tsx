@@ -285,10 +285,54 @@ export default function FinancialServicesPage() {
           </div>
         </section>
 
+        {/* Market Data Dashboard */}
+        <section className="py-8">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-center mb-8">Live Market Data</h2>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
+                <CardContent className="p-6 text-center">
+                  <TrendingUp className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                  <p className="text-sm text-slate-600">USD/ZMW Rate</p>
+                  <p className="text-2xl font-bold text-green-600">24.85</p>
+                  <p className="text-xs text-green-500">+0.15 (0.6%) ↗</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+                <CardContent className="p-6 text-center">
+                  <BarChart3 className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                  <p className="text-sm text-slate-600">LuSE Index</p>
+                  <p className="text-2xl font-bold text-blue-600">4,582.31</p>
+                  <p className="text-xs text-blue-500">+12.4 (0.3%) ↗</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-purple-50 to-violet-50 border-purple-200">
+                <CardContent className="p-6 text-center">
+                  <PiggyBank className="h-8 w-8 text-purple-600 mx-auto mb-2" />
+                  <p className="text-sm text-slate-600">Bank Rate</p>
+                  <p className="text-2xl font-bold text-purple-600">9.25%</p>
+                  <p className="text-xs text-slate-500">Central Bank Rate</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-orange-50 to-red-50 border-orange-200">
+                <CardContent className="p-6 text-center">
+                  <DollarSign className="h-8 w-8 text-orange-600 mx-auto mb-2" />
+                  <p className="text-sm text-slate-600">Inflation Rate</p>
+                  <p className="text-2xl font-bold text-orange-600">13.4%</p>
+                  <p className="text-xs text-red-500">-0.2% from last month</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* Quick Financial Tools */}
         <section className="py-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-center mb-8">Quick Financial Tools</h2>
+            <h2 className="text-2xl font-bold text-center mb-8">Financial Planning Tools</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
               <Button
                 onClick={() => setShowLoanCalculator(true)}
@@ -309,6 +353,65 @@ export default function FinancialServicesPage() {
                 <Target className="h-5 w-5 mr-2" />
                 Budget Planner
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Financial News & Updates */}
+        <section className="py-8 bg-gradient-to-r from-slate-50 to-gray-50">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-center mb-8">Financial News & Updates</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="hover:shadow-lg transition-all duration-300">
+                <CardContent className="p-6">
+                  <img
+                    src="https://cdn.builder.io/o/assets%2F7c87b45712944202864afb9b3f47cba2%2Fefcee56a289b4fd584fd9f34dc4d4aa7?alt=media&token=33eafad3-aba3-4153-a243-6922a8efa4b5&apiKey=7c87b45712944202864afb9b3f47cba2"
+                    alt="Financial News"
+                    className="w-full h-40 object-cover rounded-lg mb-4"
+                  />
+                  <Badge className="bg-emerald-100 text-emerald-800 mb-2">Banking</Badge>
+                  <h3 className="font-bold text-slate-900 mb-2">New Mobile Banking Features Launched</h3>
+                  <p className="text-slate-600 text-sm mb-3">Banks introduce enhanced security features for mobile transactions</p>
+                  <div className="flex items-center text-xs text-slate-500">
+                    <Clock className="h-4 w-4 mr-1" />
+                    2 hours ago
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-all duration-300">
+                <CardContent className="p-6">
+                  <img
+                    src="https://cdn.builder.io/o/assets%2F7c87b45712944202864afb9b3f47cba2%2F3e7c8068f27446a9b865726c17257635?alt=media&token=a194efea-d537-47d3-8aa0-333d686516f6&apiKey=7c87b45712944202864afb9b3f47cba2"
+                    alt="Investment News"
+                    className="w-full h-40 object-cover rounded-lg mb-4"
+                  />
+                  <Badge className="bg-blue-100 text-blue-800 mb-2">Investment</Badge>
+                  <h3 className="font-bold text-slate-900 mb-2">LuSE Index Reaches New Heights</h3>
+                  <p className="text-slate-600 text-sm mb-3">Stock market performance shows positive trends for Q4</p>
+                  <div className="flex items-center text-xs text-slate-500">
+                    <Clock className="h-4 w-4 mr-1" />
+                    5 hours ago
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-all duration-300">
+                <CardContent className="p-6">
+                  <img
+                    src="https://cdn.builder.io/o/assets%2F7c87b45712944202864afb9b3f47cba2%2F99f5a81f781c4ac0b8eda8541fd17836?alt=media&token=07029a4e-1f0a-47b1-8e1b-b21494144660&apiKey=7c87b45712944202864afb9b3f47cba2"
+                    alt="Policy News"
+                    className="w-full h-40 object-cover rounded-lg mb-4"
+                  />
+                  <Badge className="bg-purple-100 text-purple-800 mb-2">Policy</Badge>
+                  <h3 className="font-bold text-slate-900 mb-2">Central Bank Announces Rate Decision</h3>
+                  <p className="text-slate-600 text-sm mb-3">Monetary policy committee maintains current interest rates</p>
+                  <div className="flex items-center text-xs text-slate-500">
+                    <Clock className="h-4 w-4 mr-1" />
+                    1 day ago
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
