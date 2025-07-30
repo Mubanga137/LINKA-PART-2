@@ -302,7 +302,7 @@ const mockProducts: Product[] = [
     name: "Decorative Wall Art",
     description: "Local artist-created wall art featuring Zambian landscapes and culture",
     price: 125.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F89953559294543fdaee0ab2a147e4b1e?alt=media&token=09bd9151-4bff-484d-b4c4-3abf61826e7e&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=800&q=80"],
     category: "Home & Garden",
     inStock: true,
     stockQuantity: 8,
