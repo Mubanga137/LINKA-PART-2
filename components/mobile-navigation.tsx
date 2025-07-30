@@ -35,6 +35,7 @@ import {
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context"
+import { useFavorites } from "@/contexts/marketplace-context"
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false)
