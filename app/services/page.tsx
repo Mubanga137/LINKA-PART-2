@@ -73,7 +73,7 @@ const platformServices = [
   },
 
   {
-    id: 5,
+    id: 4,
     name: "Entertainment & Events",
     icon: Music,
     description: "Event planning, live entertainment, DJ services, and party equipment",
@@ -87,7 +87,7 @@ const platformServices = [
     image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400&h=300&fit=crop"
   },
   {
-    id: 6,
+    id: 5,
     name: "Photography & Video",
     icon: Camera,
     description: "Professional photography, videography, and content creation services",
@@ -101,7 +101,7 @@ const platformServices = [
     image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=300&fit=crop"
   },
   {
-    id: 7,
+    id: 6,
     name: "General Health Services",
     icon: Stethoscope,
     description: "General medical consultations, health checkups, and medical advice",
@@ -115,7 +115,7 @@ const platformServices = [
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop"
   },
   {
-    id: 8,
+    id: 7,
     name: "Fitness & Yoga",
     icon: Heart,
     description: "Personal training, yoga classes, group fitness, and wellness coaching",
@@ -129,7 +129,7 @@ const platformServices = [
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
   },
   {
-    id: 9,
+    id: 8,
     name: "Home Services",
     icon: Home,
     description: "Cleaning, maintenance, repairs, and home improvement services",
