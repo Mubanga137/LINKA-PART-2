@@ -355,7 +355,7 @@ export default function FinancialServicesPage() {
                       <div
                         className={`w-16 h-16 bg-gradient-to-br ${currentCategory.color} rounded-2xl flex items-center justify-center shadow-lg`}
                       >
-                        <currentCategory.icon className="h-8 w-8 text-white" />
+                        <FeatureIcon icon={currentCategory.icon} className="h-8 w-8 text-white" />
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold text-slate-900 mb-2">{currentCategory.name}</h3>
