@@ -247,7 +247,7 @@ const mockProducts: Product[] = [
     name: "Handwoven Basket Set",
     description: "Beautiful set of traditional Zambian handwoven baskets for storage and decoration",
     price: 65.99,
-    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fa9c377c2cdc54e7092356c307bf7eb05?format=webp&width=800"],
+    images: ["https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"],
     category: "Home & Garden",
     inStock: true,
     stockQuantity: 19,
