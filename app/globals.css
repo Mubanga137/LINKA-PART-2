@@ -64,7 +64,7 @@
     }
   }
 
-  /* 8px spacing scale utilities */
+  /* Enhanced spacing scale utilities with mobile-first approach */
   .space-8 { gap: 0.5rem; } /* 8px */
   .space-12 { gap: 0.75rem; } /* 12px */
   .space-16 { gap: 1rem; } /* 16px */
@@ -72,12 +72,22 @@
   .space-32 { gap: 2rem; } /* 32px */
   .space-48 { gap: 3rem; } /* 48px */
 
+  /* Mobile-optimized padding utilities */
   .p-8 { padding: 0.5rem; }
   .p-12 { padding: 0.75rem; }
   .p-16 { padding: 1rem; }
   .p-20 { padding: 1.25rem; }
   .p-24 { padding: 1.5rem; }
   .p-32 { padding: 2rem; }
+
+  /* Responsive padding utilities */
+  .p-mobile { padding: 0.75rem; } /* 12px on mobile */
+  .p-mobile-lg { padding: 1rem; } /* 16px on mobile */
+
+  @media (min-width: 640px) {
+    .p-mobile { padding: 1rem; } /* 16px on sm+ */
+    .p-mobile-lg { padding: 1.5rem; } /* 24px on sm+ */
+  }
 
   /* Clamped typography */
   .text-clamp-sm {
