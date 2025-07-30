@@ -397,27 +397,27 @@ export default function ServicesPage() {
 
                         {/* Content */}
                         <div className="p-6">
-                          <h3 className="font-bold text-xl text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">
+                          <h3 className="font-bold text-xl text-slate-900 mb-3 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                             {service.name}
                           </h3>
 
-                          <p className="text-slate-600 mb-4 leading-relaxed">{service.description}</p>
+                          <p className="text-slate-600 mb-6 leading-relaxed">{service.description}</p>
 
                           {/* Stats */}
-                          <div className="grid grid-cols-2 gap-3 mb-4">
-                            <div className="text-center p-2 bg-slate-50 rounded-lg">
-                              <div className="text-sm font-bold text-slate-900">
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="text-center p-3 bg-gradient-to-br from-slate-50 to-gray-100 rounded-xl border border-slate-200/50 hover:shadow-lg hover:scale-105 transition-all duration-300 group-hover:border-purple-200">
+                              <div className="text-lg font-bold bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text text-transparent">
                                 {Object.values(service.stats)[0]}
                               </div>
-                              <div className="text-xs text-slate-500">
+                              <div className="text-xs text-slate-500 font-medium">
                                 {Object.keys(service.stats)[0]}
                               </div>
                             </div>
-                            <div className="text-center p-2 bg-slate-50 rounded-lg">
-                              <div className="text-sm font-bold text-slate-900">
+                            <div className="text-center p-3 bg-gradient-to-br from-slate-50 to-gray-100 rounded-xl border border-slate-200/50 hover:shadow-lg hover:scale-105 transition-all duration-300 group-hover:border-purple-200">
+                              <div className="text-lg font-bold bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text text-transparent">
                                 {Object.values(service.stats)[1]}
                               </div>
-                              <div className="text-xs text-slate-500">
+                              <div className="text-xs text-slate-500 font-medium">
                                 {Object.keys(service.stats)[1]}
                               </div>
                             </div>
