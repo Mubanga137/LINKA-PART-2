@@ -664,25 +664,59 @@ export default function FinancialServicesPage() {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Loan Amount (ZMW)</label>
-                  <input type="number" className="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="50,000" />
+                  <input
+                    type="number"
+                    value={loanAmount}
+                    onChange={(e) => setLoanAmount(e.target.value)}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    placeholder="50,000"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Interest Rate (%)</label>
-                  <input type="number" className="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="15" />
+                  <input
+                    type="number"
+                    value={interestRate}
+                    onChange={(e) => setInterestRate(e.target.value)}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    placeholder="15"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Loan Term (Years)</label>
-                  <input type="number" className="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="5" />
+                  <input
+                    type="number"
+                    value={loanTerm}
+                    onChange={(e) => setLoanTerm(e.target.value)}
+                    className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    placeholder="5"
+                  />
                 </div>
                 <div className="bg-emerald-50 p-4 rounded-lg">
                   <div className="text-center">
                     <p className="text-sm text-slate-600 mb-1">Monthly Payment</p>
-                    <p className="text-3xl font-bold text-emerald-600">ZMW 1,188</p>
-                    <p className="text-sm text-slate-500">Total Interest: ZMW 21,280</p>
+                    <p className="text-3xl font-bold text-emerald-600">
+                      ZMW {monthlyPayment.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </p>
+                    <p className="text-sm text-slate-500">
+                      Total Interest: ZMW {totalInterest.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 bg-blue-50 rounded-lg">
+                    <p className="text-sm text-slate-600">Total Amount</p>
+                    <p className="text-lg font-bold text-blue-600">
+                      ZMW {(monthlyPayment * parseFloat(loanTerm) * 12).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </p>
+                  </div>
+                  <div className="text-center p-3 bg-purple-50 rounded-lg">
+                    <p className="text-sm text-slate-600">Interest Rate</p>
+                    <p className="text-lg font-bold text-purple-600">{interestRate}% p.a.</p>
                   </div>
                 </div>
                 <Button className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 text-white">
-                  Apply for This Loan
+                  Find Loan Providers
                 </Button>
               </div>
             </div>
