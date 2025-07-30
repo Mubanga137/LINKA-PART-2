@@ -410,5 +410,3 @@ export function ComparisonTool() {
     </div>
   )
 }
-
-export { ComparisonTool }
