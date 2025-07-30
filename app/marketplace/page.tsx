@@ -174,7 +174,7 @@ const mockProducts: Product[] = [
     name: "Traditional Chitenge Dress",
     description: "Beautiful handmade chitenge dress showcasing Zambian traditional patterns",
     price: 45.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fd90b819b64214d5295852a836fd2281b?alt=media&token=dee3ec2d-3f38-4caa-a228-e38a22ed8adb&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fa35923a331f74e45a3fb698b57b311bf?format=webp&width=800"],
     category: "Fashion",
     inStock: true,
     stockQuantity: 23,
