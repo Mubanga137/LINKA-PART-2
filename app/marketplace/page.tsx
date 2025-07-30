@@ -855,7 +855,7 @@ function MarketplaceContent() {
         </section>
 
         {/* Featured Categories */}
-        <section className="mt-8 sm:mt-12 lg:mt-16 space-y-6 sm:space-y-8">
+        <section className="mt-8 space-y-4">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Shop by Category</h2>
             <p className="text-gray-600">Explore our wide range of product categories</p>
