@@ -340,7 +340,7 @@ const mockProducts: Product[] = [
     name: "Herbal Tea Blend",
     description: "Traditional Zambian herbal tea blend for wellness and relaxation",
     price: 18.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb784002cbc844076b0d47df8625f4847?alt=media&token=3c0d8f1c-6c84-4bfc-ac82-d54775039dfa&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80"],
     category: "Health & Beauty",
     inStock: true,
     stockQuantity: 89,
