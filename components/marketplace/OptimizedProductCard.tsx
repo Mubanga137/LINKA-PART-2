@@ -53,7 +53,7 @@ export function OptimizedProductCard({
   };
 
   return (
-    <article className="group bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-blue-200 flex flex-col h-full max-w-sm mx-auto">
+    <article className="group bg-white rounded-lg sm:rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-2 hover:border-blue-200 flex flex-col h-full w-full">
       {/* Product Image Container */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         {imageLoading && !imageError && (
@@ -76,22 +76,22 @@ export function OptimizedProductCard({
         />
         
         {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex justify-between items-start z-10">
-          <div className="flex flex-col gap-1.5">
+        <div className="absolute top-2 left-2 right-2 sm:top-3 sm:left-3 sm:right-3 flex justify-between items-start z-10">
+          <div className="flex flex-col gap-1">
             {product.freeShipping && (
-              <Badge className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                <Truck className="h-3 w-3" />
+              <Badge className="bg-green-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center gap-1 shadow-lg">
+                <Truck className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 Free Shipping
               </Badge>
             )}
             {product.featured && (
-              <Badge className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                <Zap className="h-3 w-3" />
+              <Badge className="bg-blue-500 text-white text-xs font-semibold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center gap-1 shadow-lg">
+                <Zap className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 Top Rated
               </Badge>
             )}
             {product.discountPercentage && (
-              <Badge className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-pulse">
+              <Badge className="bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full shadow-lg animate-pulse">
                 -{product.discountPercentage}%
               </Badge>
             )}
@@ -100,12 +100,12 @@ export function OptimizedProductCard({
           <Button
             size="sm"
             variant="ghost"
-            className="w-11 h-11 p-0 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 tap-target focus-visible-enhanced"
+            className="w-8 h-8 sm:w-10 sm:h-10 p-0 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 tap-target focus-visible-enhanced"
             onClick={() => onToggleFavorite(product.id)}
             aria-label={`${isFavorite ? 'Remove from' : 'Add to'} favorites`}
           >
             <Heart
-              className={`h-4 w-4 transition-colors ${
+              className={`h-3.5 w-3.5 sm:h-4 sm:w-4 transition-colors ${
                 isFavorite ? 'fill-red-500 text-red-500' : 'hover:text-red-400'
               }`}
             />
@@ -114,42 +114,42 @@ export function OptimizedProductCard({
       </div>
 
       {/* Product Content */}
-      <div className="p-16 flex-1 flex flex-col landscape:p-3">
+      <div className="p-3 sm:p-4 flex-1 flex flex-col">
         {/* Vendor Info Header */}
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
               {product.vendor.name.charAt(0)}
             </div>
             <div className="min-w-0">
-              <p className="text-clamp-sm font-medium text-gray-900 truncate">
+              <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">
                 {product.vendor.name}
               </p>
-              <div className="flex items-center gap-1 text-xs text-gray-500">
-                <MapPin className="h-3 w-3 flex-shrink-0" />
+              <div className="flex items-center gap-0.5 text-xs text-gray-500">
+                <MapPin className="h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0" />
                 <span className="truncate">Lusaka</span>
               </div>
             </div>
           </div>
           
           {/* Rating */}
-          <div className="flex items-center gap-1 flex-shrink-0">
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <span className="text-sm font-semibold text-gray-700">
+          <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
+            <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
+            <span className="text-xs sm:text-sm font-semibold text-gray-700">
               {product.rating?.toFixed(1)}
             </span>
           </div>
         </div>
 
         {/* Product Name */}
-        <h3 className="text-clamp-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-snug">
+        <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-2 line-clamp-2 leading-snug">
           {product.name}
         </h3>
 
         {/* Price Section */}
-        <div className="mb-3">
+        <div className="mb-2 sm:mb-3">
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-lg sm:text-xl font-bold text-gray-900">
               K{product.price.toFixed(2)}
             </span>
             {product.originalPrice && (
@@ -166,7 +166,7 @@ export function OptimizedProductCard({
         </div>
 
         {/* Product Tags */}
-        <div className="flex flex-wrap gap-1 mb-16">
+        <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
           {product.tags.slice(0, 2).map((tag) => (
             <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
               {tag}
@@ -175,11 +175,11 @@ export function OptimizedProductCard({
         </div>
 
         {/* Stock Status */}
-        <div className="mb-16">
+        <div className="mb-3 sm:mb-4">
           <div className={`flex items-center gap-1 text-xs ${
             product.inStock ? 'text-green-600' : 'text-red-600'
           }`}>
-            <Package className="h-3 w-3" />
+            <Package className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
             <span>{product.inStock ? 'In Stock' : 'Out of Stock'}</span>
             {product.inStock && product.stockQuantity && product.stockQuantity <= 10 && (
               <span className="text-orange-600 ml-1">
@@ -190,31 +190,31 @@ export function OptimizedProductCard({
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-auto space-y-2">
+        <div className="mt-auto space-y-1.5 sm:space-y-2">
           <Button
             onClick={() => onAddToCart(product)}
             disabled={!product.inStock}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced text-clamp-sm"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 sm:py-2.5 text-xs sm:text-sm rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced"
             aria-label={`Add ${product.name} to cart`}
           >
-            <ShoppingCart className="h-4 w-4 mr-2" />
+            <ShoppingCart className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
             Add to Cart
           </Button>
           
           <Button 
             variant="outline" 
-            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 rounded-lg transition-all duration-200 tap-target focus-visible-enhanced text-clamp-sm"
+            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-2 sm:py-2.5 text-xs sm:text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
             asChild
           >
             <Link href={`/products/${product.id}`}>
-              <Package className="h-4 w-4 mr-2" />
+              <Package className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
               View Details
             </Link>
           </Button>
         </div>
 
         {/* Features Row */}
-        <div className="flex flex-wrap gap-1 mt-2">
+        <div className="flex flex-wrap gap-1 mt-1.5 sm:mt-2">
           {product.freeShipping && (
             <Badge variant="secondary" className="text-xs">
               Free Shipping
