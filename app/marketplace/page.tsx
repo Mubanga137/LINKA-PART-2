@@ -266,7 +266,7 @@ const mockProducts: Product[] = [
     description: "Elegant ceramic dinnerware set perfect for family dining and entertaining",
     price: 79.99,
     originalPrice: 99.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F0e98262ccb33432eb0b8a8878b35edd2?alt=media&token=034bc932-45c5-4558-aece-427b3a175aa6&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&q=80"],
     category: "Home & Garden",
     inStock: true,
     stockQuantity: 27,
