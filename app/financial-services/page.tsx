@@ -165,6 +165,11 @@ export default function FinancialServicesPage() {
     }
   }
 
+  const FeatureIcon = ({ icon: Icon, className }: { icon: any; className?: string }) => {
+    if (!Icon) return null
+    return <Icon className={className} />
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-blue-50 to-indigo-50">
       <Header />
