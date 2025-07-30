@@ -229,7 +229,7 @@ const mockProducts: Product[] = [
     name: "Leather Shoes - Oxford Style",
     description: "Genuine leather Oxford shoes handcrafted by local artisans",
     price: 89.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fe1e698232a5c474ca0c61b0398cdb4db?alt=media&token=46db7b55-ffad-47e2-81ce-5b98880f3a5c&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F158ea7b2f727420280af035a86e56edc?format=webp&width=800"],
     category: "Fashion",
     inStock: true,
     stockQuantity: 34,
