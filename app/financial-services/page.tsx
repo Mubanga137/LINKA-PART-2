@@ -749,60 +749,35 @@ export default function FinancialServicesPage() {
           </div>
         </section>
 
-        {/* Enhanced CTA Section */}
-        <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 to-blue-600/10"></div>
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative">
-            <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-8">
-              <DollarSign className="h-10 w-10 text-white" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-              Ready to Transform Your
-              <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent"> Financial Future?</span>
+        {/* Enhanced CTA Section matching reference design */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-green-600"></div>
+          <div className="absolute inset-0 opacity-20">
+            <div className="w-full h-full" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}></div>
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+              Ready to Get Started?
             </h2>
-            <p className="text-xl text-slate-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Join thousands of satisfied customers who trust our platform for their financial needs.
-              Get started with our comprehensive tools and expert guidance today.
+            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Join thousands of satisfied customers who trust Linka for their financial needs
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
-              <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-3xl font-bold text-emerald-600 mb-2">95%</div>
-                <div className="text-sm text-slate-600">Customer Satisfaction</div>
-              </div>
-              <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-3xl font-bold text-blue-600 mb-2">24/7</div>
-                <div className="text-sm text-slate-600">Expert Support</div>
-              </div>
-              <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-3xl font-bold text-purple-600 mb-2">100+</div>
-                <div className="text-sm text-slate-600">Financial Partners</div>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button
+                className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-8 py-4 rounded-full text-lg font-semibold"
                 onClick={() => scrollToSection("calculators")}
-                className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white px-8 py-3 text-lg"
               >
-                <Calculator className="h-5 w-5 mr-2" />
-                Start with Calculators
+                <Star className="h-5 w-5 mr-2" />
+                Start Your Application
               </Button>
               <Button
+                className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-8 py-4 rounded-full text-lg font-semibold"
                 onClick={() => scrollToSection("agents")}
-                variant="outline"
-                className="border-emerald-200 text-emerald-600 hover:bg-emerald-50 px-8 py-3 text-lg"
               >
-                <MapPin className="h-5 w-5 mr-2" />
-                Find Local Agents
-              </Button>
-              <Button
-                onClick={() => scrollToSection("eligibility")}
-                variant="outline"
-                className="border-blue-200 text-blue-600 hover:bg-blue-50 px-8 py-3 text-lg"
-              >
-                <FileText className="h-5 w-5 mr-2" />
-                Check Eligibility
+                <MessageCircle className="h-5 w-5 mr-2" />
+                Speak to an Expert
               </Button>
             </div>
           </div>
