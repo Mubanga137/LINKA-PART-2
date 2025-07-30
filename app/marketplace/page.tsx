@@ -193,7 +193,7 @@ const mockProducts: Product[] = [
     description: "Professional tailored business suit perfect for office and formal events",
     price: 189.99,
     originalPrice: 249.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fa2c6fbe7396943ee8b34e125ed27deab?alt=media&token=26590c1f-a5fb-4d80-a539-51289afea251&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F446d5cc72e28434a84adb3fc2ae1765d?format=webp&width=800"],
     category: "Fashion",
     inStock: true,
     stockQuantity: 18,
