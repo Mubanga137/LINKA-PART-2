@@ -297,12 +297,20 @@ export function MobileNavigation() {
                   >
                     <div className={`
                       w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200
-                      ${item.active 
-                        ? 'bg-white/20' 
+                      ${item.active
+                        ? 'bg-white/20'
+                        : (item as any).isSpecial
+                        ? 'bg-red-100'
                         : 'bg-slate-100 group-hover:bg-indigo-100'
                       }
                     `}>
-                      <item.icon className={`h-5 w-5 ${item.active ? 'text-white' : 'text-slate-600 group-hover:text-indigo-600'}`} />
+                      <item.icon className={`h-5 w-5 ${
+                        item.active
+                          ? 'text-white'
+                          : (item as any).isSpecial
+                          ? 'text-red-600'
+                          : 'text-slate-600 group-hover:text-indigo-600'
+                      }`} />
                     </div>
                     <span className="font-medium">{item.name}</span>
                     <ChevronRight className={`h-4 w-4 ml-auto ${item.active ? 'text-white/70' : 'text-slate-400'}`} />
