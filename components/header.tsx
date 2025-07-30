@@ -20,18 +20,22 @@ import { useCart } from "@/contexts/cart-context"
 export function Header() {
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
+  const router = useRouter()
+  const pathname = usePathname()
 
   // For wishlist functionality - only use on shopping pages
   let favoritesCount = 0
-  try {
-    const { useFavorites } = require("@/contexts/marketplace-context")
-    const { favorites } = useFavorites()
-    favoritesCount = favorites.length
-  } catch {
-    // Marketplace context not available on this page
+  if (typeof window !== 'undefined') {
+    try {
+      // Check if we're in marketplace context
+      const storedFavorites = localStorage.getItem('marketplace-favorites')
+      if (storedFavorites) {
+        favoritesCount = JSON.parse(storedFavorites).length
+      }
+    } catch {
+      // No favorites stored
+    }
   }
-  const router = useRouter()
-  const pathname = usePathname()
 
   // Show cart only on shopping-related pages
   const isShoppingPage = pathname?.includes('/marketplace') ||
