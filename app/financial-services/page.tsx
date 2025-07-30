@@ -688,7 +688,7 @@ export default function FinancialServicesPage() {
                 <Card key={index} className="bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 group border-0 shadow-lg">
                   <CardContent className="p-8">
                     <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                      {feature.icon && <feature.icon className="h-8 w-8 text-white" />}
+                      <FeatureIcon icon={feature.icon} className="h-8 w-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
                       {feature.title}
