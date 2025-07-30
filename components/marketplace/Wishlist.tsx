@@ -15,6 +15,7 @@ import {
   Package
 } from "lucide-react";
 import { useFavorites, useCart } from "@/contexts/marketplace-context";
+import { safeShare, showShareFeedback } from "@/lib/clipboard-utils";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
