@@ -465,3 +465,5 @@ export function UserReviews() {
     </div>
   )
 }
+
+export { UserReviews }
