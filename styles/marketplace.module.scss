@@ -2,11 +2,11 @@
 
 /* Base card component */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--ink-200);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-base);
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: all 200ms ease;
   position: relative;
   overflow: hidden;
 
@@ -17,17 +17,17 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--brand-blue-200), transparent);
+    background: linear-gradient(90deg, transparent, #bfdbfe, transparent);
     opacity: 0;
-    transition: opacity var(--transition-base);
+    transition: opacity 200ms ease;
   }
 }
 
 .cardHover {
   &:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--brand-blue-300);
+    box-shadow: 0 20px 25px rgba(15, 23, 42, 0.1), 0 10px 10px rgba(15, 23, 42, 0.04);
+    border-color: #93c5fd;
 
     &::before {
       opacity: 1;
@@ -36,46 +36,41 @@
 
   &:active {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 15px rgba(15, 23, 42, 0.08), 0 4px 6px rgba(15, 23, 42, 0.04);
   }
 }
 
 /* Enhanced card header */
 .cardHeader {
-  background: linear-gradient(
-    135deg,
-    var(--brand-blue-50) 0%,
-    var(--surface) 50%,
-    var(--brand-green-50) 100%
-  );
-  border-bottom: 1px solid var(--ink-200);
-  border-top-left-radius: var(--radius-xl);
-  border-top-right-radius: var(--radius-xl);
-  padding: var(--space-6) var(--space-8);
+  background: linear-gradient(135deg, #eff6ff 0%, white 50%, #ecfdf5 100%);
+  border-bottom: 1px solid #e2e8f0;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  padding: 1.5rem 2rem;
   position: relative;
 
   &::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: var(--space-8);
-    right: var(--space-8);
+    left: 2rem;
+    right: 2rem;
     height: 1px;
-    background: linear-gradient(90deg, var(--brand-blue-200), var(--brand-green-200));
+    background: linear-gradient(90deg, #bfdbfe, #a7f3d0);
   }
 }
 
 /* Primary button with enhanced styling */
 .primaryButton {
-  background: linear-gradient(135deg, var(--brand-blue-500), var(--brand-blue-600));
-  border: 1px solid var(--brand-blue-600);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: 1px solid #2563eb;
   color: white;
   font-weight: 600;
-  font-size: var(--font-size-sm);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-bounce);
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: all 200ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
   position: relative;
   overflow: hidden;
 
@@ -87,12 +82,12 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left var(--transition-slow);
+    transition: left 300ms ease;
   }
 
   &:hover {
-    background: linear-gradient(135deg, var(--brand-blue-600), var(--brand-blue-700));
-    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    box-shadow: 0 10px 15px rgba(15, 23, 42, 0.08), 0 4px 6px rgba(15, 23, 42, 0.04);
     transform: translateY(-1px);
 
     &::before {
@@ -102,7 +97,7 @@
 
   &:active {
     transform: translateY(0);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
   }
 
   &:disabled {
@@ -112,22 +107,22 @@
 
     &:hover {
       transform: none;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
     }
   }
 }
 
 /* Secondary button with green palette */
 .secondaryButton {
-  background: linear-gradient(135deg, var(--brand-green-500), var(--brand-green-600));
-  border: 1px solid var(--brand-green-600);
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: 1px solid #059669;
   color: white;
   font-weight: 600;
-  font-size: var(--font-size-sm);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-bounce);
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: all 200ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
   position: relative;
   overflow: hidden;
 
@@ -139,12 +134,12 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left var(--transition-slow);
+    transition: left 300ms ease;
   }
 
   &:hover {
-    background: linear-gradient(135deg, var(--brand-green-600), var(--brand-green-700));
-    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, #059669, #047857);
+    box-shadow: 0 10px 15px rgba(15, 23, 42, 0.08), 0 4px 6px rgba(15, 23, 42, 0.04);
     transform: translateY(-1px);
 
     &::before {
@@ -154,56 +149,56 @@
 
   &:active {
     transform: translateY(0);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
   }
 }
 
 /* Outline button variant */
 .outlineButton {
-  background: var(--surface);
-  border: 2px solid var(--ink-300);
-  color: var(--ink-700);
+  background: white;
+  border: 2px solid #cbd5e1;
+  color: #334155;
   font-weight: 600;
-  font-size: var(--font-size-sm);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-lg);
-  transition: all var(--transition-base);
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 200ms ease;
 
   &:hover {
-    background: var(--ink-50);
-    border-color: var(--brand-blue-400);
-    color: var(--brand-blue-700);
-    box-shadow: var(--shadow-md);
+    background: #f8fafc;
+    border-color: #60a5fa;
+    color: #1d4ed8;
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
   }
 }
 
 /* Focus states for accessibility */
 .focusable {
   &:focus-visible {
-    outline: 2px solid var(--ring-blue);
+    outline: 2px solid rgba(59, 130, 246, 0.35);
     outline-offset: 2px;
-    border-radius: var(--radius-lg);
+    border-radius: 0.75rem;
   }
 }
 
 /* Media frame with enhanced styling */
 .mediaFrame {
-  border-radius: var(--radius-lg);
+  border-radius: 0.75rem;
   overflow: hidden;
   position: relative;
-  background: var(--ink-100);
+  background: #f1f5f9;
 
   &::after {
     content: '';
     position: absolute;
     inset: 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-lg);
+    border-radius: 0.75rem;
     pointer-events: none;
   }
 
   img {
-    transition: transform var(--transition-slow);
+    transition: transform 300ms ease;
   }
 
   &:hover img {
@@ -213,36 +208,36 @@
 
 /* Enhanced pill/tag styling */
 .pill {
-  background: linear-gradient(135deg, var(--brand-blue-100), var(--brand-green-100));
-  color: var(--ink-700);
-  border: 1px solid var(--ink-200);
-  border-radius: var(--radius-full);
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--font-size-xs);
+  background: linear-gradient(135deg, #dbeafe, #d1fae5);
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  transition: all var(--transition-base);
+  gap: 0.25rem;
+  transition: all 200ms ease;
 
   &:hover {
-    background: linear-gradient(135deg, var(--brand-blue-200), var(--brand-green-200));
+    background: linear-gradient(135deg, #bfdbfe, #a7f3d0);
     transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
   }
 }
 
 /* Special pill variants */
 .pillFeatured {
-  background: linear-gradient(135deg, var(--brand-blue-500), var(--brand-blue-600));
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white;
-  border-color: var(--brand-blue-600);
+  border-color: #2563eb;
 }
 
 .pillVerified {
-  background: linear-gradient(135deg, var(--brand-green-500), var(--brand-green-600));
+  background: linear-gradient(135deg, #10b981, #059669);
   color: white;
-  border-color: var(--brand-green-600);
+  border-color: #059669;
 }
 
 .pillDiscount {
@@ -268,17 +263,17 @@
 
 /* Vendor card specific styles */
 .vendorCard {
-  background: var(--surface);
-  border-radius: var(--radius-2xl);
+  background: white;
+  border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-base);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: all 200ms ease;
   height: 100%;
   display: flex;
   flex-direction: column;
 
   &:hover {
-    box-shadow: var(--shadow-2xl);
+    box-shadow: 0 25px 50px rgba(15, 23, 42, 0.15);
     transform: translateY(-6px);
   }
 }
@@ -287,13 +282,13 @@
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--brand-blue-50), var(--brand-green-50));
+  background: linear-gradient(135deg, #eff6ff, #ecfdf5);
 
   img {
     object-fit: cover;
     width: 100%;
     height: 100%;
-    transition: transform var(--transition-slow);
+    transition: transform 300ms ease;
   }
 
   &:hover img {
@@ -302,7 +297,7 @@
 }
 
 .vendorContent {
-  padding: var(--space-6);
+  padding: 1.5rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -311,16 +306,16 @@
 .vendorHeader {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-3);
-  margin-bottom: var(--space-4);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .vendorAvatar {
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-lg);
-  border: 3px solid var(--surface);
-  box-shadow: var(--shadow-md);
+  border-radius: 0.75rem;
+  border: 3px solid white;
+  box-shadow: 0 4px 6px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
   flex-shrink: 0;
 }
 
@@ -330,16 +325,16 @@
 }
 
 .vendorName {
-  font-size: var(--font-size-lg);
+  font-size: 1.125rem;
   font-weight: 700;
-  color: var(--ink-900);
-  margin: 0 0 var(--space-1) 0;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
   line-height: 1.3;
 }
 
 .vendorTagline {
-  font-size: var(--font-size-sm);
-  color: var(--ink-600);
+  font-size: 0.875rem;
+  color: #475569;
   margin: 0;
   line-height: 1.4;
 }
@@ -347,28 +342,28 @@
 .vendorMeta {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-4);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .vendorPrice {
-  margin-bottom: var(--space-6);
-  padding: var(--space-3) var(--space-4);
-  background: linear-gradient(135deg, var(--brand-blue-50), var(--brand-green-50));
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--ink-200);
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #eff6ff, #ecfdf5);
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
 
   .priceLabel {
-    font-size: var(--font-size-sm);
-    color: var(--ink-600);
+    font-size: 0.875rem;
+    color: #64748b;
     margin: 0;
   }
 
   .priceValue {
-    font-size: var(--font-size-lg);
+    font-size: 1.125rem;
     font-weight: 700;
-    color: var(--ink-900);
-    margin: var(--space-1) 0 0 0;
+    color: #0f172a;
+    margin: 0.25rem 0 0 0;
   }
 }
 
@@ -376,7 +371,7 @@
   margin-top: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-3);
+  gap: 0.75rem;
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
@@ -385,13 +380,13 @@
 
 /* Marketing view specific styles */
 .marketingCard {
-  background: linear-gradient(135deg, var(--surface) 0%, var(--brand-blue-50) 100%);
-  border: 1px solid var(--brand-blue-200);
+  background: linear-gradient(135deg, white 0%, #eff6ff 100%);
+  border: 1px solid #bfdbfe;
 }
 
 .marketingContent {
   display: grid;
-  gap: var(--space-8);
+  gap: 2rem;
   align-items: center;
 
   @media (min-width: 768px) {
@@ -401,17 +396,17 @@
 
 .marketingText {
   .title {
-    font-size: var(--font-size-2xl);
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--ink-900);
-    margin: 0 0 var(--space-3) 0;
+    color: #0f172a;
+    margin: 0 0 0.75rem 0;
     line-height: 1.3;
   }
 
   .description {
-    font-size: var(--font-size-base);
-    color: var(--ink-600);
-    margin: 0 0 var(--space-6) 0;
+    font-size: 1rem;
+    color: #64748b;
+    margin: 0 0 1.5rem 0;
     line-height: 1.6;
   }
 }
@@ -419,39 +414,39 @@
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: var(--space-4);
+  gap: 1rem;
 }
 
 .statCard {
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  border: 1px solid var(--ink-200);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: white;
+  border: 1px solid #e2e8f0;
   text-align: center;
-  transition: all var(--transition-base);
+  transition: all 200ms ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
   }
 
   .statLabel {
-    font-size: var(--font-size-sm);
-    color: var(--ink-600);
-    margin: 0 0 var(--space-2) 0;
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0 0 0.5rem 0;
   }
 
   .statValue {
-    font-size: var(--font-size-2xl);
+    font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
 
     &.revenue {
-      color: var(--brand-blue-700);
+      color: #1d4ed8;
     }
 
     &.status {
-      color: var(--brand-green-700);
+      color: #047857;
     }
   }
 }
@@ -459,11 +454,11 @@
 /* Grid layouts */
 .vendorsGrid {
   display: grid;
-  gap: var(--space-6);
+  gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 
   @media (min-width: 640px) {
-    gap: var(--space-8);
+    gap: 2rem;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 
@@ -486,7 +481,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--surface);
+    background: white;
     opacity: 0.8;
     border-radius: inherit;
   }
@@ -495,48 +490,14 @@
 /* Responsive utilities */
 @media (max-width: 640px) {
   .cardHeader {
-    padding: var(--space-4) var(--space-5);
+    padding: 1rem 1.25rem;
   }
 
   .vendorContent {
-    padding: var(--space-5);
+    padding: 1.25rem;
   }
 
   .vendorActions {
     grid-template-columns: 1fr;
-  }
-}
-
-/* Print styles */
-@media print {
-  .card {
-    box-shadow: none;
-    border: 1px solid var(--ink-300);
-  }
-
-  .primaryButton,
-  .secondaryButton {
-    background: var(--ink-100) !important;
-    color: var(--ink-900) !important;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .card {
-    border-width: 2px;
-  }
-
-  .pill {
-    border-width: 2px;
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }
