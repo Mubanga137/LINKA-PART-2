@@ -52,21 +52,12 @@ export function VendorCard({
   };
 
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: vendor.name,
-          text: vendor.tagline,
-          url: vendor.href,
-        });
-      } catch (err) {
-        // Fallback to clipboard
-        navigator.clipboard?.writeText(window.location.origin + vendor.href);
-      }
-    } else {
-      // Fallback to clipboard
-      navigator.clipboard?.writeText(window.location.origin + vendor.href);
-    }
+    const result = await safeShare({
+      title: vendor.name,
+      text: vendor.tagline,
+      url: window.location.origin + vendor.href,
+    });
+    showShareFeedback(result);
   };
 
   return (
