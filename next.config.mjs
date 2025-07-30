@@ -8,6 +8,11 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: ['images.unsplash.com'],
+  },
+  sassOptions: {
+    includePaths: ['./styles'],
+    prependData: `@import "./styles/marketplace.module.scss";`
   },
   allowedDevOrigins: [
     '*.projects.builder.codes',
