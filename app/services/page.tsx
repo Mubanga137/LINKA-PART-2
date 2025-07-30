@@ -187,16 +187,19 @@ export default function ServicesPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-pink-500/5 to-teal-500/5"></div>
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="h-10 w-10 text-white" />
+              <div className="relative mb-8">
+                <div className="w-24 h-24 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto shadow-2xl shadow-purple-500/25 animate-pulse">
+                  <Sparkles className="h-12 w-12 text-white animate-spin" style={{animationDuration: '3s'}} />
+                </div>
+                <div className="absolute -inset-4 bg-gradient-to-r from-violet-400 via-pink-400 to-purple-400 rounded-full opacity-20 blur-xl animate-ping"></div>
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
                   Professional Services
                 </span>
               </h1>
-              <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
-                Connect with skilled service providers across Zambia for all your personal and business needs. 
+              <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style={{animationDelay: '0.3s'}}>
+                Connect with skilled service providers across Zambia for all your personal and business needs.
                 From health and wellness to entertainment, courier services to home maintenance – find trusted professionals ready to serve you.
               </p>
             </div>
