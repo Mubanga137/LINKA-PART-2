@@ -177,6 +177,41 @@ export function MobileNavigation() {
               </div>
             )}
 
+            {/* Cart & Wishlist Quick Access - Show on shopping pages */}
+            {isShoppingPage && (
+              <div className="px-6 pb-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    href="/cart"
+                    onClick={closeSheet}
+                    className="flex items-center justify-center space-x-2 p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all duration-200 hover:shadow-xl tap-target-sm"
+                  >
+                    <ShoppingCart className="h-5 w-5" />
+                    <span className="font-semibold text-sm">Cart</span>
+                    {totalItems > 0 && (
+                      <Badge className="bg-white text-blue-600 text-xs font-bold px-2 py-0.5 rounded-full ml-1">
+                        {totalItems}
+                      </Badge>
+                    )}
+                  </Link>
+
+                  <Link
+                    href="/wishlist"
+                    onClick={closeSheet}
+                    className="flex items-center justify-center space-x-2 p-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-xl shadow-lg shadow-pink-500/20 transition-all duration-200 hover:shadow-xl tap-target-sm"
+                  >
+                    <Heart className="h-5 w-5" />
+                    <span className="font-semibold text-sm">Wishlist</span>
+                    {favorites.length > 0 && (
+                      <Badge className="bg-white text-pink-600 text-xs font-bold px-2 py-0.5 rounded-full ml-1">
+                        {favorites.length}
+                      </Badge>
+                    )}
+                  </Link>
+                </div>
+              </div>
+            )}
+
             {/* Main Navigation */}
             <nav className="flex-1 px-6 space-y-2">
               {/* Primary Items */}
