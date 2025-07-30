@@ -283,13 +283,22 @@ function MarketplaceContent() {
             </p>
           </div>
 
-          {/* Cart indicator */}
-          {getCartItemCount() > 0 && (
-            <div className="inline-flex items-center bg-green-100 text-green-800 px-4 py-2 rounded-full border border-green-200">
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              <span className="font-medium">{getCartItemCount()} items in cart</span>
-            </div>
-          )}
+          {/* Cart and Wishlist indicators */}
+          <div className="flex justify-center gap-4">
+            <ShoppingCart>
+              <Button variant="outline" className="px-6 py-3 text-sm">
+                <ShoppingCart className="mr-2 h-4 w-4" />
+                Cart ({getCartItemCount()})
+              </Button>
+            </ShoppingCart>
+
+            <Wishlist products={mockProducts}>
+              <Button variant="outline" className="px-6 py-3 text-sm">
+                <Heart className="mr-2 h-4 w-4" />
+                Wishlist ({favorites.length})
+              </Button>
+            </Wishlist>
+          </div>
         </section>
 
         {/* Search and Filters */}
