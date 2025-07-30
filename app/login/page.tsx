@@ -55,22 +55,17 @@ export default function LoginPage() {
   }
 
   const handleDemoLogin = async (role: 'customer' | 'retailer' | 'admin') => {
-    // For retailer, redirect directly to retailer dashboard
-    if (role === 'retailer') {
-      router.push('/retailer/dashboard')
-      return
-    }
-
     const demoCredentials = {
       customer: { email: 'customer@demo.com', password: 'demo123' },
+      retailer: { email: 'retailer@demo.com', password: 'demo123' },
       admin: { email: 'admin@demo.com', password: 'demo123' }
     }
 
-    const creds = demoCredentials[role as 'customer' | 'admin']
+    const creds = demoCredentials[role]
     setEmail(creds.email)
     setPassword(creds.password)
 
-    // Auto-submit after brief delay
+    // Auto-submit after brief delay to trigger role-aware redirection
     setTimeout(() => {
       handleSubmit(new Event('submit') as any)
     }, 100)
