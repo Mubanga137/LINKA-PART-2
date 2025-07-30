@@ -522,7 +522,7 @@ export default function FinancialServicesPage() {
                   <span className="hidden sm:inline">Calculators</span>
                 </TabsTrigger>
                 <TabsTrigger value="comparison" className="flex items-center gap-2">
-                  <Compare className="h-4 w-4" />
+                  <GitCompare className="h-4 w-4" />
                   <span className="hidden sm:inline">Compare</span>
                 </TabsTrigger>
                 <TabsTrigger value="eligibility" className="flex items-center gap-2">
