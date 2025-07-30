@@ -598,7 +598,7 @@ function MarketplaceContent() {
         </section>
 
         {/* Search and Filters */}
-        <section className="space-y-6 mb-8">
+        <section className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
           {/* Enhanced Search Bar */}
           <div className="relative max-w-3xl mx-auto">
             <div className="relative">
