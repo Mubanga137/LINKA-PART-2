@@ -33,6 +33,7 @@ import {
 import { MarketplaceProvider, useCart, useFavorites } from "@/contexts/marketplace-context";
 import { ProductDetailModal } from "@/components/marketplace/ProductDetailModal";
 import { CategoryNavigation, HorizontalCategoryNav } from "@/components/marketplace/CategoryNavigation";
+import { OptimizedProductCard } from "@/components/marketplace/OptimizedProductCard";
 import type { Product, MarketplaceFilters, Category } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
