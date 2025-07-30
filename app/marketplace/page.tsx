@@ -572,7 +572,7 @@ function MarketplaceContent() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
       <Header />
       
-      <main className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 py-8">
+      <main className="mx-auto max-w-screen-xl px-16 landscape:px-6 sm:px-24 lg:px-32 py-32 landscape:py-4">
         {/* Enhanced Hero Section */}
         <section className="text-center space-y-8 mb-16">
           <div className="space-y-6">
