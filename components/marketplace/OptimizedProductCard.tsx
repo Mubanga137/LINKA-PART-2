@@ -53,7 +53,7 @@ export function OptimizedProductCard({
   };
 
   return (
-    <article className="group bg-white rounded-lg sm:rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-2 hover:border-blue-200 flex flex-col h-full w-full">
+    <article className="group bg-white rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blue-200 flex flex-col h-full w-full">
       {/* Product Image Container */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         {imageLoading && !imageError && (
