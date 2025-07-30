@@ -1,18 +1,25 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { 
-  CreditCard, 
-  DollarSign, 
-  PiggyBank, 
-  TrendingUp, 
-  Shield, 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { FinancialCalculators } from "@/components/financial/financial-calculators"
+import { ComparisonTool } from "@/components/financial/comparison-tool"
+import { RealTimeData } from "@/components/financial/real-time-data"
+import { UserReviews } from "@/components/financial/user-reviews"
+import { EligibilityTools } from "@/components/financial/eligibility-tools"
+import { AgentMaps } from "@/components/financial/agent-maps"
+import {
+  CreditCard,
+  DollarSign,
+  PiggyBank,
+  TrendingUp,
+  Shield,
   Building,
   Smartphone,
   FileText,
@@ -27,7 +34,13 @@ import {
   Globe,
   Award,
   Phone,
-  Calendar
+  Calendar,
+  Compare,
+  Activity,
+  MapPin,
+  MessageCircle,
+  Menu,
+  X
 } from "lucide-react"
 
 const financialCategories = [
@@ -120,12 +133,111 @@ const financialCategories = [
 export default function FinancialServicesPage() {
   const [activeCategory, setActiveCategory] = useState("banking")
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [activeSection, setActiveSection] = useState("overview")
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
 
   const currentCategory = financialCategories.find((cat) => cat.id === activeCategory)
+
+  // Handle scroll for sticky navigation
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const navigationSections = [
+    { id: "overview", name: "Overview", icon: DollarSign },
+    { id: "calculators", name: "Calculators", icon: Calculator },
+    { id: "comparison", name: "Compare", icon: Compare },
+    { id: "eligibility", name: "Eligibility", icon: FileText },
+    { id: "agents", name: "Find Agents", icon: MapPin },
+    { id: "market-data", name: "Live Data", icon: Activity },
+    { id: "reviews", name: "Reviews", icon: MessageCircle }
+  ]
+
+  const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId)
+    setIsMenuOpen(false)
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-blue-50 to-indigo-50">
       <Header />
+
+      {/* Sticky Navigation */}
+      <div className={`sticky top-0 z-40 transition-all duration-300 ${
+        scrollY > 200
+          ? "bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm"
+          : "bg-transparent"
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center gap-2">
+              <DollarSign className="h-6 w-6 text-emerald-600" />
+              <span className="font-bold text-slate-900">Financial Services</span>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1">
+              {navigationSections.map((section) => (
+                <Button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  variant="ghost"
+                  size="sm"
+                  className={`flex items-center gap-2 transition-all ${
+                    activeSection === section.id
+                      ? "bg-emerald-100 text-emerald-700 font-medium"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                  }`}
+                >
+                  <section.icon className="h-4 w-4" />
+                  {section.name}
+                </Button>
+              ))}
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <Button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              variant="ghost"
+              size="sm"
+              className="lg:hidden"
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="lg:hidden pb-4 border-t border-slate-200 mt-4">
+              <nav className="grid grid-cols-2 gap-2 mt-4">
+                {navigationSections.map((section) => (
+                  <Button
+                    key={section.id}
+                    onClick={() => scrollToSection(section.id)}
+                    variant="ghost"
+                    size="sm"
+                    className={`flex items-center gap-2 justify-start ${
+                      activeSection === section.id
+                        ? "bg-emerald-100 text-emerald-700 font-medium"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    }`}
+                  >
+                    <section.icon className="h-4 w-4" />
+                    {section.name}
+                  </Button>
+                ))}
+              </nav>
+            </div>
+          )}
+        </div>
+      </div>
       
       <main className="py-8">
         {/* Hero Section */}
@@ -181,7 +293,7 @@ export default function FinancialServicesPage() {
         </section>
 
         {/* Financial Categories Section */}
-        <section className="py-16 relative">
+        <section id="overview" className="py-16 relative">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -379,78 +491,214 @@ export default function FinancialServicesPage() {
           </div>
         </section>
 
-        {/* Market Data Dashboard */}
+        {/* Enhanced Tools and Services */}
         <section className="py-16 bg-gradient-to-r from-slate-50 to-gray-50">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-8">Live Market Data</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
-                <CardContent className="p-6 text-center">
-                  <TrendingUp className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                  <p className="text-sm text-slate-600">USD/ZMW Rate</p>
-                  <p className="text-2xl font-bold text-green-600">24.85</p>
-                  <p className="text-xs text-green-500">+0.15 (0.6%) ↗</p>
-                </CardContent>
-              </Card>
+            <Tabs defaultValue="calculators" className="space-y-8">
+              <div className="text-center mb-8">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                  <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                    Financial
+                  </span>
+                  <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+                    {" "}
+                    Tools & Services
+                  </span>
+                </h2>
+                <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                  Comprehensive tools to help you make informed financial decisions
+                </p>
+              </div>
 
-              <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-                <CardContent className="p-6 text-center">
-                  <BarChart3 className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                  <p className="text-sm text-slate-600">LuSE Index</p>
-                  <p className="text-2xl font-bold text-blue-600">4,582.31</p>
-                  <p className="text-xs text-blue-500">+12.4 (0.3%) ↗</p>
-                </CardContent>
-              </Card>
+              <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-7 bg-white rounded-xl border border-slate-200 p-1">
+                <TabsTrigger value="calculators" className="flex items-center gap-2">
+                  <Calculator className="h-4 w-4" />
+                  <span className="hidden sm:inline">Calculators</span>
+                </TabsTrigger>
+                <TabsTrigger value="comparison" className="flex items-center gap-2">
+                  <Compare className="h-4 w-4" />
+                  <span className="hidden sm:inline">Compare</span>
+                </TabsTrigger>
+                <TabsTrigger value="eligibility" className="flex items-center gap-2">
+                  <FileText className="h-4 w-4" />
+                  <span className="hidden sm:inline">Eligibility</span>
+                </TabsTrigger>
+                <TabsTrigger value="agents" className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  <span className="hidden sm:inline">Find Agents</span>
+                </TabsTrigger>
+                <TabsTrigger value="market-data" className="flex items-center gap-2">
+                  <Activity className="h-4 w-4" />
+                  <span className="hidden sm:inline">Live Data</span>
+                </TabsTrigger>
+                <TabsTrigger value="reviews" className="flex items-center gap-2">
+                  <MessageCircle className="h-4 w-4" />
+                  <span className="hidden sm:inline">Reviews</span>
+                </TabsTrigger>
+                <TabsTrigger value="education" className="flex items-center gap-2">
+                  <Award className="h-4 w-4" />
+                  <span className="hidden sm:inline">Education</span>
+                </TabsTrigger>
+              </TabsList>
 
-              <Card className="bg-gradient-to-br from-purple-50 to-violet-50 border-purple-200">
-                <CardContent className="p-6 text-center">
-                  <PiggyBank className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-                  <p className="text-sm text-slate-600">Bank Rate</p>
-                  <p className="text-2xl font-bold text-purple-600">9.25%</p>
-                  <p className="text-xs text-slate-500">Central Bank Rate</p>
-                </CardContent>
-              </Card>
+              <TabsContent value="calculators" id="calculators" className="space-y-8">
+                <FinancialCalculators />
+              </TabsContent>
 
-              <Card className="bg-gradient-to-br from-orange-50 to-red-50 border-orange-200">
-                <CardContent className="p-6 text-center">
-                  <DollarSign className="h-8 w-8 text-orange-600 mx-auto mb-2" />
-                  <p className="text-sm text-slate-600">Inflation Rate</p>
-                  <p className="text-2xl font-bold text-orange-600">13.4%</p>
-                  <p className="text-xs text-red-500">-0.2% from last month</p>
-                </CardContent>
-              </Card>
-            </div>
+              <TabsContent value="comparison" id="comparison" className="space-y-8">
+                <ComparisonTool />
+              </TabsContent>
+
+              <TabsContent value="eligibility" id="eligibility" className="space-y-8">
+                <EligibilityTools />
+              </TabsContent>
+
+              <TabsContent value="agents" id="agents" className="space-y-8">
+                <AgentMaps />
+              </TabsContent>
+
+              <TabsContent value="market-data" id="market-data" className="space-y-8">
+                <RealTimeData />
+              </TabsContent>
+
+              <TabsContent value="reviews" id="reviews" className="space-y-8">
+                <UserReviews />
+              </TabsContent>
+
+              <TabsContent value="education" className="space-y-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Award className="h-8 w-8 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-slate-900 mb-2">Financial Education Hub</h2>
+                  <p className="text-slate-600 max-w-2xl mx-auto">
+                    Learn to make smarter financial decisions with expert guidance
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {[
+                    { title: "Build Your Emergency Fund", category: "Savings", time: "3 min", level: "Beginner" },
+                    { title: "Understanding Investment Options", category: "Investment", time: "5 min", level: "Intermediate" },
+                    { title: "Insurance Planning Guide", category: "Insurance", time: "4 min", level: "Beginner" },
+                    { title: "Loan Application Tips", category: "Credit", time: "6 min", level: "Intermediate" },
+                    { title: "Retirement Planning Strategies", category: "Planning", time: "8 min", level: "Advanced" },
+                    { title: "Digital Banking Security", category: "Security", time: "4 min", level: "Beginner" }
+                  ].map((article, index) => (
+                    <Card key={index} className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group">
+                      <CardContent className="p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <Badge className="bg-emerald-100 text-emerald-700">{article.category}</Badge>
+                          <div className="flex items-center gap-2 text-sm text-slate-500">
+                            <Calendar className="h-4 w-4" />
+                            {article.time}
+                          </div>
+                        </div>
+                        <h3 className="font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">{article.title}</h3>
+                        <p className="text-slate-600 text-sm mb-4">Learn essential financial skills to secure your future and make informed decisions</p>
+                        <div className="flex items-center justify-between">
+                          <Badge variant="outline" className={`text-xs ${
+                            article.level === "Beginner" ? "border-green-200 text-green-600" :
+                            article.level === "Intermediate" ? "border-yellow-200 text-yellow-600" :
+                            "border-red-200 text-red-600"
+                          }`}>
+                            {article.level}
+                          </Badge>
+                          <Button variant="outline" size="sm" className="border-emerald-200 text-emerald-600 hover:bg-emerald-50">
+                            Read Article
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </section>
 
-        {/* Financial Education */}
+        {/* Enhanced Features Showcase */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Financial Education Hub</h2>
-              <p className="text-slate-600">Learn to make smarter financial decisions with expert guidance</p>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                  Why Choose
+                </span>
+                <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+                  {" "}
+                  Our Platform?
+                </span>
+              </h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                Advanced tools and personalized guidance for all your financial needs
+              </p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: "Build Your Emergency Fund", category: "Savings", time: "3 min" },
-                { title: "Understanding Investment Options", category: "Investment", time: "5 min" },
-                { title: "Insurance Planning Guide", category: "Insurance", time: "4 min" }
-              ].map((tip, index) => (
-                <Card key={index} className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge className="bg-emerald-100 text-emerald-700">{tip.category}</Badge>
-                      <div className="flex items-center text-sm text-slate-500">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        {tip.time}
-                      </div>
+                {
+                  icon: Calculator,
+                  title: "Smart Calculators",
+                  description: "Advanced loan, savings, and investment calculators with real-time results",
+                  color: "from-blue-500 to-cyan-600",
+                  features: ["Loan Payment Calculator", "Savings Goal Planner", "Investment Growth Projector"]
+                },
+                {
+                  icon: Compare,
+                  title: "Product Comparison",
+                  description: "Compare financial products side-by-side to find the best deals",
+                  color: "from-green-500 to-emerald-600",
+                  features: ["Rate Comparison", "Feature Analysis", "User Reviews"]
+                },
+                {
+                  icon: FileText,
+                  title: "Eligibility Checker",
+                  description: "Check your eligibility for loans, accounts, and financial products",
+                  color: "from-purple-500 to-violet-600",
+                  features: ["Instant Assessment", "Personalized Recommendations", "Document Guidance"]
+                },
+                {
+                  icon: MapPin,
+                  title: "Agent Locator",
+                  description: "Find nearby banks, mobile money agents, and financial advisors",
+                  color: "from-red-500 to-pink-600",
+                  features: ["Interactive Maps", "Real-time Availability", "Contact Details"]
+                },
+                {
+                  icon: Activity,
+                  title: "Live Market Data",
+                  description: "Real-time exchange rates, stock prices, and economic indicators",
+                  color: "from-orange-500 to-yellow-600",
+                  features: ["Currency Rates", "LuSE Stocks", "Economic Updates"]
+                },
+                {
+                  icon: Shield,
+                  title: "Secure & Verified",
+                  description: "All providers are licensed and regulated by Zambian authorities",
+                  color: "from-indigo-500 to-blue-600",
+                  features: ["BOZ Licensed", "PICZ Certified", "Data Protection"]
+                }
+              ].map((feature, index) => (
+                <Card key={index} className="bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 group border-0 shadow-lg">
+                  <CardContent className="p-8">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                      <feature.icon className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="font-bold text-slate-900 mb-2">{tip.title}</h3>
-                    <p className="text-slate-600 text-sm mb-4">Learn essential financial skills to secure your future</p>
-                    <Button variant="outline" size="sm" className="w-full border-emerald-200 text-emerald-600 hover:bg-emerald-50">
-                      Read Article
-                    </Button>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
+                      {feature.title}
+                    </h3>
+                    <p className="text-slate-600 mb-4 leading-relaxed">
+                      {feature.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {feature.features.map((feat, featIndex) => (
+                        <li key={featIndex} className="flex items-center gap-2 text-sm text-slate-600">
+                          <CheckCircle className="h-4 w-4 text-emerald-500" />
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
                   </CardContent>
                 </Card>
               ))}
@@ -471,21 +719,60 @@ export default function FinancialServicesPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Ready to Start Your Financial Journey?</h2>
-            <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
-              Get connected with licensed financial professionals and secure your financial future today
+        {/* Enhanced CTA Section */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 to-blue-600/10"></div>
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative">
+            <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-8">
+              <DollarSign className="h-10 w-10 text-white" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              Ready to Transform Your
+              <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent"> Financial Future?</span>
+            </h2>
+            <p className="text-xl text-slate-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Join thousands of satisfied customers who trust our platform for their financial needs.
+              Get started with our comprehensive tools and expert guidance today.
             </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+              <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-3xl font-bold text-emerald-600 mb-2">95%</div>
+                <div className="text-sm text-slate-600">Customer Satisfaction</div>
+              </div>
+              <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-3xl font-bold text-blue-600 mb-2">24/7</div>
+                <div className="text-sm text-slate-600">Expert Support</div>
+              </div>
+              <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-3xl font-bold text-purple-600 mb-2">100+</div>
+                <div className="text-sm text-slate-600">Financial Partners</div>
+              </div>
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white px-8">
+              <Button
+                onClick={() => scrollToSection("calculators")}
+                className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white px-8 py-3 text-lg"
+              >
                 <Calculator className="h-5 w-5 mr-2" />
-                Financial Calculator
+                Start with Calculators
               </Button>
-              <Button variant="outline" className="border-emerald-200 text-emerald-600 hover:bg-emerald-50 px-8">
-                <Phone className="h-5 w-5 mr-2" />
-                Contact Advisor
+              <Button
+                onClick={() => scrollToSection("agents")}
+                variant="outline"
+                className="border-emerald-200 text-emerald-600 hover:bg-emerald-50 px-8 py-3 text-lg"
+              >
+                <MapPin className="h-5 w-5 mr-2" />
+                Find Local Agents
+              </Button>
+              <Button
+                onClick={() => scrollToSection("eligibility")}
+                variant="outline"
+                className="border-blue-200 text-blue-600 hover:bg-blue-50 px-8 py-3 text-lg"
+              >
+                <FileText className="h-5 w-5 mr-2" />
+                Check Eligibility
               </Button>
             </div>
           </div>
