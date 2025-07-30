@@ -201,7 +201,7 @@ export default function FinancialServicesPage() {
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                   }`}
                 >
-                  <section.icon className="h-4 w-4" />
+                  <FeatureIcon icon={section.icon} className="h-4 w-4" />
                   {section.name}
                 </Button>
               ))}
