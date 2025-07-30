@@ -172,15 +172,15 @@ export default function ServicesPage() {
             {/* Overview Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
               <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-blue-600">500+</div>
+                <div className="text-2xl font-bold text-blue-600">455+</div>
                 <div className="text-sm text-slate-600">Service Providers</div>
               </div>
               <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-purple-600">9</div>
+                <div className="text-2xl font-bold text-purple-600">8</div>
                 <div className="text-sm text-slate-600">Service Categories</div>
               </div>
               <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
-                <div className="text-2xl font-bold text-green-600">1,500+</div>
+                <div className="text-2xl font-bold text-green-600">1,420+</div>
                 <div className="text-sm text-slate-600">Monthly Bookings</div>
               </div>
               <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/20">
