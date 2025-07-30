@@ -152,7 +152,7 @@ const mockProducts: Product[] = [
     name: "Wireless Earbuds Pro",
     description: "Premium wireless earbuds with active noise cancellation",
     price: 179.99,
-    images: ["https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fa9c377c2cdc54e7092356c307bf7eb05?format=webp&width=800"],
+    images: ["https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=800&q=80"],
     category: "Electronics",
     inStock: true,
     stockQuantity: 56,
