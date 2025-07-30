@@ -651,7 +651,7 @@ export default function FinancialServicesPage() {
                   features: ["Loan Payment Calculator", "Savings Goal Planner", "Investment Growth Projector"]
                 },
                 {
-                  icon: Compare,
+                  icon: GitCompare,
                   title: "Product Comparison",
                   description: "Compare financial products side-by-side to find the best deals",
                   color: "from-green-500 to-emerald-600",
