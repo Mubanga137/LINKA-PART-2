@@ -398,7 +398,7 @@ const mockProducts: Product[] = [
     name: "Football Jersey - Zambia National Team",
     description: "Official replica jersey of the Zambia national football team",
     price: 35.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F05ee6542728f4760935c8cd0a4fb431c?alt=media&token=37af48c2-fc5d-4d51-8919-14a3100d0268&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80"],
     category: "Sports & Outdoors",
     inStock: true,
     stockQuantity: 78,
