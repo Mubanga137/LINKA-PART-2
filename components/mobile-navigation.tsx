@@ -225,6 +225,50 @@ export function MobileNavigation() {
               </div>
             )}
 
+            {/* Navigation Controls */}
+            <div className="px-6 pb-4">
+              <div className="grid grid-cols-3 gap-2">
+                {/* Back Button */}
+                {!isHomePage && (
+                  <Button
+                    onClick={handleBack}
+                    variant="outline"
+                    className="flex items-center justify-center space-x-1 p-2 border-slate-200 text-slate-700 hover:bg-slate-50 rounded-lg transition-all duration-200 tap-target-sm"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="text-xs font-medium">Back</span>
+                  </Button>
+                )}
+
+                {/* Home Button */}
+                {!isHomePage && (
+                  <Button
+                    onClick={() => {
+                      router.push('/');
+                      closeSheet();
+                    }}
+                    variant="outline"
+                    className="flex items-center justify-center space-x-1 p-2 border-slate-200 text-slate-700 hover:bg-slate-50 rounded-lg transition-all duration-200 tap-target-sm"
+                  >
+                    <Home className="h-4 w-4" />
+                    <span className="text-xs font-medium">Home</span>
+                  </Button>
+                )}
+
+                {/* Hot Deals Button */}
+                <Button
+                  onClick={() => {
+                    router.push('/marketplace');
+                    closeSheet();
+                  }}
+                  className={`flex items-center justify-center space-x-1 p-2 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-lg transition-all duration-200 tap-target-sm ${!isHomePage ? 'col-span-1' : 'col-span-3'}`}
+                >
+                  <Flame className="h-4 w-4" />
+                  <span className="text-xs font-bold">Hot Deals</span>
+                </Button>
+              </div>
+            </div>
+
             {/* Main Navigation */}
             <nav className="flex-1 px-6 space-y-2">
               {/* Primary Items */}
