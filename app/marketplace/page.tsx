@@ -595,22 +595,7 @@ function MarketplaceContent() {
             </p>
           </div>
 
-          {/* Cart and Wishlist indicators */}
-          <div className="flex justify-center gap-4">
-            <ShoppingCartComponent>
-              <Button variant="outline" className="px-6 py-3 text-sm">
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                Cart ({getCartItemCount()})
-              </Button>
-            </ShoppingCartComponent>
 
-            <Wishlist products={mockProducts}>
-              <Button variant="outline" className="px-6 py-3 text-sm">
-                <Heart className="mr-2 h-4 w-4" />
-                Wishlist ({favorites.length})
-              </Button>
-            </Wishlist>
-          </div>
         </section>
 
         {/* Search and Filters */}
