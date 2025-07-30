@@ -575,20 +575,20 @@ function MarketplaceContent() {
       <main className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Enhanced Hero Section */}
         <section className="text-center space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-          <div className="space-y-6">
-            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-50 to-green-50 px-6 py-3 text-sm border border-blue-200/50 shadow-sm backdrop-blur-sm animate-fade-in">
+          <div className="space-y-4">
+            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-50 to-green-50 px-4 py-2 text-sm border border-blue-200/50">
               <ShoppingBag className="mr-2 h-4 w-4 text-blue-600" />
-              <span className="text-blue-800 font-medium">🛍️ Zambia's Premier E-commerce Platform</span>
+              <span className="text-blue-800 font-medium">Zambia's Premier E-commerce Platform</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight animate-slide-up">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
               Shop Local,
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent animate-gradient">
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
                 Support Zambian Businesses
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed animate-fade-in-delay">
+            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
               Discover amazing products from verified local vendors. From handmade crafts to modern electronics,
               find everything you need while supporting the Zambian economy.
             </p>
