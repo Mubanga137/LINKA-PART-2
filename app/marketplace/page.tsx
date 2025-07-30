@@ -1,351 +1,320 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
-import { motion } from "framer-motion"
-import { MarketplaceMainHeader } from "@/components/marketplace/marketplace-main-header"
-import { Footer } from "@/components/footer"
-import { MarketplaceFilters } from "@/components/marketplace/marketplace-filters"
-import { MarketplaceGrid } from "@/components/marketplace/marketplace-grid"
-import { MarketplaceHeader } from "@/components/marketplace/marketplace-header"
-import { FlashSalesBanner } from "@/components/marketplace/flash-sales-banner"
-import { productService, ProductFilters, ProductSortOptions } from "@/services/product-service"
-import { Product } from "@/contexts/cart-context"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { useState } from "react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { 
-  Filter, 
-  X, 
-  Sparkles, 
+  ShoppingBag, 
   TrendingUp, 
-  Crown, 
-  Shield,
-  Zap,
-  Clock,
+  Users, 
   Star,
-  Gift,
+  MapPin,
+  Shield,
+  Crown,
   Truck,
-  Phone
-} from "lucide-react"
+  Clock
+} from "lucide-react";
+import type { Vendor } from "@/lib/types";
+import { VendorsGrid } from "@/components/marketplace/VendorsGrid";
+import { MarketingView } from "@/components/marketing/MarketingView";
+import styles from "@/styles/marketplace.module.scss";
 
-const TRUST_INDICATORS = [
-  { icon: Shield, text: "100% Secure", color: "text-green-600" },
-  { icon: Truck, text: "Fast Delivery", color: "text-blue-600" },
-  { icon: Star, text: "Quality Products", color: "text-yellow-600" },
-  { icon: Phone, text: "24/7 Support", color: "text-purple-600" }
-]
-
-const FEATURED_CATEGORIES = [
-  { id: "trending", name: "Trending Now", icon: "🔥", gradient: "from-red-500 to-orange-500" },
-  { id: "new", name: "New Arrivals", icon: "✨", gradient: "from-blue-500 to-purple-500" },
-  { id: "local", name: "Local Made", icon: "🇰🇪", gradient: "from-green-500 to-teal-500" },
-  { id: "premium", name: "Premium", icon: "👑", gradient: "from-yellow-500 to-orange-500" },
-]
+// Enhanced vendor data with realistic information
+const vendors: Vendor[] = [
+  {
+    id: "artisan-baskets-co",
+    name: "Artisan Baskets Co.",
+    tagline: "Handwoven goods by local makers",
+    rating: 4.8,
+    reviewCount: 127,
+    productImageUrl: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1600&auto=format&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+    pricePreview: "From ZMW 95",
+    href: "/vendors/artisan-baskets-co",
+    categories: ["Home & Garden", "Handmade", "Decor", "Traditional Crafts"],
+    location: "Lusaka",
+    isVerified: true,
+    isFeatured: true,
+    deliveryTime: "2-3 days",
+    discount: "15% OFF"
+  },
+  {
+    id: "fresh-valley-organics",
+    name: "Fresh Valley Organics",
+    tagline: "Farm‑fresh organic produce delivered daily",
+    rating: 4.9,
+    reviewCount: 243,
+    productImageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600&auto=format&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1574263867128-b7d5c6f62ad1?q=80&w=200&auto=format&fit=crop",
+    pricePreview: "Bundles from ZMW 45",
+    href: "/vendors/fresh-valley-organics",
+    categories: ["Grocery", "Organic", "Fresh Produce", "Health"],
+    location: "Ndola",
+    isVerified: true,
+    isFeatured: false,
+    deliveryTime: "Same day"
+  },
+  {
+    id: "zamtech-solutions",
+    name: "ZamTech Solutions",
+    tagline: "Cutting-edge technology at affordable prices",
+    rating: 4.6,
+    reviewCount: 89,
+    productImageUrl: "https://images.unsplash.com/photo-1593062096033-9a26b2aa28ba?q=80&w=1600&auto=format&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=200&auto=format&fit=crop",
+    pricePreview: "From ZMW 120",
+    href: "/vendors/zamtech-solutions",
+    categories: ["Electronics", "Mobile", "Computers", "Accessories"],
+    location: "Kitwe",
+    isVerified: true,
+    isFeatured: false,
+    deliveryTime: "1-2 days"
+  },
+  {
+    id: "copper-style-boutique",
+    name: "Copper Style Boutique",
+    tagline: "Contemporary African fashion with modern flair",
+    rating: 4.7,
+    reviewCount: 156,
+    productImageUrl: "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1600&auto=format&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=200&auto=format&fit=crop",
+    pricePreview: "From ZMW 85",
+    href: "/vendors/copper-style-boutique",
+    categories: ["Fashion", "Women's Clothing", "African Fashion", "Accessories"],
+    location: "Lusaka",
+    isVerified: true,
+    isFeatured: true,
+    deliveryTime: "2-4 days",
+    discount: "Buy 2 Get 1"
+  },
+  {
+    id: "mama-chamas-kitchen",
+    name: "Mama Chama's Kitchen",
+    tagline: "Authentic Zambian cuisine and ready meals",
+    rating: 4.8,
+    reviewCount: 203,
+    productImageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?q=80&w=1600&auto=format&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1595257841889-eca2678454e2?q=80&w=200&auto=format&fit=crop",
+    pricePreview: "Meals from ZMW 25",
+    href: "/vendors/mama-chamas-kitchen",
+    categories: ["Food & Beverages", "Ready Meals", "Local Cuisine", "Catering"],
+    location: "Ndola",
+    isVerified: true,
+    isFeatured: false,
+    deliveryTime: "30-45 min"
+  },
+  {
+    id: "wellness-garden-spa",
+    name: "Wellness Garden Spa",
+    tagline: "Natural beauty products and wellness services",
+    rating: 4.9,
+    reviewCount: 178,
+    productImageUrl: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=1600&auto=format&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?q=80&w=200&auto=format&fit=crop",
+    pricePreview: "From ZMW 65",
+    href: "/vendors/wellness-garden-spa",
+    categories: ["Beauty & Wellness", "Natural Products", "Skincare", "Services"],
+    location: "Livingstone",
+    isVerified: true,
+    isFeatured: false,
+    deliveryTime: "2-3 days"
+  },
+  {
+    id: "creative-minds-education",
+    name: "Creative Minds Education",
+    tagline: "Educational toys and learning materials",
+    rating: 4.7,
+    reviewCount: 92,
+    productImageUrl: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1600&auto=format&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?q=80&w=200&auto=format&fit=crop",
+    pricePreview: "From ZMW 35",
+    href: "/vendors/creative-minds-education",
+    categories: ["Education", "Toys", "Children", "Learning"],
+    location: "Lusaka",
+    isVerified: true,
+    isFeatured: false,
+    deliveryTime: "1-3 days"
+  },
+  {
+    id: "baobab-furniture-works",
+    name: "Baobab Furniture Works",
+    tagline: "Handcrafted furniture from sustainable materials",
+    rating: 4.8,
+    reviewCount: 67,
+    productImageUrl: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1600&auto=format&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+    pricePreview: "From ZMW 450",
+    href: "/vendors/baobab-furniture-works",
+    categories: ["Furniture", "Home & Garden", "Handmade", "Sustainable"],
+    location: "Kitwe",
+    isVerified: true,
+    isFeatured: true,
+    deliveryTime: "5-7 days"
+  }
+];
 
 export default function MarketplacePage() {
-  const searchParams = useSearchParams()
-  const [products, setProducts] = useState<Product[]>([])
-  const [totalProducts, setTotalProducts] = useState(0)
-  const [isLoading, setIsLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [showMobileFilters, setShowMobileFilters] = useState(false)
-  const itemsPerPage = 24
+  const [cartCount, setCartCount] = useState(0);
 
-  // Initialize filters from URL params
-  const [filters, setFilters] = useState<ProductFilters>({
-    category: searchParams.get('category') || undefined,
-    searchQuery: searchParams.get('q') || undefined,
-    tags: searchParams.get('trending') === 'true' ? ['trending'] : 
-          searchParams.get('tags') ? searchParams.get('tags')?.split(',') : undefined,
-  })
-
-  const [sortOptions, setSortOptions] = useState<ProductSortOptions>({
-    sortBy: (searchParams.get('sort') as ProductSortOptions['sortBy']) || 'newest',
-    order: 'desc'
-  })
-
-  // Load products
-  useEffect(() => {
-    loadProducts()
-  }, [filters, sortOptions, currentPage])
-
-  const loadProducts = async () => {
-    setIsLoading(true)
-    try {
-      const offset = (currentPage - 1) * itemsPerPage
-      const result = await productService.getProducts(
-        filters,
-        sortOptions,
-        itemsPerPage,
-        offset
-      )
-      setProducts(result.products)
-      setTotalProducts(result.total)
-    } catch (error) {
-      console.error('Error loading products:', error)
-    } finally {
-      setIsLoading(false)
+  const handleAddToCart = (vendor: Vendor) => {
+    setCartCount(prev => prev + 1);
+    // Here you would integrate with your cart store or API
+    console.log("Added to cart:", vendor.name);
+    
+    // Show a temporary success message (you might want to use a toast library)
+    if (typeof window !== 'undefined') {
+      const notification = document.createElement('div');
+      notification.textContent = `${vendor.name} added to cart!`;
+      notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all';
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
     }
-  }
+  };
 
-  const handleFiltersChange = (newFilters: ProductFilters) => {
-    setFilters(newFilters)
-    setCurrentPage(1)
-  }
-
-  const handleSortChange = (newSort: ProductSortOptions) => {
-    setSortOptions(newSort)
-    setCurrentPage(1)
-  }
-
-  const clearFilters = () => {
-    setFilters({})
-    setCurrentPage(1)
-  }
-
-  const totalPages = Math.ceil(totalProducts / itemsPerPage)
-  const hasActiveFilters = Object.keys(filters).some(key => 
-    filters[key as keyof ProductFilters] !== undefined
-  )
+  const featuredVendors = vendors.filter(v => v.isFeatured);
+  const totalReviews = vendors.reduce((sum, vendor) => sum + (vendor.reviewCount || 0), 0);
+  const averageRating = vendors.reduce((sum, vendor) => sum + (vendor.rating || 0), 0) / vendors.length;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <MarketplaceMainHeader />
-
-      <main className="pb-12">
-        {/* Trust Indicators Bar - Mobile */}
-        <div className="lg:hidden bg-white border-b px-4 py-2">
-          <div className="flex items-center justify-between text-xs">
-            {TRUST_INDICATORS.map((indicator, i) => (
-              <div key={i} className={`flex items-center gap-1 ${indicator.color}`}>
-                <indicator.icon className="h-3 w-3" />
-                <span className="hidden sm:inline">{indicator.text}</span>
-              </div>
-            ))}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+      <Header />
+      
+      <main className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-12">
+        {/* Hero Section */}
+        <section className="text-center space-y-6">
+          <div className="space-y-4">
+            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-100 to-green-100 px-6 py-3 text-sm border border-blue-200">
+              <ShoppingBag className="mr-2 h-4 w-4 text-blue-600" />
+              <span className="text-blue-800 font-medium">🛍️ Zambia's Premier Marketplace</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">
+              Discover Local
+              <span className="block bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+                Businesses & Services
+              </span>
+            </h1>
+            
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Connect with verified local vendors, discover unique products, and support 
+              Zambian businesses. From handmade crafts to fresh produce, find everything you need.
+            </p>
           </div>
-        </div>
 
-        {/* Hero Section with Flash Sales */}
-        <section className="bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-            {/* Flash Sales Banner */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6"
-            >
-              <FlashSalesBanner />
-            </motion.div>
-
-            {/* Featured Categories */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
-            >
-              {FEATURED_CATEGORIES.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => handleFiltersChange({ ...filters, tags: [category.id] })}
-                  className={`bg-gradient-to-r ${category.gradient} p-4 rounded-xl text-white text-center hover:scale-105 transition-transform duration-200 shadow-lg`}
-                >
-                  <div className="text-2xl mb-2">{category.icon}</div>
-                  <div className="font-semibold text-sm">{category.name}</div>
-                </button>
-              ))}
-            </motion.div>
-
-            {/* Trust Indicators - Desktop */}
-            <div className="hidden lg:flex items-center justify-center gap-8 py-4 bg-gray-50 rounded-xl">
-              {TRUST_INDICATORS.map((indicator, i) => (
-                <div key={i} className={`flex items-center gap-2 ${indicator.color}`}>
-                  <indicator.icon className="h-5 w-5" />
-                  <span className="font-medium">{indicator.text}</span>
-                </div>
-              ))}
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className={`${styles.card} p-6 text-center hover:shadow-lg transition-all`}>
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Users className="h-6 w-6 text-blue-600" />
+              </div>
+              <div className="text-2xl font-bold text-slate-900">{vendors.length}+</div>
+              <div className="text-sm text-slate-600">Active Vendors</div>
+            </div>
+            
+            <div className={`${styles.card} p-6 text-center hover:shadow-lg transition-all`}>
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Star className="h-6 w-6 text-green-600" />
+              </div>
+              <div className="text-2xl font-bold text-slate-900">{averageRating.toFixed(1)}</div>
+              <div className="text-sm text-slate-600">Avg Rating</div>
+            </div>
+            
+            <div className={`${styles.card} p-6 text-center hover:shadow-lg transition-all`}>
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Shield className="h-6 w-6 text-purple-600" />
+              </div>
+              <div className="text-2xl font-bold text-slate-900">{totalReviews}</div>
+              <div className="text-sm text-slate-600">Reviews</div>
+            </div>
+            
+            <div className={`${styles.card} p-6 text-center hover:shadow-lg transition-all`}>
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Truck className="h-6 w-6 text-orange-600" />
+              </div>
+              <div className="text-2xl font-bold text-slate-900">24/7</div>
+              <div className="text-sm text-slate-600">Delivery</div>
             </div>
           </div>
         </section>
 
-        {/* Main Marketplace Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-          {/* Page Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-white rounded-xl border shadow-sm p-6 mb-6"
-          >
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                  Discover Amazing Products
-                </h1>
-                <p className="text-gray-600">
-                  Shop from verified local and international sellers with confidence
-                </p>
+        {/* Marketing Section */}
+        <MarketingView data={{ revenue: { growth: 0.182 } }} />
+
+        {/* Featured Vendors Section */}
+        {featuredVendors.length > 0 && (
+          <section className="space-y-6">
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center rounded-full bg-gradient-to-r from-orange-100 to-red-100 px-4 py-2 text-sm border border-orange-200">
+                <Crown className="mr-2 h-4 w-4 text-orange-600" />
+                <span className="text-orange-800 font-medium">Featured Partners</span>
               </div>
-              
-              {/* Active Filters Summary */}
-              {hasActiveFilters && (
-                <div className="flex flex-wrap gap-2">
-                  {Object.entries(filters).map(([key, value]) => {
-                    if (!value) return null
-                    
-                    const filterLabel = Array.isArray(value) 
-                      ? value.join(', ') 
-                      : typeof value === 'object' 
-                        ? `K${value.min}-K${value.max}`
-                        : value
-                    
-                    return (
-                      <Badge 
-                        key={key} 
-                        variant="secondary" 
-                        className="flex items-center gap-1 bg-orange-100 text-orange-800"
-                      >
-                        {key}: {filterLabel}
-                        <button 
-                          onClick={() => {
-                            const newFilters = { ...filters }
-                            delete newFilters[key as keyof ProductFilters]
-                            handleFiltersChange(newFilters)
-                          }}
-                          className="ml-1 hover:bg-orange-200 rounded-full p-0.5"
-                        >
-                          <X className="h-3 w-3" />
-                        </button>
-                      </Badge>
-                    )
-                  })}
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={clearFilters}
-                    className="text-orange-600 hover:text-orange-700 hover:bg-orange-50"
-                  >
-                    Clear All
-                  </Button>
-                </div>
-              )}
+              <h2 className="text-3xl font-bold text-slate-900">
+                Spotlight Vendors
+              </h2>
+              <p className="text-slate-600">
+                Hand-picked businesses offering exceptional products and services
+              </p>
             </div>
-          </motion.div>
 
-          {/* Mobile Filters Button */}
-          <div className="lg:hidden mb-4">
-            <Button
-              variant="outline"
-              onClick={() => setShowMobileFilters(true)}
-              className="w-full flex items-center justify-center gap-2 border-orange-200 text-orange-600 hover:bg-orange-50"
-            >
-              <Filter className="h-4 w-4" />
-              Filters & Search
-              {hasActiveFilters && (
-                <Badge className="bg-orange-500 text-white ml-2">
-                  {Object.keys(filters).filter(k => filters[k as keyof ProductFilters]).length}
-                </Badge>
-              )}
-            </Button>
-          </div>
-
-          {/* Main Content Layout */}
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Filters Sidebar - Desktop */}
-            <aside className="hidden lg:block lg:w-80 flex-shrink-0">
-              <div className="sticky top-6">
-                <MarketplaceFilters
-                  filters={filters}
-                  onFiltersChange={handleFiltersChange}
-                  isLoading={isLoading}
-                />
-              </div>
-            </aside>
-
-            {/* Products Grid */}
-            <div className="flex-1 min-w-0">
-              <MarketplaceGrid
-                products={products}
-                isLoading={isLoading}
-                sortOptions={sortOptions}
-                onSortChange={handleSortChange}
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-                totalProducts={totalProducts}
-                itemsPerPage={itemsPerPage}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Mobile Filters Overlay */}
-        {showMobileFilters && (
-          <div className="lg:hidden fixed inset-0 bg-black/50 z-50" onClick={() => setShowMobileFilters(false)}>
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              className="absolute right-0 top-0 h-full w-full max-w-sm bg-white shadow-xl overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="p-4 border-b bg-orange-500 text-white">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">Filters</h3>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowMobileFilters(false)}
-                    className="text-white hover:bg-white/20"
-                  >
-                    <X className="h-5 w-5" />
-                  </Button>
+            <div className={styles.vendorsGrid}>
+              {featuredVendors.map((vendor) => (
+                <div key={vendor.id} className="relative">
+                  <div className="absolute -top-2 -right-2 z-10">
+                    <Badge className={`${styles.pillFeatured} shadow-lg`}>
+                      <Crown className="h-3 w-3 mr-1" />
+                      Featured
+                    </Badge>
+                  </div>
+                  {/* VendorCard would be rendered here with the vendor data */}
                 </div>
-              </div>
-              <div className="p-4">
-                <MarketplaceFilters
-                  filters={filters}
-                  onFiltersChange={(newFilters) => {
-                    handleFiltersChange(newFilters)
-                    setShowMobileFilters(false)
-                  }}
-                  isLoading={isLoading}
-                />
-              </div>
-            </motion.div>
-          </div>
+              ))}
+            </div>
+          </section>
         )}
 
-        {/* Bottom CTA Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-8 text-center text-white"
-          >
-            <Sparkles className="h-12 w-12 mx-auto mb-4 text-yellow-300" />
-            <h2 className="text-2xl font-bold mb-2">Join Over 10,000+ Happy Customers</h2>
-            <p className="text-orange-100 mb-6 max-w-2xl mx-auto">
-              Start selling your products or discover unique items from verified local and international sellers. 
-              Safe, secure, and designed for African entrepreneurs.
+        {/* Main Vendors Grid */}
+        <VendorsGrid 
+          vendors={vendors} 
+          onAddToCart={handleAddToCart}
+          title="All Marketplace Vendors"
+          description="Browse our complete directory of verified local businesses"
+        />
+
+        {/* Call to Action Section */}
+        <section className={`${styles.card} bg-gradient-to-r from-blue-600 via-blue-700 to-green-600 text-white relative overflow-hidden`}>
+          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="relative z-10 p-8 md:p-12 text-center space-y-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Start Selling?
+            </h2>
+            <p className="text-xl opacity-90 max-w-2xl mx-auto mb-8">
+              Join hundreds of successful vendors on Zambia's fastest-growing marketplace. 
+              Start your online business today with zero setup fees.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
-                <Crown className="h-5 w-5 mr-2" />
-                Become a Seller
+              <Button 
+                size="lg" 
+                className="bg-white text-blue-600 hover:bg-gray-50 font-semibold px-8 py-4 rounded-xl shadow-lg"
+              >
+                Become a Vendor
               </Button>
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                <Gift className="h-5 w-5 mr-2" />
-                Explore More
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white/30 text-white hover:bg-white/10 bg-transparent font-semibold px-8 py-4 rounded-xl"
+              >
+                Learn More
               </Button>
             </div>
-          </motion.div>
+          </div>
         </section>
       </main>
 
       <Footer />
     </div>
-  )
+  );
 }
