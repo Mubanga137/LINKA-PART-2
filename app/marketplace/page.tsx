@@ -861,7 +861,7 @@ function MarketplaceContent() {
             <p className="text-gray-600">Explore our wide range of product categories</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 gap-16 landscape:grid-cols-3 landscape:gap-6 sm:grid-cols-3 sm:gap-20 md:grid-cols-4 md:gap-24 lg:grid-cols-6 lg:gap-24">
             {mockCategories.map((category) => (
               <Card
                 key={category.id}
