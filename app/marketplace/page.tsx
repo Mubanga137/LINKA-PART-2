@@ -418,7 +418,7 @@ const mockProducts: Product[] = [
     description: "Complete home fitness equipment set for strength training and cardio",
     price: 159.99,
     originalPrice: 199.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F55886598611245e8b46eb5f66c6ba09f?alt=media&token=dbd4bc40-71ed-4287-b2ad-c00434140e53&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"],
     category: "Sports & Outdoors",
     inStock: true,
     stockQuantity: 15,
