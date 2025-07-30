@@ -790,7 +790,7 @@ function MarketplaceContent() {
                       decoding="async"
                     />
                   </div>
-                  <div className="p-20 flex-1 flex flex-col justify-between">
+                  <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between">
                     <div>
                       <h3 className="text-clamp-lg font-bold text-gray-900 mb-2">
                         {product.name}
