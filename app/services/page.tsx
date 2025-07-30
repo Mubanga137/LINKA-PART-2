@@ -286,8 +286,8 @@ export default function ServicesPage() {
                   {service.isSpecial ? (
                     /* Special Financial Services Card Design */
                     <Card
-                      className="group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 bg-white border border-gray-200 rounded-xl overflow-hidden"
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      className="group cursor-pointer transition-all duration-500 hover:shadow-3xl hover:-translate-y-4 bg-gradient-to-br from-white to-emerald-50/50 border border-emerald-200/50 rounded-3xl overflow-hidden backdrop-blur-sm hover:border-emerald-300/50 animate-fade-in-up"
+                      style={{ animationDelay: `${index * 150}ms` }}
                     >
                       <CardContent className="p-0">
                         {/* Image Header with overlays */}
