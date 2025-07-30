@@ -90,9 +90,9 @@ export function MobileNavigation() {
     },
     {
       name: "Hot Deals",
-      href: "/marketplace?filter=hotDeal",
+      href: "/hot-deals",
       icon: Flame,
-      active: false,
+      active: pathname?.includes("/hot-deals"),
       isSpecial: true
     },
     {
