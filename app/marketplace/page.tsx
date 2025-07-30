@@ -284,7 +284,7 @@ const mockProducts: Product[] = [
     name: "Garden Tool Set",
     description: "Complete gardening tool set for maintaining your home garden",
     price: 49.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2F4eb62a99a3074e92868ffb78277850ac?alt=media&token=4c3488ff-545f-4bd3-bed1-3039c4b54871&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80"],
     category: "Home & Garden",
     inStock: true,
     stockQuantity: 41,
