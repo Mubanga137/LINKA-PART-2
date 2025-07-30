@@ -426,28 +426,6 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Financial Services CTA */}
-        <section className="py-16 bg-gradient-to-r from-emerald-100 to-blue-100">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-white/20 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <DollarSign className="h-8 w-8 text-white" />
-              </div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-4">Looking for Financial Products?</h2>
-              <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
-                Need banking, loans, insurance, or investment services? Visit our dedicated Financial Services section 
-                for comprehensive financial solutions from licensed providers.
-              </p>
-              <Link href="/financial-services">
-                <Button className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white px-8 py-3">
-                  <DollarSign className="h-5 w-5 mr-2" />
-                  Go to Financial Services
-                  <ArrowRight className="h-5 w-5 ml-2" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
 
         {/* CTA Section */}
         <section className="py-16">
