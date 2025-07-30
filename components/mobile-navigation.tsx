@@ -287,8 +287,10 @@ export function MobileNavigation() {
                     onClick={closeSheet}
                     className={`
                       flex items-center space-x-4 p-4 rounded-2xl transition-all duration-200 group
-                      ${item.active 
-                        ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/20' 
+                      ${item.active
+                        ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
+                        : (item as any).isSpecial
+                        ? 'bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 text-red-700 hover:from-red-100 hover:to-orange-100'
                         : 'text-slate-700 hover:bg-slate-100 hover:text-indigo-600'
                       }
                     `}
