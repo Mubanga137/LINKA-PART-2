@@ -574,7 +574,7 @@ function MarketplaceContent() {
       
       <main className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Enhanced Hero Section */}
-        <section className="text-center space-y-4 sm:space-y-6 lg:space-y-8 mb-8 sm:mb-12 lg:mb-16">
+        <section className="text-center space-y-4 sm:space-y-6 mb-6 sm:mb-8">
           <div className="space-y-6">
             <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-50 to-green-50 px-6 py-3 text-sm border border-blue-200/50 shadow-sm backdrop-blur-sm animate-fade-in">
               <ShoppingBag className="mr-2 h-4 w-4 text-blue-600" />
