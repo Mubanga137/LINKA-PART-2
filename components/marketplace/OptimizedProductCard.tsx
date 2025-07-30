@@ -183,41 +183,27 @@ export function OptimizedProductCard({
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-auto space-y-1.5 sm:space-y-2">
+        <div className="mt-auto space-y-2">
           <Button
             onClick={() => onAddToCart(product)}
             disabled={!product.inStock}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 sm:py-2.5 text-xs sm:text-sm rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 text-sm rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced"
             aria-label={`Add ${product.name} to cart`}
           >
-            <ShoppingCart className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+            <ShoppingCart className="h-4 w-4 mr-2" />
             Add to Cart
           </Button>
-          
-          <Button 
-            variant="outline" 
-            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-2 sm:py-2.5 text-xs sm:text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
+
+          <Button
+            variant="outline"
+            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-3 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
             asChild
           >
             <Link href={`/products/${product.id}`}>
-              <Package className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+              <Package className="h-4 w-4 mr-2" />
               View Details
             </Link>
           </Button>
-        </div>
-
-        {/* Features Row */}
-        <div className="flex flex-wrap gap-1 mt-1.5 sm:mt-2">
-          {product.freeShipping && (
-            <Badge variant="secondary" className="text-xs">
-              Free Shipping
-            </Badge>
-          )}
-          {product.fastDelivery && (
-            <Badge variant="secondary" className="text-xs">
-              Fast Delivery
-            </Badge>
-          )}
         </div>
       </div>
     </article>
