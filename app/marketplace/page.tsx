@@ -639,7 +639,7 @@ function MarketplaceContent() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-80">
-                  <div className="space-y-6">
+                  <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                     <h3 className="text-lg font-semibold">Filters</h3>
                     
                     {/* Price Range */}
