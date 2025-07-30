@@ -91,6 +91,7 @@ export interface MarketplaceFilters {
   freeShipping?: boolean;
   fastDelivery?: boolean;
   featured?: boolean;
+  hotDeal?: boolean;
   tags?: string[];
   vendorId?: string;
   sortBy?: 'relevance' | 'price_low' | 'price_high' | 'rating' | 'name' | 'newest' | 'discount';
