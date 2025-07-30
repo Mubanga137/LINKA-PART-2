@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import type { Vendor, CartItem } from '@/lib/types';
+import type { Product, CartItem } from '@/lib/types';
 import { saveToLocalStorage, loadFromLocalStorage, STORAGE_KEYS } from '@/lib/marketplace-utils';
 
 interface MarketplaceState {
@@ -12,24 +12,24 @@ interface MarketplaceState {
 }
 
 interface MarketplaceContextType extends MarketplaceState {
-  addToCart: (vendor: Vendor, quantity?: number) => void;
-  removeFromCart: (vendorId: string) => void;
-  updateCartQuantity: (vendorId: string, quantity: number) => void;
+  addToCart: (product: Product, quantity?: number, variantId?: string) => void;
+  removeFromCart: (itemId: string) => void;
+  updateCartQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
-  toggleFavorite: (vendorId: string) => void;
-  addToRecentlyViewed: (vendorId: string) => void;
+  toggleFavorite: (productId: string) => void;
+  addToRecentlyViewed: (productId: string) => void;
   addToSearchHistory: (query: string) => void;
   getCartTotal: () => number;
   getCartItemCount: () => number;
 }
 
 type MarketplaceAction =
-  | { type: 'ADD_TO_CART'; payload: { vendor: Vendor; quantity: number } }
-  | { type: 'REMOVE_FROM_CART'; payload: { vendorId: string } }
-  | { type: 'UPDATE_CART_QUANTITY'; payload: { vendorId: string; quantity: number } }
+  | { type: 'ADD_TO_CART'; payload: { product: Product; quantity: number; variantId?: string } }
+  | { type: 'REMOVE_FROM_CART'; payload: { itemId: string } }
+  | { type: 'UPDATE_CART_QUANTITY'; payload: { itemId: string; quantity: number } }
   | { type: 'CLEAR_CART' }
-  | { type: 'TOGGLE_FAVORITE'; payload: { vendorId: string } }
-  | { type: 'ADD_TO_RECENTLY_VIEWED'; payload: { vendorId: string } }
+  | { type: 'TOGGLE_FAVORITE'; payload: { productId: string } }
+  | { type: 'ADD_TO_RECENTLY_VIEWED'; payload: { productId: string } }
   | { type: 'ADD_TO_SEARCH_HISTORY'; payload: { query: string } }
   | { type: 'LOAD_PERSISTED_STATE'; payload: Partial<MarketplaceState> };
 
@@ -45,25 +45,31 @@ const initialState: MarketplaceState = {
 function marketplaceReducer(state: MarketplaceState, action: MarketplaceAction): MarketplaceState {
   switch (action.type) {
     case 'ADD_TO_CART': {
-      const { vendor, quantity } = action.payload;
-      const existingItem = state.cart.find(item => item.vendorId === vendor.id);
-      
+      const { product, quantity, variantId } = action.payload;
+      const variant = variantId ? product.variants?.find(v => v.id === variantId) : undefined;
+      const existingItem = state.cart.find(item =>
+        item.productId === product.id && item.variantId === variantId
+      );
+
       if (existingItem) {
         return {
           ...state,
           cart: state.cart.map(item =>
-            item.vendorId === vendor.id
+            item.id === existingItem.id
               ? { ...item, quantity: item.quantity + quantity }
               : item
           )
         };
       }
-      
+
       return {
         ...state,
         cart: [...state.cart, {
-          vendorId: vendor.id,
-          vendor,
+          id: `cart-${Date.now()}-${Math.random()}`,
+          productId: product.id,
+          product,
+          variantId,
+          variant,
           quantity,
           addedAt: new Date()
         }]
@@ -73,23 +79,23 @@ function marketplaceReducer(state: MarketplaceState, action: MarketplaceAction):
     case 'REMOVE_FROM_CART': {
       return {
         ...state,
-        cart: state.cart.filter(item => item.vendorId !== action.payload.vendorId)
+        cart: state.cart.filter(item => item.id !== action.payload.itemId)
       };
     }
     
     case 'UPDATE_CART_QUANTITY': {
-      const { vendorId, quantity } = action.payload;
+      const { itemId, quantity } = action.payload;
       if (quantity <= 0) {
         return {
           ...state,
-          cart: state.cart.filter(item => item.vendorId !== vendorId)
+          cart: state.cart.filter(item => item.id !== itemId)
         };
       }
-      
+
       return {
         ...state,
         cart: state.cart.map(item =>
-          item.vendorId === vendorId
+          item.id === itemId
             ? { ...item, quantity }
             : item
         )
@@ -104,24 +110,24 @@ function marketplaceReducer(state: MarketplaceState, action: MarketplaceAction):
     }
     
     case 'TOGGLE_FAVORITE': {
-      const { vendorId } = action.payload;
-      const isFavorite = state.favorites.includes(vendorId);
-      
+      const { productId } = action.payload;
+      const isFavorite = state.favorites.includes(productId);
+
       return {
         ...state,
         favorites: isFavorite
-          ? state.favorites.filter(id => id !== vendorId)
-          : [...state.favorites, vendorId]
+          ? state.favorites.filter(id => id !== productId)
+          : [...state.favorites, productId]
       };
     }
     
     case 'ADD_TO_RECENTLY_VIEWED': {
-      const { vendorId } = action.payload;
-      const filtered = state.recentlyViewed.filter(id => id !== vendorId);
-      
+      const { productId } = action.payload;
+      const filtered = state.recentlyViewed.filter(id => id !== productId);
+
       return {
         ...state,
-        recentlyViewed: [vendorId, ...filtered].slice(0, 10) // Keep last 10
+        recentlyViewed: [productId, ...filtered].slice(0, 10) // Keep last 10
       };
     }
     
@@ -179,28 +185,28 @@ export function MarketplaceProvider({ children }: MarketplaceProviderProps) {
     saveToLocalStorage(STORAGE_KEYS.RECENT_SEARCHES, state.searchHistory);
   }, [state.searchHistory]);
 
-  const addToCart = (vendor: Vendor, quantity: number = 1) => {
-    dispatch({ type: 'ADD_TO_CART', payload: { vendor, quantity } });
+  const addToCart = (product: Product, quantity: number = 1, variantId?: string) => {
+    dispatch({ type: 'ADD_TO_CART', payload: { product, quantity, variantId } });
   };
 
-  const removeFromCart = (vendorId: string) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: { vendorId } });
+  const removeFromCart = (itemId: string) => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: { itemId } });
   };
 
-  const updateCartQuantity = (vendorId: string, quantity: number) => {
-    dispatch({ type: 'UPDATE_CART_QUANTITY', payload: { vendorId, quantity } });
+  const updateCartQuantity = (itemId: string, quantity: number) => {
+    dispatch({ type: 'UPDATE_CART_QUANTITY', payload: { itemId, quantity } });
   };
 
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
   };
 
-  const toggleFavorite = (vendorId: string) => {
-    dispatch({ type: 'TOGGLE_FAVORITE', payload: { vendorId } });
+  const toggleFavorite = (productId: string) => {
+    dispatch({ type: 'TOGGLE_FAVORITE', payload: { productId } });
   };
 
-  const addToRecentlyViewed = (vendorId: string) => {
-    dispatch({ type: 'ADD_TO_RECENTLY_VIEWED', payload: { vendorId } });
+  const addToRecentlyViewed = (productId: string) => {
+    dispatch({ type: 'ADD_TO_RECENTLY_VIEWED', payload: { productId } });
   };
 
   const addToSearchHistory = (query: string) => {
@@ -211,7 +217,7 @@ export function MarketplaceProvider({ children }: MarketplaceProviderProps) {
 
   const getCartTotal = (): number => {
     return state.cart.reduce((total, item) => {
-      const price = parseFloat(item.vendor.pricePreview?.replace(/[^0-9.]/g, '') || '0');
+      const price = item.variant?.price || item.product.price;
       return total + (price * item.quantity);
     }, 0);
   };
@@ -267,6 +273,6 @@ export function useFavorites() {
   return {
     favorites,
     toggleFavorite,
-    isFavorite: (vendorId: string) => favorites.includes(vendorId)
+    isFavorite: (productId: string) => favorites.includes(productId)
   };
 }
