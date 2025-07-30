@@ -19,6 +19,7 @@ import {
   Package,
   Truck,
   Heart,
+  DollarSign,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -178,6 +179,19 @@ const industries = [
     bgGradient: "from-red-50 to-pink-50",
     stats: { providers: "95+", appointments: "500+" },
     features: ["24/7 Emergency", "Telemedicine", "Home Visits"],
+  },
+  {
+    id: 13,
+    name: "Financial Services",
+    icon: DollarSign,
+    description: "Banking, investments, insurance, and financial advisory services",
+    retailers: 95,
+    growth: "+42%",
+    rating: 4.8,
+    gradient: "from-emerald-500 to-blue-600",
+    bgGradient: "from-emerald-50 to-blue-50",
+    stats: { providers: "95+", volume: "ZMW 2.5M+" },
+    features: ["Banking", "Investments", "Insurance", "Financial Planning"],
   },
 ]
 
@@ -448,6 +462,8 @@ export function IndustriesGrid() {
                   return "/industries/transport"
                 case "Health & Wellness":
                   return "/services/health-wellness"
+                case "Financial Services":
+                  return "/services/financial-services"
                 default:
                   return "#"
               }
