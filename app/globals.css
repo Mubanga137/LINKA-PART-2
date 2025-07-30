@@ -64,30 +64,39 @@
     }
   }
 
-  /* Enhanced spacing scale utilities with mobile-first approach */
-  .space-8 { gap: 0.5rem; } /* 8px */
-  .space-12 { gap: 0.75rem; } /* 12px */
-  .space-16 { gap: 1rem; } /* 16px */
-  .space-24 { gap: 1.5rem; } /* 24px */
-  .space-32 { gap: 2rem; } /* 32px */
-  .space-48 { gap: 3rem; } /* 48px */
+  /* Industry Standard 8px Grid System */
+  .space-4 { gap: 0.25rem; } /* 4px - fine adjustments */
+  .space-8 { gap: 0.5rem; } /* 8px - basic unit */
+  .space-12 { gap: 0.75rem; } /* 12px - list items */
+  .space-16 { gap: 1rem; } /* 16px - related elements */
+  .space-24 { gap: 1.5rem; } /* 24px - unrelated groups */
+  .space-32 { gap: 2rem; } /* 32px - section spacing */
+  .space-40 { gap: 2.5rem; } /* 40px - large sections */
+  .space-48 { gap: 3rem; } /* 48px - major sections */
 
-  /* Mobile-optimized padding utilities */
-  .p-8 { padding: 0.5rem; }
-  .p-12 { padding: 0.75rem; }
-  .p-16 { padding: 1rem; }
-  .p-20 { padding: 1.25rem; }
-  .p-24 { padding: 1.5rem; }
-  .p-32 { padding: 2rem; }
+  /* 8px Grid Padding System */
+  .p-4 { padding: 0.25rem; } /* 4px */
+  .p-8 { padding: 0.5rem; } /* 8px */
+  .p-12 { padding: 0.75rem; } /* 12px */
+  .p-16 { padding: 1rem; } /* 16px - standard mobile safe area */
+  .p-24 { padding: 1.5rem; } /* 24px */
+  .p-32 { padding: 2rem; } /* 32px */
+  .p-40 { padding: 2.5rem; } /* 40px */
+  .p-48 { padding: 3rem; } /* 48px */
 
-  /* Responsive padding utilities */
-  .p-mobile { padding: 0.75rem; } /* 12px on mobile */
-  .p-mobile-lg { padding: 1rem; } /* 16px on mobile */
+  /* Mobile App Standard Spacing */
+  .mobile-safe-padding { padding: 1rem; } /* 16px safe area */
+  .mobile-section-spacing { margin-bottom: 1.5rem; } /* 24px section spacing */
+  .mobile-group-spacing { margin-bottom: 1rem; } /* 16px group spacing */
+  .mobile-element-spacing { margin-bottom: 0.5rem; } /* 8px element spacing */
 
-  @media (min-width: 640px) {
-    .p-mobile { padding: 1rem; } /* 16px on sm+ */
-    .p-mobile-lg { padding: 1.5rem; } /* 24px on sm+ */
-  }
+  /* Icon to Text Spacing */
+  .icon-text-4 { gap: 0.25rem; } /* 4px */
+  .icon-text-8 { gap: 0.5rem; } /* 8px */
+
+  /* List Item Padding (12px-16px standard) */
+  .list-item-padding { padding: 0.75rem 1rem; } /* 12px vertical, 16px horizontal */
+  .list-item-padding-lg { padding: 1rem; } /* 16px all around */
 
   /* Mobile-optimized clamped typography */
   .text-clamp-xs {
