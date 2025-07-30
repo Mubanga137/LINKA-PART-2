@@ -164,11 +164,28 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
       <Header />
       
-      <main className="py-8">
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-r from-emerald-400/15 to-teal-400/15 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-40 left-1/4 w-80 h-80 bg-gradient-to-r from-pink-400/20 to-rose-400/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        <div className="absolute bottom-20 right-1/3 w-72 h-72 bg-gradient-to-r from-indigo-400/15 to-blue-400/15 rounded-full blur-3xl animate-pulse" style={{animationDelay: '6s'}}></div>
+      </div>
+
+      {/* Floating Particles */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full animate-float opacity-60"></div>
+        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-purple-400 rounded-full animate-bounce opacity-40" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-emerald-400 rounded-full animate-float opacity-50" style={{animationDelay: '3s'}}></div>
+        <div className="absolute bottom-1/4 right-1/3 w-4 h-4 bg-pink-400 rounded-full animate-bounce opacity-30" style={{animationDelay: '5s'}}></div>
+      </div>
+
+      <main className="py-8 relative z-10">
         {/* Hero Section */}
         <section className="py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"></div>
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-emerald-500/10 animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-pink-500/5 to-teal-500/5"></div>
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
               <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Sparkles className="h-10 w-10 text-white" />
