@@ -135,23 +135,40 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
-            {/* Shopping Cart - Only show on shopping pages */}
+            {/* Shopping Cart & Wishlist - Only show on shopping pages */}
             {isShoppingPage && (
-              <Link href="/cart">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
-                >
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  Cart
-                  {totalItems > 0 && (
-                    <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
-                      {totalItems}
-                    </Badge>
-                  )}
-                </Button>
-              </Link>
+              <>
+                <Link href="/wishlist">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+                  >
+                    <Heart className="h-4 w-4 mr-2" />
+                    Wishlist
+                    {favoritesCount > 0 && (
+                      <Badge className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                        {favoritesCount}
+                      </Badge>
+                    )}
+                  </Button>
+                </Link>
+                <Link href="/cart">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+                  >
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Cart
+                    {totalItems > 0 && (
+                      <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                        {totalItems}
+                      </Badge>
+                    )}
+                  </Button>
+                </Link>
+              </>
             )}
 
             {/* Mobile Navigation */}
