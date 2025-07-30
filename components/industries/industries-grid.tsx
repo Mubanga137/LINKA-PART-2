@@ -462,6 +462,8 @@ export function IndustriesGrid() {
                   return "/industries/transport"
                 case "Health & Wellness":
                   return "/services/health-wellness"
+                case "Financial Services":
+                  return "/services/financial-services"
                 default:
                   return "#"
               }
