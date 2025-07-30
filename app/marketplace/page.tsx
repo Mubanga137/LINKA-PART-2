@@ -979,6 +979,38 @@ function MarketplaceContent() {
           </div>
         </section>
 
+        {/* Hot Deals Section */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white text-2xl">🔥</span>
+              </div>
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Hot Deals</h2>
+                <p className="text-sm text-gray-600">Limited time offers - Up to 50% off!</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-sm text-red-600 font-semibold">⏰ Limited Time</div>
+              <div className="text-xs text-gray-500">Ends soon!</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 sm:gap-4 md:gap-4 lg:gap-4 md:grid-cols-4 lg:grid-cols-4">
+            {mockProducts.filter(product => product.hotDeal).map((product, index) => (
+              <OptimizedProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={handleAddToCart}
+                onToggleFavorite={toggleFavorite}
+                isFavorite={isFavorite(product.id)}
+                priority={index < 2}
+              />
+            ))}
+          </div>
+        </section>
+
         {/* Optimized Products Grid */}
         <section className="space-y-6 sm:space-y-8">
           {viewMode === 'grid' ? (
