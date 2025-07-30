@@ -41,6 +41,7 @@ export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false)
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
+  const { favorites } = useFavorites()
   const router = useRouter()
   const pathname = usePathname()
 
