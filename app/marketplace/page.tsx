@@ -30,7 +30,7 @@ import {
   X
 } from "lucide-react";
 import { MarketplaceProvider, useCart, useFavorites } from "@/contexts/marketplace-context";
-import { ShoppingCart } from "@/components/marketplace/ShoppingCart";
+import { ShoppingCart as ShoppingCartComponent } from "@/components/marketplace/ShoppingCart";
 import { Wishlist } from "@/components/marketplace/Wishlist";
 import { ProductDetailModal } from "@/components/marketplace/ProductDetailModal";
 import { CategoryNavigation, HorizontalCategoryNav } from "@/components/marketplace/CategoryNavigation";
