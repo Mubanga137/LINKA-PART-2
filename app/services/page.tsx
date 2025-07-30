@@ -251,90 +251,175 @@ export default function ServicesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {platformServices.map((service, index) => (
                 <Link href={service.href} key={service.id}>
-                  <Card 
-                    className="group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 bg-white/90 backdrop-blur-sm border-white/20 overflow-hidden"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <CardContent className="p-0">
-                      {/* Image Header */}
-                      <div className="relative h-48 overflow-hidden">
-                        <img
-                          src={service.image}
-                          alt={service.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                        <div className={`absolute inset-0 bg-gradient-to-t ${service.bgGradient} opacity-80`}></div>
-                        <div className="absolute top-4 left-4">
-                          <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
-                            <service.icon className="h-6 w-6 text-white" />
-                          </div>
-                        </div>
-                        <div className="absolute top-4 right-4">
-                          <Badge className="bg-white/90 text-slate-700">
-                            <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
-                            {service.rating}
-                          </Badge>
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6">
-                        <h3 className="font-bold text-xl text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">
-                          {service.name}
-                        </h3>
-                        
-                        <p className="text-slate-600 mb-4 leading-relaxed">{service.description}</p>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-2 gap-3 mb-4">
-                          <div className="text-center p-2 bg-slate-50 rounded-lg">
-                            <div className="text-sm font-bold text-slate-900">
-                              {Object.values(service.stats)[0]}
-                            </div>
-                            <div className="text-xs text-slate-500">
-                              {Object.keys(service.stats)[0]}
+                  {service.isSpecial ? (
+                    /* Special Financial Services Card Design */
+                    <Card
+                      className="group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 bg-white border border-gray-200 rounded-xl overflow-hidden"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <CardContent className="p-0">
+                        {/* Image Header with overlays */}
+                        <div className="relative h-48 overflow-hidden">
+                          <img
+                            src={service.image}
+                            alt={service.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          {/* Favorite button */}
+                          <div className="absolute top-3 left-3">
+                            <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center shadow-lg">
+                              <Heart className="h-5 w-5 text-white" />
                             </div>
                           </div>
-                          <div className="text-center p-2 bg-slate-50 rounded-lg">
-                            <div className="text-sm font-bold text-slate-900">
-                              {Object.values(service.stats)[1]}
-                            </div>
-                            <div className="text-xs text-slate-500">
-                              {Object.keys(service.stats)[1]}
+                          {/* Rating badge */}
+                          <div className="absolute top-3 right-3">
+                            <div className="bg-white/90 px-2 py-1 rounded-lg flex items-center shadow-sm">
+                              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
+                              <span className="text-sm font-medium text-slate-700">{service.rating}</span>
                             </div>
                           </div>
                         </div>
 
-                        {/* Features */}
-                        <div className="mb-4">
-                          <p className="text-xs text-slate-500 mb-2 font-medium">Popular Services:</p>
-                          <div className="flex flex-wrap gap-1">
-                            {service.features.slice(0, 2).map((feature, idx) => (
-                              <Badge key={idx} variant="secondary" className="text-xs">
-                                {feature}
-                              </Badge>
-                            ))}
-                            {service.features.length > 2 && (
-                              <Badge variant="secondary" className="text-xs">
-                                +{service.features.length - 2} more
-                              </Badge>
-                            )}
+                        {/* Content */}
+                        <div className="p-6">
+                          <h3 className="font-bold text-xl text-slate-900 mb-2">
+                            {service.name}
+                          </h3>
+
+                          <p className="text-slate-600 mb-6 leading-relaxed">{service.description}</p>
+
+                          {/* Stats */}
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="text-center">
+                              <div className="text-lg font-bold text-slate-900">
+                                {Object.values(service.stats)[0]}
+                              </div>
+                              <div className="text-sm text-slate-500">
+                                {Object.keys(service.stats)[0]}
+                              </div>
+                            </div>
+                            <div className="text-center">
+                              <div className="text-lg font-bold text-slate-900">
+                                {Object.values(service.stats)[1]}
+                              </div>
+                              <div className="text-sm text-slate-500">
+                                {Object.keys(service.stats)[1]}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Popular Services */}
+                          <div className="mb-6">
+                            <p className="text-sm text-slate-600 mb-3 font-medium">Popular Services:</p>
+                            <div className="flex flex-wrap gap-2">
+                              {service.features.map((feature, idx) => (
+                                <span key={idx} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                                  {feature}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Bottom section */}
+                          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                            <div className="text-sm text-slate-600">
+                              {service.providers} providers
+                            </div>
+                            <div className="flex items-center text-blue-600 hover:text-blue-700 transition-colors">
+                              <span className="text-sm font-medium mr-1">View Services</span>
+                              <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ) : (
+                    /* Regular Service Card Design */
+                    <Card
+                      className="group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 bg-white/90 backdrop-blur-sm border-white/20 overflow-hidden"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <CardContent className="p-0">
+                        {/* Image Header */}
+                        <div className="relative h-48 overflow-hidden">
+                          <img
+                            src={service.image}
+                            alt={service.name}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                          <div className={`absolute inset-0 bg-gradient-to-t ${service.bgGradient} opacity-80`}></div>
+                          <div className="absolute top-4 left-4">
+                            <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
+                              <service.icon className="h-6 w-6 text-white" />
+                            </div>
+                          </div>
+                          <div className="absolute top-4 right-4">
+                            <Badge className="bg-white/90 text-slate-700">
+                              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
+                              {service.rating}
+                            </Badge>
                           </div>
                         </div>
 
-                        {/* Action */}
-                        <div className="flex items-center justify-between">
-                          <div className="text-sm text-slate-500">
-                            {service.providers} providers
+                        {/* Content */}
+                        <div className="p-6">
+                          <h3 className="font-bold text-xl text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">
+                            {service.name}
+                          </h3>
+
+                          <p className="text-slate-600 mb-4 leading-relaxed">{service.description}</p>
+
+                          {/* Stats */}
+                          <div className="grid grid-cols-2 gap-3 mb-4">
+                            <div className="text-center p-2 bg-slate-50 rounded-lg">
+                              <div className="text-sm font-bold text-slate-900">
+                                {Object.values(service.stats)[0]}
+                              </div>
+                              <div className="text-xs text-slate-500">
+                                {Object.keys(service.stats)[0]}
+                              </div>
+                            </div>
+                            <div className="text-center p-2 bg-slate-50 rounded-lg">
+                              <div className="text-sm font-bold text-slate-900">
+                                {Object.values(service.stats)[1]}
+                              </div>
+                              <div className="text-xs text-slate-500">
+                                {Object.keys(service.stats)[1]}
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex items-center text-blue-600 group-hover:text-blue-700">
-                            <span className="text-sm font-medium">View Services</span>
-                            <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+
+                          {/* Features */}
+                          <div className="mb-4">
+                            <p className="text-xs text-slate-500 mb-2 font-medium">Popular Services:</p>
+                            <div className="flex flex-wrap gap-1">
+                              {service.features.slice(0, 2).map((feature, idx) => (
+                                <Badge key={idx} variant="secondary" className="text-xs">
+                                  {feature}
+                                </Badge>
+                              ))}
+                              {service.features.length > 2 && (
+                                <Badge variant="secondary" className="text-xs">
+                                  +{service.features.length - 2} more
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Action */}
+                          <div className="flex items-center justify-between">
+                            <div className="text-sm text-slate-500">
+                              {service.providers} providers
+                            </div>
+                            <div className="flex items-center text-blue-600 group-hover:text-blue-700">
+                              <span className="text-sm font-medium">View Services</span>
+                              <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  )}
                 </Link>
               ))}
             </div>
