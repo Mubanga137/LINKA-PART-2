@@ -358,7 +358,7 @@ const mockProducts: Product[] = [
     description: "Premium organic face cream with natural moisturizing properties",
     price: 39.99,
     originalPrice: 49.99,
-    images: ["https://cdn.builder.io/o/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fe4e2aad98ecf40fca81d09b2b9cc93fe?alt=media&token=65b86073-86b2-4ee9-8c4f-37006894478e&apiKey=64659d81f7594bc7853ad37ab97b2333"],
+    images: ["https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80"],
     category: "Health & Beauty",
     inStock: true,
     stockQuantity: 45,
