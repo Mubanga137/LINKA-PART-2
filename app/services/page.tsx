@@ -295,19 +295,20 @@ export default function ServicesPage() {
                           <img
                             src={service.image}
                             alt={service.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 via-transparent to-blue-500/10 group-hover:from-emerald-500/30 transition-colors duration-300"></div>
                           {/* Favorite button */}
-                          <div className="absolute top-3 left-3">
-                            <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center shadow-lg">
-                              <Heart className="h-5 w-5 text-white" />
+                          <div className="absolute top-4 left-4">
+                            <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 group-hover:rotate-3">
+                              <Heart className="h-6 w-6 text-white" />
                             </div>
                           </div>
                           {/* Rating badge */}
-                          <div className="absolute top-3 right-3">
-                            <div className="bg-white/90 px-2 py-1 rounded-lg flex items-center shadow-sm">
-                              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
-                              <span className="text-sm font-medium text-slate-700">{service.rating}</span>
+                          <div className="absolute top-4 right-4">
+                            <div className="bg-white/95 backdrop-blur-sm px-3 py-2 rounded-xl flex items-center shadow-lg hover:shadow-xl transition-all duration-300">
+                              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1 animate-pulse" />
+                              <span className="text-sm font-bold text-slate-700">{service.rating}</span>
                             </div>
                           </div>
                         </div>
