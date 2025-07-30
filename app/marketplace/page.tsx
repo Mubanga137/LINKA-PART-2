@@ -773,7 +773,7 @@ function MarketplaceContent() {
               ))}
             </div>
           ) : (
-            <div className="space-y-16">
+            <div className="space-y-4 sm:space-y-6">
               {filteredProducts.map((product, index) => (
                 <div
                   key={product.id}
