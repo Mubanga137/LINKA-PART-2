@@ -495,3 +495,5 @@ export function EligibilityTools() {
     </div>
   )
 }
+
+export { EligibilityTools }
