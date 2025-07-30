@@ -73,7 +73,9 @@ html {
           <AuthProvider>
             <RetailerAuthProvider>
               <CartProvider>
-                {children}
+                <MarketplaceProvider>
+                  {children}
+                </MarketplaceProvider>
               </CartProvider>
             </RetailerAuthProvider>
           </AuthProvider>
