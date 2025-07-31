@@ -442,7 +442,7 @@ export default function InsurancePage() {
                   <div className="bg-white rounded-xl p-6 border border-orange-200">
                     <div className="text-center">
                       <p className="text-orange-600 font-medium mb-2">Estimated Annual Premium</p>
-                      <p className="text-4xl font-bold text-orange-700 mb-4">UGX {estimatedPremium.toLocaleString()}</p>
+                      <p className="text-4xl font-bold text-orange-700 mb-4">ZMW {estimatedPremium.toLocaleString()}</p>
                       <div className="flex items-center justify-center gap-4 text-sm text-slate-600">
                         <span className="flex items-center gap-1">
                           <CheckCircle className="h-4 w-4 text-green-500" />
