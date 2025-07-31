@@ -268,7 +268,7 @@ export default function InsurancePage() {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="vehicle-value">Vehicle Value (UGX)</Label>
+                        <Label htmlFor="vehicle-value">Vehicle Value (ZMW)</Label>
                         <Input
                           id="vehicle-value"
                           type="number"
