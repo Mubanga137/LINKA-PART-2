@@ -476,17 +476,17 @@ export default function LoanServicesPage() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="p-4 bg-white rounded-lg border border-green-200 text-center">
                       <h4 className="font-bold text-slate-900 mb-2">Personal Loan</h4>
-                      <p className="text-2xl font-bold text-green-600 mb-1">Up to UGX 5M</p>
+                      <p className="text-2xl font-bold text-green-600 mb-1">Up to ZMW 350K</p>
                       <p className="text-sm text-slate-600">18% APR • 36 months</p>
                     </div>
                     <div className="p-4 bg-white rounded-lg border border-green-200 text-center">
                       <h4 className="font-bold text-slate-900 mb-2">Business Loan</h4>
-                      <p className="text-2xl font-bold text-green-600 mb-1">Up to UGX 15M</p>
+                      <p className="text-2xl font-bold text-green-600 mb-1">Up to ZMW 1.05M</p>
                       <p className="text-sm text-slate-600">15% APR • 60 months</p>
                     </div>
                     <div className="p-4 bg-white rounded-lg border border-green-200 text-center">
                       <h4 className="font-bold text-slate-900 mb-2">Secured Loan</h4>
-                      <p className="text-2xl font-bold text-green-600 mb-1">Up to UGX 25M</p>
+                      <p className="text-2xl font-bold text-green-600 mb-1">Up to ZMW 1.75M</p>
                       <p className="text-sm text-slate-600">12% APR • 84 months</p>
                     </div>
                   </div>
