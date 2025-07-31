@@ -140,6 +140,7 @@ const financialCategories = [
 ]
 
 export default function FinancialServicesPage() {
+  const router = useRouter()
   const [activeCategory, setActiveCategory] = useState("banking")
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
   const [activeSection, setActiveSection] = useState("overview")
@@ -147,6 +148,10 @@ export default function FinancialServicesPage() {
   const [scrollY, setScrollY] = useState(0)
 
   const currentCategory = financialCategories.find((cat) => cat.id === activeCategory)
+
+  const navigateToService = (serviceId: string) => {
+    router.push(`/financial-services/${serviceId}`)
+  }
 
   // Handle scroll for sticky navigation
   useEffect(() => {
