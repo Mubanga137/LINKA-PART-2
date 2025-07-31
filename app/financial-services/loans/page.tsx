@@ -155,13 +155,13 @@ export default function LoanServicesPage() {
         {/* Smart Loan Calculator */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 mb-16">
+            <Card className="bg-gradient-to-br from-slate-25 via-blue-25 to-emerald-25 border-blue-200 mb-16 shadow-xl hover:shadow-2xl transition-all duration-500" style={{background: 'linear-gradient(135deg, #f8fafc 0%, #f0f8ff 50%, #f0fdf4 100%)'}}>
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg hover:scale-110 transition-all duration-300 hover:rotate-6">
                   <Calculator className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-2xl text-green-700">Smart Loan Calculator</CardTitle>
-                <p className="text-green-600">Calculate your monthly payments and see what you qualify for</p>
+                <CardTitle className="text-2xl text-blue-700">Smart Loan Calculator</CardTitle>
+                <p className="text-blue-600">Calculate your monthly payments and see what you qualify for</p>
               </CardHeader>
               <CardContent className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
