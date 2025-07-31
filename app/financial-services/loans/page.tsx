@@ -31,7 +31,7 @@ import {
 } from "lucide-react"
 
 export default function LoanServicesPage() {
-  const [loanAmount, setLoanAmount] = useState("1000000")
+  const [loanAmount, setLoanAmount] = useState("70000")
   const [interestRate, setInterestRate] = useState("18")
   const [loanTerm, setLoanTerm] = useState("12")
   const [monthlyPayment, setMonthlyPayment] = useState(0)
