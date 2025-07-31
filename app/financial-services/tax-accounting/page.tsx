@@ -117,7 +117,7 @@ export default function TaxAccountingPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-25 via-blue-25 to-slate-25" style={{background: 'linear-gradient(135deg, #eef2ff 0%, #f0f8ff 50%, #f8fafc 100)'}}>
       <Header />
       
       {/* Hero Section */}
