@@ -123,7 +123,7 @@ const financialCategories = [
     ],
   },
   {
-    id: "payments",
+    id: "payment-gateways",
     name: "Payment Gateways",
     icon: Globe,
     description: "Integrate payment solutions for your business",
