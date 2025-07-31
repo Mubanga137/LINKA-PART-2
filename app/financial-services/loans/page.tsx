@@ -82,7 +82,7 @@ export default function LoanServicesPage() {
 
   const loanProviders = [
     {
-      name: "QuickCash Uganda",
+      name: "QuickCash Zambia",
       logo: "QC",
       rating: 4.8,
       reviews: 1500,
@@ -90,9 +90,9 @@ export default function LoanServicesPage() {
       loanTypes: ["Microloans", "Personal Loans"],
       processingTime: "< 24 hours",
       approvalRate: "95%",
-      loanRange: "UGX 100K - UGX 10M",
+      loanRange: "ZMW 7K - ZMW 700K",
       totalLoans: "15K+",
-      location: "Kampala, Uganda"
+      location: "Lusaka, Zambia"
     },
     {
       name: "Business Finance Solutions",
@@ -103,9 +103,9 @@ export default function LoanServicesPage() {
       loanTypes: ["Business Loans", "Equipment Finance"],
       processingTime: "3-5 days",
       approvalRate: "87%",
-      loanRange: "UGX 1M - UGX 50M",
+      loanRange: "ZMW 70K - ZMW 3.5M",
       totalLoans: "8K+",
-      location: "Kampala, Uganda"
+      location: "Lusaka, Zambia"
     },
     {
       name: "Community Credit Union",
@@ -116,9 +116,9 @@ export default function LoanServicesPage() {
       loanTypes: ["Microloans", "Savings"],
       processingTime: "2-3 days",
       approvalRate: "92%",
-      loanRange: "UGX 200K - UGX 5M",
+      loanRange: "ZMW 14K - ZMW 350K",
       totalLoans: "5K+",
-      location: "Entebbe, Uganda"
+      location: "Kitwe, Zambia"
     }
   ]
 
