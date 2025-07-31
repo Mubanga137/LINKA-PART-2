@@ -78,7 +78,7 @@ export default function PaymentGatewaysPage() {
       description: "Modern online and offline payments for Africa",
       rating: 4.7,
       reviews: 890,
-      transactionFee: "3.2% + UGX 150",
+      transactionFee: "3.2% + ZMW 10.5",
       setupFee: "Free",
       features: ["Online payments", "POS solutions", "Invoicing", "Subscriptions"],
       integrations: ["E-commerce", "Mobile", "API", "Plugins"],
