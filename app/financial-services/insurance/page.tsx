@@ -169,11 +169,11 @@ export default function InsurancePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-25 via-peach-25 to-red-25" style={{background: 'linear-gradient(135deg, #fff7ed 0%, #ffd9b3 50%, #fee2e2 100%)'}}>
       <Header />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-700 to-red-600">
+      <section className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-amber-500 to-red-500 opacity-95">
         <div className="absolute inset-0 opacity-20">
           <div className="w-full h-full" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}></div>
         </div>
@@ -221,9 +221,9 @@ export default function InsurancePage() {
         {/* Insurance Quote Tool */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <Card className="bg-gradient-to-br from-orange-50 to-red-50 border-orange-200 mb-16">
+            <Card className="bg-gradient-to-br from-orange-25 via-peach-25 to-red-25 border-orange-200 mb-16 shadow-xl hover:shadow-2xl transition-all duration-500" style={{background: 'linear-gradient(135deg, #fff7ed 0%, #ffd9b3 50%, #fee2e2 100%)'}}>
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg hover:scale-110 transition-all duration-300 hover:rotate-6">
                   <Calculator className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-2xl text-orange-700">Get Insurance Quote</CardTitle>
@@ -431,7 +431,7 @@ export default function InsurancePage() {
                 <div className="text-center">
                   <Button 
                     onClick={calculateQuote}
-                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-12 py-4 rounded-full text-lg font-semibold"
+                    className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     <Target className="h-5 w-5 mr-2" />
                     Get Instant Quote
@@ -439,13 +439,13 @@ export default function InsurancePage() {
                 </div>
 
                 {estimatedPremium > 0 && (
-                  <div className="bg-white rounded-xl p-6 border border-orange-200">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 border border-orange-200 shadow-lg animate-fade-in-up">
                     <div className="text-center">
                       <p className="text-orange-600 font-medium mb-2">Estimated Annual Premium</p>
-                      <p className="text-4xl font-bold text-orange-700 mb-4">ZMW {estimatedPremium.toLocaleString()}</p>
+                      <p className="text-4xl font-bold text-orange-700 mb-4 animate-pulse">ZMW {estimatedPremium.toLocaleString()}</p>
                       <div className="flex items-center justify-center gap-4 text-sm text-slate-600">
                         <span className="flex items-center gap-1">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
+                          <CheckCircle className="h-4 w-4 text-emerald-500" />
                           Instant approval
                         </span>
                         <span className="flex items-center gap-1">
@@ -475,15 +475,15 @@ export default function InsurancePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {insuranceTypes.map((type, index) => (
-                <Card key={index} className={`group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg ${type.popular ? 'ring-2 ring-orange-500' : ''}`}>
+                <Card key={index} className={`group hover:shadow-xl transition-all duration-500 hover:-translate-y-3 border-0 shadow-lg hover:scale-[1.02] bg-white/95 backdrop-blur-sm ${type.popular ? 'ring-2 ring-orange-400 shadow-orange-100' : ''}`}>
                   {type.popular && (
                     <div className="absolute top-4 right-4 z-10">
-                      <Badge className="bg-orange-500 text-white">Most Popular</Badge>
+                      <Badge className="bg-orange-400 text-white shadow-lg animate-pulse">Most Popular</Badge>
                     </div>
                   )}
                   <CardContent className="p-8">
                     <div className="text-center mb-6">
-                      <div className={`w-16 h-16 bg-gradient-to-br ${type.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+                      <div className={`w-16 h-16 bg-gradient-to-br ${type.color} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-300 group-hover:rotate-6`}>
                         <type.icon className="h-8 w-8 text-white" />
                       </div>
                       <h3 className="text-2xl font-bold text-slate-900 mb-2">{type.title}</h3>
@@ -505,7 +505,7 @@ export default function InsurancePage() {
                       </div>
                       <div className="text-center p-3 bg-slate-50 rounded-lg">
                         <p className="text-sm text-slate-600 mb-1">Approval</p>
-                        <p className="font-semibold text-green-600">{type.approval}</p>
+                        <p className="font-semibold text-emerald-600">{type.approval}</p>
                       </div>
                     </div>
 
@@ -514,7 +514,7 @@ export default function InsurancePage() {
                       <div className="grid grid-cols-2 gap-2">
                         {type.features.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-500" />
+                            <CheckCircle className="h-4 w-4 text-emerald-500" />
                             <span className="text-sm text-slate-600">{feature}</span>
                           </div>
                         ))}
