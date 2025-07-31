@@ -416,7 +416,7 @@ export default function MobileMoneyAgentsPage() {
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <Banknote className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">UGX 8.2B</h3>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">ZMW 574M</h3>
                 <p className="text-slate-600">Daily Volume</p>
                 <div className="flex items-center justify-center gap-1 text-purple-600 text-sm mt-2">
                   <ArrowRight className="h-3 w-3" />
