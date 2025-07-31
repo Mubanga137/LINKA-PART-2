@@ -756,7 +756,7 @@ export default function FinancialServicesPage() {
                   features: ["BOZ Licensed", "PICZ Certified", "Data Protection"]
                 }
               ].map((feature, index) => (
-                <Card key={index} className="bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-500 group border-0 shadow-lg hover:-translate-y-2 hover:scale-[1.02]">
+                <Card key={index} className={`bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-500 group border-0 shadow-lg hover:-translate-y-2 hover:scale-[1.02] transform ${visibleFeatures.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                   <CardContent className="p-8">
                     <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 group-hover:rotate-6 shadow-lg group-hover:shadow-xl`}>
                       <FeatureIcon icon={feature.icon} className="h-8 w-8 text-white" />
