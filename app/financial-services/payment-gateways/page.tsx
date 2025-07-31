@@ -61,7 +61,7 @@ export default function PaymentGatewaysPage() {
       description: "Africa's leading payment technology company",
       rating: 4.9,
       reviews: 1250,
-      transactionFee: "2.9% + UGX 100",
+      transactionFee: "2.9% + ZMW 7",
       setupFee: "Free",
       features: ["Card payments", "Mobile money", "Bank transfers", "International payments"],
       integrations: ["Website", "Mobile app", "POS", "API"],
