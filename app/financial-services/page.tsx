@@ -118,9 +118,9 @@ const financialCategories = [
     bgColor: "from-indigo-50 to-blue-50",
     stats: { approved: "200+", rate: "+18%" },
     items: [
-      { name: "Tax Filing Services", price: "UGX 50K - 300K", users: "5.2K", rating: 4.8, discount: "EXPERT", service: "Individual & business" },
-      { name: "Bookkeeping Services", price: "UGX 100K - 500K/month", users: "3.1K", rating: 4.7, discount: "MONTHLY", service: "Full accounting" },
-      { name: "VAT Registration", price: "UGX 200K - 800K", users: "2.8K", rating: 4.6, discount: "COMPLIANCE", service: "Legal registration" },
+      { name: "Tax Filing Services", price: "ZMW 3.5K - 21K", users: "5.2K", rating: 4.8, discount: "EXPERT", service: "Individual & business" },
+      { name: "Bookkeeping Services", price: "ZMW 7K - 35K/month", users: "3.1K", rating: 4.7, discount: "MONTHLY", service: "Full accounting" },
+      { name: "VAT Registration", price: "ZMW 14K - 56K", users: "2.8K", rating: 4.6, discount: "COMPLIANCE", service: "Legal registration" },
     ],
   },
   {
