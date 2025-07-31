@@ -439,11 +439,11 @@ export default function MobileMoneyAgentsPage() {
               <CardContent>
                 <div className="space-y-4">
                   {[
-                    { action: "Money Transfer", location: "Kampala Central", network: "MTN", amount: "UGX 150K", time: "2 mins ago", status: "success" },
-                    { action: "Cash Withdrawal", location: "Nakawa", network: "Airtel", amount: "UGX 80K", time: "3 mins ago", status: "success" },
-                    { action: "Bill Payment", location: "Entebbe", network: "MTN", amount: "UGX 45K", time: "5 mins ago", status: "success" },
-                    { action: "Airtime Purchase", location: "Jinja", network: "Airtel", amount: "UGX 10K", time: "7 mins ago", status: "success" },
-                    { action: "Money Transfer", location: "Mbarara", network: "MTN", amount: "UGX 200K", time: "8 mins ago", status: "pending" }
+                    { action: "Money Transfer", location: "Lusaka Central", network: "MTN", amount: "ZMW 10.5K", time: "2 mins ago", status: "success" },
+                    { action: "Cash Withdrawal", location: "Kitwe", network: "Airtel", amount: "ZMW 5.6K", time: "3 mins ago", status: "success" },
+                    { action: "Bill Payment", location: "Ndola", network: "MTN", amount: "ZMW 3.15K", time: "5 mins ago", status: "success" },
+                    { action: "Airtime Purchase", location: "Livingstone", network: "Airtel", amount: "ZMW 700", time: "7 mins ago", status: "success" },
+                    { action: "Money Transfer", location: "Kabwe", network: "MTN", amount: "ZMW 14K", time: "8 mins ago", status: "pending" }
                   ].map((activity, index) => (
                     <div key={index} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
                       <div className="flex items-center gap-4">
