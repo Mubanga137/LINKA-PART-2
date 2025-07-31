@@ -18,6 +18,7 @@ import { AgentMaps } from "@/components/financial/agent-maps"
 import { EnhancedAgentMaps } from "@/components/financial/enhanced-agent-maps"
 import { LiveChat } from "@/components/financial/live-chat"
 import { DigitalKYC } from "@/components/financial/digital-kyc"
+import { AnimatedCounter } from "@/components/ui/animated-counter"
 import {
   CreditCard,
   DollarSign,
