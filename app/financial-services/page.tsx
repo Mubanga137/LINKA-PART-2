@@ -149,6 +149,10 @@ export default function FinancialServicesPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
 
+  // Scroll reveal hooks
+  const { elementRef: whyChooseRef, isVisible: whyChooseVisible } = useScrollReveal({ delay: 200 })
+  const { containerRef: featuresRef, visibleItems: visibleFeatures } = useStaggeredReveal(6, 150)
+
   const currentCategory = financialCategories.find((cat) => cat.id === activeCategory)
 
   const navigateToService = (serviceId: string) => {
