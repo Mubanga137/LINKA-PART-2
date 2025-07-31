@@ -132,8 +132,8 @@ const financialCategories = [
     bgColor: "from-teal-50 to-cyan-50",
     stats: { approved: "99.9%", rate: "+30%" },
     items: [
-      { name: "Flutterwave Integration", price: "2.9% + UGX 100", users: "12K", rating: 4.9, discount: "POPULAR", features: "Multi-channel payments" },
-      { name: "Paystack Uganda", price: "3.2% + UGX 150", users: "8K", rating: 4.7, discount: "RELIABLE", features: "Online & POS" },
+      { name: "Flutterwave Integration", price: "2.9% + ZMW 7", users: "12K", rating: 4.9, discount: "POPULAR", features: "Multi-channel payments" },
+      { name: "Paystack Zambia", price: "3.2% + ZMW 10.5", users: "8K", rating: 4.7, discount: "RELIABLE", features: "Online & POS" },
       { name: "MTN MoMo API", price: "1.5% transaction fee", users: "25K", rating: 4.6, discount: "LOCAL", features: "Mobile integration" },
     ],
   },
