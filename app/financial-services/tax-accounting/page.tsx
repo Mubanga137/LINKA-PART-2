@@ -76,15 +76,15 @@ export default function TaxAccountingPage() {
 
   const taxExperts = [
     {
-      name: "Kampala Tax Associates",
+      name: "Lusaka Tax Associates",
       expertise: "Corporate Tax",
       rating: 4.9,
       reviews: 156,
       experience: "15+ years",
       clients: "500+",
       services: ["Individual Tax", "Corporate Tax", "VAT Registration"],
-      location: "Kampala Central",
-      phone: "+256 700 123 456",
+      location: "Lusaka Central",
+      phone: "+260 97 123 456",
       verified: true,
       featured: true
     },
@@ -93,11 +93,11 @@ export default function TaxAccountingPage() {
       expertise: "Small Business",
       rating: 4.7,
       reviews: 203,
-      experience: "10+ years", 
+      experience: "10+ years",
       clients: "300+",
       services: ["Bookkeeping", "Payroll", "Financial Statements"],
-      location: "Nakawa, Kampala",
-      phone: "+256 701 234 567",
+      location: "Kitwe, Zambia",
+      phone: "+260 97 234 567",
       verified: true,
       featured: false
     },
@@ -107,10 +107,10 @@ export default function TaxAccountingPage() {
       rating: 4.8,
       reviews: 89,
       experience: "12+ years",
-      clients: "200+", 
+      clients: "200+",
       services: ["Business Registration", "Compliance", "Tax Planning"],
-      location: "Kololo, Kampala",
-      phone: "+256 702 345 678",
+      location: "Ndola, Zambia",
+      phone: "+260 97 345 678",
       verified: true,
       featured: false
     }
