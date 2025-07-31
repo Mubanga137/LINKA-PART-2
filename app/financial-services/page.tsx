@@ -62,9 +62,9 @@ const financialCategories = [
     bgColor: "from-blue-50 to-indigo-50",
     stats: { approved: "15K+", rate: "+23%" },
     items: [
-      { name: "QuickCash Uganda", price: "UGX 100K - UGX 10M", users: "45K", rating: 4.8, discount: "FEATURED", processingTime: "< 24 hours", approval: "95%" },
-      { name: "Business Finance Solutions", price: "UGX 1M - UGX 50M", users: "12K", rating: 4.6, discount: "BUSINESS", processingTime: "3-5 days", approval: "87%" },
-      { name: "Community Credit Union", price: "UGX 200K - UGX 5M", users: "28K", rating: 4.7, discount: "COMMUNITY", processingTime: "2-3 days", approval: "92%" },
+      { name: "QuickCash Zambia", price: "ZMW 7K - ZMW 70K", users: "45K", rating: 4.8, discount: "FEATURED", processingTime: "< 24 hours", approval: "95%" },
+      { name: "Business Finance Solutions", price: "ZMW 70K - ZMW 3.5M", users: "12K", rating: 4.6, discount: "BUSINESS", processingTime: "3-5 days", approval: "87%" },
+      { name: "Community Credit Union", price: "ZMW 14K - ZMW 350K", users: "28K", rating: 4.7, discount: "COMMUNITY", processingTime: "2-3 days", approval: "92%" },
     ],
   },
   {
