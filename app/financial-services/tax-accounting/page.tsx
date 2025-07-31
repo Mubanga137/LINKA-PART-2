@@ -503,15 +503,15 @@ export default function TaxAccountingPage() {
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-slate-600">Tax Planning Session</span>
-                        <span className="font-semibold">UGX 100K</span>
+                        <span className="font-semibold">ZMW 7K</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-slate-600">Business Consultation</span>
-                        <span className="font-semibold">UGX 150K</span>
+                        <span className="font-semibold">ZMW 10.5K</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-slate-600">Audit Review</span>
-                        <span className="font-semibold">UGX 250K</span>
+                        <span className="font-semibold">ZMW 17.5K</span>
                       </div>
                     </div>
                   </CardContent>
