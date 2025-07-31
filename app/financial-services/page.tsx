@@ -304,15 +304,15 @@ export default function FinancialServicesPage() {
             </div>
 
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-12">
+            <div className="max-w-2xl mx-auto mb-12 px-4">
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search by financial service, provider name, or location..."
-                  className="w-full px-6 py-4 rounded-full bg-white/95 backdrop-blur-sm border-0 text-slate-900 placeholder-slate-500 text-lg focus:outline-none focus:ring-4 focus:ring-white/30 shadow-xl"
+                  placeholder="Search financial services..."
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full bg-white/95 backdrop-blur-sm border-0 text-slate-900 placeholder-slate-500 text-base sm:text-lg focus:outline-none focus:ring-4 focus:ring-white/30 shadow-xl"
                 />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-colors">
-                  <Search className="h-5 w-5" />
+                <button className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-2 sm:p-3 rounded-full transition-colors">
+                  <Search className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
               </div>
             </div>
