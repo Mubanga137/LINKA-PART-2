@@ -272,7 +272,7 @@ export default function FinancialServicesPage() {
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 text-white">
                 <Star className="h-5 w-5 text-yellow-300 fill-current" />
-                <span className="font-medium">Trusted by 50,000+ Ugandans</span>
+                <span className="font-medium">Trusted by 50,000+ Zambians</span>
                 <Star className="h-5 w-5 text-yellow-300 fill-current" />
               </div>
             </div>
