@@ -221,7 +221,7 @@ export default function SavingsInvestmentsPage() {
               <CardContent className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="savings-goal">Savings Goal (UGX)</Label>
+                    <Label htmlFor="savings-goal">Savings Goal (ZMW)</Label>
                     <Input
                       id="savings-goal"
                       type="number"
