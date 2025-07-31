@@ -280,7 +280,7 @@ export default function SavingsInvestmentsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                       <div>
                         <p className="text-green-600 font-medium mb-2">Total Savings</p>
-                        <p className="text-3xl font-bold text-green-700">UGX {totalSavings.toLocaleString()}</p>
+                        <p className="text-3xl font-bold text-green-700">ZMW {totalSavings.toLocaleString()}</p>
                       </div>
                       <div>
                         <p className="text-green-600 font-medium mb-2">Goal Progress</p>
