@@ -96,7 +96,7 @@ export default function PaymentGatewaysPage() {
       rating: 4.6,
       reviews: 567,
       transactionFee: "1.5%",
-      setupFee: "UGX 500K",
+      setupFee: "ZMW 35K",
       features: ["Mobile money", "Bulk payments", "Collections", "Disbursements"],
       integrations: ["API", "USSD", "Mobile app"],
       uptime: "99.5%",
