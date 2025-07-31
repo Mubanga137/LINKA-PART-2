@@ -292,7 +292,7 @@ export default function FinancialServicesPage() {
               <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 text-white">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                 <span className="text-sm font-medium">Live</span>
-                <span className="text-sm">John M. just got approved for UGX 2M loan</span>
+                <span className="text-sm">John M. just got approved for ZMW 15K loan</span>
                 <CheckCircle className="h-4 w-4 text-green-400" />
               </div>
             </div>
