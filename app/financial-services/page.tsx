@@ -371,7 +371,7 @@ export default function FinancialServicesPage() {
             <Alert className="bg-emerald-50 border-emerald-200 mb-8">
               <CheckCircle className="h-4 w-4 text-emerald-600" />
               <AlertDescription className="text-emerald-800">
-                <strong>Security Guarantee:</strong> All financial providers are licensed by BOZ, PICZ, FSCA, and other relevant Zambian authorities.
+                <strong>Security Guarantee:</strong> All financial providers are licensed by BOZ, PICZ, ZRA, and other relevant Zambian authorities.
               </AlertDescription>
             </Alert>
           </div>
