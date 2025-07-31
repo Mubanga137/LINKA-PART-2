@@ -477,8 +477,8 @@ export default function SavingsInvestmentsPage() {
                             <Badge className="bg-green-100 text-green-700">{goal.deadline}</Badge>
                           </div>
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-slate-600">UGX {(goal.current / 1000000).toFixed(1)}M</span>
-                            <span className="text-slate-600">UGX {(goal.target / 1000000).toFixed(1)}M</span>
+                            <span className="text-slate-600">ZMW {(goal.current / 1000).toFixed(1)}K</span>
+                            <span className="text-slate-600">ZMW {(goal.target / 1000).toFixed(1)}K</span>
                           </div>
                           <Progress value={(goal.current / goal.target) * 100} className="h-3 mb-2" />
                           <p className="text-sm text-slate-500">{Math.round((goal.current / goal.target) * 100)}% complete</p>
