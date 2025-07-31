@@ -158,11 +158,11 @@ export default function SavingsInvestmentsPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-25 via-blue-25 to-slate-25" style={{background: 'linear-gradient(135deg, #f0fdf4 0%, #f0f8ff 50%, #f8fafc 100%)'}}>
       <Header />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-emerald-600">
+      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-500 via-green-500 to-blue-500 opacity-95">
         <div className="absolute inset-0 opacity-20">
           <div className="w-full h-full" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}></div>
         </div>
@@ -210,13 +210,13 @@ export default function SavingsInvestmentsPage() {
         {/* Smart Savings Calculator */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 mb-16">
+            <Card className="bg-gradient-to-br from-emerald-25 via-blue-25 to-slate-25 border-emerald-200 mb-16 shadow-xl hover:shadow-2xl transition-all duration-500" style={{background: 'linear-gradient(135deg, #f0fdf4 0%, #f0f8ff 50%, #f8fafc 100%)'}}>
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg hover:scale-110 transition-all duration-300 hover:rotate-6">
                   <Calculator className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-2xl text-green-700">Savings Goal Calculator</CardTitle>
-                <p className="text-green-600">Plan your savings journey and track your progress</p>
+                <CardTitle className="text-2xl text-emerald-700">Savings Goal Calculator</CardTitle>
+                <p className="text-emerald-600">Plan your savings journey and track your progress</p>
               </CardHeader>
               <CardContent className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -268,7 +268,7 @@ export default function SavingsInvestmentsPage() {
                 <div className="text-center">
                   <Button 
                     onClick={calculateSavings}
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-12 py-4 rounded-full text-lg font-semibold"
+                    className="bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     <Target className="h-5 w-5 mr-2" />
                     Calculate Savings Plan
@@ -276,22 +276,22 @@ export default function SavingsInvestmentsPage() {
                 </div>
 
                 {totalSavings > 0 && (
-                  <div className="bg-white rounded-xl p-6 border border-green-200">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 border border-emerald-200 shadow-lg animate-fade-in-up">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                       <div>
-                        <p className="text-green-600 font-medium mb-2">Total Savings</p>
-                        <p className="text-3xl font-bold text-green-700">ZMW {totalSavings.toLocaleString()}</p>
+                        <p className="text-emerald-600 font-medium mb-2">Total Savings</p>
+                        <p className="text-3xl font-bold text-emerald-700 animate-pulse">ZMW {totalSavings.toLocaleString()}</p>
                       </div>
                       <div>
-                        <p className="text-green-600 font-medium mb-2">Goal Progress</p>
+                        <p className="text-emerald-600 font-medium mb-2">Goal Progress</p>
                         <div className="flex items-center gap-2">
                           <Progress value={(totalSavings / parseFloat(savingsGoal)) * 100} className="flex-1 h-3" />
                           <span className="text-sm font-semibold">{Math.round((totalSavings / parseFloat(savingsGoal)) * 100)}%</span>
                         </div>
                       </div>
                       <div>
-                        <p className="text-green-600 font-medium mb-2">Time to Goal</p>
-                        <p className="text-2xl font-bold text-green-700">{timeframe} months</p>
+                        <p className="text-emerald-600 font-medium mb-2">Time to Goal</p>
+                        <p className="text-2xl font-bold text-emerald-700">{timeframe} months</p>
                       </div>
                     </div>
                   </div>
@@ -311,10 +311,10 @@ export default function SavingsInvestmentsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {savingsOptions.map((option, index) => (
-                <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
+                <Card key={index} className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-3 border-0 shadow-lg hover:scale-[1.02] bg-white/95 backdrop-blur-sm">
                   <CardContent className="p-8">
                     <div className="text-center mb-6">
-                      <div className={`w-16 h-16 bg-gradient-to-br ${option.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+                      <div className={`w-16 h-16 bg-gradient-to-br ${option.color} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-300 group-hover:rotate-6`}>
                         <option.icon className="h-8 w-8 text-white" />
                       </div>
                       <h3 className="text-2xl font-bold text-slate-900 mb-2">{option.title}</h3>
@@ -333,7 +333,7 @@ export default function SavingsInvestmentsPage() {
                         </div>
                         <div className="text-center p-3 bg-slate-50 rounded-lg">
                           <p className="text-sm text-slate-600 mb-1">Risk Level</p>
-                          <Badge className={`${option.risk === 'Low' || option.risk === 'Very Low' ? 'bg-green-100 text-green-700' : option.risk === 'Medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}`}>
+                          <Badge className={`${option.risk === 'Low' || option.risk === 'Very Low' ? 'bg-emerald-100 text-emerald-700' : option.risk === 'Medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}`}>
                             {option.risk}
                           </Badge>
                         </div>
@@ -344,8 +344,8 @@ export default function SavingsInvestmentsPage() {
                       </div>
                       
                       <div className="text-center p-3 bg-blue-50 rounded-lg">
-                        <p className="text-sm text-blue-600 mb-1">Community</p>
-                        <p className="font-semibold text-blue-700">{option.members}</p>
+                        <p className="text-sm text-emerald-600 mb-1">Community</p>
+                        <p className="font-semibold text-emerald-700">{option.members}</p>
                       </div>
                     </div>
 
@@ -354,7 +354,7 @@ export default function SavingsInvestmentsPage() {
                       <div className="grid grid-cols-2 gap-2">
                         {option.features.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-500" />
+                            <CheckCircle className="h-4 w-4 text-emerald-500" />
                             <span className="text-sm text-slate-600">{feature}</span>
                           </div>
                         ))}
