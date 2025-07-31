@@ -90,8 +90,8 @@ const financialCategories = [
     bgColor: "from-purple-50 to-violet-50",
     stats: { approved: "500+", rate: "+8%" },
     items: [
-      { name: "MTN Mobile Money", price: "UGX 500 - 15K per transaction", users: "125K", rating: 4.4, discount: "POPULAR", network: "Largest network" },
-      { name: "Airtel Money", price: "UGX 300 - 12K per transaction", users: "98K", rating: 4.6, discount: "LOW FEES", network: "Fast transfers" },
+      { name: "MTN Mobile Money", price: "ZMW 35 - 1K per transaction", users: "125K", rating: 4.4, discount: "POPULAR", network: "Largest network" },
+      { name: "Airtel Money", price: "ZMW 21 - 840 per transaction", users: "98K", rating: 4.6, discount: "LOW FEES", network: "Fast transfers" },
       { name: "Agent Banking", price: "Free transactions", users: "67K", rating: 4.5, discount: "BANK LINKED", network: "Bank services" },
     ],
   },
