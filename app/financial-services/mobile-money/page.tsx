@@ -195,18 +195,100 @@ export default function MobileMoneyAgentsPage() {
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <Card className="bg-gradient-to-br from-slate-900 to-slate-800 text-white border-0 shadow-xl mb-12">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-6 w-6" />
-                  <CardTitle className="text-white">Agent Locations Map</CardTitle>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-6 w-6" />
+                    <CardTitle className="text-white">Agent Locations Map</CardTitle>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-white/80 text-sm">Live Updates</span>
+                  </div>
                 </div>
-                <p className="text-white/80">Interactive map showing nearby mobile money agents</p>
+                <p className="text-white/80">Interactive map with real-time agent availability</p>
               </CardHeader>
               <CardContent>
-                <div className="bg-slate-100 rounded-xl h-80 flex items-center justify-center">
-                  <div className="text-center text-slate-600">
-                    <MapPin className="h-16 w-16 mx-auto mb-4 text-purple-500" />
-                    <h3 className="text-xl font-bold text-slate-700 mb-2">Interactive map will be displayed here</h3>
-                    <p className="text-slate-500">Showing agents within 5km radius</p>
+                <div className="bg-slate-100 rounded-xl h-96 relative overflow-hidden">
+                  {/* Mock Interactive Map */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100">
+                    {/* Map Grid */}
+                    <div className="grid grid-cols-8 grid-rows-6 h-full opacity-20">
+                      {[...Array(48)].map((_, i) => (
+                        <div key={i} className="border border-slate-300"></div>
+                      ))}
+                    </div>
+
+                    {/* Agent Markers */}
+                    <div className="absolute top-1/4 left-1/3 w-4 h-4 bg-green-500 rounded-full shadow-lg animate-pulse cursor-pointer hover:scale-125 transition-transform">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded text-xs font-medium text-slate-700 opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+                        MTN Agent - Cash Available
+                      </div>
+                    </div>
+                    <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-blue-500 rounded-full shadow-lg animate-pulse cursor-pointer hover:scale-125 transition-transform">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded text-xs font-medium text-slate-700 opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Airtel Agent - Open Now
+                      </div>
+                    </div>
+                    <div className="absolute top-2/3 left-1/4 w-4 h-4 bg-orange-500 rounded-full shadow-lg cursor-pointer hover:scale-125 transition-transform">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded text-xs font-medium text-slate-700 opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Multi-Network - Low Cash
+                      </div>
+                    </div>
+                    <div className="absolute top-1/3 right-1/4 w-4 h-4 bg-green-500 rounded-full shadow-lg animate-pulse cursor-pointer hover:scale-125 transition-transform">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded text-xs font-medium text-slate-700 opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Bank Agent - Full Service
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Map Controls */}
+                  <div className="absolute top-4 right-4 flex flex-col gap-2">
+                    <Button className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 p-0">
+                      <span className="text-white font-bold">+</span>
+                    </Button>
+                    <Button className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 p-0">
+                      <span className="text-white font-bold">-</span>
+                    </Button>
+                  </div>
+
+                  {/* Map Legend */}
+                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3">
+                    <div className="flex flex-col gap-2 text-xs">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <span>Cash Available</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                        <span>Open Now</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                        <span>Low Cash</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Map Features */}
+                <div className="grid grid-cols-3 gap-4 mt-6">
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-green-500 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <Navigation className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80 text-sm">GPS Navigation</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-blue-500 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <Clock className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80 text-sm">Real-time Status</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-purple-500 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <Phone className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80 text-sm">Direct Contact</p>
                   </div>
                 </div>
               </CardContent>
