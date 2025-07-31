@@ -89,7 +89,7 @@ export default function MobileMoneyAgentsPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-25 via-violet-25 to-blue-25" style={{background: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #f0f8ff 100)'}}>
       <Header />
       
       {/* Hero Section */}
