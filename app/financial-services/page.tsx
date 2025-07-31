@@ -285,10 +285,10 @@ export default function FinancialServicesPage() {
 
             {/* Main Heading */}
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 leading-tight px-4">
                 Your Trusted Financial Solutions
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed px-4">
                 All in one place. Secure, verified, and designed for your success.
               </p>
             </div>
