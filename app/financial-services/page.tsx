@@ -332,34 +332,42 @@ export default function FinancialServicesPage() {
               </Button>
             </div>
 
-            {/* Stats Cards matching reference design */}
+            {/* Stats Cards with Animated Counters */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Users className="h-6 w-6 text-blue-600" />
                 </div>
-                <div className="text-3xl font-bold text-slate-900 mb-1">500+</div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">
+                  <AnimatedCounter end={500} suffix="+" duration={2500} />
+                </div>
                 <div className="text-sm text-slate-600">Verified Providers</div>
               </div>
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FileText className="h-6 w-6 text-green-600" />
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group">
+                <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <FileText className="h-6 w-6 text-emerald-600" />
                 </div>
-                <div className="text-3xl font-bold text-slate-900 mb-1">10K+</div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">
+                  <AnimatedCounter end={10} suffix="K+" duration={2200} />
+                </div>
                 <div className="text-sm text-slate-600">Successful Applications</div>
               </div>
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group">
+                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Star className="h-6 w-6 text-yellow-600" />
                 </div>
-                <div className="text-3xl font-bold text-slate-900 mb-1">4.8</div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">
+                  <AnimatedCounter end={4.8} decimals={1} duration={2000} />
+                </div>
                 <div className="text-sm text-slate-600">Average Rating</div>
               </div>
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <TrendingUp className="h-6 w-6 text-purple-600" />
                 </div>
-                <div className="text-3xl font-bold text-slate-900 mb-1">25%</div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">
+                  <AnimatedCounter end={25} suffix="%" duration={2800} />
+                </div>
                 <div className="text-sm text-slate-600">Growth Rate</div>
               </div>
             </div>
