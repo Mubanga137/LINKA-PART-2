@@ -187,7 +187,7 @@ export default function FinancialServicesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-25 via-slate-25 to-emerald-25" style={{background: 'linear-gradient(135deg, #f0f8ff 0%, #f8fafc 50%, #f0fdf4 100%)'}}>
       <Header />
 
       {/* Sticky Navigation */}
@@ -263,8 +263,8 @@ export default function FinancialServicesPage() {
       <main className="py-8">
         {/* Hero Section */}
         <section className="relative min-h-[70vh] overflow-hidden">
-          {/* Background with gradient matching reference design */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-blue-600 to-green-500"></div>
+          {/* Background with lighter gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-indigo-400 to-emerald-400 opacity-90"></div>
           <div className={"absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"2\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"}></div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-16">
@@ -378,7 +378,7 @@ export default function FinancialServicesPage() {
         </section>
 
         {/* Financial Services Section */}
-        <section id="overview" className="py-20 bg-slate-50 relative">
+        <section id="overview" className="py-20 bg-gradient-to-br from-slate-25 via-blue-25 to-emerald-25 relative" style={{background: 'linear-gradient(135deg, #f8fafc 0%, #f0f8ff 50%, #f0fdf4 100%)'}}>
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">
@@ -389,33 +389,33 @@ export default function FinancialServicesPage() {
               </p>
             </div>
 
-            {/* Service Cards Grid matching reference design */}
+            {/* Service Cards Grid with Enhanced Modern Design */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               {financialCategories.map((category, index) => (
                 <Card
                   key={category.id}
-                  className={`group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-pointer border-0 hover:scale-[1.02] ${
+                  className={`group relative overflow-hidden transition-all duration-700 hover:-translate-y-3 hover:shadow-2xl cursor-pointer border-0 hover:scale-[1.03] animate-fade-in-up shadow-lg ${
                     index < 3 ? 'mb-8' : ''
                   }`}
                   style={{
                     background: index === 0
-                      ? 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)'
+                      ? 'linear-gradient(135deg, #e6f0ff 0%, #cce0ff 100%)' // Softer blue
                       : index === 1
-                      ? 'linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%)'
+                      ? 'linear-gradient(135deg, #f0fdf4 0%, #b2f2bb 100%)' // Mint green
                       : index === 2
-                      ? 'linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%)'
+                      ? 'linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%)' // Light purple
                       : index === 3
-                      ? 'linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%)'
+                      ? 'linear-gradient(135deg, #fff7ed 0%, #ffd9b3 100%)' // Peach
                       : index === 4
-                      ? 'linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%)'
-                      : 'linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%)'
+                      ? 'linear-gradient(135deg, #f0f8ff 0%, #c5e4ff 100%)' // Lighter blue
+                      : 'linear-gradient(135deg, #f0fdfa 0%, #a7f3d0 100%)' // Light emerald
                   }}
                   onClick={() => navigateToService(category.id)}
                 >
                   <CardContent className="p-8">
                     {/* Category Icon and Stats */}
                     <div className="flex items-start justify-between mb-6">
-                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${category.color} shadow-lg`}>
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${category.color} shadow-lg transform group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3`}>
                         <FeatureIcon icon={category.icon} className="h-8 w-8 text-white" />
                       </div>
                       <div className="text-right">
@@ -450,13 +450,18 @@ export default function FinancialServicesPage() {
                     </Button>
                   </CardContent>
 
-                  {/* Hover Effect Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Enhanced Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
 
-                  {/* Click indicator */}
-                  <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <ArrowRight className="h-3 w-3 text-white" />
+                  {/* Animated shimmer effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 animate-shimmer"></div>
+                  </div>
+
+                  {/* Enhanced Click indicator */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110">
+                    <div className="w-8 h-8 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shadow-lg">
+                      <ArrowRight className="h-4 w-4 text-white animate-pulse" />
                     </div>
                   </div>
                 </Card>
@@ -492,7 +497,7 @@ export default function FinancialServicesPage() {
         </section>
 
         {/* Why Choose Linka Finance */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-gradient-to-br from-white via-blue-25/30 to-emerald-25/30" style={{background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f0fdf4 100%)'}}>
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">
@@ -506,8 +511,8 @@ export default function FinancialServicesPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {/* Verified Providers */}
               <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Shield className="h-10 w-10 text-white" />
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-500 group-hover:rotate-6 shadow-lg group-hover:shadow-xl">
+                  <Shield className="h-10 w-10 text-white group-hover:animate-pulse" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-4">Verified Providers</h3>
                 <p className="text-slate-600 leading-relaxed">
@@ -517,8 +522,8 @@ export default function FinancialServicesPage() {
 
               {/* Expert Support */}
               <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Users className="h-10 w-10 text-white" />
+                <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-500 group-hover:rotate-6 shadow-lg group-hover:shadow-xl">
+                  <Users className="h-10 w-10 text-white group-hover:animate-pulse" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-4">Expert Support</h3>
                 <p className="text-slate-600 leading-relaxed">
@@ -528,8 +533,8 @@ export default function FinancialServicesPage() {
 
               {/* Mobile-First */}
               <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Smartphone className="h-10 w-10 text-white" />
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-violet-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-500 group-hover:rotate-6 shadow-lg group-hover:shadow-xl">
+                  <Smartphone className="h-10 w-10 text-white group-hover:animate-pulse" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-4">Mobile-First</h3>
                 <p className="text-slate-600 leading-relaxed">
@@ -541,7 +546,7 @@ export default function FinancialServicesPage() {
         </section>
 
         {/* Enhanced Tools and Services */}
-        <section className="py-16 bg-gradient-to-r from-slate-50 to-gray-50">
+        <section className="py-16 bg-gradient-to-br from-slate-25 via-blue-25 to-emerald-25" style={{background: 'linear-gradient(135deg, #f8fafc 0%, #f0f8ff 50%, #f0fdf4 100%)'}}>
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <Tabs defaultValue="calculators" className="space-y-8">
               <div className="text-center mb-8">
@@ -737,9 +742,9 @@ export default function FinancialServicesPage() {
                   features: ["BOZ Licensed", "PICZ Certified", "Data Protection"]
                 }
               ].map((feature, index) => (
-                <Card key={index} className="bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 group border-0 shadow-lg">
+                <Card key={index} className="bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-500 group border-0 shadow-lg hover:-translate-y-2 hover:scale-[1.02]">
                   <CardContent className="p-8">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                    <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 group-hover:rotate-6 shadow-lg group-hover:shadow-xl`}>
                       <FeatureIcon icon={feature.icon} className="h-8 w-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
@@ -778,7 +783,7 @@ export default function FinancialServicesPage() {
 
         {/* Enhanced CTA Section matching reference design */}
         <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-green-600"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-indigo-500 to-emerald-500 opacity-95"></div>
           <div className="absolute inset-0 opacity-20">
             <div className="w-full h-full" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}></div>
           </div>
