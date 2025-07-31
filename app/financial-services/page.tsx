@@ -511,9 +511,9 @@ export default function FinancialServicesPage() {
         </section>
 
         {/* Why Choose Linka Finance */}
-        <section className="py-20 bg-gradient-to-br from-white via-blue-25/30 to-emerald-25/30" style={{background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f0fdf4 100%)'}}>
+        <section ref={whyChooseRef} className="py-20 bg-gradient-to-br from-white via-blue-25/30 to-emerald-25/30" style={{background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f0fdf4 100%)'}}>
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className={`text-center mb-16 transition-all duration-1000 transform ${whyChooseVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">
                 Why Choose Linka Finance?
               </h2>
