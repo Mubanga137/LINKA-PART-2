@@ -451,6 +451,13 @@ export default function FinancialServicesPage() {
 
                   {/* Hover Effect Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                  {/* Click indicator */}
+                  <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <ArrowRight className="h-3 w-3 text-white" />
+                    </div>
+                  </div>
                 </Card>
               ))}
             </div>
