@@ -76,9 +76,9 @@ const financialCategories = [
     bgColor: "from-green-50 to-emerald-50",
     stats: { approved: "8.5K", rate: "+12%" },
     items: [
-      { name: "SACCO Savings Groups", price: "UGX 50K minimum", users: "32K", rating: 4.9, discount: "COOPERATIVE", returns: "12-15% annually" },
-      { name: "Investment Clubs", price: "UGX 100K entry", users: "15K", rating: 4.7, discount: "GROWTH", returns: "18-25% annually" },
-      { name: "Fixed Deposits", price: "UGX 500K minimum", users: "8K", rating: 4.5, discount: "SECURE", returns: "8-10% annually" },
+      { name: "SACCO Savings Groups", price: "ZMW 3.5K minimum", users: "32K", rating: 4.9, discount: "COOPERATIVE", returns: "12-15% annually" },
+      { name: "Investment Clubs", price: "ZMW 7K entry", users: "15K", rating: 4.7, discount: "GROWTH", returns: "18-25% annually" },
+      { name: "Fixed Deposits", price: "ZMW 35K minimum", users: "8K", rating: 4.5, discount: "SECURE", returns: "8-10% annually" },
     ],
   },
   {
