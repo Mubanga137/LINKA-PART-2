@@ -11,12 +11,12 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { 
-  PiggyBank, 
-  TrendingUp, 
-  Users, 
-  Star, 
-  CheckCircle, 
+import {
+  PiggyBank,
+  TrendingUp,
+  Users,
+  Star,
+  CheckCircle,
   Clock,
   Phone,
   MapPin,
@@ -30,7 +30,8 @@ import {
   DollarSign,
   Percent,
   Calendar,
-  LineChart
+  LineChart,
+  BookOpen
 } from "lucide-react"
 
 export default function SavingsInvestmentsPage() {
