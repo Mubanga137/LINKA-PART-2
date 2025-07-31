@@ -40,7 +40,7 @@ export default function TaxAccountingPage() {
       icon: FileText,
       title: "Tax Filing Services",
       description: "Individual and business tax preparation and filing",
-      priceRange: "UGX 50K - 300K",
+      priceRange: "ZMW 3.5K - 21K",
       timeframe: "1-3 days",
       includes: ["Tax return preparation", "Electronic filing", "Audit support"],
       color: "from-blue-500 to-indigo-600"
@@ -49,7 +49,7 @@ export default function TaxAccountingPage() {
       icon: BookOpen,
       title: "Bookkeeping Services",
       description: "Complete financial record keeping and management",
-      priceRange: "UGX 100K - 500K/month",
+      priceRange: "ZMW 7K - 35K/month",
       timeframe: "Ongoing",
       includes: ["Daily transaction recording", "Financial statements", "Payroll management"],
       color: "from-green-500 to-emerald-600"
@@ -58,7 +58,7 @@ export default function TaxAccountingPage() {
       icon: Building,
       title: "Business Registration",
       description: "Company incorporation and legal compliance",
-      priceRange: "UGX 200K - 800K",
+      priceRange: "ZMW 14K - 56K",
       timeframe: "5-10 days",
       includes: ["Business registration", "Tax ID application", "License assistance"],
       color: "from-purple-500 to-violet-600"
@@ -67,7 +67,7 @@ export default function TaxAccountingPage() {
       icon: Shield,
       title: "VAT Registration",
       description: "VAT registration and compliance services",
-      priceRange: "UGX 150K - 400K",
+      priceRange: "ZMW 10.5K - 28K",
       timeframe: "3-7 days",
       includes: ["VAT registration", "Monthly returns", "Compliance monitoring"],
       color: "from-orange-500 to-red-600"
@@ -76,15 +76,15 @@ export default function TaxAccountingPage() {
 
   const taxExperts = [
     {
-      name: "Kampala Tax Associates",
+      name: "Lusaka Tax Associates",
       expertise: "Corporate Tax",
       rating: 4.9,
       reviews: 156,
       experience: "15+ years",
       clients: "500+",
       services: ["Individual Tax", "Corporate Tax", "VAT Registration"],
-      location: "Kampala Central",
-      phone: "+256 700 123 456",
+      location: "Lusaka Central",
+      phone: "+260 97 123 456",
       verified: true,
       featured: true
     },
@@ -93,11 +93,11 @@ export default function TaxAccountingPage() {
       expertise: "Small Business",
       rating: 4.7,
       reviews: 203,
-      experience: "10+ years", 
+      experience: "10+ years",
       clients: "300+",
       services: ["Bookkeeping", "Payroll", "Financial Statements"],
-      location: "Nakawa, Kampala",
-      phone: "+256 701 234 567",
+      location: "Kitwe, Zambia",
+      phone: "+260 97 234 567",
       verified: true,
       featured: false
     },
@@ -107,17 +107,17 @@ export default function TaxAccountingPage() {
       rating: 4.8,
       reviews: 89,
       experience: "12+ years",
-      clients: "200+", 
+      clients: "200+",
       services: ["Business Registration", "Compliance", "Tax Planning"],
-      location: "Kololo, Kampala",
-      phone: "+256 702 345 678",
+      location: "Ndola, Zambia",
+      phone: "+260 97 345 678",
       verified: true,
       featured: false
     }
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-25 via-blue-25 to-slate-25" style={{background: 'linear-gradient(135deg, #eef2ff 0%, #f0f8ff 50%, #f8fafc 100)'}}>
       <Header />
       
       {/* Hero Section */}
@@ -346,6 +346,255 @@ export default function TaxAccountingPage() {
                         Call
                       </Button>
                     </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Appointment Booking System */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Book a Consultation</h2>
+              <p className="text-xl text-slate-600">Schedule a meeting with certified tax professionals</p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Booking Form */}
+              <Card className="border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-2xl">Schedule Appointment</CardTitle>
+                  <p className="text-slate-600">Choose your preferred time and service</p>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="first-name">First Name</Label>
+                      <Input id="first-name" placeholder="John" className="bg-white" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="last-name">Last Name</Label>
+                      <Input id="last-name" placeholder="Doe" className="bg-white" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="service-type">Service Type</Label>
+                    <Select>
+                      <SelectTrigger className="bg-white">
+                        <SelectValue placeholder="Select service" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="tax-filing">Individual Tax Filing</SelectItem>
+                        <SelectItem value="business-tax">Business Tax Consultation</SelectItem>
+                        <SelectItem value="vat-registration">VAT Registration</SelectItem>
+                        <SelectItem value="bookkeeping">Bookkeeping Services</SelectItem>
+                        <SelectItem value="audit">Financial Audit</SelectItem>
+                        <SelectItem value="business-setup">Business Registration</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="preferred-date">Preferred Date</Label>
+                      <Input id="preferred-date" type="date" className="bg-white" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="preferred-time">Preferred Time</Label>
+                      <Select>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Select time" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="09:00">9:00 AM</SelectItem>
+                          <SelectItem value="10:00">10:00 AM</SelectItem>
+                          <SelectItem value="11:00">11:00 AM</SelectItem>
+                          <SelectItem value="14:00">2:00 PM</SelectItem>
+                          <SelectItem value="15:00">3:00 PM</SelectItem>
+                          <SelectItem value="16:00">4:00 PM</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="meeting-type">Meeting Type</Label>
+                    <Select>
+                      <SelectTrigger className="bg-white">
+                        <SelectValue placeholder="Select meeting type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="in-person">In-Person Meeting</SelectItem>
+                        <SelectItem value="video-call">Video Call</SelectItem>
+                        <SelectItem value="phone-call">Phone Call</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Additional Notes</Label>
+                    <textarea
+                      id="message"
+                      placeholder="Describe your specific needs or questions..."
+                      className="w-full p-3 border border-slate-200 rounded-lg bg-white resize-none h-24"
+                    />
+                  </div>
+
+                  <Button className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white py-3">
+                    <Calendar className="h-5 w-5 mr-2" />
+                    Book Appointment
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Available Time Slots */}
+              <div className="space-y-6">
+                <Card className="border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-xl">Available This Week</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {[
+                        { day: "Monday", date: "Jan 15", slots: ["9:00 AM", "2:00 PM", "4:00 PM"] },
+                        { day: "Tuesday", date: "Jan 16", slots: ["10:00 AM", "3:00 PM"] },
+                        { day: "Wednesday", date: "Jan 17", slots: ["9:00 AM", "11:00 AM", "2:00 PM", "4:00 PM"] },
+                        { day: "Thursday", date: "Jan 18", slots: ["10:00 AM", "3:00 PM"] },
+                        { day: "Friday", date: "Jan 19", slots: ["9:00 AM", "2:00 PM"] }
+                      ].map((day, index) => (
+                        <div key={index} className="p-4 bg-slate-50 rounded-lg">
+                          <div className="flex items-center justify-between mb-3">
+                            <div>
+                              <p className="font-medium text-slate-900">{day.day}</p>
+                              <p className="text-sm text-slate-600">{day.date}</p>
+                            </div>
+                            <Badge className="bg-green-100 text-green-700">
+                              {day.slots.length} slots
+                            </Badge>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {day.slots.map((slot, slotIndex) => (
+                              <button
+                                key={slotIndex}
+                                className="px-3 py-1 text-xs bg-white border border-slate-200 rounded-full hover:bg-indigo-50 hover:border-indigo-200 transition-colors"
+                              >
+                                {slot}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-xl">Consultation Rates</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-600">Initial Consultation</span>
+                        <span className="font-semibold">Free</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-600">Tax Planning Session</span>
+                        <span className="font-semibold">ZMW 7K</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-600">Business Consultation</span>
+                        <span className="font-semibold">ZMW 10.5K</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-600">Audit Review</span>
+                        <span className="font-semibold">ZMW 17.5K</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Downloadable Tools & Resources */}
+        <section className="py-16 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Free Tax Tools & Resources</h2>
+              <p className="text-xl text-slate-600">Download helpful tools and templates</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Tax Calculator 2024",
+                  description: "Calculate your individual or business tax liability",
+                  type: "Excel Spreadsheet",
+                  downloads: "2.1K downloads",
+                  icon: Calculator,
+                  color: "from-green-500 to-emerald-600"
+                },
+                {
+                  title: "VAT Registration Guide",
+                  description: "Step-by-step guide for VAT registration in Uganda",
+                  type: "PDF Guide",
+                  downloads: "1.8K downloads",
+                  icon: FileText,
+                  color: "from-blue-500 to-indigo-600"
+                },
+                {
+                  title: "Expense Tracking Template",
+                  description: "Keep track of business expenses for tax purposes",
+                  type: "Excel Template",
+                  downloads: "3.2K downloads",
+                  icon: DollarSign,
+                  color: "from-purple-500 to-violet-600"
+                },
+                {
+                  title: "Tax Compliance Checklist",
+                  description: "Ensure you meet all tax obligations",
+                  type: "PDF Checklist",
+                  downloads: "1.5K downloads",
+                  icon: CheckCircle,
+                  color: "from-orange-500 to-red-600"
+                },
+                {
+                  title: "Business Registration Kit",
+                  description: "Forms and requirements for business registration",
+                  type: "Document Pack",
+                  downloads: "950 downloads",
+                  icon: Building,
+                  color: "from-teal-500 to-cyan-600"
+                },
+                {
+                  title: "Payroll Tax Calculator",
+                  description: "Calculate PAYE and other payroll taxes",
+                  type: "Online Tool",
+                  downloads: "2.7K uses",
+                  icon: Users,
+                  color: "from-pink-500 to-rose-600"
+                }
+              ].map((tool, index) => (
+                <Card key={index} className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md">
+                  <CardContent className="p-6">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${tool.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+                      <tool.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">{tool.title}</h3>
+                    <p className="text-slate-600 mb-4">{tool.description}</p>
+                    <div className="flex items-center justify-between text-sm text-slate-500 mb-4">
+                      <span>{tool.type}</span>
+                      <span>{tool.downloads}</span>
+                    </div>
+                    <Button className={`w-full bg-gradient-to-r ${tool.color} hover:shadow-lg transition-all duration-300`}>
+                      <ArrowRight className="h-4 w-4 mr-2" />
+                      Download
+                    </Button>
                   </CardContent>
                 </Card>
               ))}

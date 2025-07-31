@@ -33,8 +33,8 @@ export default function MobileMoneyAgentsPage() {
       rating: 4.8,
       reviews: 156,
       distance: "0.2 km",
-      address: "Plot 45, Kampala Road, Kampala",
-      phone: "+256 700 123 456",
+      address: "Plot 45, Cairo Road, Lusaka",
+      phone: "+260 97 123 456",
       hours: "6:00 AM - 10:00 PM",
       services: ["MTN Mobile Money", "Airtime", "Data Bundles"],
       cashAvailable: true,
@@ -46,8 +46,8 @@ export default function MobileMoneyAgentsPage() {
       rating: 4.6,
       reviews: 203,
       distance: "0.4 km",
-      address: "Shop 12, Garden City Mall, Kampala",
-      phone: "+256 701 234 567",
+      address: "Shop 12, Manda Hill Mall, Lusaka",
+      phone: "+260 97 234 567",
       hours: "8:00 AM - 9:00 PM",
       services: ["MTN Mobile Money", "Airtel Money", "Airtime", "Bill Payments"],
       cashAvailable: true,
@@ -59,8 +59,8 @@ export default function MobileMoneyAgentsPage() {
       rating: 4.7,
       reviews: 89,
       distance: "0.6 km",
-      address: "Plot 78, Buganda Road, Kampala",
-      phone: "+256 702 345 678",
+      address: "Plot 78, Independence Avenue, Lusaka",
+      phone: "+260 97 345 678",
       hours: "7:00 AM - 8:00 PM",
       services: ["Airtel Money", "Airtime", "Utility Bills"],
       cashAvailable: false,
@@ -72,8 +72,8 @@ export default function MobileMoneyAgentsPage() {
       rating: 4.5,
       reviews: 124,
       distance: "0.8 km",
-      address: "Plot 23, Namirembe Road, Kampala",
-      phone: "+256 703 456 789",
+      address: "Plot 23, Church Road, Lusaka",
+      phone: "+260 97 456 789",
       hours: "6:30 AM - 9:30 PM",
       services: ["MTN Mobile Money", "Western Union", "Money Gram"],
       cashAvailable: true,
@@ -89,7 +89,7 @@ export default function MobileMoneyAgentsPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-25 via-violet-25 to-blue-25" style={{background: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #f0f8ff 100)'}}>
       <Header />
       
       {/* Hero Section */}
@@ -195,18 +195,100 @@ export default function MobileMoneyAgentsPage() {
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <Card className="bg-gradient-to-br from-slate-900 to-slate-800 text-white border-0 shadow-xl mb-12">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-6 w-6" />
-                  <CardTitle className="text-white">Agent Locations Map</CardTitle>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-6 w-6" />
+                    <CardTitle className="text-white">Agent Locations Map</CardTitle>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-white/80 text-sm">Live Updates</span>
+                  </div>
                 </div>
-                <p className="text-white/80">Interactive map showing nearby mobile money agents</p>
+                <p className="text-white/80">Interactive map with real-time agent availability</p>
               </CardHeader>
               <CardContent>
-                <div className="bg-slate-100 rounded-xl h-80 flex items-center justify-center">
-                  <div className="text-center text-slate-600">
-                    <MapPin className="h-16 w-16 mx-auto mb-4 text-purple-500" />
-                    <h3 className="text-xl font-bold text-slate-700 mb-2">Interactive map will be displayed here</h3>
-                    <p className="text-slate-500">Showing agents within 5km radius</p>
+                <div className="bg-slate-100 rounded-xl h-96 relative overflow-hidden">
+                  {/* Mock Interactive Map */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100">
+                    {/* Map Grid */}
+                    <div className="grid grid-cols-8 grid-rows-6 h-full opacity-20">
+                      {[...Array(48)].map((_, i) => (
+                        <div key={i} className="border border-slate-300"></div>
+                      ))}
+                    </div>
+
+                    {/* Agent Markers */}
+                    <div className="absolute top-1/4 left-1/3 w-4 h-4 bg-green-500 rounded-full shadow-lg animate-pulse cursor-pointer hover:scale-125 transition-transform">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded text-xs font-medium text-slate-700 opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+                        MTN Agent - Cash Available
+                      </div>
+                    </div>
+                    <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-blue-500 rounded-full shadow-lg animate-pulse cursor-pointer hover:scale-125 transition-transform">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded text-xs font-medium text-slate-700 opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Airtel Agent - Open Now
+                      </div>
+                    </div>
+                    <div className="absolute top-2/3 left-1/4 w-4 h-4 bg-orange-500 rounded-full shadow-lg cursor-pointer hover:scale-125 transition-transform">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded text-xs font-medium text-slate-700 opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Multi-Network - Low Cash
+                      </div>
+                    </div>
+                    <div className="absolute top-1/3 right-1/4 w-4 h-4 bg-green-500 rounded-full shadow-lg animate-pulse cursor-pointer hover:scale-125 transition-transform">
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded text-xs font-medium text-slate-700 opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+                        Bank Agent - Full Service
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Map Controls */}
+                  <div className="absolute top-4 right-4 flex flex-col gap-2">
+                    <Button className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 p-0">
+                      <span className="text-white font-bold">+</span>
+                    </Button>
+                    <Button className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 p-0">
+                      <span className="text-white font-bold">-</span>
+                    </Button>
+                  </div>
+
+                  {/* Map Legend */}
+                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3">
+                    <div className="flex flex-col gap-2 text-xs">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <span>Cash Available</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                        <span>Open Now</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                        <span>Low Cash</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Map Features */}
+                <div className="grid grid-cols-3 gap-4 mt-6">
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-green-500 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <Navigation className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80 text-sm">GPS Navigation</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-blue-500 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <Clock className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80 text-sm">Real-time Status</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-purple-500 rounded-full mx-auto mb-2 flex items-center justify-center">
+                      <Phone className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80 text-sm">Direct Contact</p>
                   </div>
                 </div>
               </CardContent>
@@ -294,6 +376,92 @@ export default function MobileMoneyAgentsPage() {
                 </Card>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Real-time Transaction Monitor */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Live Transaction Monitor</h2>
+              <p className="text-xl text-slate-600">See real-time mobile money activity across Uganda</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <Card className="text-center p-6 border-0 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Send className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">12,547</h3>
+                <p className="text-slate-600">Transactions Today</p>
+                <div className="flex items-center justify-center gap-1 text-green-600 text-sm mt-2">
+                  <ArrowRight className="h-3 w-3" />
+                  <span>+15% from yesterday</span>
+                </div>
+              </Card>
+
+              <Card className="text-center p-6 border-0 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">3,241</h3>
+                <p className="text-slate-600">Active Agents</p>
+                <div className="flex items-center justify-center gap-1 text-blue-600 text-sm mt-2">
+                  <CheckCircle className="h-3 w-3" />
+                  <span>98% online</span>
+                </div>
+              </Card>
+
+              <Card className="text-center p-6 border-0 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Banknote className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">ZMW 574M</h3>
+                <p className="text-slate-600">Daily Volume</p>
+                <div className="flex items-center justify-center gap-1 text-purple-600 text-sm mt-2">
+                  <ArrowRight className="h-3 w-3" />
+                  <span>+8% growth</span>
+                </div>
+              </Card>
+            </div>
+
+            {/* Live Activity Feed */}
+            <Card className="border-0 shadow-lg">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-2xl">Recent Activity</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-slate-600">Live updates</span>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { action: "Money Transfer", location: "Lusaka Central", network: "MTN", amount: "ZMW 10.5K", time: "2 mins ago", status: "success" },
+                    { action: "Cash Withdrawal", location: "Kitwe", network: "Airtel", amount: "ZMW 5.6K", time: "3 mins ago", status: "success" },
+                    { action: "Bill Payment", location: "Ndola", network: "MTN", amount: "ZMW 3.15K", time: "5 mins ago", status: "success" },
+                    { action: "Airtime Purchase", location: "Livingstone", network: "Airtel", amount: "ZMW 700", time: "7 mins ago", status: "success" },
+                    { action: "Money Transfer", location: "Kabwe", network: "MTN", amount: "ZMW 14K", time: "8 mins ago", status: "pending" }
+                  ].map((activity, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-3 h-3 rounded-full ${activity.status === 'success' ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+                        <div>
+                          <p className="font-medium text-slate-900">{activity.action}</p>
+                          <p className="text-sm text-slate-600">{activity.location} • {activity.network}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-semibold text-slate-900">{activity.amount}</p>
+                        <p className="text-sm text-slate-500">{activity.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
