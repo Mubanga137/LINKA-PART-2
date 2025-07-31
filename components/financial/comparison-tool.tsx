@@ -153,7 +153,7 @@ export function ComparisonTool() {
     <div className="space-y-8">
       <div className="text-center">
         <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Compare className="h-8 w-8 text-white" />
+          <GitCompare className="h-8 w-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-slate-900 mb-2">Compare Financial Products</h2>
         <p className="text-slate-600 max-w-2xl mx-auto">
