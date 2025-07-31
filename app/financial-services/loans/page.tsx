@@ -198,9 +198,9 @@ export default function LoanServicesPage() {
                 </div>
 
                 <div className="text-center">
-                  <Button 
+                  <Button
                     onClick={calculateLoan}
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-12 py-4 rounded-full text-lg font-semibold"
+                    className="bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white px-12 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     <Target className="h-5 w-5 mr-2" />
                     Get Pre-Qualified
