@@ -40,7 +40,7 @@ export default function TaxAccountingPage() {
       icon: FileText,
       title: "Tax Filing Services",
       description: "Individual and business tax preparation and filing",
-      priceRange: "UGX 50K - 300K",
+      priceRange: "ZMW 3.5K - 21K",
       timeframe: "1-3 days",
       includes: ["Tax return preparation", "Electronic filing", "Audit support"],
       color: "from-blue-500 to-indigo-600"
@@ -49,7 +49,7 @@ export default function TaxAccountingPage() {
       icon: BookOpen,
       title: "Bookkeeping Services",
       description: "Complete financial record keeping and management",
-      priceRange: "UGX 100K - 500K/month",
+      priceRange: "ZMW 7K - 35K/month",
       timeframe: "Ongoing",
       includes: ["Daily transaction recording", "Financial statements", "Payroll management"],
       color: "from-green-500 to-emerald-600"
@@ -58,7 +58,7 @@ export default function TaxAccountingPage() {
       icon: Building,
       title: "Business Registration",
       description: "Company incorporation and legal compliance",
-      priceRange: "UGX 200K - 800K",
+      priceRange: "ZMW 14K - 56K",
       timeframe: "5-10 days",
       includes: ["Business registration", "Tax ID application", "License assistance"],
       color: "from-purple-500 to-violet-600"
@@ -67,7 +67,7 @@ export default function TaxAccountingPage() {
       icon: Shield,
       title: "VAT Registration",
       description: "VAT registration and compliance services",
-      priceRange: "UGX 150K - 400K",
+      priceRange: "ZMW 10.5K - 28K",
       timeframe: "3-7 days",
       includes: ["VAT registration", "Monthly returns", "Compliance monitoring"],
       color: "from-orange-500 to-red-600"
