@@ -211,7 +211,7 @@ export default function LoanServicesPage() {
                   <div className="bg-white rounded-xl p-6 border border-green-200">
                     <div className="text-center">
                       <p className="text-green-600 font-medium mb-2">Estimated Monthly Payment</p>
-                      <p className="text-4xl font-bold text-green-700">UGX {monthlyPayment.toLocaleString()}</p>
+                      <p className="text-4xl font-bold text-green-700">ZMW {monthlyPayment.toLocaleString()}</p>
                     </div>
                   </div>
                 )}
