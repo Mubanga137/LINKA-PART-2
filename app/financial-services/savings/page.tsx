@@ -443,7 +443,7 @@ export default function SavingsInvestmentsPage() {
                         <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                           <DollarSign className="h-6 w-6 text-white" />
                         </div>
-                        <h3 className="text-2xl font-bold text-blue-700 mb-2">UGX 2.8M</h3>
+                        <h3 className="text-2xl font-bold text-blue-700 mb-2">ZMW 196K</h3>
                         <p className="text-blue-600">Total Value</p>
                       </div>
                       <div className="text-center p-6 bg-purple-50 rounded-xl">
