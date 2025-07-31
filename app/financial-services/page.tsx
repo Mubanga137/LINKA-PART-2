@@ -318,22 +318,26 @@ export default function FinancialServicesPage() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-full">
-                <FileText className="mr-2 h-5 w-5" />
-                Apply Now
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-16 px-4">
+              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base">
+                <FileText className="mr-1 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="hidden sm:inline">Apply Now</span>
+                <span className="sm:hidden">Apply</span>
               </Button>
-              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-full">
-                <Phone className="mr-2 h-5 w-5" />
-                Request Call
+              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base">
+                <Phone className="mr-1 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="hidden sm:inline">Request Call</span>
+                <span className="sm:hidden">Call</span>
               </Button>
-              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-full">
-                <MapPin className="mr-2 h-5 w-5" />
-                Locate Agent
+              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base">
+                <MapPin className="mr-1 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="hidden sm:inline">Locate Agent</span>
+                <span className="sm:hidden">Find</span>
               </Button>
-              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-6 py-3 rounded-full">
-                <Calculator className="mr-2 h-5 w-5" />
-                Get a Quote
+              <Button className="bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base">
+                <Calculator className="mr-1 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="hidden sm:inline">Get a Quote</span>
+                <span className="sm:hidden">Quote</span>
               </Button>
             </div>
 
