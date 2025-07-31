@@ -357,6 +357,232 @@ export default function LoanServicesPage() {
           </div>
         </section>
 
+        {/* Loan Eligibility Checker */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Check Your Eligibility</h2>
+              <p className="text-xl text-slate-600">See what loans you qualify for in under 2 minutes</p>
+            </div>
+
+            <Card className="max-w-4xl mx-auto border-0 shadow-lg">
+              <CardContent className="p-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="monthly-income">Monthly Income (UGX)</Label>
+                      <Input id="monthly-income" type="number" placeholder="500000" className="bg-white" />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="employment-type">Employment Type</Label>
+                      <Select>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Select employment type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="employed">Employed</SelectItem>
+                          <SelectItem value="self-employed">Self Employed</SelectItem>
+                          <SelectItem value="business-owner">Business Owner</SelectItem>
+                          <SelectItem value="freelancer">Freelancer</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="credit-score">Credit History</Label>
+                      <Select>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Select credit history" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="excellent">Excellent</SelectItem>
+                          <SelectItem value="good">Good</SelectItem>
+                          <SelectItem value="fair">Fair</SelectItem>
+                          <SelectItem value="poor">Poor</SelectItem>
+                          <SelectItem value="none">No Credit History</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="existing-loans">Existing Loans</Label>
+                      <Select>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Do you have existing loans?" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="none">No existing loans</SelectItem>
+                          <SelectItem value="one">1 existing loan</SelectItem>
+                          <SelectItem value="multiple">Multiple loans</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="collateral">Collateral Available</Label>
+                      <Select>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Select collateral type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="property">Property</SelectItem>
+                          <SelectItem value="vehicle">Vehicle</SelectItem>
+                          <SelectItem value="business-assets">Business Assets</SelectItem>
+                          <SelectItem value="guarantor">Guarantor</SelectItem>
+                          <SelectItem value="none">No Collateral</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="loan-purpose">Loan Purpose</Label>
+                      <Select>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Why do you need the loan?" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="business">Business</SelectItem>
+                          <SelectItem value="education">Education</SelectItem>
+                          <SelectItem value="emergency">Emergency</SelectItem>
+                          <SelectItem value="home-improvement">Home Improvement</SelectItem>
+                          <SelectItem value="debt-consolidation">Debt Consolidation</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-center mt-8">
+                  <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-12 py-4 rounded-full text-lg font-semibold">
+                    <CheckCircle className="h-5 w-5 mr-2" />
+                    Check Eligibility
+                  </Button>
+                </div>
+
+                {/* Mock Results */}
+                <div className="mt-8 p-6 bg-green-50 rounded-xl border border-green-200">
+                  <div className="text-center mb-6">
+                    <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-2" />
+                    <h3 className="text-2xl font-bold text-green-700 mb-2">Great News!</h3>
+                    <p className="text-green-600">You're eligible for multiple loan products</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-4 bg-white rounded-lg border border-green-200 text-center">
+                      <h4 className="font-bold text-slate-900 mb-2">Personal Loan</h4>
+                      <p className="text-2xl font-bold text-green-600 mb-1">Up to UGX 5M</p>
+                      <p className="text-sm text-slate-600">18% APR • 36 months</p>
+                    </div>
+                    <div className="p-4 bg-white rounded-lg border border-green-200 text-center">
+                      <h4 className="font-bold text-slate-900 mb-2">Business Loan</h4>
+                      <p className="text-2xl font-bold text-green-600 mb-1">Up to UGX 15M</p>
+                      <p className="text-sm text-slate-600">15% APR • 60 months</p>
+                    </div>
+                    <div className="p-4 bg-white rounded-lg border border-green-200 text-center">
+                      <h4 className="font-bold text-slate-900 mb-2">Secured Loan</h4>
+                      <p className="text-2xl font-bold text-green-600 mb-1">Up to UGX 25M</p>
+                      <p className="text-sm text-slate-600">12% APR • 84 months</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Application Tracking */}
+        <section className="py-16 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Track Your Application</h2>
+              <p className="text-xl text-slate-600">Monitor your loan application status in real-time</p>
+            </div>
+
+            <Card className="max-w-4xl mx-auto border-0 shadow-lg">
+              <CardContent className="p-8">
+                <div className="mb-8">
+                  <div className="flex items-center gap-4 mb-6">
+                    <Input placeholder="Enter your application reference number" className="flex-1 bg-white" />
+                    <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8">
+                      <Search className="h-4 w-4 mr-2" />
+                      Track
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Mock Application Status */}
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                        <FileText className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-slate-900">Application Submitted</h3>
+                        <p className="text-sm text-slate-600">January 10, 2024 at 2:30 PM</p>
+                      </div>
+                    </div>
+                    <CheckCircle className="h-6 w-6 text-green-500" />
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                        <Users className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-slate-900">Under Review</h3>
+                        <p className="text-sm text-slate-600">Being processed by our underwriting team</p>
+                      </div>
+                    </div>
+                    <Clock className="h-6 w-6 text-yellow-500 animate-spin" />
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 bg-slate-100 rounded-lg border border-slate-200 opacity-60">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-slate-400 rounded-full flex items-center justify-center">
+                        <CheckCircle className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-slate-900">Approval Decision</h3>
+                        <p className="text-sm text-slate-600">Final approval and loan terms</p>
+                      </div>
+                    </div>
+                    <Clock className="h-6 w-6 text-slate-400" />
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 bg-slate-100 rounded-lg border border-slate-200 opacity-60">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-slate-400 rounded-full flex items-center justify-center">
+                        <DollarSign className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-slate-900">Funds Disbursed</h3>
+                        <p className="text-sm text-slate-600">Money transferred to your account</p>
+                      </div>
+                    </div>
+                    <Clock className="h-6 w-6 text-slate-400" />
+                  </div>
+                </div>
+
+                <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="flex items-start gap-3">
+                    <Shield className="h-5 w-5 text-blue-600 mt-0.5" />
+                    <div>
+                      <h4 className="font-medium text-blue-900 mb-1">Application Status: Under Review</h4>
+                      <p className="text-sm text-blue-700">Your application is currently being reviewed by our underwriting team. We'll contact you within 24 hours if we need any additional documentation.</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
         {/* How to Apply Process */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
