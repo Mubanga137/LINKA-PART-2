@@ -467,9 +467,9 @@ export default function SavingsInvestmentsPage() {
                   <CardContent>
                     <div className="space-y-6">
                       {[
-                        { goal: "Emergency Fund", target: 1000000, current: 750000, deadline: "Dec 2024" },
-                        { goal: "New Business", target: 5000000, current: 2100000, deadline: "Jun 2025" },
-                        { goal: "House Deposit", target: 20000000, current: 4500000, deadline: "Dec 2025" }
+                        { goal: "Emergency Fund", target: 70000, current: 52500, deadline: "Dec 2024" },
+                        { goal: "New Business", target: 350000, current: 147000, deadline: "Jun 2025" },
+                        { goal: "House Deposit", target: 1400000, current: 315000, deadline: "Dec 2025" }
                       ].map((goal, index) => (
                         <div key={index} className="p-6 bg-slate-50 rounded-xl">
                           <div className="flex items-center justify-between mb-4">
