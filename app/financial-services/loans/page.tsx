@@ -145,7 +145,7 @@ export default function LoanServicesPage() {
               Loan Services
             </h1>
             <p className="text-xl text-white/90 max-w-3xl leading-relaxed">
-              Access microloans, business loans, and personal financing from verified lenders across Uganda
+              Access microloans, business loans, and personal financing from verified lenders across Zambia
             </p>
           </div>
         </div>
