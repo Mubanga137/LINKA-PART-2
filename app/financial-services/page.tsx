@@ -393,7 +393,7 @@ export default function FinancialServicesPage() {
               {financialCategories.map((category, index) => (
                 <Card
                   key={category.id}
-                  className={`group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-pointer border-0 ${
+                  className={`group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-pointer border-0 hover:scale-[1.02] ${
                     index < 3 ? 'mb-8' : ''
                   }`}
                   style={{
