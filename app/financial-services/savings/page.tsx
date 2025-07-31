@@ -35,8 +35,8 @@ import {
 } from "lucide-react"
 
 export default function SavingsInvestmentsPage() {
-  const [savingsGoal, setSavingsGoal] = useState("500000")
-  const [monthlyContribution, setMonthlyContribution] = useState("50000")
+  const [savingsGoal, setSavingsGoal] = useState("35000")
+  const [monthlyContribution, setMonthlyContribution] = useState("3500")
   const [timeframe, setTimeframe] = useState("12")
   const [riskTolerance, setRiskTolerance] = useState("")
   const [totalSavings, setTotalSavings] = useState(0)
