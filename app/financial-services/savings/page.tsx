@@ -231,7 +231,7 @@ export default function SavingsInvestmentsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="monthly-contribution">Monthly Contribution (UGX)</Label>
+                    <Label htmlFor="monthly-contribution">Monthly Contribution (ZMW)</Label>
                     <Input
                       id="monthly-contribution"
                       type="number"
