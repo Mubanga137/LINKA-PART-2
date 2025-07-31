@@ -439,9 +439,9 @@ export default function FinancialServicesPage() {
                     {/* CTA Button */}
                     <Button
                       className={`w-full bg-gradient-to-r ${category.color} hover:shadow-lg transition-all duration-300 group-hover:scale-105 rounded-full py-3`}
-                      onClick={() => {
-                        // Navigate to specific service page
-                        window.location.href = `/financial-services/${category.id}`
+                      onClick={(e) => {
+                        e.stopPropagation() // Prevent card click when button is clicked
+                        navigateToService(category.id)
                       }}
                     >
                       Explore Services
