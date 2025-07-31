@@ -150,6 +150,7 @@ export default function FinancialServicesPage() {
   const currentCategory = financialCategories.find((cat) => cat.id === activeCategory)
 
   const navigateToService = (serviceId: string) => {
+    console.log('Navigating to service:', serviceId)
     router.push(`/financial-services/${serviceId}`)
   }
 
