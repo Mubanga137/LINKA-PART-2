@@ -286,11 +286,11 @@ export default function PaymentGatewaysPage() {
                         <SelectValue placeholder="Select volume" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1000000">Under UGX 1M</SelectItem>
-                        <SelectItem value="5000000">UGX 1M - 10M</SelectItem>
-                        <SelectItem value="25000000">UGX 10M - 50M</SelectItem>
-                        <SelectItem value="100000000">UGX 50M - 200M</SelectItem>
-                        <SelectItem value="300000000">Over UGX 200M</SelectItem>
+                        <SelectItem value="70000">Under ZMW 70K</SelectItem>
+                        <SelectItem value="350000">ZMW 70K - 700K</SelectItem>
+                        <SelectItem value="1750000">ZMW 700K - 3.5M</SelectItem>
+                        <SelectItem value="7000000">ZMW 3.5M - 14M</SelectItem>
+                        <SelectItem value="21000000">Over ZMW 14M</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
