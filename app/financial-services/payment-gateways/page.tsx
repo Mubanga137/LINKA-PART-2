@@ -545,10 +545,10 @@ export default function PaymentGatewaysPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { volume: "Under UGX 1M", fee: "2.9%", setup: "Free", support: "Email", features: ["Basic analytics", "Standard support"] },
-                { volume: "UGX 1M - 10M", fee: "2.7%", setup: "Free", support: "Phone", features: ["Advanced analytics", "Priority support"] },
-                { volume: "UGX 10M - 50M", fee: "2.5%", setup: "Free", support: "Dedicated", features: ["Custom dashboards", "Account manager"] },
-                { volume: "Over UGX 50M", fee: "Custom", setup: "Free", support: "Premium", features: ["Enterprise features", "24/7 support"] }
+                { volume: "Under ZMW 70K", fee: "2.9%", setup: "Free", support: "Email", features: ["Basic analytics", "Standard support"] },
+                { volume: "ZMW 70K - 700K", fee: "2.7%", setup: "Free", support: "Phone", features: ["Advanced analytics", "Priority support"] },
+                { volume: "ZMW 700K - 3.5M", fee: "2.5%", setup: "Free", support: "Dedicated", features: ["Custom dashboards", "Account manager"] },
+                { volume: "Over ZMW 3.5M", fee: "Custom", setup: "Free", support: "Premium", features: ["Enterprise features", "24/7 support"] }
               ].map((tier, index) => (
                 <Card key={index} className={`text-center hover:shadow-lg transition-all duration-300 ${index === 2 ? 'ring-2 ring-teal-500 scale-105' : ''}`}>
                   <CardContent className="p-6">
