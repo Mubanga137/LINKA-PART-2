@@ -409,6 +409,7 @@ export default function FinancialServicesPage() {
                       ? 'linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%)'
                       : 'linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%)'
                   }}
+                  onClick={() => navigateToService(category.id)}
                 >
                   <CardContent className="p-8">
                     {/* Category Icon and Stats */}
