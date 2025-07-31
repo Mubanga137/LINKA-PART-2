@@ -123,7 +123,7 @@ export default function LoanServicesPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-25 via-blue-25 to-emerald-25" style={{background: 'linear-gradient(135deg, #f8fafc 0%, #f0f8ff 50%, #f0fdf4 100)'}}>
       <Header />
       
       {/* Hero Section */}
