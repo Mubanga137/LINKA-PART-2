@@ -379,6 +379,92 @@ export default function MobileMoneyAgentsPage() {
           </div>
         </section>
 
+        {/* Real-time Transaction Monitor */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Live Transaction Monitor</h2>
+              <p className="text-xl text-slate-600">See real-time mobile money activity across Uganda</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <Card className="text-center p-6 border-0 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Send className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">12,547</h3>
+                <p className="text-slate-600">Transactions Today</p>
+                <div className="flex items-center justify-center gap-1 text-green-600 text-sm mt-2">
+                  <ArrowRight className="h-3 w-3" />
+                  <span>+15% from yesterday</span>
+                </div>
+              </Card>
+
+              <Card className="text-center p-6 border-0 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">3,241</h3>
+                <p className="text-slate-600">Active Agents</p>
+                <div className="flex items-center justify-center gap-1 text-blue-600 text-sm mt-2">
+                  <CheckCircle className="h-3 w-3" />
+                  <span>98% online</span>
+                </div>
+              </Card>
+
+              <Card className="text-center p-6 border-0 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Banknote className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">UGX 8.2B</h3>
+                <p className="text-slate-600">Daily Volume</p>
+                <div className="flex items-center justify-center gap-1 text-purple-600 text-sm mt-2">
+                  <ArrowRight className="h-3 w-3" />
+                  <span>+8% growth</span>
+                </div>
+              </Card>
+            </div>
+
+            {/* Live Activity Feed */}
+            <Card className="border-0 shadow-lg">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-2xl">Recent Activity</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-slate-600">Live updates</span>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { action: "Money Transfer", location: "Kampala Central", network: "MTN", amount: "UGX 150K", time: "2 mins ago", status: "success" },
+                    { action: "Cash Withdrawal", location: "Nakawa", network: "Airtel", amount: "UGX 80K", time: "3 mins ago", status: "success" },
+                    { action: "Bill Payment", location: "Entebbe", network: "MTN", amount: "UGX 45K", time: "5 mins ago", status: "success" },
+                    { action: "Airtime Purchase", location: "Jinja", network: "Airtel", amount: "UGX 10K", time: "7 mins ago", status: "success" },
+                    { action: "Money Transfer", location: "Mbarara", network: "MTN", amount: "UGX 200K", time: "8 mins ago", status: "pending" }
+                  ].map((activity, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-3 h-3 rounded-full ${activity.status === 'success' ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+                        <div>
+                          <p className="font-medium text-slate-900">{activity.action}</p>
+                          <p className="text-sm text-slate-600">{activity.location} • {activity.network}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-semibold text-slate-900">{activity.amount}</p>
+                        <p className="text-sm text-slate-500">{activity.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
         {/* Quick Actions */}
         <section className="py-16 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-600">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
