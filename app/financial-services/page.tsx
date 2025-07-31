@@ -104,9 +104,9 @@ const financialCategories = [
     bgColor: "from-orange-50 to-red-50",
     stats: { approved: "95%", rate: "+15%" },
     items: [
-      { name: "Motor Insurance", price: "UGX 200K - 2M/year", users: "18K", rating: 4.5, discount: "COMPARE", coverage: "Comprehensive" },
-      { name: "Health Insurance", price: "UGX 150K - 800K/year", users: "22K", rating: 4.7, discount: "FAMILY", coverage: "Medical & dental" },
-      { name: "Life Insurance", price: "UGX 100K - 500K/year", users: "14K", rating: 4.6, discount: "PROTECTION", coverage: "Life & disability" },
+      { name: "Motor Insurance", price: "ZMW 14K - 140K/year", users: "18K", rating: 4.5, discount: "COMPARE", coverage: "Comprehensive" },
+      { name: "Health Insurance", price: "ZMW 10.5K - 56K/year", users: "22K", rating: 4.7, discount: "FAMILY", coverage: "Medical & dental" },
+      { name: "Life Insurance", price: "ZMW 7K - 35K/year", users: "14K", rating: 4.6, discount: "PROTECTION", coverage: "Life & disability" },
     ],
   },
   {
