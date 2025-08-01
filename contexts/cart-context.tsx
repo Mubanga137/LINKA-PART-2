@@ -155,7 +155,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       removeFromCart,
       updateQuantity,
       clearCart,
-      getItemQuantity
+      getItemQuantity,
+      getCartTotal
     }}>
       {children}
     </CartContext.Provider>
