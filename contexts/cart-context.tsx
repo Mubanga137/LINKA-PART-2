@@ -141,6 +141,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     return item ? item.quantity : 0
   }
 
+  const getCartTotal = () => {
+    return totalPrice
+  }
+
   return (
     <CartContext.Provider value={{
       items,
