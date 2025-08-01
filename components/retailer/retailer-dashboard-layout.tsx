@@ -24,7 +24,8 @@ import {
   User,
   Store,
   Plus,
-  Download
+  Download,
+  ChevronDown
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -86,13 +87,6 @@ const sidebarSections = [
         icon: Upload,
         badge: null,
         description: 'Service offerings and bookings'
-      },
-      {
-        title: 'Store Settings',
-        href: '/retailer/store-settings',
-        icon: Settings,
-        badge: null,
-        description: 'Store configuration and preferences'
       }
     ]
   },
@@ -159,204 +153,248 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50">
+      <div className="min-h-screen bg-slate-50/50">
         {/* Mobile sidebar overlay */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity duration-300"
             onClick={() => setSidebarOpen(false)}
           />
         )}
 
-        {/* Sidebar */}
-        <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-indigo-900 via-purple-900 to-indigo-900 shadow-2xl transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0`}>
-          <div className="flex items-center justify-between h-16 px-6 border-b border-indigo-700/50">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-sm">L</span>
-              </div>
-              <div>
-                <h1 className="text-lg font-bold text-white">LINKA</h1>
-                <p className="text-xs text-indigo-300">Retailer Portal</p>
-              </div>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setSidebarOpen(false)}
-              className="lg:hidden"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-
-          <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
-            {sidebarSections.map((section, sectionIndex) => (
-              <div key={sectionIndex} className="space-y-3">
-                <h3 className="text-xs font-semibold text-indigo-300 uppercase tracking-wider px-3">
-                  {section.title}
-                </h3>
-                <div className="space-y-1">
-                  {section.items.map((item) => {
-                    const Icon = item.icon;
-                    const isActive = pathname === item.href;
-
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`group flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 ${
-                          isActive
-                            ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg transform scale-105'
-                            : 'text-indigo-200 hover:bg-indigo-800/50 hover:text-white hover:transform hover:scale-102'
-                        }`}
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className={`p-2 rounded-lg transition-colors ${
-                            isActive
-                              ? 'bg-white/20'
-                              : 'bg-indigo-800/50 group-hover:bg-indigo-700/70'
-                          }`}>
-                            <Icon className="h-4 w-4" />
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-medium">{item.title}</p>
-                            <p className={`text-xs ${
-                              isActive
-                                ? 'text-white/80'
-                                : 'text-indigo-300 group-hover:text-indigo-200'
-                            }`}>
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                        {item.badge && (
-                          <Badge className="bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs shadow-md animate-pulse ml-2">
-                            {item.badge}
-                          </Badge>
-                        )}
-                      </Link>
-                    );
-                  })}
+        {/* Layout Container */}
+        <div className="flex h-screen overflow-hidden">
+          {/* Sidebar */}
+          <aside 
+            className={`
+              fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200/60 shadow-xl
+              transform transition-all duration-300 ease-out
+              ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+              lg:translate-x-0 lg:static lg:inset-0 lg:w-72
+              flex flex-col
+            `}
+          >
+            {/* Sidebar Header */}
+            <div className="flex items-center justify-between h-16 px-6 border-b border-slate-200/60 bg-gradient-to-r from-slate-50 to-white">
+              <div className="flex items-center space-x-3">
+                <div className="w-9 h-9 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg ring-1 ring-indigo-200">
+                  <span className="text-white font-bold text-lg">L</span>
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                    LINKA
+                  </h1>
+                  <p className="text-xs font-medium text-slate-500 tracking-wide">RETAILER PORTAL</p>
                 </div>
               </div>
-            ))}
-          </nav>
-
-          {/* User info at bottom */}
-        <div className="p-4 border-t border-indigo-700/50 bg-indigo-800/30">
-          <div className="flex items-center space-x-3">
-            <Avatar className="h-8 w-8 ring-2 ring-yellow-400">
-              <AvatarImage src={user?.avatar} />
-              <AvatarFallback className="bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold">
-                {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white truncate">{user?.name || 'User'}</p>
-              <p className="text-xs text-indigo-300 truncate">{store?.name || 'Store Owner'}</p>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarOpen(false)}
+                className="lg:hidden h-8 w-8 hover:bg-slate-100"
+              >
+                <X className="h-4 w-4" />
+              </Button>
             </div>
-          </div>
-        </div>
-        </div>
 
-        {/* Main content */}
-        <div className="lg:pl-64">
-          {/* Top header */}
-          <header className="bg-white/80 backdrop-blur-lg shadow-xl border-b border-indigo-200">
-            <div className="px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center justify-between h-16">
-                <div className="flex items-center space-x-4">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={toggleSidebar}
-                    className="lg:hidden"
-                  >
-                    <Menu className="h-5 w-5" />
-                  </Button>
+            {/* Sidebar Navigation */}
+            <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent">
+              {sidebarSections.map((section, sectionIndex) => (
+                <div key={sectionIndex} className="space-y-2">
+                  <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-1">
+                    {section.title}
+                  </h3>
+                  <div className="space-y-1">
+                    {section.items.map((item) => {
+                      const Icon = item.icon;
+                      const isActive = pathname === item.href;
 
-                  <div className="relative flex-1 max-w-lg">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                    <Input
-                      placeholder="Search orders, products, customers, reports..."
-                      className="pl-10 w-full"
-                    />
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                      <kbd className="inline-flex items-center rounded border bg-gray-100 px-1.5 py-0.5 text-xs font-mono text-gray-500">
-                        ⌘K
-                      </kbd>
-                    </div>
+                      return (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={`
+                            group flex items-center justify-between px-3 py-3 rounded-lg 
+                            transition-all duration-200 hover:shadow-sm
+                            ${isActive
+                              ? 'bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200/50 text-indigo-700 shadow-sm'
+                              : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                            }
+                          `}
+                        >
+                          <div className="flex items-center space-x-3 flex-1 min-w-0">
+                            <div className={`
+                              flex-shrink-0 p-2 rounded-lg transition-colors
+                              ${isActive
+                                ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg'
+                                : 'bg-slate-100 text-slate-600 group-hover:bg-slate-200 group-hover:text-slate-700'
+                              }
+                            `}>
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className={`text-sm font-medium truncate ${
+                                isActive ? 'text-indigo-900' : 'text-slate-900'
+                              }`}>
+                                {item.title}
+                              </p>
+                              <p className={`text-xs truncate mt-0.5 ${
+                                isActive ? 'text-indigo-600' : 'text-slate-500'
+                              }`}>
+                                {item.description}
+                              </p>
+                            </div>
+                          </div>
+                          {item.badge && (
+                            <Badge className={`
+                              ml-2 h-5 px-2 text-xs font-medium
+                              ${isActive
+                                ? 'bg-indigo-100 text-indigo-700 border-indigo-200'
+                                : 'bg-orange-100 text-orange-700 border-orange-200'
+                              }
+                            `}>
+                              {item.badge}
+                            </Badge>
+                          )}
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
+              ))}
+            </nav>
 
-                <div className="flex items-center space-x-4">
-                  <Button variant="outline" size="sm" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50">
-                    <Download className="h-4 w-4 mr-2" />
-                    Export Data
+            {/* User Profile Section */}
+            <div className="border-t border-slate-200/60 bg-gradient-to-r from-slate-50 to-white p-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="w-full justify-start p-3 h-auto hover:bg-slate-100">
+                    <div className="flex items-center space-x-3 w-full">
+                      <Avatar className="h-9 w-9 ring-2 ring-slate-200">
+                        <AvatarImage src={user?.avatar} />
+                        <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-semibold text-sm">
+                          {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 min-w-0 text-left">
+                        <p className="text-sm font-medium text-slate-900 truncate">
+                          {user?.name || 'User'}
+                        </p>
+                        <p className="text-xs text-slate-500 truncate">
+                          {store?.name || 'Store Owner'}
+                        </p>
+                      </div>
+                      <ChevronDown className="h-4 w-4 text-slate-400" />
+                    </div>
                   </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{user?.name || 'User'}</p>
+                      <p className="text-xs leading-none text-slate-500">
+                        {user?.email || 'user@example.com'}
+                      </p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/retailer/profile">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Profile</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/retailer/store-settings">
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout} className="text-red-600 focus:text-red-600">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </aside>
 
-                  <Button size="sm" className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg">
-                    <Plus className="h-4 w-4 mr-2" />
-                    New Order
-                  </Button>
+          {/* Main Content Area */}
+          <div className="flex-1 flex flex-col min-w-0 lg:ml-0">
+            {/* Top Header */}
+            <header className="flex-shrink-0 bg-white border-b border-slate-200/60 shadow-sm">
+              <div className="px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                  <div className="flex items-center space-x-4 flex-1">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={toggleSidebar}
+                      className="lg:hidden hover:bg-slate-100"
+                    >
+                      <Menu className="h-5 w-5" />
+                    </Button>
 
-                  <Button variant="ghost" size="sm" className="relative hover:bg-indigo-50">
-                    <Bell className="h-5 w-5 text-indigo-600" />
-                    <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs animate-bounce shadow-lg">
-                      1
-                    </Badge>
-                  </Button>
+                    <div className="relative flex-1 max-w-md">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                      <Input
+                        placeholder="Search orders, products, customers..."
+                        className="pl-10 w-full bg-slate-50/50 border-slate-200 focus:bg-white transition-colors"
+                      />
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        <kbd className="inline-flex items-center rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-xs font-mono text-slate-500">
+                          ⌘K
+                        </kbd>
+                      </div>
+                    </div>
+                  </div>
 
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                        <Avatar className="h-8 w-8">
-                          <AvatarImage src={user?.avatar} />
-                          <AvatarFallback>
-                            {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
-                          </AvatarFallback>
-                        </Avatar>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56" align="end" forceMount>
-                      <DropdownMenuLabel className="font-normal">
-                        <div className="flex flex-col space-y-1">
-                          <p className="text-sm font-medium leading-none">{user?.name || 'User'}</p>
-                          <p className="text-xs leading-none text-gray-500">
-                            {user?.email || 'user@example.com'}
-                          </p>
-                        </div>
-                      </DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem asChild>
-                        <Link href="/retailer/profile">
-                          <User className="mr-2 h-4 w-4" />
-                          <span>Profile</span>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link href="/retailer/store-settings">
-                          <Settings className="mr-2 h-4 w-4" />
-                          <span>Settings</span>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={logout} className="text-red-600 focus:text-red-600">
-                        <LogOut className="mr-2 h-4 w-4" />
-                        <span>Log out</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <div className="flex items-center space-x-3">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="border-slate-200 text-slate-700 hover:bg-slate-50 hidden sm:flex"
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Export
+                    </Button>
+
+                    <Button 
+                      size="sm" 
+                      className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-sm"
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      <span className="hidden sm:inline">New Order</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="relative hover:bg-slate-100">
+                      <Bell className="h-5 w-5 text-slate-600" />
+                      <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-red-500 text-white text-xs">
+                        1
+                      </Badge>
+                    </Button>
+
+                    <div className="hidden sm:block w-px h-6 bg-slate-200"></div>
+
+                    <Avatar className="h-8 w-8 ring-1 ring-slate-200 hover:ring-slate-300 transition-all cursor-pointer">
+                      <AvatarImage src={user?.avatar} />
+                      <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-medium text-sm">
+                        {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+                  </div>
                 </div>
               </div>
-            </div>
-          </header>
+            </header>
 
-          {/* Page content */}
-          <main className="flex-1">
-            {children}
-          </main>
+            {/* Page Content */}
+            <main className="flex-1 overflow-y-auto bg-slate-50/50">
+              <div className="h-full">
+                {children}
+              </div>
+            </main>
+          </div>
         </div>
       </div>
     </ProtectedRoute>
