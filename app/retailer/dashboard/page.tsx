@@ -38,8 +38,8 @@ import {
   Tablet,
   ChevronRight,
   AlertTriangle,
-  TrendingUp as TrendUp,
-  Image
+  Bell,
+  Search
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -49,995 +49,537 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
 import RetailerDashboardLayout from '@/components/retailer/retailer-dashboard-layout';
-import EnhancedMediaGallery from '@/components/dashboard/enhanced-media-gallery';
 
 // Enhanced dashboard data with real-time capabilities
 const dashboardStats = {
-  totalRevenue: 1108000,
-  revenueChange: 28.4,
-  totalOrders: 2472,
-  ordersChange: 15.2,
-  pendingOrders: 23,
-  processingOrders: 45,
-  activeProducts: 3847,
-  productsChange: 18.7,
-  lowStock: 5,
-  totalCustomers: 12429,
-  customersChange: 12.8,
-  newCustomers: 325,
-  avgOrderValue: 142.50,
-  conversionRate: 3.8,
-  storefront: {
-    views: 25430,
-    visitors: 8924,
-    bounceRate: 32.5,
-    avgSessionTime: '4m 32s'
-  },
-  financials: {
-    grossProfit: 442000,
-    netProfit: 334500,
-    profitMargin: 30.2,
-    pendingPayouts: 15600
-  }
+  todaysSales: 42300,
+  salesChange: 12.5,
+  totalOrders: 2,
+  ordersChange: 8.2,
+  productsSold: 2,
+  productsChange: -2.1,
+  totalProducts: 8,
+  productsActive: 15.3,
+  lowStockItems: 2,
+  featuredItems: 4,
+  inventoryValue: 1214900,
+  conversionRate: 3.2,
+  avgOrderValue: 365
 };
+
+const featuredProducts = [
+  {
+    id: 1,
+    name: 'iPhone 15 Pro',
+    price: 17500,
+    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2F96def3273acb488683da8d6dc1d2f677?format=webp&width=800',
+    stats: { products: 247, followers: '1.2k', rating: '98%' },
+    category: 'electronics',
+    featured: true,
+    status: 'active'
+  },
+  {
+    id: 2,
+    name: 'MacBook Air M2',
+    price: 24800,
+    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2F24c3337bcb4c4431b75bab53769a5940?format=webp&width=800',
+    stats: { products: 189, followers: '956', rating: '95%' },
+    category: 'electronics',
+    featured: true,
+    status: 'active'
+  }
+];
 
 const recentOrders = [
   {
-    id: 'ORD-2024-001',
-    customer: 'Alexandra Chen',
-    avatar: 'AC',
-    items: 3,
-    amount: 459.99,
-    status: 'Delivered',
-    statusColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    time: '2 hours ago',
-    location: 'Lusaka, Zambia'
+    id: 'ORD-001',
+    customer: 'Chanda Mwanza',
+    product: 'iPhone 15 Pro',
+    amount: 17500,
+    time: '5 min ago',
+    status: 'pending',
+    statusColor: 'text-orange-600 bg-orange-50 border-orange-200'
   },
   {
-    id: 'ORD-2024-002',
-    customer: 'Marcus Johnson',
-    avatar: 'MJ',
-    items: 2,
-    amount: 289.5,
-    status: 'Processing',
-    statusColor: 'bg-blue-50 text-blue-700 border-blue-200',
-    time: '5 hours ago',
-    location: 'Kitwe, Zambia'
-  },
-  {
-    id: 'ORD-2024-003',
-    customer: 'Sofia Rodriguez',
-    avatar: 'SR',
-    items: 1,
-    amount: 129.99,
-    status: 'Shipped',
-    statusColor: 'bg-amber-50 text-amber-700 border-amber-200',
-    time: '1 day ago',
-    location: 'Ndola, Zambia'
-  },
-  {
-    id: 'ORD-2024-004',
-    customer: 'David Kim',
-    avatar: 'DK',
-    items: 4,
-    amount: 699.99,
-    status: 'Pending',
-    statusColor: 'bg-orange-50 text-orange-700 border-orange-200',
-    time: '2 days ago',
-    location: 'Kabwe, Zambia'
+    id: 'ORD-002',
+    customer: 'Bwalya Tembo',
+    product: 'MacBook Air M2',
+    amount: 24800,
+    time: '15 min ago',
+    status: 'processing',
+    statusColor: 'text-blue-600 bg-blue-50 border-blue-200'
   }
 ];
 
-const topProducts = [
-  {
-    id: 1,
-    name: 'Premium Wireless Headphones',
-    category: 'Electronics',
-    sales: 1847,
-    revenue: 258680,
-    growth: 18.2,
-    stock: 45,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fe280805121624c4c89e1740b42d7242b?alt=media&token=a690ae27-18c8-4e1a-a3bf-522ab8349805&apiKey=4bf015b55143432d9c1c69e328364ff3',
-    rating: 4.8,
-    reviews: 342
-  },
-  {
-    id: 2,
-    name: 'Smart Fitness Watch',
-    category: 'Electronics',
-    sales: 1523,
-    revenue: 456900,
-    growth: 12.8,
-    stock: 23,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F4cc39ea70bf4407aab01471d71b17cab?alt=media&token=e6b3a137-56fe-4b63-8eab-ea79dd35f1e8&apiKey=4bf015b55143432d9c1c69e328364ff3',
-    rating: 4.6,
-    reviews: 278
-  },
-  {
-    id: 3,
-    name: 'Ergonomic Office Chair',
-    category: 'Home & Garden',
-    sales: 892,
-    revenue: 178400,
-    growth: 24.5,
-    stock: 12,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F41ba2cbf74a7423999b79fdc1e5aeb8d?alt=media&token=3230b762-4d84-4830-95b6-420899bd31e7&apiKey=4bf015b55143432d9c1c69e328364ff3',
-    rating: 4.9,
-    reviews: 156
-  },
-  {
-    id: 4,
-    name: 'Professional Camera Lens',
-    category: 'Electronics',
-    sales: 634,
-    revenue: 190200,
-    growth: 8.7,
-    stock: 8,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F1f5b33889b8f43a79b94d8cde37d4c07?alt=media&token=2d2dfb75-b5f1-4dba-977f-c2b5c409190c&apiKey=4bf015b55143432d9c1c69e328364ff3',
-    rating: 4.7,
-    reviews: 89
-  }
+const weeklyTrend = [
+  { day: 'Mon', amount: 2400 },
+  { day: 'Tue', amount: 1398 },
+  { day: 'Wed', amount: 9800 },
+  { day: 'Thu', amount: 3908 },
+  { day: 'Fri', amount: 4800 },
+  { day: 'Sat', amount: 3800 },
+  { day: 'Sun', amount: 4300 }
 ];
 
-const businessInsights = [
-  {
-    id: 1,
-    type: 'Revenue Growth',
-    title: 'Your revenue increased by 28.4% this month, primarily driven by electronics sales and improved customer retention strategies.',
-    icon: TrendingUp,
-    iconColor: 'text-emerald-600',
-    bgColor: 'bg-emerald-50',
-    borderColor: 'border-emerald-200',
-    action: 'View Analytics',
-    priority: 'success'
-  },
-  {
-    id: 2,
-    type: 'Market Leadership',
-    title: 'Electronics category leads with 35% market share. Consider expanding inventory for high-demand items.',
-    icon: Activity,
-    iconColor: 'text-blue-600',
-    bgColor: 'bg-blue-50',
-    borderColor: 'border-blue-200',
-    action: 'Expand Catalog',
-    priority: 'info'
-  },
-  {
-    id: 3,
-    type: 'Inventory Alert',
-    title: '5 popular products are running low. Restock now to avoid lost sales during peak season.',
-    icon: AlertTriangle,
-    iconColor: 'text-amber-600',
-    bgColor: 'bg-amber-50',
-    borderColor: 'border-amber-200',
-    action: 'Manage Inventory',
-    priority: 'warning'
-  }
-];
-
-const trafficSources = [
-  { source: 'Organic Search', visitors: 45.2, change: 12.3, color: 'bg-emerald-500' },
-  { source: 'Direct', visitors: 28.7, change: -2.1, color: 'bg-blue-500' },
-  { source: 'Social Media', visitors: 15.4, change: 25.8, color: 'bg-purple-500' },
-  { source: 'Referrals', visitors: 10.7, change: 8.4, color: 'bg-orange-500' }
-];
-
-const deviceStats = [
-  { device: 'Mobile', percentage: 68, icon: Smartphone, color: 'text-blue-600' },
-  { device: 'Desktop', percentage: 24, icon: Monitor, color: 'text-green-600' },
-  { device: 'Tablet', percentage: 8, icon: Tablet, color: 'text-purple-600' }
-];
-
-const quickActions = [
-  {
-    title: 'Add New Product',
-    description: 'List a new product in your store',
-    icon: Plus,
-    color: 'bg-blue-500',
-    href: '/retailer/products/new'
-  },
-  {
-    title: 'View Orders',
-    description: 'Manage pending and recent orders',
-    icon: ShoppingCart,
-    color: 'bg-emerald-500',
-    href: '/retailer/orders'
-  },
-  {
-    title: 'Analytics Dashboard',
-    description: 'Detailed business insights',
-    icon: BarChart3,
-    color: 'bg-purple-500',
-    href: '/retailer/analytics'
-  },
-  {
-    title: 'Storefront Settings',
-    description: 'Customize your store appearance',
-    icon: Store,
-    color: 'bg-orange-500',
-    href: '/retailer/storefront'
-  }
-];
-
-export default function EnhancedRetailerDashboard() {
-  const [timeRange, setTimeRange] = useState('6M');
+export default function ModernDashboard() {
+  const [timeRange, setTimeRange] = useState('today');
   const [refreshing, setRefreshing] = useState(false);
   const [realTimeData, setRealTimeData] = useState(dashboardStats);
 
-  // Simulate real-time data updates
+  // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
       setRealTimeData(prev => ({
         ...prev,
-        storefront: {
-          ...prev.storefront,
-          views: prev.storefront.views + Math.floor(Math.random() * 5),
-          visitors: prev.storefront.visitors + Math.floor(Math.random() * 2)
-        }
+        todaysSales: prev.todaysSales + Math.floor(Math.random() * 100),
+        totalOrders: prev.totalOrders + (Math.random() > 0.8 ? 1 : 0)
       }));
-    }, 30000); // Update every 30 seconds
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
     setRefreshing(false);
   };
 
   return (
     <RetailerDashboardLayout>
-      <div className="h-full flex flex-col bg-gradient-to-br from-slate-50/50 via-white to-indigo-50/20">
-        {/* Enhanced Header Section */}
-        <div className="p-6 space-y-6">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-            <div className="space-y-2">
-              <div className="flex items-center space-x-3">
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent">
-                  Business Command Center
-                </h1>
-                <Badge className="bg-gradient-to-r from-emerald-100 to-emerald-200 text-emerald-800 border-emerald-300">
-                  <Circle className="w-2 h-2 mr-1 fill-emerald-500" />
-                  Live
-                </Badge>
-              </div>
-              <p className="text-slate-600 font-medium flex items-center">
-                <Clock className="w-4 h-4 mr-2" />
-                Last updated: {new Date().toLocaleTimeString()}
-              </p>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+        {/* Modern Header */}
+        <div className="sticky top-0 z-50 border-b border-white/20 bg-white/80 backdrop-blur-xl">
+          <div className="flex items-center justify-between p-6">
+            <div className="space-y-1">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
+                Dashboard
+              </h1>
+              <p className="text-slate-600 font-medium">Welcome back, Mwamba! Here's your store overview.</p>
             </div>
-            <div className="flex items-center gap-3">
+            
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                <Input 
+                  placeholder="Search products, orders..."
+                  className="pl-10 w-64 bg-white/60 border-white/40 backdrop-blur-sm"
+                />
+              </div>
+              <Button variant="outline" size="sm" className="bg-white/60 border-white/40 backdrop-blur-sm">
+                <Bell className="h-4 w-4" />
+              </Button>
               <Button 
                 variant="outline" 
-                size="sm" 
+                size="sm"
                 onClick={handleRefresh}
                 disabled={refreshing}
-                className="border-slate-200 text-slate-700 hover:bg-slate-50"
+                className="bg-white/60 border-white/40 backdrop-blur-sm"
               >
                 <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
                 Refresh
               </Button>
-              <Button 
-                variant="outline"
-                size="sm" 
-                className="border-slate-200 text-slate-700 hover:bg-slate-50 hidden sm:flex"
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Export Report
-              </Button>
-              <Button 
-                size="sm" 
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg"
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                Quick Action
-              </Button>
             </div>
           </div>
+        </div>
 
-          {/* Quick Stats Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { 
-                label: 'Today\'s Revenue', 
-                value: 'ZMW 4,230', 
-                change: '+12%', 
-                icon: DollarSign, 
-                color: 'text-emerald-600',
-                bg: 'bg-emerald-50'
-              },
-              { 
-                label: 'Active Orders', 
-                value: '23', 
-                change: '+5', 
-                icon: ShoppingCart, 
-                color: 'text-blue-600',
-                bg: 'bg-blue-50'
-              },
-              { 
-                label: 'Store Views', 
-                value: realTimeData.storefront.views.toLocaleString(), 
-                change: '+8%', 
-                icon: Eye, 
-                color: 'text-purple-600',
-                bg: 'bg-purple-50'
-              },
-              { 
-                label: 'Conversion Rate', 
-                value: `${realTimeData.conversionRate}%`, 
-                change: '+0.3%', 
-                icon: Target, 
-                color: 'text-orange-600',
-                bg: 'bg-orange-50'
-              }
-            ].map((stat, index) => (
-              <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-all duration-200">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className={`w-10 h-10 ${stat.bg} rounded-lg flex items-center justify-center`}>
-                      <stat.icon className={`h-5 w-5 ${stat.color}`} />
-                    </div>
-                    <span className="text-xs text-emerald-600 font-medium">{stat.change}</span>
+        <div className="p-6 space-y-8">
+          {/* Hero Stats Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Today's Sales */}
+            <Card className="group hover:shadow-xl transition-all duration-500 border-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 hover:scale-[1.02] cursor-pointer overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform duration-700"></div>
+              <CardContent className="p-6 relative">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/25 transition-shadow duration-500">
+                    <DollarSign className="h-6 w-6 text-white" />
                   </div>
-                  <div className="mt-3">
-                    <p className="text-sm text-slate-600">{stat.label}</p>
-                    <p className="text-xl font-bold text-slate-900">{stat.value}</p>
+                  <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 px-3 py-1">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +{realTimeData.salesChange}%
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold text-emerald-700 uppercase tracking-wide">Today's Sales</p>
+                  <p className="text-3xl font-bold text-emerald-900">
+                    ZMW {realTimeData.todaysSales.toLocaleString()}
+                  </p>
+                  <p className="text-xs text-emerald-600">+12.5% from yesterday</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Total Orders */}
+            <Card className="group hover:shadow-xl transition-all duration-500 border-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 hover:scale-[1.02] cursor-pointer overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-400/20 to-amber-400/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform duration-700"></div>
+              <CardContent className="p-6 relative">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-orange-500/25 transition-shadow duration-500">
+                    <ShoppingCart className="h-6 w-6 text-white" />
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <Badge className="bg-orange-100 text-orange-700 border-orange-200 px-3 py-1">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +{realTimeData.ordersChange}%
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold text-orange-700 uppercase tracking-wide">Total Orders</p>
+                  <p className="text-3xl font-bold text-orange-900">{realTimeData.totalOrders}</p>
+                  <p className="text-xs text-orange-600">+8.2% from yesterday</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Products Sold */}
+            <Card className="group hover:shadow-xl transition-all duration-500 border-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 hover:scale-[1.02] cursor-pointer overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform duration-700"></div>
+              <CardContent className="p-6 relative">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-shadow duration-500">
+                    <Target className="h-6 w-6 text-white" />
+                  </div>
+                  <Badge className="bg-red-100 text-red-700 border-red-200 px-3 py-1">
+                    <TrendingDown className="h-3 w-3 mr-1" />
+                    -2.1%
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold text-blue-700 uppercase tracking-wide">Products Sold</p>
+                  <p className="text-3xl font-bold text-blue-900">{realTimeData.productsSold}</p>
+                  <p className="text-xs text-red-600">-2.1% from yesterday</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Total Products */}
+            <Card className="group hover:shadow-xl transition-all duration-500 border-0 bg-gradient-to-br from-purple-50 via-violet-50 to-indigo-50 hover:scale-[1.02] cursor-pointer overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/20 to-violet-400/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform duration-700"></div>
+              <CardContent className="p-6 relative">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-purple-500/25 transition-shadow duration-500">
+                    <Package className="h-6 w-6 text-white" />
+                  </div>
+                  <Badge className="bg-purple-100 text-purple-700 border-purple-200 px-3 py-1">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +15.3%
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold text-purple-700 uppercase tracking-wide">Total Products</p>
+                  <p className="text-3xl font-bold text-purple-900">{realTimeData.totalProducts}</p>
+                  <p className="text-xs text-purple-600">+15.3% from yesterday</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Main Dashboard Content */}
-          <Tabs defaultValue="overview" className="space-y-6">
-            <div className="flex items-center justify-between">
-              <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:grid-cols-none lg:flex">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="analytics">Analytics</TabsTrigger>
-                <TabsTrigger value="storefront">Storefront</TabsTrigger>
-                <TabsTrigger value="financial">Financial</TabsTrigger>
-                <TabsTrigger value="insights">Insights</TabsTrigger>
-              </TabsList>
-              <Select value={timeRange} onValueChange={setTimeRange}>
-                <SelectTrigger className="w-32 h-9">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1D">Today</SelectItem>
-                  <SelectItem value="7D">7 Days</SelectItem>
-                  <SelectItem value="1M">1 Month</SelectItem>
-                  <SelectItem value="3M">3 Months</SelectItem>
-                  <SelectItem value="6M">6 Months</SelectItem>
-                  <SelectItem value="1Y">1 Year</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          {/* Secondary Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="border-0 bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition-colors">
+                    <Package className="h-5 w-5 text-purple-600" />
+                  </div>
+                  <Badge variant="outline" className="text-purple-600 border-purple-200">8</Badge>
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-slate-600">Total Products</p>
+                  <p className="text-2xl font-bold text-slate-900">8</p>
+                </div>
+              </CardContent>
+            </Card>
 
-            <TabsContent value="overview" className="space-y-6">
-              {/* Enhanced Key Metrics */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {/* Total Revenue */}
-                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-emerald-50 to-emerald-100/60 overflow-hidden relative">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-200/30 rounded-full -mr-10 -mt-10"></div>
-                  <CardContent className="p-6 relative">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <DollarSign className="h-6 w-6 text-white" />
-                      </div>
-                      <div className="flex items-center text-emerald-600 text-sm font-semibold">
-                        <TrendingUp className="h-4 w-4 mr-1" />
-                        +{dashboardStats.revenueChange}%
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-sm font-semibold text-emerald-700">Total Revenue</p>
-                      <p className="text-2xl font-bold text-emerald-900">
-                        ZMW {dashboardStats.totalRevenue.toLocaleString()}
-                      </p>
-                      <p className="text-xs text-emerald-600">vs last month</p>
-                    </div>
-                    <div className="mt-4">
-                      <Progress value={75} className="h-2 bg-emerald-200" />
-                      <p className="text-xs text-emerald-600 mt-1">75% of monthly goal</p>
-                    </div>
-                  </CardContent>
-                </Card>
+            <Card className="border-0 bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200 transition-colors">
+                    <DollarSign className="h-5 w-5 text-green-600" />
+                  </div>
+                  <Badge variant="outline" className="text-green-600 border-green-200">ZMW</Badge>
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-slate-600">Inventory Value</p>
+                  <p className="text-2xl font-bold text-slate-900">1,214,900</p>
+                </div>
+              </CardContent>
+            </Card>
 
-                {/* Total Orders */}
-                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-50 to-blue-100/60 overflow-hidden relative">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-blue-200/30 rounded-full -mr-10 -mt-10"></div>
-                  <CardContent className="p-6 relative">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <ShoppingCart className="h-6 w-6 text-white" />
-                      </div>
-                      <div className="flex items-center text-blue-600 text-sm font-semibold">
-                        <TrendingUp className="h-4 w-4 mr-1" />
-                        +{dashboardStats.ordersChange}%
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-sm font-semibold text-blue-700">Total Orders</p>
-                      <p className="text-2xl font-bold text-blue-900">
-                        {dashboardStats.totalOrders.toLocaleString()}
-                      </p>
-                      <div className="flex items-center space-x-4 text-xs">
-                        <span className="text-orange-600">{dashboardStats.pendingOrders} pending</span>
-                        <span className="text-blue-600">{dashboardStats.processingOrders} processing</span>
-                      </div>
-                    </div>
-                    <div className="mt-4">
-                      <Progress value={68} className="h-2 bg-blue-200" />
-                      <p className="text-xs text-blue-600 mt-1">68% fulfillment rate</p>
-                    </div>
-                  </CardContent>
-                </Card>
+            <Card className="border-0 bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-200 transition-colors">
+                    <AlertTriangle className="h-5 w-5 text-red-600" />
+                  </div>
+                  <Badge variant="outline" className="text-red-600 border-red-200">2</Badge>
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-slate-600">Low Stock Items</p>
+                  <p className="text-2xl font-bold text-slate-900">2</p>
+                </div>
+              </CardContent>
+            </Card>
 
-                {/* Active Products */}
-                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-purple-50 to-purple-100/60 overflow-hidden relative">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-purple-200/30 rounded-full -mr-10 -mt-10"></div>
-                  <CardContent className="p-6 relative">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <Package className="h-6 w-6 text-white" />
-                      </div>
-                      <div className="flex items-center text-green-600 text-sm font-semibold">
-                        <TrendingUp className="h-4 w-4 mr-1" />
-                        +{dashboardStats.productsChange}%
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-sm font-semibold text-purple-700">Active Products</p>
-                      <p className="text-2xl font-bold text-purple-900">
-                        {dashboardStats.activeProducts.toLocaleString()}
-                      </p>
-                      <p className="text-xs text-red-600 flex items-center">
-                        <AlertTriangle className="w-3 h-3 mr-1" />
-                        {dashboardStats.lowStock} low stock items
-                      </p>
-                    </div>
-                    <div className="mt-4">
-                      <Progress value={82} className="h-2 bg-purple-200" />
-                      <p className="text-xs text-purple-600 mt-1">82% in stock</p>
-                    </div>
-                  </CardContent>
-                </Card>
+            <Card className="border-0 bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                    <Eye className="h-5 w-5 text-blue-600" />
+                  </div>
+                  <Badge variant="outline" className="text-blue-600 border-blue-200">4</Badge>
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-slate-600">Featured Items</p>
+                  <p className="text-2xl font-bold text-slate-900">4</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-                {/* Customer Base */}
-                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-orange-50 to-orange-100/60 overflow-hidden relative">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-orange-200/30 rounded-full -mr-10 -mt-10"></div>
-                  <CardContent className="p-6 relative">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <Users className="h-6 w-6 text-white" />
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Storefront Preview */}
+            <Card className="lg:col-span-2 border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-500">
+              <CardHeader className="flex flex-row items-center justify-between pb-4">
+                <CardTitle className="text-xl font-bold text-slate-900">Storefront Preview</CardTitle>
+                <Button variant="outline" size="sm" className="bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100">
+                  <Settings className="h-4 w-4 mr-2" />
+                  Edit Store
+                </Button>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-6 text-white relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                  <div className="relative">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                        <span className="text-lg font-bold">MK</span>
                       </div>
-                      <div className="flex items-center text-green-600 text-sm font-semibold">
-                        <TrendingUp className="h-4 w-4 mr-1" />
-                        +{dashboardStats.customersChange}%
+                      <div>
+                        <h3 className="text-lg font-bold">Mwamba's Electronics</h3>
+                        <div className="flex items-center space-x-2">
+                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <span className="text-sm">4.9</span>
+                          <span className="text-sm opacity-75">Premium Seller</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <p className="text-sm font-semibold text-orange-700">Customer Base</p>
-                      <p className="text-2xl font-bold text-orange-900">
-                        {dashboardStats.totalCustomers.toLocaleString()}
-                      </p>
-                      <p className="text-xs text-green-600 flex items-center">
-                        <Users className="w-3 h-3 mr-1" />
-                        {dashboardStats.newCustomers} new this month
-                      </p>
-                    </div>
-                    <div className="mt-4">
-                      <Progress value={91} className="h-2 bg-orange-200" />
-                      <p className="text-xs text-orange-600 mt-1">91% retention rate</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+                    <p className="text-sm opacity-90 mb-4">📍 Lusaka, Zambia</p>
+                    <div className="text-xs opacity-75">Powered by Linka</div>
+                  </div>
+                </div>
 
-              {/* Quick Actions Section */}
-              <Card className="border-0 shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold text-slate-900 flex items-center">
-                    <Zap className="h-5 w-5 mr-2 text-yellow-500" />
-                    Quick Actions
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {quickActions.map((action, index) => (
-                      <Button
-                        key={index}
-                        variant="outline"
-                        className="h-auto p-4 flex flex-col items-center space-y-2 hover:shadow-md transition-all duration-200"
-                        asChild
-                      >
-                        <a href={action.href}>
-                          <div className={`w-10 h-10 ${action.color} rounded-lg flex items-center justify-center text-white`}>
-                            <action.icon className="h-5 w-5" />
-                          </div>
-                          <div className="text-center">
-                            <p className="font-medium text-sm">{action.title}</p>
-                            <p className="text-xs text-slate-500">{action.description}</p>
-                          </div>
-                        </a>
-                      </Button>
+                <div className="mt-6">
+                  <h4 className="font-semibold text-slate-900 mb-4">Featured Products</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    {featuredProducts.map((product) => (
+                      <div key={product.id} className="group">
+                        <div className="aspect-square bg-slate-100 rounded-lg mb-3 overflow-hidden">
+                          <img 
+                            src={product.image} 
+                            alt={product.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                        <h5 className="font-medium text-slate-900 text-sm">{product.name}</h5>
+                        <p className="text-blue-600 font-bold">ZMW {product.price.toLocaleString()}</p>
+                        <div className="flex items-center justify-between mt-2 text-xs text-slate-500">
+                          <span>{product.stats.products} Products</span>
+                          <span>{product.stats.followers} Followers</span>
+                          <span>{product.stats.rating} Rating</span>
+                        </div>
+                      </div>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </CardContent>
+            </Card>
 
-              {/* Charts and Analytics */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Revenue Trend */}
-                <Card className="lg:col-span-2 border-0 shadow-sm">
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-                    <CardTitle className="text-lg font-semibold text-slate-900">Revenue Trends</CardTitle>
-                    <div className="flex items-center space-x-2">
-                      <Badge variant="outline" className="text-emerald-600 border-emerald-200">
-                        +28.4% Growth
-                      </Badge>
+            {/* Live Order Monitoring */}
+            <Card className="border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-500">
+              <CardHeader className="flex flex-row items-center justify-between pb-4">
+                <CardTitle className="text-lg font-bold text-slate-900 flex items-center">
+                  Live Order Monitoring
+                  <div className="w-2 h-2 bg-green-500 rounded-full ml-2 animate-pulse"></div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {recentOrders.map((order, index) => (
+                  <div key={order.id} className="flex items-center justify-between p-4 rounded-lg border hover:bg-slate-50 transition-colors">
+                    <div className="space-y-1">
+                      <p className="font-medium text-slate-900">{order.id}</p>
+                      <p className="text-sm text-slate-600">{order.customer}</p>
+                      <p className="text-xs text-slate-500">{order.product}</p>
+                      <p className="text-xs text-slate-400">{order.time}</p>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-80 bg-gradient-to-br from-slate-50 to-indigo-50/30 rounded-lg flex items-center justify-center border border-slate-100">
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-indigo-200">
-                          <TrendingUp className="h-8 w-8 text-indigo-600" />
-                        </div>
-                        <p className="text-lg font-semibold text-slate-900">Interactive Revenue Chart</p>
-                        <p className="text-sm text-slate-500 max-w-md">
-                          Advanced analytics showing revenue trends, seasonality patterns, and growth projections
-                        </p>
-                        <Button variant="outline" size="sm" className="mt-3">
-                          <PieChart className="h-4 w-4 mr-2" />
-                          View Full Analytics
+                    <div className="text-right space-y-1">
+                      <p className="font-bold text-slate-900">ZMW {order.amount.toLocaleString()}</p>
+                      <Badge className={`text-xs ${order.statusColor}`}>
+                        {order.status}
+                      </Badge>
+                      <div className="flex justify-end space-x-1">
+                        <Button size="sm" variant="outline" className="h-8 px-3 text-xs">
+                          Decline
+                        </Button>
+                        <Button size="sm" className="h-8 px-3 text-xs bg-blue-600 hover:bg-blue-700">
+                          Accept
                         </Button>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-
-                {/* Top Categories */}
-                <Card className="border-0 shadow-sm">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-slate-900">Top Categories</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {[
-                        { name: 'Electronics', percentage: 35, revenue: 61040, color: 'bg-blue-500', growth: '+18%' },
-                        { name: 'Fashion', percentage: 28, revenue: 48832, color: 'bg-emerald-500', growth: '+12%' },
-                        { name: 'Home & Garden', percentage: 18, revenue: 31392, color: 'bg-orange-500', growth: '+25%' },
-                        { name: 'Sports', percentage: 12, revenue: 20928, color: 'bg-purple-500', growth: '+8%' },
-                        { name: 'Books', percentage: 7, revenue: 12208, color: 'bg-pink-500', growth: '+15%' }
-                      ].map((category) => (
-                        <div key={category.name} className="space-y-2">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              <div className={`w-3 h-3 ${category.color} rounded-full`}></div>
-                              <span className="text-sm font-medium text-slate-700">{category.name}</span>
-                            </div>
-                            <div className="text-right">
-                              <p className="text-sm font-semibold text-slate-900">{category.percentage}%</p>
-                              <p className="text-xs text-emerald-600">{category.growth}</p>
-                            </div>
-                          </div>
-                          <div className="w-full bg-slate-200 rounded-full h-2">
-                            <div 
-                              className={`${category.color} h-2 rounded-full transition-all duration-500`}
-                              style={{ width: `${category.percentage}%` }}
-                            ></div>
-                          </div>
-                          <p className="text-xs text-slate-500">ZMW {category.revenue.toLocaleString()}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Enhanced Media Gallery Section */}
-              <Card className="border-0 shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold text-slate-900 flex items-center">
-                    <Image className="h-5 w-5 mr-2 text-indigo-600" />
-                    Media & Assets Gallery
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <EnhancedMediaGallery />
-                </CardContent>
-              </Card>
-
-              {/* Recent Activity */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Recent Orders */}
-                <Card className="border-0 shadow-sm">
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-                    <CardTitle className="text-lg font-semibold text-slate-900">Recent Orders</CardTitle>
-                    <Button variant="ghost" size="sm" className="hover:bg-slate-100">
-                      <Eye className="h-4 w-4 mr-2" />
-                      View All
-                    </Button>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {recentOrders.map((order) => (
-                        <div key={order.id} className="flex items-center justify-between p-4 bg-slate-50/50 rounded-lg border border-slate-100 hover:bg-slate-50 transition-all duration-200 group">
-                          <div className="flex items-center space-x-3">
-                            <Avatar className="h-10 w-10 ring-2 ring-slate-200 group-hover:ring-slate-300 transition-all">
-                              <AvatarFallback className="bg-gradient-to-br from-slate-100 to-slate-200 text-slate-700 font-semibold">
-                                {order.avatar}
-                              </AvatarFallback>
-                            </Avatar>
-                            <div>
-                              <p className="text-sm font-semibold text-slate-900">{order.customer}</p>
-                              <p className="text-xs text-slate-500 flex items-center">
-                                {order.id} • {order.items} items
-                                <MapPin className="w-3 h-3 ml-2 mr-1" />
-                                {order.location}
-                              </p>
-                              <p className="text-xs text-slate-400 flex items-center mt-1">
-                                <Clock className="w-3 h-3 mr-1" />
-                                {order.time}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm font-semibold text-slate-900">ZMW {order.amount}</p>
-                            <Badge className={`text-xs border ${order.statusColor} mt-1`}>
-                              {order.status}
-                            </Badge>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Top Products */}
-                <Card className="border-0 shadow-sm">
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-                    <CardTitle className="text-lg font-semibold text-slate-900">Best Sellers</CardTitle>
-                    <Button variant="ghost" size="sm" className="hover:bg-slate-100">
-                      <Star className="h-4 w-4 mr-2" />
-                      View All
-                    </Button>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {topProducts.map((product, index) => (
-                        <div key={product.id} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50/50 transition-all duration-200 group">
-                          <div className="flex-shrink-0">
-                            <div className="w-8 h-8 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center">
-                              <span className="text-sm font-bold text-indigo-600">{index + 1}</span>
-                            </div>
-                          </div>
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className="w-12 h-12 rounded-lg object-cover border border-slate-200 group-hover:shadow-md transition-all"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-slate-900 truncate">{product.name}</p>
-                            <div className="flex items-center space-x-2 mt-1">
-                              <Badge variant="outline" className="text-xs">{product.category}</Badge>
-                              <div className="flex items-center text-xs text-amber-500">
-                                <Star className="w-3 h-3 mr-1 fill-current" />
-                                {product.rating}
-                              </div>
-                            </div>
-                            <p className="text-xs text-slate-500 mt-1">
-                              {product.sales} sales • Stock: {product.stock}
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm font-semibold text-slate-900">ZMW {product.revenue.toLocaleString()}</p>
-                            <div className="flex items-center text-xs text-emerald-600 mt-1">
-                              <ArrowUpRight className="h-3 w-3 mr-1" />
-                              +{product.growth}%
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-
-            {/* Analytics Tab */}
-            <TabsContent value="analytics" className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Traffic Sources */}
-                <Card className="border-0 shadow-sm">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-slate-900">Traffic Sources</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {trafficSources.map((source) => (
-                        <div key={source.source} className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 ${source.color} rounded-full`}></div>
-                            <span className="text-sm font-medium text-slate-700">{source.source}</span>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm font-semibold text-slate-900">{source.visitors}%</p>
-                            <p className={`text-xs ${source.change > 0 ? 'text-emerald-600' : 'text-red-600'}`}>
-                              {source.change > 0 ? '+' : ''}{source.change}%
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Device Analytics */}
-                <Card className="border-0 shadow-sm">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-slate-900">Device Breakdown</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {deviceStats.map((device) => (
-                        <div key={device.device} className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <device.icon className={`h-5 w-5 ${device.color}`} />
-                            <span className="text-sm font-medium text-slate-700">{device.device}</span>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm font-semibold text-slate-900">{device.percentage}%</p>
-                            <div className="w-20 bg-slate-200 rounded-full h-2 mt-1">
-                              <div 
-                                className="bg-gradient-to-r from-indigo-500 to-purple-500 h-2 rounded-full transition-all duration-500"
-                                style={{ width: `${device.percentage}%` }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-
-            {/* Storefront Tab */}
-            <TabsContent value="storefront" className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <Card className="lg:col-span-2 border-0 shadow-sm">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-slate-900 flex items-center">
-                      <Store className="h-5 w-5 mr-2 text-indigo-600" />
-                      Storefront Performance
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 gap-6">
-                      <div className="text-center">
-                        <p className="text-3xl font-bold text-slate-900">{realTimeData.storefront.views.toLocaleString()}</p>
-                        <p className="text-sm text-slate-600">Total Views</p>
-                        <p className="text-xs text-emerald-600 mt-1">+12.3% vs last month</p>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-3xl font-bold text-slate-900">{realTimeData.storefront.visitors.toLocaleString()}</p>
-                        <p className="text-sm text-slate-600">Unique Visitors</p>
-                        <p className="text-xs text-emerald-600 mt-1">+8.7% vs last month</p>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-3xl font-bold text-slate-900">{realTimeData.storefront.bounceRate}%</p>
-                        <p className="text-sm text-slate-600">Bounce Rate</p>
-                        <p className="text-xs text-red-600 mt-1">-2.1% improvement</p>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-3xl font-bold text-slate-900">{realTimeData.storefront.avgSessionTime}</p>
-                        <p className="text-sm text-slate-600">Avg. Session</p>
-                        <p className="text-xs text-emerald-600 mt-1">+15s improvement</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-0 shadow-sm">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-slate-900">Store Actions</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <Button className="w-full justify-start" variant="outline" asChild>
-                      <a href="/retailer/storefront">
-                        <Settings className="h-4 w-4 mr-2" />
-                        Customize Storefront
-                      </a>
-                    </Button>
-                    <Button className="w-full justify-start" variant="outline" asChild>
-                      <a href="/retailer/products">
-                        <Package className="h-4 w-4 mr-2" />
-                        Manage Products
-                      </a>
-                    </Button>
-                    <Button className="w-full justify-start" variant="outline" asChild>
-                      <a href="/retailer/analytics">
-                        <BarChart3 className="h-4 w-4 mr-2" />
-                        View Analytics
-                      </a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-
-            {/* Financial Tab */}
-            <TabsContent value="financial" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  {
-                    title: 'Gross Profit',
-                    value: `ZMW ${realTimeData.financials.grossProfit.toLocaleString()}`,
-                    change: '+15.3%',
-                    icon: DollarSign,
-                    color: 'text-emerald-600',
-                    bg: 'bg-emerald-50'
-                  },
-                  {
-                    title: 'Net Profit',
-                    value: `ZMW ${realTimeData.financials.netProfit.toLocaleString()}`,
-                    change: '+18.7%',
-                    icon: TrendingUp,
-                    color: 'text-blue-600',
-                    bg: 'bg-blue-50'
-                  },
-                  {
-                    title: 'Profit Margin',
-                    value: `${realTimeData.financials.profitMargin}%`,
-                    change: '+2.1%',
-                    icon: Target,
-                    color: 'text-purple-600',
-                    bg: 'bg-purple-50'
-                  },
-                  {
-                    title: 'Pending Payouts',
-                    value: `ZMW ${realTimeData.financials.pendingPayouts.toLocaleString()}`,
-                    change: 'Ready',
-                    icon: Clock,
-                    color: 'text-orange-600',
-                    bg: 'bg-orange-50'
-                  }
-                ].map((metric, index) => (
-                  <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow">
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className={`w-10 h-10 ${metric.bg} rounded-lg flex items-center justify-center`}>
-                          <metric.icon className={`h-5 w-5 ${metric.color}`} />
-                        </div>
-                        <span className="text-xs text-emerald-600 font-medium">{metric.change}</span>
-                      </div>
-                      <div>
-                        <p className="text-sm text-slate-600 mb-1">{metric.title}</p>
-                        <p className="text-xl font-bold text-slate-900">{metric.value}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  </div>
                 ))}
-              </div>
-            </TabsContent>
+                <Button variant="outline" className="w-full mt-4">
+                  View All Orders (2)
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
 
-            {/* Insights Tab */}
-            <TabsContent value="insights" className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Business Insights */}
-                <Card className="border-0 shadow-sm">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-slate-900 flex items-center">
-                      <Activity className="h-5 w-5 mr-2 text-blue-600" />
-                      Business Insights
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {businessInsights.map((insight) => {
-                        const Icon = insight.icon;
-                        return (
-                          <div key={insight.id} className={`flex items-start space-x-4 p-4 ${insight.bgColor} rounded-lg border ${insight.borderColor} hover:shadow-sm transition-all`}>
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-white border ${insight.borderColor} flex-shrink-0 shadow-sm`}>
-                              <Icon className={`h-5 w-5 ${insight.iconColor}`} />
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-center justify-between mb-2">
-                                <h4 className="text-sm font-semibold text-slate-900">{insight.type}</h4>
-                                <Badge 
-                                  variant="outline" 
-                                  className={`text-xs ${
-                                    insight.priority === 'success' ? 'border-emerald-200 text-emerald-700' :
-                                    insight.priority === 'warning' ? 'border-amber-200 text-amber-700' :
-                                    'border-blue-200 text-blue-700'
-                                  }`}
-                                >
-                                  {insight.priority}
-                                </Badge>
+          {/* Analytics Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Advanced Analytics */}
+            <Card className="border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-500">
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-slate-900">Advanced Analytics & Insights</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Tabs defaultValue="overview" className="space-y-4">
+                  <TabsList className="grid w-full grid-cols-4 bg-slate-100">
+                    <TabsTrigger value="overview" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">Overview</TabsTrigger>
+                    <TabsTrigger value="products" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">Products</TabsTrigger>
+                    <TabsTrigger value="regions" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">Regions</TabsTrigger>
+                    <TabsTrigger value="traffic" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">Traffic</TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="overview" className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="text-center p-4 bg-blue-50 rounded-lg">
+                        <div className="text-2xl font-bold text-blue-600">3.2%</div>
+                        <div className="text-sm text-slate-600">Conversion Rate</div>
+                        <div className="text-xs text-green-600">+0.5% from last month</div>
+                      </div>
+                      <div className="text-center p-4 bg-green-50 rounded-lg">
+                        <div className="text-2xl font-bold text-green-600">ZMW 365</div>
+                        <div className="text-sm text-slate-600">Avg. Order Value</div>
+                        <div className="text-xs text-green-600">+12% from last month</div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold text-slate-900 mb-3">Weekly Sales Trend</h4>
+                      <div className="space-y-2">
+                        {weeklyTrend.map((day) => (
+                          <div key={day.day} className="flex items-center justify-between">
+                            <span className="text-sm text-slate-600 w-8">{day.day}</span>
+                            <div className="flex-1 mx-3">
+                              <div className="w-full bg-slate-200 rounded-full h-2">
+                                <div 
+                                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
+                                  style={{ width: `${(day.amount / 10000) * 100}%` }}
+                                ></div>
                               </div>
-                              <p className="text-sm text-slate-700 mb-3">{insight.title}</p>
-                              <Button variant="outline" size="sm" className="border-slate-300 hover:bg-white">
-                                <ChevronRight className="h-3 w-3 mr-1" />
-                                {insight.action}
-                              </Button>
                             </div>
+                            <span className="text-sm font-medium text-slate-900">ZMW {day.amount.toLocaleString()}</span>
                           </div>
-                        );
-                      })}
+                        ))}
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
 
-                {/* AI Recommendations */}
-                <Card className="border-0 shadow-sm">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-slate-900 flex items-center">
-                      <Zap className="h-5 w-5 mr-2 text-yellow-500" />
-                      AI Recommendations
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {[
-                        {
-                          title: 'Optimize Product Listings',
-                          description: 'AI suggests improving 12 product descriptions and adding high-quality images to boost conversion rates.',
-                          impact: '+15% conversion rate',
-                          confidence: 94,
-                          action: 'Start Optimization'
-                        },
-                        {
-                          title: 'Dynamic Pricing Strategy',
-                          description: 'Adjust pricing for 8 electronics products based on competitor analysis and demand patterns.',
-                          impact: '+8% revenue',
-                          confidence: 87,
-                          action: 'Review Suggestions'
-                        },
-                        {
-                          title: 'Inventory Restocking',
-                          description: 'Restock 5 trending products before estimated stockout date to maximize sales potential.',
-                          impact: 'Prevent 23% lost sales',
-                          confidence: 96,
-                          action: 'View Products'
-                        }
-                      ].map((rec, index) => (
-                        <div key={index} className="p-4 border border-slate-200 rounded-lg hover:bg-slate-50/50 transition-colors">
-                          <div className="flex items-start justify-between mb-3">
-                            <h4 className="text-sm font-semibold text-slate-900">{rec.title}</h4>
-                            <div className="flex items-center space-x-2">
-                              <Badge variant="outline" className="text-xs text-emerald-600 border-emerald-200">
-                                {rec.confidence}% confidence
-                              </Badge>
-                            </div>
-                          </div>
-                          <p className="text-sm text-slate-600 mb-3">{rec.description}</p>
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs text-emerald-600 font-medium">{rec.impact}</span>
-                            <Button variant="outline" size="sm" className="border-slate-300 hover:bg-slate-100">
-                              <ArrowUpRight className="h-3 w-3 mr-1" />
-                              {rec.action}
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+            {/* Quick Product Publisher */}
+            <Card className="border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-500">
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-slate-900">Quick Product Publisher</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium text-slate-700">Product Name *</label>
+                  <Input placeholder="Enter product name" className="mt-1" />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-sm font-medium text-slate-700">Price (ZMW) *</label>
+                    <Input placeholder="0.00" className="mt-1" />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-slate-700">Stock Quantity</label>
+                    <Input placeholder="0" className="mt-1" />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="text-sm font-medium text-slate-700">Category *</label>
+                  <Select>
+                    <SelectTrigger className="mt-1">
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="electronics">Electronics</SelectItem>
+                      <SelectItem value="fashion">Fashion</SelectItem>
+                      <SelectItem value="home">Home & Garden</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <label className="text-sm font-medium text-slate-700">Description</label>
+                  <textarea 
+                    placeholder="Describe your product..."
+                    className="mt-1 w-full px-3 py-2 border border-slate-300 rounded-md text-sm"
+                    rows={3}
+                  />
+                </div>
+                
+                <div>
+                  <label className="text-sm font-medium text-slate-700">Product Images</label>
+                  <div className="mt-2 border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer">
+                    <Upload className="h-8 w-8 text-slate-400 mx-auto mb-2" />
+                    <p className="text-sm text-slate-600">Upload up to 5 images (Max 5MB each)</p>
+                  </div>
+                </div>
+                
+                <div className="flex space-x-3 pt-4">
+                  <Button variant="outline" className="flex-1">
+                    Save Draft
+                  </Button>
+                  <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Publish Product
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Quick Actions */}
+          <Card className="border-0 bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-xl transition-all duration-500">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-bold mb-2">Ready to boost your sales?</h3>
+                  <p className="text-blue-100">Add more products, manage your storefront, and track analytics</p>
+                </div>
+                <div className="flex space-x-3">
+                  <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+                    <Store className="h-4 w-4 mr-2" />
+                    Storefront Manager
+                  </Button>
+                  <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+                    <BarChart3 className="h-4 w-4 mr-2" />
+                    Analytics
+                  </Button>
+                </div>
               </div>
-            </TabsContent>
-          </Tabs>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </RetailerDashboardLayout>
   );
-}
-
-// Helper component for the live indicator
-function Circle({ className }: { className?: string }) {
-  return <div className={`rounded-full ${className}`} />;
 }
