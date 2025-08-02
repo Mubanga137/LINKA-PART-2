@@ -129,8 +129,11 @@ export default function ModernDashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [realTimeData, setRealTimeData] = useState(dashboardStats);
 
-  // Simulate real-time updates
+  // Simulate real-time updates (client-side only to prevent hydration errors)
   useEffect(() => {
+    // Only run on client side to prevent hydration errors
+    if (typeof window === 'undefined') return;
+
     const interval = setInterval(() => {
       setRealTimeData(prev => ({
         ...prev,
