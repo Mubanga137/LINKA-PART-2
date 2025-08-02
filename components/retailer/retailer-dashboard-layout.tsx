@@ -323,6 +323,28 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
             })}
           </div>
 
+          {/* Navigation Controls */}
+          <div className="p-4 border-t border-slate-200/60 space-y-3">
+            <Button
+              variant="outline"
+              className="w-full justify-start bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100"
+              onClick={() => window.history.back()}
+            >
+              <ChevronRight className="h-4 w-4 mr-2 rotate-180" />
+              Back
+            </Button>
+            <Button
+              variant="outline"
+              className="w-full justify-start bg-green-50 text-green-600 border-green-200 hover:bg-green-100"
+              asChild
+            >
+              <Link href="/">
+                <LayoutDashboard className="h-4 w-4 mr-2" />
+                Back to Homepage
+              </Link>
+            </Button>
+          </div>
+
           {/* Sidebar Footer */}
           <div className="p-4 border-t border-slate-200/60 bg-gradient-to-r from-slate-50 to-white">
             <DropdownMenu>
