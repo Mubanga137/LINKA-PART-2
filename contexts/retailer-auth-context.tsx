@@ -187,16 +187,30 @@ export function RetailerAuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setLoading(true);
-      
+
       // Simulate API login call
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Mock login validation
-      if (email === 'john.doe@techhubzm.com' && password === 'password123') {
+
+      // Mock login validation - Allow demo credentials and common retailer emails
+      const validCredentials = [
+        { email: 'john.doe@techhubzm.com', password: 'password123' },
+        { email: 'retailer@demo.com', password: 'demo123' },
+        { email: 'demo@retailer.com', password: 'demo123' },
+        { email: 'test@retailer.com', password: 'test123' }
+      ];
+
+      const isValidLogin = validCredentials.some(cred =>
+        cred.email === email && cred.password === password
+      );
+
+      if (isValidLogin) {
         const token = 'mock_jwt_token_' + Date.now();
         localStorage.setItem('retailer_token', token);
         setUser(mockUser);
         setStore(mockStore);
+
+        // Redirect to retailer dashboard immediately after successful login
+        router.push('/retailer/dashboard');
         return true;
       } else {
         throw new Error('Invalid credentials');
