@@ -141,7 +141,7 @@ const sampleProducts = [
     id: 2,
     name: 'MacBook Pro M3',
     price: 15999,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F8ab774df80c84d7ca5e74e3006583b5e?alt=media&token=5b175f4b-4db7-4955-9305-287cce3c7f3a&apiKey=4bf015b55143432d9c1c69e328364ff3',
+    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fd6a6e50fa6184c339f2c7eba01c8d627?format=webp&width=800',
     rating: 4.8,
     sales: 89
   },
