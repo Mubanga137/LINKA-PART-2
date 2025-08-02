@@ -136,7 +136,7 @@ const topProducts = [
     revenue: 258680,
     growth: 18.2,
     stock: 45,
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80&h=80&fit=crop',
+    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fe280805121624c4c89e1740b42d7242b?alt=media&token=a690ae27-18c8-4e1a-a3bf-522ab8349805&apiKey=4bf015b55143432d9c1c69e328364ff3',
     rating: 4.8,
     reviews: 342
   },
@@ -148,7 +148,7 @@ const topProducts = [
     revenue: 456900,
     growth: 12.8,
     stock: 23,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=80&h=80&fit=crop',
+    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F4cc39ea70bf4407aab01471d71b17cab?alt=media&token=e6b3a137-56fe-4b63-8eab-ea79dd35f1e8&apiKey=4bf015b55143432d9c1c69e328364ff3',
     rating: 4.6,
     reviews: 278
   },
@@ -160,7 +160,7 @@ const topProducts = [
     revenue: 178400,
     growth: 24.5,
     stock: 12,
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=80&h=80&fit=crop',
+    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F41ba2cbf74a7423999b79fdc1e5aeb8d?alt=media&token=3230b762-4d84-4830-95b6-420899bd31e7&apiKey=4bf015b55143432d9c1c69e328364ff3',
     rating: 4.9,
     reviews: 156
   },
@@ -172,7 +172,7 @@ const topProducts = [
     revenue: 190200,
     growth: 8.7,
     stock: 8,
-    image: 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=80&h=80&fit=crop',
+    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F1f5b33889b8f43a79b94d8cde37d4c07?alt=media&token=2d2dfb75-b5f1-4dba-977f-c2b5c409190c&apiKey=4bf015b55143432d9c1c69e328364ff3',
     rating: 4.7,
     reviews: 89
   }
