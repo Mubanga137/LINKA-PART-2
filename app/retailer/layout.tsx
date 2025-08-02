@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ErrorBoundary } from '@/components/error-boundary'
 
 export const metadata: Metadata = {
   title: 'Retailer Dashboard - Linka',
@@ -11,8 +12,10 @@ export default function RetailerLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="retailer-layout">
-      {children}
-    </div>
+    <ErrorBoundary>
+      <div className="retailer-layout">
+        {children}
+      </div>
+    </ErrorBoundary>
   )
 }
