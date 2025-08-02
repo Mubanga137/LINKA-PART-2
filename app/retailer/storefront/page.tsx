@@ -272,11 +272,12 @@ export default function StorefrontManager() {
             {!isPreviewMode && (
               <div className="w-80 border-r border-slate-200/60 bg-white overflow-y-auto">
                 <Tabs defaultValue="design" className="h-full">
-                  <TabsList className="grid w-full grid-cols-4 sticky top-0 z-10 bg-white border-b border-slate-200/60">
+                  <TabsList className="grid w-full grid-cols-5 sticky top-0 z-10 bg-white border-b border-slate-200/60">
                     <TabsTrigger value="design">Design</TabsTrigger>
                     <TabsTrigger value="content">Content</TabsTrigger>
                     <TabsTrigger value="features">Features</TabsTrigger>
                     <TabsTrigger value="seo">SEO</TabsTrigger>
+                    <TabsTrigger value="gallery">Gallery</TabsTrigger>
                   </TabsList>
 
                   <div className="p-4 space-y-6">
