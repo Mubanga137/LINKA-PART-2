@@ -59,6 +59,9 @@ export function Header() {
 
   const handleLogout = () => {
     logout()
+    if (retailerUser) {
+      retailerLogout()
+    }
     router.push('/')
   }
 
