@@ -58,8 +58,8 @@ import RetailerDashboardLayout from '@/components/retailer/retailer-dashboard-la
 const storefrontData = {
   name: 'TechHub Zambia',
   description: 'Your premier destination for cutting-edge technology and electronics in Zambia. We offer the latest smartphones, laptops, accessories, and smart home devices.',
-  logo: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F1623ef96744f4e8d90c950f6abe1bbd2',
-  banner: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F61f30557e9d14734a75c7476a5ed2fbf',
+  logo: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F638cfac869fb401eba6d7fb48b6e01ee?alt=media&token=74789b41-612a-42e4-a406-47b8908a4f35&apiKey=4bf015b55143432d9c1c69e328364ff3',
+  banner: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F820c161a7dbd4b58bfdfa11e8a5b77e8?alt=media&token=966e981e-12dd-4db8-a75d-73f74ae00091&apiKey=4bf015b55143432d9c1c69e328364ff3',
   theme: {
     primaryColor: '#3B82F6',
     secondaryColor: '#10B981',
@@ -100,28 +100,28 @@ const themeTemplates = [
   {
     id: 'modern',
     name: 'Modern Tech',
-    preview: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Ff10d61fb9b1d4e99806635be0a265294',
+    preview: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F82f630a64ccd4ff1a0e60a9830efdf63?alt=media&token=70f69cc6-18e2-4ab7-b4bf-7d19baa4662b&apiKey=4bf015b55143432d9c1c69e328364ff3',
     colors: { primary: '#3B82F6', secondary: '#10B981' },
     description: 'Clean, modern design perfect for tech stores'
   },
   {
     id: 'elegant',
     name: 'Elegant Fashion',
-    preview: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fdd35229f10be41a0952051baa52b9aad',
+    preview: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fb159ec8d523f4c0fb9a1a9c54048ebdd?alt=media&token=bee5e29d-e6cb-42b5-bbf3-659b5bf4810b&apiKey=4bf015b55143432d9c1c69e328364ff3',
     colors: { primary: '#8B5CF6', secondary: '#EC4899' },
     description: 'Sophisticated layout for fashion and lifestyle brands'
   },
   {
     id: 'minimal',
     name: 'Minimal Clean',
-    preview: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F055dad65b97047ad9a3546171f2cdb25',
+    preview: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F6995621fafc94b559e52ca72adcfdca2?alt=media&token=fb6fa0ae-ef8c-48a5-8e77-6c28f7b67783&apiKey=4bf015b55143432d9c1c69e328364ff3',
     colors: { primary: '#1F2937', secondary: '#6B7280' },
     description: 'Minimalist design focusing on products'
   },
   {
     id: 'vibrant',
     name: 'Vibrant Market',
-    preview: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F7ca1bbd8baed44548ad3dffe9baf2a42',
+    preview: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fc3924f31e71d4869b42a4d0e5eacdee5?alt=media&token=db9ffa16-1109-49a9-ad6d-f9e0229b60d1&apiKey=4bf015b55143432d9c1c69e328364ff3',
     colors: { primary: '#F59E0B', secondary: '#EF4444' },
     description: 'Bold, energetic design for marketplaces'
   }
@@ -132,7 +132,7 @@ const sampleProducts = [
     id: 1,
     name: 'iPhone 15 Pro Max',
     price: 8999,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F1a4bf765e221413fae5bfe660fdf0daa',
+    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F884365930bf6403ab6a72ce421a20511?alt=media&token=26fb6a61-ceb9-4ab2-80ce-c593f74b4334&apiKey=4bf015b55143432d9c1c69e328364ff3',
     rating: 4.9,
     sales: 142
   },
@@ -140,7 +140,7 @@ const sampleProducts = [
     id: 2,
     name: 'MacBook Pro M3',
     price: 15999,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F80d925e94d33468b8423ed6a20f618ca',
+    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F8ab774df80c84d7ca5e74e3006583b5e?alt=media&token=5b175f4b-4db7-4955-9305-287cce3c7f3a&apiKey=4bf015b55143432d9c1c69e328364ff3',
     rating: 4.8,
     sales: 89
   },
@@ -148,7 +148,7 @@ const sampleProducts = [
     id: 3,
     name: 'AirPods Pro',
     price: 1299,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F8289c9248ef54c71bf3eb8aee92ab862',
+    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fc609a13b506a49dca1ab65303d841ae0?alt=media&token=32f5453e-184d-4972-a00d-92015dfad39b&apiKey=4bf015b55143432d9c1c69e328364ff3',
     rating: 4.7,
     sales: 234
   }
