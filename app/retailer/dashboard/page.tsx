@@ -128,6 +128,12 @@ export default function ModernDashboard() {
   const [timeRange, setTimeRange] = useState('today');
   const [refreshing, setRefreshing] = useState(false);
   const [realTimeData, setRealTimeData] = useState(dashboardStats);
+  const [mounted, setMounted] = useState(false);
+
+  // Handle client-side mounting
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Simulate real-time updates (client-side only to prevent hydration errors)
   useEffect(() => {
