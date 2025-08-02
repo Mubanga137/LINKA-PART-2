@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRetailerAuth } from '@/contexts/retailer-auth-context';
 import ProtectedRoute from './protected-route';
-import { useErrorHandler } from '@/components/error-boundary';
 import { 
   LayoutDashboard, 
   Package, 
