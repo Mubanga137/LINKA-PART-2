@@ -8,6 +8,7 @@ import { FeaturesSection } from "@/components/features-section"
 import { HowItWorksSection } from "@/components/how-it-works-section"
 import { Footer } from "@/components/footer"
 import { HomepageAccessGuard } from "@/components/homepage-access-guard"
+import { AuthStatusBanner } from "@/components/auth-status-banner"
 
 export default function HomePage() {
   return (
