@@ -16,6 +16,9 @@ export default function HomePage() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
         <Header />
         <main>
+          <div className="container mx-auto px-4 py-4">
+            <AuthStatusBanner />
+          </div>
           <HeroSection />
           <VendorShowcase
             title="Featured Local Vendors"
