@@ -324,6 +324,35 @@ export default function AdvancedAnalytics() {
         {/* Main Content */}
         <div className="flex-1 overflow-auto">
           <div className="p-6 space-y-6">
+            {/* Analytics Showcase Gallery */}
+            <Card className="border-0 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-lg font-semibold text-slate-900 flex items-center">
+                  <Activity className="h-5 w-5 mr-2 text-indigo-600" />
+                  Analytics Showcase
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {analyticsShowcaseImages.map((image, index) => (
+                    <div key={index} className="group relative overflow-hidden rounded-lg border border-slate-200 hover:shadow-md transition-all">
+                      <img
+                        src={image}
+                        alt={`Analytics showcase ${index + 1}`}
+                        className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors">
+                        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button size="sm" variant="secondary" className="h-6 w-6 p-0">
+                            <Eye className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
             <Tabs value={selectedMetric} onValueChange={setSelectedMetric} className="space-y-6">
               <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="revenue">Revenue</TabsTrigger>
