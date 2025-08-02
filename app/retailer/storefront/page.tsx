@@ -149,7 +149,7 @@ const sampleProducts = [
     id: 3,
     name: 'AirPods Pro',
     price: 1299,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fc609a13b506a49dca1ab65303d841ae0?alt=media&token=32f5453e-184d-4972-a00d-92015dfad39b&apiKey=4bf015b55143432d9c1c69e328364ff3',
+    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2F8583a431a0094cd586dcdce5c70a7e4a?format=webp&width=800',
     rating: 4.7,
     sales: 234
   }
