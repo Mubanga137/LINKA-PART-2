@@ -7,24 +7,27 @@ import { ServicesPreviewSection } from "@/components/services-preview-section"
 import { FeaturesSection } from "@/components/features-section"
 import { HowItWorksSection } from "@/components/how-it-works-section"
 import { Footer } from "@/components/footer"
+import { HomepageAccessGuard } from "@/components/homepage-access-guard"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <Header />
-      <main>
-        <HeroSection />
-        <VendorShowcase
-          title="Featured Local Vendors"
-          subtitle="Support amazing businesses in your community"
-          maxVendors={6}
-        />
-        <ServicesPreviewSection />
-        <TrendingOffers maxOffers={6} layout="grid" />
-        <FeaturesSection />
-        <HowItWorksSection />
-      </main>
-      <Footer />
-    </div>
+    <HomepageAccessGuard>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+        <Header />
+        <main>
+          <HeroSection />
+          <VendorShowcase
+            title="Featured Local Vendors"
+            subtitle="Support amazing businesses in your community"
+            maxVendors={6}
+          />
+          <ServicesPreviewSection />
+          <TrendingOffers maxOffers={6} layout="grid" />
+          <FeaturesSection />
+          <HowItWorksSection />
+        </main>
+        <Footer />
+      </div>
+    </HomepageAccessGuard>
   )
 }
