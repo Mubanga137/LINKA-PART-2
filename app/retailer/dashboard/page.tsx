@@ -191,15 +191,23 @@ export default function ModernDashboard() {
 
         <div className="p-6 space-y-8">
           {/* Welcome Section */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white shadow-lg">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold mb-2">Welcome back, Mwamba!</h2>
-                <p className="text-blue-100">Here's your store overview for today</p>
+                <p className="text-blue-100">Here's your store overview</p>
+                <div className="flex items-center space-x-4 mt-3">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-blue-100">Store Active</span>
+                  </div>
+                  <div className="text-sm text-blue-100">4.9★ Rating</div>
+                </div>
               </div>
               <div className="text-right">
                 <p className="text-3xl font-bold">8</p>
                 <p className="text-blue-100 text-sm">Products</p>
+                <p className="text-xs text-blue-200 mt-1">2 Low Stock</p>
               </div>
             </div>
           </div>
