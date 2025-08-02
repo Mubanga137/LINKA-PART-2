@@ -59,8 +59,8 @@ import ImageShowcase from '@/components/storefront/image-showcase';
 const storefrontData = {
   name: 'TechHub Zambia',
   description: 'Your premier destination for cutting-edge technology and electronics in Zambia. We offer the latest smartphones, laptops, accessories, and smart home devices.',
-  logo: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F638cfac869fb401eba6d7fb48b6e01ee?alt=media&token=74789b41-612a-42e4-a406-47b8908a4f35&apiKey=4bf015b55143432d9c1c69e328364ff3',
-  banner: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F820c161a7dbd4b58bfdfa11e8a5b77e8?alt=media&token=966e981e-12dd-4db8-a75d-73f74ae00091&apiKey=4bf015b55143432d9c1c69e328364ff3',
+  logo: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2F96def3273acb488683da8d6dc1d2f677?format=webp&width=800',
+  banner: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2F1d64db8f787249e0aed5eb579a5d6ac3?format=webp&width=800',
   theme: {
     primaryColor: '#3B82F6',
     secondaryColor: '#10B981',
