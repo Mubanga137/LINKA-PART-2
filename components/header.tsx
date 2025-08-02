@@ -218,12 +218,12 @@ export function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem onClick={() => router.push(getUserDashboardLink())}>
-                    {user.role === 'retailer' ? (
+                    {isRetailer ? (
                       <>
                         <BarChart3 className="mr-2 h-4 w-4" />
                         Dashboard
                       </>
-                    ) : user.role === 'admin' ? (
+                    ) : (retailerUser || user)?.role === 'admin' ? (
                       <>
                         <Settings className="mr-2 h-4 w-4" />
                         Admin Panel
@@ -235,7 +235,7 @@ export function Header() {
                       </>
                     )}
                   </DropdownMenuItem>
-                  {user.role === 'customer' && (
+                  {!isRetailer && user?.role === 'customer' && (
                     <DropdownMenuItem onClick={() => router.push('/orders')}>
                       <Package className="mr-2 h-4 w-4" />
                       My Orders
