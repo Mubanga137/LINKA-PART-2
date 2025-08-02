@@ -149,8 +149,36 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const { user, store, logout } = useRetailerAuth();
+  const { handleError } = useErrorHandler();
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  // Handle navigation errors
+  useEffect(() => {
+    const handleNavigationError = (error: any) => {
+      if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+        console.warn('Navigation fetch error caught and handled:', error);
+        // Don't throw, just log for non-critical navigation prefetch errors
+        return;
+      }
+      handleError(error);
+    };
+
+    window.addEventListener('error', handleNavigationError);
+    window.addEventListener('unhandledrejection', (event) => {
+      if (event.reason?.message?.includes('Failed to fetch')) {
+        console.warn('Fetch rejection caught and handled:', event.reason);
+        event.preventDefault(); // Prevent error from being thrown
+        return;
+      }
+      handleNavigationError(event.reason);
+    });
+
+    return () => {
+      window.removeEventListener('error', handleNavigationError);
+      window.removeEventListener('unhandledrejection', handleNavigationError);
+    };
+  }, [handleError]);
 
   return (
     <ProtectedRoute>
