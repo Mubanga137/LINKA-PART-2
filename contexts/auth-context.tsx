@@ -128,6 +128,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = () => {
     setUser(null)
+    // Clear both auth tokens
+    localStorage.removeItem('linka_user')
+    localStorage.removeItem('retailer_token')
+    // Redirect to homepage
+    if (typeof window !== 'undefined') {
+      window.location.href = '/';
+    }
   }
 
   const updateProfile = async (data: Partial<User>): Promise<{ success: boolean; error?: string }> => {
