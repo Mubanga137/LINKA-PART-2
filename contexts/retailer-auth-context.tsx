@@ -227,7 +227,7 @@ export function RetailerAuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('retailer_token');
     setUser(null);
     setStore(null);
-    router.push('/login');
+    router.push('/'); // Redirect to homepage instead of login
   };
 
   const hasPermission = (permission: string): boolean => {
