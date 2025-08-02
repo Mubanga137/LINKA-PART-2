@@ -1213,8 +1213,10 @@ function MarketplaceContent() {
 
 export default function MarketplacePage() {
   return (
-    <MarketplaceProvider>
-      <MarketplaceContent />
-    </MarketplaceProvider>
+    <HomepageAccessGuard>
+      <MarketplaceProvider>
+        <MarketplaceContent />
+      </MarketplaceProvider>
+    </HomepageAccessGuard>
   );
 }
