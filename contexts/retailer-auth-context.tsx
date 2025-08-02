@@ -163,7 +163,19 @@ export function RetailerAuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // Check for existing session
     checkAuthStatus();
-  }, []);
+
+    // Development mode: auto-login after 2 seconds if not authenticated
+    const timer = setTimeout(() => {
+      if (!user && typeof window !== 'undefined') {
+        localStorage.setItem('retailer_token', 'demo-token');
+        setUser(mockUser);
+        setStore(mockStore);
+        setLoading(false);
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [user]);
 
   const checkAuthStatus = async () => {
     try {
