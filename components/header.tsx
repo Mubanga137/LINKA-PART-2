@@ -66,10 +66,14 @@ export function Header() {
   }
 
   const getUserDashboardLink = () => {
-    if (!user) return '/'
-    switch (user.role) {
-      case 'retailer':
-        return '/retailer-dashboard'
+    const currentUser = retailerUser || user
+    if (!currentUser) return '/'
+
+    if (retailerUser || currentUser.role === 'retailer') {
+      return '/retailer/dashboard'
+    }
+
+    switch (currentUser.role) {
       case 'admin':
         return '/admin-dashboard'
       default:
