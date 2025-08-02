@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ErrorBoundary } from '@/components/error-boundary'
+import { RetailerRouteGuard } from '@/components/retailer/retailer-route-guard'
 
 export const metadata: Metadata = {
   title: 'Retailer Dashboard - Linka',
@@ -13,9 +14,11 @@ export default function RetailerLayout({
 }) {
   return (
     <ErrorBoundary>
-      <div className="retailer-layout">
-        {children}
-      </div>
+      <RetailerRouteGuard>
+        <div className="retailer-layout">
+          {children}
+        </div>
+      </RetailerRouteGuard>
     </ErrorBoundary>
   )
 }
