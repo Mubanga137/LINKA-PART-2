@@ -203,7 +203,7 @@ export function Header() {
             <MobileNavigation />
 
             {/* User Authentication */}
-            {user ? (
+            {(user || retailerUser) ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
