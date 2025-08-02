@@ -9,8 +9,6 @@ import { User, UserCheck, Store } from 'lucide-react';
 export function AuthStatusBanner() {
   const { user: generalUser } = useAuth();
   const { user: retailerUser } = useRetailerAuth();
-  const searchParams = useSearchParams();
-  const allowHomepage = searchParams.get('allow-homepage') === 'true';
 
   const getCurrentUser = () => {
     if (retailerUser) return { user: retailerUser, type: 'retailer' };
@@ -40,22 +38,12 @@ export function AuthStatusBanner() {
         <div className="flex items-center space-x-2">
           <Store className="h-5 w-5 text-blue-600" />
           <span className="text-blue-800 font-medium">
-            Welcome, {currentAuth.user.name}! You are logged in as a retailer.
+            Welcome, {currentAuth.user.name}! You can freely access the homepage and your dashboard.
           </span>
           <Badge variant="outline" className="bg-blue-100 text-blue-700">
             Retailer
           </Badge>
-          {allowHomepage && (
-            <Badge className="bg-amber-100 text-amber-700 border-amber-300">
-              Special Homepage Access
-            </Badge>
-          )}
         </div>
-        {allowHomepage && (
-          <p className="text-sm text-blue-600 mt-2">
-            You have special permission to view the homepage. Normally, retailers are redirected to their dashboard.
-          </p>
-        )}
       </div>
     );
   }
