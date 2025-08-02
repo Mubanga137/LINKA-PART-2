@@ -27,10 +27,7 @@ export function middleware(request: NextRequest) {
 
   // RETAILER ACCESS CONTROL
   if (isRetailer) {
-    // Check if the request has the 'allow-homepage' parameter (from "Back to Homepage" button)
-    const allowHomepage = request.nextUrl.searchParams.get('allow-homepage') === 'true'
-
-    // Define pages that retailers CANNOT access (except homepage with explicit permission)
+    // Define pages that retailers CANNOT access
     const prohibitedPaths = [
       '/marketplace',
       '/marketplace-simple',
@@ -50,33 +47,31 @@ export function middleware(request: NextRequest) {
       '/checkout'
     ]
 
-    // Allow homepage access if explicitly requested
-    if (pathname === '/' && allowHomepage) {
-      return NextResponse.next()
-    }
-
     // Check if retailer is trying to access prohibited content
     const isProhibitedPath = prohibitedPaths.some(path => {
       return pathname.startsWith(path)
     })
 
-    // Block homepage access unless explicitly allowed
-    if (pathname === '/' && !allowHomepage) {
-      return NextResponse.redirect(new URL('/retailer/dashboard', request.url))
-    }
-
-    // If retailer is on other prohibited pages, redirect to dashboard
+    // If retailer is on prohibited pages, redirect to dashboard
     if (isProhibitedPath) {
       return NextResponse.redirect(new URL('/retailer/dashboard', request.url))
     }
 
-    // If retailer is not on a retailer-specific route and not on login/signup, redirect to dashboard
-    if (!pathname.startsWith('/retailer/') && 
-        !pathname.startsWith('/login') && 
+    // Allow homepage access for retailers
+    if (pathname === '/') {
+      return NextResponse.next()
+    }
+
+    // If retailer is not on a retailer-specific route and not on allowed pages, redirect to dashboard
+    if (!pathname.startsWith('/retailer/') &&
+        !pathname.startsWith('/login') &&
         !pathname.startsWith('/signup') &&
         !pathname.startsWith('/api/') &&
         !pathname.startsWith('/_next/') &&
-        !pathname.startsWith('/favicon')) {
+        !pathname.startsWith('/favicon') &&
+        pathname !== '/' &&
+        pathname !== '/about' &&
+        pathname !== '/contact') {
       return NextResponse.redirect(new URL('/retailer/dashboard', request.url))
     }
   }
