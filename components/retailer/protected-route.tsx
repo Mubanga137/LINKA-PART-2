@@ -38,13 +38,31 @@ export default function ProtectedRoute({
     }
   }, [isAuthenticated, isRetailer, loading, router]);
 
-  // Loading state
+  // Loading state with timeout
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Verifying access...</p>
+          <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </div>
+          <h3 className="text-lg font-semibold text-slate-900 mb-2">Authenticating...</h3>
+          <p className="text-slate-600">Verifying your retailer access</p>
+          <div className="mt-6">
+            <Button
+              variant="outline"
+              onClick={() => router.push('/login/retailer')}
+              className="mr-3"
+            >
+              Sign In
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => router.push('/')}
+            >
+              Go to Homepage
+            </Button>
+          </div>
         </div>
       </div>
     );
