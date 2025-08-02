@@ -17,6 +17,22 @@ const nextConfig = {
     '*.projects.builder.codes',
     '*.fly.dev'
   ],
+  experimental: {
+    serverComponentsExternalPackages: [],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, must-revalidate',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 export default nextConfig
