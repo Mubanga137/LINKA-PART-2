@@ -65,11 +65,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     setIsLoading(true)
-    
+
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))
-      
+
       // Mock user data based on email
       const mockUser: User = {
         id: Math.random().toString(36).substr(2, 9),
@@ -86,6 +86,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser(mockUser)
       setIsLoading(false)
+
+      // Automatically redirect retailers to their dashboard
+      if (mockUser.role === 'retailer' && typeof window !== 'undefined') {
+        window.location.href = '/retailer/dashboard';
+      }
+
       return { success: true }
     } catch (error) {
       setIsLoading(false)
