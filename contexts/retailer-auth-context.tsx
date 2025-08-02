@@ -237,9 +237,11 @@ export function RetailerAuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     localStorage.removeItem('retailer_token');
+    localStorage.removeItem('linka_user');
     setUser(null);
     setStore(null);
-    router.push('/'); // Redirect to homepage instead of login
+    // Force redirect to homepage to ensure clean state
+    window.location.href = '/';
   };
 
   const hasPermission = (permission: string): boolean => {
