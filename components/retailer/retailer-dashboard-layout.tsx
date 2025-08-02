@@ -351,21 +351,21 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
                   </div>
 
                   <div className="flex items-center space-x-3">
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
+                    <Button
+                      variant="outline"
+                      size="sm"
                       className="border-slate-200 text-slate-700 hover:bg-slate-50 hidden sm:flex"
                     >
                       <Download className="h-4 w-4 mr-2" />
                       Export
                     </Button>
 
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-sm"
                     >
                       <Plus className="h-4 w-4 mr-2" />
-                      <span className="hidden sm:inline">New Order</span>
+                      <span className="hidden sm:inline">New Product</span>
                     </Button>
 
                     <Button variant="ghost" size="sm" className="relative hover:bg-slate-100">
@@ -377,12 +377,44 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
 
                     <div className="hidden sm:block w-px h-6 bg-slate-200"></div>
 
-                    <Avatar className="h-8 w-8 ring-1 ring-slate-200 hover:ring-slate-300 transition-all cursor-pointer">
-                      <AvatarImage src={user?.avatar} />
-                      <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-medium text-sm">
-                        {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
-                      </AvatarFallback>
-                    </Avatar>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Avatar className="h-8 w-8 ring-1 ring-slate-200 hover:ring-slate-300 transition-all cursor-pointer">
+                          <AvatarImage src={user?.avatar} />
+                          <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-medium text-sm">
+                            {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
+                          </AvatarFallback>
+                        </Avatar>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-56" align="end">
+                        <DropdownMenuLabel className="font-normal">
+                          <div className="flex flex-col space-y-1">
+                            <p className="text-sm font-medium leading-none">{user?.name || 'User'}</p>
+                            <p className="text-xs leading-none text-slate-500">
+                              {user?.email || 'user@example.com'}
+                            </p>
+                          </div>
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                          <Link href="/retailer/store-settings">
+                            <Settings className="mr-2 h-4 w-4" />
+                            <span>Store Settings</span>
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href="/retailer/earnings">
+                            <DollarSign className="mr-2 h-4 w-4" />
+                            <span>Earnings</span>
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={logout} className="text-red-600 focus:text-red-600">
+                          <LogOut className="mr-2 h-4 w-4" />
+                          <span>Log out</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </div>
               </div>
