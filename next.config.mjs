@@ -17,9 +17,7 @@ const nextConfig = {
     '*.projects.builder.codes',
     '*.fly.dev'
   ],
-  experimental: {
-    serverComponentsExternalPackages: [],
-  },
+  serverExternalPackages: [],
   async headers() {
     return [
       {
