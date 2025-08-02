@@ -647,6 +647,11 @@ export default function StorefrontManager() {
                         </CardContent>
                       </Card>
                     </TabsContent>
+
+                    {/* Gallery Tab */}
+                    <TabsContent value="gallery" className="space-y-6 mt-0">
+                      <ImageShowcase />
+                    </TabsContent>
                   </div>
                 </Tabs>
               </div>
