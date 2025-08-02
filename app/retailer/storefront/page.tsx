@@ -133,7 +133,7 @@ const sampleProducts = [
     id: 1,
     name: 'iPhone 15 Pro Max',
     price: 8999,
-    image: 'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F884365930bf6403ab6a72ce421a20511?alt=media&token=26fb6a61-ceb9-4ab2-80ce-c593f74b4334&apiKey=4bf015b55143432d9c1c69e328364ff3',
+    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2F24c3337bcb4c4431b75bab53769a5940?format=webp&width=800',
     rating: 4.9,
     sales: 142
   },
