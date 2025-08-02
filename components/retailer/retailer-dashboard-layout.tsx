@@ -338,7 +338,7 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
               className="w-full justify-start bg-green-50 text-green-600 border-green-200 hover:bg-green-100"
               asChild
             >
-              <Link href="/">
+              <Link href="/?allow-homepage=true">
                 <LayoutDashboard className="h-4 w-4 mr-2" />
                 Back to Homepage
               </Link>
