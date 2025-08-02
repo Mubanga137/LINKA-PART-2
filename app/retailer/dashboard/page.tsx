@@ -49,6 +49,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import RetailerDashboardLayout from '@/components/retailer/retailer-dashboard-layout';
+import EnhancedMediaGallery from '@/components/dashboard/enhanced-media-gallery';
 
 // Enhanced dashboard data with real-time capabilities
 const dashboardStats = {
@@ -636,6 +637,19 @@ export default function EnhancedRetailerDashboard() {
                   </CardContent>
                 </Card>
               </div>
+
+              {/* Enhanced Media Gallery Section */}
+              <Card className="border-0 shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-slate-900 flex items-center">
+                    <Image className="h-5 w-5 mr-2 text-indigo-600" />
+                    Media & Assets Gallery
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <EnhancedMediaGallery />
+                </CardContent>
+              </Card>
 
               {/* Recent Activity */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
