@@ -212,7 +212,7 @@ export function Header() {
                     className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
                   >
                     <User className="h-4 w-4 mr-2" />
-                    {user.name}
+                    {(retailerUser || user)?.name}
                     <ChevronDown className="h-3 w-3 ml-1" />
                   </Button>
                 </DropdownMenuTrigger>
