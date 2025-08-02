@@ -65,7 +65,7 @@ const products = [
     stock: 15,
     sold: 247,
     status: 'featured',
-    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2F96def3273acb488683da8d6dc1d2f677?format=webp&width=800',
+    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fe182d99b828f4a768817871766e2f5bb?format=webp&width=800',
     rating: 4.9,
     reviews: 67,
     profit: 2500,
