@@ -266,8 +266,8 @@ export function Header() {
             )}
 
             {/* CTA Button - Role specific */}
-            {user?.role === 'retailer' ? (
-              <Link href="/retailer-dashboard">
+            {isRetailer ? (
+              <Link href="/retailer/dashboard">
                 <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/30 transition-all">
                   My Dashboard
                 </Button>
