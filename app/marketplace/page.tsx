@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { HomepageAccessGuard } from "@/components/homepage-access-guard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
