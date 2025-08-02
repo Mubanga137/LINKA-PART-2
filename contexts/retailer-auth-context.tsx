@@ -170,8 +170,8 @@ export function RetailerAuthProvider({ children }: { children: ReactNode }) {
       // In a real app, this would check with your backend
       const token = localStorage.getItem('retailer_token');
       if (token) {
-        // Simulate API call to validate token
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Simulate API call to validate token (reduced timeout)
+        await new Promise(resolve => setTimeout(resolve, 500));
         setUser(mockUser);
         setStore(mockStore);
       }
