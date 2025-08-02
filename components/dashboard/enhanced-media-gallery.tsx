@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  Image, 
-  Play, 
-  Download, 
-  ExternalLink, 
-  Grid3X3, 
-  List, 
+import {
+  Image,
+  Play,
+  Download,
+  ExternalLink,
+  Grid3X3,
+  List,
   Search,
   Filter,
   Star,
@@ -21,7 +21,8 @@ import {
   ZoomIn,
   Copy,
   ArrowLeft,
-  ArrowRight
+  ArrowRight,
+  Upload
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
