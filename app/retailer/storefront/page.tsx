@@ -53,6 +53,7 @@ import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Slider } from '@/components/ui/slider';
 import RetailerDashboardLayout from '@/components/retailer/retailer-dashboard-layout';
+import ImageShowcase from '@/components/storefront/image-showcase';
 
 // Mock storefront data
 const storefrontData = {
