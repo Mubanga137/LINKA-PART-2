@@ -88,7 +88,7 @@ const products = [
     stock: 8,
     sold: 189,
     status: 'low_stock',
-    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2F24c3337bcb4c4431b75bab53769a5940?format=webp&width=800',
+    image: 'https://cdn.builder.io/api/v1/image/assets%2F4bf015b55143432d9c1c69e328364ff3%2Ffb567d646d14485db40714dd67030874?format=webp&width=800',
     rating: 4.8,
     reviews: 43,
     profit: 3800,
