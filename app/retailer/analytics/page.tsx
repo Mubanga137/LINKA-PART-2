@@ -52,6 +52,16 @@ import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import RetailerDashboardLayout from '@/components/retailer/retailer-dashboard-layout';
 
+// Additional showcase images for analytics
+const analyticsShowcaseImages = [
+  'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F2d67619c8efd4c4a8ccb9d599d00350f?alt=media&token=16d53e9a-b39b-4fda-9281-e0c14a404875&apiKey=4bf015b55143432d9c1c69e328364ff3',
+  'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fca179f90e262406baeeb9deb895c7a55?alt=media&token=94a99df6-03f2-4917-91f3-209190f869a0&apiKey=4bf015b55143432d9c1c69e328364ff3',
+  'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F7edbb425061847fdb4f7faad0f8076a6?alt=media&token=891120d6-c7f1-4e97-a669-b49fc908f400&apiKey=4bf015b55143432d9c1c69e328364ff3',
+  'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fb394d01c916c42bfba454ca2dc936d59?alt=media&token=7fbe4a8b-1b16-4c68-a3ed-85f9ed4b08de&apiKey=4bf015b55143432d9c1c69e328364ff3',
+  'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2Fe367a3cd6fcf44e69a5a426a6b490033?alt=media&token=73b53fde-4d31-4d06-8133-876c01bd1c23&apiKey=4bf015b55143432d9c1c69e328364ff3',
+  'https://cdn.builder.io/o/assets%2F4bf015b55143432d9c1c69e328364ff3%2F8bbd2f2f86ee4d7a8459844ef929c27b?alt=media&token=4291d4bc-0f13-43e2-8cfa-25a17314ae44&apiKey=4bf015b55143432d9c1c69e328364ff3'
+];
+
 // Mock analytics data
 const analyticsData = {
   revenue: {
