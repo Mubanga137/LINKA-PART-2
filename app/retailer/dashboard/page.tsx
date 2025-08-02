@@ -190,6 +190,20 @@ export default function ModernDashboard() {
         </div>
 
         <div className="p-6 space-y-8">
+          {/* Welcome Section */}
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">Welcome back, Mwamba!</h2>
+                <p className="text-blue-100">Here's your store overview for today</p>
+              </div>
+              <div className="text-right">
+                <p className="text-3xl font-bold">8</p>
+                <p className="text-blue-100 text-sm">Products</p>
+              </div>
+            </div>
+          </div>
+
           {/* Hero Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Today's Sales */}
