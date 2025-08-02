@@ -182,7 +182,7 @@ export default function LoginPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleDemoLogin('retailer')}
+                    onClick={() => router.push('/login/retailer')}
                     disabled={isLoading}
                   >
                     Retailer
