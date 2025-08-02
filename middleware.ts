@@ -27,10 +27,11 @@ export function middleware(request: NextRequest) {
 
   // RETAILER ACCESS CONTROL
   if (isRetailer) {
-    // Define pages that retailers CANNOT access
+    // Check if the request has the 'allow-homepage' parameter (from "Back to Homepage" button)
+    const allowHomepage = request.nextUrl.searchParams.get('allow-homepage') === 'true'
+
+    // Define pages that retailers CANNOT access (except homepage with explicit permission)
     const prohibitedPaths = [
-      '/',
-      '/home',
       '/marketplace',
       '/marketplace-simple',
       '/hot-deals',
@@ -49,15 +50,22 @@ export function middleware(request: NextRequest) {
       '/checkout'
     ]
 
+    // Allow homepage access if explicitly requested
+    if (pathname === '/' && allowHomepage) {
+      return NextResponse.next()
+    }
+
     // Check if retailer is trying to access prohibited content
     const isProhibitedPath = prohibitedPaths.some(path => {
-      if (path === '/') {
-        return pathname === path
-      }
       return pathname.startsWith(path)
     })
 
-    // If retailer is on prohibited page, redirect to dashboard
+    // Block homepage access unless explicitly allowed
+    if (pathname === '/' && !allowHomepage) {
+      return NextResponse.redirect(new URL('/retailer/dashboard', request.url))
+    }
+
+    // If retailer is on other prohibited pages, redirect to dashboard
     if (isProhibitedPath) {
       return NextResponse.redirect(new URL('/retailer/dashboard', request.url))
     }
