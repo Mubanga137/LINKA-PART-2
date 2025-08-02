@@ -38,7 +38,8 @@ import {
   Tablet,
   ChevronRight,
   AlertTriangle,
-  TrendingUp as TrendUp
+  TrendingUp as TrendUp,
+  Image
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
