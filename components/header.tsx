@@ -22,9 +22,19 @@ import { useCart } from "@/contexts/cart-context"
 
 export function Header() {
   const { user, logout } = useAuth()
+  const { user: retailerUser, logout: retailerLogout } = useRetailerAuth()
   const { totalItems } = useCart()
   const router = useRouter()
   const pathname = usePathname()
+
+  // Check if user is a retailer from either auth system
+  const isRetailer = retailerUser || user?.role === 'retailer'
+
+  // If retailer is trying to access homepage, redirect to dashboard
+  if (isRetailer && (pathname === '/' || pathname?.startsWith('/marketplace') || pathname?.startsWith('/shop'))) {
+    router.push('/retailer/dashboard')
+    return null
+  }
 
   // For wishlist functionality - only use on shopping pages
   let favoritesCount = 0
