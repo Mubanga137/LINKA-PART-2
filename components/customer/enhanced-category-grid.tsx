@@ -166,7 +166,7 @@ export function EnhancedCategoryGrid() {
               animationDelay: `${index * 100}ms`,
               transitionDelay: `${index * 100}ms`
             }}
-            onClick={() => router.push(category.href)}
+            onClick={() => window.location.href = category.href}
             onMouseEnter={() => setHoveredCard(category.id)}
             onMouseLeave={() => setHoveredCard(null)}
           >
