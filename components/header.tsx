@@ -30,11 +30,12 @@ export function Header() {
   // Check if user is a retailer from either auth system
   const isRetailer = retailerUser || user?.role === 'retailer'
 
-  // If retailer is trying to access homepage, redirect to dashboard
-  if (isRetailer && (pathname === '/' || pathname?.startsWith('/marketplace') || pathname?.startsWith('/shop'))) {
-    router.push('/retailer/dashboard')
-    return null
-  }
+  // Handle retailer redirects in useEffect to avoid render-time state updates
+  useEffect(() => {
+    if (isRetailer && (pathname === '/' || pathname?.startsWith('/marketplace') || pathname?.startsWith('/shop'))) {
+      router.push('/retailer/dashboard')
+    }
+  }, [isRetailer, pathname, router])
 
   // For wishlist functionality - only use on shopping pages
   let favoritesCount = 0
