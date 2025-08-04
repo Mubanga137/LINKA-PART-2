@@ -260,10 +260,10 @@ function RetailerDashboardContent() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <ModernDashboardSidebar 
-        activeView={activeView} 
+      <ModernDashboardSidebar
+        activeView={activeView}
         onViewChange={setActiveView}
-        user={user}
+        user={user!}
         pendingOrders={dashboardData?.orders.pending || 0}
         lowStock={dashboardData?.products.lowStock || 0}
       />
@@ -271,8 +271,8 @@ function RetailerDashboardContent() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <ModernDashboardHeader 
-          user={user}
+        <ModernDashboardHeader
+          user={user!}
           currentView={activeView}
           onViewChange={setActiveView}
         />
@@ -284,4 +284,12 @@ function RetailerDashboardContent() {
       </div>
     </div>
   )
+}
+
+export default function ModernRetailerDashboard() {
+  return (
+    <AuthRedirectWrapper requiredRole="retailer">
+      <RetailerDashboardContent />
+    </AuthRedirectWrapper>
+  );
 }
