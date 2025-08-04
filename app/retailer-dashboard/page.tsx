@@ -75,10 +75,10 @@ function RetailerDashboardContent() {
   useEffect(() => {
     const loadDashboardData = async () => {
       setIsLoading(true)
-      
+
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))
-      
+
       // Generate realistic mock data
       const mockData: DashboardData = {
         revenue: {
@@ -213,19 +213,13 @@ function RetailerDashboardContent() {
           ]
         }
       }
-      
+
       setDashboardData(mockData)
       setIsLoading(false)
     }
 
-    if (user?.role === 'retailer') {
-      loadDashboardData()
-    }
-  }, [user])
-
-  if (!user || user.role !== 'retailer') {
-    return null
-  }
+    loadDashboardData()
+  }, [])
 
   if (isLoading) {
     return (
