@@ -649,40 +649,118 @@ function ShopByCategorySection() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-8"
         >
           {mockCategories.slice(0, 10).map((category, index) => (
             <motion.div
               key={category.id}
               variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -5 }}
+              whileHover={{
+                scale: 1.08,
+                y: -8,
+                rotateY: 5,
+                transition: { duration: 0.4, ease: "easeOut" }
+              }}
               whileTap={{ scale: 0.95 }}
               className="group cursor-pointer"
             >
-              <Card className="text-center p-6 hover:shadow-xl transition-all duration-300 border-0 shadow-md">
-                <CardContent className="p-0">
-                  <motion.div
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-4xl mb-4"
-                  >
-                    {category.icon}
-                  </motion.div>
-                  <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                    {category.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-3">
-                    {category.productCount.toLocaleString()} items
-                  </p>
-                  {category.featured && (
-                    <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs">
-                      Featured
-                    </Badge>
-                  )}
-                </CardContent>
-              </Card>
+              <Link href={`/categories/${category.slug}`}>
+                <Card className={`
+                  relative overflow-hidden text-center p-6
+                  hover:shadow-2xl transition-all duration-500
+                  border-0 shadow-lg rounded-2xl
+                  bg-gradient-to-br ${category.bgColor}
+                  hover:bg-gradient-to-br hover:${category.color.replace('500', '100').replace('600', '200')}
+                  group-hover:border-white/50
+                `}>
+                  <CardContent className="p-0 relative z-10">
+                    {/* Animated Background Glow */}
+                    <motion.div
+                      className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}
+                      whileHover={{ opacity: 0.15 }}
+                    />
+
+                    {/* Icon Container */}
+                    <motion.div
+                      whileHover={{
+                        scale: 1.2,
+                        rotate: [0, -10, 10, 0],
+                        transition: { duration: 0.6 }
+                      }}
+                      className={`
+                        w-16 h-16 mx-auto mb-4 rounded-2xl
+                        bg-gradient-to-r ${category.color}
+                        flex items-center justify-center
+                        shadow-lg group-hover:shadow-xl
+                        transition-all duration-300
+                      `}
+                    >
+                      <category.icon className="h-8 w-8 text-white" />
+                    </motion.div>
+
+                    <motion.h3
+                      className="font-bold text-gray-900 mb-2 group-hover:text-gray-800 transition-colors text-lg"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {category.name}
+                    </motion.h3>
+
+                    <motion.p
+                      className="text-sm text-gray-600 mb-4 font-medium"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      {category.productCount.toLocaleString()} items
+                    </motion.p>
+
+                    {category.featured && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ delay: 0.2 + index * 0.1 }}
+                      >
+                        <Badge className={`
+                          bg-gradient-to-r ${category.color}
+                          text-white text-xs px-3 py-1 rounded-full
+                          shadow-md group-hover:shadow-lg
+                          animate-pulse
+                        `}>
+                          <Star className="h-3 w-3 mr-1" />
+                          Featured
+                        </Badge>
+                      </motion.div>
+                    )}
+
+                    {/* Floating Particles Effect */}
+                    <motion.div
+                      className="absolute top-2 right-2 w-2 h-2 bg-white/40 rounded-full opacity-0 group-hover:opacity-100"
+                      animate={{
+                        y: [0, -10, 0],
+                        opacity: [0, 1, 0]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: index * 0.2
+                      }}
+                    />
+                    <motion.div
+                      className="absolute bottom-2 left-2 w-1.5 h-1.5 bg-white/30 rounded-full opacity-0 group-hover:opacity-100"
+                      animate={{
+                        y: [0, -8, 0],
+                        opacity: [0, 1, 0]
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        delay: index * 0.3
+                      }}
+                    />
+                  </CardContent>
+                </Card>
+              </Link>
             </motion.div>
           ))}
         </motion.div>
