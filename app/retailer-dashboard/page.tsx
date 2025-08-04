@@ -13,6 +13,7 @@ import { ProductsView } from "@/components/dashboard/products-view"
 import { CustomersView } from "@/components/dashboard/customers-view"
 import { MarketingView } from "@/components/dashboard/marketing-view"
 import { useAuth } from "@/contexts/auth-context"
+import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
 
 interface DashboardData {
   revenue: {
@@ -63,28 +64,21 @@ interface DashboardData {
   }
 }
 
-export default function ModernRetailerDashboard() {
+function RetailerDashboardContent() {
   const { user } = useAuth()
   const router = useRouter()
   const [activeView, setActiveView] = useState('overview')
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  // Redirect if not a retailer
-  useEffect(() => {
-    if (user && user.role !== 'retailer') {
-      router.push('/')
-    }
-  }, [user, router])
-
   // Load dashboard data
   useEffect(() => {
     const loadDashboardData = async () => {
       setIsLoading(true)
-      
+
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))
-      
+
       // Generate realistic mock data
       const mockData: DashboardData = {
         revenue: {
@@ -219,19 +213,13 @@ export default function ModernRetailerDashboard() {
           ]
         }
       }
-      
+
       setDashboardData(mockData)
       setIsLoading(false)
     }
 
-    if (user?.role === 'retailer') {
-      loadDashboardData()
-    }
-  }, [user])
-
-  if (!user || user.role !== 'retailer') {
-    return null
-  }
+    loadDashboardData()
+  }, [])
 
   if (isLoading) {
     return (
@@ -272,10 +260,10 @@ export default function ModernRetailerDashboard() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <ModernDashboardSidebar 
-        activeView={activeView} 
+      <ModernDashboardSidebar
+        activeView={activeView}
         onViewChange={setActiveView}
-        user={user}
+        user={user!}
         pendingOrders={dashboardData?.orders.pending || 0}
         lowStock={dashboardData?.products.lowStock || 0}
       />
@@ -283,8 +271,8 @@ export default function ModernRetailerDashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <ModernDashboardHeader 
-          user={user}
+        <ModernDashboardHeader
+          user={user!}
           currentView={activeView}
           onViewChange={setActiveView}
         />
@@ -296,4 +284,12 @@ export default function ModernRetailerDashboard() {
       </div>
     </div>
   )
+}
+
+export default function ModernRetailerDashboard() {
+  return (
+    <AuthRedirectWrapper requiredRole="retailer">
+      <RetailerDashboardContent />
+    </AuthRedirectWrapper>
+  );
 }

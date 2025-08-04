@@ -18,7 +18,7 @@ export interface User {
 interface AuthContextType {
   user: User | null
   isLoading: boolean
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string; user?: User }>
   signup: (data: SignupData) => Promise<{ success: boolean; error?: string }>
   logout: () => void
   updateProfile: (data: Partial<User>) => Promise<{ success: boolean; error?: string }>
@@ -63,18 +63,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [user])
 
-  const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+  const login = async (email: string, password: string): Promise<{ success: boolean; error?: string; user?: User }> => {
     setIsLoading(true)
-    
+
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))
-      
+
       // Mock user data based on email
       const mockUser: User = {
         id: Math.random().toString(36).substr(2, 9),
         email,
-        name: email.includes('retailer') ? 'John Retailer' : 'Jane Customer',
+        name: email.includes('retailer') ? 'John Retailer' : email.includes('admin') ? 'Admin User' : 'Jane Customer',
         role: email.includes('retailer') ? 'retailer' : email.includes('admin') ? 'admin' : 'customer',
         avatar: '/placeholder.svg?height=100&width=100',
         phone: '+260 97 123-4567',
@@ -86,7 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser(mockUser)
       setIsLoading(false)
-      return { success: true }
+      return { success: true, user: mockUser }
     } catch (error) {
       setIsLoading(false)
       return { success: false, error: 'Login failed. Please try again.' }

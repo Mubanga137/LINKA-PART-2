@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Header } from "@/components/header"
@@ -20,8 +20,32 @@ export default function LoginPage() {
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   
-  const { login } = useAuth()
+  const { login, user, isLoading: authLoading, getRoleBasedRedirectUrl } = useAuth()
   const router = useRouter()
+
+  // Redirect if user is already logged in
+  useEffect(() => {
+    if (!authLoading && user) {
+      const redirectUrl = getRoleBasedRedirectUrl(user)
+      router.replace(redirectUrl)
+    }
+  }, [user, authLoading, router, getRoleBasedRedirectUrl])
+
+  // Prevent rendering if already authenticated
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Checking authentication...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (user) {
+    return null // Prevent flash of content while redirecting
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,24 +56,14 @@ export default function LoginPage() {
       const result = await login(email, password)
       
       if (result.success) {
-        // Get user from auth context to check role
-        const redirectUrl = new URLSearchParams(window.location.search).get('redirect')
-
-        // Role-aware redirection based on email patterns (in real app, use user.role)
-        if (email.includes('admin')) {
-          router.push('/admin')
-        } else if (email.includes('retailer')) {
-          router.push('/retailer/dashboard')
-        } else {
-          // Customer redirect - always redirect to customer dashboard
-          router.push('/customer-dashboard')
-        }
+        // The useEffect above will handle redirection once user state is updated
+        // No need to manually redirect here
       } else {
         setError(result.error || "Login failed")
+        setIsLoading(false)
       }
     } catch (err) {
       setError("An unexpected error occurred")
-    } finally {
       setIsLoading(false)
     }
   }
@@ -64,11 +78,22 @@ export default function LoginPage() {
     const creds = demoCredentials[role]
     setEmail(creds.email)
     setPassword(creds.password)
+    setError("")
+    setIsLoading(true)
 
-    // Auto-submit after brief delay to trigger role-aware redirection
-    setTimeout(() => {
-      handleSubmit(new Event('submit') as any)
-    }, 100)
+    try {
+      const result = await login(creds.email, creds.password)
+      
+      if (result.success) {
+        // The useEffect above will handle redirection once user state is updated
+      } else {
+        setError(result.error || "Demo login failed")
+        setIsLoading(false)
+      }
+    } catch (err) {
+      setError("An unexpected error occurred")
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -108,6 +133,7 @@ export default function LoginPage() {
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
                       required
+                      disabled={isLoading}
                     />
                   </div>
                 </div>
@@ -124,11 +150,13 @@ export default function LoginPage() {
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10 pr-10"
                       required
+                      disabled={isLoading}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-3 text-slate-400 hover:text-slate-600"
+                      className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 disabled:opacity-50"
+                      disabled={isLoading}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
@@ -176,25 +204,37 @@ export default function LoginPage() {
                     size="sm"
                     onClick={() => handleDemoLogin('customer')}
                     disabled={isLoading}
+                    className="flex flex-col items-center py-3 h-auto"
                   >
-                    Customer
+                    <span className="text-lg mb-1">🛍️</span>
+                    <span className="text-xs">Customer</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleDemoLogin('retailer')}
                     disabled={isLoading}
+                    className="flex flex-col items-center py-3 h-auto"
                   >
-                    Retailer
+                    <span className="text-lg mb-1">🏪</span>
+                    <span className="text-xs">Retailer</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleDemoLogin('admin')}
                     disabled={isLoading}
+                    className="flex flex-col items-center py-3 h-auto"
                   >
-                    Admin
+                    <span className="text-lg mb-1">⚙️</span>
+                    <span className="text-xs">Admin</span>
                   </Button>
+                </div>
+
+                <div className="mt-4 text-center">
+                  <p className="text-xs text-slate-500">
+                    Demo accounts redirect to role-specific dashboards
+                  </p>
                 </div>
               </div>
 

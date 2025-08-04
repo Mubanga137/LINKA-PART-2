@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -28,588 +29,184 @@ import {
   Tag,
   Clock,
   X,
-  Package
+  Package,
+  TrendingUp,
+  Sparkles,
+  Eye,
+  Award,
+  CheckCircle,
+  Users,
+  Timer,
+  Flame,
+  Phone,
+  HeadphonesIcon,
+  CreditCard,
+  MessageCircle,
+  ExternalLink,
+  Verified,
+  Crown,
+  ChevronRight,
+  ArrowRight,
+  StarIcon,
+  ThumbsUp,
+  ShieldCheck,
+  Headphones,
+  RefreshCw,
+  Gift,
+  Percent,
+  Smartphone,
+  Shirt,
+  Home,
+  Paintbrush,
+  Dumbbell,
+  BookOpen,
+  Gem,
+  UtensilsCrossed,
+  Palette
 } from "lucide-react";
 import { MarketplaceProvider, useCart, useFavorites } from "@/contexts/marketplace-context";
 import { ProductDetailModal } from "@/components/marketplace/ProductDetailModal";
 import { CategoryNavigation, HorizontalCategoryNav } from "@/components/marketplace/CategoryNavigation";
 import { OptimizedProductCard } from "@/components/marketplace/OptimizedProductCard";
+import { SmartSearch } from "@/components/marketplace/smart-search";
+import { TrendingNowSection } from "@/components/marketplace/trending-now-section";
+import { RecommendedSection } from "@/components/marketplace/recommended-section";
+import { VerifiedVendorsSection } from "@/components/marketplace/verified-vendors-section";
+import { MobileBottomNav } from "@/components/marketplace/mobile-bottom-nav";
 import type { Product, MarketplaceFilters, Category } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
 
-// Mock data for demonstration
-const mockCategories: Category[] = [
-  { id: "1", name: "Electronics", slug: "electronics", icon: "📱", productCount: 9 },
-  { id: "2", name: "Fashion", slug: "fashion", icon: "👕", productCount: 6 },
-  { id: "3", name: "Home & Garden", slug: "home-garden", icon: "🏠", productCount: 7 },
-  { id: "4", name: "Health & Beauty", slug: "health-beauty", icon: "💄", productCount: 3 },
-  { id: "5", name: "Sports & Outdoors", slug: "sports", icon: "⚽", productCount: 4 },
-  { id: "6", name: "Books & Media", slug: "books", icon: "📚", productCount: 3 },
-  { id: "7", name: "Jewelry & Accessories", slug: "jewelry", icon: "💎", productCount: 1 }
-];
-
-const mockProducts: Product[] = [
-  // Electronics Category
+// Enhanced mock data with trending vendors and featured content
+const mockCategories = [
   {
     id: "1",
-    name: "4K Smart TV 55-inch",
-    description: "Ultra HD Smart TV with built-in streaming apps and crystal clear display",
-    price: 599.99,
-    originalPrice: 749.99,
-    images: ["https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&q=80"],
-    category: "Electronics",
-    inStock: true,
-    stockQuantity: 15,
-    rating: 4.7,
-    reviewCount: 234,
-    tags: ["tv", "smart", "4k", "entertainment"],
-    vendor: { id: "v1", name: "Electronics Hub Zambia", logo: "" },
+    name: "Electronics",
+    slug: "electronics",
+    icon: Smartphone,
+    productCount: 1248,
     featured: true,
-    discountPercentage: 20,
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    color: "from-blue-500 to-indigo-600",
+    bgColor: "from-blue-50 to-indigo-50"
   },
   {
     id: "2",
-    name: "Wireless Gaming Controller",
-    description: "Professional wireless controller with precision controls for gaming",
-    price: 79.99,
-    images: ["https://images.unsplash.com/photo-1592840062661-afe1e104c5a4?w=800&q=80"],
-    category: "Electronics",
-    inStock: true,
-    stockQuantity: 67,
-    rating: 4.5,
-    reviewCount: 189,
-    tags: ["gaming", "wireless", "controller", "electronics"],
-    vendor: { id: "v1", name: "Electronics Hub Zambia", logo: "" },
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    name: "Fashion",
+    slug: "fashion",
+    icon: Shirt,
+    productCount: 892,
+    featured: true,
+    color: "from-pink-500 to-rose-600",
+    bgColor: "from-pink-50 to-rose-50"
   },
   {
     id: "3",
-    name: "Bluetooth Speaker System",
-    description: "High-quality portable Bluetooth speaker with rich bass and crystal clear sound",
-    price: 149.99,
-    originalPrice: 199.99,
-    images: ["https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80"],
-    category: "Electronics",
-    inStock: true,
-    stockQuantity: 34,
-    rating: 4.6,
-    reviewCount: 145,
-    tags: ["bluetooth", "speaker", "audio", "portable"],
-    vendor: { id: "v2", name: "Audio Pro Zambia", logo: "" },
-    discountPercentage: 25,
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    name: "Home & Garden",
+    slug: "home-garden",
+    icon: Home,
+    productCount: 567,
+    color: "from-green-500 to-emerald-600",
+    bgColor: "from-green-50 to-emerald-50"
   },
   {
     id: "4",
-    name: "Smartphone 128GB",
-    description: "Latest smartphone with advanced camera system and long-lasting battery",
-    price: 399.99,
-    images: ["https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80"],
-    category: "Electronics",
-    inStock: true,
-    stockQuantity: 28,
-    rating: 4.8,
-    reviewCount: 312,
-    tags: ["smartphone", "mobile", "camera", "technology"],
-    vendor: { id: "v3", name: "Mobile Tech Zambia", logo: "" },
-    featured: true,
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    name: "Health & Beauty",
+    slug: "health-beauty",
+    icon: Sparkles,
+    productCount: 334,
+    color: "from-purple-500 to-violet-600",
+    bgColor: "from-purple-50 to-violet-50"
   },
   {
     id: "5",
-    name: "Laptop Computer 15-inch",
-    description: "Powerful laptop perfect for work, study, and entertainment",
-    price: 799.99,
-    originalPrice: 999.99,
-    images: ["https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80"],
-    category: "Electronics",
-    inStock: true,
-    stockQuantity: 12,
-    rating: 4.7,
-    reviewCount: 98,
-    tags: ["laptop", "computer", "work", "study"],
-    vendor: { id: "v4", name: "Computer World Zambia", logo: "" },
-    discountPercentage: 20,
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    name: "Sports & Outdoors",
+    slug: "sports",
+    icon: Dumbbell,
+    productCount: 423,
+    color: "from-orange-500 to-amber-600",
+    bgColor: "from-orange-50 to-amber-50"
   },
   {
     id: "6",
-    name: "Wireless Earbuds Pro",
-    description: "Premium wireless earbuds with active noise cancellation",
-    price: 179.99,
-    images: ["https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=800&q=80"],
-    category: "Electronics",
-    inStock: true,
-    stockQuantity: 56,
-    rating: 4.4,
-    reviewCount: 167,
-    tags: ["earbuds", "wireless", "audio", "noise-cancelling"],
-    vendor: { id: "v2", name: "Audio Pro Zambia", logo: "" },
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    name: "Books & Media",
+    slug: "books",
+    icon: BookOpen,
+    productCount: 198,
+    color: "from-teal-500 to-cyan-600",
+    bgColor: "from-teal-50 to-cyan-50"
   },
-
-  // Fashion Category
   {
     id: "7",
-    name: "Traditional Chitenge Dress",
-    description: "Beautiful handmade chitenge dress showcasing Zambian traditional patterns",
-    price: 45.99,
-    images: ["https://images.unsplash.com/photo-1594736797933-d0300ad942ed?w=800&q=80"],
-    category: "Fashion",
-    inStock: true,
-    stockQuantity: 23,
-    rating: 4.9,
-    reviewCount: 87,
-    tags: ["traditional", "chitenge", "dress", "zambian"],
-    vendor: { id: "v5", name: "Zambian Heritage Fashion", logo: "" },
+    name: "Jewelry & Accessories",
+    slug: "jewelry",
+    icon: Gem,
+    productCount: 156,
     featured: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    color: "from-yellow-500 to-orange-600",
+    bgColor: "from-yellow-50 to-orange-50"
   },
   {
     id: "8",
-    name: "Men's Business Suit",
-    description: "Professional tailored business suit perfect for office and formal events",
-    price: 189.99,
-    originalPrice: 249.99,
-    images: ["https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&q=80"],
-    category: "Fashion",
-    inStock: true,
-    stockQuantity: 18,
-    rating: 4.6,
-    reviewCount: 124,
-    tags: ["suit", "business", "formal", "mens"],
-    vendor: { id: "v6", name: "Elegant Tailors Lusaka", logo: "" },
-    discountPercentage: 24,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    name: "Food & Beverages",
+    slug: "food",
+    icon: UtensilsCrossed,
+    productCount: 445,
+    color: "from-red-500 to-pink-600",
+    bgColor: "from-red-50 to-pink-50"
   },
   {
     id: "9",
-    name: "Women's Casual Blouse",
-    description: "Comfortable and stylish blouse perfect for everyday wear",
-    price: 29.99,
-    images: ["https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=800&q=80"],
-    category: "Fashion",
-    inStock: true,
-    stockQuantity: 45,
-    rating: 4.3,
-    reviewCount: 89,
-    tags: ["blouse", "casual", "womens", "comfortable"],
-    vendor: { id: "v7", name: "Fashion Forward Zambia", logo: "" },
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "10",
-    name: "Leather Shoes - Oxford Style",
-    description: "Genuine leather Oxford shoes handcrafted by local artisans",
-    price: 89.99,
-    images: ["https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80"],
-    category: "Fashion",
-    inStock: true,
-    stockQuantity: 34,
-    rating: 4.7,
-    reviewCount: 156,
-    tags: ["shoes", "leather", "oxford", "formal"],
-    vendor: { id: "v8", name: "Lusaka Leather Works", logo: "" },
+    name: "Traditional Crafts",
+    slug: "crafts",
+    icon: Palette,
+    productCount: 267,
     featured: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
+    color: "from-indigo-500 to-purple-600",
+    bgColor: "from-indigo-50 to-purple-50"
+  }
+];
 
-  // Home & Garden Category
+const featuredVendors = [
   {
-    id: "11",
-    name: "Handwoven Basket Set",
-    description: "Beautiful set of traditional Zambian handwoven baskets for storage and decoration",
-    price: 65.99,
-    images: ["https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"],
-    category: "Home & Garden",
-    inStock: true,
-    stockQuantity: 19,
+    id: "v1",
+    name: "Electronics Hub Zambia",
+    logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&q=80",
     rating: 4.8,
-    reviewCount: 73,
-    tags: ["baskets", "handwoven", "traditional", "storage"],
-    vendor: { id: "v9", name: "Zambian Craft Collective", logo: "" },
-    featured: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    reviewCount: 1240,
+    verified: true,
+    products: 89,
+    specialties: ["Electronics", "Gaming"],
+    badge: "Top Seller"
   },
   {
-    id: "12",
-    name: "Ceramic Dinnerware Set",
-    description: "Elegant ceramic dinnerware set perfect for family dining and entertaining",
-    price: 79.99,
-    originalPrice: 99.99,
-    images: ["https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&q=80"],
-    category: "Home & Garden",
-    inStock: true,
-    stockQuantity: 27,
-    rating: 4.5,
-    reviewCount: 112,
-    tags: ["dinnerware", "ceramic", "tableware", "kitchen"],
-    vendor: { id: "v10", name: "Home Essentials Zambia", logo: "" },
-    discountPercentage: 20,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "13",
-    name: "Garden Tool Set",
-    description: "Complete gardening tool set for maintaining your home garden",
-    price: 49.99,
-    images: ["https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80"],
-    category: "Home & Garden",
-    inStock: true,
-    stockQuantity: 41,
-    rating: 4.4,
-    reviewCount: 95,
-    tags: ["garden", "tools", "gardening", "outdoor"],
-    vendor: { id: "v11", name: "Green Thumb Zambia", logo: "" },
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "14",
-    name: "Decorative Wall Art",
-    description: "Local artist-created wall art featuring Zambian landscapes and culture",
-    price: 125.99,
-    images: ["https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=800&q=80"],
-    category: "Home & Garden",
-    inStock: true,
-    stockQuantity: 8,
+    id: "v2",
+    name: "Zambian Heritage Fashion",
+    logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&q=80",
     rating: 4.9,
-    reviewCount: 45,
-    tags: ["art", "wall", "decoration", "zambian"],
-    vendor: { id: "v12", name: "Zambian Artists Gallery", logo: "" },
-    featured: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-
-  // Health & Beauty Category
-  {
-    id: "15",
-    name: "Natural Soap Collection",
-    description: "Handmade natural soaps with indigenous ingredients and essential oils",
-    price: 24.99,
-    images: ["https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80"],
-    category: "Health & Beauty",
-    inStock: true,
-    stockQuantity: 67,
-    rating: 4.6,
-    reviewCount: 134,
-    tags: ["soap", "natural", "handmade", "skincare"],
-    vendor: { id: "v13", name: "Natural Beauty Zambia", logo: "" },
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    reviewCount: 987,
+    verified: true,
+    products: 156,
+    specialties: ["Traditional", "Fashion"],
+    badge: "Choice Award"
   },
   {
-    id: "16",
-    name: "Herbal Tea Blend",
-    description: "Traditional Zambian herbal tea blend for wellness and relaxation",
-    price: 18.99,
-    images: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80"],
-    category: "Health & Beauty",
-    inStock: true,
-    stockQuantity: 89,
+    id: "v3",
+    name: "Craft Collective ZM",
+    logo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=100&q=80",
     rating: 4.7,
-    reviewCount: 76,
-    tags: ["tea", "herbal", "wellness", "traditional"],
-    vendor: { id: "v14", name: "Wellness Herbs Zambia", logo: "" },
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "17",
-    name: "Organic Face Cream",
-    description: "Premium organic face cream with natural moisturizing properties",
-    price: 39.99,
-    originalPrice: 49.99,
-    images: ["https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80"],
-    category: "Health & Beauty",
-    inStock: true,
-    stockQuantity: 45,
-    rating: 4.8,
-    reviewCount: 98,
-    tags: ["skincare", "organic", "moisturizer", "beauty"],
-    vendor: { id: "v13", name: "Natural Beauty Zambia", logo: "" },
-    discountPercentage: 20,
-    featured: true,
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
+    reviewCount: 654,
+    verified: true,
+    products: 73,
+    specialties: ["Handmade", "Crafts"],
+    badge: "Artisan Verified"
+  }
+];
 
-  // Sports & Outdoors Category
+const flashSaleProducts: Product[] = [
   {
-    id: "18",
-    name: "Hiking Backpack 40L",
-    description: "Durable hiking backpack perfect for outdoor adventures and camping",
-    price: 89.99,
-    images: ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"],
-    category: "Sports & Outdoors",
-    inStock: true,
-    stockQuantity: 23,
-    rating: 4.5,
-    reviewCount: 67,
-    tags: ["backpack", "hiking", "outdoor", "camping"],
-    vendor: { id: "v15", name: "Adventure Gear Zambia", logo: "" },
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "19",
-    name: "Football Jersey - Zambia National Team",
-    description: "Official replica jersey of the Zambia national football team",
-    price: 35.99,
-    images: ["https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80"],
-    category: "Sports & Outdoors",
-    inStock: true,
-    stockQuantity: 78,
-    rating: 4.7,
-    reviewCount: 189,
-    tags: ["football", "jersey", "zambia", "sports"],
-    vendor: { id: "v16", name: "Sports Fan Zone", logo: "" },
-    featured: true,
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "20",
-    name: "Fitness Equipment Set",
-    description: "Complete home fitness equipment set for strength training and cardio",
-    price: 159.99,
-    originalPrice: 199.99,
-    images: ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"],
-    category: "Sports & Outdoors",
-    inStock: true,
-    stockQuantity: 15,
-    rating: 4.6,
-    reviewCount: 93,
-    tags: ["fitness", "equipment", "home", "exercise"],
-    vendor: { id: "v17", name: "Fit Life Zambia", logo: "" },
-    discountPercentage: 20,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-
-  // Books & Media Category
-  {
-    id: "21",
-    name: "Zambian Literature Collection",
-    description: "Comprehensive collection of contemporary Zambian literature and poetry",
-    price: 45.99,
-    images: ["https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80"],
-    category: "Books & Media",
-    inStock: true,
-    stockQuantity: 34,
-    rating: 4.9,
-    reviewCount: 67,
-    tags: ["books", "literature", "zambian", "poetry"],
-    vendor: { id: "v18", name: "Zambian Writers Hub", logo: "" },
-    featured: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "22",
-    name: "Educational Children's Books",
-    description: "Set of educational children's books featuring African stories and culture",
-    price: 29.99,
-    images: ["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"],
-    category: "Books & Media",
-    inStock: true,
-    stockQuantity: 56,
-    rating: 4.8,
-    reviewCount: 124,
-    tags: ["children", "education", "books", "african"],
-    vendor: { id: "v19", name: "Little Readers Zambia", logo: "" },
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-
-  // Additional Traditional Crafts
-  {
-    id: "23",
-    name: "Traditional African Headwrap",
-    description: "Authentic colorful African headwrap with beautiful embroidered patterns",
-    price: 32.99,
-    images: ["https://images.pexels.com/photos/3021563/pexels-photo-3021563.jpeg"],
-    category: "Fashion",
-    inStock: true,
-    stockQuantity: 28,
-    rating: 4.8,
-    reviewCount: 56,
-    tags: ["headwrap", "traditional", "colorful", "african"],
-    vendor: { id: "v20", name: "African Heritage Textiles", logo: "" },
-    featured: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "24",
-    name: "Handmade Beaded Jewelry Set",
-    description: "Beautiful handcrafted jewelry with traditional African beads and feathers",
-    price: 58.99,
-    originalPrice: 79.99,
-    images: ["https://images.pexels.com/photos/709617/pexels-photo-709617.jpeg"],
-    category: "Jewelry & Accessories",
-    inStock: true,
-    stockQuantity: 15,
-    rating: 4.9,
-    reviewCount: 42,
-    tags: ["jewelry", "handmade", "beads", "traditional"],
-    vendor: { id: "v21", name: "Zambian Artisan Jewelry", logo: "" },
-    discountPercentage: 26,
-    featured: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "25",
-    name: "Artisan Ceramic Pottery Collection",
-    description: "Elegant handcrafted ceramic pottery perfect for home decoration",
-    price: 89.99,
-    images: ["https://images.pexels.com/photos/19884207/pexels-photo-19884207.png"],
-    category: "Home & Garden",
-    inStock: true,
-    stockQuantity: 12,
-    rating: 4.7,
-    reviewCount: 38,
-    tags: ["pottery", "ceramic", "handcrafted", "decoration"],
-    vendor: { id: "v22", name: "Pottery Masters Zambia", logo: "" },
-    featured: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "26",
-    name: "Wicker Basket Collection",
-    description: "Beautiful handwoven wicker baskets and accessories for storage and decor",
-    price: 45.99,
-    images: ["https://images.pexels.com/photos/9173943/pexels-photo-9173943.jpeg"],
-    category: "Home & Garden",
-    inStock: true,
-    stockQuantity: 24,
-    rating: 4.6,
-    reviewCount: 67,
-    tags: ["wicker", "baskets", "handwoven", "storage"],
-    vendor: { id: "v23", name: "Traditional Weavers Co-op", logo: "" },
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "27",
-    name: "Modern Ceramic Dinnerware",
-    description: "Clean, minimalist ceramic dinnerware set perfect for modern dining",
-    price: 129.99,
-    originalPrice: 159.99,
-    images: ["https://images.pexels.com/photos/3756655/pexels-photo-3756655.jpeg"],
-    category: "Home & Garden",
-    inStock: true,
-    stockQuantity: 18,
-    rating: 4.8,
-    reviewCount: 94,
-    tags: ["ceramic", "dinnerware", "modern", "minimalist"],
-    vendor: { id: "v24", name: "Modern Home Essentials", logo: "" },
-    discountPercentage: 19,
-    featured: true,
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "28",
-    name: "Professional Stationery Set",
-    description: "Premium office stationery set for professional and creative work",
-    price: 39.99,
-    images: ["https://images.pexels.com/photos/29765803/pexels-photo-29765803.jpeg"],
-    category: "Books & Media",
-    inStock: true,
-    stockQuantity: 45,
-    rating: 4.5,
-    reviewCount: 78,
-    tags: ["stationery", "office", "professional", "workspace"],
-    vendor: { id: "v25", name: "Office Pro Zambia", logo: "" },
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "29",
-    name: "Premium Yoga Mat",
-    description: "High-quality cork yoga mat perfect for indoor exercise and meditation",
-    price: 67.99,
-    images: ["https://images.pexels.com/photos/8436582/pexels-photo-8436582.jpeg"],
-    category: "Sports & Outdoors",
-    inStock: true,
-    stockQuantity: 32,
-    rating: 4.7,
-    reviewCount: 156,
-    tags: ["yoga", "exercise", "cork", "meditation"],
-    vendor: { id: "v26", name: "Wellness & Fitness Zambia", logo: "" },
-    featured: true,
-    fastDelivery: true,
-    freeShipping: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-
-  // Hot Deals Products
-  {
-    id: "30",
+    id: "fs1",
     name: "Gaming Headset Pro",
-    description: "Professional gaming headset with 7.1 surround sound and noise cancellation",
+    description: "Professional gaming headset with 7.1 surround sound",
     price: 79.99,
     originalPrice: 149.99,
     images: ["https://images.unsplash.com/photo-1585298723682-7115561c51b7?w=800&q=80"],
@@ -618,20 +215,21 @@ const mockProducts: Product[] = [
     stockQuantity: 25,
     rating: 4.8,
     reviewCount: 189,
-    tags: ["gaming", "headset", "audio", "pro"],
-    vendor: { id: "v27", name: "Gaming World Zambia", logo: "" },
+    tags: ["gaming", "headset", "flash-sale"],
+    vendor: { id: "v1", name: "Electronics Hub Zambia", logo: "" },
     discountPercentage: 47,
     featured: true,
     fastDelivery: true,
     freeShipping: true,
     hotDeal: true,
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    timeLeft: "2h 34m"
   },
   {
-    id: "31",
+    id: "fs2",
     name: "Smart Fitness Watch",
-    description: "Advanced fitness tracker with heart rate monitoring and GPS",
+    description: "Advanced fitness tracker with heart rate monitoring",
     price: 159.99,
     originalPrice: 299.99,
     images: ["https://images.unsplash.com/photo-1544117519-31a4b719223d?w=800&q=80"],
@@ -640,573 +238,1161 @@ const mockProducts: Product[] = [
     stockQuantity: 15,
     rating: 4.7,
     reviewCount: 245,
-    tags: ["smartwatch", "fitness", "tracker", "health"],
-    vendor: { id: "v28", name: "Wearable Tech Zambia", logo: "" },
+    tags: ["smartwatch", "fitness", "flash-sale"],
+    vendor: { id: "v1", name: "Electronics Hub Zambia", logo: "" },
     discountPercentage: 47,
     featured: true,
     fastDelivery: true,
     freeShipping: true,
     hotDeal: true,
     createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "32",
-    name: "Designer Handbag Collection",
-    description: "Luxury designer handbag made from genuine leather",
-    price: 89.99,
-    originalPrice: 179.99,
-    images: ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"],
-    category: "Fashion",
-    inStock: true,
-    stockQuantity: 8,
-    rating: 4.9,
-    reviewCount: 87,
-    tags: ["handbag", "designer", "leather", "luxury"],
-    vendor: { id: "v29", name: "Luxury Fashion Zambia", logo: "" },
-    discountPercentage: 50,
-    featured: true,
-    freeShipping: true,
-    hotDeal: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: "33",
-    name: "Wireless Charging Station",
-    description: "Multi-device wireless charging station for phones, watches, and earbuds",
-    price: 49.99,
-    originalPrice: 99.99,
-    images: ["https://images.unsplash.com/photo-1601972602237-8c79241e468b?w=800&q=80"],
-    category: "Electronics",
-    inStock: true,
-    stockQuantity: 30,
-    rating: 4.6,
-    reviewCount: 156,
-    tags: ["wireless", "charging", "station", "multi-device"],
-    vendor: { id: "v30", name: "Tech Accessories Zambia", logo: "" },
-    discountPercentage: 50,
-    featured: true,
-    fastDelivery: true,
-    freeShipping: true,
-    hotDeal: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    timeLeft: "2h 34m"
   }
 ];
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30
+    }
+  }
+};
+
+const sparkleVariants = {
+  initial: { scale: 0, rotate: 0 },
+  animate: { 
+    scale: [0, 1, 0], 
+    rotate: [0, 180, 360],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      repeatType: "loop" as const
+    }
+  }
+};
+
+// Enhanced Hero Section Component
+function EnhancedHeroSection() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [animateSearch, setAnimateSearch] = useState(false);
+
+  const heroSlides = [
+    {
+      title: "Discover Amazing Products",
+      subtitle: "From Local Zambian Vendors",
+      description: "Support local businesses while finding exactly what you need",
+      cta: "Explore Now",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+      color: "from-blue-600 to-purple-600"
+    },
+    {
+      title: "Flash Sale Alert!",
+      subtitle: "Up to 50% Off Selected Items",
+      description: "Limited time offers on trending products",
+      cta: "Shop Sale",
+      image: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=800&q=80",
+      color: "from-red-500 to-orange-500"
+    },
+    {
+      title: "Verified Vendors",
+      subtitle: "Quality Guaranteed",
+      description: "Shop with confidence from our trusted seller network",
+      cta: "Browse Vendors",
+      image: "https://images.unsplash.com/photo-1556740758-90de374c12ad?w=800&q=80",
+      color: "from-green-500 to-teal-500"
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery) {
+      setAnimateSearch(true);
+      const timer = setTimeout(() => setAnimateSearch(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [searchQuery]);
+
+  return (
+    <motion.section
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-green-50 py-12 md:py-20"
+    >
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            variants={sparkleVariants}
+            initial="initial"
+            animate="animate"
+            style={{ 
+              animationDelay: `${i * 0.5}s`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`
+            }}
+            className="absolute w-4 h-4 text-blue-400 opacity-60"
+          >
+            <Sparkles className="w-full h-full" />
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-100 to-green-100 px-4 py-2 text-sm border border-blue-200/50"
+              >
+                <ShoppingBag className="mr-2 h-4 w-4 text-blue-600" />
+                <span className="text-blue-800 font-medium">Zambia's Premier E-commerce Platform</span>
+              </motion.div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentSlide}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="space-y-4"
+                >
+                  <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+                    <span className="text-slate-900">{heroSlides[currentSlide].title}</span>
+                    <span className={`block bg-gradient-to-r ${heroSlides[currentSlide].color} bg-clip-text text-transparent`}>
+                      {heroSlides[currentSlide].subtitle}
+                    </span>
+                  </h1>
+                  
+                  <p className="text-xl text-slate-600 leading-relaxed">
+                    {heroSlides[currentSlide].description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Smart Search Bar */}
+            <motion.div variants={itemVariants} className="relative">
+              <SmartSearch
+                onSearch={(query) => {
+                  setSearchQuery(query);
+                  // Handle search logic here
+                  console.log('Search query:', query);
+                }}
+                placeholder="Search for products, vendors, or categories..."
+              />
+            </motion.div>
+
+            {/* Quick Actions - Enhanced with Color Palettes */}
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+              {[
+                {
+                  icon: Star,
+                  label: "Featured",
+                  color: "from-yellow-400 to-orange-400",
+                  hoverColor: "from-yellow-500 to-orange-500",
+                  textColor: "text-yellow-700",
+                  href: "/marketplace/featured"
+                },
+                {
+                  icon: Zap,
+                  label: "Flash Sale",
+                  color: "from-red-400 to-pink-400",
+                  hoverColor: "from-red-500 to-pink-500",
+                  textColor: "text-red-700",
+                  href: "/marketplace/flash-sale"
+                },
+                {
+                  icon: Crown,
+                  label: "Premium",
+                  color: "from-purple-400 to-indigo-400",
+                  hoverColor: "from-purple-500 to-indigo-500",
+                  textColor: "text-purple-700",
+                  href: "/marketplace/premium"
+                },
+                {
+                  icon: Truck,
+                  label: "Free Ship",
+                  color: "from-green-400 to-emerald-400",
+                  hoverColor: "from-green-500 to-emerald-500",
+                  textColor: "text-green-700",
+                  href: "/marketplace/free-shipping"
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  whileHover={{
+                    scale: 1.08,
+                    y: -3,
+                    rotate: [0, -1, 1, 0],
+                    transition: { duration: 0.3 }
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    delay: 0.8 + index * 0.15,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }}
+                >
+                  <Button
+                    variant="outline"
+                    className={`
+                      bg-gradient-to-r ${item.color} bg-opacity-20
+                      border-0 hover:bg-opacity-30
+                      hover:shadow-xl hover:shadow-${item.color.split('-')[1]}-500/25
+                      transition-all duration-500 ease-out
+                      backdrop-blur-sm
+                      hover:bg-gradient-to-r hover:${item.hoverColor}
+                      ${item.textColor} hover:text-white
+                      font-semibold px-6 py-3 rounded-xl
+                      group overflow-hidden relative
+                    `}
+                    asChild
+                  >
+                    <Link href={item.href}>
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ background: `linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to))` }}
+                      />
+                      <motion.div
+                        className="relative z-10 flex items-center"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <item.icon className="h-4 w-4 mr-2" />
+                        {item.label}
+                      </motion.div>
+                    </Link>
+                  </Button>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Hero CTA */}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button 
+                  size="lg"
+                  className={`bg-gradient-to-r ${heroSlides[currentSlide].color} text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}
+                >
+                  {heroSlides[currentSlide].cta}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </motion.div>
+              
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="border-2 border-gray-300 hover:border-gray-400 px-8 py-4 rounded-xl font-semibold"
+                >
+                  Browse Categories
+                </Button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Content - Featured Vendors */}
+          <motion.div variants={itemVariants} className="space-y-6">
+            <div className="text-center lg:text-left">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Featured Vendors</h3>
+              <p className="text-gray-600">Trusted sellers with excellent ratings</p>
+            </div>
+
+            <div className="grid gap-4">
+              {featuredVendors.slice(0, 3).map((vendor, index) => (
+                <motion.div
+                  key={vendor.id}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 + index * 0.2 }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
+                  className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 cursor-pointer"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <Image
+                        src={vendor.logo}
+                        alt={vendor.name}
+                        width={60}
+                        height={60}
+                        className="rounded-full object-cover"
+                      />
+                      {vendor.verified && (
+                        <div className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1">
+                          <CheckCircle className="h-3 w-3 text-white" />
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-semibold text-gray-900">{vendor.name}</h4>
+                        <Badge className="bg-green-100 text-green-700 text-xs px-2 py-1">
+                          {vendor.badge}
+                        </Badge>
+                      </div>
+                      
+                      <div className="flex items-center gap-4 text-sm text-gray-600">
+                        <div className="flex items-center gap-1">
+                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                          <span>{vendor.rating}</span>
+                          <span>({vendor.reviewCount})</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Package className="h-4 w-4" />
+                          <span>{vendor.products} products</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-1 mt-2">
+                        {vendor.specialties.map((specialty) => (
+                          <Badge key={specialty} variant="outline" className="text-xs">
+                            {specialty}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <ChevronRight className="h-5 w-5 text-gray-400" />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button 
+                variant="outline" 
+                className="w-full border-2 border-dashed border-gray-300 hover:border-blue-400 hover:bg-blue-50 text-gray-600 hover:text-blue-600 py-3 rounded-xl transition-all duration-300"
+                asChild
+              >
+                <Link href="/retailers">
+                  View All Vendors
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Hero Slide Indicators */}
+        <motion.div 
+          variants={itemVariants}
+          className="flex justify-center mt-12 gap-2"
+        >
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide ? 'bg-blue-600 w-8' : 'bg-gray-300'
+              }`}
+            />
+          ))}
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+}
+
+// Shop by Category Section
+function ShopByCategorySection() {
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+      className="py-16 bg-white"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div variants={itemVariants} className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Shop by Category
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Explore our wide range of products from verified local vendors
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-8"
+        >
+          {mockCategories.slice(0, 10).map((category, index) => (
+            <motion.div
+              key={category.id}
+              variants={itemVariants}
+              whileHover={{
+                scale: 1.08,
+                y: -8,
+                rotateY: 5,
+                transition: { duration: 0.4, ease: "easeOut" }
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="group cursor-pointer"
+            >
+              <Link href={`/categories/${category.slug}`}>
+                <Card className={`
+                  relative overflow-hidden text-center p-6
+                  hover:shadow-2xl transition-all duration-500
+                  border-0 shadow-lg rounded-2xl
+                  bg-gradient-to-br ${category.bgColor}
+                  hover:bg-gradient-to-br hover:${category.color.replace('500', '100').replace('600', '200')}
+                  group-hover:border-white/50
+                `}>
+                  <CardContent className="p-0 relative z-10">
+                    {/* Animated Background Glow */}
+                    <motion.div
+                      className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}
+                      whileHover={{ opacity: 0.15 }}
+                    />
+
+                    {/* Icon Container */}
+                    <motion.div
+                      whileHover={{
+                        scale: 1.2,
+                        rotate: [0, -10, 10, 0],
+                        transition: { duration: 0.6 }
+                      }}
+                      className={`
+                        w-16 h-16 mx-auto mb-4 rounded-2xl
+                        bg-gradient-to-r ${category.color}
+                        flex items-center justify-center
+                        shadow-lg group-hover:shadow-xl
+                        transition-all duration-300
+                      `}
+                    >
+                      <category.icon className="h-8 w-8 text-white" />
+                    </motion.div>
+
+                    <motion.h3
+                      className="font-bold text-gray-900 mb-2 group-hover:text-gray-800 transition-colors text-lg"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {category.name}
+                    </motion.h3>
+
+                    <motion.p
+                      className="text-sm text-gray-600 mb-4 font-medium"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      {category.productCount.toLocaleString()} items
+                    </motion.p>
+
+                    {category.featured && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ delay: 0.2 + index * 0.1 }}
+                      >
+                        <Badge className={`
+                          bg-gradient-to-r ${category.color}
+                          text-white text-xs px-3 py-1 rounded-full
+                          shadow-md group-hover:shadow-lg
+                          animate-pulse
+                        `}>
+                          <Star className="h-3 w-3 mr-1" />
+                          Featured
+                        </Badge>
+                      </motion.div>
+                    )}
+
+                    {/* Floating Particles Effect */}
+                    <motion.div
+                      className="absolute top-2 right-2 w-2 h-2 bg-white/40 rounded-full opacity-0 group-hover:opacity-100"
+                      animate={{
+                        y: [0, -10, 0],
+                        opacity: [0, 1, 0]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: index * 0.2
+                      }}
+                    />
+                    <motion.div
+                      className="absolute bottom-2 left-2 w-1.5 h-1.5 bg-white/30 rounded-full opacity-0 group-hover:opacity-100"
+                      animate={{
+                        y: [0, -8, 0],
+                        opacity: [0, 1, 0]
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        delay: index * 0.3
+                      }}
+                    />
+                  </CardContent>
+                </Card>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="text-center">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg"
+              asChild
+            >
+              <Link href="/categories">
+                Explore All Categories
+                <Grid3X3 className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </motion.div>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+}
+
+// Flash Sales Section
+function FlashSalesSection() {
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 2,
+    minutes: 34,
+    seconds: 15
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft(prev => {
+        let { hours, minutes, seconds } = prev;
+        
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          minutes--;
+          seconds = 59;
+        } else if (hours > 0) {
+          hours--;
+          minutes = 59;
+          seconds = 59;
+        }
+        
+        return { hours, minutes, seconds };
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={containerVariants}
+      className="py-16 bg-gradient-to-r from-red-50 to-orange-50"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div variants={itemVariants} className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <motion.div
+              animate={{ 
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "loop"
+              }}
+              className="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg"
+            >
+              <Flame className="text-white text-2xl" />
+            </motion.div>
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
+                Flash Sales
+                <Badge className="bg-red-500 text-white animate-pulse">LIVE</Badge>
+              </h2>
+              <p className="text-gray-600">Limited time offers - Up to 50% off!</p>
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center bg-white rounded-xl p-4 shadow-lg border"
+          >
+            <div className="flex items-center gap-2 text-red-600 font-bold text-xl">
+              <Timer className="h-5 w-5" />
+              <span>
+                {timeLeft.hours.toString().padStart(2, '0')}:
+                {timeLeft.minutes.toString().padStart(2, '0')}:
+                {timeLeft.seconds.toString().padStart(2, '0')}
+              </span>
+            </div>
+            <p className="text-xs text-gray-500 mt-1">Time remaining</p>
+          </motion.div>
+        </motion.div>
+
+        <motion.div 
+          variants={containerVariants}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6"
+        >
+          {flashSaleProducts.concat(flashSaleProducts).slice(0, 4).map((product, index) => (
+            <motion.div
+              key={`${product.id}-${index}`}
+              variants={itemVariants}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="group"
+            >
+              <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300">
+                <div className="relative">
+                  <Image
+                    src={product.images[0]}
+                    alt={product.name}
+                    width={300}
+                    height={300}
+                    className="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  
+                  <div className="absolute top-2 left-2 flex flex-col gap-1">
+                    <Badge className="bg-red-500 text-white text-xs px-2 py-1 animate-pulse">
+                      <Flame className="h-3 w-3 mr-1" />
+                      Flash Sale
+                    </Badge>
+                    <Badge className="bg-red-600 text-white text-xs px-2 py-1">
+                      -{product.discountPercentage}%
+                    </Badge>
+                  </div>
+
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-2 bg-white/80 hover:bg-white rounded-full"
+                  >
+                    <Heart className="h-4 w-4" />
+                  </Button>
+                </div>
+
+                <CardContent className="p-4">
+                  <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
+                    {product.name}
+                  </h3>
+                  
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-xl font-bold text-red-600">
+                      K{product.price.toFixed(2)}
+                    </span>
+                    <span className="text-sm text-gray-400 line-through">
+                      K{product.originalPrice?.toFixed(2)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-sm text-gray-600 mb-3">
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                      <span>{product.rating}</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-red-600">
+                      <Timer className="h-3 w-3" />
+                      <span>{product.timeLeft}</span>
+                    </div>
+                  </div>
+
+                  <Button 
+                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
+                  >
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Buy Now
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="text-center mt-8">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button 
+              size="lg"
+              variant="outline"
+              className="border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white px-8 py-4 rounded-xl font-semibold"
+              asChild
+            >
+              <Link href="/hot-deals">
+                View All Flash Sales
+                <Flame className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </motion.div>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+}
+
+// Support & Trust Section
+function SupportTrustSection() {
+  const trustFeatures = [
+    {
+      icon: ShieldCheck,
+      title: "Secure Payments",
+      description: "256-bit SSL encryption for all transactions",
+      color: "from-blue-500 to-blue-600"
+    },
+    {
+      icon: Truck,
+      title: "Fast Delivery",
+      description: "Same-day delivery in major cities",
+      color: "from-green-500 to-green-600"
+    },
+    {
+      icon: Headphones,
+      title: "24/7 Support",
+      description: "Round-the-clock customer assistance",
+      color: "from-purple-500 to-purple-600"
+    },
+    {
+      icon: RefreshCw,
+      title: "Easy Returns",
+      description: "30-day hassle-free return policy",
+      color: "from-orange-500 to-orange-600"
+    }
+  ];
+
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={containerVariants}
+      className="py-16 bg-gray-50"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div variants={itemVariants} className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Why Choose Linka?
+          </h2>
+          <p className="text-xl text-gray-600">
+            Your security and satisfaction are our top priorities
+          </p>
+        </motion.div>
+
+        <motion.div 
+          variants={containerVariants}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {trustFeatures.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
+              className="text-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center shadow-lg`}
+              >
+                <feature.icon className="h-8 w-8 text-white" />
+              </motion.div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="text-center mt-12">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border">
+            <div className="flex items-center justify-center gap-8 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-blue-600" />
+                <span>SSL Secured</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-green-600" />
+                <span>Verified Vendors</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="h-5 w-5 text-purple-600" />
+                <span>24/7 Support</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CreditCard className="h-5 w-5 text-orange-600" />
+                <span>Safe Payments</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+}
+
+// Main Marketplace Content Component
 function MarketplaceContent() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState<MarketplaceFilters>({
     sortBy: 'relevance'
   });
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [showFilters, setShowFilters] = useState(false);
-
-  // Handle URL parameters for filters
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const hotDealParam = urlParams.get('filter');
-    if (hotDealParam === 'hotDeal') {
-      setFilters(prev => ({ ...prev, hotDeal: true }));
-    }
-  }, []);
-  
-  const { cart, addToCart, getCartItemCount } = useCart();
-  const { favorites, toggleFavorite, isFavorite } = useFavorites();
-
-  // Filter and sort products
-  const filteredProducts = useMemo(() => {
-    let result = [...mockProducts];
-
-    // Apply search filter
-    if (searchQuery) {
-      result = result.filter(product =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-      );
-    }
-
-    // Apply category filter
-    if (filters.category) {
-      result = result.filter(product => product.category === filters.category);
-    }
-
-    // Apply price range filter
-    if (filters.priceRange) {
-      result = result.filter(product => 
-        product.price >= filters.priceRange![0] && 
-        product.price <= filters.priceRange![1]
-      );
-    }
-
-    // Apply rating filter
-    if (filters.rating) {
-      result = result.filter(product => (product.rating || 0) >= filters.rating!);
-    }
-
-    // Apply in stock filter
-    if (filters.inStock) {
-      result = result.filter(product => product.inStock);
-    }
-
-    // Apply feature filters
-    if (filters.freeShipping) {
-      result = result.filter(product => product.freeShipping);
-    }
-
-    if (filters.fastDelivery) {
-      result = result.filter(product => product.fastDelivery);
-    }
-
-    if (filters.featured) {
-      result = result.filter(product => product.featured);
-    }
-
-    if ((filters as any).hotDeal) {
-      result = result.filter(product => (product as any).hotDeal);
-    }
-
-    // Apply sorting
-    switch (filters.sortBy) {
-      case 'price_low':
-        result.sort((a, b) => a.price - b.price);
-        break;
-      case 'price_high':
-        result.sort((a, b) => b.price - a.price);
-        break;
-      case 'rating':
-        result.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-        break;
-      case 'name':
-        result.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'newest':
-        result.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-        break;
-      case 'discount':
-        result.sort((a, b) => (b.discountPercentage || 0) - (a.discountPercentage || 0));
-        break;
-      default:
-        // relevance - featured items first, then by rating
-        result.sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return (b.rating || 0) - (a.rating || 0);
-        });
-    }
-
-    return result;
-  }, [searchQuery, filters]);
-
-  const handleAddToCart = (product: Product) => {
-    addToCart(product, 1);
-  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen bg-white"
+    >
       <Header />
       
-      <main className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
-        {/* Enhanced Hero Section */}
-        <section className="text-center space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-          <div className="space-y-4">
-            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-50 to-green-50 px-4 py-2 text-sm border border-blue-200/50">
-              <ShoppingBag className="mr-2 h-4 w-4 text-blue-600" />
-              <span className="text-blue-800 font-medium">Zambia's Premier E-commerce Platform</span>
-            </div>
+      <main>
+        <EnhancedHeroSection />
+        <ShopByCategorySection />
+        <FlashSalesSection />
+        <TrendingNowSection
+          onAddToCart={(product) => console.log('Add to cart:', product)}
+          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
+          wishlistedItems={new Set()}
+        />
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-              Shop Local,
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
-                Support Zambian Businesses
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Discover amazing products from verified local vendors. From handmade crafts to modern electronics,
-              find everything you need while supporting the Zambian economy.
-            </p>
-          </div>
-
-
-        </section>
-
-        {/* Search and Filters */}
-        <section className="space-y-4 mb-6">
-          {/* Enhanced Search Bar */}
-          <div className="relative w-full">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 z-10" />
-              <Input
-                type="text"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 text-base rounded-lg border border-gray-200 focus:border-blue-400 focus:ring-0 bg-white transition-all duration-200 tap-target"
-              />
-            </div>
-          </div>
-
-          {/* Quick Filters */}
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-center mb-4">
-            <Button
-              variant={filters.featured ? "default" : "outline"}
-              size="sm"
-              onClick={() => setFilters(prev => ({ ...prev, featured: !prev.featured }))}
-              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm"
-            >
-              ⭐ Featured
-            </Button>
-            <Button
-              variant={(filters as any).hotDeal ? "default" : "outline"}
-              size="sm"
-              onClick={() => setFilters(prev => ({ ...prev, hotDeal: !(prev as any).hotDeal }))}
-              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 text-red-700 hover:from-red-100 hover:to-orange-100"
-            >
-              🔥 Hot Deals
-            </Button>
-            <Button
-              variant={filters.freeShipping ? "default" : "outline"}
-              size="sm"
-              onClick={() => setFilters(prev => ({ ...prev, freeShipping: !prev.freeShipping }))}
-              className="whitespace-nowrap flex-shrink-0 px-4 py-2 text-sm tap-target-sm"
-            >
-              🚚 Free Ship
-            </Button>
-          </div>
-
-          {/* Category Navigation */}
-          <HorizontalCategoryNav
-            categories={mockCategories}
-            selectedCategory={filters.category}
-            onCategorySelect={(categoryId) => {
-              const category = mockCategories.find(c => c.id === categoryId);
-              setFilters(prev => ({
-                ...prev,
-                category: category?.name
-              }));
-            }}
-            className="justify-center"
-          />
-
-          {/* Filter and Sort Controls */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-4">
-              <Sheet open={showFilters} onOpenChange={setShowFilters}>
-                <SheetTrigger asChild>
-                  <Button variant="outline" size="sm">
-                    <SlidersHorizontal className="h-4 w-4 mr-2" />
-                    Filters
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-80">
-                  <div className="space-y-3 sm:space-y-4 lg:space-y-6">
-                    <h3 className="text-lg font-semibold">Filters</h3>
-                    
-                    {/* Price Range */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Price Range</label>
-                      <div className="grid grid-cols-2 gap-2">
-                        <Input
-                          type="number"
-                          placeholder="Min"
-                          value={filters.priceRange?.[0] || ''}
-                          onChange={(e) => setFilters(prev => ({
-                            ...prev,
-                            priceRange: [Number(e.target.value), prev.priceRange?.[1] || 1000]
-                          }))}
-                        />
-                        <Input
-                          type="number"
-                          placeholder="Max"
-                          value={filters.priceRange?.[1] || ''}
-                          onChange={(e) => setFilters(prev => ({
-                            ...prev,
-                            priceRange: [prev.priceRange?.[0] || 0, Number(e.target.value)]
-                          }))}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Features */}
-                    <div className="space-y-3">
-                      <label className="text-sm font-medium">Features</label>
-                      {[
-                        { key: 'inStock', label: 'In Stock Only' },
-                        { key: 'freeShipping', label: 'Free Shipping' },
-                        { key: 'fastDelivery', label: 'Fast Delivery' },
-                        { key: 'featured', label: 'Featured Products' }
-                      ].map(({ key, label }) => (
-                        <div key={key} className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            id={key}
-                            checked={filters[key as keyof MarketplaceFilters] as boolean}
-                            onChange={(e) => setFilters(prev => ({
-                              ...prev,
-                              [key]: e.target.checked
-                            }))}
-                            className="rounded border-gray-300"
-                          />
-                          <label htmlFor={key} className="text-sm">{label}</label>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Clear Filters */}
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setFilters({ sortBy: 'relevance' })}
-                      className="w-full"
-                    >
-                      Clear All Filters
-                    </Button>
-                  </div>
-                </SheetContent>
-              </Sheet>
-
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">Sort by:</span>
-                <select
-                  value={filters.sortBy}
-                  onChange={(e) => setFilters(prev => ({ 
-                    ...prev, 
-                    sortBy: e.target.value as MarketplaceFilters['sortBy'] 
-                  }))}
-                  className="text-sm border rounded-lg px-3 py-1 bg-white"
-                >
-                  <option value="relevance">Relevance</option>
-                  <option value="price_low">Price: Low to High</option>
-                  <option value="price_high">Price: High to Low</option>
-                  <option value="rating">Highest Rated</option>
-                  <option value="newest">Newest</option>
-                  <option value="discount">Best Deals</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-600">View:</span>
-              <div className="flex border rounded-lg">
-                <Button
-                  variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                  size="sm"
-                  onClick={() => setViewMode('grid')}
-                  className="rounded-r-none"
-                >
-                  <Grid3X3 className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant={viewMode === 'list' ? 'default' : 'ghost'}
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                  className="rounded-l-none"
-                >
-                  <List className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Results Count */}
-          <div className="text-center">
-            <p className="text-gray-600">
-              Showing {filteredProducts.length} of {mockProducts.length} products
-              {searchQuery && <span> for "{searchQuery}"</span>}
-            </p>
-          </div>
-        </section>
-
-        {/* Hot Deals Section */}
-        <section className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-white text-2xl">🔥</span>
-              </div>
-              <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Hot Deals</h2>
-                <p className="text-sm text-gray-600">Limited time offers - Up to 50% off!</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="text-sm text-red-600 font-semibold">⏰ Limited Time</div>
-              <div className="text-xs text-gray-500">Ends soon!</div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 sm:gap-4 md:gap-4 lg:gap-4 md:grid-cols-4 lg:grid-cols-4">
-            {mockProducts.filter(product => product.hotDeal).map((product, index) => (
-              <OptimizedProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={handleAddToCart}
-                onToggleFavorite={toggleFavorite}
-                isFavorite={isFavorite(product.id)}
-                priority={index < 2}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* Optimized Products Grid */}
-        <section className="space-y-6 sm:space-y-8">
-          {viewMode === 'grid' ? (
-            <div className="grid grid-cols-2 gap-4 sm:gap-4 md:gap-4 lg:gap-4 md:grid-cols-3 lg:grid-cols-4">
-              {filteredProducts.map((product, index) => (
-                <OptimizedProductCard
-                  key={product.id}
-                  product={product}
-                  onAddToCart={handleAddToCart}
-                  onToggleFavorite={toggleFavorite}
-                  isFavorite={isFavorite(product.id)}
-                  priority={index < 4} // LCP optimization for first 4 products
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-4 sm:space-y-6">
-              {filteredProducts.map((product, index) => (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-blue-200 flex flex-col sm:flex-row"
-                >
-                  <div className="aspect-square sm:w-48 sm:flex-shrink-0 overflow-hidden bg-gray-100">
-                    <Image
-                      src={product.images[0]}
-                      alt={`${product.name} - ${product.description}`}
-                      width={300}
-                      height={300}
-                      className="object-cover w-full h-full"
-                      loading={index < 2 ? "eager" : "lazy"}
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-clamp-lg font-bold text-gray-900 mb-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-clamp-base text-gray-600 mb-3 sm:mb-4">
-                        {product.description}
-                      </p>
-                      <div className="flex items-baseline gap-2 mb-3 sm:mb-4">
-                        <span className="text-2xl font-bold text-gray-900">
-                          K{product.price.toFixed(2)}
-                        </span>
-                        {product.originalPrice && (
-                          <span className="text-sm text-gray-400 line-through">
-                            K{product.originalPrice.toFixed(2)}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex gap-2 sm:gap-3">
-                      <Button
-                        onClick={() => handleAddToCart(product)}
-                        disabled={!product.inStock}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 sm:px-6 rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced flex-1"
-                      >
-                        <ShoppingCart className="h-4 w-4 mr-2" />
-                        Add to Cart
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 px-4 sm:px-6 rounded-lg transition-all duration-200 tap-target focus-visible-enhanced flex-1"
-                        asChild
-                      >
-                        <Link href={`/products/${product.id}`}>
-                          View Details
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* No Results */}
-          {filteredProducts.length === 0 && (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="h-8 w-8 text-gray-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No products found</h3>
-              <p className="text-gray-600 mb-4">
-                Try adjusting your filters or search terms
+        {/* Additional CTA Section for more marketplace features */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="py-16 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Explore More Marketplace Features
+              </h2>
+              <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
+                Discover trending products, browse verified vendors, and shop amazing sales
               </p>
-              <Button onClick={() => {
-                setSearchQuery("");
-                setFilters({ sortBy: 'relevance' });
-              }}>
-                Clear All Filters
-              </Button>
             </div>
-          )}
-        </section>
 
-        {/* Featured Categories */}
-        <section className="mt-8 space-y-4">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Shop by Category</h2>
-            <p className="text-gray-600">Explore our wide range of product categories</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-            {mockCategories.map((category) => (
-              <Card
-                key={category.id}
-                className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                onClick={() => setFilters(prev => ({ ...prev, category: category.name }))}
-              >
-                <CardContent className="p-6 text-center">
-                  <div className="text-3xl mb-3">{category.icon}</div>
-                  <h3 className="font-semibold text-gray-900 mb-1">{category.name}</h3>
-                  <p className="text-sm text-gray-600">{category.productCount} items</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="mt-8 bg-gradient-to-r from-blue-600 via-blue-700 to-green-600 text-white relative overflow-hidden rounded-2xl p-6 sm:p-8 text-center">
-          <div className="absolute inset-0 bg-black/10"></div>
-          <div className="relative z-10 space-y-4 sm:space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              Join Our Marketplace
-            </h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Start selling your products to thousands of customers across Zambia. 
-              Join our growing community of successful entrepreneurs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-white text-blue-600 hover:bg-gray-50 font-semibold px-8 py-4 rounded-xl"
-                asChild
-              >
-                <Link href="/become-retailer">Become a Seller</Link>
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-white/30 text-white hover:bg-white/10 bg-transparent font-semibold px-8 py-4 rounded-xl"
-                asChild
-              >
-                <Link href="/about">Learn More</Link>
-              </Button>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  title: "Trending Now",
+                  desc: "See what's hot right now",
+                  href: "/marketplace/trending",
+                  icon: TrendingUp,
+                  color: "from-pink-500 to-red-500"
+                },
+                {
+                  title: "Shop the Sale",
+                  desc: "Massive discounts available",
+                  href: "/marketplace/shop-sale",
+                  icon: Tag,
+                  color: "from-red-500 to-orange-500"
+                },
+                {
+                  title: "Browse Vendors",
+                  desc: "Trusted verified sellers",
+                  href: "/marketplace/vendors",
+                  icon: Store,
+                  color: "from-green-500 to-emerald-500"
+                },
+                {
+                  title: "All Categories",
+                  desc: "Complete product catalog",
+                  href: "/categories",
+                  icon: Grid3X3,
+                  color: "from-blue-500 to-indigo-500"
+                }
+              ].map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href={feature.href}>
+                    <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                      <CardContent className="p-6 text-center">
+                        <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                          <feature.icon className="h-8 w-8 text-white" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
+                        <p className="text-indigo-100 text-sm">{feature.desc}</p>
+                        <div className="mt-4">
+                          <Badge className="bg-white/20 text-white border-white/30">
+                            Explore Now
+                          </Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </section>
+        </motion.section>
+        <RecommendedSection
+          onAddToCart={(product) => console.log('Add to cart:', product)}
+          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
+          wishlistedItems={new Set()}
+        />
+        <VerifiedVendorsSection
+          onFollowVendor={(vendorId) => console.log('Follow vendor:', vendorId)}
+          followedVendors={new Set()}
+        />
+
+        {/* Quick Access Grid */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="py-16 bg-gray-50"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Quick Access to Popular Features
+              </h2>
+              <p className="text-xl text-gray-600">
+                Everything you need is just one click away
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {[
+                {
+                  title: "Featured",
+                  href: "/marketplace/featured",
+                  icon: Star,
+                  color: "from-yellow-400 to-orange-400",
+                  bgColor: "from-yellow-50 to-orange-50",
+                  description: "Handpicked premium items"
+                },
+                {
+                  title: "Flash Sale",
+                  href: "/marketplace/flash-sale",
+                  icon: Flame,
+                  color: "from-red-400 to-pink-400",
+                  bgColor: "from-red-50 to-pink-50",
+                  description: "Limited time offers"
+                },
+                {
+                  title: "Premium",
+                  href: "/marketplace/premium",
+                  icon: Crown,
+                  color: "from-purple-400 to-indigo-400",
+                  bgColor: "from-purple-50 to-indigo-50",
+                  description: "Luxury & exclusive"
+                },
+                {
+                  title: "Free Ship",
+                  href: "/marketplace/free-shipping",
+                  icon: Truck,
+                  color: "from-green-400 to-emerald-400",
+                  bgColor: "from-green-50 to-emerald-50",
+                  description: "No delivery charges"
+                },
+                {
+                  title: "Trending",
+                  href: "/marketplace/trending",
+                  icon: TrendingUp,
+                  color: "from-pink-400 to-red-400",
+                  bgColor: "from-pink-50 to-red-50",
+                  description: "What's popular now"
+                },
+                {
+                  title: "Vendors",
+                  href: "/marketplace/vendors",
+                  icon: Store,
+                  color: "from-emerald-400 to-green-400",
+                  bgColor: "from-emerald-50 to-green-50",
+                  description: "Trusted sellers"
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }}
+                  whileHover={{
+                    scale: 1.08,
+                    y: -5,
+                    rotate: [0, 2, -2, 0],
+                    transition: { duration: 0.4 }
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href={item.href}>
+                    <Card className={`
+                      relative overflow-hidden text-center p-5
+                      hover:shadow-2xl transition-all duration-500
+                      border-0 shadow-lg rounded-2xl
+                      bg-gradient-to-br ${item.bgColor}
+                      group cursor-pointer
+                    `}>
+                      <CardContent className="p-0 relative z-10">
+                        {/* Animated Background */}
+                        <motion.div
+                          className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                          whileHover={{ opacity: 0.15 }}
+                        />
+
+                        {/* Icon with enhanced animation */}
+                        <motion.div
+                          whileHover={{
+                            scale: 1.3,
+                            rotate: 360,
+                            transition: { duration: 0.8 }
+                          }}
+                          className={`
+                            w-14 h-14 bg-gradient-to-r ${item.color}
+                            rounded-2xl flex items-center justify-center
+                            mx-auto mb-3 shadow-lg group-hover:shadow-xl
+                            transition-all duration-300
+                          `}
+                        >
+                          <item.icon className="h-7 w-7 text-white" />
+                        </motion.div>
+
+                        <motion.h3
+                          className="font-bold text-gray-900 text-sm mb-1 group-hover:text-gray-800"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          {item.title}
+                        </motion.h3>
+
+                        <motion.p
+                          className="text-xs text-gray-600 font-medium"
+                          whileHover={{ scale: 1.02 }}
+                        >
+                          {item.description}
+                        </motion.p>
+
+                        {/* Floating effect particles */}
+                        <motion.div
+                          className="absolute top-1 right-1 w-1.5 h-1.5 bg-white/40 rounded-full opacity-0 group-hover:opacity-100"
+                          animate={{
+                            y: [0, -8, 0],
+                            opacity: [0, 1, 0]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: index * 0.2
+                          }}
+                        />
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+        <SupportTrustSection />
+
+        {/* Newsletter Section */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="py-16 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div variants={itemVariants} className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Stay Updated with Latest Deals
+              </h2>
+              <p className="text-xl text-blue-100">
+                Get exclusive offers, new arrivals, and flash sale alerts delivered to your inbox
+              </p>
+              
+              <motion.div
+                variants={itemVariants}
+                className="max-w-md mx-auto"
+              >
+                <div className="flex gap-3">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-blue-200 focus:bg-white/20"
+                  />
+                  <Button className="bg-white text-blue-600 hover:bg-blue-50 px-8 font-semibold">
+                    Subscribe
+                  </Button>
+                </div>
+              </motion.div>
+              
+              <div className="flex items-center justify-center gap-4 text-blue-200 text-sm">
+                <div className="flex items-center gap-1">
+                  <Gift className="h-4 w-4" />
+                  <span>Exclusive Offers</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Percent className="h-4 w-4" />
+                  <span>Early Access</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Sparkles className="h-4 w-4" />
+                  <span>New Arrivals</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
       </main>
 
       <Footer />
-    </div>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav />
+    </motion.div>
   );
 }
 

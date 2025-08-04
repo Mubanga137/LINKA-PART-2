@@ -147,11 +147,11 @@ export function EnhancedCategoryGrid() {
           </h2>
           <p className="text-slate-600">Discover amazing products from local Zambian businesses</p>
         </div>
-        <button 
-          onClick={() => router.push('/marketplace')}
+        <button
+          onClick={() => router.push('/categories')}
           className="group flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold transition-all duration-300 hover:gap-3"
         >
-          View all categories
+          Explore All Categories
           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
@@ -269,7 +269,7 @@ export function EnhancedCategoryGrid() {
       {/* Floating Action */}
       <div className="mt-12 text-center">
         <button
-          onClick={() => router.push('/marketplace')}
+          onClick={() => router.push('/categories')}
           className="group inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
         >
           <TrendingUp className="h-5 w-5 group-hover:animate-bounce" />
