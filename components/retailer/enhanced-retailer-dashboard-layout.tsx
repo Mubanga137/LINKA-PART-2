@@ -519,6 +519,16 @@ export default function EnhancedRetailerDashboardLayout({ children }: EnhancedRe
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Demo Mode Banner */}
+          {isDemoAccount && (
+            <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-2 text-center text-sm font-medium shadow-lg">
+              <div className="flex items-center justify-center space-x-2">
+                <Clock className="h-4 w-4" />
+                <span>Demo Mode: All changes are temporary and will reset after session</span>
+              </div>
+            </div>
+          )}
+
           {/* Mobile Header */}
           <div className="lg:hidden flex items-center justify-between p-4 bg-white/90 backdrop-blur-xl border-b border-white/20 shadow-sm">
             <Button
@@ -533,6 +543,11 @@ export default function EnhancedRetailerDashboardLayout({ children }: EnhancedRe
               <h1 className="text-lg font-bold bg-gradient-to-r from-slate-900 to-blue-900 bg-clip-text text-transparent">
                 Linka Dashboard
               </h1>
+              {isDemoAccount && (
+                <Badge className="bg-amber-100 text-amber-700 border-amber-200 text-xs">
+                  Demo
+                </Badge>
+              )}
             </div>
             <div className="w-8" /> {/* Spacer for centering */}
           </div>
