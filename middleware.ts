@@ -93,8 +93,22 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
-  // Allow request to continue
-  return NextResponse.next()
+  // UNAUTHENTICATED ACCESS CONTROL - protect retailer routes from logged-out users
+  if (!isAuthenticated && pathname.startsWith('/retailer/')) {
+    console.log(`Unauthenticated user attempted retailer route access: ${pathname}`)
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  // Add security headers to prevent caching of protected content
+  const response = NextResponse.next()
+
+  if (pathname.startsWith('/retailer/')) {
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate')
+    response.headers.set('Pragma', 'no-cache')
+    response.headers.set('Expires', '0')
+  }
+
+  return response
 }
 
 export const config = {
