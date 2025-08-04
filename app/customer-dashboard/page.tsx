@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { useAuth } from "@/contexts/auth-context";
+import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper";
 import { AnimatedSidebar } from "@/components/ui/animated-sidebar";
 import { EnhancedCustomerWelcome } from "@/components/customer/enhanced-customer-welcome";
 import { RecentOrdersViewed } from "@/components/customer/recent-orders-viewed";
