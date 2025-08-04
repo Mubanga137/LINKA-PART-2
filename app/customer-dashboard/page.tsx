@@ -84,10 +84,10 @@ export default function CustomerDashboard() {
         <EnhancedCategoryGrid />
 
         {/* Trending Products */}
-        <TrendingProducts />
+        <CustomerTrendingProducts />
 
         {/* Recommended Services */}
-        <RecommendedServices />
+        <CustomerRecommendedServices />
       </div>
 
       <Footer />
