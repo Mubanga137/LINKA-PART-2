@@ -178,9 +178,9 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
           </Card>
 
           {/* Active Orders */}
-          <Card 
+          <Card
             className="bg-white/80 backdrop-blur-sm border-white/50 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer group overflow-hidden"
-            onClick={() => router.push('/orders')}
+            onClick={() => window.location.href = '/orders'}
           >
             <CardContent className="p-6 relative">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/20 to-purple-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
