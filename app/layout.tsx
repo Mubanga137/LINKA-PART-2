@@ -7,6 +7,7 @@ import { RetailerAuthProvider } from '@/contexts/retailer-auth-context'
 import { MarketplaceProvider } from '@/contexts/marketplace-context'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
+import { ToastProvider } from '@/components/ui/toast'
 import './globals.css'
 
 export const metadata: Metadata = {
