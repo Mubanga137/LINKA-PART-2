@@ -527,8 +527,8 @@ export default function EnhancedRetailerDashboardLayout({ children }: EnhancedRe
                   Notifications
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem 
-                  onClick={logout}
+                <DropdownMenuItem
+                  onClick={() => setShowLogoutModal(true)}
                   className="text-red-600 hover:bg-red-50 focus:bg-red-50"
                 >
                   <LogOut className="h-4 w-4 mr-2" />
