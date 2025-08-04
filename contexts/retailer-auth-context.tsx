@@ -218,11 +218,15 @@ export function RetailerAuthProvider({ children }: { children: ReactNode }) {
       if (isValidLogin) {
         const token = 'mock_jwt_token_' + Date.now();
         localStorage.setItem('retailer_token', token);
+
+        // Clear any general user token to prevent conflicts
+        localStorage.removeItem('linka_user');
+
         setUser(mockUser);
         setStore(mockStore);
 
-        // Redirect to retailer dashboard immediately after successful login
-        router.push('/retailer/dashboard');
+        // STRICT ROUTING: Always redirect retailers to dashboard - never homepage
+        window.location.href = '/retailer/dashboard';
         return true;
       } else {
         throw new Error('Invalid credentials');
