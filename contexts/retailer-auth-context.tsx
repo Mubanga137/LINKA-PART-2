@@ -240,12 +240,16 @@ export function RetailerAuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
+    // Clear all authentication data
     localStorage.removeItem('retailer_token');
     localStorage.removeItem('linka_user');
+
+    // Clear state
     setUser(null);
     setStore(null);
-    // Force redirect to homepage to ensure clean state
-    window.location.href = '/';
+
+    // Note: Redirect is handled by the logout handler in the UI component
+    // to allow for proper toast notifications and animations
   };
 
   const hasPermission = (permission: string): boolean => {
