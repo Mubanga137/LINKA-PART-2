@@ -264,6 +264,9 @@ export default function EnhancedRetailerDashboardLayout({ children }: EnhancedRe
   const pathname = usePathname();
   const { user, logout } = useRetailerAuth();
 
+  // Check if this is a demo account
+  const isDemoAccount = user?.email?.includes('demo') || user?.email?.includes('test') || user?.id?.includes('demo');
+
   const toggleSection = (sectionTitle: string) => {
     setExpandedSections(prev => 
       prev.includes(sectionTitle) 
