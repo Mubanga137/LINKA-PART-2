@@ -51,7 +51,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
-import RetailerDashboardLayout from '@/components/retailer/retailer-dashboard-layout';
+import EnhancedRetailerDashboardLayout from '@/components/retailer/enhanced-retailer-dashboard-layout';
 
 // Enhanced dashboard data with real-time capabilities
 const dashboardStats = {
