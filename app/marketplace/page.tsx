@@ -53,7 +53,16 @@ import {
   Headphones,
   RefreshCw,
   Gift,
-  Percent
+  Percent,
+  Smartphone,
+  Shirt,
+  Home,
+  Paintbrush,
+  Dumbbell,
+  BookOpen,
+  Gem,
+  UtensilsCrossed,
+  Palette
 } from "lucide-react";
 import { MarketplaceProvider, useCart, useFavorites } from "@/contexts/marketplace-context";
 import { ProductDetailModal } from "@/components/marketplace/ProductDetailModal";
