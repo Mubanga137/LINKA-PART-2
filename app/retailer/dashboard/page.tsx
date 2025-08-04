@@ -52,6 +52,7 @@ import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import EnhancedRetailerDashboardLayout from '@/components/retailer/enhanced-retailer-dashboard-layout';
+import { RetailerGuard } from '@/components/auth/role-guard';
 
 // Enhanced dashboard data with real-time capabilities
 const dashboardStats = {
