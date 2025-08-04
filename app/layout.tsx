@@ -78,7 +78,6 @@ html {
                   <AuthRedirectWrapper>
                     {children}
                   </AuthRedirectWrapper>
-                  <AuthUtilities />
                 </MarketplaceProvider>
               </CartProvider>
             </RetailerAuthProvider>
