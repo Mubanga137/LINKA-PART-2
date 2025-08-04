@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Heart,
-  Stethoscope,
   Truck,
   Scissors,
   Music,
@@ -16,15 +13,9 @@ import {
   DollarSign,
   Star,
   Grid3X3,
-  ChevronRight,
-  Sparkles,
-  TrendingUp,
-  Users,
-  ExternalLink,
   ArrowRight
 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 // Service categories data from the services page
 const serviceCategories = [
