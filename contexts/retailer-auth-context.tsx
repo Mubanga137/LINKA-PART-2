@@ -172,11 +172,15 @@ export function RetailerAuthProvider({ children }: { children: ReactNode }) {
     try {
       // In a real app, this would check with your backend
       const token = localStorage.getItem('retailer_token');
-      if (token) {
+      if (token && token !== 'demo-token') {
+        // Only authenticate with valid tokens, not demo tokens
         // Simulate API call to validate token (reduced timeout)
         await new Promise(resolve => setTimeout(resolve, 500));
         setUser(mockUser);
         setStore(mockStore);
+      } else if (token === 'demo-token') {
+        // Clear demo token to allow guest access
+        localStorage.removeItem('retailer_token');
       }
     } catch (error) {
       console.error('Auth check failed:', error);
