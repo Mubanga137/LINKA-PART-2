@@ -1,24 +1,15 @@
-import type { Metadata } from 'next'
-import { ErrorBoundary } from '@/components/error-boundary'
-import { RetailerRouteGuard } from '@/components/retailer/retailer-route-guard'
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Retailer Dashboard - Linka',
-  description: 'Manage your business with Linka\'s comprehensive retailer dashboard',
-}
+import { RetailerGuard } from '@/components/auth/role-guard';
 
 export default function RetailerLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <ErrorBoundary>
-      <RetailerRouteGuard>
-        <div className="retailer-layout">
-          {children}
-        </div>
-      </RetailerRouteGuard>
-    </ErrorBoundary>
-  )
+    <RetailerGuard>
+      {children}
+    </RetailerGuard>
+  );
 }
