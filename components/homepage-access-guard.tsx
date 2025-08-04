@@ -19,18 +19,22 @@ export function HomepageAccessGuard({ children }: HomepageAccessGuardProps) {
     // Wait for auth systems to load
     if (generalLoading || retailerLoading) return;
 
-    // Check if user is a retailer from either auth system
-    const isRetailer = retailerUser || generalUser?.role === 'retailer';
+    // Get current authenticated user
+    const currentUser = retailerUser || generalUser;
 
-    // STRICT ENFORCEMENT: Retailers should NEVER see the homepage
-    if (isRetailer && pathname === '/') {
-      console.log('Retailer detected on homepage, redirecting to dashboard');
-      router.push('/retailer/dashboard');
+    // If user is authenticated and on homepage, redirect to their dashboard
+    if (currentUser && pathname === '/') {
+      const dashboardPath = currentUser.role === 'retailer'
+        ? '/retailer/dashboard'
+        : '/customer-dashboard';
+
+      console.log(`Authenticated ${currentUser.role} detected on homepage, redirecting to ${dashboardPath}`);
+      router.push(dashboardPath);
       return;
     }
 
     // Block retailers from customer-specific areas
-    if (isRetailer && pathname !== '/') {
+    if (currentUser?.role === 'retailer' && pathname !== '/') {
       const customerOnlyPaths = [
         '/marketplace',
         '/marketplace-simple',
@@ -62,9 +66,9 @@ export function HomepageAccessGuard({ children }: HomepageAccessGuardProps) {
     }
   }, [generalUser, retailerUser, generalLoading, retailerLoading, pathname, router]);
 
-  // Don't render homepage content if user is a retailer
-  const isRetailer = retailerUser || generalUser?.role === 'retailer';
-  if (isRetailer && pathname === '/') {
+  // Don't render homepage content if user is authenticated (will be redirected)
+  const currentUser = retailerUser || generalUser;
+  if (currentUser && pathname === '/') {
     return null;
   }
 
