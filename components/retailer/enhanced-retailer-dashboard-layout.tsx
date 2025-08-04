@@ -263,8 +263,10 @@ const sidebarSections = [
 export default function EnhancedRetailerDashboardLayout({ children }: EnhancedRetailerDashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>(['Overview', 'Store Management']);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const pathname = usePathname();
   const { user, logout } = useRetailerAuth();
+  const { addToast } = useToast();
 
   // Check if this is a demo account
   const isDemoAccount = user?.email?.includes('demo') || user?.email?.includes('test') || user?.id?.includes('demo');
