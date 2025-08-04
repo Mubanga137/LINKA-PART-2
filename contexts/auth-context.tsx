@@ -87,9 +87,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(mockUser)
       setIsLoading(false)
 
-      // Automatically redirect retailers to their dashboard
-      if (mockUser.role === 'retailer' && typeof window !== 'undefined') {
-        window.location.href = '/retailer/dashboard';
+      // STRICT ROLE-BASED ROUTING: Immediate redirect based on role
+      if (typeof window !== 'undefined') {
+        const redirectPath = getRoleBasedRedirectUrl(mockUser);
+        // Use window.location.href for immediate redirect to prevent homepage exposure
+        window.location.href = redirectPath;
       }
 
       return { success: true }
