@@ -72,17 +72,19 @@ html {
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            <RetailerAuthProvider>
-              <CartProvider>
-                <MarketplaceProvider>
-                  <AuthRedirectWrapper>
-                    {children}
-                  </AuthRedirectWrapper>
-                </MarketplaceProvider>
-              </CartProvider>
-            </RetailerAuthProvider>
-          </AuthProvider>
+          <ToastProvider>
+            <AuthProvider>
+              <RetailerAuthProvider>
+                <CartProvider>
+                  <MarketplaceProvider>
+                    <AuthRedirectWrapper>
+                      {children}
+                    </AuthRedirectWrapper>
+                  </MarketplaceProvider>
+                </CartProvider>
+              </RetailerAuthProvider>
+            </AuthProvider>
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>
