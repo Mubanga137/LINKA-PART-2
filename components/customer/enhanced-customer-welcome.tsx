@@ -114,8 +114,8 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
 
               {/* Quick Actions */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  onClick={() => router.push('/marketplace')}
+                <Button
+                  onClick={() => window.location.href = '/marketplace'}
                   className="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 font-semibold px-8 py-4 border border-white/30 transition-all duration-300 hover:scale-105 hover:shadow-xl group"
                   size="lg"
                 >
@@ -123,9 +123,9 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
                   Start Shopping
                   <Sparkles className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
-                
+
                 <Button
-                  onClick={() => router.push('/orders')}
+                  onClick={() => window.location.href = '/orders'}
                   variant="outline"
                   className="border-white/30 bg-white/10 text-white hover:bg-white/20 px-8 py-4 transition-all duration-300 hover:scale-105"
                   size="lg"
