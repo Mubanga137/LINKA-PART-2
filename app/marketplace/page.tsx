@@ -63,6 +63,7 @@ import { SmartSearch } from "@/components/marketplace/smart-search";
 import { TrendingNowSection } from "@/components/marketplace/trending-now-section";
 import { RecommendedSection } from "@/components/marketplace/recommended-section";
 import { VerifiedVendorsSection } from "@/components/marketplace/verified-vendors-section";
+import { MobileBottomNav } from "@/components/marketplace/mobile-bottom-nav";
 import type { Product, MarketplaceFilters, Category } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -928,6 +929,9 @@ function MarketplaceContent() {
       </main>
 
       <Footer />
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav />
     </motion.div>
   );
 }
