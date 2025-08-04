@@ -127,7 +127,6 @@ const categories = [
 ]
 
 export function EnhancedCategoryGrid() {
-  const router = useRouter()
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
   const [isVisible, setIsVisible] = useState(false)
 
