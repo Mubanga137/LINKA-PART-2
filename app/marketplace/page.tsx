@@ -59,6 +59,9 @@ import { MarketplaceProvider, useCart, useFavorites } from "@/contexts/marketpla
 import { ProductDetailModal } from "@/components/marketplace/ProductDetailModal";
 import { CategoryNavigation, HorizontalCategoryNav } from "@/components/marketplace/CategoryNavigation";
 import { OptimizedProductCard } from "@/components/marketplace/OptimizedProductCard";
+import { SmartSearch } from "@/components/marketplace/smart-search";
+import { TrendingNowSection } from "@/components/marketplace/trending-now-section";
+import { RecommendedSection } from "@/components/marketplace/recommended-section";
 import type { Product, MarketplaceFilters, Category } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -312,42 +315,16 @@ function EnhancedHeroSection() {
               </AnimatePresence>
             </div>
 
-            {/* Enhanced Search Bar */}
+            {/* Smart Search Bar */}
             <motion.div variants={itemVariants} className="relative">
-              <div className="relative group">
-                <motion.div
-                  animate={{ scale: animateSearch ? 1.02 : 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="relative bg-white rounded-2xl p-3 shadow-xl border border-gray-200/50"
-                >
-                  <div className="flex items-center">
-                    <motion.div
-                      animate={{ rotate: animateSearch ? 360 : 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute left-6 z-10"
-                    >
-                      <Search className="text-gray-400 h-5 w-5" />
-                    </motion.div>
-                    <Input
-                      type="text"
-                      placeholder="Search for products, vendors, or categories..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-14 pr-32 py-4 text-lg border-0 bg-transparent focus:ring-0 placeholder:text-gray-400"
-                    />
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Button 
-                        className="absolute right-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg"
-                      >
-                        Search
-                      </Button>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </div>
+              <SmartSearch
+                onSearch={(query) => {
+                  setSearchQuery(query);
+                  // Handle search logic here
+                  console.log('Search query:', query);
+                }}
+                placeholder="Search for products, vendors, or categories..."
+              />
             </motion.div>
 
             {/* Quick Actions */}
@@ -881,6 +858,16 @@ function MarketplaceContent() {
         <EnhancedHeroSection />
         <ShopByCategorySection />
         <FlashSalesSection />
+        <TrendingNowSection
+          onAddToCart={(product) => console.log('Add to cart:', product)}
+          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
+          wishlistedItems={new Set()}
+        />
+        <RecommendedSection
+          onAddToCart={(product) => console.log('Add to cart:', product)}
+          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
+          wishlistedItems={new Set()}
+        />
         <SupportTrustSection />
 
         {/* Newsletter Section */}
