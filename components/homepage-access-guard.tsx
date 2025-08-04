@@ -22,7 +22,14 @@ export function HomepageAccessGuard({ children }: HomepageAccessGuardProps) {
     // Check if user is a retailer from either auth system
     const isRetailer = retailerUser || generalUser?.role === 'retailer';
 
-    // Only block retailers from customer-specific areas (not homepage)
+    // STRICT ENFORCEMENT: Retailers should NEVER see the homepage
+    if (isRetailer && pathname === '/') {
+      console.log('Retailer detected on homepage, redirecting to dashboard');
+      router.push('/retailer/dashboard');
+      return;
+    }
+
+    // Block retailers from customer-specific areas
     if (isRetailer && pathname !== '/') {
       const customerOnlyPaths = [
         '/marketplace',
@@ -48,11 +55,18 @@ export function HomepageAccessGuard({ children }: HomepageAccessGuardProps) {
       );
 
       if (isCustomerPath) {
+        console.log('Retailer detected on customer path, redirecting to dashboard');
         router.push('/retailer/dashboard');
         return;
       }
     }
   }, [generalUser, retailerUser, generalLoading, retailerLoading, pathname, router]);
+
+  // Don't render homepage content if user is a retailer
+  const isRetailer = retailerUser || generalUser?.role === 'retailer';
+  if (isRetailer && pathname === '/') {
+    return null;
+  }
 
   return <>{children}</>;
 }
