@@ -283,6 +283,32 @@ export default function EnhancedRetailerDashboardLayout({ children }: EnhancedRe
     return pathname === href;
   };
 
+  const handleLogoutConfirm = async () => {
+    try {
+      // Clear all authentication data
+      localStorage.removeItem('retailer_token');
+      localStorage.removeItem('linka_user');
+
+      // Call logout function
+      logout();
+
+      // Show success message
+      addToast('Successfully signed out!', 'success');
+
+      // Close modal
+      setShowLogoutModal(false);
+
+      // Redirect to homepage with a slight delay to show the toast
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+
+    } catch (error) {
+      console.error('Logout error:', error);
+      addToast('Error during sign out. Please try again.', 'error');
+    }
+  };
+
   return (
     <ProtectedRoute>
       <div className="flex h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
