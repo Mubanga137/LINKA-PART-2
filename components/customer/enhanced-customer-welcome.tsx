@@ -143,9 +143,9 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
       <div className="max-w-7xl mx-auto px-6 -mt-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Loyalty Points */}
-          <Card 
+          <Card
             className="bg-white/80 backdrop-blur-sm border-white/50 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer group overflow-hidden"
-            onClick={() => router.push('/profile')}
+            onClick={() => window.location.href = '/profile'}
           >
             <CardContent className="p-6 relative">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
