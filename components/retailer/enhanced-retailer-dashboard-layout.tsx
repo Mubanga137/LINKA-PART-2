@@ -58,6 +58,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
+import { LogoutModal } from '@/components/auth/logout-modal';
+import { useToast } from '@/components/ui/toast';
 
 interface EnhancedRetailerDashboardLayoutProps {
   children: React.ReactNode;
