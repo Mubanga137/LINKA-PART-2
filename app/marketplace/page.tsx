@@ -70,7 +70,7 @@ import Link from "next/link";
 
 // Enhanced mock data with trending vendors and featured content
 const mockCategories: Category[] = [
-  { id: "1", name: "Electronics", slug: "electronics", icon: "📱", productCount: 1248, featured: true },
+  { id: "1", name: "Electronics", slug: "electronics", icon: "����", productCount: 1248, featured: true },
   { id: "2", name: "Fashion", slug: "fashion", icon: "👕", productCount: 892, featured: true },
   { id: "3", name: "Home & Garden", slug: "home-garden", icon: "🏠", productCount: 567 },
   { id: "4", name: "Health & Beauty", slug: "health-beauty", icon: "💄", productCount: 334 },
@@ -868,6 +868,86 @@ function MarketplaceContent() {
           onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
           wishlistedItems={new Set()}
         />
+
+        {/* Additional CTA Section for more marketplace features */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="py-16 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Explore More Marketplace Features
+              </h2>
+              <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
+                Discover trending products, browse verified vendors, and shop amazing sales
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  title: "Trending Now",
+                  desc: "See what's hot right now",
+                  href: "/marketplace/trending",
+                  icon: TrendingUp,
+                  color: "from-pink-500 to-red-500"
+                },
+                {
+                  title: "Shop the Sale",
+                  desc: "Massive discounts available",
+                  href: "/marketplace/shop-sale",
+                  icon: Tag,
+                  color: "from-red-500 to-orange-500"
+                },
+                {
+                  title: "Browse Vendors",
+                  desc: "Trusted verified sellers",
+                  href: "/marketplace/vendors",
+                  icon: Store,
+                  color: "from-green-500 to-emerald-500"
+                },
+                {
+                  title: "All Categories",
+                  desc: "Complete product catalog",
+                  href: "/categories",
+                  icon: Grid3X3,
+                  color: "from-blue-500 to-indigo-500"
+                }
+              ].map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href={feature.href}>
+                    <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                      <CardContent className="p-6 text-center">
+                        <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                          <feature.icon className="h-8 w-8 text-white" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
+                        <p className="text-indigo-100 text-sm">{feature.desc}</p>
+                        <div className="mt-4">
+                          <Badge className="bg-white/20 text-white border-white/30">
+                            Explore Now
+                          </Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
         <RecommendedSection
           onAddToCart={(product) => console.log('Add to cart:', product)}
           onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
@@ -877,6 +957,58 @@ function MarketplaceContent() {
           onFollowVendor={(vendorId) => console.log('Follow vendor:', vendorId)}
           followedVendors={new Set()}
         />
+
+        {/* Quick Access Grid */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="py-16 bg-gray-50"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Quick Access to Popular Features
+              </h2>
+              <p className="text-xl text-gray-600">
+                Everything you need is just one click away
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {[
+                { title: "Featured", href: "/marketplace/featured", icon: Star, color: "from-yellow-400 to-orange-400" },
+                { title: "Flash Sale", href: "/marketplace/flash-sale", icon: Flame, color: "from-red-400 to-pink-400" },
+                { title: "Premium", href: "/marketplace/premium", icon: Crown, color: "from-purple-400 to-indigo-400" },
+                { title: "Free Ship", href: "/marketplace/free-shipping", icon: Truck, color: "from-green-400 to-emerald-400" },
+                { title: "Trending", href: "/marketplace/trending", icon: TrendingUp, color: "from-pink-400 to-red-400" },
+                { title: "Vendors", href: "/marketplace/vendors", icon: Store, color: "from-emerald-400 to-green-400" }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href={item.href}>
+                    <Card className="text-center p-4 hover:shadow-lg transition-all duration-300 border-0 shadow-md">
+                      <CardContent className="p-0">
+                        <div className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg`}>
+                          <item.icon className="h-6 w-6 text-white" />
+                        </div>
+                        <h3 className="font-semibold text-gray-900 text-sm">{item.title}</h3>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
         <SupportTrustSection />
 
         {/* Newsletter Section */}
