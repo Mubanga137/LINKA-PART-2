@@ -62,6 +62,7 @@ import { OptimizedProductCard } from "@/components/marketplace/OptimizedProductC
 import { SmartSearch } from "@/components/marketplace/smart-search";
 import { TrendingNowSection } from "@/components/marketplace/trending-now-section";
 import { RecommendedSection } from "@/components/marketplace/recommended-section";
+import { VerifiedVendorsSection } from "@/components/marketplace/verified-vendors-section";
 import type { Product, MarketplaceFilters, Category } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -867,6 +868,10 @@ function MarketplaceContent() {
           onAddToCart={(product) => console.log('Add to cart:', product)}
           onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
           wishlistedItems={new Set()}
+        />
+        <VerifiedVendorsSection
+          onFollowVendor={(vendorId) => console.log('Follow vendor:', vendorId)}
+          followedVendors={new Set()}
         />
         <SupportTrustSection />
 
