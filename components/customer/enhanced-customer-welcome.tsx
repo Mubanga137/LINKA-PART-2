@@ -208,9 +208,9 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
           </Card>
 
           {/* Saved Items */}
-          <Card 
+          <Card
             className="bg-white/80 backdrop-blur-sm border-white/50 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer group overflow-hidden"
-            onClick={() => router.push('/wishlist')}
+            onClick={() => window.location.href = '/wishlist'}
           >
             <CardContent className="p-6 relative">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-pink-400/20 to-red-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
