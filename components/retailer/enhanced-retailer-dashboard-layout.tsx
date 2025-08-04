@@ -587,6 +587,14 @@ export default function EnhancedRetailerDashboardLayout({ children }: EnhancedRe
             {children}
           </main>
         </div>
+
+        {/* Logout Confirmation Modal */}
+        <LogoutModal
+          isOpen={showLogoutModal}
+          onClose={() => setShowLogoutModal(false)}
+          onConfirm={handleLogoutConfirm}
+          userName={user?.name}
+        />
       </div>
     </ProtectedRoute>
   );
