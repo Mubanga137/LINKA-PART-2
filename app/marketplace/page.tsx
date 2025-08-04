@@ -930,7 +930,7 @@ function MarketplaceContent() {
       
       <main>
         <EnhancedHeroSection />
-        {/* <ShopByCategorySection maxItems={6} /> */}
+        <ShopByCategorySection maxItems={6} />
         <FlashSalesSection />
         <TrendingNowSection
           onAddToCart={(product) => console.log('Add to cart:', product)}
