@@ -13,6 +13,7 @@ import { ClearAuthButton } from "@/components/clear-auth-button"
 export default function HomePage() {
   return (
     <HomepageAccessGuard>
+      <ClearAuthButton />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
         <Header />
         <main>
