@@ -34,9 +34,9 @@ export function middleware(request: NextRequest) {
     isAuthenticated = true
   }
 
-  // STRICT RETAILER ACCESS CONTROL
+  // RETAILER ACCESS CONTROL - Allow homepage but redirect authenticated users to dashboards
   if (isRetailer) {
-    // Define pages that retailers are COMPLETELY FORBIDDEN from accessing
+    // Define pages that retailers are FORBIDDEN from accessing
     const prohibitedPaths = [
       '/marketplace',
       '/marketplace-simple',
@@ -56,12 +56,6 @@ export function middleware(request: NextRequest) {
       '/checkout'
     ]
 
-    // CRITICAL: Block homepage access for retailers - redirect to dashboard
-    if (pathname === '/' || pathname === '/home') {
-      console.log(`Retailer attempted homepage access, redirecting to dashboard: ${pathname}`)
-      return NextResponse.redirect(new URL('/retailer/dashboard', request.url))
-    }
-
     // Check if retailer is trying to access prohibited content
     const isProhibitedPath = prohibitedPaths.some(path => {
       return pathname.startsWith(path)
@@ -80,6 +74,7 @@ export function middleware(request: NextRequest) {
         !pathname.startsWith('/api/') &&
         !pathname.startsWith('/_next/') &&
         !pathname.startsWith('/favicon') &&
+        pathname !== '/' &&
         pathname !== '/about' &&
         pathname !== '/contact') {
       console.log(`Retailer attempted non-retailer route access: ${pathname}`)
