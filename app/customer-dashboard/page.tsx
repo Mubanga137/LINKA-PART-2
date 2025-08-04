@@ -178,39 +178,8 @@ const mockTrendingProducts = [
   }
 ];
 
-export default function CustomerDashboard() {
+function CustomerDashboardContent() {
   const { user } = useAuth();
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
-        <Header />
-        <main className="flex items-center justify-center min-h-[60vh]">
-          <div className="text-center space-y-6 p-8">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50"
-            >
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Welcome to Linka Dashboard
-              </h2>
-              <p className="text-lg text-gray-600 mb-6">
-                Please log in to access your personalized dashboard and start your shopping journey.
-              </p>
-              <Link href="/login">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  Log In to Continue
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
@@ -223,7 +192,7 @@ export default function CustomerDashboard() {
         {/* Main Content */}
         <main className="flex-1 min-h-screen">
           {/* Enhanced Welcome Section */}
-          <EnhancedCustomerWelcome user={user} />
+          <EnhancedCustomerWelcome user={user!} />
 
           {/* Main Dashboard Content */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12">
@@ -312,5 +281,13 @@ export default function CustomerDashboard() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function CustomerDashboard() {
+  return (
+    <AuthRedirectWrapper requiredRole="customer">
+      <CustomerDashboardContent />
+    </AuthRedirectWrapper>
   );
 }
