@@ -430,20 +430,21 @@ export function RecentOrdersViewed() {
                         size="sm"
                         onClick={() => handleQuickView(product)}
                         variant="outline"
-                        className="flex-1 text-xs"
+                        className="flex-1 text-xs min-h-[36px] touch-manipulation tap-highlight-transparent"
                         disabled={!product.inStock}
                       >
-                        <Eye className="h-3 w-3 mr-1" />
-                        View
+                        <Eye className="h-3 w-3 sm:mr-1" />
+                        <span className="hidden sm:inline">View</span>
                       </Button>
                       <Button
                         size="sm"
                         onClick={() => handleAddToCart(product)}
-                        className="flex-1 bg-purple-600 hover:bg-purple-700 text-xs"
+                        className="flex-1 bg-purple-600 hover:bg-purple-700 text-xs min-h-[36px] touch-manipulation tap-highlight-transparent"
                         disabled={!product.inStock}
                       >
-                        <ShoppingCart className="h-3 w-3 mr-1" />
-                        {product.inStock ? 'Add' : 'Sold Out'}
+                        <ShoppingCart className="h-3 w-3 sm:mr-1" />
+                        <span className="hidden sm:inline">{product.inStock ? 'Add' : 'Sold Out'}</span>
+                        <span className="sm:hidden">{product.inStock ? '+' : '✗'}</span>
                       </Button>
                     </div>
                   </div>
