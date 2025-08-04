@@ -146,8 +146,8 @@ export function EnhancedCategoryGrid() {
           </h2>
           <p className="text-slate-600">Discover amazing products from local Zambian businesses</p>
         </div>
-        <button 
-          onClick={() => router.push('/marketplace')}
+        <button
+          onClick={() => window.location.href = '/marketplace'}
           className="group flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold transition-all duration-300 hover:gap-3"
         >
           View all categories
