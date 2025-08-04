@@ -446,14 +446,15 @@ export default function EnhancedRetailerDashboardLayout({ children }: EnhancedRe
               <ChevronRight className="h-4 w-4 mr-2 rotate-180" />
               Back
             </Button>
+            {/* Retailer-specific help link instead of homepage */}
             <Button
               variant="outline"
-              className="w-full justify-start bg-green-50 text-green-600 border-green-200 hover:bg-green-100 transition-all duration-200"
+              className="w-full justify-start bg-purple-50 text-purple-600 border-purple-200 hover:bg-purple-100 transition-all duration-200"
               asChild
             >
-              <Link href="/">
-                <Home className="h-4 w-4 mr-2" />
-                Back to Homepage
+              <Link href="/retailer/support">
+                <HelpCircle className="h-4 w-4 mr-2" />
+                Help & Support
               </Link>
             </Button>
           </div>
