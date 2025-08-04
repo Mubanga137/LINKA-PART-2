@@ -21,9 +21,16 @@ export function useAuthRedirect() {
     // If no user is logged in, allow access to public pages
     if (!currentUser) return;
 
-    // RETAILER ACCESS CONTROL (simplified - allow homepage access)
+    // STRICT RETAILER ACCESS CONTROL - No homepage access allowed
     if (currentUser.role === 'retailer') {
-      // Only block access to customer-specific functionality, not homepage
+      // CRITICAL: Block homepage access completely
+      if (pathname === '/' || pathname === '/home') {
+        console.log('useAuthRedirect: Retailer attempted homepage access, redirecting to dashboard');
+        router.push('/retailer/dashboard');
+        return;
+      }
+
+      // Block access to all customer-specific functionality
       const prohibitedPaths = [
         '/marketplace',
         '/marketplace-simple',
@@ -50,11 +57,18 @@ export function useAuthRedirect() {
 
       // If retailer is on prohibited page, redirect to dashboard
       if (isOnProhibitedPath) {
+        console.log('useAuthRedirect: Retailer attempted prohibited path access:', pathname);
         router.push('/retailer/dashboard');
         return;
       }
 
-      // Allow homepage and other general pages for retailers
+      // If retailer is not on a retailer route, redirect to dashboard
+      if (!pathname.startsWith('/retailer/') && pathname !== '/about' && pathname !== '/contact') {
+        console.log('useAuthRedirect: Retailer on non-retailer route, redirecting to dashboard:', pathname);
+        router.push('/retailer/dashboard');
+        return;
+      }
+
       return;
     }
 
