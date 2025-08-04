@@ -64,19 +64,12 @@ interface DashboardData {
   }
 }
 
-export default function ModernRetailerDashboard() {
+function RetailerDashboardContent() {
   const { user } = useAuth()
   const router = useRouter()
   const [activeView, setActiveView] = useState('overview')
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-
-  // Redirect if not a retailer
-  useEffect(() => {
-    if (user && user.role !== 'retailer') {
-      router.push('/')
-    }
-  }, [user, router])
 
   // Load dashboard data
   useEffect(() => {
