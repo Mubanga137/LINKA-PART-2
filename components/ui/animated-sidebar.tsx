@@ -208,14 +208,25 @@ export function AnimatedSidebar({ className }: SidebarProps) {
     <>
       {/* Mobile Toggle Button */}
       {isMobile && (
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setIsOpen(!isOpen)}
-          className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm border-gray-200 shadow-lg"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <Menu className="h-4 w-4" />
-        </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsOpen(!isOpen)}
+            className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm border-gray-200 shadow-lg hover:shadow-xl transition-all duration-200 tap-highlight-transparent touch-manipulation min-h-[44px] min-w-[44px]"
+          >
+            <motion.div
+              animate={{ rotate: isOpen ? 90 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Menu className="h-4 w-4" />
+            </motion.div>
+          </Button>
+        </motion.div>
       )}
 
       {/* Overlay for mobile */}
