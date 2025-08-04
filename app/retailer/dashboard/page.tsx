@@ -159,7 +159,8 @@ export default function ModernDashboard() {
   };
 
   return (
-    <EnhancedRetailerDashboardLayout>
+    <RetailerGuard>
+      <EnhancedRetailerDashboardLayout>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
         {/* Modern Header */}
         <div className="sticky top-0 z-50 border-b border-white/20 bg-white/80 backdrop-blur-xl">
@@ -613,6 +614,7 @@ export default function ModernDashboard() {
           </Card>
         </div>
       </div>
-    </EnhancedRetailerDashboardLayout>
+      </EnhancedRetailerDashboardLayout>
+    </RetailerGuard>
   );
 }
