@@ -4,7 +4,13 @@ import { useEffect, ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
 import { useRetailerAuth } from '@/contexts/retailer-auth-context';
-import { toast } from 'sonner';
+// Simple toast implementation
+const toast = {
+  info: (message: string, options?: { description?: string; duration?: number }) => {
+    console.log(`Toast: ${message}`, options);
+    // Could implement a simple toast component here
+  }
+};
 import { Loader2 } from 'lucide-react';
 
 interface RoleGuardProps {
