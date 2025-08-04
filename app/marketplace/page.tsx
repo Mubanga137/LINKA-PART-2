@@ -1199,29 +1199,133 @@ function MarketplaceContent() {
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {[
-                { title: "Featured", href: "/marketplace/featured", icon: Star, color: "from-yellow-400 to-orange-400" },
-                { title: "Flash Sale", href: "/marketplace/flash-sale", icon: Flame, color: "from-red-400 to-pink-400" },
-                { title: "Premium", href: "/marketplace/premium", icon: Crown, color: "from-purple-400 to-indigo-400" },
-                { title: "Free Ship", href: "/marketplace/free-shipping", icon: Truck, color: "from-green-400 to-emerald-400" },
-                { title: "Trending", href: "/marketplace/trending", icon: TrendingUp, color: "from-pink-400 to-red-400" },
-                { title: "Vendors", href: "/marketplace/vendors", icon: Store, color: "from-emerald-400 to-green-400" }
+                {
+                  title: "Featured",
+                  href: "/marketplace/featured",
+                  icon: Star,
+                  color: "from-yellow-400 to-orange-400",
+                  bgColor: "from-yellow-50 to-orange-50",
+                  description: "Handpicked premium items"
+                },
+                {
+                  title: "Flash Sale",
+                  href: "/marketplace/flash-sale",
+                  icon: Flame,
+                  color: "from-red-400 to-pink-400",
+                  bgColor: "from-red-50 to-pink-50",
+                  description: "Limited time offers"
+                },
+                {
+                  title: "Premium",
+                  href: "/marketplace/premium",
+                  icon: Crown,
+                  color: "from-purple-400 to-indigo-400",
+                  bgColor: "from-purple-50 to-indigo-50",
+                  description: "Luxury & exclusive"
+                },
+                {
+                  title: "Free Ship",
+                  href: "/marketplace/free-shipping",
+                  icon: Truck,
+                  color: "from-green-400 to-emerald-400",
+                  bgColor: "from-green-50 to-emerald-50",
+                  description: "No delivery charges"
+                },
+                {
+                  title: "Trending",
+                  href: "/marketplace/trending",
+                  icon: TrendingUp,
+                  color: "from-pink-400 to-red-400",
+                  bgColor: "from-pink-50 to-red-50",
+                  description: "What's popular now"
+                },
+                {
+                  title: "Vendors",
+                  href: "/marketplace/vendors",
+                  icon: Store,
+                  color: "from-emerald-400 to-green-400",
+                  bgColor: "from-emerald-50 to-green-50",
+                  description: "Trusted sellers"
+                }
               ].map((item, index) => (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  transition={{
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }}
+                  whileHover={{
+                    scale: 1.08,
+                    y: -5,
+                    rotate: [0, 2, -2, 0],
+                    transition: { duration: 0.4 }
+                  }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link href={item.href}>
-                    <Card className="text-center p-4 hover:shadow-lg transition-all duration-300 border-0 shadow-md">
-                      <CardContent className="p-0">
-                        <div className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg`}>
-                          <item.icon className="h-6 w-6 text-white" />
-                        </div>
-                        <h3 className="font-semibold text-gray-900 text-sm">{item.title}</h3>
+                    <Card className={`
+                      relative overflow-hidden text-center p-5
+                      hover:shadow-2xl transition-all duration-500
+                      border-0 shadow-lg rounded-2xl
+                      bg-gradient-to-br ${item.bgColor}
+                      group cursor-pointer
+                    `}>
+                      <CardContent className="p-0 relative z-10">
+                        {/* Animated Background */}
+                        <motion.div
+                          className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                          whileHover={{ opacity: 0.15 }}
+                        />
+
+                        {/* Icon with enhanced animation */}
+                        <motion.div
+                          whileHover={{
+                            scale: 1.3,
+                            rotate: 360,
+                            transition: { duration: 0.8 }
+                          }}
+                          className={`
+                            w-14 h-14 bg-gradient-to-r ${item.color}
+                            rounded-2xl flex items-center justify-center
+                            mx-auto mb-3 shadow-lg group-hover:shadow-xl
+                            transition-all duration-300
+                          `}
+                        >
+                          <item.icon className="h-7 w-7 text-white" />
+                        </motion.div>
+
+                        <motion.h3
+                          className="font-bold text-gray-900 text-sm mb-1 group-hover:text-gray-800"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          {item.title}
+                        </motion.h3>
+
+                        <motion.p
+                          className="text-xs text-gray-600 font-medium"
+                          whileHover={{ scale: 1.02 }}
+                        >
+                          {item.description}
+                        </motion.p>
+
+                        {/* Floating effect particles */}
+                        <motion.div
+                          className="absolute top-1 right-1 w-1.5 h-1.5 bg-white/40 rounded-full opacity-0 group-hover:opacity-100"
+                          animate={{
+                            y: [0, -8, 0],
+                            opacity: [0, 1, 0]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: index * 0.2
+                          }}
+                        />
                       </CardContent>
                     </Card>
                   </Link>
