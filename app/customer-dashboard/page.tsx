@@ -8,8 +8,8 @@ import { EnhancedCustomerWelcome } from "@/components/customer/enhanced-customer
 import { QuickActions } from "@/components/customer/quick-actions";
 import { RecentActivity } from "@/components/customer/recent-activity";
 import { EnhancedCategoryGrid } from "@/components/customer/enhanced-category-grid";
-import { TrendingProducts } from "@/components/customer/trending-products";
-import { RecommendedServices } from "@/components/customer/recommended-services";
+import { CustomerTrendingProducts } from "@/components/customer/customer-trending-products";
+import { CustomerRecommendedServices } from "@/components/customer/customer-recommended-services";
 import Link from "next/link";
 
 export default function CustomerDashboard() {
