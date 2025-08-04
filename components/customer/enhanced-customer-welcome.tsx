@@ -28,7 +28,6 @@ interface EnhancedCustomerWelcomeProps {
 }
 
 export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) {
-  const router = useRouter()
   const [isVisible, setIsVisible] = useState(false)
   const [loyaltyProgress, setLoyaltyProgress] = useState(0)
   const [currentPoints, setCurrentPoints] = useState(0)
