@@ -13,6 +13,7 @@ import { ProductsView } from "@/components/dashboard/products-view"
 import { CustomersView } from "@/components/dashboard/customers-view"
 import { MarketingView } from "@/components/dashboard/marketing-view"
 import { useAuth } from "@/contexts/auth-context"
+import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
 
 interface DashboardData {
   revenue: {
