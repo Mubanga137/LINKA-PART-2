@@ -78,16 +78,92 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Enhanced mock data with trending vendors and featured content
-const mockCategories: Category[] = [
-  { id: "1", name: "Electronics", slug: "electronics", icon: "����", productCount: 1248, featured: true },
-  { id: "2", name: "Fashion", slug: "fashion", icon: "👕", productCount: 892, featured: true },
-  { id: "3", name: "Home & Garden", slug: "home-garden", icon: "🏠", productCount: 567 },
-  { id: "4", name: "Health & Beauty", slug: "health-beauty", icon: "💄", productCount: 334 },
-  { id: "5", name: "Sports & Outdoors", slug: "sports", icon: "⚽", productCount: 423 },
-  { id: "6", name: "Books & Media", slug: "books", icon: "📚", productCount: 198 },
-  { id: "7", name: "Jewelry & Accessories", slug: "jewelry", icon: "💎", productCount: 156, featured: true },
-  { id: "8", name: "Food & Beverages", slug: "food", icon: "🍽️", productCount: 445 },
-  { id: "9", name: "Traditional Crafts", slug: "crafts", icon: "🎨", productCount: 267, featured: true }
+const mockCategories = [
+  {
+    id: "1",
+    name: "Electronics",
+    slug: "electronics",
+    icon: Smartphone,
+    productCount: 1248,
+    featured: true,
+    color: "from-blue-500 to-indigo-600",
+    bgColor: "from-blue-50 to-indigo-50"
+  },
+  {
+    id: "2",
+    name: "Fashion",
+    slug: "fashion",
+    icon: Shirt,
+    productCount: 892,
+    featured: true,
+    color: "from-pink-500 to-rose-600",
+    bgColor: "from-pink-50 to-rose-50"
+  },
+  {
+    id: "3",
+    name: "Home & Garden",
+    slug: "home-garden",
+    icon: Home,
+    productCount: 567,
+    color: "from-green-500 to-emerald-600",
+    bgColor: "from-green-50 to-emerald-50"
+  },
+  {
+    id: "4",
+    name: "Health & Beauty",
+    slug: "health-beauty",
+    icon: Sparkles,
+    productCount: 334,
+    color: "from-purple-500 to-violet-600",
+    bgColor: "from-purple-50 to-violet-50"
+  },
+  {
+    id: "5",
+    name: "Sports & Outdoors",
+    slug: "sports",
+    icon: Dumbbell,
+    productCount: 423,
+    color: "from-orange-500 to-amber-600",
+    bgColor: "from-orange-50 to-amber-50"
+  },
+  {
+    id: "6",
+    name: "Books & Media",
+    slug: "books",
+    icon: BookOpen,
+    productCount: 198,
+    color: "from-teal-500 to-cyan-600",
+    bgColor: "from-teal-50 to-cyan-50"
+  },
+  {
+    id: "7",
+    name: "Jewelry & Accessories",
+    slug: "jewelry",
+    icon: Gem,
+    productCount: 156,
+    featured: true,
+    color: "from-yellow-500 to-orange-600",
+    bgColor: "from-yellow-50 to-orange-50"
+  },
+  {
+    id: "8",
+    name: "Food & Beverages",
+    slug: "food",
+    icon: UtensilsCrossed,
+    productCount: 445,
+    color: "from-red-500 to-pink-600",
+    bgColor: "from-red-50 to-pink-50"
+  },
+  {
+    id: "9",
+    name: "Traditional Crafts",
+    slug: "crafts",
+    icon: Palette,
+    productCount: 267,
+    featured: true,
+    color: "from-indigo-500 to-purple-600",
+    bgColor: "from-indigo-50 to-purple-50"
+  }
 ];
 
 const featuredVendors = [
