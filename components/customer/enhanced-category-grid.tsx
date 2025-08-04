@@ -147,11 +147,11 @@ export function EnhancedCategoryGrid() {
           </h2>
           <p className="text-slate-600">Discover amazing products from local Zambian businesses</p>
         </div>
-        <button 
-          onClick={() => router.push('/marketplace')}
+        <button
+          onClick={() => router.push('/categories')}
           className="group flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold transition-all duration-300 hover:gap-3"
         >
-          View all categories
+          Explore All Categories
           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
