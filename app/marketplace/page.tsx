@@ -73,7 +73,7 @@ import { TrendingNowSection } from "@/components/marketplace/trending-now-sectio
 import { RecommendedSection } from "@/components/marketplace/recommended-section";
 import { VerifiedVendorsSection } from "@/components/marketplace/verified-vendors-section";
 import { MobileBottomNav } from "@/components/marketplace/mobile-bottom-nav";
-import { ShopByCategorySection } from "@/components/marketplace/shop-by-category";
+// import { ShopByCategorySection } from "@/components/marketplace/shop-by-category";
 import type { Product, MarketplaceFilters, Category } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
