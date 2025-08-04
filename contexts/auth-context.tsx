@@ -18,7 +18,7 @@ export interface User {
 interface AuthContextType {
   user: User | null
   isLoading: boolean
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string; user?: User }>
   signup: (data: SignupData) => Promise<{ success: boolean; error?: string }>
   logout: () => void
   updateProfile: (data: Partial<User>) => Promise<{ success: boolean; error?: string }>
