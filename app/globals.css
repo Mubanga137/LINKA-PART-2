@@ -587,14 +587,37 @@
   background: linear-gradient(to bottom, #4f46e5, #7c3aed);
 }
 
-/* Scrollbar for light theme */
+/* Enhanced Scrollbar for light theme */
 .scrollbar-thin {
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 #f1f5f9;
+  scrollbar-color: rgba(203, 213, 225, 0.6) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(203, 213, 225, 0.6);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.8);
 }
 
 .scrollbar-thumb-slate-300 {
   scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.scrollbar-thumb-slate-400::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.8);
 }
 
 .scrollbar-track-transparent {
