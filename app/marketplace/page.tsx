@@ -331,11 +331,11 @@ function EnhancedHeroSection() {
 
             {/* Quick Actions */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
-              {[
-                { icon: Star, label: "Featured", color: "from-yellow-400 to-orange-400" },
-                { icon: Zap, label: "Flash Sale", color: "from-red-400 to-pink-400" },
-                { icon: Crown, label: "Premium", color: "from-purple-400 to-indigo-400" },
-                { icon: Truck, label: "Free Ship", color: "from-green-400 to-emerald-400" }
+{[
+                { icon: Star, label: "Featured", color: "from-yellow-400 to-orange-400", href: "/marketplace/featured" },
+                { icon: Zap, label: "Flash Sale", color: "from-red-400 to-pink-400", href: "/marketplace/flash-sale" },
+                { icon: Crown, label: "Premium", color: "from-purple-400 to-indigo-400", href: "/marketplace/premium" },
+                { icon: Truck, label: "Free Ship", color: "from-green-400 to-emerald-400", href: "/marketplace/free-shipping" }
               ].map((item, index) => (
                 <motion.div
                   key={item.label}
