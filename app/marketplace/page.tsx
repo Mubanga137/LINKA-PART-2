@@ -348,9 +348,12 @@ function EnhancedHeroSection() {
                   <Button
                     variant="outline"
                     className={`bg-gradient-to-r ${item.color} bg-opacity-10 border-0 hover:shadow-lg transition-all duration-300`}
+                    asChild
                   >
-                    <item.icon className="h-4 w-4 mr-2" />
-                    {item.label}
+                    <Link href={item.href}>
+                      <item.icon className="h-4 w-4 mr-2" />
+                      {item.label}
+                    </Link>
                   </Button>
                 </motion.div>
               ))}
