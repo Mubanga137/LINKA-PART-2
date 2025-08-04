@@ -10,6 +10,7 @@ export function middleware(request: NextRequest) {
 
   let isRetailer = false
   let userRole = null
+  let isAuthenticated = false
 
   // Check if user is a retailer from stored data
   if (generalToken) {
@@ -17,8 +18,12 @@ export function middleware(request: NextRequest) {
       const userData = JSON.parse(generalToken)
       isRetailer = userData.role === 'retailer'
       userRole = userData.role
+      isAuthenticated = true
     } catch (error) {
-      // Invalid token, continue
+      // Invalid token, clear it
+      const response = NextResponse.next()
+      response.cookies.delete('linka_user')
+      return response
     }
   }
 
@@ -26,6 +31,7 @@ export function middleware(request: NextRequest) {
   if (retailerToken) {
     isRetailer = true
     userRole = 'retailer'
+    isAuthenticated = true
   }
 
   // STRICT RETAILER ACCESS CONTROL
