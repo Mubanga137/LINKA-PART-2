@@ -41,7 +41,9 @@ export function RoleGuard({
 
     // If no user is authenticated, redirect to login
     if (!currentUser) {
-      router.push(`${fallbackPath}?redirect=${encodeURIComponent(pathname)}`);
+      // For retailer routes, redirect to homepage instead of login to prevent loops
+      const redirectUrl = pathname.startsWith('/retailer/') ? '/' : `${fallbackPath}?redirect=${encodeURIComponent(pathname)}`;
+      router.push(redirectUrl);
       return;
     }
 
@@ -49,27 +51,22 @@ export function RoleGuard({
     if (!allowedRoles.includes(currentUser.role)) {
       // Redirect based on user role
       const redirectPath = getRedirectPathForRole(currentUser.role);
-      
+
       if (showRedirectMessage) {
-        toast.info(getRedirectMessage(currentUser.role), {
-          description: 'You have been redirected to your dashboard',
-          duration: 4000,
-        });
+        console.log(getRedirectMessage(currentUser.role));
       }
-      
-      router.push(redirectPath);
+
+      // Use window.location.href for immediate redirect to prevent history issues
+      window.location.href = redirectPath;
       return;
     }
 
     // Special case: If retailer tries to access homepage, redirect to dashboard
     if (currentUser.role === 'retailer' && (pathname === '/' || pathname === '/home')) {
       if (showRedirectMessage) {
-        toast.info('Redirected to your retailer dashboard', {
-          description: 'Retailers have a dedicated dashboard experience',
-          duration: 4000,
-        });
+        console.log('Redirected to your retailer dashboard');
       }
-      router.push('/retailer/dashboard');
+      window.location.href = '/retailer/dashboard';
       return;
     }
 
