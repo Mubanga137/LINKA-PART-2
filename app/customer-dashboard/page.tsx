@@ -25,13 +25,13 @@ import {
 } from "lucide-react";
 
 export default function CustomerDashboard() {
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const { totalItems, getCartTotal } = useCart();
   const { favorites } = useFavorites();
 
   const handleDemoLogin = async () => {
     // Demo login as customer
-    const result = await useAuth().login('customer@demo.com', 'demo123');
+    const result = await login('customer@demo.com', 'demo123');
     if (result.success) {
       window.location.reload();
     }
