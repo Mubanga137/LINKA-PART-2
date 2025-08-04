@@ -56,7 +56,7 @@ const quickActions = [
     label: 'My Orders',
     description: 'Track your purchases',
     icon: ShoppingBag,
-    href: '/customer-dashboard/orders',
+    href: '/orders',
     color: 'from-emerald-500 to-teal-600',
     bgColor: 'bg-emerald-50'
   },
@@ -65,7 +65,7 @@ const quickActions = [
     label: 'Saved Items',
     description: 'Your wishlist & favorites',
     icon: Heart,
-    href: '/customer-dashboard/saved',
+    href: '/wishlist',
     color: 'from-red-500 to-pink-600',
     bgColor: 'bg-red-50'
   },
@@ -74,7 +74,7 @@ const quickActions = [
     label: 'Messages',
     description: 'Chat with sellers',
     icon: MessageCircle,
-    href: '/customer-dashboard/messages',
+    href: '/contact',
     color: 'from-cyan-500 to-blue-600',
     bgColor: 'bg-cyan-50'
   },
@@ -83,7 +83,7 @@ const quickActions = [
     label: 'My Wallet',
     description: 'Payments & transactions',
     icon: Wallet,
-    href: '/customer-dashboard/wallet',
+    href: '/profile',
     color: 'from-slate-500 to-gray-600',
     bgColor: 'bg-slate-50'
   }
