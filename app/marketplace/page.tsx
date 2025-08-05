@@ -84,7 +84,7 @@ const mockProducts: Product[] = [
     rating: 4.5,
     reviewCount: 189,
     tags: ["gaming", "wireless", "controller", "electronics"],
-    vendor: { id: "v1", name: "Electronics Hub Zambia", logo: "" },
+    vendor: { id: "tech-solutions-zm", name: "Tech Solutions ZM", logo: "" },
     fastDelivery: true,
     freeShipping: true,
     createdAt: new Date(),
