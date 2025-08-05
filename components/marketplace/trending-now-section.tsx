@@ -359,11 +359,11 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                           )}
                         </div>
 
-                        {/* Trending Score */}
+                        {/* Rating Badge */}
                         <div className="absolute bottom-4 left-4">
                           <div className="bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
-                            <TrendingUp className="h-3 w-3" />
-                            Trending #{product.trendingScore}
+                            <Star className="h-3 w-3 fill-current text-yellow-400" />
+                            {product.rating} ({product.reviewCount})
                           </div>
                         </div>
                       </div>
