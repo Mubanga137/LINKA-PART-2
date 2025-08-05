@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, use } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useInView } from "framer-motion"
