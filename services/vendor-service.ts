@@ -86,6 +86,57 @@ const mockVendors: Record<string, Vendor> = {
     isFeatured: false,
     discount: "5% off orders over K500",
     deliveryTime: "2-4 days"
+  },
+  "lusaka-bookstore": {
+    id: "vendor-6",
+    name: "Lusaka Bookstore",
+    tagline: "Books, knowledge, and inspiration for everyone",
+    rating: 4.6,
+    reviewCount: 342,
+    productImageUrl: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80",
+    vendorImageUrl: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+    pricePreview: "From K35",
+    href: "/vendors/lusaka-bookstore",
+    categories: ["Books", "Education", "Stationery", "Academic"],
+    location: "Lusaka, Zambia",
+    isVerified: true,
+    isFeatured: true,
+    discount: "20% off textbooks",
+    deliveryTime: "1-2 days"
+  },
+  "copperbelt-sports": {
+    id: "vendor-7",
+    name: "Copperbelt Sports",
+    tagline: "Sports equipment and gear for champions",
+    rating: 4.7,
+    reviewCount: 589,
+    productImageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",
+    vendorImageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&q=80",
+    pricePreview: "From K120",
+    href: "/vendors/copperbelt-sports",
+    categories: ["Sports", "Fitness", "Equipment", "Apparel"],
+    location: "Ndola, Zambia",
+    isVerified: true,
+    isFeatured: true,
+    discount: "15% off team orders",
+    deliveryTime: "2-3 days"
+  },
+  "manda-hill-pharmacy": {
+    id: "vendor-8",
+    name: "Manda Hill Pharmacy",
+    tagline: "Your health, our priority - trusted since 1995",
+    rating: 4.8,
+    reviewCount: 1156,
+    productImageUrl: "https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&q=80",
+    vendorImageUrl: "https://images.unsplash.com/photo-1576671081837-49000212a370?w=200&q=80",
+    pricePreview: "From K15",
+    href: "/vendors/manda-hill-pharmacy",
+    categories: ["Health", "Medicine", "Wellness", "Beauty"],
+    location: "Lusaka, Zambia",
+    isVerified: true,
+    isFeatured: true,
+    discount: "10% off vitamins",
+    deliveryTime: "Same day delivery"
   }
 };
 
