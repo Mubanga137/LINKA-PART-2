@@ -385,9 +385,14 @@ export function VendorShowcase({
 
                   {/* Action Buttons */}
                   <div className="flex space-x-2 mt-6">
-                    <Button className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                      <ShoppingBag className="h-4 w-4 mr-2" />
-                      Visit Store
+                    <Button
+                      className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                      asChild
+                    >
+                      <Link href={`/vendors/${vendor.id}`}>
+                        <ShoppingBag className="h-4 w-4 mr-2" />
+                        Visit Store
+                      </Link>
                     </Button>
                     <Button variant="outline" size="sm" className="px-3">
                       <Users className="h-4 w-4" />
