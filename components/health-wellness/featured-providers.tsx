@@ -335,20 +335,35 @@ export function FeaturedProviders() {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex space-x-2">
-                        <Button 
+                      <div className="space-y-2">
+                        <Button
                           size="sm"
-                          className="flex-1 bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                          className="w-full bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
                         >
                           <Calendar className="h-3 w-3 mr-1" />
-                          Book
+                          Book Appointment
                         </Button>
-                        <Button variant="outline" size="sm" className="px-3">
-                          <Phone className="h-3 w-3" />
-                        </Button>
-                        <Button variant="outline" size="sm" className="px-3">
-                          <MessageCircle className="h-3 w-3" />
-                        </Button>
+
+                        <div className="flex space-x-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 border-blue-300 text-blue-600 hover:bg-blue-50"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              window.location.href = `/vendors/${provider.id}`
+                            }}
+                          >
+                            <Store className="h-3 w-3 mr-1" />
+                            Visit Clinic
+                          </Button>
+                          <Button variant="outline" size="sm" className="px-3">
+                            <Phone className="h-3 w-3" />
+                          </Button>
+                          <Button variant="outline" size="sm" className="px-3">
+                            <MessageCircle className="h-3 w-3" />
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </div>
