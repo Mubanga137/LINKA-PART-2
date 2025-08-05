@@ -83,6 +83,7 @@ const itemVariants = {
 }
 
 export default function VendorStorefront({ params }: VendorStorefrontProps) {
+  const resolvedParams = use(params)
   const [vendor, setVendor] = useState<Vendor | null>(null)
   const [products, setProducts] = useState<Product[]>([])
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
@@ -90,7 +91,7 @@ export default function VendorStorefront({ params }: VendorStorefrontProps) {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [isFollowing, setIsFollowing] = useState(false)
   const [loading, setLoading] = useState(true)
-  
+
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
