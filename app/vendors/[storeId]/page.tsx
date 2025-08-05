@@ -43,9 +43,9 @@ import type { Product, Vendor } from "@/lib/types"
 import { getVendorBySlug, getProductsByVendorId, getVendorStats } from "@/services/vendor-service"
 
 interface VendorStorefrontProps {
-  params: {
+  params: Promise<{
     storeId: string
-  }
+  }>
 }
 
 // Fetch vendor stats for additional information
