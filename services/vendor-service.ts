@@ -1,7 +1,23 @@
 // services/vendor-service.ts
 import type { Vendor, Product } from "@/lib/types";
 
-export interface VendorDetails extends Vendor {
+export interface VendorDetails {
+  id: string;
+  name: string;
+  tagline?: string;
+  rating?: number;
+  reviewCount?: number;
+  productImageUrl: string;
+  vendorImageUrl?: string;
+  pricePreview?: string;
+  href: string;
+  categories?: string[];
+  location?: string;
+  isVerified?: boolean;
+  isFeatured?: boolean;
+  discount?: string;
+  deliveryTime?: string;
+  products?: Product[];
   fullDescription: string;
   businessType: string;
   joinDate: string;
