@@ -1,5 +1,5 @@
 // services/vendor-service.ts
-import type { Vendor, Product } from "@/lib/types";
+import type { Vendor, Product } from "../lib/types";
 
 export interface VendorDetails {
   id: string;
