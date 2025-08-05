@@ -109,8 +109,8 @@ const mockProducts: Product[] = [
     fastDelivery: true,
     freeShipping: true,
     featured: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
   },
   {
     id: "prod-2", 
@@ -130,8 +130,8 @@ const mockProducts: Product[] = [
     fastDelivery: true,
     freeShipping: true,
     featured: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
   },
   {
     id: "prod-3",
@@ -151,8 +151,8 @@ const mockProducts: Product[] = [
     fastDelivery: true,
     freeShipping: true,
     featured: false,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
   },
   {
     id: "prod-4",
@@ -172,8 +172,8 @@ const mockProducts: Product[] = [
     fastDelivery: false,
     freeShipping: true,
     featured: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
   },
   {
     id: "prod-5",
@@ -193,8 +193,8 @@ const mockProducts: Product[] = [
     fastDelivery: false,
     freeShipping: true,
     featured: false,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
   },
   {
     id: "prod-6",
@@ -214,8 +214,8 @@ const mockProducts: Product[] = [
     fastDelivery: false,
     freeShipping: false,
     featured: false,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
   },
   {
     id: "prod-7",
@@ -235,8 +235,8 @@ const mockProducts: Product[] = [
     fastDelivery: false,
     freeShipping: false,
     featured: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
   },
   {
     id: "prod-8",
@@ -256,8 +256,8 @@ const mockProducts: Product[] = [
     fastDelivery: true,
     freeShipping: false,
     featured: false,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date('2024-01-15')
   }
 ];
 
