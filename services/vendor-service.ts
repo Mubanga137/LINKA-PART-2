@@ -287,8 +287,8 @@ export async function getVendorBySlug(storeSlug: string): Promise<Vendor | null>
  */
 export async function getVendorById(vendorId: string): Promise<Vendor | null> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-  
+  await new Promise(resolve => setTimeout(resolve, 300));
+
   return Object.values(mockVendors).find(vendor => vendor.id === vendorId) || null;
 }
 
@@ -297,8 +297,8 @@ export async function getVendorById(vendorId: string): Promise<Vendor | null> {
  */
 export async function getAllVendors(): Promise<Vendor[]> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-  
+  await new Promise(resolve => setTimeout(resolve, 400));
+
   return Object.values(mockVendors);
 }
 
@@ -307,8 +307,8 @@ export async function getAllVendors(): Promise<Vendor[]> {
  */
 export async function getProductsByVendorId(vendorId: string): Promise<Product[]> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-  
+  await new Promise(resolve => setTimeout(resolve, 300));
+
   return mockProducts.filter(product => product.vendor.id === vendorId);
 }
 
@@ -317,8 +317,8 @@ export async function getProductsByVendorId(vendorId: string): Promise<Product[]
  */
 export async function getFeaturedVendors(limit: number = 6): Promise<Vendor[]> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-  
+  await new Promise(resolve => setTimeout(resolve, 200));
+
   return Object.values(mockVendors)
     .filter(vendor => vendor.isFeatured)
     .slice(0, limit);
@@ -329,14 +329,14 @@ export async function getFeaturedVendors(limit: number = 6): Promise<Vendor[]> {
  */
 export async function searchVendors(query: string): Promise<Vendor[]> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-  
+  await new Promise(resolve => setTimeout(resolve, 250));
+
   const lowercaseQuery = query.toLowerCase();
-  
+
   return Object.values(mockVendors).filter(vendor =>
     vendor.name.toLowerCase().includes(lowercaseQuery) ||
     vendor.tagline?.toLowerCase().includes(lowercaseQuery) ||
-    vendor.categories?.some(category => 
+    vendor.categories?.some(category =>
       category.toLowerCase().includes(lowercaseQuery)
     )
   );
