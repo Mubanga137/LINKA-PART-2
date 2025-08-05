@@ -259,8 +259,8 @@ export default function ServicesPage() {
             key={i}
             className="absolute w-2 h-2 bg-blue-400/40 rounded-full"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              top: `${(i * 12 + 10) % 90}%`,
+              left: `${(i * 15 + 5) % 85}%`,
             }}
             animate={{
               y: [0, -20, 0],
@@ -268,9 +268,9 @@ export default function ServicesPage() {
               scale: [1, 1.5, 1]
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 3 + (i % 3),
               repeat: Infinity,
-              delay: Math.random() * 2
+              delay: i * 0.5
             }}
           />
         ))}
