@@ -374,26 +374,22 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                       <div className="space-y-4">
                         {/* Vendor Info */}
                         <div className="flex items-center gap-3">
-                          <Image
-                            src={product.vendor.logo}
-                            alt={product.vendor.name}
-                            width={40}
-                            height={40}
-                            className="rounded-full object-cover"
-                          />
+                          <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                            <span className="text-white font-bold text-sm">
+                              {product.vendor.name.charAt(0)}
+                            </span>
+                          </div>
                           <div>
                             <div className="flex items-center gap-2">
                               <span className="font-medium text-gray-900">{product.vendor.name}</span>
-                              {product.vendor.verified && (
-                                <Badge className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5">
-                                  <Shield className="h-2.5 w-2.5 mr-1" />
-                                  Verified
-                                </Badge>
-                              )}
+                              <Badge className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5">
+                                <Shield className="h-2.5 w-2.5 mr-1" />
+                                Verified
+                              </Badge>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-gray-500">
                               <MapPin className="h-3 w-3" />
-                              <span>{product.location}</span>
+                              <span>{product.category}</span>
                             </div>
                           </div>
                         </div>
