@@ -58,7 +58,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = React.useState<Array<{ id: string; message: string; type: 'success' | 'error' | 'info' }>>([]);
 
   const showToast = React.useCallback((message: string, type: 'success' | 'error' | 'info' = 'info') => {
-    const id = Math.random().toString(36).substring(7);
+    const id = `toast-${Date.now()}-${Math.floor(Date.now() % 1000)}`;
     setToasts(prev => [...prev, { id, message, type }]);
   }, []);
 
