@@ -185,6 +185,76 @@ export const MOCK_VENDORS: Record<string, VendorDetails> = {
       weekdays: "8:00 AM - 8:00 PM",
       weekends: "9:00 AM - 6:00 PM"
     }
+  },
+  "dr-mwanza": {
+    id: "dr-mwanza",
+    name: "Dr. John Mwanza Medical Practice",
+    tagline: "General Practitioner specializing in Family Medicine & Emergency Care",
+    fullDescription: "Dr. Mwanza is a highly experienced general practitioner with over 12 years of medical practice. He specializes in family medicine, emergency care, and preventive health. Our clinic provides comprehensive healthcare services with a focus on patient-centered care.",
+    businessType: "Medical Practice",
+    rating: 4.9,
+    reviewCount: 234,
+    productImageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face",
+    pricePreview: "From K100",
+    href: `/vendors/dr-mwanza`,
+    categories: ["Healthcare", "Medical", "General Practice"],
+    location: "Lusaka Central, Zambia",
+    isVerified: true,
+    isFeatured: true,
+    deliveryTime: "Same day appointments",
+    joinDate: "June 2020",
+    responseTime: "< 30 mins",
+    successRate: 99.2,
+    totalSales: 1134,
+    contactInfo: {
+      phone: "+260 97 567 8901",
+      email: "info@mwanzaclinic.zm"
+    },
+    policies: {
+      returns: "Satisfaction guaranteed or consultation refund",
+      shipping: "Home visits available for K250",
+      warranty: "Follow-up consultations included"
+    },
+    businessHours: {
+      weekdays: "8:00 AM - 6:00 PM",
+      weekends: "9:00 AM - 2:00 PM"
+    }
+  },
+  "dr-banda": {
+    id: "dr-banda",
+    name: "Dr. Sarah Banda Psychology Practice",
+    tagline: "Clinical Psychologist specializing in Mental Health & Therapy",
+    fullDescription: "Dr. Banda is a dedicated clinical psychologist specializing in anxiety, depression, and family therapy. She provides compassionate care with evidence-based treatments in a safe and supportive environment.",
+    businessType: "Psychology Practice",
+    rating: 4.8,
+    reviewCount: 156,
+    productImageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+    vendorImageUrl: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+    pricePreview: "From K150",
+    href: `/vendors/dr-banda`,
+    categories: ["Healthcare", "Psychology", "Mental Health"],
+    location: "Lusaka East, Zambia",
+    isVerified: true,
+    isFeatured: false,
+    deliveryTime: "Appointments available",
+    joinDate: "September 2021",
+    responseTime: "< 1 hour",
+    successRate: 98.7,
+    totalSales: 892,
+    contactInfo: {
+      phone: "+260 97 678 9012",
+      email: "therapy@bandapsychology.zm"
+    },
+    policies: {
+      returns: "First session satisfaction guarantee",
+      shipping: "Online therapy sessions available",
+      warranty: "Confidential and professional service"
+    },
+    businessHours: {
+      weekdays: "9:00 AM - 7:00 PM",
+      weekends: "10:00 AM - 4:00 PM"
+    }
   }
 };
 
