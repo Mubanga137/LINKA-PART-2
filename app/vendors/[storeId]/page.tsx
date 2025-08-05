@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import type { Product, Vendor } from "@/lib/types";
 import { OptimizedProductCard } from "@/components/marketplace/OptimizedProductCard";
+import { VendorService, type VendorDetails } from "@/services/vendor-service";
 
 interface VendorStorefrontPageProps {
   params: {
