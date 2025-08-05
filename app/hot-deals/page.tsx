@@ -180,6 +180,7 @@ function HotDealsContent() {
                 onToggleFavorite={toggleFavorite}
                 isFavorite={isFavorite(product.id)}
                 priority={index < 4}
+                showVisitStore={false} // Disable Visit Store for flash sale items
               />
             ))}
           </div>
