@@ -229,6 +229,7 @@ export class VendorService {
           name: "Traditional Wall Art",
           description: "Hand-painted canvas featuring traditional Zambian patterns",
           price: 120.00,
+          originalPrice: undefined,
           images: ["https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=400&fit=crop"],
           category: "Art",
           tags: ["art", "wall", "traditional", "painting"]
