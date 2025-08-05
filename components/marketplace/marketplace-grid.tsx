@@ -34,7 +34,8 @@ import {
   AlertCircle,
   Timer,
   Flame,
-  Camera
+  Camera,
+  Store
 } from "lucide-react"
 import { Product } from "@/contexts/cart-context"
 import { useCart } from "@/contexts/cart-context"
