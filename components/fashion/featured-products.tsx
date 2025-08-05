@@ -214,6 +214,15 @@ export function FeaturedProducts({ category }: FeaturedProductsProps) {
     setFilteredProducts(filtered)
   }, [category, sortBy])
 
+  // Generate store slug from vendor name
+  const generateStoreSlug = (vendorName: string) => {
+    return vendorName.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
   const ProductCard = ({ product }: { product: Product }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
