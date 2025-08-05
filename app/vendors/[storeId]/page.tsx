@@ -101,7 +101,7 @@ export default function VendorStorefront({ params }: VendorStorefrontProps) {
 
       try {
         // Fetch vendor data by store slug
-        const vendorData = await getVendorBySlug(params.storeId)
+        const vendorData = await getVendorBySlug(resolvedParams.storeId)
         setVendor(vendorData)
 
         if (vendorData) {
@@ -119,7 +119,7 @@ export default function VendorStorefront({ params }: VendorStorefrontProps) {
     }
 
     fetchVendorData()
-  }, [params.storeId])
+  }, [resolvedParams.storeId])
 
   useEffect(() => {
     let filtered = products
