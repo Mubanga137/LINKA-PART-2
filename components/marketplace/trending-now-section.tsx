@@ -485,36 +485,55 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex gap-3 mt-6">
+                      <div className="space-y-3 mt-6">
                         <motion.div
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="flex-1"
                         >
                           <Button
                             onClick={() => handleAddToCart(product)}
                             className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                           >
                             <ShoppingCart className="h-5 w-5 mr-2" />
-                            Add to Cart
+                            Buy Now
                           </Button>
                         </motion.div>
-                        
-                        <motion.div
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <Button
-                            variant="outline"
-                            className="px-6 py-3 border-2 border-gray-300 hover:border-orange-500 hover:text-orange-500"
-                            asChild
+
+                        <div className="flex gap-3">
+                          <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="flex-1"
                           >
-                            <Link href={`/products/${product.id}`}>
-                              View Details
-                              <ExternalLink className="h-4 w-4 ml-2" />
-                            </Link>
-                          </Button>
-                        </motion.div>
+                            <Button
+                              variant="outline"
+                              className="w-full px-4 py-3 border-2 border-blue-300 text-blue-600 hover:border-blue-500 hover:bg-blue-50"
+                              asChild
+                            >
+                              <Link href={`/vendors/${generateStoreSlug(product.vendor.name)}`}>
+                                <Store className="h-4 w-4 mr-2" />
+                                Visit Store
+                              </Link>
+                            </Button>
+                          </motion.div>
+
+                          <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="flex-1"
+                          >
+                            <Button
+                              variant="outline"
+                              className="w-full px-4 py-3 border-2 border-gray-300 hover:border-orange-500 hover:text-orange-500"
+                              asChild
+                            >
+                              <Link href={`/products/${product.id}`}>
+                                <Eye className="h-4 w-4 mr-2" />
+                                Details
+                              </Link>
+                            </Button>
+                          </motion.div>
+                        </div>
                       </div>
                     </div>
                   </div>
