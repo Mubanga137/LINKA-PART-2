@@ -338,14 +338,37 @@ export function MensTraditionalProducts({
               <p className="text-xs text-orange-700">{product.cultural_significance}</p>
             </div>
 
-            <div className="flex space-x-2">
-              <Button 
-                className="flex-1 bg-blue-600 hover:bg-blue-700"
+            <div className="space-y-2">
+              <Button
+                className="w-full bg-blue-600 hover:bg-blue-700"
                 onClick={() => onAddToCart(product)}
               >
                 <ShoppingCart className="h-4 w-4 mr-2" />
                 Add to Cart
               </Button>
+
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  className="flex-1 border-blue-300 text-blue-600 hover:bg-blue-50"
+                  asChild
+                >
+                  <Link href={`/vendors/${product.vendor.id || 'unknown'}`}>
+                    <Store className="h-4 w-4 mr-2" />
+                    Visit Store
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="flex-1 border-gray-300 text-gray-600 hover:bg-gray-50"
+                  asChild
+                >
+                  <Link href={`/products/${product.id}`}>
+                    <Eye className="h-4 w-4 mr-2" />
+                    Details
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </CardContent>
