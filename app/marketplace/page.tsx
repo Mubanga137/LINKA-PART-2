@@ -64,7 +64,7 @@ const mockProducts: Product[] = [
     rating: 4.7,
     reviewCount: 234,
     tags: ["tv", "smart", "4k", "entertainment"],
-    vendor: { id: "v1", name: "Electronics Hub Zambia", logo: "" },
+    vendor: { id: "tech-solutions-zm", name: "Tech Solutions ZM", logo: "" },
     featured: true,
     discountPercentage: 20,
     fastDelivery: true,
