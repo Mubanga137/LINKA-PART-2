@@ -36,9 +36,9 @@ import { OptimizedProductCard } from "@/components/marketplace/OptimizedProductC
 import { VendorService, type VendorDetails } from "../../../services/vendor-service";
 
 interface VendorStorefrontPageProps {
-  params: {
+  params: Promise<{
     storeId: string;
-  };
+  }>;
 }
 
 // Data will be fetched using VendorService
@@ -51,20 +51,25 @@ export default function VendorStorefrontPage({ params }: VendorStorefrontPagePro
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [isFollowing, setIsFollowing] = useState(false);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [storeId, setStoreId] = useState<string>("");
 
   useEffect(() => {
     const loadVendorData = async () => {
       setLoading(true);
 
       try {
+        // Await params to get storeId
+        const resolvedParams = await params;
+        setStoreId(resolvedParams.storeId);
+
         // Fetch vendor data
-        const vendorData = await VendorService.getVendorById(params.storeId);
+        const vendorData = await VendorService.getVendorById(resolvedParams.storeId);
         if (!vendorData) {
           notFound();
         }
 
         // Fetch vendor products
-        const vendorProducts = await VendorService.getVendorProducts(params.storeId);
+        const vendorProducts = await VendorService.getVendorProducts(resolvedParams.storeId);
 
         setVendor(vendorData);
         setProducts(vendorProducts);
@@ -77,7 +82,7 @@ export default function VendorStorefrontPage({ params }: VendorStorefrontPagePro
     };
 
     loadVendorData();
-  }, [params.storeId]);
+  }, [params]);
 
   const handleAddToCart = (product: Product) => {
     console.log("Adding to cart:", product);
