@@ -220,6 +220,7 @@ export class VendorService {
           name: "Wooden Sculpture Collection",
           description: "Authentic Zambian wooden sculptures carved by local artisans",
           price: 150.00,
+          originalPrice: undefined,
           images: ["https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop"],
           category: "Art",
           tags: ["wooden", "sculpture", "art", "handmade"]
