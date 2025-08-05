@@ -364,6 +364,46 @@ export class VendorService {
           category: "Electronics",
           tags: ["laptop", "gaming", "computer", "performance"]
         }
+      ],
+      "dr-mwanza": [
+        {
+          name: "General Consultation",
+          description: "Comprehensive medical consultation and health assessment",
+          price: 150.00,
+          originalPrice: undefined,
+          images: ["https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop"],
+          category: "Medical Services",
+          tags: ["consultation", "medical", "health", "checkup"]
+        },
+        {
+          name: "Home Visit",
+          description: "Professional medical consultation at your home",
+          price: 250.00,
+          originalPrice: undefined,
+          images: ["https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=400&fit=crop"],
+          category: "Medical Services",
+          tags: ["home visit", "medical", "consultation", "convenience"]
+        }
+      ],
+      "dr-banda": [
+        {
+          name: "Individual Therapy Session",
+          description: "One-on-one psychological therapy session for personal growth",
+          price: 200.00,
+          originalPrice: undefined,
+          images: ["https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=400&fit=crop"],
+          category: "Psychology Services",
+          tags: ["therapy", "mental health", "counseling", "psychology"]
+        },
+        {
+          name: "Online Therapy Session",
+          description: "Convenient online therapy session from the comfort of your home",
+          price: 150.00,
+          originalPrice: undefined,
+          images: ["https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=400&h=400&fit=crop"],
+          category: "Psychology Services",
+          tags: ["online therapy", "mental health", "remote", "counseling"]
+        }
       ]
     };
 
