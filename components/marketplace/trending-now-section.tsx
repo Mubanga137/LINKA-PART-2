@@ -114,13 +114,31 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
     setCurrentIndex((prev) => (prev - 1 + filteredProducts.length) % filteredProducts.length);
   };
 
-  const handleAddToCart = (product: TrendingProduct) => {
+  const handleAddToCart = (product: Product) => {
     onAddToCart?.(product);
   };
 
   const handleToggleWishlist = (productId: string) => {
     onToggleWishlist?.(productId);
   };
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4 animate-pulse"></div>
+            <div className="h-4 bg-gray-200 rounded w-96 mx-auto animate-pulse"></div>
+          </div>
+          <div className="h-96 bg-gray-200 rounded-3xl animate-pulse"></div>
+        </div>
+      </section>
+    );
+  }
+
+  if (filteredProducts.length === 0) {
+    return null;
+  }
 
   return (
     <motion.section
