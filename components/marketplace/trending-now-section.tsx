@@ -300,16 +300,16 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                         
                         {/* Overlay Badges */}
                         <div className="absolute top-4 left-4 flex flex-col gap-2">
-                          {product.isHotTrend && (
+                          {product.featured && (
                             <Badge className="bg-red-500 text-white px-3 py-1 animate-pulse">
                               <Flame className="h-3 w-3 mr-1" />
-                              Hot Trend
+                              Featured
                             </Badge>
                           )}
-                          {product.isNewArrival && (
+                          {product.fastDelivery && (
                             <Badge className="bg-blue-500 text-white px-3 py-1">
                               <Zap className="h-3 w-3 mr-1" />
-                              New Arrival
+                              Fast Delivery
                             </Badge>
                           )}
                           {product.discountPercentage && (
@@ -317,7 +317,7 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                               -{product.discountPercentage}% OFF
                             </Badge>
                           )}
-                          {product.isLimitedStock && (
+                          {product.stockQuantity && product.stockQuantity <= 10 && (
                             <Badge className="bg-orange-500 text-white px-3 py-1 animate-bounce">
                               <Timer className="h-3 w-3 mr-1" />
                               Limited Stock
