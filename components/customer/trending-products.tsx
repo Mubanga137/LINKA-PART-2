@@ -195,11 +195,11 @@ export function TrendingProducts({ products, isLoading }: TrendingProductsProps)
                   )}
                 </div>
 
-                {/* Add to Cart Button */}
-                <div className="flex gap-2">
+                {/* Action Buttons */}
+                <div className="space-y-2">
                   {product.inStock ? (
                     <Button
-                      className="flex-1 bg-emerald-600 hover:bg-emerald-700"
+                      className="w-full bg-emerald-600 hover:bg-emerald-700"
                       onClick={() => handleAddToCart(product)}
                     >
                       <ShoppingCart className="h-4 w-4 mr-2" />
@@ -210,10 +210,33 @@ export function TrendingProducts({ products, isLoading }: TrendingProductsProps)
                       )}
                     </Button>
                   ) : (
-                    <Button disabled className="flex-1">
+                    <Button disabled className="w-full">
                       Out of Stock
                     </Button>
                   )}
+
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-emerald-300 text-emerald-600 hover:bg-emerald-50"
+                      asChild
+                    >
+                      <Link href={`/vendors/${product.retailerId || 'unknown'}`}>
+                        <Store className="h-4 w-4 mr-1" />
+                        Visit Store
+                      </Link>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-gray-300 text-gray-600 hover:bg-gray-50"
+                      asChild
+                    >
+                      <Link href={`/products/${product.id}`}>
+                        <Eye className="h-4 w-4 mr-1" />
+                        Details
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </CardContent>
