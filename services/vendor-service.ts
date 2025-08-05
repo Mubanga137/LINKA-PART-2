@@ -347,21 +347,24 @@ export async function searchVendors(query: string): Promise<Vendor[]> {
  */
 export async function getVendorStats(vendorId: string) {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-  
+  await new Promise(resolve => setTimeout(resolve, 300));
+
   const vendor = Object.values(mockVendors).find(v => v.id === vendorId);
   const products = mockProducts.filter(p => p.vendor.id === vendorId);
-  
+
   if (!vendor) return null;
-  
+
+  // Use deterministic values based on vendor ID to avoid hydration issues
+  const vendorHash = vendorId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
   return {
     totalProducts: products.length,
     totalReviews: vendor.reviewCount,
     averageRating: vendor.rating,
-    totalOrders: Math.floor(Math.random() * 5000) + 1000,
+    totalOrders: 1000 + (vendorHash % 4000), // Deterministic based on vendor ID
     responseTime: "< 2 hours",
     joinDate: "2022-03-15", // Mock join date
-    successRate: Math.floor(Math.random() * 10) + 90 // 90-100%
+    successRate: 90 + (vendorHash % 10) // Deterministic 90-99%
   };
 }
 
