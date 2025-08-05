@@ -5,15 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Heart, 
-  ShoppingCart, 
-  Star, 
-  MapPin, 
-  Truck, 
-  Clock, 
+import {
+  Heart,
+  ShoppingCart,
+  Star,
+  MapPin,
+  Truck,
+  Clock,
   Package,
-  Zap
+  Zap,
+  Store
 } from "lucide-react";
 import type { Product } from "@/lib/types";
 
