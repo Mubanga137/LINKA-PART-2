@@ -289,6 +289,7 @@ export class VendorService {
           name: "Gaming Laptop",
           description: "High-performance laptop perfect for gaming and work",
           price: 3200.00,
+          originalPrice: undefined,
           images: ["https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop"],
           category: "Electronics",
           tags: ["laptop", "gaming", "computer", "performance"]
