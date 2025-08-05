@@ -26,10 +26,13 @@ import {
   MapPin,
   Truck,
   Shield,
-  ChevronDown
+  ChevronDown,
+  Store
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getAllVendors, getProductsByVendorId, generateStoreSlug } from "@/services/vendor-service";
+import type { Product, Vendor } from "@/lib/types";
 
 interface TrendingProduct {
   id: string;
