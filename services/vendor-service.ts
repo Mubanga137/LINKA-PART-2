@@ -277,8 +277,8 @@ export function generateStoreSlug(vendorName: string): string {
  */
 export async function getVendorBySlug(storeSlug: string): Promise<Vendor | null> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-  
+  await new Promise(resolve => setTimeout(resolve, 500));
+
   return mockVendors[storeSlug] || null;
 }
 
