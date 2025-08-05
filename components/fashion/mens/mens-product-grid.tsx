@@ -25,7 +25,8 @@ import {
   Filter,
   Grid3X3,
   List,
-  Search
+  Search,
+  Store
 } from "lucide-react"
 import { ProductFilter } from "../../../app/categories/fashion/mens/page"
 
