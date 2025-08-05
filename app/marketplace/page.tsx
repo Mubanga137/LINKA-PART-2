@@ -353,10 +353,10 @@ function EnhancedHeroSection() {
             variants={sparkleVariants}
             initial="initial"
             animate="animate"
-            style={{ 
+            style={{
               animationDelay: `${i * 0.5}s`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`
+              top: `${(i * 20 + 10) % 80}%`,
+              left: `${(i * 25 + 15) % 85}%`
             }}
             className="absolute w-4 h-4 text-blue-400 opacity-60"
           >
