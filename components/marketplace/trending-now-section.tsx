@@ -36,167 +36,8 @@ import type { Product, Vendor } from "@/lib/types";
 
 // Using the Product type from our service instead of custom interface
 
-const trendingProducts: TrendingProduct[] = [
-  {
-    id: "t1",
-    name: "Wireless Gaming Headset Pro Max",
-    description: "Professional gaming headset with 7.1 surround sound, noise cancellation, and RGB lighting",
-    price: 89.99,
-    originalPrice: 149.99,
-    images: [
-      "https://images.unsplash.com/photo-1585298723682-7115561c51b7?w=800&q=80",
-      "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80"
-    ],
-    category: "Gaming",
-    vendor: {
-      id: "v1",
-      name: "Gaming World ZM",
-      logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&q=80",
-      verified: true
-    },
-    rating: 4.8,
-    reviewCount: 1247,
-    views: 15420,
-    purchaseCount: 342,
-    trendingScore: 98,
-    discountPercentage: 40,
-    fastDelivery: true,
-    freeShipping: true,
-    inStock: true,
-    stockQuantity: 23,
-    tags: ["gaming", "wireless", "premium"],
-    lastSold: "2 minutes ago",
-    location: "Lusaka",
-    hasVideo: true,
-    isHotTrend: true
-  },
-  {
-    id: "t2",
-    name: "Smart Fitness Tracker Pro",
-    description: "Advanced fitness tracker with heart rate monitoring, GPS, and 10-day battery life",
-    price: 199.99,
-    originalPrice: 299.99,
-    images: [
-      "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=800&q=80",
-      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80"
-    ],
-    category: "Fitness",
-    vendor: {
-      id: "v2",
-      name: "FitTech Zambia",
-      logo: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=100&q=80",
-      verified: true
-    },
-    rating: 4.7,
-    reviewCount: 892,
-    views: 12380,
-    purchaseCount: 256,
-    trendingScore: 95,
-    discountPercentage: 33,
-    fastDelivery: true,
-    freeShipping: true,
-    inStock: true,
-    stockQuantity: 45,
-    tags: ["fitness", "smart", "health"],
-    lastSold: "5 minutes ago",
-    location: "Kitwe",
-    isNewArrival: true
-  },
-  {
-    id: "t3",
-    name: "Traditional Chitenge Outfit Set",
-    description: "Beautiful handmade chitenge outfit with matching accessories, celebrating Zambian heritage",
-    price: 65.99,
-    images: [
-      "https://images.unsplash.com/photo-1594736797933-d0300ad942ed?w=800&q=80",
-      "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800&q=80"
-    ],
-    category: "Fashion",
-    vendor: {
-      id: "v3",
-      name: "Heritage Fashion ZM",
-      logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&q=80",
-      verified: true
-    },
-    rating: 4.9,
-    reviewCount: 634,
-    views: 8920,
-    purchaseCount: 189,
-    trendingScore: 92,
-    fastDelivery: false,
-    freeShipping: true,
-    inStock: true,
-    stockQuantity: 12,
-    tags: ["traditional", "handmade", "chitenge"],
-    lastSold: "1 hour ago",
-    location: "Ndola",
-    isLimitedStock: true
-  },
-  {
-    id: "t4",
-    name: "Premium Coffee Beans - Zambian Grown",
-    description: "Single-origin coffee beans from the hills of Northern Zambia, roasted to perfection",
-    price: 24.99,
-    originalPrice: 34.99,
-    images: [
-      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80",
-      "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&q=80"
-    ],
-    category: "Food & Beverages",
-    vendor: {
-      id: "v4",
-      name: "Zambian Coffee Co.",
-      logo: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=100&q=80",
-      verified: true
-    },
-    rating: 4.6,
-    reviewCount: 423,
-    views: 6750,
-    purchaseCount: 145,
-    trendingScore: 89,
-    discountPercentage: 29,
-    fastDelivery: true,
-    freeShipping: false,
-    inStock: true,
-    stockQuantity: 67,
-    tags: ["coffee", "organic", "local"],
-    lastSold: "30 minutes ago",
-    location: "Solwezi",
-    isHotTrend: true
-  },
-  {
-    id: "t5",
-    name: "Handwoven Basket Collection",
-    description: "Set of 3 traditional handwoven baskets perfect for storage and home decoration",
-    price: 45.99,
-    images: [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80"
-    ],
-    category: "Home & Garden",
-    vendor: {
-      id: "v5",
-      name: "Craft Collective ZM",
-      logo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=100&q=80",
-      verified: true
-    },
-    rating: 4.8,
-    reviewCount: 298,
-    views: 5640,
-    purchaseCount: 87,
-    trendingScore: 86,
-    fastDelivery: false,
-    freeShipping: true,
-    inStock: true,
-    stockQuantity: 34,
-    tags: ["handmade", "baskets", "traditional"],
-    lastSold: "3 hours ago",
-    location: "Livingstone"
-  }
-];
-
 interface TrendingNowSectionProps {
-  onAddToCart?: (product: TrendingProduct) => void;
+  onAddToCart?: (product: Product) => void;
   onToggleWishlist?: (productId: string) => void;
   wishlistedItems?: Set<string>;
 }
@@ -206,32 +47,64 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'trending' | 'hot' | 'new'>('trending');
+  const [trendingProducts, setTrendingProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollXProgress } = useScroll({ container: containerRef });
   const x = useTransform(scrollXProgress, [0, 1], [0, -100]);
 
+  // Load trending products from vendors
+  useEffect(() => {
+    const loadTrendingProducts = async () => {
+      setLoading(true);
+      try {
+        const vendors = await getAllVendors();
+        const productPromises = vendors.slice(0, 5).map(vendor =>
+          getProductsByVendorId(vendor.id)
+        );
+
+        const vendorProducts = await Promise.all(productPromises);
+
+        // Get featured and high-rated products
+        const trending = vendorProducts
+          .flat()
+          .filter(product => product.featured || product.rating >= 4.6)
+          .sort((a, b) => (b.rating * b.reviewCount) - (a.rating * a.reviewCount))
+          .slice(0, 8);
+
+        setTrendingProducts(trending);
+      } catch (error) {
+        console.error('Error loading trending products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadTrendingProducts();
+  }, []);
+
   // Auto-play carousel
   useEffect(() => {
-    if (!isAutoPlay) return;
+    if (!isAutoPlay || trendingProducts.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % trendingProducts.length);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlay]);
+  }, [isAutoPlay, trendingProducts.length]);
 
   // Filter products based on view mode
   const filteredProducts = trendingProducts.filter(product => {
     switch (viewMode) {
       case 'hot':
-        return product.isHotTrend;
+        return product.discountPercentage && product.discountPercentage > 20;
       case 'new':
-        return product.isNewArrival;
+        return product.featured;
       default:
         return true;
     }
-  }).sort((a, b) => b.trendingScore - a.trendingScore);
+  });
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % filteredProducts.length);
