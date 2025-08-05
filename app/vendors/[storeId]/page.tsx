@@ -40,6 +40,7 @@ import {
   ArrowLeft
 } from "lucide-react"
 import type { Product, Vendor } from "@/lib/types"
+import { getVendorBySlug, getProductsByVendorId, getVendorStats } from "@/services/vendor-service"
 
 interface VendorStorefrontProps {
   params: {
