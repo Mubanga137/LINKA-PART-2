@@ -17,7 +17,8 @@ import {
   Filter,
   Grid3X3,
   List,
-  ChevronDown
+  ChevronDown,
+  Store
 } from "lucide-react"
 import {
   Select,
