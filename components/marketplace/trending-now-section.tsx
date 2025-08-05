@@ -34,38 +34,7 @@ import Link from "next/link";
 import { getAllVendors, getProductsByVendorId, generateStoreSlug } from "@/services/vendor-service";
 import type { Product, Vendor } from "@/lib/types";
 
-interface TrendingProduct {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  originalPrice?: number;
-  images: string[];
-  category: string;
-  vendor: {
-    id: string;
-    name: string;
-    logo: string;
-    verified: boolean;
-  };
-  rating: number;
-  reviewCount: number;
-  views: number;
-  purchaseCount: number;
-  trendingScore: number;
-  discountPercentage?: number;
-  fastDelivery: boolean;
-  freeShipping: boolean;
-  inStock: boolean;
-  stockQuantity: number;
-  tags: string[];
-  lastSold: string;
-  location: string;
-  hasVideo?: boolean;
-  isHotTrend?: boolean;
-  isNewArrival?: boolean;
-  isLimitedStock?: boolean;
-}
+// Using the Product type from our service instead of custom interface
 
 const trendingProducts: TrendingProduct[] = [
   {
