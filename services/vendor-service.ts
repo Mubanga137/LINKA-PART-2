@@ -269,6 +269,7 @@ export class VendorService {
           name: "Modern African Print Shirt",
           description: "Contemporary shirt featuring vibrant African prints",
           price: 95.00,
+          originalPrice: undefined,
           images: ["https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&h=400&fit=crop"],
           category: "Fashion",
           tags: ["african", "print", "shirt", "modern"]
