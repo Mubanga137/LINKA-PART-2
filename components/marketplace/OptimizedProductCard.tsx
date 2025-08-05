@@ -197,19 +197,32 @@ export function OptimizedProductCard({
             aria-label={`Add ${product.name} to cart`}
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
-            Add to Cart
+            {!product.inStock ? 'Out of Stock' : 'Add to Cart'}
           </Button>
 
-          <Button
-            variant="outline"
-            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-3 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
-            asChild
-          >
-            <Link href={`/products/${product.id}`}>
-              <Package className="h-4 w-4 mr-2" />
-              View Details
-            </Link>
-          </Button>
+          <div className="grid grid-cols-2 gap-2">
+            <Button
+              variant="outline"
+              className="border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
+              asChild
+            >
+              <Link href={`/products/${product.id}`}>
+                <Package className="h-4 w-4 mr-1" />
+                Details
+              </Link>
+            </Button>
+
+            <Button
+              variant="outline"
+              className="border-blue-300 text-blue-600 hover:bg-blue-50 py-2.5 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
+              asChild
+            >
+              <Link href={`/vendors/${product.vendor.id}`}>
+                <Store className="h-4 w-4 mr-1" />
+                Visit Store
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </article>
