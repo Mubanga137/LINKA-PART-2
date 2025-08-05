@@ -306,7 +306,7 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }: P
             </div>
             <div className="flex items-center gap-1 text-xs text-gray-500">
               <Eye className="h-3 w-3" />
-              <span>{Math.floor(Math.random() * 1000) + 100}</span>
+              <span>{150 + (product.id.charCodeAt(0) * 10) % 500}</span>
             </div>
           </div>
 
