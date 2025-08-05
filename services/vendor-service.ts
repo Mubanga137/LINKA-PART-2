@@ -373,11 +373,11 @@ export async function getVendorStats(vendorId: string) {
  */
 export async function toggleVendorFavorite(vendorId: string, isFavorited: boolean): Promise<boolean> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
+  await new Promise(resolve => setTimeout(resolve, 200));
+
   // In a real app, this would update the user's favorites in the database
   console.log(`${isFavorited ? 'Added' : 'Removed'} vendor ${vendorId} ${isFavorited ? 'to' : 'from'} favorites`);
-  
+
   return !isFavorited; // Return new state
 }
 
@@ -386,10 +386,10 @@ export async function toggleVendorFavorite(vendorId: string, isFavorited: boolea
  */
 export async function getVendorByProductId(productId: string): Promise<Vendor | null> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
+  await new Promise(resolve => setTimeout(resolve, 200));
+
   const product = mockProducts.find(p => p.id === productId);
   if (!product) return null;
-  
+
   return Object.values(mockVendors).find(vendor => vendor.id === product.vendor.id) || null;
 }
