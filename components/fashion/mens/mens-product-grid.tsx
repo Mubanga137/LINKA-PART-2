@@ -347,11 +347,34 @@ export const MensProductGrid = memo(function MensProductGrid({ filters, sortBy, 
               {product.vendor.name}, {product.vendor.location}
             </div>
 
-            <div className="flex space-x-2">
-              <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
+            <div className="space-y-2">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">
                 <ShoppingCart className="h-4 w-4 mr-2" />
                 Add to Cart
               </Button>
+
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  className="flex-1 border-blue-300 text-blue-600 hover:bg-blue-50"
+                  asChild
+                >
+                  <Link href={`/vendors/${product.vendor.id || 'unknown'}`}>
+                    <Store className="h-4 w-4 mr-1" />
+                    Visit Store
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="flex-1 border-gray-300 text-gray-600 hover:bg-gray-50"
+                  asChild
+                >
+                  <Link href={`/products/${product.id}`}>
+                    <Eye className="h-4 w-4 mr-1" />
+                    Details
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </CardContent>
