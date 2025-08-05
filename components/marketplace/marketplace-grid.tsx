@@ -335,22 +335,46 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }: P
           )}
 
           {/* Actions */}
-          <div className="flex gap-2 pt-1">
+          <div className="space-y-2 pt-1">
+            {/* Primary Action - Buy Now */}
             <Button
               onClick={() => onAddToCart(product)}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white text-xs py-2 h-8 rounded-lg"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white text-xs py-2 h-8 rounded-lg"
               size="sm"
             >
               <ShoppingCart className="h-3 w-3 mr-1" />
-              {product.category === 'services' ? 'Book' : 'Add'}
+              {product.category === 'services' ? 'Book Now' : 'Buy Now'}
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="px-2 h-8 text-xs border-orange-200 text-orange-600 hover:bg-orange-50"
-            >
-              <MessageCircle className="h-3 w-3" />
-            </Button>
+
+            {/* Secondary Actions Row */}
+            <div className="flex gap-2">
+              {/* Visit Store Button - Only show for non-flash-sale items */}
+              {!isFlashSale && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-xs border-orange-200 text-orange-600 hover:bg-orange-50 h-7"
+                  asChild
+                >
+                  <Link href={`/vendors/${getStoreSlug(product.retailerName || 'unknown-vendor')}`}>
+                    <Store className="h-3 w-3 mr-1" />
+                    Visit Store
+                  </Link>
+                </Button>
+              )}
+
+              {/* Contact/Message Button */}
+              <Button
+                variant="outline"
+                size="sm"
+                className={`text-xs border-orange-200 text-orange-600 hover:bg-orange-50 h-7 ${
+                  !isFlashSale ? 'px-2' : 'flex-1'
+                }`}
+              >
+                <MessageCircle className="h-3 w-3 mr-1" />
+                {!isFlashSale ? '' : 'Contact'}
+              </Button>
+            </div>
           </div>
 
           {/* Trust Indicators */}
