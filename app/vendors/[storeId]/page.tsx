@@ -95,25 +95,28 @@ export default function VendorStorefront({ params }: VendorStorefrontProps) {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   useEffect(() => {
-    // Simulate API call
     const fetchVendorData = async () => {
       setLoading(true)
-      
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      const vendorData = getVendorData(params.storeId)
-      setVendor(vendorData)
-      
-      if (vendorData) {
-        const vendorProducts = getVendorProducts(vendorData.id)
-        setProducts(vendorProducts)
-        setFilteredProducts(vendorProducts)
+
+      try {
+        // Fetch vendor data by store slug
+        const vendorData = await getVendorBySlug(params.storeId)
+        setVendor(vendorData)
+
+        if (vendorData) {
+          // Fetch vendor's products
+          const vendorProducts = await getProductsByVendorId(vendorData.id)
+          setProducts(vendorProducts)
+          setFilteredProducts(vendorProducts)
+        }
+      } catch (error) {
+        console.error('Error fetching vendor data:', error)
+        setVendor(null)
+      } finally {
+        setLoading(false)
       }
-      
-      setLoading(false)
     }
-    
+
     fetchVendorData()
   }, [params.storeId])
 
