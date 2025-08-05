@@ -101,6 +101,15 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }: P
   const isChoice = product.tags?.includes('top-choice')
   const hasVideoReview = product.tags?.includes('video-review')
 
+  // Generate store slug from vendor name
+  const getStoreSlug = (vendorName: string) => {
+    return vendorName.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
   return (
     <motion.div
       layout
