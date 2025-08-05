@@ -326,22 +326,49 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }: P
           )}
 
           {/* Actions */}
-          <div className="flex gap-2 pt-1">
+          <div className="space-y-2 pt-1">
             <Button
               onClick={() => onAddToCart(product)}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white text-xs py-2 h-8 rounded-lg"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white text-xs py-2 h-8 rounded-lg"
               size="sm"
             >
               <ShoppingCart className="h-3 w-3 mr-1" />
-              {product.category === 'services' ? 'Book' : 'Add'}
+              {product.category === 'services' ? 'Book Now' : 'Add to Cart'}
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="px-2 h-8 text-xs border-orange-200 text-orange-600 hover:bg-orange-50"
-            >
-              <MessageCircle className="h-3 w-3" />
-            </Button>
+
+            {!isFlashSale && (
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 h-8 text-xs border-blue-200 text-blue-600 hover:bg-blue-50"
+                  asChild
+                >
+                  <Link href={`/vendors/${product.retailerId || 'unknown'}`}>
+                    <Store className="h-3 w-3 mr-1" />
+                    Visit Store
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="px-2 h-8 text-xs border-orange-200 text-orange-600 hover:bg-orange-50"
+                >
+                  <MessageCircle className="h-3 w-3" />
+                </Button>
+              </div>
+            )}
+
+            {isFlashSale && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full h-8 text-xs border-orange-200 text-orange-600 hover:bg-orange-50"
+              >
+                <MessageCircle className="h-3 w-3 mr-1" />
+                Contact Seller
+              </Button>
+            )}
           </div>
 
           {/* Trust Indicators */}
