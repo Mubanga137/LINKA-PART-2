@@ -103,7 +103,7 @@ const mockProducts: Product[] = [
     rating: 4.6,
     reviewCount: 145,
     tags: ["bluetooth", "speaker", "audio", "portable"],
-    vendor: { id: "v2", name: "Audio Pro Zambia", logo: "" },
+    vendor: { id: "tech-solutions-zm", name: "Tech Solutions ZM", logo: "" },
     discountPercentage: 25,
     fastDelivery: true,
     freeShipping: true,
