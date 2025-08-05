@@ -240,6 +240,7 @@ export class VendorService {
           name: "Organic Vegetable Box",
           description: "Fresh seasonal vegetables harvested daily from our farm",
           price: 45.00,
+          originalPrice: undefined,
           images: ["https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop"],
           category: "Fresh Produce",
           tags: ["organic", "fresh", "vegetables", "healthy"]
@@ -248,6 +249,7 @@ export class VendorService {
           name: "Fresh Fruit Basket",
           description: "Assorted seasonal fruits picked at peak ripeness",
           price: 38.00,
+          originalPrice: undefined,
           images: ["https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=400&h=400&fit=crop"],
           category: "Fresh Produce",
           tags: ["fresh", "fruits", "organic", "seasonal"]
