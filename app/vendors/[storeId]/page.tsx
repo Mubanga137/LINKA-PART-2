@@ -44,7 +44,7 @@ interface VendorStorefrontPageProps {
 // Data will be fetched using VendorService
 
 export default function VendorStorefrontPage({ params }: VendorStorefrontPageProps) {
-  const [vendor, setVendor] = useState<any>(null);
+  const [vendor, setVendor] = useState<VendorDetails | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,18 +55,25 @@ export default function VendorStorefrontPage({ params }: VendorStorefrontPagePro
   useEffect(() => {
     const loadVendorData = async () => {
       setLoading(true);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const vendorData = generateVendorData(params.storeId);
-      if (!vendorData) {
+
+      try {
+        // Fetch vendor data
+        const vendorData = await VendorService.getVendorById(params.storeId);
+        if (!vendorData) {
+          notFound();
+        }
+
+        // Fetch vendor products
+        const vendorProducts = await VendorService.getVendorProducts(params.storeId);
+
+        setVendor(vendorData);
+        setProducts(vendorProducts);
+      } catch (error) {
+        console.error("Error loading vendor data:", error);
         notFound();
+      } finally {
+        setLoading(false);
       }
-      
-      setVendor(vendorData);
-      setProducts(generateVendorProducts(params.storeId));
-      setLoading(false);
     };
 
     loadVendorData();
