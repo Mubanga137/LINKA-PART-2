@@ -13,7 +13,10 @@ import {
   Truck, 
   Clock, 
   Package,
-  Zap
+  Zap,
+  Store,
+  ExternalLink,
+  Eye
 } from "lucide-react";
 import type { Product } from "@/lib/types";
 
@@ -23,6 +26,7 @@ interface OptimizedProductCardProps {
   onToggleFavorite: (productId: string) => void;
   isFavorite: boolean;
   priority?: boolean; // For LCP optimization on first few products
+  showVisitStore?: boolean; // Control whether to show Visit Store button
 }
 
 export function OptimizedProductCard({
@@ -30,7 +34,8 @@ export function OptimizedProductCard({
   onAddToCart,
   onToggleFavorite,
   isFavorite,
-  priority = false
+  priority = false,
+  showVisitStore = true
 }: OptimizedProductCardProps) {
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
@@ -51,6 +56,18 @@ export function OptimizedProductCard({
     if (imageError) return fallbackImage;
     return product.images[0] || fallbackImage;
   };
+
+  // Generate store slug from vendor name
+  const getStoreSlug = (vendorName: string) => {
+    return vendorName.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-|-$/g, '');
+  };
+
+  // Check if this is a flash sale item
+  const isFlashSale = product.tags?.includes('flash-sale') || (product as any).hotDeal;
 
   return (
     <article className="group bg-white rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blue-200 flex flex-col h-full w-full">
@@ -189,6 +206,7 @@ export function OptimizedProductCard({
 
         {/* Action Buttons */}
         <div className="mt-auto space-y-2">
+          {/* Buy Now Button */}
           <Button
             onClick={() => onAddToCart(product)}
             disabled={!product.inStock}
@@ -196,19 +214,39 @@ export function OptimizedProductCard({
             aria-label={`Add ${product.name} to cart`}
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
-            Add to Cart
+            Buy Now
           </Button>
 
-          <Button
-            variant="outline"
-            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-3 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
-            asChild
-          >
-            <Link href={`/products/${product.id}`}>
-              <Package className="h-4 w-4 mr-2" />
-              View Details
-            </Link>
-          </Button>
+          {/* Secondary Buttons Row */}
+          <div className="grid grid-cols-2 gap-2">
+            {/* Visit Store Button - Only show for non-flash-sale items */}
+            {showVisitStore && !isFlashSale && (
+              <Button
+                variant="outline"
+                className="border-gray-300 text-gray-600 hover:bg-gray-50 hover:border-blue-300 hover:text-blue-600 py-2.5 text-xs rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
+                asChild
+              >
+                <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
+                  <Store className="h-3 w-3 mr-1" />
+                  Visit Store
+                </Link>
+              </Button>
+            )}
+
+            {/* View Details Button */}
+            <Button
+              variant="outline"
+              className={`border-gray-300 text-gray-600 hover:bg-gray-50 hover:border-blue-300 hover:text-blue-600 py-2.5 text-xs rounded-lg transition-all duration-200 tap-target focus-visible-enhanced ${
+                showVisitStore && !isFlashSale ? '' : 'col-span-2'
+              }`}
+              asChild
+            >
+              <Link href={`/products/${product.id}`}>
+                <Eye className="h-3 w-3 mr-1" />
+                {showVisitStore && !isFlashSale ? 'Details' : 'View Details'}
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </article>
