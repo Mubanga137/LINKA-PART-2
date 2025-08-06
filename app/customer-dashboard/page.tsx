@@ -109,12 +109,6 @@ export default function CustomerDashboard() {
     { icon: Package, label: "Track Orders", href: "/orders", gradient: "from-purple-500 to-indigo-500", count: "3" }
   ];
 
-  const categories = [
-    { name: "Fashion & Textiles", icon: "👕", href: "/categories/fashion", trending: "Hot" },
-    { name: "Traditional Crafts", icon: "🏺", href: "/categories/traditional-crafts", trending: "New" },
-    { name: "Electronics", icon: "📱", href: "/categories/electronics", trending: "Sale" },
-    { name: "Home & Garden", icon: "🏠", href: "/categories/home-garden", trending: "Popular" }
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
