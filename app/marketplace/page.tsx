@@ -748,7 +748,7 @@ export default function MarketplacePage() {
                   </Button>
                 </motion.div>
 
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={{ scale: 1.03, transition: { duration: 0.2, ease: "easeOut" } }} whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}>
                   <Link href="/cart">
                     <Button variant="outline" size="sm" className="relative">
                       <ShoppingCart className="h-4 w-4" />
