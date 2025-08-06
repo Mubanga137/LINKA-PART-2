@@ -659,7 +659,29 @@ export default function MarketplacePage() {
         [productId]: (prev[productId] || 0) + quantity
       }));
 
-      addToCart({ id: productId, name: product.name, price: product.price }, quantity);
+      // Convert the product to the format expected by marketplace context
+      const marketplaceProduct = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        originalPrice: product.originalPrice,
+        image: product.image,
+        category: product.category,
+        description: product.description,
+        vendor: product.vendor,
+        vendorId: product.vendorId,
+        rating: product.rating,
+        reviews: product.reviews,
+        location: product.location,
+        tags: product.tags,
+        features: product.features,
+        type: product.type,
+        inStock: product.inStock,
+        available: product.available,
+        variants: []
+      };
+
+      addToCart(marketplaceProduct, quantity);
       cartToast.addToCart(product.name);
     } catch (error) {
       console.error('Error adding to cart:', error);
