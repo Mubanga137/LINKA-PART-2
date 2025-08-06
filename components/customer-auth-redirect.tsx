@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { Loader } from "lucide-react";
@@ -13,10 +13,11 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
   const { user, loading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const redirected = useRef(false);
 
   useEffect(() => {
-    // Skip redirect logic if still loading auth state
-    if (loading) return;
+    // Skip redirect logic if still loading auth state or already redirected
+    if (loading || redirected.current) return;
 
     // Define public routes that don't require authentication
     const publicRoutes = [
@@ -52,47 +53,58 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
       '/retailer'
     ];
 
-    const isPublicRoute = publicRoutes.some(route => 
+    const isPublicRoute = publicRoutes.some(route =>
       pathname === route || pathname?.startsWith(route + '/')
     );
-    
-    const isCustomerRoute = customerRoutes.some(route => 
+
+    const isCustomerRoute = customerRoutes.some(route =>
       pathname === route || pathname?.startsWith(route + '/')
     );
-    
-    const isRetailerRoute = retailerRoutes.some(route => 
+
+    const isRetailerRoute = retailerRoutes.some(route =>
       pathname === route || pathname?.startsWith(route + '/')
     );
+
+    // Prevent redirect loops by checking current location
+    const handleRedirect = (targetPath: string) => {
+      if (pathname !== targetPath && !redirected.current) {
+        redirected.current = true;
+        setTimeout(() => {
+          try {
+            router.replace(targetPath);
+          } catch (error) {
+            console.error('Navigation error:', error);
+            redirected.current = false;
+          }
+        }, 100);
+      }
+    };
 
     // Handle authentication and role-based routing
     if (user) {
       // User is logged in
       if (user.role === 'customer') {
-        // Customer trying to access homepage or public routes
+        // Customer trying to access homepage or auth routes
         if (pathname === '/' || pathname === '/login' || pathname === '/signup') {
-          console.log('Customer detected, redirecting to dashboard');
-          router.replace('/customer-dashboard');
+          handleRedirect('/customer-dashboard');
           return;
         }
-        
+
         // Customer trying to access retailer routes
         if (isRetailerRoute) {
-          console.log('Customer trying to access retailer route, redirecting to customer dashboard');
-          router.replace('/customer-dashboard');
+          handleRedirect('/customer-dashboard');
           return;
         }
       } else if (user.role === 'retailer') {
-        // Retailer trying to access customer routes
+        // Retailer trying to access customer routes (excluding public ones)
         if (isCustomerRoute && !isPublicRoute) {
-          console.log('Retailer trying to access customer route, redirecting to retailer dashboard');
-          router.replace('/retailer-dashboard');
+          handleRedirect('/retailer-dashboard');
           return;
         }
-        
-        // Retailer trying to access homepage
+
+        // Retailer trying to access homepage or auth routes
         if (pathname === '/' || pathname === '/login' || pathname === '/signup') {
-          console.log('Retailer detected, redirecting to retailer dashboard');
-          router.replace('/retailer-dashboard');
+          handleRedirect('/retailer-dashboard');
           return;
         }
       }
@@ -100,12 +112,20 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
       // User is not logged in
       if (isCustomerRoute || isRetailerRoute) {
         // Trying to access protected routes without authentication
-        console.log('Unauthenticated user trying to access protected route, redirecting to login');
-        router.replace(`/login?redirect=${encodeURIComponent(pathname || '/')}`);
+        const redirectPath = `/login?redirect=${encodeURIComponent(pathname || '/')}`;
+        handleRedirect(redirectPath);
         return;
       }
     }
+
+    // Reset redirect flag if no redirect was needed
+    redirected.current = false;
   }, [user, loading, pathname, router]);
+
+  // Reset redirect flag when pathname changes
+  useEffect(() => {
+    redirected.current = false;
+  }, [pathname]);
 
   // Show loading spinner while auth state is being determined
   if (loading) {
