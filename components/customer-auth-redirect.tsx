@@ -127,16 +127,20 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
     redirected.current = false;
   }, [pathname]);
 
-  // Show loading spinner while auth state is being determined
-  if (loading) {
+  // Show loading spinner while auth state is being determined or during redirect
+  if (loading || redirected.current) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="text-center">
           <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <Loader className="h-8 w-8 text-white animate-spin" />
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Loading Linka</h2>
-          <p className="text-gray-600">Please wait while we set things up...</p>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {redirected.current ? 'Redirecting...' : 'Loading Linka'}
+          </h2>
+          <p className="text-gray-600">
+            {redirected.current ? 'Taking you to the right place...' : 'Please wait while we set things up...'}
+          </p>
         </div>
       </div>
     );
