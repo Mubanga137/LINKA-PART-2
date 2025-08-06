@@ -26,7 +26,7 @@ import {
 
 export default function CustomerDashboard() {
   const { user } = useAuth();
-  const { totalItems, getCartTotal } = useCart();
+  const { totalItems, totalPrice } = useCart();
   const { favorites } = useFavorites();
 
   if (!user) {
