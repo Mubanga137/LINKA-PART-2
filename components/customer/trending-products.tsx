@@ -90,140 +90,46 @@ export function TrendingProducts({ products, isLoading }: TrendingProductsProps)
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product, index) => (
-          <Card key={product.id} className="group bg-white/80 backdrop-blur-sm border-white/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-            <CardContent className="p-0">
-              {/* Product Image */}
-              <div className="relative">
-                <Link href={`/products/${product.id}`}>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </Link>
+        {products.map((product, index) => {
+          // Transform the product data to match the InteractiveProductCard interface
+          const transformedProduct = {
+            ...product,
+            images: [product.image], // Convert single image to array
+            vendor: {
+              id: product.retailerId || 'unknown',
+              name: product.retailerName || 'Unknown Store'
+            },
+            inStock: product.inStock,
+            freeShipping: false, // Add default value
+            featured: index < 3, // Mark top 3 as featured
+            stockQuantity: undefined,
+            hotDeal: false,
+            discountPercentage: product.originalPrice ?
+              Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) :
+              undefined
+          };
 
-                {/* Badges */}
-                <div className="absolute top-3 left-3 flex flex-col gap-2">
-                  <Badge className="bg-red-500 text-white">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    #{index + 1}
-                  </Badge>
-                  {product.originalPrice && (
-                    <Badge variant="destructive" className="bg-green-500 text-white">
-                      {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-                    </Badge>
-                  )}
-                </div>
-
-                {/* Favorite button */}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm hover:bg-white/90"
-                  onClick={() => toggleFavorite(product.id)}
-                >
-                  <Heart 
-                    className={`h-4 w-4 ${
-                      favorites.has(product.id) 
-                        ? 'fill-red-500 text-red-500' 
-                        : 'text-slate-600'
-                    }`} 
-                  />
-                </Button>
-
-                {/* Quick view button */}
-                <Link href={`/products/${product.id}`}>
-                  <Button
-                    size="sm"
-                    className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-slate-900 hover:bg-gray-100"
-                  >
-                    <Eye className="h-4 w-4" />
-                  </Button>
-                </Link>
+          return (
+            <div key={product.id} className="relative">
+              {/* Trending Badge Overlay */}
+              <div className="absolute top-2 left-2 z-20">
+                <Badge className="bg-red-500 text-white shadow-lg">
+                  <TrendingUp className="h-3 w-3 mr-1" />
+                  #{index + 1}
+                </Badge>
               </div>
 
-              {/* Product Info */}
-              <div className="p-4">
-                <Link href={`/products/${product.id}`}>
-                  <h3 className="font-semibold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors line-clamp-2">
-                    {product.name}
-                  </h3>
-                </Link>
-
-                {/* Retailer */}
-                <div className="flex items-center text-sm text-slate-600 mb-2">
-                  <MapPin className="h-3 w-3 mr-1" />
-                  <span>{product.retailerName}</span>
-                </div>
-
-                {/* Rating */}
-                <div className="flex items-center space-x-2 mb-3">
-                  <div className="flex">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-4 w-4 ${
-                          i < Math.floor(product.rating)
-                            ? 'text-yellow-400 fill-current'
-                            : 'text-slate-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-slate-600">
-                    {product.rating} ({product.reviewCount})
-                  </span>
-                </div>
-
-                {/* Price */}
-                <div className="flex items-baseline space-x-2 mb-3">
-                  <span className="text-xl font-bold text-emerald-600">
-                    ZMW {product.price.toLocaleString()}
-                  </span>
-                  {product.originalPrice && (
-                    <span className="text-sm text-slate-500 line-through">
-                      ZMW {product.originalPrice.toLocaleString()}
-                    </span>
-                  )}
-                </div>
-
-                {/* Action Buttons */}
-                <div className="space-y-2">
-                  {product.inStock ? (
-                    <Button
-                      className="w-full bg-emerald-600 hover:bg-emerald-700"
-                      onClick={() => handleAddToCart(product)}
-                    >
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      {getItemQuantity(product.id) > 0 ? (
-                        `In Cart (${getItemQuantity(product.id)})`
-                      ) : (
-                        'Add to Cart'
-                      )}
-                    </Button>
-                  ) : (
-                    <Button disabled className="w-full">
-                      Out of Stock
-                    </Button>
-                  )}
-
-                  <Button
-                    variant="outline"
-                    className="w-full border-emerald-300 text-emerald-600 hover:bg-emerald-50 py-2 text-sm"
-                    asChild
-                  >
-                    <Link href={`/vendors/${product.retailerId || 'unknown'}`}>
-                      <Store className="h-4 w-4 mr-1" />
-                      <span className="hidden sm:inline">Visit Store</span>
-                      <span className="sm:hidden">Store</span>
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              <InteractiveProductCard
+                product={transformedProduct}
+                onAddToCart={handleAddToCart}
+                onToggleFavorite={toggleFavorite}
+                isFavorite={favorites.has(product.id)}
+                priority={index < 4} // Prioritize first 4 for LCP
+                className="h-full"
+              />
+            </div>
+          );
+        })}
       </div>
 
       {/* Mobile View All Button */}
