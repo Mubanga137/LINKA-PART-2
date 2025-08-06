@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Heart } from "lucide-react";
