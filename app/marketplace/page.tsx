@@ -551,7 +551,7 @@ export default function MarketplacePage() {
               initial={{ x: -320 }}
               animate={{ x: 0 }}
               exit={{ x: -320 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              transition={{ type: "spring", stiffness: 260, damping: 24, mass: 0.8 }}
               className={`fixed left-0 top-0 h-full bg-white border-r border-gray-200 shadow-xl z-50 ${
                 sidebarCollapsed ? 'w-16' : 'w-72'
               } transition-all duration-300`}
@@ -849,11 +849,11 @@ export default function MarketplacePage() {
                   {filteredProducts.map((item, index) => (
                     <motion.div
                       key={item.id}
-                      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                      initial={{ opacity: 0, scale: 0.92, y: 20 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.6 }}
-                      whileHover={{ scale: 1.02, y: -8 }}
-                      whileTap={{ scale: 0.98 }}
+                      transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
+                      whileHover={{ scale: 1.02, y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
+                      whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
                       className="group"
                     >
                       <Card className="h-full bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
@@ -863,7 +863,7 @@ export default function MarketplacePage() {
                             <img
                               src={item.image}
                               alt={item.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              className="w-full h-full object-cover transition-transform duration-400 ease-out group-hover:scale-105"
                             />
                             
                             {/* Badges */}
@@ -884,8 +884,8 @@ export default function MarketplacePage() {
                             {/* Favorite Button */}
                             <div className="absolute top-3 right-3">
                               <motion.button
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileHover={{ scale: 1.08, transition: { duration: 0.2, ease: "easeOut" } }}
+                                whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
                                 onClick={() => toggleFavorite(item.id)}
                                 className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg"
                               >
@@ -988,7 +988,7 @@ export default function MarketplacePage() {
 
                             {/* Action Buttons */}
                             <div className="flex gap-2">
-                              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
+                              <motion.div whileHover={{ scale: 1.015, transition: { duration: 0.2, ease: "easeOut" } }} whileTap={{ scale: 0.985, transition: { duration: 0.1 } }} className="flex-1">
                                 <Button 
                                   className="w-full bg-gradient-to-r from-pink-500 to-blue-500 hover:from-pink-600 hover:to-blue-600 text-white"
                                   disabled={item.type === "product" ? !item.inStock : !item.available}
