@@ -1287,8 +1287,8 @@ export default function MarketplacePage() {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1, transition: { duration: 0.3, ease: "easeOut" } }}
               exit={{ scale: 0.8, opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.06, transition: { duration: 0.2, ease: "easeOut" } }}
+              whileTap={{ scale: 0.94, transition: { duration: 0.1 } }}
             >
               <Button
                 onClick={scrollToTop}
