@@ -205,130 +205,68 @@ export function FeaturedProducts({ category }: FeaturedProductsProps) {
     setFilteredProducts(filtered)
   }, [category, sortBy])
 
-  const ProductCard = ({ product }: { product: Product }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="group"
-    >
-      <Card className="overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        <CardContent className="p-0">
-          <div className="relative">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
-            />
+  const [favorites, setFavorites] = useState<Set<string>>(new Set())
 
-            {/* Badges */}
-            <div className="absolute top-3 left-3 space-y-2">
-              {product.originalPrice && (
-                <Badge className="bg-red-500 text-white">
-                  {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-                </Badge>
-              )}
-              {product.newArrival && (
-                <Badge className="bg-green-500 text-white">New</Badge>
-              )}
-              {product.trending && (
-                <Badge className="bg-orange-500 text-white">Trending</Badge>
-              )}
-              {product.freeShipping && (
-                <Badge className="bg-blue-500 text-white">
-                  <Truck className="h-3 w-3 mr-1" />
-                  Free Shipping
-                </Badge>
-              )}
-            </div>
+  const toggleFavorite = (productId: string) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev)
+      if (newFavorites.has(productId)) {
+        newFavorites.delete(productId)
+      } else {
+        newFavorites.add(productId)
+      }
+      return newFavorites
+    })
+  }
 
-            {/* Quick Actions */}
-            <div className="absolute top-3 right-3 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <Button size="sm" variant="secondary" className="h-8 w-8 p-0 rounded-full">
-                <Heart className="h-4 w-4" />
-              </Button>
-              <Button size="sm" variant="secondary" className="h-8 w-8 p-0 rounded-full">
-                <Eye className="h-4 w-4" />
-              </Button>
-            </div>
+  const handleAddToCart = (product: Product) => {
+    // Add to cart logic here
+    console.log('Adding to cart:', product.name);
+  }
 
-            {/* Vendor Badge */}
-            {product.vendor.verified && (
-              <div className="absolute bottom-3 left-3">
-                <Badge className="bg-white/90 text-slate-700">
-                  ✓ Verified Vendor
-                </Badge>
-              </div>
-            )}
-          </div>
+  const ProductCard = ({ product }: { product: Product }) => {
+    // Transform the product data to match the InteractiveProductCard interface
+    const transformedProduct = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      images: [product.image],
+      vendor: {
+        id: product.vendor?.id || 'unknown',
+        name: product.vendor?.name || 'Unknown Store'
+      },
+      rating: product.rating,
+      reviewCount: product.reviews,
+      description: `High-quality ${product.brand} product with premium features.`,
+      features: product.features,
+      inStock: product.inStock,
+      stockQuantity: undefined,
+      freeShipping: product.freeShipping,
+      featured: product.newArrival || product.trending,
+      hotDeal: false,
+      discountPercentage: product.originalPrice ?
+        Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) :
+        undefined
+    };
 
-          <div className="p-6">
-            <div className="mb-2">
-              <h3 className="font-semibold text-slate-900 group-hover:text-purple-600 transition-colors line-clamp-2">
-                {product.name}
-              </h3>
-              <p className="text-sm text-slate-500">{product.brand}</p>
-            </div>
-
-            <div className="flex items-center space-x-1 mb-3">
-              <Star className="h-4 w-4 text-yellow-400 fill-current" />
-              <span className="text-sm font-medium">{product.rating}</span>
-              <span className="text-sm text-slate-500">({product.reviews})</span>
-            </div>
-
-            <div className="flex items-center space-x-2 mb-3">
-              <span className="text-xl font-bold text-slate-900">
-                ZMW {product.price}
-              </span>
-              {product.originalPrice && (
-                <span className="text-sm text-slate-500 line-through">
-                  ZMW {product.originalPrice}
-                </span>
-              )}
-            </div>
-
-            <div className="flex items-center text-xs text-slate-500 mb-4">
-              <MapPin className="h-3 w-3 mr-1" />
-              {product.vendor.name}, {product.vendor.location}
-            </div>
-
-            <div className="flex flex-wrap gap-1 mb-4">
-              {product.features.slice(0, 2).map((feature, index) => (
-                <Badge key={index} variant="outline" className="text-xs">
-                  {feature}
-                </Badge>
-              ))}
-              {product.features.length > 2 && (
-                <Badge variant="outline" className="text-xs">
-                  +{product.features.length - 2} more
-                </Badge>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Button className="w-full bg-purple-600 hover:bg-purple-700 py-2.5 text-sm font-semibold">
-                <ShoppingCart className="h-4 w-4 mr-2" />
-                <span className="hidden sm:inline">Add to Cart</span>
-                <span className="sm:hidden">Buy Now</span>
-              </Button>
-
-              <Button
-                variant="outline"
-                className="w-full border-purple-300 text-purple-600 hover:bg-purple-50 py-2 text-sm"
-                asChild
-              >
-                <Link href={`/vendors/${product.vendor.id || 'unknown'}`}>
-                  <Store className="h-4 w-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Visit Store</span>
-                  <span className="sm:hidden">Store</span>
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </motion.div>
-  )
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="group h-full"
+      >
+        <InteractiveProductCard
+          product={transformedProduct}
+          onAddToCart={handleAddToCart}
+          onToggleFavorite={toggleFavorite}
+          isFavorite={favorites.has(product.id)}
+          className="h-full"
+        />
+      </motion.div>
+    );
+  }
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
