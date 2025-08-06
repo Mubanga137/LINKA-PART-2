@@ -10,6 +10,7 @@ import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
 import { CustomerAuthRedirect } from '@/components/customer-auth-redirect'
 import { ToastProvider } from '@/components/toast-notification'
 import { NavigationErrorBoundary } from '@/components/navigation-error-boundary'
+import '@/lib/error-handler' // Initialize client error handler
 import './globals.css'
 
 export const metadata: Metadata = {
