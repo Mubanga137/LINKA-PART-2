@@ -52,6 +52,7 @@ export interface Product {
   };
   specifications?: Record<string, string>;
   variants?: ProductVariant[];
+  features?: string[];
   featured?: boolean;
   discountPercentage?: number;
   fastDelivery?: boolean;
