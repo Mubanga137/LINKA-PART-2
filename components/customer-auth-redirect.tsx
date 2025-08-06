@@ -10,7 +10,7 @@ interface CustomerAuthRedirectProps {
 }
 
 export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
-  const { user, loading } = useAuth();
+  const { user, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const redirected = useRef(false);
