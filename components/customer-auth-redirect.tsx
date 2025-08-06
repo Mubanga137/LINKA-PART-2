@@ -66,18 +66,22 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
       pathname === route || pathname?.startsWith(route + '/')
     );
 
-    // Prevent redirect loops by checking current location
-    const handleRedirect = (targetPath: string) => {
-      if (pathname !== targetPath && !redirected.current) {
-        redirected.current = true;
-        setTimeout(() => {
-          try {
+    // Safe redirect handler
+    const handleRedirect = async (targetPath: string) => {
+      if (pathname !== targetPath && !isRedirecting) {
+        setIsRedirecting(true);
+        try {
+          const success = await SafeNavigation.safeReplace(router, targetPath);
+          if (!success) {
+            console.warn('Safe navigation failed, trying direct navigation');
             router.replace(targetPath);
-          } catch (error) {
-            console.error('Navigation error:', error);
-            redirected.current = false;
           }
-        }, 100);
+        } catch (error) {
+          console.error('Navigation error:', error);
+        } finally {
+          // Reset redirecting state after a delay
+          setTimeout(() => setIsRedirecting(false), 1000);
+        }
       }
     };
 
