@@ -144,10 +144,10 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
             <Loader className="h-8 w-8 text-white animate-spin" />
           </div>
           <h2 className="text-xl font-semibold text-gray-900 mb-2">
-            {redirected.current ? 'Redirecting...' : 'Loading Linka'}
+            {(isRedirecting || SafeNavigation.isRedirecting()) ? 'Redirecting...' : 'Loading Linka'}
           </h2>
           <p className="text-gray-600">
-            {redirected.current ? 'Taking you to the right place...' : 'Please wait while we set things up...'}
+            {(isRedirecting || SafeNavigation.isRedirecting()) ? 'Taking you to the right place...' : 'Please wait while we set things up...'}
           </p>
         </div>
       </div>
