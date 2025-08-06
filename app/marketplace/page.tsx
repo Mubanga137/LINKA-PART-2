@@ -741,7 +741,7 @@ export default function MarketplacePage() {
                   </Button>
                 </div>
 
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={{ scale: 1.03, transition: { duration: 0.2, ease: "easeOut" } }} whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}>
                   <Button variant="outline" size="sm" className="relative">
                     <Bell className="h-4 w-4" />
                     <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
