@@ -1133,7 +1133,7 @@ export default function MarketplacePage() {
                           <motion.button
                             whileHover={{ scale: 1.08, transition: { duration: 0.2, ease: "easeOut" } }}
                             whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
-                            onClick={() => toggleFavorite(item.id)}
+                            onClick={() => handleToggleFavorite(item.id)}
                             className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg"
                           >
                             <Heart className={`h-5 w-5 ${favorites.includes(item.id) ? 'text-red-500 fill-current' : 'text-gray-600'}`} />
