@@ -646,11 +646,30 @@ export default function MarketplacePage() {
   }, [selectedCategory, searchTerm, sortBy, activeFilters]);
 
   const handleAddToCart = (productId: string, quantity: number = 1) => {
+    const product = allProducts.find(p => p.id === productId);
+    if (!product) return;
+
     setCartItems(prev => ({
       ...prev,
       [productId]: (prev[productId] || 0) + quantity
     }));
-    addToCart({ id: productId, name: "Product", price: 100 }, quantity);
+
+    addToCart({ id: productId, name: product.name, price: product.price }, quantity);
+    cartToast.addToCart(product.name);
+  };
+
+  const handleToggleFavorite = (productId: string) => {
+    const product = allProducts.find(p => p.id === productId);
+    if (!product) return;
+
+    const isCurrentlyFavorited = favorites.includes(productId);
+    toggleFavorite(productId);
+
+    if (isCurrentlyFavorited) {
+      wishlistToast.removeFromWishlist(product.name);
+    } else {
+      wishlistToast.addToWishlist(product.name);
+    }
   };
 
   const scrollToTop = () => {
