@@ -8,6 +8,7 @@ import { MarketplaceProvider } from '@/contexts/marketplace-context'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
 import { CustomerAuthRedirect } from '@/components/customer-auth-redirect'
+import { ToastProvider } from '@/components/toast-notification'
 import './globals.css'
 
 export const metadata: Metadata = {
