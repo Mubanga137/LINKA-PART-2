@@ -77,7 +77,9 @@ html {
               <CartProvider>
                 <MarketplaceProvider>
                   <AuthRedirectWrapper>
-                    {children}
+                    <CustomerAuthRedirect>
+                      {children}
+                    </CustomerAuthRedirect>
                   </AuthRedirectWrapper>
                 </MarketplaceProvider>
               </CartProvider>
