@@ -128,7 +128,7 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
   }, [pathname]);
 
   // Show loading spinner while auth state is being determined or during redirect
-  if (loading || redirected.current) {
+  if (isLoading || redirected.current) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="text-center">
