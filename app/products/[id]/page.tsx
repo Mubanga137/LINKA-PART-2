@@ -678,7 +678,12 @@ export default function ProductDetail() {
                           <MessageCircle className="h-4 w-4" />
                           Message
                         </Button>
-                        <Button variant="outline" size="sm" className="gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="gap-2"
+                          onClick={() => router.push(`/vendors/${product.seller.id}`)}
+                        >
                           <Store className="h-4 w-4" />
                           View Store
                         </Button>
