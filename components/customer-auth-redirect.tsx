@@ -17,7 +17,7 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
 
   useEffect(() => {
     // Skip redirect logic if still loading auth state or already redirected
-    if (loading || redirected.current) return;
+    if (isLoading || redirected.current) return;
 
     // Define public routes that don't require authentication
     const publicRoutes = [
