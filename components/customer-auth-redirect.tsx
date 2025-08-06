@@ -123,13 +123,16 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
       }
     }
 
-    // Reset redirect flag if no redirect was needed
-    redirected.current = false;
-  }, [user, isLoading, pathname, router]);
+    // Reset redirecting state if no redirect was needed
+    if (!isRedirecting) {
+      setIsRedirecting(false);
+    }
+  }, [user, isLoading, pathname, router, isRedirecting]);
 
-  // Reset redirect flag when pathname changes
+  // Reset redirecting state when pathname changes
   useEffect(() => {
-    redirected.current = false;
+    setIsRedirecting(false);
+    SafeNavigation.reset();
   }, [pathname]);
 
   // Show loading spinner while auth state is being determined or during redirect
