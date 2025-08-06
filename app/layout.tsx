@@ -81,11 +81,11 @@ html {
                 <MarketplaceProvider>
                   <NavigationErrorBoundary>
                     <AuthRedirectWrapper>
-                      <SimpleAuthRedirect>
+                      <MinimalAuthWrapper>
                       <ToastProvider>
                         {children}
                       </ToastProvider>
-                    </SimpleAuthRedirect>
+                    </MinimalAuthWrapper>
                     </AuthRedirectWrapper>
                   </NavigationErrorBoundary>
                 </MarketplaceProvider>
