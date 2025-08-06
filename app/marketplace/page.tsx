@@ -123,8 +123,8 @@ export default function MarketplacePage() {
   const { user } = useAuth();
   const { addToCart, cart, getCartItemCount, getCartTotal } = useCart();
   const { favorites, toggleFavorite } = useFavorites();
-  // const cartToast = useCartToast();
-  // const wishlistToast = useWishlistToast();
+  const cartToast = useCartToast();
+  const wishlistToast = useWishlistToast();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
