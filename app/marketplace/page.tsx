@@ -1226,11 +1226,13 @@ export default function MarketplacePage() {
 
                         {/* Action Buttons */}
                         <div className="flex gap-2">
-                          <motion.div whileHover={{ scale: 1.015, transition: { duration: 0.2, ease: "easeOut" } }} whileTap={{ scale: 0.985, transition: { duration: 0.1 } }} className="flex-1">
-                            <Button 
+                          <div className="flex-1">
+                            <InteractiveButton
                               className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white"
                               disabled={item.type === "product" ? !item.inStock : !item.available}
                               onClick={() => handleAddToCart(item.id)}
+                              loadingText="Adding..."
+                              successText="Added!"
                             >
                               {item.type === "product" ? (
                                 <>
@@ -1243,8 +1245,8 @@ export default function MarketplacePage() {
                                   {item.available ? 'Book Now' : 'Unavailable'}
                                 </>
                               )}
-                            </Button>
-                          </motion.div>
+                            </InteractiveButton>
+                          </div>
                           <motion.div whileHover={{ scale: 1.06, transition: { duration: 0.2, ease: "easeOut" } }} whileTap={{ scale: 0.94, transition: { duration: 0.1 } }}>
                             <Link href={`/vendors/${item.vendorId}`}>
                               <Button variant="outline" size="sm" className="px-3">
