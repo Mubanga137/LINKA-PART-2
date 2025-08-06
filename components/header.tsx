@@ -181,8 +181,8 @@ export function Header() {
               </>
             )}
 
-            {/* Mobile Navigation */}
-            <MobileNavigation />
+            {/* Enhanced Mobile Navigation */}
+            <EnhancedMobileNavigation />
 
             {/* User Authentication */}
             {user ? (
