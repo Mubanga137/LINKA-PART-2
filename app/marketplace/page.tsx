@@ -239,7 +239,7 @@ export default function MarketplacePage() {
       icon: ShoppingCart, 
       label: "Cart", 
       href: "/cart", 
-      badge: totalItems || null,
+      badge: getCartItemCount() || null,
       description: "Shopping cart"
     },
     { 
