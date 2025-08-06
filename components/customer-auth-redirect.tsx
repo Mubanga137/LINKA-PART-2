@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
+import { SafeNavigation } from "@/lib/safe-navigation";
 import { Loader } from "lucide-react";
 
 interface CustomerAuthRedirectProps {
