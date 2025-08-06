@@ -16,6 +16,25 @@
     display: none;
   }
 
+  /* Enhanced tap targets for mobile */
+  .tap-target-large {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Extra small breakpoint utilities */
+  @media (max-width: 475px) {
+    .xs\\:hidden {
+      display: none;
+    }
+  }
+
+  @media (min-width: 476px) {
+    .xs\\:inline {
+      display: inline;
+    }
+  }
+
   /* Mobile-first responsive spacing utilities */
   @media (max-width: 640px) {
     .mobile-tight {
