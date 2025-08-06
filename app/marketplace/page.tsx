@@ -700,11 +700,11 @@ export default function MarketplacePage() {
       const isCurrentlyFavorited = favorites.includes(productId);
       toggleFavorite(productId);
 
-      if (isCurrentlyFavorited) {
-        wishlistToast.removeFromWishlist(product.name);
-      } else {
-        wishlistToast.addToWishlist(product.name);
-      }
+      // if (isCurrentlyFavorited) {
+      //   wishlistToast.removeFromWishlist(product.name);
+      // } else {
+      //   wishlistToast.addToWishlist(product.name);
+      // }
     } catch (error) {
       console.error('Error toggling favorite:', error);
     }
