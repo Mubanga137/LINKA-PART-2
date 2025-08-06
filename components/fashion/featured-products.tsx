@@ -315,33 +315,23 @@ export function FeaturedProducts({ category }: FeaturedProductsProps) {
             </div>
 
             <div className="space-y-2">
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
+              <Button className="w-full bg-purple-600 hover:bg-purple-700 py-2.5 text-sm font-semibold">
                 <ShoppingCart className="h-4 w-4 mr-2" />
-                Add to Cart
+                <span className="hidden sm:inline">Add to Cart</span>
+                <span className="sm:hidden">Buy Now</span>
               </Button>
 
-              <div className="flex space-x-2">
-                <Button
-                  variant="outline"
-                  className="flex-1 border-purple-300 text-purple-600 hover:bg-purple-50"
-                  asChild
-                >
-                  <Link href={`/vendors/${product.vendor.id || 'unknown'}`}>
-                    <Store className="h-4 w-4 mr-1" />
-                    Visit Store
-                  </Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="flex-1 border-gray-300 text-gray-600 hover:bg-gray-50"
-                  asChild
-                >
-                  <Link href={`/products/${product.id}`}>
-                    <Eye className="h-4 w-4 mr-1" />
-                    Details
-                  </Link>
-                </Button>
-              </div>
+              <Button
+                variant="outline"
+                className="w-full border-purple-300 text-purple-600 hover:bg-purple-50 py-2 text-sm"
+                asChild
+              >
+                <Link href={`/vendors/${product.vendor.id || 'unknown'}`}>
+                  <Store className="h-4 w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Visit Store</span>
+                  <span className="sm:hidden">Store</span>
+                </Link>
+              </Button>
             </div>
           </div>
         </CardContent>
