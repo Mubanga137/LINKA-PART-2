@@ -79,7 +79,9 @@ html {
                 <MarketplaceProvider>
                   <AuthRedirectWrapper>
                     <CustomerAuthRedirect>
-                      {children}
+                      <ToastProvider>
+                        {children}
+                      </ToastProvider>
                     </CustomerAuthRedirect>
                   </AuthRedirectWrapper>
                 </MarketplaceProvider>
