@@ -518,7 +518,7 @@ export function EnhancedCategoriesGrid({ showSearch = true, maxCategories }: Enh
                           src={service.image}
                           alt={service.name}
                           className="w-full h-full object-cover"
-                          whileHover={{ scale: 1.1 }}
+                          whileHover={{ scale: 1.06, transition: { duration: 0.3, ease: "easeOut" } }}
                           transition={{ duration: 0.4 }}
                         />
                         
