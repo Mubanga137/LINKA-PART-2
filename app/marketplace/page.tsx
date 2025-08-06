@@ -1003,9 +1003,9 @@ export default function MarketplacePage() {
                   <Link href="/cart">
                     <Button variant="outline" size="sm" className="relative">
                       <ShoppingCart className="h-4 w-4" />
-                      {totalItems > 0 && (
+                      {getCartItemCount() > 0 && (
                         <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-xs font-bold text-white">
-                          {totalItems}
+                          {getCartItemCount()}
                         </span>
                       )}
                     </Button>
