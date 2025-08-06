@@ -17,6 +17,8 @@ import { useCart } from "@/contexts/cart-context";
 import { useFavorites } from "@/contexts/marketplace-context";
 import { InteractiveButton } from "@/components/interactive-button";
 import { useToast, useCartToast, useWishlistToast } from "@/components/toast-notification";
+import { EnhancedProductGrid } from "@/components/enhanced-product-grid";
+import { Compact3DCard } from "@/components/compact-3d-card";
 import { 
   Search,
   Filter,
