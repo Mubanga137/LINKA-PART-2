@@ -90,7 +90,7 @@ export default function CustomerDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Cart Total</p>
-                  <p className="text-2xl font-bold text-gray-900">K{getCartTotal().toFixed(2)}</p>
+                  <p className="text-2xl font-bold text-gray-900">K{totalPrice.toFixed(2)}</p>
                 </div>
                 <CreditCard className="h-8 w-8 text-green-500" />
               </div>
