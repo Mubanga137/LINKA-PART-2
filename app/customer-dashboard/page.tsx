@@ -173,16 +173,16 @@ export default function CustomerDashboard() {
         <Header />
         <main className="flex items-center justify-center py-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.6, type: "spring" }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 260, damping: 20 }}
             className="max-w-md mx-auto bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/50"
           >
             <div className="text-center">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                transition={{ delay: 0.3, type: "spring", stiffness: 180, damping: 15 }}
                 className="w-20 h-20 bg-gradient-to-br from-blue-500 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg"
               >
                 <User className="h-10 w-10 text-white" />
@@ -366,7 +366,7 @@ export default function CustomerDashboard() {
               initial={{ x: -300 }}
               animate={{ x: 0 }}
               exit={{ x: -300 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              transition={{ type: "spring", stiffness: 260, damping: 24, mass: 0.8 }}
               className={`fixed left-0 top-0 h-full bg-white/95 backdrop-blur-xl border-r border-white/50 shadow-2xl z-50 ${
                 sidebarCollapsed ? 'w-20' : 'w-80'
               } transition-all duration-300`}
@@ -566,8 +566,8 @@ export default function CustomerDashboard() {
                 {/* User Info */}
                 <div className="flex items-center gap-6">
                   <motion.div 
-                    whileHover={{ scale: 1.05, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    whileHover={{ scale: 1.03, rotate: 3, transition: { duration: 0.25, ease: "easeOut" } }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
                     className="relative"
                   >
                     <Avatar className="h-20 w-20 border-4 border-gradient-to-r from-blue-400 to-orange-400 shadow-xl">
@@ -578,7 +578,7 @@ export default function CustomerDashboard() {
                     </Avatar>
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                       className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center"
                     >
                       <Crown className="h-3 w-3 text-white" />
@@ -594,8 +594,8 @@ export default function CustomerDashboard() {
                     >
                       {getTimeGreeting()}, {user.name.split(' ')[0]}! 
                       <motion.span
-                        animate={{ rotate: [0, 15, -15, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                        animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                         className="inline-block ml-2"
                       >
                         👋
