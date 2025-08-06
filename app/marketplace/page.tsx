@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/contexts/auth-context";
 import { useCart, useFavorites } from "@/contexts/marketplace-context";
-import { InteractiveButton } from "@/components/interactive-button";
+// import { InteractiveButton } from "@/components/interactive-button";
 // import { useToast, useCartToast, useWishlistToast } from "@/components/toast-notification";
 import { SimpleProductGrid } from "@/components/simple-product-grid";
 // import { Compact3DCard } from "@/components/compact-3d-card";
