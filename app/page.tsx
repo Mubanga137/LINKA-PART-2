@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/auth-context";
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { PersonalizedProductCarousel } from "@/components/personalized-product-carousel"
@@ -9,6 +14,23 @@ import { HowItWorksSection } from "@/components/how-it-works-section"
 import { Footer } from "@/components/footer"
 
 export default function HomePage() {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Only redirect if user is logged in and not loading
+    if (!isLoading && user) {
+      const timer = setTimeout(() => {
+        if (user.role === 'customer') {
+          router.push('/customer-dashboard');
+        } else if (user.role === 'retailer') {
+          router.push('/retailer-dashboard');
+        }
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [user, isLoading, router]);
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <Header />
