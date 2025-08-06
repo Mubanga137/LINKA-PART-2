@@ -120,7 +120,7 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
 
     // Reset redirect flag if no redirect was needed
     redirected.current = false;
-  }, [user, loading, pathname, router]);
+  }, [user, isLoading, pathname, router]);
 
   // Reset redirect flag when pathname changes
   useEffect(() => {
