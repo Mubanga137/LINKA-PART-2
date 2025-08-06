@@ -29,6 +29,8 @@ export interface Vendor {
   discount?: string;
   deliveryTime?: string;
   products?: Product[];
+  description?: string;
+  phone?: string;
 }
 
 export interface Product {
