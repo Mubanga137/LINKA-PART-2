@@ -535,56 +535,8 @@ export default function CustomerDashboard() {
           </div>
         </motion.section>
 
-        {/* Categories Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.6 }}
-        >
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">Explore Categories</h2>
-              <p className="text-slate-600">Discover amazing products from local vendors</p>
-            </div>
-            <Link href="/marketplace">
-              <Button variant="outline" className="group">
-                View All
-                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((category, index) => (
-              <motion.div
-                key={category.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.7 + index * 0.1, duration: 0.5 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-              >
-                <Link href={category.href}>
-                  <Card className="bg-white/80 backdrop-blur-sm border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group overflow-hidden">
-                    <CardContent className="p-6 text-center relative">
-                      <div className="absolute top-3 right-3">
-                        <Badge className="text-xs bg-gradient-to-r from-orange-400 to-red-500 text-white">
-                          {category.trending}
-                        </Badge>
-                      </div>
-                      
-                      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                        {category.icon}
-                      </div>
-                      <h3 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
-                        {category.name}
-                      </h3>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
+        {/* Enhanced Categories Section */}
+        <EnhancedCategoriesGrid showSearch={false} maxCategories={8} />
       </main>
 
       <Footer />
