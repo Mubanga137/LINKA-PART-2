@@ -663,22 +663,23 @@ export default function MarketplacePage() {
       const marketplaceProduct = {
         id: product.id,
         name: product.name,
+        description: product.description,
         price: product.price,
         originalPrice: product.originalPrice,
-        image: product.image,
+        images: [product.image], // Convert single image to array
         category: product.category,
-        description: product.description,
-        vendor: product.vendor,
-        vendorId: product.vendorId,
+        inStock: product.inStock || product.available || true,
         rating: product.rating,
-        reviews: product.reviews,
-        location: product.location,
+        reviewCount: product.reviews,
         tags: product.tags,
+        vendor: {
+          id: product.vendorId,
+          name: product.vendor
+        },
         features: product.features,
-        type: product.type,
-        inStock: product.inStock,
-        available: product.available,
-        variants: []
+        variants: [],
+        createdAt: new Date(),
+        updatedAt: new Date()
       };
 
       addToCart(marketplaceProduct, quantity);
