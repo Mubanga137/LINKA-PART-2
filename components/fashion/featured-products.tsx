@@ -2,24 +2,15 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
-  Star,
-  Heart,
-  ShoppingCart,
-  Eye,
-  MapPin,
-  Truck,
-  Clock,
   Filter,
   Grid3X3,
   List,
-  ChevronDown,
-  Store
+  ChevronDown
 } from "lucide-react"
+import { InteractiveProductCard } from "@/components/marketplace/InteractiveProductCard"
 import {
   Select,
   SelectContent,
