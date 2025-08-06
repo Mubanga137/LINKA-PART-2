@@ -1137,14 +1137,15 @@ export default function MarketplacePage() {
                 </Button>
               </motion.div>
 
-              <EnhancedProductGrid
-                products={allProducts.filter(item => item.isRecommended)}
-                onAddToCart={handleAddToCart}
-                onToggleFavorite={handleToggleFavorite}
-                favorites={favorites}
-                variant="featured"
-                showQuickActions={true}
-              />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {allProducts.filter(item => item.isRecommended).map((product) => (
+                  <div key={product.id} className="bg-white rounded-lg shadow-md p-4">
+                    <h3 className="font-bold text-lg">{product.name}</h3>
+                    <p className="text-gray-600">{product.vendor}</p>
+                    <p className="text-xl font-bold">K{product.price}</p>
+                  </div>
+                ))}
+              </div>
             </motion.section>
 
             {/* 2. HOT DEALS SECTION */}
