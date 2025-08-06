@@ -1137,7 +1137,7 @@ export default function MarketplacePage() {
                 </Button>
               </motion.div>
 
-              <SimpleProductGrid
+              <EnhancedProductGrid
                 products={allProducts.filter(item => item.isRecommended)}
                 onAddToCart={handleAddToCart}
                 onToggleFavorite={handleToggleFavorite}
