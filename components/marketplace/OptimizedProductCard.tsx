@@ -53,8 +53,16 @@ export function OptimizedProductCard({
     return product.images[0] || fallbackImage;
   };
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Allow button clicks to propagate without triggering card navigation
+    if ((e.target as HTMLElement).closest('button')) {
+      e.stopPropagation();
+    }
+  };
+
   return (
-    <article className="group bg-white rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blue-200 flex flex-col h-full w-full">
+    <Link href={`/products/${product.id}`} className="block h-full">
+      <article onClick={handleCardClick} className="group bg-white rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blue-200 flex flex-col h-full w-full cursor-pointer">
       {/* Product Image Container */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         {imageLoading && !imageError && (
@@ -188,43 +196,40 @@ export function OptimizedProductCard({
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="mt-auto space-y-2">
+        {/* Action Buttons - Improved Mobile Layout */}
+        <div className="mt-auto space-y-2 p-1">
           <Button
-            onClick={() => onAddToCart(product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart(product);
+            }}
             disabled={!product.inStock}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 text-sm rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target focus-visible-enhanced"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 text-sm sm:text-base rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 tap-target-large"
             aria-label={`Add ${product.name} to cart`}
           >
-            <ShoppingCart className="h-4 w-4 mr-2" />
-            {!product.inStock ? 'Out of Stock' : 'Add to Cart'}
+            <ShoppingCart className="h-4 w-4 mr-1 sm:mr-2" />
+            <span className="hidden xs:inline">{!product.inStock ? 'Out of Stock' : 'Add to Cart'}</span>
+            <span className="xs:hidden">{!product.inStock ? 'Sold Out' : 'Buy'}</span>
           </Button>
 
-          <div className="grid grid-cols-2 gap-2">
+          {/* Only show Visit Store for non-flash deals */}
+          {!product.hotDeal && (
             <Button
               variant="outline"
-              className="border-gray-300 text-gray-600 hover:bg-gray-50 py-2.5 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
-              asChild
+              className="w-full border-blue-300 text-blue-600 hover:bg-blue-50 py-2 text-xs sm:text-sm rounded-lg transition-all duration-200 tap-target-large"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.location.href = `/vendors/${product.vendor.id}`;
+              }}
             >
-              <Link href={`/products/${product.id}`}>
-                <Package className="h-4 w-4 mr-1" />
-                Details
-              </Link>
+              <Store className="h-3 w-3 mr-1" />
+              <span className="hidden xs:inline">Visit Store</span>
+              <span className="xs:hidden">Store</span>
             </Button>
-
-            <Button
-              variant="outline"
-              className="border-blue-300 text-blue-600 hover:bg-blue-50 py-2.5 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
-              asChild
-            >
-              <Link href={`/vendors/${product.vendor.id}`}>
-                <Store className="h-4 w-4 mr-1" />
-                Visit Store
-              </Link>
-            </Button>
-          </div>
+          )}
         </div>
       </div>
     </article>
+    </Link>
   );
 }
