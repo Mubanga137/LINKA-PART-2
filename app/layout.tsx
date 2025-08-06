@@ -7,7 +7,7 @@ import { RetailerAuthProvider } from '@/contexts/retailer-auth-context'
 import { MarketplaceProvider } from '@/contexts/marketplace-context'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
-import { CustomerAuthRedirect } from '@/components/customer-auth-redirect'
+import { SimpleAuthRedirect } from '@/components/simple-auth-redirect'
 import { ToastProvider } from '@/components/toast-notification'
 import { NavigationErrorBoundary } from '@/components/navigation-error-boundary'
 import '@/lib/error-handler' // Initialize client error handler
