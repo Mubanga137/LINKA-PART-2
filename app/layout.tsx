@@ -78,13 +78,15 @@ html {
             <RetailerAuthProvider>
               <CartProvider>
                 <MarketplaceProvider>
-                  <AuthRedirectWrapper>
-                    <CustomerAuthRedirect>
-                      <ToastProvider>
-                        {children}
-                      </ToastProvider>
-                    </CustomerAuthRedirect>
-                  </AuthRedirectWrapper>
+                  <NavigationErrorBoundary>
+                    <AuthRedirectWrapper>
+                      <CustomerAuthRedirect>
+                        <ToastProvider>
+                          {children}
+                        </ToastProvider>
+                      </CustomerAuthRedirect>
+                    </AuthRedirectWrapper>
+                  </NavigationErrorBoundary>
                 </MarketplaceProvider>
               </CartProvider>
             </RetailerAuthProvider>
