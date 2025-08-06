@@ -14,11 +14,11 @@ export function CustomerAuthRedirect({ children }: CustomerAuthRedirectProps) {
   const { user, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const redirected = useRef(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
-    // Skip redirect logic if still loading auth state or already redirected
-    if (isLoading || redirected.current) return;
+    // Skip redirect logic if still loading auth state or already redirecting
+    if (isLoading || isRedirecting || SafeNavigation.isRedirecting()) return;
 
     // Define public routes that don't require authentication
     const publicRoutes = [
