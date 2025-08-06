@@ -1558,7 +1558,7 @@ export default function MarketplacePage() {
             { icon: Home, label: "Home", href: "/customer-dashboard" },
             { icon: Store, label: "Shop", href: "/marketplace", active: true },
             { icon: Heart, label: "Wishlist", href: "/wishlist", badge: favorites.length },
-            { icon: ShoppingCart, label: "Cart", href: "/cart", badge: totalItems },
+            { icon: ShoppingCart, label: "Cart", href: "/cart", badge: getCartItemCount() },
             { icon: User, label: "Account", href: "/profile" }
           ].map((item) => (
             <Link key={item.label} href={item.href}>
