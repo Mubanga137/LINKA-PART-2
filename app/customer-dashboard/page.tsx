@@ -10,6 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/contexts/auth-context";
 import { useCart } from "@/contexts/cart-context";
 import { useFavorites } from "@/contexts/marketplace-context";
+import { EnhancedCategoriesGrid } from "@/components/customer/enhanced-categories-grid";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
