@@ -648,29 +648,43 @@ export default function MarketplacePage() {
   }, [selectedCategory, searchTerm, sortBy, activeFilters]);
 
   const handleAddToCart = (productId: string, quantity: number = 1) => {
-    const product = allProducts.find(p => p.id === productId);
-    if (!product) return;
+    try {
+      const product = allProducts.find(p => p.id === productId);
+      if (!product) {
+        console.warn('Product not found:', productId);
+        return;
+      }
 
-    setCartItems(prev => ({
-      ...prev,
-      [productId]: (prev[productId] || 0) + quantity
-    }));
+      setCartItems(prev => ({
+        ...prev,
+        [productId]: (prev[productId] || 0) + quantity
+      }));
 
-    addToCart({ id: productId, name: product.name, price: product.price }, quantity);
-    cartToast.addToCart(product.name);
+      addToCart({ id: productId, name: product.name, price: product.price }, quantity);
+      cartToast.addToCart(product.name);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   };
 
   const handleToggleFavorite = (productId: string) => {
-    const product = allProducts.find(p => p.id === productId);
-    if (!product) return;
+    try {
+      const product = allProducts.find(p => p.id === productId);
+      if (!product) {
+        console.warn('Product not found:', productId);
+        return;
+      }
 
-    const isCurrentlyFavorited = favorites.includes(productId);
-    toggleFavorite(productId);
+      const isCurrentlyFavorited = favorites.includes(productId);
+      toggleFavorite(productId);
 
-    if (isCurrentlyFavorited) {
-      wishlistToast.removeFromWishlist(product.name);
-    } else {
-      wishlistToast.addToWishlist(product.name);
+      if (isCurrentlyFavorited) {
+        wishlistToast.removeFromWishlist(product.name);
+      } else {
+        wishlistToast.addToWishlist(product.name);
+      }
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
     }
   };
 
