@@ -1302,8 +1302,8 @@ export default function MarketplacePage() {
 
         {/* Help Chat */}
         <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.06, transition: { duration: 0.2, ease: "easeOut" } }}
+          whileTap={{ scale: 0.94, transition: { duration: 0.1 } }}
         >
           <Button className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-teal-500 text-white shadow-lg hover:shadow-xl">
             <MessageCircle className="h-5 w-5" />
