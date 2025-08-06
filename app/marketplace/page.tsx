@@ -676,8 +676,8 @@ export default function MarketplacePage() {
         {/* Mobile Menu Button */}
         <div className="lg:hidden fixed top-4 left-4 z-30">
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03, transition: { duration: 0.2, ease: "easeOut" } }}
+            whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
           >
             <Button
               onClick={() => setSidebarOpen(true)}
