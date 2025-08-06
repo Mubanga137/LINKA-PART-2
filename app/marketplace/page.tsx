@@ -762,7 +762,7 @@ export default function MarketplacePage() {
                 </motion.div>
 
                 {user && (
-                  <motion.div whileHover={{ scale: 1.05 }}>
+                  <motion.div whileHover={{ scale: 1.03, transition: { duration: 0.2, ease: "easeOut" } }}>
                     <Avatar className="h-10 w-10 border-2 border-pink-200 cursor-pointer">
                       <AvatarFallback className="bg-gradient-to-br from-pink-500 to-blue-500 text-white font-semibold">
                         {user.name?.charAt(0)}
