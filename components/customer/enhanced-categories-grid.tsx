@@ -263,9 +263,9 @@ export function EnhancedCategoriesGrid({ showSearch = true, maxCategories }: Enh
       boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 25px 25px -12px rgba(0, 0, 0, 0.15)",
       transition: { 
         type: "spring", 
-        stiffness: 400, 
-        damping: 17,
-        duration: 0.3
+        stiffness: 320,
+        damping: 20,
+        duration: 0.25
       }
     },
     tap: { 
