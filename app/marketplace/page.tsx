@@ -683,7 +683,7 @@ export default function MarketplacePage() {
       };
 
       addToCart(marketplaceProduct, quantity);
-      // cartToast.addToCart(product.name);
+      cartToast.addToCart(product.name);
     } catch (error) {
       console.error('Error adding to cart:', error);
     }
