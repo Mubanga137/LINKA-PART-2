@@ -121,7 +121,7 @@ import {
 
 export default function MarketplacePage() {
   const { user } = useAuth();
-  const { addToCart, totalItems, totalPrice } = useCart();
+  const { addToCart, cart, getCartItemCount, getCartTotal } = useCart();
   const { favorites, toggleFavorite } = useFavorites();
   const cartToast = useCartToast();
   const wishlistToast = useWishlistToast();
