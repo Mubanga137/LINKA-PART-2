@@ -36,13 +36,14 @@ import {
   Flame
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
 import { useFavorites } from "@/contexts/marketplace-context"
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false)
   const { user, logout } = useAuth()
-  const { totalItems } = useCart()
+  const { getCartItemCount } = useCart()
+  const totalItems = getCartItemCount()
   const { favorites } = useFavorites()
   const router = useRouter()
   const pathname = usePathname()
