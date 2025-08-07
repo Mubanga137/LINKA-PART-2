@@ -851,8 +851,30 @@ function MarketplaceContent() {
       className="min-h-screen bg-white"
     >
       <Header />
-      
-      <main>
+
+      {/* Marketplace Layout with Sidebar */}
+      <div className="flex relative">
+        {/* Sidebar */}
+        <MarketplaceSidebar
+          isOpen={isSidebarOpen}
+          onClose={closeSidebar}
+          onFilterChange={(newFilters) => {
+            setFilters(prevFilters => ({ ...prevFilters, ...newFilters }));
+          }}
+        />
+
+        {/* Main Content */}
+        <div className={`flex-1 transition-all duration-300 ${
+          isSidebarOpen ? 'lg:ml-72 xl:ml-80' : ''
+        }`}>
+          {/* Marketplace Header with Filter Toggle */}
+          <MarketplaceHeader
+            totalProducts={2000}
+            currentFilters={filters}
+            onSidebarToggle={toggleSidebar}
+          />
+
+          <main>
         <EnhancedHeroSection />
         <RecommendedSection
           onAddToCart={(product) => {
@@ -1180,8 +1202,10 @@ function MarketplaceContent() {
               </div>
             </motion.div>
           </div>
-        </motion.section>
-      </main>
+            </motion.section>
+          </main>
+        </div>
+      </div>
 
       <Footer />
 
