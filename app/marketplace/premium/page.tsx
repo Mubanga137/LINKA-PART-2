@@ -322,13 +322,20 @@ export default function PremiumItemsPage() {
 
       <main className="relative z-10">
         {/* Luxury Hero Section */}
-        <section className="relative py-24 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/15 via-yellow-400/20 to-amber-600/15 backdrop-blur-sm"></div>
+        <section className="relative py-32 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 via-yellow-300/25 to-amber-500/20 backdrop-blur-sm"></div>
 
-          {/* Professional golden pattern overlay */}
+          {/* Sophisticated golden pattern overlays */}
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/40 to-transparent transform rotate-12 animate-pulse" style={{animationDuration: '6s'}}></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-300/30 to-transparent transform -rotate-12 animate-pulse" style={{animationDelay: '3s', animationDuration: '6s'}}></div>
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-amber-300/35 to-transparent transform rotate-6 animate-pulse" style={{animationDelay: '1s', animationDuration: '8s'}}></div>
+          </div>
+
+          {/* Luxury light rays */}
           <div className="absolute inset-0 opacity-20">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-300/30 to-transparent transform rotate-12"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent transform -rotate-12"></div>
+            <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-amber-400 to-transparent animate-pulse" style={{animationDuration: '4s'}}></div>
+            <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-yellow-400 to-transparent animate-pulse" style={{animationDelay: '2s', animationDuration: '4s'}}></div>
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
             <motion.div
