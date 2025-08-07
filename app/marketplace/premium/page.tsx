@@ -671,9 +671,9 @@ export default function PremiumItemsPage() {
 
                       {/* Certifications */}
                       {product.certifications && product.certifications.length > 0 && (
-                        <div className="mt-3 text-center">
-                          <div className="flex items-center justify-center gap-1 text-xs text-gray-500">
-                            <CheckCircle className="h-3 w-3 text-green-500" />
+                        <div className="mt-4 text-center">
+                          <div className="flex items-center justify-center gap-2 text-sm text-amber-700 font-medium">
+                            <CheckCircle className="h-4 w-4 text-green-600" />
                             <span>{product.certifications.join(" • ")}</span>
                           </div>
                         </div>
