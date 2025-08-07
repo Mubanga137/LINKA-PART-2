@@ -479,86 +479,124 @@ export default function PremiumItemsPage() {
         </section>
 
         {/* Filters and Controls */}
-        <section className="py-12">
+        <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-r from-white/95 via-amber-50/90 to-white/95 backdrop-blur-md rounded-3xl border border-amber-200/60 shadow-2xl p-8">
-              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="bg-gradient-to-br from-white/98 via-amber-50/70 to-yellow-50/60 backdrop-blur-xl rounded-[2rem] border-2 border-amber-200/70 shadow-2xl p-10 relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-100/30 to-transparent animate-pulse"></div>
+
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 relative z-10">
                 {/* Premium Filters */}
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-amber-900 mb-4 flex items-center gap-3">
-                    <Diamond className="h-5 w-5 text-amber-600" />
+                  <motion.h3
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-2xl font-black text-amber-900 mb-6 flex items-center gap-4"
+                  >
+                    <motion.div
+                      animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+                      transition={{
+                        rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                        scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                      }}
+                    >
+                      <Diamond className="h-6 w-6 text-amber-600" />
+                    </motion.div>
                     Premium Categories
-                  </h3>
-                  <div className="flex flex-wrap gap-3">
+                  </motion.h3>
+                  <div className="flex flex-wrap gap-4">
                     {[
                       { value: 'all', label: 'All Premium', icon: Crown },
                       { value: 'handcrafted', label: 'Handcrafted', icon: Award },
                       { value: 'limited', label: 'Limited Edition', icon: Medal },
                       { value: 'exclusive', label: 'Exclusive Design', icon: Sparkles }
-                    ].map((filter) => (
-                      <Button
+                    ].map((filter, index) => (
+                      <motion.div
                         key={filter.value}
-                        variant={filterBy === filter.value ? "default" : "outline"}
-                        size="lg"
-                        onClick={() => setFilterBy(filter.value as any)}
-                        className={`transition-all duration-300 font-semibold px-6 py-3 rounded-2xl ${
-                          filterBy === filter.value
-                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-xl border-0 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700'
-                            : 'border-amber-300 text-amber-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-900'
-                        }`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.1 + 0.3 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <filter.icon className="h-4 w-4 mr-2" />
-                        {filter.label}
-                      </Button>
+                        <Button
+                          variant={filterBy === filter.value ? "default" : "outline"}
+                          size="lg"
+                          onClick={() => setFilterBy(filter.value as any)}
+                          className={`transition-all duration-500 font-bold px-8 py-4 rounded-2xl text-lg shadow-lg ${
+                            filterBy === filter.value
+                              ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-2xl border-0 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700 hover:shadow-3xl'
+                              : 'border-2 border-amber-300 text-amber-800 hover:border-amber-400 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 hover:text-amber-900'
+                          }`}
+                        >
+                          <filter.icon className="h-5 w-5 mr-3" />
+                          {filter.label}
+                        </Button>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
 
                 {/* Sort and View Options */}
-                <div className="flex items-center gap-6">
-                  <div className="flex items-center gap-3">
-                    <span className="text-lg font-semibold text-amber-900">Sort:</span>
-                    <select
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex items-center gap-8"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="text-2xl font-black text-amber-900">Sort:</span>
+                    <motion.select
+                      whileHover={{ scale: 1.05 }}
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as any)}
-                      className="text-base border-2 border-amber-300 rounded-xl px-4 py-2 bg-white/90 backdrop-blur-sm text-amber-900 font-medium focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-200"
+                      className="text-lg border-2 border-amber-400 rounded-2xl px-6 py-3 bg-gradient-to-r from-white/95 to-amber-50/80 backdrop-blur-md text-amber-900 font-bold focus:border-amber-600 focus:ring-4 focus:ring-amber-200/50 transition-all duration-300 shadow-lg"
                     >
                       <option value="luxury">Luxury Rating</option>
                       <option value="price">Highest Price</option>
                       <option value="rating">Best Rated</option>
                       <option value="newest">Most Popular</option>
-                    </select>
+                    </motion.select>
                   </div>
 
-                  <div className="flex gap-2 border-2 border-amber-300 rounded-xl overflow-hidden bg-white/50 backdrop-blur-sm">
-                    <Button
-                      variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                      size="lg"
-                      onClick={() => setViewMode('grid')}
-                      className={`rounded-none px-4 py-2 ${
-                        viewMode === 'grid'
-                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white'
-                          : 'text-amber-800 hover:bg-amber-100'
-                      }`}
-                    >
-                      <Grid3X3 className="h-5 w-5" />
-                    </Button>
-                    <Button
-                      variant={viewMode === 'list' ? 'default' : 'ghost'}
-                      size="lg"
-                      onClick={() => setViewMode('list')}
-                      className={`rounded-none px-4 py-2 ${
-                        viewMode === 'list'
-                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white'
-                          : 'text-amber-800 hover:bg-amber-100'
-                      }`}
-                    >
-                      <List className="h-5 w-5" />
-                    </Button>
+                  <div className="flex gap-1 border-2 border-amber-400 rounded-2xl overflow-hidden bg-gradient-to-r from-white/90 to-amber-50/70 backdrop-blur-md shadow-lg">
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <Button
+                        variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                        size="lg"
+                        onClick={() => setViewMode('grid')}
+                        className={`rounded-none px-6 py-3 font-bold ${
+                          viewMode === 'grid'
+                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-lg'
+                            : 'text-amber-800 hover:bg-gradient-to-r hover:from-amber-100 hover:to-yellow-100'
+                        }`}
+                      >
+                        <Grid3X3 className="h-6 w-6" />
+                      </Button>
+                    </motion.div>
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <Button
+                        variant={viewMode === 'list' ? 'default' : 'ghost'}
+                        size="lg"
+                        onClick={() => setViewMode('list')}
+                        className={`rounded-none px-6 py-3 font-bold ${
+                          viewMode === 'list'
+                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-lg'
+                            : 'text-amber-800 hover:bg-gradient-to-r hover:from-amber-100 hover:to-yellow-100'
+                        }`}
+                      >
+                        <List className="h-6 w-6" />
+                      </Button>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
