@@ -300,28 +300,35 @@ export default function PremiumItemsPage() {
 
       <main className="relative z-10 space-y-0">
         {/* Hero Section */}
-        <section className="relative py-24 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/15 via-yellow-400/20 to-amber-600/15"></div>
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-            <div className="text-center mb-20">
-              <div className="flex items-center justify-center gap-8 mb-12">
-                <div className="w-24 h-24 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/60 animate-pulse">
-                  <Crown className="text-white text-4xl drop-shadow-2xl" />
+        <section className="relative pt-16 pb-20 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-400/8 via-yellow-300/12 to-amber-500/8"></div>
+
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-20">
+            <div className="text-center space-y-16">
+              {/* Header Content */}
+              <div className="space-y-8">
+                <div className="flex items-center justify-center gap-10">
+                  <div className="w-20 h-20 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center shadow-xl border-3 border-white/50">
+                    <Crown className="text-white text-3xl drop-shadow-lg" />
+                  </div>
+                  <div className="text-left">
+                    <h1 className="text-5xl lg:text-7xl font-black bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent leading-tight">
+                      <span className="text-amber-600">✨</span> Premium
+                      <div className="mt-2">
+                        <Badge className="bg-gradient-to-br from-amber-500 via-yellow-400 to-amber-600 text-white text-xl px-6 py-3 shadow-xl border border-white/20 rounded-2xl">
+                          <Diamond className="h-5 w-5 mr-2" />
+                          LUXURY
+                        </Badge>
+                      </div>
+                    </h1>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="text-6xl md:text-8xl font-black bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 bg-clip-text text-transparent flex items-center gap-6 drop-shadow-lg">
-                    <span className="animate-pulse">✨</span>
-                    Premium
-                    <Badge className="bg-gradient-to-br from-amber-500 via-yellow-400 to-amber-600 text-white text-2xl px-8 py-4 shadow-2xl border-2 border-white/30">
-                      <Diamond className="h-6 w-6 mr-3" />
-                      LUXURY
-                    </Badge>
-                  </h1>
-                  <p className="text-3xl text-amber-900/90 mt-8 font-semibold tracking-wide">
+
+                <div className="max-w-4xl mx-auto space-y-4">
+                  <p className="text-2xl lg:text-3xl text-amber-900/85 font-semibold tracking-wide leading-relaxed">
                     Curated luxury items from Zambia's finest artisans
                   </p>
-                  <p className="text-xl text-amber-800/80 mt-4 tracking-wide font-medium">
+                  <p className="text-lg lg:text-xl text-amber-800/75 font-medium tracking-wide">
                     Experience unparalleled craftsmanship and exclusive designs
                   </p>
                 </div>
