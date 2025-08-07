@@ -353,42 +353,14 @@ export default function PremiumItemsPage() {
                   <Crown className="text-white text-4xl drop-shadow-2xl relative z-10" />
                 </motion.div>
                 <div>
-                  <motion.h1
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                    className="text-7xl md:text-9xl font-black bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 bg-clip-text text-transparent flex items-center gap-6 drop-shadow-lg"
-                  >
-                    <motion.span
-                      animate={{
-                        scale: [1, 1.1, 1],
-                        rotate: [0, 5, -5, 0]
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      ✨
-                    </motion.span>
+                  <h1 className="text-7xl md:text-9xl font-black bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 bg-clip-text text-transparent flex items-center gap-6 drop-shadow-lg">
+                    <span className="animate-pulse">✨</span>
                     Premium
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="relative"
-                    >
-                      <Badge className="bg-gradient-to-br from-amber-500 via-yellow-400 to-amber-600 text-white text-2xl px-8 py-4 shadow-2xl border-2 border-white/30 backdrop-blur-sm">
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                        >
-                          <Diamond className="h-6 w-6 mr-3" />
-                        </motion.div>
-                        LUXURY
-                      </Badge>
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse rounded-full"></div>
-                    </motion.div>
-                  </motion.h1>
+                    <Badge className="bg-gradient-to-br from-amber-500 via-yellow-400 to-amber-600 text-white text-2xl px-8 py-4 shadow-2xl border-2 border-white/30 backdrop-blur-sm">
+                      <Diamond className="h-6 w-6 mr-3" />
+                      LUXURY
+                    </Badge>
+                  </h1>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
