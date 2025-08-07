@@ -475,51 +475,51 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="group"
               >
-                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 h-full min-h-[500px]">
-                  <div className="relative">
-                    <div className="aspect-square bg-gray-100 overflow-hidden">
-                      <Image
-                        src={product.images[0]}
-                        alt={product.name}
-                        width={300}
-                        height={300}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      
-                      {/* Match Score Badge */}
-                      <div className="absolute top-3 left-3">
-                        <Badge className="bg-purple-500 text-white px-2 py-1 text-xs">
-                          <Target className="h-3 w-3 mr-1" />
-                          {product.matchScore}% match
+                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Product Image */}
+                  <div className="relative aspect-square bg-gray-100 overflow-hidden">
+                    <Image
+                      src={product.images[0]}
+                      alt={product.name}
+                      width={300}
+                      height={300}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+
+                    {/* Match Score Badge */}
+                    <div className="absolute top-3 left-3">
+                      <Badge className="bg-purple-500 text-white px-2 py-1 text-xs">
+                        <Target className="h-3 w-3 mr-1" />
+                        {product.matchScore}% match
+                      </Badge>
+                    </div>
+
+                    {/* Discount Badge */}
+                    {product.discountPercentage && (
+                      <div className="absolute top-3 right-3">
+                        <Badge className="bg-green-500 text-white px-2 py-1 text-xs">
+                          -{product.discountPercentage}%
                         </Badge>
                       </div>
+                    )}
 
-                      {/* Discount Badge */}
-                      {product.discountPercentage && (
-                        <div className="absolute top-3 right-3">
-                          <Badge className="bg-green-500 text-white px-2 py-1 text-xs">
-                            -{product.discountPercentage}%
-                          </Badge>
-                        </div>
-                      )}
-
-                      {/* Wishlist Button */}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleToggleWishlist(product.id)}
-                        className={`absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 rounded-full ${
-                          wishlistedItems.has(product.id) 
-                            ? 'bg-red-100 text-red-600' 
-                            : 'bg-white/90 text-gray-600 hover:text-red-500'
-                        }`}
-                      >
-                        <Heart className={`h-4 w-4 ${wishlistedItems.has(product.id) ? 'fill-current' : ''}`} />
-                      </Button>
-                    </div>
+                    {/* Wishlist Button */}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleToggleWishlist(product.id)}
+                      className={`absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 rounded-full ${
+                        wishlistedItems.has(product.id)
+                          ? 'bg-red-100 text-red-600'
+                          : 'bg-white/90 text-gray-600 hover:text-red-500'
+                      }`}
+                    >
+                      <Heart className={`h-4 w-4 ${wishlistedItems.has(product.id) ? 'fill-current' : ''}`} />
+                    </Button>
                   </div>
 
-                  <CardContent className="p-4 flex flex-col flex-1">
+                  {/* Product Content */}
+                  <CardContent className="p-4">
                     {/* Vendor Info */}
                     <div className="flex items-center gap-2 mb-2">
                       <Image
