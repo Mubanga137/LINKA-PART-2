@@ -283,22 +283,22 @@ export default function PremiumItemsPage() {
     });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-100/80 to-amber-100 relative overflow-hidden">
-      {/* Golden background effects */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-amber-300/20 via-yellow-200/15 to-amber-400/25 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-300/10 to-amber-200/20 pointer-events-none"></div>
-      
-      {/* Simple floating particles */}
+    <div className="min-h-screen bg-gradient-to-br from-amber-50/90 via-yellow-50/60 to-amber-50/80 relative overflow-hidden">
+      {/* Refined golden background effects */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-amber-200/15 via-yellow-100/10 to-amber-300/20 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-200/8 to-amber-100/15 pointer-events-none"></div>
+
+      {/* Subtle floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-16 w-2 h-2 bg-amber-400/60 rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-32 w-1.5 h-1.5 bg-yellow-400/70 rounded-full animate-bounce"></div>
-        <div className="absolute bottom-40 right-1/4 w-2 h-2 bg-yellow-500/50 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-32 left-1/3 w-1 h-1 bg-amber-400/60 rounded-full animate-bounce"></div>
+        <div className="absolute top-24 left-20 w-1.5 h-1.5 bg-amber-300/40 rounded-full animate-pulse"></div>
+        <div className="absolute top-48 right-28 w-1 h-1 bg-yellow-300/50 rounded-full animate-bounce"></div>
+        <div className="absolute bottom-48 right-1/5 w-1.5 h-1.5 bg-yellow-400/30 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-36 left-1/4 w-0.5 h-0.5 bg-amber-300/40 rounded-full animate-bounce"></div>
       </div>
-      
+
       <Header />
-      
-      <main className="relative z-10">
+
+      <main className="relative z-10 space-y-0">
         {/* Hero Section */}
         <section className="relative py-24 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-amber-500/15 via-yellow-400/20 to-amber-600/15"></div>
