@@ -5,12 +5,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Heart } from "lucide-react";
-import { useCart } from "@/contexts/cart-context";
+import { useCart } from "@/contexts/marketplace-context";
 import { useFavorites } from "@/contexts/marketplace-context";
 
 export function MobileCartWishlistFAB() {
   const pathname = usePathname();
-  const { totalItems } = useCart();
+  const { getCartItemCount } = useCart();
+  const totalItems = getCartItemCount();
   const { favorites } = useFavorites();
 
   // Show only on shopping-related pages
