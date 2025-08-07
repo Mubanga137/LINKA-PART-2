@@ -519,7 +519,7 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                     </div>
                   </div>
 
-                  <CardContent className="p-4 flex flex-col min-h-[320px]">
+                  <CardContent className="p-4 flex flex-col h-full">
                     {/* Vendor Info */}
                     <div className="flex items-center gap-2 mb-2">
                       <Image
@@ -607,36 +607,25 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                     </div>
 
                     {/* Actions */}
-                    <div className="mt-auto space-y-2">
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                    <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
+                      <Button
+                        onClick={() => handleAddToCart(product)}
+                        className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-2.5 shadow-md"
                       >
-                        <Button
-                          onClick={() => handleAddToCart(product)}
-                          className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white"
-                        >
-                          <ShoppingCart className="h-4 w-4 mr-2" />
-                          Add to Cart
-                        </Button>
-                      </motion.div>
+                        <ShoppingCart className="h-4 w-4 mr-2" />
+                        Add to Cart
+                      </Button>
 
-                      {/* Visit Store Button */}
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                      <Button
+                        variant="outline"
+                        className="w-full border-purple-300 text-purple-600 hover:bg-purple-50 hover:border-purple-400 font-semibold py-2.5 shadow-sm"
+                        asChild
                       >
-                        <Button
-                          variant="outline"
-                          className="w-full border-purple-300 text-purple-600 hover:bg-purple-50 hover:border-purple-400"
-                          asChild
-                        >
-                          <Link href={`/vendors/${product.vendor.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/--+/g, '-').replace(/^-|-$/g, '')}`}>
-                            <Store className="h-4 w-4 mr-2" />
-                            Visit Store
-                          </Link>
-                        </Button>
-                      </motion.div>
+                        <Link href={`/vendors/${product.vendor.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/--+/g, '-').replace(/^-|-$/g, '')}`}>
+                          <Store className="h-4 w-4 mr-2" />
+                          Visit Store
+                        </Link>
+                      </Button>
 
                       {/* Feedback Buttons */}
                       {!feedbackGiven.has(product.id) && (
