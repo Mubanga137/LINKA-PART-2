@@ -519,7 +519,7 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                     </div>
                   </div>
 
-                  <CardContent className="p-4 flex flex-col h-full">
+                  <CardContent className="p-4 flex flex-col min-h-[320px]">
                     {/* Vendor Info */}
                     <div className="flex items-center gap-2 mb-2">
                       <Image
