@@ -931,7 +931,30 @@ function MarketplaceContent() {
       <main>
         <EnhancedHeroSection />
         <RecommendedSection
-          onAddToCart={(product) => console.log('Add to cart:', product)}
+          onAddToCart={(product) => {
+            // Convert RecommendedProduct to cart-compatible format
+            const cartProduct = {
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              image: product.images[0],
+              retailerName: product.vendor.name,
+              retailerLocation: product.location,
+              category: product.category,
+              rating: product.rating,
+              reviewCount: product.reviewCount,
+              inStock: product.inStock,
+              features: product.tags,
+              variants: {},
+              shippingInfo: {
+                freeShipping: product.freeShipping,
+                estimatedDays: product.fastDelivery ? 1 : 3,
+                shippingCost: product.freeShipping ? 0 : 25
+              }
+            };
+            // In a real app, this would use the cart context
+            console.log('Add to cart:', cartProduct);
+          }}
           onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
           wishlistedItems={new Set()}
         />
