@@ -476,19 +476,19 @@ export default function PremiumItemsPage() {
                         Premium
                       </Badge>
                       {product.handcrafted && (
-                        <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-2 py-1 text-xs shadow-lg border border-white/30">
+                        <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-2 py-0.5 text-xs shadow-md border border-white/20">
                           <Award className="h-2.5 w-2.5 mr-1" />
                           Handcrafted
                         </Badge>
                       )}
                       {product.limitedEdition && (
-                        <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-2 py-1 text-xs shadow-lg border border-white/30">
+                        <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-2 py-0.5 text-xs shadow-md border border-white/20">
                           <Medal className="h-2.5 w-2.5 mr-1" />
                           Limited
                         </Badge>
                       )}
                       {product.exclusiveDesign && (
-                        <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2 py-1 text-xs shadow-lg border border-white/30">
+                        <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2 py-0.5 text-xs shadow-md border border-white/20">
                           <Sparkles className="h-2.5 w-2.5 mr-1" />
                           Exclusive
                         </Badge>
