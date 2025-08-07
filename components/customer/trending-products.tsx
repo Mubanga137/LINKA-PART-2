@@ -15,8 +15,8 @@ import {
   Store
 } from "lucide-react"
 import Link from "next/link"
-import { Product } from "@/contexts/cart-context"
-import { useCart } from "@/contexts/cart-context"
+import { Product } from "@/lib/types"
+import { useCart } from "@/contexts/marketplace-context"
 
 interface TrendingProductsProps {
   products: Product[]
@@ -25,7 +25,7 @@ interface TrendingProductsProps {
 
 export function TrendingProducts({ products, isLoading }: TrendingProductsProps) {
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
-  const { addToCart, getItemQuantity } = useCart()
+  const { addToCart } = useCart()
 
   const toggleFavorite = (productId: string) => {
     setFavorites(prev => {
