@@ -229,13 +229,14 @@ export default function ProductShowcasePage() {
                     </Badge>
                   </div>
                   
-                  <OptimizedProductCard
+                  <OptimizedProductCard3D
                     product={product}
                     onAddToCart={handleAddToCart}
                     onToggleFavorite={handleToggleFavorite}
                     isFavorite={favorites.has(product.id)}
                     showVisitStore={true}
                     priority={index < 3}
+                    index={index}
                   />
                 </motion.div>
               ))}
