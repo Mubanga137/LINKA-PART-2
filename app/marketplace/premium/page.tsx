@@ -587,15 +587,15 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Premium Features */}
-                      <div className="mb-4">
-                        <div className="flex flex-wrap gap-1">
+                      <div className="mb-5">
+                        <div className="flex flex-wrap gap-2">
                           {product.premiumFeatures.slice(0, 3).map((feature) => (
-                            <Badge key={feature} variant="outline" className="text-xs border-amber-200 text-amber-700">
+                            <Badge key={feature} variant="outline" className="text-sm border-amber-300 text-amber-800 bg-amber-50/50 px-3 py-1">
                               {feature}
                             </Badge>
                           ))}
                           {product.premiumFeatures.length > 3 && (
-                            <Badge variant="outline" className="text-xs border-gray-200 text-gray-500">
+                            <Badge variant="outline" className="text-sm border-amber-200 text-amber-600 bg-amber-50/30 px-3 py-1">
                               +{product.premiumFeatures.length - 3} more
                             </Badge>
                           )}
@@ -603,16 +603,16 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Price */}
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="text-2xl font-bold text-amber-600">
+                      <div className="flex items-center gap-4 mb-5">
+                        <span className="text-3xl font-bold bg-gradient-to-r from-amber-700 to-yellow-700 bg-clip-text text-transparent">
                           K{product.price.toFixed(2)}
                         </span>
                         {product.originalPrice && (
                           <>
-                            <span className="text-lg text-gray-400 line-through">
+                            <span className="text-xl text-amber-500/60 line-through">
                               K{product.originalPrice.toFixed(2)}
                             </span>
-                            <Badge className="bg-green-100 text-green-700">
+                            <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 shadow-lg">
                               Save K{(product.originalPrice - product.price).toFixed(2)}
                             </Badge>
                           </>
