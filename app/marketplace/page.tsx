@@ -1022,11 +1022,6 @@ function MarketplaceContent() {
             </div>
           </div>
         </motion.section>
-        <RecommendedSection
-          onAddToCart={(product) => console.log('Add to cart:', product)}
-          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
-          wishlistedItems={new Set()}
-        />
         <VerifiedVendorsSection
           onFollowVendor={(vendorId) => console.log('Follow vendor:', vendorId)}
           followedVendors={new Set()}
