@@ -118,10 +118,12 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
   };
 
   const handleAddToCart = (product: Product) => {
+    addToCart(product, 1);
     onAddToCart?.(product);
   };
 
   const handleToggleWishlist = (productId: string) => {
+    toggleFavorite(productId);
     onToggleWishlist?.(productId);
   };
 
