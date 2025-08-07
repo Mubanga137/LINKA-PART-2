@@ -359,17 +359,17 @@ export default function PremiumItemsPage() {
         </section>
 
         {/* Filters and Controls */}
-        <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-br from-white/95 via-amber-50/70 to-yellow-50/60 backdrop-blur-xl rounded-3xl border-2 border-amber-200/70 shadow-2xl p-8">
-              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="bg-white/98 backdrop-blur-xl rounded-3xl border border-amber-100/60 shadow-lg p-8 lg:p-10">
+              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-8 xl:gap-12">
                 {/* Premium Filters */}
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-amber-900 mb-4 flex items-center gap-3">
+                <div className="flex-1 w-full">
+                  <h3 className="text-xl font-bold text-amber-900 mb-6 flex items-center gap-3">
                     <Diamond className="h-5 w-5 text-amber-600" />
                     Premium Categories
                   </h3>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:flex xl:flex-wrap gap-3">
                     {[
                       { value: 'all', label: 'All Premium', icon: Crown },
                       { value: 'handcrafted', label: 'Handcrafted', icon: Award },
@@ -381,10 +381,10 @@ export default function PremiumItemsPage() {
                         variant={filterBy === filter.value ? "default" : "outline"}
                         size="lg"
                         onClick={() => setFilterBy(filter.value as any)}
-                        className={`transition-all duration-300 font-semibold px-6 py-3 rounded-2xl ${
-                          filterBy === filter.value 
-                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-xl border-0 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700' 
-                            : 'border-2 border-amber-300 text-amber-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-900'
+                        className={`transition-all duration-300 font-semibold px-5 py-3 rounded-xl border-2 ${
+                          filterBy === filter.value
+                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-lg border-transparent hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700'
+                            : 'border-amber-200 text-amber-800 bg-white hover:border-amber-300 hover:bg-amber-50 hover:text-amber-900'
                         }`}
                       >
                         <filter.icon className="h-4 w-4 mr-2" />
@@ -395,13 +395,13 @@ export default function PremiumItemsPage() {
                 </div>
 
                 {/* Sort and View Options */}
-                <div className="flex items-center gap-6">
-                  <div className="flex items-center gap-3">
-                    <span className="text-lg font-semibold text-amber-900">Sort:</span>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full xl:w-auto">
+                  <div className="flex items-center gap-4">
+                    <span className="text-lg font-semibold text-amber-900 whitespace-nowrap">Sort by:</span>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as any)}
-                      className="text-base border-2 border-amber-300 rounded-xl px-4 py-2 bg-white/90 backdrop-blur-sm text-amber-900 font-medium focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-200"
+                      className="text-base border-2 border-amber-200 rounded-xl px-4 py-2.5 bg-white text-amber-900 font-medium focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition-all duration-200 min-w-[160px]"
                     >
                       <option value="luxury">Luxury Rating</option>
                       <option value="price">Highest Price</option>
@@ -410,15 +410,15 @@ export default function PremiumItemsPage() {
                     </select>
                   </div>
 
-                  <div className="flex gap-1 border-2 border-amber-300 rounded-xl overflow-hidden bg-white/50 backdrop-blur-sm">
+                  <div className="flex border-2 border-amber-200 rounded-xl overflow-hidden bg-white">
                     <Button
                       variant={viewMode === 'grid' ? 'default' : 'ghost'}
                       size="lg"
                       onClick={() => setViewMode('grid')}
-                      className={`rounded-none px-4 py-2 ${
-                        viewMode === 'grid' 
-                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white' 
-                          : 'text-amber-800 hover:bg-amber-100'
+                      className={`rounded-none px-5 py-2.5 border-none ${
+                        viewMode === 'grid'
+                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-sm'
+                          : 'text-amber-700 hover:bg-amber-50'
                       }`}
                     >
                       <Grid3X3 className="h-5 w-5" />
@@ -427,10 +427,10 @@ export default function PremiumItemsPage() {
                       variant={viewMode === 'list' ? 'default' : 'ghost'}
                       size="lg"
                       onClick={() => setViewMode('list')}
-                      className={`rounded-none px-4 py-2 ${
-                        viewMode === 'list' 
-                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white' 
-                          : 'text-amber-800 hover:bg-amber-100'
+                      className={`rounded-none px-5 py-2.5 border-none ${
+                        viewMode === 'list'
+                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-sm'
+                          : 'text-amber-700 hover:bg-amber-50'
                       }`}
                     >
                       <List className="h-5 w-5" />
