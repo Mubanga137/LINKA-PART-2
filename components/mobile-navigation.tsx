@@ -154,13 +154,13 @@ export function MobileNavigation() {
           </Button>
         </SheetTrigger>
         
-        <SheetContent 
-          side="right" 
-          className="w-full max-w-sm p-0 bg-gradient-to-br from-slate-50 to-white border-l border-slate-200/50"
+        <SheetContent
+          side="right"
+          className="w-full max-w-xs sm:max-w-sm p-0 bg-gradient-to-br from-slate-50 to-white border-l border-slate-200/50"
         >
           <div className="flex flex-col h-full">
             {/* Header */}
-            <SheetHeader className="p-6 pb-4 border-b border-slate-100">
+            <SheetHeader className="p-4 sm:p-6 pb-3 sm:pb-4 border-b border-slate-100">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
@@ -186,8 +186,8 @@ export function MobileNavigation() {
 
             {/* User Info */}
             {user && (
-              <div className="p-6 pb-4">
-                <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100">
+              <div className="p-4 sm:p-6 pb-3 sm:pb-4">
+                <div className="flex items-center space-x-3 p-3 sm:p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl sm:rounded-2xl border border-indigo-100">
                   <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
                     <User className="h-6 w-6 text-white" />
                   </div>
@@ -206,7 +206,7 @@ export function MobileNavigation() {
 
             {/* Cart & Wishlist Quick Access - Show on shopping pages */}
             {isShoppingPage && (
-              <div className="px-6 pb-4">
+              <div className="px-4 sm:px-6 pb-3 sm:pb-4">
                 <div className="grid grid-cols-2 gap-3">
                   <Link
                     href="/cart"
@@ -240,7 +240,7 @@ export function MobileNavigation() {
             )}
 
             {/* Navigation Controls */}
-            <div className="px-6 pb-4">
+            <div className="px-4 sm:px-6 pb-3 sm:pb-4">
               <div className={`grid gap-2 ${isMarketplaceContext ? 'grid-cols-3' : !isHomePage ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 {/* Back Button */}
                 {!isHomePage && (
@@ -286,7 +286,7 @@ export function MobileNavigation() {
             </div>
 
             {/* Main Navigation */}
-            <nav className="flex-1 px-6 space-y-2">
+            <nav className="flex-1 px-4 sm:px-6 space-y-1 sm:space-y-2">
               {/* Primary Items */}
               <div className="space-y-1">
                 {primaryItems.map((item) => (
@@ -392,7 +392,7 @@ export function MobileNavigation() {
             </nav>
 
             {/* Footer */}
-            <div className="p-6 pt-4 border-t border-slate-100 space-y-3">
+            <div className="p-4 sm:p-6 pt-3 sm:pt-4 border-t border-slate-100 space-y-2 sm:space-y-3">
               {user ? (
                 <Button
                   onClick={handleLogout}
