@@ -302,11 +302,23 @@ export function WomensProductGrid({ filters, sortBy, onFiltersChange, onSortChan
               {product.vendor.name}, {product.vendor.location}
             </div>
 
-            <div className="flex space-x-2">
-              <Button className="flex-1 bg-pink-600 hover:bg-pink-700">
+            <div className="space-y-2">
+              <Button className="w-full bg-pink-600 hover:bg-pink-700">
                 <ShoppingCart className="h-4 w-4 mr-2" />
                 Add to Cart
               </Button>
+              <div className="flex space-x-2">
+                <Button variant="outline" className="flex-1">
+                  <Eye className="h-3 w-3 mr-1" />
+                  View
+                </Button>
+                <Link href={`/vendors/${product.vendor.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/--+/g, '-').replace(/^-|-$/g, '')}`} className="flex-1">
+                  <Button variant="outline" className="w-full">
+                    <Store className="h-3 w-3 mr-1" />
+                    Store
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </CardContent>
