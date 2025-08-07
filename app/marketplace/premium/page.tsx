@@ -543,16 +543,21 @@ export default function LinkaRoyalePage() {
         {/* 3D Hero Carousel */}
         <HeroCarousel3D />
 
-        {/* Recommended Products Section */}
-        <section className="py-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/30 via-amber-50/20 to-yellow-50/30"></div>
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-blue-900 font-serif mb-4">
-                👑 Royal Recommendations
+        {/* Luxury Recommended Products Section */}
+        <section className="py-24 relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-cream-luxury/20 via-champagne-gold/10 to-cream-luxury/20 texture-royal"></div>
+          <div className="max-w-7xl mx-auto px-8 lg:px-12 relative z-10">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-3 glass-luxury rounded-full px-8 py-4 mb-8 border border-royal-gold/20">
+                <Crown className="h-6 w-6 text-royal-gold" />
+                <span className="text-luxury-caption text-charcoal-luxury">Curated Excellence</span>
+              </div>
+              <h2 className="text-5xl lg:text-6xl font-bold text-midnight-blue font-royal mb-6 text-luxury-title">
+                Royal Recommendations
               </h2>
-              <p className="text-xl text-blue-700 max-w-3xl mx-auto leading-relaxed">
-                Curated exclusively for your royal taste and discerning preferences
+              <div className="w-24 h-1 bg-gradient-to-r from-royal-gold to-luxury-gold mx-auto rounded-full mb-6"></div>
+              <p className="text-2xl text-charcoal-luxury/80 max-w-4xl mx-auto leading-relaxed text-luxury-body">
+                Curated exclusively for your discerning taste and refined preferences
               </p>
             </div>
 
@@ -582,16 +587,21 @@ export default function LinkaRoyalePage() {
         {/* Premium Brands Carousel */}
         <PremiumBrandsCarousel />
 
-        {/* Shop by Category Section */}
-        <section className="py-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-indigo-50/20 to-blue-50/30"></div>
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-blue-900 font-serif mb-4">
-                🏛️ Royal Categories
+        {/* Luxury Categories Section */}
+        <section className="py-24 relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-platinum/15 via-pearl-white/10 to-platinum/15"></div>
+          <div className="max-w-7xl mx-auto px-8 lg:px-12 relative z-10">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-3 glass-luxury rounded-full px-8 py-4 mb-8 border border-royal-gold/20">
+                <Diamond className="h-6 w-6 text-royal-gold" />
+                <span className="text-luxury-caption text-charcoal-luxury">Exclusive Collections</span>
+              </div>
+              <h2 className="text-5xl lg:text-6xl font-bold text-midnight-blue font-royal mb-6 text-luxury-title">
+                Luxury Categories
               </h2>
-              <p className="text-xl text-blue-700 max-w-3xl mx-auto leading-relaxed">
-                Explore our curated collections of premium products and services
+              <div className="w-24 h-1 bg-gradient-to-r from-royal-gold to-luxury-gold mx-auto rounded-full mb-6"></div>
+              <p className="text-2xl text-charcoal-luxury/80 max-w-4xl mx-auto leading-relaxed text-luxury-body">
+                Explore our meticulously curated collections of premium products and services
               </p>
             </div>
 
@@ -605,31 +615,36 @@ export default function LinkaRoyalePage() {
                 <Link
                   key={category.name}
                   href={category.href}
-                  className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                  className="group luxury-card overflow-hidden rounded-3xl transition-all duration-700 hover:-translate-y-4 hover:scale-105"
                 >
                   <div className="aspect-[4/3] relative">
                     <Image
                       src={category.image}
                       alt={category.name}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="object-cover group-hover:scale-115 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/40 to-transparent"></div>
-                    <div className="absolute inset-0 bg-yellow-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-midnight-blue/90 via-midnight-blue/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-royal-gold/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                    {/* Luxury Overlay Pattern */}
+                    <div className="absolute inset-0 texture-luxury opacity-20"></div>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center">
-                        <category.icon className="h-6 w-6 text-blue-900" />
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <div className="glass-luxury-dark rounded-2xl p-6 border border-royal-gold/20">
+                      <div className="flex items-center gap-4 mb-3">
+                        <div className="w-12 h-12 bg-gold-luxury-gradient rounded-2xl flex items-center justify-center shadow-xl border border-royal-gold/30">
+                          <category.icon className="h-7 w-7 text-midnight-blue" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold font-royal text-luxury-title">{category.name}</h3>
+                          <p className="text-platinum/80 text-luxury-caption">{category.count} Exclusive Items</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-xl font-bold font-serif">{category.name}</h3>
-                        <p className="text-blue-200">{category.count} items</p>
+                      <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                        <span className="text-royal-gold font-semibold text-luxury-body">Explore Collection</span>
+                        <ChevronRight className="h-5 w-5 text-royal-gold" />
                       </div>
-                    </div>
-                    <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="text-yellow-400 font-semibold">Explore Collection</span>
-                      <ChevronRight className="h-4 w-4 text-yellow-400" />
                     </div>
                   </div>
                 </Link>
