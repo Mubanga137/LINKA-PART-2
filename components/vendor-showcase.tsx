@@ -216,19 +216,19 @@ export function VendorShowcase({
   }
 
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="py-8 sm:py-12 md:py-16 relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/30"></div>
       
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-4">
             <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
               {title}
             </span>
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto px-4">
             {subtitle}
             {user?.location && (
               <span className="block mt-2 text-indigo-600 font-medium">
@@ -240,22 +240,22 @@ export function VendorShowcase({
         </div>
 
         {/* Vendor Grid */}
-        <div className={`grid gap-8 ${
-          layout === 'featured' 
-            ? 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-3' 
-            : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        <div className={`grid gap-4 sm:gap-6 md:gap-8 ${
+          layout === 'featured'
+            ? 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'
+            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
         }`}>
           {vendors.map((vendor, index) => (
             <Card
               key={vendor.id}
-              className="group hover:shadow-2xl hover:shadow-slate-900/10 transition-all duration-500 hover:-translate-y-4 hover:scale-105 bg-white/90 backdrop-blur-sm border-white/20 overflow-hidden cursor-pointer"
+              className="group hover:shadow-2xl hover:shadow-slate-900/10 transition-all duration-500 hover:-translate-y-2 sm:hover:-translate-y-4 hover:scale-105 bg-white/90 backdrop-blur-sm border-white/20 overflow-hidden cursor-pointer mx-2 sm:mx-0"
               style={{ animationDelay: `${index * 150}ms` }}
               onMouseEnter={() => setHoveredVendor(vendor.id)}
               onMouseLeave={() => setHoveredVendor(null)}
             >
               <CardContent className="p-0">
                 {/* Cover Image */}
-                <div className="relative h-40 overflow-hidden">
+                <div className="relative h-32 sm:h-36 md:h-40 overflow-hidden">
                   <Image
                     src={vendor.coverImage}
                     alt={vendor.businessName}
@@ -269,7 +269,7 @@ export function VendorShowcase({
                   <div className={`absolute inset-0 bg-gradient-to-br ${vendor.gradient} opacity-20 group-hover:opacity-40 transition-all duration-500`}></div>
                   
                   {/* Top Badges */}
-                  <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                  <div className="absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4 flex flex-wrap gap-1 sm:gap-2">
                     {vendor.isVerified && (
                       <Badge className="bg-blue-600/90 text-white font-bold flex items-center">
                         <Verified className="h-3 w-3 mr-1" />
@@ -284,7 +284,7 @@ export function VendorShowcase({
                   </div>
 
                   {/* Follow Button */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <Button
                       size="sm"
                       variant={vendor.isFollowed ? "default" : "secondary"}
@@ -303,54 +303,54 @@ export function VendorShowcase({
                   </div>
 
                   {/* Distance Badge */}
-                  <div className="absolute bottom-4 right-4 bg-black/70 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm flex items-center">
+                  <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 right-2 sm:right-3 md:right-4 bg-black/70 text-white text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-sm flex items-center">
                     <MapPin className="h-3 w-3 mr-1" />
                     {vendor.distance < 10 ? `${vendor.distance.toFixed(1)}km` : vendor.location}
                   </div>
                 </div>
 
                 {/* Vendor Info */}
-                <div className="p-6">
+                <div className="p-4 sm:p-5 md:p-6">
                   {/* Header with Avatar */}
-                  <div className="flex items-center space-x-4 mb-4">
-                    <Avatar className="h-12 w-12 border-2 border-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
+                    <Avatar className="h-10 w-10 sm:h-12 sm:w-12 border-2 border-white shadow-lg group-hover:scale-110 transition-transform duration-300">
                       <AvatarImage src={vendor.avatar} alt={vendor.name} />
                       <AvatarFallback>{vendor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
-                      <h3 className="font-bold text-lg text-slate-900 group-hover:text-indigo-600 transition-colors duration-300">
+                      <h3 className="font-bold text-base sm:text-lg text-slate-900 group-hover:text-indigo-600 transition-colors duration-300 line-clamp-1">
                         {vendor.businessName}
                       </h3>
-                      <p className="text-sm text-slate-600">by {vendor.name}</p>
+                      <p className="text-xs sm:text-sm text-slate-600 line-clamp-1">by {vendor.name}</p>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-2">
+                  <p className="text-slate-600 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-2">
                     {vendor.description}
                   </p>
 
                   {/* Rating and Reviews */}
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="flex items-center">
                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="ml-1.5 text-sm font-bold text-slate-900">{vendor.rating.toFixed(1)}</span>
-                      <span className="ml-1 text-sm text-slate-500">({vendor.reviews} reviews)</span>
+                      <span className="ml-1.5 text-xs sm:text-sm font-bold text-slate-900">{vendor.rating.toFixed(1)}</span>
+                      <span className="ml-1 text-xs sm:text-sm text-slate-500">({vendor.reviews})</span>
                     </div>
-                    <div className="flex items-center text-sm text-slate-500">
+                    <div className="flex items-center text-xs sm:text-sm text-slate-500">
                       <Clock className="h-4 w-4 mr-1" />
                       {vendor.responseTime}
                     </div>
                   </div>
 
                   {/* Specialties */}
-                  <div className="mb-4">
-                    <p className="text-xs text-slate-500 mb-2 font-medium">Specializes in:</p>
+                  <div className="mb-3 sm:mb-4">
+                    <p className="text-xs text-slate-500 mb-1 sm:mb-2 font-medium">Specializes in:</p>
                     <div className="flex flex-wrap gap-1">
                       {vendor.specialties.map((specialty, specIndex) => (
                         <span
                           key={specIndex}
-                          className="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded-full hover:bg-indigo-100 hover:text-indigo-700 transition-colors cursor-pointer"
+                          className="text-xs bg-slate-100 text-slate-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full hover:bg-indigo-100 hover:text-indigo-700 transition-colors cursor-pointer"
                         >
                           {specialty}
                         </span>
@@ -359,15 +359,15 @@ export function VendorShowcase({
                   </div>
 
                   {/* Stats */}
-                  <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-3 sm:pt-4 border-t border-slate-200">
                     <div className="text-center">
-                      <p className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                      <p className="text-sm sm:text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
                         {vendor.totalProducts}
                       </p>
                       <p className="text-xs text-slate-500">Products</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                      <p className="text-sm sm:text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
                         {vendor.totalSales}
                       </p>
                       <p className="text-xs text-slate-500">Sales</p>
@@ -375,7 +375,7 @@ export function VendorShowcase({
                     <div className="text-center">
                       <div className="flex items-center justify-center">
                         <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-                        <p className="text-lg font-bold text-green-600">
+                        <p className="text-sm sm:text-lg font-bold text-green-600">
                           {Math.round(vendor.rating * 20)}
                         </p>
                       </div>
@@ -384,13 +384,13 @@ export function VendorShowcase({
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex space-x-2 mt-6">
-                    <Button className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                      <ShoppingBag className="h-4 w-4 mr-2" />
+                  <div className="flex space-x-2 mt-4 sm:mt-6">
+                    <Button className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 text-xs sm:text-sm px-2 sm:px-4 py-2">
+                      <ShoppingBag className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                       Visit Store
                     </Button>
-                    <Button variant="outline" size="sm" className="px-3">
-                      <Users className="h-4 w-4" />
+                    <Button variant="outline" size="sm" className="px-2 sm:px-3">
+                      <Users className="h-3 w-3 sm:h-4 sm:w-4" />
                     </Button>
                   </div>
                 </div>
@@ -400,7 +400,7 @@ export function VendorShowcase({
         </div>
 
         {/* View All Button */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-8 sm:mt-10 md:mt-12 px-4">
           <Button
             size="lg"
             variant="outline"
