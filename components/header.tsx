@@ -21,7 +21,8 @@ import { useCart } from "@/contexts/marketplace-context"
 
 export function Header() {
   const { user, logout } = useAuth()
-  const { totalItems } = useCart()
+  const { getCartItemCount } = useCart()
+  const totalItems = getCartItemCount()
   const router = useRouter()
   const pathname = usePathname()
 
