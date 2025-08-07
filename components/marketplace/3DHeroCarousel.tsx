@@ -325,29 +325,29 @@ export function HeroCarousel3D() {
         </div>
       </div>
 
-      {/* Navigation Controls */}
+      {/* Royal Navigation Controls */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30">
-        <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/20 shadow-2xl">
+        <div className="bg-yellow-400/10 backdrop-blur-xl rounded-2xl p-4 border-2 border-yellow-400/30 shadow-2xl">
           <div className="flex items-center gap-4">
             {/* Previous Button */}
             <Button
               variant="ghost"
               size="lg"
               onClick={prevSlide}
-              className="text-white hover:bg-white/20 rounded-xl p-3"
+              className="text-yellow-400 hover:bg-yellow-400/20 hover:text-yellow-300 rounded-xl p-3 border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300"
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
 
-            {/* Slide Indicators */}
+            {/* Royal Slide Indicators */}
             <div className="flex gap-2">
               {heroProducts.map((_, index) => (
                 <button
                   key={index}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentSlide 
-                      ? 'bg-white shadow-lg' 
-                      : 'bg-white/40 hover:bg-white/60'
+                  className={`w-3 h-3 rounded-full transition-all duration-300 border border-yellow-400/30 ${
+                    index === currentSlide
+                      ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50'
+                      : 'bg-yellow-400/40 hover:bg-yellow-400/60'
                   }`}
                   onClick={() => setCurrentSlide(index)}
                 />
@@ -359,18 +359,18 @@ export function HeroCarousel3D() {
               variant="ghost"
               size="lg"
               onClick={nextSlide}
-              className="text-white hover:bg-white/20 rounded-xl p-3"
+              className="text-yellow-400 hover:bg-yellow-400/20 hover:text-yellow-300 rounded-xl p-3 border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300"
             >
               <ChevronRight className="h-6 w-6" />
             </Button>
 
             {/* Auto Play Toggle */}
-            <div className="w-px h-8 bg-white/20 mx-2" />
+            <div className="w-px h-8 bg-yellow-400/20 mx-2" />
             <Button
               variant="ghost"
               size="lg"
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className="text-white hover:bg-white/20 rounded-xl p-3"
+              className="text-yellow-400 hover:bg-yellow-400/20 hover:text-yellow-300 rounded-xl p-3 border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300"
             >
               {isAutoPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
             </Button>
@@ -378,11 +378,11 @@ export function HeroCarousel3D() {
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10">
-        <div 
-          className="h-full bg-gradient-to-r from-amber-400 to-yellow-500 transition-all duration-300"
-          style={{ 
+      {/* Royal Progress Bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-2 bg-blue-900/50">
+        <div
+          className="h-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 transition-all duration-300 shadow-lg"
+          style={{
             width: `${((currentSlide + 1) / heroProducts.length) * 100}%`
           }}
         />
