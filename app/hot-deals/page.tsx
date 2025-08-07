@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { OptimizedProductCard } from "@/components/marketplace/OptimizedProductCard";
+import { OptimizedProductCard3D } from "@/components/marketplace/OptimizedProductCard3D";
 import { MarketplaceProvider, useCart, useFavorites } from "@/contexts/marketplace-context";
 import type { Product } from "@/lib/types";
 import { Flame, Clock, ShoppingBag } from "lucide-react";
