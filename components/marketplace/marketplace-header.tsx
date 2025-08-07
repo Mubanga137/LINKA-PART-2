@@ -5,13 +5,18 @@ import { motion, useInView, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import {
-  Search,
+import { 
+  Search, 
+  MapPin, 
   Filter,
+  Grid3X3,
+  List,
   Star,
+  Truck,
+  Zap,
+  TrendingUp,
   Sparkles,
-  ShoppingBag,
-  Menu
+  ShoppingBag
 } from "lucide-react"
 import { ProductFilters } from "@/services/product-service"
 import { useRef } from "react"
@@ -19,11 +24,11 @@ import { useRef } from "react"
 interface MarketplaceHeaderProps {
   totalProducts: number
   currentFilters: ProductFilters
-  onSidebarToggle?: () => void
 }
 
-export function MarketplaceHeader({ totalProducts, currentFilters, onSidebarToggle }: MarketplaceHeaderProps) {
+export function MarketplaceHeader({ totalProducts, currentFilters }: MarketplaceHeaderProps) {
   const [searchValue, setSearchValue] = useState(currentFilters.searchQuery || "")
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   
   const ref = useRef(null)
@@ -79,6 +84,13 @@ export function MarketplaceHeader({ totalProducts, currentFilters, onSidebarTogg
            currentFilters.rating
   }
 
+  const quickFilters = [
+    { icon: MapPin, label: 'Near Me', color: 'from-blue-500 to-blue-600', hoverColor: 'hover:from-blue-600 hover:to-blue-700' },
+    { icon: Star, label: 'Top Rated', color: 'from-yellow-500 to-yellow-600', hoverColor: 'hover:from-yellow-600 hover:to-yellow-700' },
+    { icon: Truck, label: 'Free Delivery', color: 'from-green-500 to-green-600', hoverColor: 'hover:from-green-600 hover:to-green-700' },
+    { icon: Zap, label: 'Fast Delivery', color: 'from-orange-500 to-orange-600', hoverColor: 'hover:from-orange-600 hover:to-orange-700' },
+    { icon: TrendingUp, label: 'Trending', color: 'from-purple-500 to-purple-600', hoverColor: 'hover:from-purple-600 hover:to-purple-700' }
+  ]
 
   return (
     <motion.div 
@@ -286,6 +298,33 @@ export function MarketplaceHeader({ totalProducts, currentFilters, onSidebarTogg
           </motion.div>
         </motion.div>
 
+        {/* Quick Filter Pills */}
+        <motion.div 
+          className="flex flex-wrap items-center justify-center gap-3 mb-8"
+          initial={{ y: 20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+        >
+          {quickFilters.map((filter, index) => (
+            <motion.div
+              key={filter.label}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.8 + index * 0.1 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className={`rounded-full bg-white/10 backdrop-blur-sm border-white/20 text-white ${filter.hoverColor} hover:scale-105 transition-all duration-300 hover:shadow-lg hover:border-white/40`}
+              >
+                <filter.icon className="h-4 w-4 mr-2" />
+                {filter.label}
+              </Button>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Results Summary Bar */}
         <motion.div 
@@ -296,22 +335,7 @@ export function MarketplaceHeader({ totalProducts, currentFilters, onSidebarTogg
           whileHover={{ bg: "rgba(255, 255, 255, 0.15)" }}
         >
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              {/* Sidebar Toggle */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSidebarToggle}
-                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:border-white/40"
-                >
-                  <Menu className="h-4 w-4 mr-2" />
-                  Filters & Options
-                </Button>
-              </motion.div>
+            <div className="flex items-center space-x-6">
               <motion.span 
                 className="text-white font-medium"
                 initial={{ scale: 0.9 }}
@@ -350,6 +374,33 @@ export function MarketplaceHeader({ totalProducts, currentFilters, onSidebarTogg
               </AnimatePresence>
             </div>
 
+            {/* View Mode Toggle */}
+            <motion.div 
+              className="hidden md:flex items-center space-x-4"
+              initial={{ x: 20, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : { x: 20, opacity: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+            >
+              <span className="text-sm text-blue-200">View:</span>
+              <div className="flex bg-white/10 rounded-lg overflow-hidden border border-white/20">
+                {(['grid', 'list'] as const).map((mode) => (
+                  <motion.div key={mode} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      variant={viewMode === mode ? "default" : "ghost"} 
+                      size="sm" 
+                      className={`px-4 py-2 transition-all duration-300 ${
+                        viewMode === mode 
+                          ? "bg-orange-500 text-white shadow-lg" 
+                          : "text-white hover:bg-white/20"
+                      }`}
+                      onClick={() => setViewMode(mode)}
+                    >
+                      {mode === 'grid' ? <Grid3X3 className="h-4 w-4" /> : <List className="h-4 w-4" />}
+                    </Button>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
