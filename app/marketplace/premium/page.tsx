@@ -496,20 +496,22 @@ export default function PremiumItemsPage() {
                     </div>
 
                     {/* Luxury Rating */}
-                    <div className="absolute top-4 right-4 z-20">
-                      <div className="bg-gradient-to-r from-white/95 to-amber-50/90 backdrop-blur-md rounded-2xl px-4 py-2 flex items-center gap-2 shadow-xl border border-amber-200/50">
-                        <Diamond className="h-4 w-4 text-amber-600" />
-                        <span className="text-sm font-bold text-amber-900">{product.luxuryRating}/5</span>
+                    <div className="absolute top-3 right-3 z-20">
+                      <div className="bg-white/95 backdrop-blur-md rounded-xl px-3 py-1.5 flex items-center gap-1.5 shadow-lg border border-amber-100/50">
+                        <Diamond className="h-3.5 w-3.5 text-amber-600" />
+                        <span className="text-xs font-bold text-amber-900">{product.luxuryRating}/5</span>
                       </div>
                     </div>
 
                     {/* Product Image */}
-                    <div className="relative aspect-[4/3] bg-gradient-to-br from-amber-100 to-yellow-50 overflow-hidden">
+                    <div className={`relative bg-gradient-to-br from-amber-50 to-yellow-50 overflow-hidden ${
+                      viewMode === 'list' ? 'w-48 h-48 flex-shrink-0' : 'aspect-[4/3]'
+                    }`}>
                       <Image
                         src={product.images[0]}
                         alt={product.name}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       
                       {/* Premium Overlay */}
