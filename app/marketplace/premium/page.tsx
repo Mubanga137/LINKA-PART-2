@@ -557,31 +557,31 @@ export default function PremiumItemsPage() {
                       </div>
                     </div>
 
-                    <CardContent className="p-6">
+                    <CardContent className="p-8">
                       {/* Vendor Info */}
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-3 mb-4">
                         <Image
                           src={product.vendor.logo}
                           alt={product.vendor.name}
-                          width={24}
-                          height={24}
-                          className="rounded-full object-cover"
+                          width={32}
+                          height={32}
+                          className="rounded-full object-cover border-2 border-amber-200"
                         />
-                        <span className="text-sm font-medium text-gray-700">{product.vendor.name}</span>
+                        <span className="text-base font-semibold text-amber-900">{product.vendor.name}</span>
                         {product.vendor.premiumSeller && (
-                          <Badge className="bg-amber-100 text-amber-700 text-xs px-2 py-0.5">
-                            <Crown className="h-2.5 w-2.5 mr-1" />
+                          <Badge className="bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800 text-sm px-3 py-1 border border-amber-200">
+                            <Crown className="h-3 w-3 mr-1.5" />
                             Premium Seller
                           </Badge>
                         )}
                       </div>
 
                       {/* Product Info */}
-                      <div className="mb-4">
-                        <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2 group-hover:text-amber-600 transition-colors">
+                      <div className="mb-5">
+                        <h3 className="font-bold text-amber-900 text-xl mb-3 line-clamp-2 group-hover:text-amber-700 transition-colors">
                           {product.name}
                         </h3>
-                        <p className="text-gray-600 text-sm line-clamp-2">
+                        <p className="text-amber-800/80 text-base line-clamp-2 leading-relaxed">
                           {product.description}
                         </p>
                       </div>
