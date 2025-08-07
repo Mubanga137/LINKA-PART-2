@@ -33,7 +33,8 @@ import {
   ThumbsDown,
   Flag
 } from "lucide-react"
-import { useCart, Product } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
+import { Product } from "@/lib/types"
 import { useAuth } from "@/contexts/auth-context"
 import { productService } from "@/services/product-service"
 
