@@ -156,18 +156,19 @@ export function OptimizedProductCard3D({
   };
 
   return (
-    <motion.article 
-      ref={cardRef}
-      className="group relative w-full h-full"
-      variants={cardVariants}
-      initial="hidden"
-      animate="visible"
-      whileHover="hover"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      style={{ perspective: 1000 }}
-    >
+    <Link href={`/products/${product.id}`} className="block w-full h-full group">
+      <motion.article
+        ref={cardRef}
+        className="relative w-full h-full cursor-pointer"
+        variants={cardVariants}
+        initial="hidden"
+        animate="visible"
+        whileHover="hover"
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        style={{ perspective: 1000 }}
+      >
       <motion.div
         className="relative w-full h-full bg-white/90 backdrop-blur-xl rounded-2xl border border-white/30 overflow-hidden shadow-xl flex flex-col"
         style={{
@@ -549,7 +550,7 @@ export function OptimizedProductCard3D({
             </motion.div>
 
             {/* Secondary Actions */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className={`${showVisitStore && !isFlashSale ? 'block' : 'hidden'}`}>
               {showVisitStore && !isFlashSale && (
                 <motion.div
                   whileHover={{ scale: 1.02 }}
@@ -568,22 +569,6 @@ export function OptimizedProductCard3D({
                 </motion.div>
               )}
 
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={showVisitStore && !isFlashSale ? '' : 'col-span-2'}
-              >
-                <Button
-                  variant="outline"
-                  className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 hover:border-blue-300 hover:text-blue-600 py-2.5 text-xs rounded-lg transition-all duration-200"
-                  asChild
-                >
-                  <Link href={`/products/${product.id}`}>
-                    <Eye className="h-3 w-3 mr-1" />
-                    {showVisitStore && !isFlashSale ? 'Details' : 'View Details'}
-                  </Link>
-                </Button>
-              </motion.div>
             </div>
           </div>
         </div>
@@ -620,6 +605,7 @@ export function OptimizedProductCard3D({
           )}
         </AnimatePresence>
       </motion.div>
-    </motion.article>
+      </motion.article>
+    </Link>
   );
 }
