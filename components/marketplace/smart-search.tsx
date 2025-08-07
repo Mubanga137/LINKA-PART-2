@@ -1,4 +1,5 @@
 "use client";
+// Fixed Fire icon reference
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
