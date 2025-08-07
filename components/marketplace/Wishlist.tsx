@@ -136,8 +136,9 @@ function WishlistItemCard({ product, onRemove, onAddToCart, onShare }: WishlistI
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <Card className="border border-gray-200 hover:shadow-md transition-all">
-      <CardContent className="p-4">
+    <Link href={`/products/${product.id}`} className="block">
+      <Card className="border border-gray-200 hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer">
+        <CardContent className="p-3">
         <div className="flex gap-4">
           {/* Product Image */}
           <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
@@ -239,11 +240,6 @@ function WishlistItemCard({ product, onRemove, onAddToCart, onShare }: WishlistI
                 <ShoppingCart className="h-3 w-3 mr-1" />
                 Add to Cart
               </Button>
-              <Button variant="outline" size="sm" className="text-xs h-8" asChild>
-                <Link href={`/products/${product.id}`}>
-                  View Details
-                </Link>
-              </Button>
             </div>
 
             {/* Features */}
@@ -266,8 +262,9 @@ function WishlistItemCard({ product, onRemove, onAddToCart, onShare }: WishlistI
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 
