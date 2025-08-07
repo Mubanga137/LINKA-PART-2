@@ -475,7 +475,7 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="group"
               >
-                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
+                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 h-full min-h-[480px] flex flex-col">
                   <div className="relative">
                     <div className="aspect-square bg-gray-100 overflow-hidden">
                       <Image
