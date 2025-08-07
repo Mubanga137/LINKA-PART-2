@@ -620,51 +620,51 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Rating and Stats */}
-                      <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
-                        <div className="flex items-center gap-1">
-                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                          <span className="font-medium">{product.rating}</span>
-                          <span>({product.reviewCount})</span>
+                      <div className="flex items-center justify-between text-base text-amber-800 mb-5">
+                        <div className="flex items-center gap-2">
+                          <Star className="h-5 w-5 text-yellow-500 fill-current" />
+                          <span className="font-bold">{product.rating}</span>
+                          <span className="text-amber-700">({product.reviewCount})</span>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Eye className="h-3 w-3" />
-                          <span>{product.views.toLocaleString()}</span>
+                        <div className="flex items-center gap-2">
+                          <Eye className="h-4 w-4" />
+                          <span className="font-medium">{product.views.toLocaleString()}</span>
                         </div>
                       </div>
 
                       {/* Premium Guarantees */}
-                      <div className="bg-amber-50 rounded-lg p-3 mb-4">
-                        <div className="flex items-center gap-4 text-xs text-amber-700">
-                          <div className="flex items-center gap-1">
-                            <Shield className="h-3 w-3" />
+                      <div className="bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 rounded-2xl p-4 mb-6 border border-amber-200/50">
+                        <div className="flex items-center gap-6 text-sm text-amber-800 font-medium">
+                          <div className="flex items-center gap-2">
+                            <Shield className="h-4 w-4" />
                             <span>{product.warranty}</span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Truck className="h-3 w-3" />
+                          <div className="flex items-center gap-2">
+                            <Truck className="h-4 w-4" />
                             <span>Premium Delivery</span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <RefreshCw className="h-3 w-3" />
+                          <div className="flex items-center gap-2">
+                            <RefreshCw className="h-4 w-4" />
                             <span>Easy Returns</span>
                           </div>
                         </div>
                       </div>
 
                       {/* Actions */}
-                      <div className="flex gap-2">
-                        <Button 
-                          className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold py-3"
+                      <div className="flex gap-3">
+                        <Button
+                          className="flex-1 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 hover:from-amber-700 hover:via-yellow-600 hover:to-amber-700 text-white font-bold py-4 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
                         >
-                          <ShoppingCart className="h-4 w-4 mr-2" />
+                          <ShoppingCart className="h-5 w-5 mr-3" />
                           Add to Cart
                         </Button>
                         <Button
                           variant="outline"
-                          className="px-4 py-3 border-amber-300 hover:border-amber-500 hover:text-amber-600"
+                          className="px-6 py-4 border-2 border-amber-400 hover:border-amber-600 hover:bg-amber-50 text-amber-800 hover:text-amber-900 rounded-2xl font-semibold transition-all duration-300"
                           asChild
                         >
                           <Link href={`/products/${product.id}`}>
-                            <ExternalLink className="h-4 w-4" />
+                            <ExternalLink className="h-5 w-5" />
                           </Link>
                         </Button>
                       </div>
