@@ -1,8 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { Enhanced3DProductCard } from "@/components/marketplace/Enhanced3DProductCard";
+import { HeroCarousel3D } from "@/components/marketplace/3DHeroCarousel";
+import { PremiumServicesSection } from "@/components/marketplace/PremiumServicesSection";
+import { HotDealsSection } from "@/components/marketplace/HotDealsSection";
+import { PremiumBrandsCarousel } from "@/components/marketplace/PremiumBrandsCarousel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,7 +30,20 @@ import {
   CheckCircle,
   Verified,
   Sparkles,
-  Medal
+  Medal,
+  Menu,
+  X,
+  Home,
+  Package,
+  Settings,
+  User,
+  Search,
+  Bell,
+  TrendingUp,
+  Flame,
+  Zap,
+  Filter,
+  SortAsc
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -252,6 +270,28 @@ export default function PremiumItemsPage() {
   const [sortBy, setSortBy] = useState<'luxury' | 'price' | 'rating' | 'newest'>('luxury');
   const [filterBy, setFilterBy] = useState<'all' | 'handcrafted' | 'limited' | 'exclusive'>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Luxury loading animation
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Scroll to top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Filter and sort products
   const filteredProducts = premiumProducts
@@ -282,109 +322,173 @@ export default function PremiumItemsPage() {
       }
     });
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50/90 via-yellow-50/60 to-amber-50/80 relative overflow-hidden">
-      {/* Refined golden background effects */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-amber-200/15 via-yellow-100/10 to-amber-300/20 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-200/8 to-amber-100/15 pointer-events-none"></div>
+  // Luxury Loading Screen
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+        <div className="text-center space-y-8">
+          <div className="relative">
+            <div className="w-32 h-32 border-4 border-amber-200/30 rounded-full animate-spin border-t-amber-400"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Crown className="h-12 w-12 text-amber-400 animate-pulse" />
+            </div>
+          </div>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 bg-clip-text text-transparent">
+              ✨ Loading Premium Experience
+            </h2>
+            <div className="flex justify-center space-x-1">
+              <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce delay-100"></div>
+              <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce delay-200"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-      {/* Subtle floating elements */}
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 relative overflow-hidden">
+      {/* Advanced 3D Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-amber-400/10 via-purple-500/5 to-blue-500/10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-amber-300/5 to-yellow-400/10 pointer-events-none"></div>
+
+      {/* Animated Luxury Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-24 left-20 w-1.5 h-1.5 bg-amber-300/40 rounded-full animate-pulse"></div>
-        <div className="absolute top-48 right-28 w-1 h-1 bg-yellow-300/50 rounded-full animate-bounce"></div>
-        <div className="absolute bottom-48 right-1/5 w-1.5 h-1.5 bg-yellow-400/30 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-36 left-1/4 w-0.5 h-0.5 bg-amber-300/40 rounded-full animate-bounce"></div>
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-amber-300/30 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${5 + Math.random() * 10}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* 3D Navigation Sidebar */}
+      <div className={`fixed top-0 left-0 h-full w-80 bg-white/95 backdrop-blur-xl shadow-2xl transform transition-all duration-500 z-50 border-r border-amber-100/50 ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        <div className="p-6 space-y-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-xl flex items-center justify-center">
+                <Crown className="h-6 w-6 text-white" />
+              </div>
+              <span className="font-bold text-xl text-gray-900">Premium</span>
+            </div>
+            <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)}>
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
+          <nav className="space-y-2">
+            {[
+              { icon: Home, label: 'Home', href: '/' },
+              { icon: Package, label: 'Products', href: '/categories' },
+              { icon: Sparkles, label: 'Services', href: '/services' },
+              { icon: TrendingUp, label: 'Trending', href: '/trending' },
+              { icon: Flame, label: 'Hot Deals', href: '/hot-deals' },
+              { icon: Crown, label: 'Premium', href: '/marketplace/premium' },
+              { icon: User, label: 'Profile', href: '/profile' },
+              { icon: Settings, label: 'Settings', href: '/settings' }
+            ].map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-amber-50 transition-all duration-300 group"
+              >
+                <item.icon className="h-5 w-5 text-gray-600 group-hover:text-amber-600 transition-colors" />
+                <span className="font-medium text-gray-700 group-hover:text-amber-700">{item.label}</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      {/* Sidebar Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all duration-300"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-amber-100/50 shadow-2xl z-40 md:hidden">
+        <div className="flex items-center justify-around py-3">
+          {[
+            { icon: Home, label: 'Home' },
+            { icon: Search, label: 'Search' },
+            { icon: Heart, label: 'Wishlist' },
+            { icon: ShoppingCart, label: 'Cart' },
+            { icon: User, label: 'Profile' }
+          ].map((item) => (
+            <button key={item.label} className="flex flex-col items-center gap-1 p-2 rounded-xl hover:bg-amber-50 transition-all duration-300">
+              <item.icon className="h-5 w-5 text-gray-600" />
+              <span className="text-xs text-gray-600">{item.label}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       <Header />
 
       <main className="relative z-10 space-y-0">
-        {/* Hero Section */}
-        <section className="relative pt-16 pb-20 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-400/8 via-yellow-300/12 to-amber-500/8"></div>
+        {/* Mobile Menu Button */}
+        <Button
+          variant="outline"
+          size="lg"
+          onClick={() => setSidebarOpen(true)}
+          className="fixed top-20 left-4 z-40 bg-white/90 backdrop-blur-xl border-2 border-amber-200 hover:border-amber-300 rounded-xl shadow-xl md:hidden"
+        >
+          <Menu className="h-5 w-5 text-amber-700" />
+        </Button>
 
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-20">
-            <div className="text-center space-y-16">
-              {/* Header Content */}
-              <div className="space-y-8">
-                <div className="flex items-center justify-center gap-10">
-                  <div className="w-20 h-20 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center shadow-xl border-3 border-white/50">
-                    <Crown className="text-white text-3xl drop-shadow-lg" />
-                  </div>
-                  <div className="text-left">
-                    <h1 className="text-5xl lg:text-7xl font-black bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent leading-tight">
-                      <span className="text-amber-600">✨</span> Premium
-                      <div className="mt-2">
-                        <Badge className="bg-gradient-to-br from-amber-500 via-yellow-400 to-amber-600 text-white text-xl px-6 py-3 shadow-xl border border-white/20 rounded-2xl">
-                          <Diamond className="h-5 w-5 mr-2" />
-                          LUXURY
-                        </Badge>
-                      </div>
-                    </h1>
-                  </div>
-                </div>
+        {/* 3D Hero Carousel */}
+        <HeroCarousel3D />
 
-                <div className="max-w-4xl mx-auto space-y-4">
-                  <p className="text-2xl lg:text-3xl text-amber-900/85 font-semibold tracking-wide leading-relaxed">
-                    Curated luxury items from Zambia's finest artisans
-                  </p>
-                  <p className="text-lg lg:text-xl text-amber-800/75 font-medium tracking-wide">
-                    Experience unparalleled craftsmanship and exclusive designs
-                  </p>
-                </div>
-              </div>
+        {/* Hot Deals Section */}
+        <HotDealsSection />
 
-              {/* Premium Features */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
-                {[
-                  { icon: Shield, label: "Quality Guaranteed", desc: "Premium materials only" },
-                  { icon: Award, label: "Master Crafted", desc: "By skilled artisans" },
-                  { icon: Verified, label: "Authenticity", desc: "Certified genuine" },
-                  { icon: Gift, label: "Luxury Packaging", desc: "Gift-ready presentation" }
-                ].map((feature, index) => (
-                  <div
-                    key={feature.label}
-                    className="group bg-white/95 backdrop-blur-md rounded-2xl p-6 lg:p-8 shadow-lg border border-amber-100/80 hover:border-amber-200 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl"
-                  >
-                    <div className="w-14 h-14 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-xl flex items-center justify-center mx-auto mb-5 shadow-md group-hover:scale-110 transition-transform duration-300">
-                      <feature.icon className="h-7 w-7 text-white drop-shadow-sm" />
-                    </div>
-                    <h3 className="font-bold text-amber-900 mb-3 text-lg text-center">{feature.label}</h3>
-                    <p className="text-amber-800/75 text-sm leading-relaxed text-center">{feature.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Premium Services Section */}
+        <PremiumServicesSection />
 
-        {/* Filters and Controls */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="bg-white/98 backdrop-blur-xl rounded-3xl border border-amber-100/60 shadow-lg p-8 lg:p-10">
+        {/* Premium Brands Carousel */}
+        <PremiumBrandsCarousel />
+
+        {/* Advanced Filters and Controls */}
+        <section className="py-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/30 via-purple-50/20 to-pink-50/30"></div>
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+            <div className="bg-white/95 backdrop-blur-xl rounded-3xl border-2 border-purple-100/60 shadow-2xl p-8 lg:p-12">
               <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-8 xl:gap-12">
-                {/* Premium Filters */}
+                {/* Advanced Premium Filters */}
                 <div className="flex-1 w-full">
-                  <h3 className="text-xl font-bold text-amber-900 mb-6 flex items-center gap-3">
-                    <Diamond className="h-5 w-5 text-amber-600" />
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                    <Filter className="h-6 w-6 text-purple-600" />
                     Premium Categories
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:flex xl:flex-wrap gap-3">
                     {[
-                      { value: 'all', label: 'All Premium', icon: Crown },
-                      { value: 'handcrafted', label: 'Handcrafted', icon: Award },
-                      { value: 'limited', label: 'Limited Edition', icon: Medal },
-                      { value: 'exclusive', label: 'Exclusive Design', icon: Sparkles }
+                      { value: 'all', label: 'All Premium', icon: Crown, color: 'from-purple-500 to-indigo-500' },
+                      { value: 'handcrafted', label: 'Handcrafted', icon: Award, color: 'from-amber-500 to-orange-500' },
+                      { value: 'limited', label: 'Limited Edition', icon: Medal, color: 'from-emerald-500 to-teal-500' },
+                      { value: 'exclusive', label: 'Exclusive Design', icon: Sparkles, color: 'from-pink-500 to-rose-500' }
                     ].map((filter) => (
                       <Button
                         key={filter.value}
                         variant={filterBy === filter.value ? "default" : "outline"}
                         size="lg"
                         onClick={() => setFilterBy(filter.value as any)}
-                        className={`transition-all duration-300 font-semibold px-5 py-3 rounded-xl border-2 ${
+                        className={`transition-all duration-300 font-semibold px-6 py-3 rounded-xl border-2 transform hover:scale-105 hover:shadow-lg ${
                           filterBy === filter.value
-                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-lg border-transparent hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700'
-                            : 'border-amber-200 text-amber-800 bg-white hover:border-amber-300 hover:bg-amber-50 hover:text-amber-900'
+                            ? `bg-gradient-to-r ${filter.color} text-white shadow-lg border-transparent hover:shadow-xl`
+                            : 'border-purple-200 text-purple-800 bg-white hover:border-purple-300 hover:bg-purple-50 hover:text-purple-900'
                         }`}
                       >
                         <filter.icon className="h-4 w-4 mr-2" />
@@ -397,11 +501,12 @@ export default function PremiumItemsPage() {
                 {/* Sort and View Options */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full xl:w-auto">
                   <div className="flex items-center gap-4">
-                    <span className="text-lg font-semibold text-amber-900 whitespace-nowrap">Sort by:</span>
+                    <SortAsc className="h-5 w-5 text-purple-600" />
+                    <span className="text-lg font-semibold text-gray-900 whitespace-nowrap">Sort by:</span>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as any)}
-                      className="text-base border-2 border-amber-200 rounded-xl px-4 py-2.5 bg-white text-amber-900 font-medium focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition-all duration-200 min-w-[160px]"
+                      className="text-base border-2 border-purple-200 rounded-xl px-4 py-3 bg-white text-gray-900 font-medium focus:border-purple-400 focus:ring-2 focus:ring-purple-100 transition-all duration-200 min-w-[160px] shadow-sm"
                     >
                       <option value="luxury">Luxury Rating</option>
                       <option value="price">Highest Price</option>
@@ -410,15 +515,15 @@ export default function PremiumItemsPage() {
                     </select>
                   </div>
 
-                  <div className="flex border-2 border-amber-200 rounded-xl overflow-hidden bg-white">
+                  <div className="flex border-2 border-purple-200 rounded-xl overflow-hidden bg-white shadow-sm">
                     <Button
                       variant={viewMode === 'grid' ? 'default' : 'ghost'}
                       size="lg"
                       onClick={() => setViewMode('grid')}
-                      className={`rounded-none px-5 py-2.5 border-none ${
+                      className={`rounded-none px-5 py-3 border-none transition-all duration-300 ${
                         viewMode === 'grid'
-                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-sm'
-                          : 'text-amber-700 hover:bg-amber-50'
+                          ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-sm'
+                          : 'text-purple-700 hover:bg-purple-50'
                       }`}
                     >
                       <Grid3X3 className="h-5 w-5" />
@@ -427,10 +532,10 @@ export default function PremiumItemsPage() {
                       variant={viewMode === 'list' ? 'default' : 'ghost'}
                       size="lg"
                       onClick={() => setViewMode('list')}
-                      className={`rounded-none px-5 py-2.5 border-none ${
+                      className={`rounded-none px-5 py-3 border-none transition-all duration-300 ${
                         viewMode === 'list'
-                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-sm'
-                          : 'text-amber-700 hover:bg-amber-50'
+                          ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-sm'
+                          : 'text-purple-700 hover:bg-purple-50'
                       }`}
                     >
                       <List className="h-5 w-5" />
@@ -442,246 +547,126 @@ export default function PremiumItemsPage() {
           </div>
         </section>
 
-        {/* Premium Products Grid */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* Enhanced Premium Products Grid */}
+        <section className="py-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 via-gray-50/30 to-slate-50/50"></div>
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
             <div className="flex items-center justify-between mb-12">
               <div>
-                <h2 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent mb-2">
-                  Premium Collection
+                <h2 className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-slate-800 via-gray-700 to-slate-900 bg-clip-text text-transparent mb-3">
+                  💎 Curated Collection
                 </h2>
-                <p className="text-amber-700/70 text-lg">
+                <p className="text-xl text-gray-600">
                   {filteredProducts.length} exclusive {filteredProducts.length === 1 ? 'item' : 'items'} available
                 </p>
+              </div>
+              <div className="hidden md:flex items-center gap-3">
+                <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 text-sm font-bold rounded-xl shadow-lg">
+                  <Shield className="h-4 w-4 mr-2" />
+                  Verified Authentic
+                </Badge>
+                <Badge className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 text-sm font-bold rounded-xl shadow-lg">
+                  <Truck className="h-4 w-4 mr-2" />
+                  Premium Shipping
+                </Badge>
               </div>
             </div>
 
             <div className={`gap-8 ${
               viewMode === 'grid'
-                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'
-                : 'flex flex-col space-y-6'
+                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                : 'flex flex-col space-y-8'
             }`}>
-              {filteredProducts.map((product, index) => (
-                <div
-                  key={product.id}
-                  className="group hover:-translate-y-1 transition-all duration-300"
-                >
-                  <Card className={`overflow-hidden border border-amber-100/80 shadow-lg hover:shadow-xl transition-all duration-300 bg-white backdrop-blur-sm hover:border-amber-200 ${
-                    viewMode === 'list' ? 'flex flex-row' : ''
-                  }`}>
-                    {/* Premium Badges */}
-                    <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5">
-                      <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-2.5 py-1 shadow-md border border-white/20 text-xs">
-                        <Crown className="h-3 w-3 mr-1" />
-                        Premium
-                      </Badge>
-                      {product.handcrafted && (
-                        <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-2 py-0.5 text-xs shadow-md border border-white/20">
-                          <Award className="h-2.5 w-2.5 mr-1" />
-                          Handcrafted
-                        </Badge>
-                      )}
-                      {product.limitedEdition && (
-                        <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-2 py-0.5 text-xs shadow-md border border-white/20">
-                          <Medal className="h-2.5 w-2.5 mr-1" />
-                          Limited
-                        </Badge>
-                      )}
-                      {product.exclusiveDesign && (
-                        <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2 py-0.5 text-xs shadow-md border border-white/20">
-                          <Sparkles className="h-2.5 w-2.5 mr-1" />
-                          Exclusive
-                        </Badge>
-                      )}
-                    </div>
+              {filteredProducts.map((product, index) => {
+                // Convert to Enhanced3DProductCard format
+                const enhancedProduct = {
+                  ...product,
+                  trending: index < 2,
+                  flashSale: product.originalPrice ? true : false,
+                  stockLevel: 15 - (index * 2),
+                  saleEndTime: product.originalPrice ? new Date(Date.now() + (24 * 60 * 60 * 1000)) : undefined
+                };
 
-                    {/* Luxury Rating */}
-                    <div className="absolute top-3 right-3 z-20">
-                      <div className="bg-white/95 backdrop-blur-md rounded-xl px-3 py-1.5 flex items-center gap-1.5 shadow-lg border border-amber-100/50">
-                        <Diamond className="h-3.5 w-3.5 text-amber-600" />
-                        <span className="text-xs font-bold text-amber-900">{product.luxuryRating}/5</span>
-                      </div>
-                    </div>
-
-                    {/* Product Image */}
-                    <div className={`relative bg-gradient-to-br from-amber-50 to-yellow-50 overflow-hidden ${
-                      viewMode === 'list' ? 'w-48 h-48 flex-shrink-0' : 'aspect-[4/3]'
-                    }`}>
-                      <Image
-                        src={product.images[0]}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      
-                      {/* Premium Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="flex gap-2">
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="flex-1 bg-white/90 backdrop-blur-sm border-0 hover:bg-white"
-                            >
-                              <Heart className="h-4 w-4 mr-1" />
-                              Save
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="flex-1 bg-white/90 backdrop-blur-sm border-0 hover:bg-white"
-                            >
-                              <Share2 className="h-4 w-4 mr-1" />
-                              Share
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <CardContent className={`${viewMode === 'list' ? 'flex-1 p-6' : 'p-5'}`}>
-                      {/* Vendor Info */}
-                      <div className="flex items-center gap-2.5 mb-4">
-                        <Image
-                          src={product.vendor.logo}
-                          alt={product.vendor.name}
-                          width={20}
-                          height={20}
-                          className="rounded-full object-cover"
-                        />
-                        <span className="text-sm font-medium text-amber-900">{product.vendor.name}</span>
-                        {product.vendor.premiumSeller && (
-                          <Badge className="bg-amber-50 text-amber-700 text-xs px-2 py-0.5 border border-amber-200">
-                            <Crown className="h-2 w-2 mr-1" />
-                            Premium
-                          </Badge>
-                        )}
-                      </div>
-
-                      {/* Product Info */}
-                      <div className="mb-4">
-                        <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2 leading-tight group-hover:text-amber-800 transition-colors">
-                          {product.name}
-                        </h3>
-                        <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed">
-                          {product.description}
-                        </p>
-                      </div>
-
-                      {/* Premium Features */}
-                      <div className="mb-5">
-                        <div className="flex flex-wrap gap-1.5">
-                          {product.premiumFeatures.slice(0, 3).map((feature) => (
-                            <Badge key={feature} variant="outline" className="text-xs border-amber-200 text-amber-700 bg-amber-50/50">
-                              {feature}
-                            </Badge>
-                          ))}
-                          {product.premiumFeatures.length > 3 && (
-                            <Badge variant="outline" className="text-xs border-gray-200 text-gray-500 bg-gray-50">
-                              +{product.premiumFeatures.length - 3} more
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Price */}
-                      <div className="flex items-center gap-3 mb-5">
-                        <span className="text-2xl font-bold text-amber-600">
-                          K{product.price.toFixed(2)}
-                        </span>
-                        {product.originalPrice && (
-                          <>
-                            <span className="text-lg text-gray-400 line-through">
-                              K{product.originalPrice.toFixed(2)}
-                            </span>
-                            <Badge className="bg-green-50 text-green-700 border border-green-200">
-                              Save K{(product.originalPrice - product.price).toFixed(2)}
-                            </Badge>
-                          </>
-                        )}
-                      </div>
-
-                      {/* Rating and Stats */}
-                      <div className="flex items-center justify-between text-sm text-gray-600 mb-5">
-                        <div className="flex items-center gap-1">
-                          <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                          <span className="font-medium text-gray-900">{product.rating}</span>
-                          <span>({product.reviewCount})</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Eye className="h-3 w-3" />
-                          <span>{product.views.toLocaleString()}</span>
-                        </div>
-                      </div>
-
-                      {/* Premium Guarantees */}
-                      <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl p-4 mb-5 border border-amber-100">
-                        <div className="flex flex-wrap items-center gap-4 text-xs text-amber-700">
-                          <div className="flex items-center gap-1.5">
-                            <Shield className="h-3 w-3" />
-                            <span className="font-medium">{product.warranty}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Truck className="h-3 w-3" />
-                            <span className="font-medium">Premium Delivery</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <RefreshCw className="h-3 w-3" />
-                            <span className="font-medium">Easy Returns</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Actions */}
-                      <div className="flex gap-3">
-                        <Button className="flex-1 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-semibold py-3 rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
-                          <ShoppingCart className="h-4 w-4 mr-2" />
-                          Add to Cart
-                        </Button>
-                        <Button
-                          variant="outline"
-                          className="px-4 py-3 border-2 border-amber-200 hover:border-amber-300 hover:bg-amber-50 text-amber-700 hover:text-amber-800 rounded-xl transition-all duration-200"
-                          asChild
-                        >
-                          <Link href={`/products/${product.id}`}>
-                            <ExternalLink className="h-4 w-4" />
-                          </Link>
-                        </Button>
-                      </div>
-
-                      {/* Certifications */}
-                      {product.certifications && product.certifications.length > 0 && (
-                        <div className="mt-4 pt-4 border-t border-gray-100">
-                          <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500">
-                            <CheckCircle className="h-3 w-3 text-green-600" />
-                            <span className="font-medium">{product.certifications.join(" • ")}</span>
-                          </div>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
+                return (
+                  <Enhanced3DProductCard
+                    key={product.id}
+                    product={enhancedProduct}
+                    variant={index === 0 ? 'featured' : 'standard'}
+                    className={viewMode === 'list' ? 'w-full' : ''}
+                  />
+                );
+              })}
             </div>
 
             {filteredProducts.length === 0 && (
-              <div className="text-center py-16">
-                <div className="w-20 h-20 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-                  <Crown className="h-10 w-10 text-amber-600" />
+              <div className="text-center py-20">
+                <div className="w-32 h-32 bg-gradient-to-r from-purple-100 via-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
+                  <Crown className="h-16 w-16 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   No premium items found
                 </h3>
-                <p className="text-gray-600 text-lg">
+                <p className="text-gray-600 text-lg mb-8">
                   Try adjusting your filters to see more luxury products
                 </p>
+                <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl">
+                  <Sparkles className="h-5 w-5 mr-2" />
+                  Browse All Categories
+                </Button>
               </div>
             )}
           </div>
         </section>
       </main>
 
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <Button
+          onClick={scrollToTop}
+          className="fixed bottom-24 right-6 z-50 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white rounded-full w-14 h-14 shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 md:bottom-6"
+        >
+          <Crown className="h-6 w-6" />
+        </Button>
+      )}
+
+      {/* Notification Bell */}
+      <Button
+        variant="outline"
+        className="fixed top-20 right-4 z-40 bg-white/90 backdrop-blur-xl border-2 border-amber-200 hover:border-amber-300 rounded-full w-12 h-12 shadow-xl"
+      >
+        <Bell className="h-5 w-5 text-amber-700" />
+      </Button>
+
       <Footer />
     </div>
   );
 }
+
+// Add these CSS animations to globals.css
+const customAnimations = `
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+  33% { transform: translateY(-20px) rotate(120deg); opacity: 1; }
+  66% { transform: translateY(-10px) rotate(240deg); opacity: 0.8; }
+}
+
+.animate-float {
+  animation: float linear infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+}
+
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+.backdrop-blur-3xl {
+  backdrop-filter: blur(64px);
+}
+`;
