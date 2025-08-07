@@ -122,27 +122,27 @@ export function HeroCarousel3D() {
   const currentProduct = heroProducts[currentSlide];
 
   return (
-    <section 
-      className="relative h-[70vh] lg:h-[80vh] overflow-hidden"
+    <section
+      className="relative h-[70vh] lg:h-[80vh] overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-800"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* 3D Background Effects */}
+      {/* Royal 3D Background Effects */}
       <div className="absolute inset-0">
-        {/* Animated Gradient Background */}
-        <div 
-          className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-yellow-800/30 to-amber-800/20 transition-all duration-1000"
+        {/* Animated Royal Gradient Background */}
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-amber-500/30 to-yellow-600/20 transition-all duration-1000"
           style={{
-            background: `radial-gradient(ellipse at ${50 + currentSlide * 10}% ${50 + currentSlide * 5}%, rgba(245, 158, 11, 0.3) 0%, rgba(251, 191, 36, 0.2) 25%, rgba(217, 119, 6, 0.1) 50%, transparent 75%)`
+            background: `radial-gradient(ellipse at ${50 + currentSlide * 10}% ${50 + currentSlide * 5}%, rgba(255, 215, 0, 0.3) 0%, rgba(255, 193, 7, 0.2) 25%, rgba(255, 215, 0, 0.1) 50%, transparent 75%)`
           }}
         />
-        
-        {/* Floating Particles */}
+
+        {/* Floating Royal Particles */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(25)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-amber-300/30 rounded-full animate-float"
+              className="absolute w-1 h-1 bg-yellow-400/40 rounded-full animate-royal-float"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
