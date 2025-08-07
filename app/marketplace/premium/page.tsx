@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -18,11 +17,9 @@ import {
   Truck,
   RefreshCw,
   Gift,
-  Users,
   Eye,
   Share2,
   ExternalLink,
-  Filter,
   Grid3X3,
   List,
   CheckCircle,
@@ -287,387 +284,209 @@ export default function PremiumItemsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-100/80 to-amber-100 relative overflow-hidden">
-      {/* Sophisticated golden base layers */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-amber-300/25 via-yellow-200/20 to-amber-400/30 pointer-events-none animate-pulse"></div>
-      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-300/15 to-amber-200/25 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-amber-100/40 via-transparent to-yellow-100/40 pointer-events-none"></div>
-
-      {/* Luxury golden wave animations */}
+      {/* Golden background effects */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-amber-300/20 via-yellow-200/15 to-amber-400/25 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-300/10 to-amber-200/20 pointer-events-none"></div>
+      
+      {/* Simple floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-300/20 to-transparent transform -skew-y-12 animate-pulse"></div>
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-yellow-300/15 to-transparent transform skew-y-6 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-20 left-16 w-2 h-2 bg-amber-400/60 rounded-full animate-pulse"></div>
+        <div className="absolute top-40 right-32 w-1.5 h-1.5 bg-yellow-400/70 rounded-full animate-bounce"></div>
+        <div className="absolute bottom-40 right-1/4 w-2 h-2 bg-yellow-500/50 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-32 left-1/3 w-1 h-1 bg-amber-400/60 rounded-full animate-bounce"></div>
       </div>
-
-      {/* Simplified floating golden particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-16 w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-32 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce"></div>
-        <div className="absolute bottom-40 right-1/4 w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-32 left-1/3 w-1 h-1 bg-amber-400 rounded-full animate-bounce"></div>
-      </div>
-
-      {/* Luxury shimmer effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform translate-x-full animate-pulse pointer-events-none" style={{animationDuration: '8s', animationIterationCount: 'infinite'}}></div>
-
+      
       <Header />
-
+      
       <main className="relative z-10">
-        {/* Luxury Hero Section */}
-        <section className="relative py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 via-yellow-300/25 to-amber-500/20 backdrop-blur-sm"></div>
-
-          {/* Sophisticated golden pattern overlays */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/40 to-transparent transform rotate-12 animate-pulse" style={{animationDuration: '6s'}}></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-300/30 to-transparent transform -rotate-12 animate-pulse" style={{animationDelay: '3s', animationDuration: '6s'}}></div>
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-amber-300/35 to-transparent transform rotate-6 animate-pulse" style={{animationDelay: '1s', animationDuration: '8s'}}></div>
-          </div>
-
-          {/* Luxury light rays */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-amber-400 to-transparent animate-pulse" style={{animationDuration: '4s'}}></div>
-            <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-yellow-400 to-transparent animate-pulse" style={{animationDelay: '2s', animationDuration: '4s'}}></div>
-          </div>
+        {/* Hero Section */}
+        <section className="relative py-24 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/15 via-yellow-400/20 to-amber-600/15"></div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="text-center mb-24"
-            >
+            <div className="text-center mb-20">
               <div className="flex items-center justify-center gap-8 mb-12">
-                <motion.div
-                  animate={{
-                    rotate: 360,
-                    scale: [1, 1.2, 1],
-                    boxShadow: ["0 0 20px rgba(245, 158, 11, 0.3)", "0 0 40px rgba(245, 158, 11, 0.6)", "0 0 20px rgba(245, 158, 11, 0.3)"]
-                  }}
-                  transition={{
-                    rotate: { duration: 30, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                    boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="w-28 h-28 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/60 backdrop-blur-sm relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent animate-pulse"></div>
-                  <Crown className="text-white text-4xl drop-shadow-2xl relative z-10" />
-                </motion.div>
+                <div className="w-24 h-24 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/60 animate-pulse">
+                  <Crown className="text-white text-4xl drop-shadow-2xl" />
+                </div>
                 <div>
-                  <h1 className="text-7xl md:text-9xl font-black bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 bg-clip-text text-transparent flex items-center gap-6 drop-shadow-lg">
+                  <h1 className="text-6xl md:text-8xl font-black bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 bg-clip-text text-transparent flex items-center gap-6 drop-shadow-lg">
                     <span className="animate-pulse">✨</span>
                     Premium
-                    <Badge className="bg-gradient-to-br from-amber-500 via-yellow-400 to-amber-600 text-white text-2xl px-8 py-4 shadow-2xl border-2 border-white/30 backdrop-blur-sm">
+                    <Badge className="bg-gradient-to-br from-amber-500 via-yellow-400 to-amber-600 text-white text-2xl px-8 py-4 shadow-2xl border-2 border-white/30">
                       <Diamond className="h-6 w-6 mr-3" />
                       LUXURY
                     </Badge>
                   </h1>
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.8 }}
-                    className="text-3xl text-amber-900/90 mt-8 font-semibold drop-shadow-md tracking-wide"
-                  >
+                  <p className="text-3xl text-amber-900/90 mt-8 font-semibold tracking-wide">
                     Curated luxury items from Zambia's finest artisans
-                  </motion.p>
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9, duration: 0.8 }}
-                    className="text-xl text-amber-800/80 mt-4 tracking-wide font-medium"
-                  >
+                  </p>
+                  <p className="text-xl text-amber-800/80 mt-4 tracking-wide font-medium">
                     Experience unparalleled craftsmanship and exclusive designs
-                  </motion.p>
+                  </p>
                 </div>
               </div>
 
               {/* Premium Features */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
                 {[
-                  { icon: Shield, label: "Quality Guaranteed", desc: "Premium materials only", color: "from-amber-400 to-yellow-500" },
-                  { icon: Award, label: "Master Crafted", desc: "By skilled artisans", color: "from-yellow-400 to-amber-500" },
-                  { icon: Verified, label: "Authenticity", desc: "Certified genuine", color: "from-amber-500 to-yellow-600" },
-                  { icon: Gift, label: "Luxury Packaging", desc: "Gift-ready presentation", color: "from-yellow-500 to-amber-600" }
+                  { icon: Shield, label: "Quality Guaranteed", desc: "Premium materials only" },
+                  { icon: Award, label: "Master Crafted", desc: "By skilled artisans" },
+                  { icon: Verified, label: "Authenticity", desc: "Certified genuine" },
+                  { icon: Gift, label: "Luxury Packaging", desc: "Gift-ready presentation" }
                 ].map((feature, index) => (
                   <div
                     key={feature.label}
-                    className="group bg-gradient-to-br from-white/98 via-amber-50/60 to-yellow-50/80 backdrop-blur-md rounded-3xl p-10 shadow-2xl border-2 border-amber-200/60 hover:border-amber-300/80 transition-all duration-300 hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
+                    className="group bg-gradient-to-br from-white/98 via-amber-50/60 to-yellow-50/80 backdrop-blur-md rounded-3xl p-8 shadow-xl border-2 border-amber-200/60 hover:border-amber-300/80 transition-all duration-300 hover:scale-105 hover:-translate-y-2"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl relative overflow-hidden group-hover:scale-110 transition-transform duration-300`}>
-                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent animate-pulse"></div>
-                      <feature.icon className="h-10 w-10 text-white drop-shadow-lg relative z-10" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <feature.icon className="h-8 w-8 text-white drop-shadow-lg" />
                     </div>
-
-                    <h3 className="font-black text-amber-900 mb-3 text-xl tracking-wide">
-                      {feature.label}
-                    </h3>
-                    <p className="text-amber-800/80 text-base leading-relaxed font-medium">
-                      {feature.desc}
-                    </p>
+                    <h3 className="font-bold text-amber-900 mb-2 text-lg">{feature.label}</h3>
+                    <p className="text-amber-800/70 text-sm leading-relaxed">{feature.desc}</p>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Filters and Controls */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="bg-gradient-to-br from-white/98 via-amber-50/70 to-yellow-50/60 backdrop-blur-xl rounded-[2rem] border-2 border-amber-200/70 shadow-2xl p-10 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-100/30 to-transparent animate-pulse"></div>
-
-              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 relative z-10">
+            <div className="bg-gradient-to-br from-white/95 via-amber-50/70 to-yellow-50/60 backdrop-blur-xl rounded-3xl border-2 border-amber-200/70 shadow-2xl p-8">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
                 {/* Premium Filters */}
                 <div className="flex-1">
-                  <motion.h3
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-2xl font-black text-amber-900 mb-6 flex items-center gap-4"
-                  >
-                    <motion.div
-                      animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-                      transition={{
-                        rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                        scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                      }}
-                    >
-                      <Diamond className="h-6 w-6 text-amber-600" />
-                    </motion.div>
+                  <h3 className="text-xl font-bold text-amber-900 mb-4 flex items-center gap-3">
+                    <Diamond className="h-5 w-5 text-amber-600" />
                     Premium Categories
-                  </motion.h3>
-                  <div className="flex flex-wrap gap-4">
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
                     {[
                       { value: 'all', label: 'All Premium', icon: Crown },
                       { value: 'handcrafted', label: 'Handcrafted', icon: Award },
                       { value: 'limited', label: 'Limited Edition', icon: Medal },
                       { value: 'exclusive', label: 'Exclusive Design', icon: Sparkles }
-                    ].map((filter, index) => (
-                      <motion.div
+                    ].map((filter) => (
+                      <Button
                         key={filter.value}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.1 + 0.3 }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        variant={filterBy === filter.value ? "default" : "outline"}
+                        size="lg"
+                        onClick={() => setFilterBy(filter.value as any)}
+                        className={`transition-all duration-300 font-semibold px-6 py-3 rounded-2xl ${
+                          filterBy === filter.value 
+                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-xl border-0 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700' 
+                            : 'border-2 border-amber-300 text-amber-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-900'
+                        }`}
                       >
-                        <Button
-                          variant={filterBy === filter.value ? "default" : "outline"}
-                          size="lg"
-                          onClick={() => setFilterBy(filter.value as any)}
-                          className={`transition-all duration-500 font-bold px-8 py-4 rounded-2xl text-lg shadow-lg ${
-                            filterBy === filter.value
-                              ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-2xl border-0 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700 hover:shadow-3xl'
-                              : 'border-2 border-amber-300 text-amber-800 hover:border-amber-400 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 hover:text-amber-900'
-                          }`}
-                        >
-                          <filter.icon className="h-5 w-5 mr-3" />
-                          {filter.label}
-                        </Button>
-                      </motion.div>
+                        <filter.icon className="h-4 w-4 mr-2" />
+                        {filter.label}
+                      </Button>
                     ))}
                   </div>
                 </div>
 
                 {/* Sort and View Options */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="flex items-center gap-8"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl font-black text-amber-900">Sort:</span>
-                    <motion.select
-                      whileHover={{ scale: 1.05 }}
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-3">
+                    <span className="text-lg font-semibold text-amber-900">Sort:</span>
+                    <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as any)}
-                      className="text-lg border-2 border-amber-400 rounded-2xl px-6 py-3 bg-gradient-to-r from-white/95 to-amber-50/80 backdrop-blur-md text-amber-900 font-bold focus:border-amber-600 focus:ring-4 focus:ring-amber-200/50 transition-all duration-300 shadow-lg"
+                      className="text-base border-2 border-amber-300 rounded-xl px-4 py-2 bg-white/90 backdrop-blur-sm text-amber-900 font-medium focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-200"
                     >
                       <option value="luxury">Luxury Rating</option>
                       <option value="price">Highest Price</option>
                       <option value="rating">Best Rated</option>
                       <option value="newest">Most Popular</option>
-                    </motion.select>
+                    </select>
                   </div>
 
-                  <div className="flex gap-1 border-2 border-amber-400 rounded-2xl overflow-hidden bg-gradient-to-r from-white/90 to-amber-50/70 backdrop-blur-md shadow-lg">
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button
-                        variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                        size="lg"
-                        onClick={() => setViewMode('grid')}
-                        className={`rounded-none px-6 py-3 font-bold ${
-                          viewMode === 'grid'
-                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-lg'
-                            : 'text-amber-800 hover:bg-gradient-to-r hover:from-amber-100 hover:to-yellow-100'
-                        }`}
-                      >
-                        <Grid3X3 className="h-6 w-6" />
-                      </Button>
-                    </motion.div>
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button
-                        variant={viewMode === 'list' ? 'default' : 'ghost'}
-                        size="lg"
-                        onClick={() => setViewMode('list')}
-                        className={`rounded-none px-6 py-3 font-bold ${
-                          viewMode === 'list'
-                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-lg'
-                            : 'text-amber-800 hover:bg-gradient-to-r hover:from-amber-100 hover:to-yellow-100'
-                        }`}
-                      >
-                        <List className="h-6 w-6" />
-                      </Button>
-                    </motion.div>
+                  <div className="flex gap-1 border-2 border-amber-300 rounded-xl overflow-hidden bg-white/50 backdrop-blur-sm">
+                    <Button
+                      variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                      size="lg"
+                      onClick={() => setViewMode('grid')}
+                      className={`rounded-none px-4 py-2 ${
+                        viewMode === 'grid' 
+                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white' 
+                          : 'text-amber-800 hover:bg-amber-100'
+                      }`}
+                    >
+                      <Grid3X3 className="h-5 w-5" />
+                    </Button>
+                    <Button
+                      variant={viewMode === 'list' ? 'default' : 'ghost'}
+                      size="lg"
+                      onClick={() => setViewMode('list')}
+                      className={`rounded-none px-4 py-2 ${
+                        viewMode === 'list' 
+                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white' 
+                          : 'text-amber-800 hover:bg-amber-100'
+                      }`}
+                    >
+                      <List className="h-5 w-5" />
+                    </Button>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Premium Products Grid */}
-        <section className="py-20">
+        <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between mb-12">
-              <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent drop-shadow-sm">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent">
                 Premium Collection ({filteredProducts.length})
               </h2>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className={`grid gap-8 ${
-                viewMode === 'grid' 
-                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-                  : 'grid-cols-1'
-              }`}
-            >
+            <div className={`grid gap-8 ${
+              viewMode === 'grid' 
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+                : 'grid-cols-1'
+            }`}>
               {filteredProducts.map((product, index) => (
-                <motion.div
+                <div
                   key={product.id}
-                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{
-                    delay: index * 0.15,
-                    duration: 0.8,
-                    ease: "easeOut"
-                  }}
-                  whileHover={{
-                    y: -15,
-                    scale: 1.03,
-                    boxShadow: "0 35px 70px rgba(245, 158, 11, 0.25)"
-                  }}
-                  className="group"
+                  className="group hover:-translate-y-2 transition-all duration-300"
                 >
-                  <Card className="overflow-hidden border-2 border-amber-200/70 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-gradient-to-br from-white/98 via-amber-50/40 to-yellow-50/30 backdrop-blur-md hover:border-amber-400/90 relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <Card className="overflow-hidden border-2 border-amber-200/70 shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-white/98 via-amber-50/40 to-yellow-50/30 backdrop-blur-md hover:border-amber-400/90">
                     {/* Premium Badges */}
-                    <div className="absolute top-6 left-6 z-20 flex flex-col gap-3">
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.15 + 0.3, type: "spring" }}
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-5 py-2.5 shadow-xl border-2 border-white/40 backdrop-blur-sm font-bold text-base">
-                          <motion.div
-                            animate={{ rotate: [0, 10, -10, 0] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                          >
-                            <Crown className="h-5 w-5 mr-2" />
-                          </motion.div>
-                          Premium
-                        </Badge>
-                      </motion.div>
+                    <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
+                      <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-3 py-1 shadow-lg border border-white/30">
+                        <Crown className="h-3 w-3 mr-1" />
+                        Premium
+                      </Badge>
                       {product.handcrafted && (
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.15 + 0.4 }}
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 text-sm shadow-xl border-2 border-white/40 backdrop-blur-sm font-semibold">
-                            <motion.div
-                              animate={{ scale: [1, 1.2, 1] }}
-                              transition={{ duration: 2, repeat: Infinity }}
-                            >
-                              <Award className="h-4 w-4 mr-2" />
-                            </motion.div>
-                            Handcrafted
-                          </Badge>
-                        </motion.div>
+                        <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-2 py-1 text-xs shadow-lg border border-white/30">
+                          <Award className="h-2.5 w-2.5 mr-1" />
+                          Handcrafted
+                        </Badge>
                       )}
                       {product.limitedEdition && (
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.15 + 0.5 }}
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-4 py-2 text-sm shadow-xl border-2 border-white/40 backdrop-blur-sm font-semibold">
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                            >
-                              <Medal className="h-4 w-4 mr-2" />
-                            </motion.div>
-                            Limited
-                          </Badge>
-                        </motion.div>
+                        <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-2 py-1 text-xs shadow-lg border border-white/30">
+                          <Medal className="h-2.5 w-2.5 mr-1" />
+                          Limited
+                        </Badge>
                       )}
                       {product.exclusiveDesign && (
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.15 + 0.6 }}
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 text-sm shadow-xl border-2 border-white/40 backdrop-blur-sm font-semibold">
-                            <motion.div
-                              animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
-                              transition={{ duration: 2, repeat: Infinity }}
-                            >
-                              <Sparkles className="h-4 w-4 mr-2" />
-                            </motion.div>
-                            Exclusive
-                          </Badge>
-                        </motion.div>
+                        <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2 py-1 text-xs shadow-lg border border-white/30">
+                          <Sparkles className="h-2.5 w-2.5 mr-1" />
+                          Exclusive
+                        </Badge>
                       )}
                     </div>
 
                     {/* Luxury Rating */}
-                    <div className="absolute top-6 right-6 z-20">
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.15 + 0.2, type: "spring" }}
-                        whileHover={{ scale: 1.1 }}
-                        className="bg-gradient-to-br from-white/98 via-amber-50/90 to-yellow-50/80 backdrop-blur-xl rounded-2xl px-5 py-3 flex items-center gap-3 shadow-2xl border-2 border-amber-300/60"
-                      >
-                        <motion.div
-                          animate={{
-                            rotate: 360,
-                            scale: [1, 1.2, 1]
-                          }}
-                          transition={{
-                            rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                            scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                          }}
-                        >
-                          <Diamond className="h-5 w-5 text-amber-600" />
-                        </motion.div>
-                        <span className="text-base font-black text-amber-900">{product.luxuryRating}/5</span>
-                      </motion.div>
+                    <div className="absolute top-4 right-4 z-20">
+                      <div className="bg-gradient-to-r from-white/95 to-amber-50/90 backdrop-blur-md rounded-2xl px-4 py-2 flex items-center gap-2 shadow-xl border border-amber-200/50">
+                        <Diamond className="h-4 w-4 text-amber-600" />
+                        <span className="text-sm font-bold text-amber-900">{product.luxuryRating}/5</span>
+                      </div>
                     </div>
 
                     {/* Product Image */}
@@ -676,27 +495,27 @@ export default function PremiumItemsPage() {
                         src={product.images[0]}
                         alt={product.name}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-
+                      
                       {/* Premium Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        <div className="absolute bottom-6 left-6 right-6">
-                          <div className="flex gap-3">
+                      <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <div className="flex gap-2">
                             <Button
-                              size="lg"
+                              size="sm"
                               variant="outline"
-                              className="flex-1 bg-white/95 backdrop-blur-md border-0 hover:bg-white shadow-xl text-amber-800 hover:text-amber-900 font-semibold"
+                              className="flex-1 bg-white/90 backdrop-blur-sm border-0 hover:bg-white"
                             >
-                              <Heart className="h-4 w-4 mr-2" />
+                              <Heart className="h-4 w-4 mr-1" />
                               Save
                             </Button>
                             <Button
-                              size="lg"
+                              size="sm"
                               variant="outline"
-                              className="flex-1 bg-white/95 backdrop-blur-md border-0 hover:bg-white shadow-xl text-amber-800 hover:text-amber-900 font-semibold"
+                              className="flex-1 bg-white/90 backdrop-blur-sm border-0 hover:bg-white"
                             >
-                              <Share2 className="h-4 w-4 mr-2" />
+                              <Share2 className="h-4 w-4 mr-1" />
                               Share
                             </Button>
                           </div>
@@ -704,45 +523,45 @@ export default function PremiumItemsPage() {
                       </div>
                     </div>
 
-                    <CardContent className="p-8">
+                    <CardContent className="p-6">
                       {/* Vendor Info */}
-                      <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center gap-2 mb-3">
                         <Image
                           src={product.vendor.logo}
                           alt={product.vendor.name}
-                          width={32}
-                          height={32}
-                          className="rounded-full object-cover border-2 border-amber-200"
+                          width={24}
+                          height={24}
+                          className="rounded-full object-cover"
                         />
-                        <span className="text-base font-semibold text-amber-900">{product.vendor.name}</span>
+                        <span className="text-sm font-medium text-amber-900">{product.vendor.name}</span>
                         {product.vendor.premiumSeller && (
-                          <Badge className="bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800 text-sm px-3 py-1 border border-amber-200">
-                            <Crown className="h-3 w-3 mr-1.5" />
+                          <Badge className="bg-amber-100 text-amber-700 text-xs px-2 py-0.5">
+                            <Crown className="h-2.5 w-2.5 mr-1" />
                             Premium Seller
                           </Badge>
                         )}
                       </div>
 
                       {/* Product Info */}
-                      <div className="mb-5">
-                        <h3 className="font-bold text-amber-900 text-xl mb-3 line-clamp-2 group-hover:text-amber-700 transition-colors">
+                      <div className="mb-4">
+                        <h3 className="font-bold text-amber-900 text-lg mb-2 line-clamp-2 group-hover:text-amber-700 transition-colors">
                           {product.name}
                         </h3>
-                        <p className="text-amber-800/80 text-base line-clamp-2 leading-relaxed">
+                        <p className="text-amber-800/80 text-sm line-clamp-2">
                           {product.description}
                         </p>
                       </div>
 
                       {/* Premium Features */}
-                      <div className="mb-5">
-                        <div className="flex flex-wrap gap-2">
+                      <div className="mb-4">
+                        <div className="flex flex-wrap gap-1">
                           {product.premiumFeatures.slice(0, 3).map((feature) => (
-                            <Badge key={feature} variant="outline" className="text-sm border-amber-300 text-amber-800 bg-amber-50/50 px-3 py-1">
+                            <Badge key={feature} variant="outline" className="text-xs border-amber-200 text-amber-700">
                               {feature}
                             </Badge>
                           ))}
                           {product.premiumFeatures.length > 3 && (
-                            <Badge variant="outline" className="text-sm border-amber-200 text-amber-600 bg-amber-50/30 px-3 py-1">
+                            <Badge variant="outline" className="text-xs border-gray-200 text-gray-500">
                               +{product.premiumFeatures.length - 3} more
                             </Badge>
                           )}
@@ -750,16 +569,16 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Price */}
-                      <div className="flex items-center gap-4 mb-5">
-                        <span className="text-3xl font-bold bg-gradient-to-r from-amber-700 to-yellow-700 bg-clip-text text-transparent">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-2xl font-bold text-amber-600">
                           K{product.price.toFixed(2)}
                         </span>
                         {product.originalPrice && (
                           <>
-                            <span className="text-xl text-amber-500/60 line-through">
+                            <span className="text-lg text-gray-400 line-through">
                               K{product.originalPrice.toFixed(2)}
                             </span>
-                            <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 shadow-lg">
+                            <Badge className="bg-green-100 text-green-700">
                               Save K{(product.originalPrice - product.price).toFixed(2)}
                             </Badge>
                           </>
@@ -767,101 +586,77 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Rating and Stats */}
-                      <div className="flex items-center justify-between text-base text-amber-800 mb-5">
-                        <div className="flex items-center gap-2">
-                          <Star className="h-5 w-5 text-yellow-500 fill-current" />
-                          <span className="font-bold">{product.rating}</span>
-                          <span className="text-amber-700">({product.reviewCount})</span>
+                      <div className="flex items-center justify-between text-sm text-amber-800 mb-4">
+                        <div className="flex items-center gap-1">
+                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                          <span className="font-medium">{product.rating}</span>
+                          <span>({product.reviewCount})</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Eye className="h-4 w-4" />
-                          <span className="font-medium">{product.views.toLocaleString()}</span>
+                        <div className="flex items-center gap-1">
+                          <Eye className="h-3 w-3" />
+                          <span>{product.views.toLocaleString()}</span>
                         </div>
                       </div>
 
                       {/* Premium Guarantees */}
-                      <div className="bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 rounded-2xl p-4 mb-6 border border-amber-200/50">
-                        <div className="flex items-center gap-6 text-sm text-amber-800 font-medium">
-                          <div className="flex items-center gap-2">
-                            <Shield className="h-4 w-4" />
+                      <div className="bg-amber-50 rounded-lg p-3 mb-4">
+                        <div className="flex items-center gap-4 text-xs text-amber-700">
+                          <div className="flex items-center gap-1">
+                            <Shield className="h-3 w-3" />
                             <span>{product.warranty}</span>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Truck className="h-4 w-4" />
+                          <div className="flex items-center gap-1">
+                            <Truck className="h-3 w-3" />
                             <span>Premium Delivery</span>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <RefreshCw className="h-4 w-4" />
+                          <div className="flex items-center gap-1">
+                            <RefreshCw className="h-3 w-3" />
                             <span>Easy Returns</span>
                           </div>
                         </div>
                       </div>
 
                       {/* Actions */}
-                      <div className="flex gap-4">
-                        <motion.div
-                          className="flex-1"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                      <div className="flex gap-2">
+                        <Button className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold py-3">
+                          <ShoppingCart className="h-4 w-4 mr-2" />
+                          Add to Cart
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="px-4 py-3 border-amber-300 hover:border-amber-500 hover:text-amber-600"
+                          asChild
                         >
-                          <Button
-                            className="w-full bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 hover:from-amber-700 hover:via-yellow-600 hover:to-amber-700 text-white font-black py-5 text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 relative overflow-hidden group"
-                          >
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
-                            <motion.div
-                              animate={{ rotate: [0, 5, -5, 0] }}
-                              transition={{ duration: 2, repeat: Infinity }}
-                            >
-                              <ShoppingCart className="h-6 w-6 mr-3 relative z-10" />
-                            </motion.div>
-                            <span className="relative z-10">Add to Cart</span>
-                          </Button>
-                        </motion.div>
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <Button
-                            variant="outline"
-                            className="px-8 py-5 border-2 border-amber-400 hover:border-amber-600 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 text-amber-800 hover:text-amber-900 rounded-2xl font-bold transition-all duration-500 shadow-lg hover:shadow-xl"
-                            asChild
-                          >
-                            <Link href={`/products/${product.id}`}>
-                              <motion.div
-                                animate={{ scale: [1, 1.2, 1] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                              >
-                                <ExternalLink className="h-6 w-6" />
-                              </motion.div>
-                            </Link>
-                          </Button>
-                        </motion.div>
+                          <Link href={`/products/${product.id}`}>
+                            <ExternalLink className="h-4 w-4" />
+                          </Link>
+                        </Button>
                       </div>
 
                       {/* Certifications */}
                       {product.certifications && product.certifications.length > 0 && (
-                        <div className="mt-4 text-center">
-                          <div className="flex items-center justify-center gap-2 text-sm text-amber-700 font-medium">
-                            <CheckCircle className="h-4 w-4 text-green-600" />
+                        <div className="mt-3 text-center">
+                          <div className="flex items-center justify-center gap-1 text-xs text-gray-500">
+                            <CheckCircle className="h-3 w-3 text-green-500" />
                             <span>{product.certifications.join(" • ")}</span>
                           </div>
                         </div>
                       )}
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
 
             {filteredProducts.length === 0 && (
-              <div className="text-center py-20">
-                <div className="w-24 h-24 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl">
-                  <Crown className="h-12 w-12 text-white drop-shadow-lg" />
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Crown className="h-8 w-8 text-amber-500" />
                 </div>
-                <h3 className="text-2xl font-bold text-amber-900 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   No premium items found
                 </h3>
-                <p className="text-amber-800/70 text-lg">
+                <p className="text-gray-600">
                   Try adjusting your filters to see more luxury products
                 </p>
               </div>
