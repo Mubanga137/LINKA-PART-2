@@ -4,14 +4,15 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Star, 
-  Heart, 
-  ShoppingCart, 
-  MapPin, 
-  TrendingUp, 
+import {
+  Star,
+  Heart,
+  ShoppingCart,
+  MapPin,
+  TrendingUp,
   ArrowRight,
-  Eye
+  Eye,
+  Store
 } from "lucide-react"
 import Link from "next/link"
 import { Product } from "@/contexts/cart-context"
