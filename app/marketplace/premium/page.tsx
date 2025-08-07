@@ -464,12 +464,14 @@ export default function PremiumItemsPage() {
               {filteredProducts.map((product, index) => (
                 <div
                   key={product.id}
-                  className="group hover:-translate-y-2 transition-all duration-300"
+                  className="group hover:-translate-y-1 transition-all duration-300"
                 >
-                  <Card className="overflow-hidden border-2 border-amber-200/70 shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-white/98 via-amber-50/40 to-yellow-50/30 backdrop-blur-md hover:border-amber-400/90">
+                  <Card className={`overflow-hidden border border-amber-100/80 shadow-lg hover:shadow-xl transition-all duration-300 bg-white backdrop-blur-sm hover:border-amber-200 ${
+                    viewMode === 'list' ? 'flex flex-row' : ''
+                  }`}>
                     {/* Premium Badges */}
-                    <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
-                      <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-3 py-1 shadow-lg border border-white/30">
+                    <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5">
+                      <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-2.5 py-1 shadow-md border border-white/20 text-xs">
                         <Crown className="h-3 w-3 mr-1" />
                         Premium
                       </Badge>
