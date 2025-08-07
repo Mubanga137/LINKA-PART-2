@@ -410,13 +410,11 @@ function EnhancedHeroSection() {
               <SmartSearch
                 onSearch={(query) => {
                   setSearchQuery(query);
-                  // Handle search logic here
                   console.log('Search query:', query);
                 }}
                 placeholder="Search for products, vendors, or categories..."
               />
             </motion.div>
-
 
             {/* Hero CTA */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
@@ -544,8 +542,6 @@ function EnhancedHeroSection() {
     </motion.section>
   );
 }
-
-
 
 // Flash Sales Section
 function FlashSalesSection() {
@@ -851,357 +847,354 @@ function MarketplaceContent() {
       className="min-h-screen bg-white"
     >
       <Header />
-
+      
       {/* Marketplace Layout with Sidebar */}
       <div className="flex relative">
         {/* Sidebar */}
-        <MarketplaceSidebar
+        <MarketplaceSidebar 
           isOpen={isSidebarOpen}
           onClose={closeSidebar}
           onFilterChange={(newFilters) => {
             setFilters(prevFilters => ({ ...prevFilters, ...newFilters }));
           }}
         />
-
+        
         {/* Main Content */}
         <div className={`flex-1 transition-all duration-300 ${
           isSidebarOpen ? 'lg:ml-72 xl:ml-80' : ''
         }`}>
           {/* Marketplace Header with Filter Toggle */}
-          <MarketplaceHeader
+          <MarketplaceHeader 
             totalProducts={2000}
             currentFilters={filters}
             onSidebarToggle={toggleSidebar}
           />
-
+          
           <main>
             <EnhancedHeroSection />
             <RecommendedSection
-          onAddToCart={(product) => {
-            // Convert RecommendedProduct to cart-compatible format
-            const cartProduct = {
-              id: product.id,
-              name: product.name,
-              price: product.price,
-              image: product.images[0],
-              retailerName: product.vendor.name,
-              retailerLocation: product.location,
-              category: product.category,
-              rating: product.rating,
-              reviewCount: product.reviewCount,
-              inStock: product.inStock,
-              features: product.tags,
-              variants: {},
-              shippingInfo: {
-                freeShipping: product.freeShipping,
-                estimatedDays: product.fastDelivery ? 1 : 3,
-                shippingCost: product.freeShipping ? 0 : 25
-              }
-            };
-            // In a real app, this would use the cart context
-            console.log('Add to cart:', cartProduct);
-          }}
-          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
-          wishlistedItems={new Set()}
+              onAddToCart={(product) => {
+                const cartProduct = {
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.images[0],
+                  retailerName: product.vendor.name,
+                  retailerLocation: product.location,
+                  category: product.category,
+                  rating: product.rating,
+                  reviewCount: product.reviewCount,
+                  inStock: product.inStock,
+                  features: product.tags,
+                  variants: {},
+                  shippingInfo: {
+                    freeShipping: product.freeShipping,
+                    estimatedDays: product.fastDelivery ? 1 : 3,
+                    shippingCost: product.freeShipping ? 0 : 25
+                  }
+                };
+                console.log('Add to cart:', cartProduct);
+              }}
+              onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
+              wishlistedItems={new Set()}
             />
             <ShopByCategorySection maxItems={6} />
             <FlashSalesSection />
             <TrendingNowSection
-          onAddToCart={(product) => console.log('Add to cart:', product)}
-          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
-          wishlistedItems={new Set()}
+              onAddToCart={(product) => console.log('Add to cart:', product)}
+              onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
+              wishlistedItems={new Set()}
             />
 
             {/* Additional CTA Section for more marketplace features */}
             <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
               className="py-16 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Explore More Marketplace Features
-              </h2>
-              <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
-                Discover trending products, browse verified vendors, and shop amazing sales
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  title: "Trending Now",
-                  desc: "See what's hot right now",
-                  href: "/marketplace/trending",
-                  icon: TrendingUp,
-                  color: "from-pink-500 to-red-500"
-                },
-                {
-                  title: "Shop the Sale",
-                  desc: "Massive discounts available",
-                  href: "/marketplace/shop-sale",
-                  icon: Tag,
-                  color: "from-red-500 to-orange-500"
-                },
-                {
-                  title: "Browse Vendors",
-                  desc: "Trusted verified sellers",
-                  href: "/marketplace/vendors",
-                  icon: Store,
-                  color: "from-green-500 to-emerald-500"
-                },
-                {
-                  title: "All Categories",
-                  desc: "Complete product catalog",
-                  href: "/categories",
-                  icon: Grid3X3,
-                  color: "from-blue-500 to-indigo-500"
-                }
-              ].map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link href={feature.href}>
-                    <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
-                      <CardContent className="p-6 text-center">
-                        <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                          <feature.icon className="h-8 w-8 text-white" />
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
-                        <p className="text-indigo-100 text-sm">{feature.desc}</p>
-                        <div className="mt-4">
-                          <Badge className="bg-white/20 text-white border-white/30">
-                            Explore Now
-                          </Badge>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.section>
-        <VerifiedVendorsSection
-          onFollowVendor={(vendorId) => console.log('Follow vendor:', vendorId)}
-          followedVendors={new Set()}
-        />
-
-        {/* Quick Access Grid */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="py-16 bg-gray-50"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Quick Access to Popular Features
-              </h2>
-              <p className="text-xl text-gray-600">
-                Everything you need is just one click away
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {[
-                {
-                  title: "Featured",
-                  href: "/marketplace/featured",
-                  icon: Star,
-                  color: "from-yellow-400 to-orange-400",
-                  bgColor: "from-yellow-50 to-orange-50",
-                  description: "Handpicked premium items"
-                },
-                {
-                  title: "Flash Sale",
-                  href: "/marketplace/flash-sale",
-                  icon: Flame,
-                  color: "from-red-400 to-pink-400",
-                  bgColor: "from-red-50 to-pink-50",
-                  description: "Limited time offers"
-                },
-                {
-                  title: "Premium",
-                  href: "/marketplace/premium",
-                  icon: Crown,
-                  color: "from-purple-400 to-indigo-400",
-                  bgColor: "from-purple-50 to-indigo-50",
-                  description: "Luxury & exclusive"
-                },
-                {
-                  title: "Free Ship",
-                  href: "/marketplace/free-shipping",
-                  icon: Truck,
-                  color: "from-green-400 to-emerald-400",
-                  bgColor: "from-green-50 to-emerald-50",
-                  description: "No delivery charges"
-                },
-                {
-                  title: "Trending",
-                  href: "/marketplace/trending",
-                  icon: TrendingUp,
-                  color: "from-pink-400 to-red-400",
-                  bgColor: "from-pink-50 to-red-50",
-                  description: "What's popular now"
-                },
-                {
-                  title: "Vendors",
-                  href: "/marketplace/vendors",
-                  icon: Store,
-                  color: "from-emerald-400 to-green-400",
-                  bgColor: "from-emerald-50 to-green-50",
-                  description: "Trusted sellers"
-                }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: index * 0.1,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20
-                  }}
-                  whileHover={{
-                    scale: 1.08,
-                    y: -5,
-                    rotate: [0, 2, -2, 0],
-                    transition: { duration: 0.4 }
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link href={item.href}>
-                    <Card className={`
-                      relative overflow-hidden text-center p-5
-                      hover:shadow-2xl transition-all duration-500
-                      border-0 shadow-lg rounded-2xl
-                      bg-gradient-to-br ${item.bgColor}
-                      group cursor-pointer
-                    `}>
-                      <CardContent className="p-0 relative z-10">
-                        {/* Animated Background */}
-                        <motion.div
-                          className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-                          whileHover={{ opacity: 0.15 }}
-                        />
-
-                        {/* Icon with enhanced animation */}
-                        <motion.div
-                          whileHover={{
-                            scale: 1.3,
-                            rotate: 360,
-                            transition: { duration: 0.8 }
-                          }}
-                          className={`
-                            w-14 h-14 bg-gradient-to-r ${item.color}
-                            rounded-2xl flex items-center justify-center
-                            mx-auto mb-3 shadow-lg group-hover:shadow-xl
-                            transition-all duration-300
-                          `}
-                        >
-                          <item.icon className="h-7 w-7 text-white" />
-                        </motion.div>
-
-                        <motion.h3
-                          className="font-bold text-gray-900 text-sm mb-1 group-hover:text-gray-800"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {item.title}
-                        </motion.h3>
-
-                        <motion.p
-                          className="text-xs text-gray-600 font-medium"
-                          whileHover={{ scale: 1.02 }}
-                        >
-                          {item.description}
-                        </motion.p>
-
-                        {/* Floating effect particles */}
-                        <motion.div
-                          className="absolute top-1 right-1 w-1.5 h-1.5 bg-white/40 rounded-full opacity-0 group-hover:opacity-100"
-                          animate={{
-                            y: [0, -8, 0],
-                            opacity: [0, 1, 0]
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: index * 0.2
-                          }}
-                        />
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.section>
-        <SupportTrustSection />
-
-        {/* Newsletter Section */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-          className="py-16 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700"
-        >
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div variants={itemVariants} className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
-                Stay Updated with Latest Deals
-              </h2>
-              <p className="text-xl text-blue-100">
-                Get exclusive offers, new arrivals, and flash sale alerts delivered to your inbox
-              </p>
-              
-              <motion.div
-                variants={itemVariants}
-                className="max-w-md mx-auto"
-              >
-                <div className="flex gap-3">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-blue-200 focus:bg-white/20"
-                  />
-                  <Button className="bg-white text-blue-600 hover:bg-blue-50 px-8 font-semibold">
-                    Subscribe
-                  </Button>
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Explore More Marketplace Features
+                  </h2>
+                  <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
+                    Discover trending products, browse verified vendors, and shop amazing sales
+                  </p>
                 </div>
-              </motion.div>
-              
-              <div className="flex items-center justify-center gap-4 text-blue-200 text-sm">
-                <div className="flex items-center gap-1">
-                  <Gift className="h-4 w-4" />
-                  <span>Exclusive Offers</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Percent className="h-4 w-4" />
-                  <span>Early Access</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Sparkles className="h-4 w-4" />
-                  <span>New Arrivals</span>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {[
+                    {
+                      title: "Trending Now",
+                      desc: "See what's hot right now",
+                      href: "/marketplace/trending",
+                      icon: TrendingUp,
+                      color: "from-pink-500 to-red-500"
+                    },
+                    {
+                      title: "Shop the Sale",
+                      desc: "Massive discounts available",
+                      href: "/marketplace/shop-sale",
+                      icon: Tag,
+                      color: "from-red-500 to-orange-500"
+                    },
+                    {
+                      title: "Browse Vendors",
+                      desc: "Trusted verified sellers",
+                      href: "/marketplace/vendors",
+                      icon: Store,
+                      color: "from-green-500 to-emerald-500"
+                    },
+                    {
+                      title: "All Categories",
+                      desc: "Complete product catalog",
+                      href: "/categories",
+                      icon: Grid3X3,
+                      color: "from-blue-500 to-indigo-500"
+                    }
+                  ].map((feature, index) => (
+                    <motion.div
+                      key={feature.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Link href={feature.href}>
+                        <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                          <CardContent className="p-6 text-center">
+                            <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                              <feature.icon className="h-8 w-8 text-white" />
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
+                            <p className="text-indigo-100 text-sm">{feature.desc}</p>
+                            <div className="mt-4">
+                              <Badge className="bg-white/20 text-white border-white/30">
+                                Explore Now
+                              </Badge>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </motion.section>
+            
+            <VerifiedVendorsSection
+              onFollowVendor={(vendorId) => console.log('Follow vendor:', vendorId)}
+              followedVendors={new Set()}
+            />
+
+            {/* Quick Access Grid */}
+            <motion.section
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="py-16 bg-gray-50"
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    Quick Access to Popular Features
+                  </h2>
+                  <p className="text-xl text-gray-600">
+                    Everything you need is just one click away
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {[
+                    {
+                      title: "Featured",
+                      href: "/marketplace/featured",
+                      icon: Star,
+                      color: "from-yellow-400 to-orange-400",
+                      bgColor: "from-yellow-50 to-orange-50",
+                      description: "Handpicked premium items"
+                    },
+                    {
+                      title: "Flash Sale",
+                      href: "/marketplace/flash-sale",
+                      icon: Flame,
+                      color: "from-red-400 to-pink-400",
+                      bgColor: "from-red-50 to-pink-50",
+                      description: "Limited time offers"
+                    },
+                    {
+                      title: "Premium",
+                      href: "/marketplace/premium",
+                      icon: Crown,
+                      color: "from-purple-400 to-indigo-400",
+                      bgColor: "from-purple-50 to-indigo-50",
+                      description: "Luxury & exclusive"
+                    },
+                    {
+                      title: "Free Ship",
+                      href: "/marketplace/free-shipping",
+                      icon: Truck,
+                      color: "from-green-400 to-emerald-400",
+                      bgColor: "from-green-50 to-emerald-50",
+                      description: "No delivery charges"
+                    },
+                    {
+                      title: "Trending",
+                      href: "/marketplace/trending",
+                      icon: TrendingUp,
+                      color: "from-pink-400 to-red-400",
+                      bgColor: "from-pink-50 to-red-50",
+                      description: "What's popular now"
+                    },
+                    {
+                      title: "Vendors",
+                      href: "/marketplace/vendors",
+                      icon: Store,
+                      color: "from-emerald-400 to-green-400",
+                      bgColor: "from-emerald-50 to-green-50",
+                      description: "Trusted sellers"
+                    }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item.title}
+                      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        delay: index * 0.1,
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20
+                      }}
+                      whileHover={{
+                        scale: 1.08,
+                        y: -5,
+                        rotate: [0, 2, -2, 0],
+                        transition: { duration: 0.4 }
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Link href={item.href}>
+                        <Card className={`
+                          relative overflow-hidden text-center p-5
+                          hover:shadow-2xl transition-all duration-500
+                          border-0 shadow-lg rounded-2xl
+                          bg-gradient-to-br ${item.bgColor}
+                          group cursor-pointer
+                        `}>
+                          <CardContent className="p-0 relative z-10">
+                            <motion.div
+                              className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                              whileHover={{ opacity: 0.15 }}
+                            />
+
+                            <motion.div
+                              whileHover={{
+                                scale: 1.3,
+                                rotate: 360,
+                                transition: { duration: 0.8 }
+                              }}
+                              className={`
+                                w-14 h-14 bg-gradient-to-r ${item.color}
+                                rounded-2xl flex items-center justify-center
+                                mx-auto mb-3 shadow-lg group-hover:shadow-xl
+                                transition-all duration-300
+                              `}
+                            >
+                              <item.icon className="h-7 w-7 text-white" />
+                            </motion.div>
+
+                            <motion.h3
+                              className="font-bold text-gray-900 text-sm mb-1 group-hover:text-gray-800"
+                              whileHover={{ scale: 1.05 }}
+                            >
+                              {item.title}
+                            </motion.h3>
+
+                            <motion.p
+                              className="text-xs text-gray-600 font-medium"
+                              whileHover={{ scale: 1.02 }}
+                            >
+                              {item.description}
+                            </motion.p>
+
+                            <motion.div
+                              className="absolute top-1 right-1 w-1.5 h-1.5 bg-white/40 rounded-full opacity-0 group-hover:opacity-100"
+                              animate={{
+                                y: [0, -8, 0],
+                                opacity: [0, 1, 0]
+                              }}
+                              transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                delay: index * 0.2
+                              }}
+                            />
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.section>
+            
+            <SupportTrustSection />
+
+            {/* Newsletter Section */}
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={containerVariants}
+              className="py-16 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700"
+            >
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <motion.div variants={itemVariants} className="space-y-6">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white">
+                    Stay Updated with Latest Deals
+                  </h2>
+                  <p className="text-xl text-blue-100">
+                    Get exclusive offers, new arrivals, and flash sale alerts delivered to your inbox
+                  </p>
+                  
+                  <motion.div
+                    variants={itemVariants}
+                    className="max-w-md mx-auto"
+                  >
+                    <div className="flex gap-3">
+                      <Input
+                        type="email"
+                        placeholder="Enter your email"
+                        className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-blue-200 focus:bg-white/20"
+                      />
+                      <Button className="bg-white text-blue-600 hover:bg-blue-50 px-8 font-semibold">
+                        Subscribe
+                      </Button>
+                    </div>
+                  </motion.div>
+                  
+                  <div className="flex items-center justify-center gap-4 text-blue-200 text-sm">
+                    <div className="flex items-center gap-1">
+                      <Gift className="h-4 w-4" />
+                      <span>Exclusive Offers</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Percent className="h-4 w-4" />
+                      <span>Early Access</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Sparkles className="h-4 w-4" />
+                      <span>New Arrivals</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </motion.section>
           </main>
         </div>
