@@ -530,7 +530,7 @@ export function MarketplaceGrid({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <Enhanced3DProductCard
+              <OptimizedProductCard3D
                 product={product}
                 onAddToCart={addToCart}
                 onToggleFavorite={handleToggleWishlist}
