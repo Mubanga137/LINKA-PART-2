@@ -530,11 +530,13 @@ export function MarketplaceGrid({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <ProductCard
+              <Enhanced3DProductCard
                 product={product}
                 onAddToCart={addToCart}
-                onToggleWishlist={handleToggleWishlist}
-                isWishlisted={wishlistedItems.has(product.id)}
+                onToggleFavorite={handleToggleWishlist}
+                isFavorite={wishlistedItems.has(product.id)}
+                index={index}
+                priority={index < 4}
               />
             </motion.div>
           ))}
