@@ -11,14 +11,17 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { ShoppingBag, ArrowLeft } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
 import { useAuth } from "@/contexts/auth-context"
 import Link from "next/link"
 
 export default function CartPage() {
   const [selectedItems, setSelectedItems] = useState<string[]>([])
   const [savedItems, setSavedItems] = useState<string[]>([])
-  const { items, totalItems, totalPrice, removeFromCart, updateQuantity } = useCart()
+  const { cart, getCartItemCount, getCartTotal, removeFromCart, updateCartQuantity } = useCart()
+  const items = cart
+  const totalItems = getCartItemCount()
+  const totalPrice = getCartTotal()
   const { user } = useAuth()
   const router = useRouter()
 
