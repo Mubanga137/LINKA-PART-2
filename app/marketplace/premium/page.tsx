@@ -462,10 +462,10 @@ export default function PremiumItemsPage() {
         </section>
 
         {/* Premium Products Grid */}
-        <section className="py-16">
+        <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-gray-900">
+            <div className="flex items-center justify-between mb-12">
+              <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent drop-shadow-sm">
                 Premium Collection ({filteredProducts.length})
               </h2>
             </div>
