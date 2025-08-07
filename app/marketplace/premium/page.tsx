@@ -889,7 +889,7 @@ export default function PremiumItemsPage() {
                         >
                           <Button
                             variant="outline"
-                            className="px-8 py-5 border-3 border-amber-400 hover:border-amber-600 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 text-amber-800 hover:text-amber-900 rounded-2xl font-bold transition-all duration-500 shadow-lg hover:shadow-xl"
+                            className="px-8 py-5 border-2 border-amber-400 hover:border-amber-600 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 text-amber-800 hover:text-amber-900 rounded-2xl font-bold transition-all duration-500 shadow-lg hover:shadow-xl"
                             asChild
                           >
                             <Link href={`/products/${product.id}`}>
