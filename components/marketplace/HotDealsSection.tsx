@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Flame,
   Clock,
-  Lightning,
+  Bolt,
   Star,
   ShoppingCart,
   Heart,
