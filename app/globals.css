@@ -5,6 +5,239 @@
 /* Import 3D Marketplace Styles */
 @import '../styles/marketplace-3d.css';
 
+/* Linka Royale Royal Theme */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Royal Typography */
+.font-serif {
+  font-family: 'Playfair Display', 'Cinzel', serif;
+}
+
+.font-royal {
+  font-family: 'Cinzel', serif;
+}
+
+.font-sans {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Royal Color Variables */
+:root {
+  --royal-gold: #FFD700;
+  --midnight-blue: #001f3f;
+  --pearl-white: #F8F9FA;
+  --charcoal-gray: #36393F;
+  --emerald-green: #2ECC71;
+}
+
+/* Royal Animations */
+@keyframes royalFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  33% {
+    transform: translateY(-15px) rotate(120deg);
+    opacity: 1;
+  }
+  66% {
+    transform: translateY(-8px) rotate(240deg);
+    opacity: 0.9;
+  }
+}
+
+.animate-royal-float {
+  animation: royalFloat linear infinite;
+}
+
+@keyframes royalGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4);
+  }
+}
+
+.animate-royal-glow {
+  animation: royalGlow 3s ease-in-out infinite;
+}
+
+@keyframes royalPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.animate-royal-pulse {
+  animation: royalPulse 2s ease-in-out infinite;
+}
+
+/* Royal Gradient Backgrounds */
+.bg-royal-gradient {
+  background: linear-gradient(135deg, #001f3f 0%, #1a3a5c 25%, #2d5a87 50%, #4a7ba7 75%, #FFD700 100%);
+}
+
+.bg-royal-gold-gradient {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FF8C00 50%, #FFD700 75%, #FFF8DC 100%);
+}
+
+/* Royal Card Styles */
+.royal-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 31, 63, 0.1), 0 0 0 1px rgba(255, 215, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.royal-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 31, 63, 0.15), 0 0 0 1px rgba(255, 215, 0, 0.3);
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+/* Royal Button Styles */
+.btn-royal {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  color: #001f3f;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-royal:hover {
+  background: linear-gradient(135deg, #FFA500 0%, #FFD700 50%, #FFA500 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+/* Royal Glassmorphism */
+.glass-royal {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 31, 63, 0.1);
+}
+
+/* Royal Text Effects */
+.text-royal-gold {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: royalTextShine 3s ease-in-out infinite;
+}
+
+@keyframes royalTextShine {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Royal Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 31, 63, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #FFA500, #FFD700);
+}
+
+/* Royal Navigation Effects */
+.royal-nav-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.royal-nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.royal-nav-item:hover::before {
+  left: 100%;
+}
+
+/* Royal Loading Animation */
+@keyframes royalSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.animate-royal-spin {
+  animation: royalSpin 2s linear infinite;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .royal-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+/* High Performance Mode */
+@media (prefers-reduced-motion: reduce) {
+  .animate-royal-float,
+  .animate-royal-glow,
+  .animate-royal-pulse,
+  .animate-royal-spin {
+    animation: none;
+  }
+
+  .royal-card:hover {
+    transform: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .royal-card {
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
