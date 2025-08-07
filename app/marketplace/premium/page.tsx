@@ -488,11 +488,11 @@ export default function PremiumItemsPage() {
                   whileHover={{ y: -8, scale: 1.02 }}
                   className="group"
                 >
-                  <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-white">
+                  <Card className="overflow-hidden border-2 border-amber-200/60 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-gradient-to-br from-white/98 via-amber-50/30 to-white/95 backdrop-blur-sm hover:scale-[1.02] hover:border-amber-300/80">
                     {/* Premium Badges */}
-                    <div className="absolute top-4 left-4 z-20 flex flex-col gap-1">
-                      <Badge className="bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-3 py-1">
-                        <Crown className="h-3 w-3 mr-1" />
+                    <div className="absolute top-6 left-6 z-20 flex flex-col gap-2">
+                      <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-4 py-2 shadow-lg border border-white/30">
+                        <Crown className="h-4 w-4 mr-2" />
                         Premium
                       </Badge>
                       {product.handcrafted && (
