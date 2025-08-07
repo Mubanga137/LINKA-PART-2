@@ -37,7 +37,7 @@ import {
   Camera,
   Store
 } from "lucide-react"
-import { Product } from "@/contexts/marketplace-context"
+import { Product } from "@/lib/types"
 import { useCart } from "@/contexts/marketplace-context"
 import { ProductSortOptions } from "@/services/product-service"
 import { ResponsiveProductGrid } from "./ResponsiveProductGrid"
