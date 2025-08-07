@@ -40,7 +40,7 @@ import {
 import { Product } from "@/contexts/cart-context"
 import { useCart } from "@/contexts/cart-context"
 import { ProductSortOptions } from "@/services/product-service"
-import { OptimizedProductCard3D } from "./OptimizedProductCard3D"
+import { ResponsiveProductGrid } from "./ResponsiveProductGrid"
 
 interface MarketplaceGridProps {
   products: Product[]
