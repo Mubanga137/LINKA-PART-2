@@ -121,11 +121,8 @@ export function InteractiveProductCard({
     onTap: (e) => {
       e.stopPropagation();
       if (!isSwipeRevealed && !showPreview) {
-        if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-          toggleExpansion();
-        } else {
-          expandCard();
-        }
+        // Navigate to product details on tap/click
+        handleViewProduct();
         triggerHaptic('light');
       }
     },
@@ -574,16 +571,6 @@ export function InteractiveProductCard({
                         </Button>
                       )}
                       
-                      <Button
-                        variant="outline"
-                        className={`flex items-center gap-1 text-xs ${
-                          showVisitStore && !isFlashSale ? '' : 'col-span-2'
-                        }`}
-                        onClick={handleViewProduct}
-                      >
-                        <Eye className="h-3 w-3" />
-                        View Details
-                      </Button>
                     </div>
                   </div>
                 </motion.div>
