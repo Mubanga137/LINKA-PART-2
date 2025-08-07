@@ -569,15 +569,15 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Premium Features */}
-                      <div className="mb-4">
-                        <div className="flex flex-wrap gap-1">
+                      <div className="mb-5">
+                        <div className="flex flex-wrap gap-1.5">
                           {product.premiumFeatures.slice(0, 3).map((feature) => (
-                            <Badge key={feature} variant="outline" className="text-xs border-amber-200 text-amber-700">
+                            <Badge key={feature} variant="outline" className="text-xs border-amber-200 text-amber-700 bg-amber-50/50">
                               {feature}
                             </Badge>
                           ))}
                           {product.premiumFeatures.length > 3 && (
-                            <Badge variant="outline" className="text-xs border-gray-200 text-gray-500">
+                            <Badge variant="outline" className="text-xs border-gray-200 text-gray-500 bg-gray-50">
                               +{product.premiumFeatures.length - 3} more
                             </Badge>
                           )}
@@ -585,7 +585,7 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Price */}
-                      <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center gap-3 mb-5">
                         <span className="text-2xl font-bold text-amber-600">
                           K{product.price.toFixed(2)}
                         </span>
@@ -594,7 +594,7 @@ export default function PremiumItemsPage() {
                             <span className="text-lg text-gray-400 line-through">
                               K{product.originalPrice.toFixed(2)}
                             </span>
-                            <Badge className="bg-green-100 text-green-700">
+                            <Badge className="bg-green-50 text-green-700 border border-green-200">
                               Save K{(product.originalPrice - product.price).toFixed(2)}
                             </Badge>
                           </>
@@ -602,10 +602,10 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Rating and Stats */}
-                      <div className="flex items-center justify-between text-sm text-amber-800 mb-4">
+                      <div className="flex items-center justify-between text-sm text-gray-600 mb-5">
                         <div className="flex items-center gap-1">
-                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                          <span className="font-medium">{product.rating}</span>
+                          <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                          <span className="font-medium text-gray-900">{product.rating}</span>
                           <span>({product.reviewCount})</span>
                         </div>
                         <div className="flex items-center gap-1">
@@ -615,32 +615,32 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Premium Guarantees */}
-                      <div className="bg-amber-50 rounded-lg p-3 mb-4">
-                        <div className="flex items-center gap-4 text-xs text-amber-700">
-                          <div className="flex items-center gap-1">
+                      <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl p-4 mb-5 border border-amber-100">
+                        <div className="flex flex-wrap items-center gap-4 text-xs text-amber-700">
+                          <div className="flex items-center gap-1.5">
                             <Shield className="h-3 w-3" />
-                            <span>{product.warranty}</span>
+                            <span className="font-medium">{product.warranty}</span>
                           </div>
-                          <div className="flex items-center gap-1">
+                          <div className="flex items-center gap-1.5">
                             <Truck className="h-3 w-3" />
-                            <span>Premium Delivery</span>
+                            <span className="font-medium">Premium Delivery</span>
                           </div>
-                          <div className="flex items-center gap-1">
+                          <div className="flex items-center gap-1.5">
                             <RefreshCw className="h-3 w-3" />
-                            <span>Easy Returns</span>
+                            <span className="font-medium">Easy Returns</span>
                           </div>
                         </div>
                       </div>
 
                       {/* Actions */}
-                      <div className="flex gap-2">
-                        <Button className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold py-3">
+                      <div className="flex gap-3">
+                        <Button className="flex-1 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-semibold py-3 rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
                           <ShoppingCart className="h-4 w-4 mr-2" />
                           Add to Cart
                         </Button>
                         <Button
                           variant="outline"
-                          className="px-4 py-3 border-amber-300 hover:border-amber-500 hover:text-amber-600"
+                          className="px-4 py-3 border-2 border-amber-200 hover:border-amber-300 hover:bg-amber-50 text-amber-700 hover:text-amber-800 rounded-xl transition-all duration-200"
                           asChild
                         >
                           <Link href={`/products/${product.id}`}>
