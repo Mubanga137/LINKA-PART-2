@@ -903,10 +903,10 @@ function MarketplaceContent() {
           }}
           onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
           wishlistedItems={new Set()}
-        />
-        <ShopByCategorySection maxItems={6} />
-        <FlashSalesSection />
-        <TrendingNowSection
+            />
+            <ShopByCategorySection maxItems={6} />
+            <FlashSalesSection />
+            <TrendingNowSection
           onAddToCart={(product) => console.log('Add to cart:', product)}
           onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
           wishlistedItems={new Set()}
