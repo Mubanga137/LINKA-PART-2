@@ -18,7 +18,7 @@ import {
   Filter,
   X,
   History,
-  Fire,
+  Flame,
   Zap,
   Heart,
   ArrowUpRight,
@@ -139,7 +139,7 @@ const recentSearches = [
 ];
 
 const quickFilters = [
-  { icon: Fire, label: "Trending", color: "from-red-400 to-orange-400" },
+  { icon: Flame, label: "Trending", color: "from-red-400 to-orange-400" },
   { icon: Star, label: "Top Rated", color: "from-yellow-400 to-orange-400" },
   { icon: Zap, label: "Flash Sale", color: "from-purple-400 to-pink-400" },
   { icon: Heart, label: "Wishlist", color: "from-pink-400 to-red-400" }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,205 +26,18 @@ import {
   MapPin,
   Truck,
   Shield,
-  ChevronDown
+  ChevronDown,
+  Store
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getAllVendors, getProductsByVendorId, generateStoreSlug } from "@/services/vendor-service";
+import type { Product, Vendor } from "@/lib/types";
 
-interface TrendingProduct {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  originalPrice?: number;
-  images: string[];
-  category: string;
-  vendor: {
-    id: string;
-    name: string;
-    logo: string;
-    verified: boolean;
-  };
-  rating: number;
-  reviewCount: number;
-  views: number;
-  purchaseCount: number;
-  trendingScore: number;
-  discountPercentage?: number;
-  fastDelivery: boolean;
-  freeShipping: boolean;
-  inStock: boolean;
-  stockQuantity: number;
-  tags: string[];
-  lastSold: string;
-  location: string;
-  hasVideo?: boolean;
-  isHotTrend?: boolean;
-  isNewArrival?: boolean;
-  isLimitedStock?: boolean;
-}
-
-const trendingProducts: TrendingProduct[] = [
-  {
-    id: "t1",
-    name: "Wireless Gaming Headset Pro Max",
-    description: "Professional gaming headset with 7.1 surround sound, noise cancellation, and RGB lighting",
-    price: 89.99,
-    originalPrice: 149.99,
-    images: [
-      "https://images.unsplash.com/photo-1585298723682-7115561c51b7?w=800&q=80",
-      "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80"
-    ],
-    category: "Gaming",
-    vendor: {
-      id: "v1",
-      name: "Gaming World ZM",
-      logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&q=80",
-      verified: true
-    },
-    rating: 4.8,
-    reviewCount: 1247,
-    views: 15420,
-    purchaseCount: 342,
-    trendingScore: 98,
-    discountPercentage: 40,
-    fastDelivery: true,
-    freeShipping: true,
-    inStock: true,
-    stockQuantity: 23,
-    tags: ["gaming", "wireless", "premium"],
-    lastSold: "2 minutes ago",
-    location: "Lusaka",
-    hasVideo: true,
-    isHotTrend: true
-  },
-  {
-    id: "t2",
-    name: "Smart Fitness Tracker Pro",
-    description: "Advanced fitness tracker with heart rate monitoring, GPS, and 10-day battery life",
-    price: 199.99,
-    originalPrice: 299.99,
-    images: [
-      "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=800&q=80",
-      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80"
-    ],
-    category: "Fitness",
-    vendor: {
-      id: "v2",
-      name: "FitTech Zambia",
-      logo: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=100&q=80",
-      verified: true
-    },
-    rating: 4.7,
-    reviewCount: 892,
-    views: 12380,
-    purchaseCount: 256,
-    trendingScore: 95,
-    discountPercentage: 33,
-    fastDelivery: true,
-    freeShipping: true,
-    inStock: true,
-    stockQuantity: 45,
-    tags: ["fitness", "smart", "health"],
-    lastSold: "5 minutes ago",
-    location: "Kitwe",
-    isNewArrival: true
-  },
-  {
-    id: "t3",
-    name: "Traditional Chitenge Outfit Set",
-    description: "Beautiful handmade chitenge outfit with matching accessories, celebrating Zambian heritage",
-    price: 65.99,
-    images: [
-      "https://images.unsplash.com/photo-1594736797933-d0300ad942ed?w=800&q=80",
-      "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800&q=80"
-    ],
-    category: "Fashion",
-    vendor: {
-      id: "v3",
-      name: "Heritage Fashion ZM",
-      logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&q=80",
-      verified: true
-    },
-    rating: 4.9,
-    reviewCount: 634,
-    views: 8920,
-    purchaseCount: 189,
-    trendingScore: 92,
-    fastDelivery: false,
-    freeShipping: true,
-    inStock: true,
-    stockQuantity: 12,
-    tags: ["traditional", "handmade", "chitenge"],
-    lastSold: "1 hour ago",
-    location: "Ndola",
-    isLimitedStock: true
-  },
-  {
-    id: "t4",
-    name: "Premium Coffee Beans - Zambian Grown",
-    description: "Single-origin coffee beans from the hills of Northern Zambia, roasted to perfection",
-    price: 24.99,
-    originalPrice: 34.99,
-    images: [
-      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80",
-      "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&q=80"
-    ],
-    category: "Food & Beverages",
-    vendor: {
-      id: "v4",
-      name: "Zambian Coffee Co.",
-      logo: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=100&q=80",
-      verified: true
-    },
-    rating: 4.6,
-    reviewCount: 423,
-    views: 6750,
-    purchaseCount: 145,
-    trendingScore: 89,
-    discountPercentage: 29,
-    fastDelivery: true,
-    freeShipping: false,
-    inStock: true,
-    stockQuantity: 67,
-    tags: ["coffee", "organic", "local"],
-    lastSold: "30 minutes ago",
-    location: "Solwezi",
-    isHotTrend: true
-  },
-  {
-    id: "t5",
-    name: "Handwoven Basket Collection",
-    description: "Set of 3 traditional handwoven baskets perfect for storage and home decoration",
-    price: 45.99,
-    images: [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80"
-    ],
-    category: "Home & Garden",
-    vendor: {
-      id: "v5",
-      name: "Craft Collective ZM",
-      logo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=100&q=80",
-      verified: true
-    },
-    rating: 4.8,
-    reviewCount: 298,
-    views: 5640,
-    purchaseCount: 87,
-    trendingScore: 86,
-    fastDelivery: false,
-    freeShipping: true,
-    inStock: true,
-    stockQuantity: 34,
-    tags: ["handmade", "baskets", "traditional"],
-    lastSold: "3 hours ago",
-    location: "Livingstone"
-  }
-];
+// Using the Product type from our service instead of custom interface
 
 interface TrendingNowSectionProps {
-  onAddToCart?: (product: TrendingProduct) => void;
+  onAddToCart?: (product: Product) => void;
   onToggleWishlist?: (productId: string) => void;
   wishlistedItems?: Set<string>;
 }
@@ -234,32 +47,62 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'trending' | 'hot' | 'new'>('trending');
+  const [trendingProducts, setTrendingProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollXProgress } = useScroll({ container: containerRef });
-  const x = useTransform(scrollXProgress, [0, 1], [0, -100]);
+
+  // Load trending products from vendors
+  useEffect(() => {
+    const loadTrendingProducts = async () => {
+      setLoading(true);
+      try {
+        const vendors = await getAllVendors();
+        const productPromises = vendors.slice(0, 5).map(vendor =>
+          getProductsByVendorId(vendor.id)
+        );
+
+        const vendorProducts = await Promise.all(productPromises);
+
+        // Get featured and high-rated products
+        const trending = vendorProducts
+          .flat()
+          .filter(product => product.featured || product.rating >= 4.6)
+          .sort((a, b) => (b.rating * b.reviewCount) - (a.rating * a.reviewCount))
+          .slice(0, 8);
+
+        setTrendingProducts(trending);
+      } catch (error) {
+        console.error('Error loading trending products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadTrendingProducts();
+  }, []);
 
   // Auto-play carousel
   useEffect(() => {
-    if (!isAutoPlay) return;
+    if (!isAutoPlay || trendingProducts.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % trendingProducts.length);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlay]);
+  }, [isAutoPlay, trendingProducts.length]);
 
   // Filter products based on view mode
   const filteredProducts = trendingProducts.filter(product => {
     switch (viewMode) {
       case 'hot':
-        return product.isHotTrend;
+        return product.discountPercentage && product.discountPercentage > 20;
       case 'new':
-        return product.isNewArrival;
+        return product.featured;
       default:
         return true;
     }
-  }).sort((a, b) => b.trendingScore - a.trendingScore);
+  });
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % filteredProducts.length);
@@ -269,13 +112,31 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
     setCurrentIndex((prev) => (prev - 1 + filteredProducts.length) % filteredProducts.length);
   };
 
-  const handleAddToCart = (product: TrendingProduct) => {
+  const handleAddToCart = (product: Product) => {
     onAddToCart?.(product);
   };
 
   const handleToggleWishlist = (productId: string) => {
     onToggleWishlist?.(productId);
   };
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4 animate-pulse"></div>
+            <div className="h-4 bg-gray-200 rounded w-96 mx-auto animate-pulse"></div>
+          </div>
+          <div className="h-96 bg-gray-200 rounded-3xl animate-pulse"></div>
+        </div>
+      </section>
+    );
+  }
+
+  if (filteredProducts.length === 0) {
+    return null;
+  }
 
   return (
     <motion.section
@@ -455,16 +316,16 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                         
                         {/* Overlay Badges */}
                         <div className="absolute top-4 left-4 flex flex-col gap-2">
-                          {product.isHotTrend && (
+                          {product.featured && (
                             <Badge className="bg-red-500 text-white px-3 py-1 animate-pulse">
                               <Flame className="h-3 w-3 mr-1" />
-                              Hot Trend
+                              Featured
                             </Badge>
                           )}
-                          {product.isNewArrival && (
+                          {product.fastDelivery && (
                             <Badge className="bg-blue-500 text-white px-3 py-1">
                               <Zap className="h-3 w-3 mr-1" />
-                              New Arrival
+                              Fast Delivery
                             </Badge>
                           )}
                           {product.discountPercentage && (
@@ -472,7 +333,7 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                               -{product.discountPercentage}% OFF
                             </Badge>
                           )}
-                          {product.isLimitedStock && (
+                          {product.stockQuantity && product.stockQuantity <= 10 && (
                             <Badge className="bg-orange-500 text-white px-3 py-1 animate-bounce">
                               <Timer className="h-3 w-3 mr-1" />
                               Limited Stock
@@ -514,11 +375,11 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                           )}
                         </div>
 
-                        {/* Trending Score */}
+                        {/* Rating Badge */}
                         <div className="absolute bottom-4 left-4">
                           <div className="bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
-                            <TrendingUp className="h-3 w-3" />
-                            Trending #{product.trendingScore}
+                            <Star className="h-3 w-3 fill-current text-yellow-400" />
+                            {product.rating} ({product.reviewCount})
                           </div>
                         </div>
                       </div>
@@ -529,26 +390,22 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                       <div className="space-y-4">
                         {/* Vendor Info */}
                         <div className="flex items-center gap-3">
-                          <Image
-                            src={product.vendor.logo}
-                            alt={product.vendor.name}
-                            width={40}
-                            height={40}
-                            className="rounded-full object-cover"
-                          />
+                          <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                            <span className="text-white font-bold text-sm">
+                              {product.vendor.name.charAt(0)}
+                            </span>
+                          </div>
                           <div>
                             <div className="flex items-center gap-2">
                               <span className="font-medium text-gray-900">{product.vendor.name}</span>
-                              {product.vendor.verified && (
-                                <Badge className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5">
-                                  <Shield className="h-2.5 w-2.5 mr-1" />
-                                  Verified
-                                </Badge>
-                              )}
+                              <Badge className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5">
+                                <Shield className="h-2.5 w-2.5 mr-1" />
+                                Verified
+                              </Badge>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-gray-500">
                               <MapPin className="h-3 w-3" />
-                              <span>{product.location}</span>
+                              <span>{product.category}</span>
                             </div>
                           </div>
                         </div>
@@ -601,7 +458,7 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                           
                           <div className="flex items-center gap-1 text-gray-500">
                             <Eye className="h-4 w-4" />
-                            <span>{product.views.toLocaleString()} views</span>
+                            <span>{((product.reviewCount || 0) * 10 + 150).toLocaleString()} views</span>
                           </div>
                         </div>
 
@@ -614,10 +471,10 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                                 transition={{ duration: 1, repeat: Infinity }}
                                 className="w-2 h-2 bg-green-500 rounded-full"
                               />
-                              <span>Last sold: {product.lastSold}</span>
+                              <span>Recently viewed</span>
                             </div>
                             <div className="text-gray-500">
-                              {product.stockQuantity} left in stock
+                              {product.stockQuantity || 0} left in stock
                             </div>
                           </div>
                         </div>
@@ -640,36 +497,55 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex gap-3 mt-6">
+                      <div className="space-y-3 mt-6">
                         <motion.div
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="flex-1"
                         >
                           <Button
                             onClick={() => handleAddToCart(product)}
                             className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                           >
                             <ShoppingCart className="h-5 w-5 mr-2" />
-                            Add to Cart
+                            Buy Now
                           </Button>
                         </motion.div>
-                        
-                        <motion.div
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <Button
-                            variant="outline"
-                            className="px-6 py-3 border-2 border-gray-300 hover:border-orange-500 hover:text-orange-500"
-                            asChild
+
+                        <div className="flex gap-3">
+                          <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="flex-1"
                           >
-                            <Link href={`/products/${product.id}`}>
-                              View Details
-                              <ExternalLink className="h-4 w-4 ml-2" />
-                            </Link>
-                          </Button>
-                        </motion.div>
+                            <Button
+                              variant="outline"
+                              className="w-full px-4 py-3 border-2 border-blue-300 text-blue-600 hover:border-blue-500 hover:bg-blue-50"
+                              asChild
+                            >
+                              <Link href={`/vendors/${generateStoreSlug(product.vendor.name)}`}>
+                                <Store className="h-4 w-4 mr-2" />
+                                Visit Store
+                              </Link>
+                            </Button>
+                          </motion.div>
+
+                          <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="flex-1"
+                          >
+                            <Button
+                              variant="outline"
+                              className="w-full px-4 py-3 border-2 border-gray-300 hover:border-orange-500 hover:text-orange-500"
+                              asChild
+                            >
+                              <Link href={`/products/${product.id}`}>
+                                <Eye className="h-4 w-4 mr-2" />
+                                Details
+                              </Link>
+                            </Button>
+                          </motion.div>
+                        </div>
                       </div>
                     </div>
                   </div>

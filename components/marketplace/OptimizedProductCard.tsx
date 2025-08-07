@@ -1,19 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Heart, 
-  ShoppingCart, 
-  Star, 
-  MapPin, 
-  Truck, 
-  Clock, 
+import {
+  Heart,
+  ShoppingCart,
+  Star,
+  MapPin,
+  Truck,
+  Clock,
   Package,
-  Zap
+  Zap,
+  Store,
+  ExternalLink,
+  Eye,
+  Sparkles,
+  Shield,
+  Plus,
+  Minus
 } from "lucide-react";
 import type { Product } from "@/lib/types";
 
@@ -23,6 +31,7 @@ interface OptimizedProductCardProps {
   onToggleFavorite: (productId: string) => void;
   isFavorite: boolean;
   priority?: boolean; // For LCP optimization on first few products
+  showVisitStore?: boolean; // Control whether to show Visit Store button
 }
 
 export function OptimizedProductCard({
@@ -30,10 +39,40 @@ export function OptimizedProductCard({
   onAddToCart,
   onToggleFavorite,
   isFavorite,
-  priority = false
+  priority = false,
+  showVisitStore = true
 }: OptimizedProductCardProps) {
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [addingToCart, setAddingToCart] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Motion values for 3D transforms
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-100, 100], [15, -15]);
+  const rotateY = useTransform(x, [-100, 100], [-15, 15]);
+
+  // Handle mouse move for 3D tilt effect
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    x.set((event.clientX - centerX) / 8);
+    y.set((event.clientY - centerY) / 8);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    setIsHovered(false);
+  };
 
   const handleImageError = () => {
     setImageError(true);
@@ -44,6 +83,16 @@ export function OptimizedProductCard({
     setImageLoading(false);
   };
 
+  const handleAddToCart = async () => {
+    setAddingToCart(true);
+    onAddToCart({ ...product, quantity });
+
+    // Simulate loading delay for visual feedback
+    setTimeout(() => {
+      setAddingToCart(false);
+    }, 600);
+  };
+
   // Fallback image URL
   const fallbackImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z' transform='translate(180,180)'/%3E%3C/svg%3E";
 
@@ -52,8 +101,21 @@ export function OptimizedProductCard({
     return product.images[0] || fallbackImage;
   };
 
+  // Generate store slug from vendor name
+  const getStoreSlug = (vendorName: string) => {
+    return vendorName.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-|-$/g, '');
+  };
+
+  // Check if this is a flash sale item
+  const isFlashSale = product.tags?.includes('flash-sale') || (product as any).hotDeal;
+
   return (
-    <article className="group bg-white rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blue-200 flex flex-col h-full w-full">
+    <Link href={`/products/${product.id}`} className="block w-full h-full group">
+      <article className="bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 flex flex-col h-full w-full cursor-pointer">
       {/* Product Image Container */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         {imageLoading && !imageError && (
@@ -189,6 +251,7 @@ export function OptimizedProductCard({
 
         {/* Action Buttons */}
         <div className="mt-auto space-y-2">
+          {/* Buy Now Button */}
           <Button
             onClick={() => onAddToCart(product)}
             disabled={!product.inStock}
@@ -196,21 +259,29 @@ export function OptimizedProductCard({
             aria-label={`Add ${product.name} to cart`}
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
-            Add to Cart
+            Buy Now
           </Button>
 
-          <Button
-            variant="outline"
-            className="w-full border-gray-300 text-gray-600 hover:bg-gray-50 py-3 text-sm rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
-            asChild
-          >
-            <Link href={`/products/${product.id}`}>
-              <Package className="h-4 w-4 mr-2" />
-              View Details
-            </Link>
-          </Button>
+          {/* Secondary Buttons Row */}
+          <div className={`${showVisitStore && !isFlashSale ? 'block' : 'hidden'}`}>
+            {/* Visit Store Button - Only show for non-flash-sale items */}
+            {showVisitStore && !isFlashSale && (
+              <Button
+                variant="outline"
+                className="border-gray-300 text-gray-600 hover:bg-gray-50 hover:border-blue-300 hover:text-blue-600 py-2.5 text-xs rounded-lg transition-all duration-200 tap-target focus-visible-enhanced"
+                asChild
+              >
+                <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
+                  <Store className="h-3 w-3 mr-1" />
+                  Visit Store
+                </Link>
+              </Button>
+            )}
+
+          </div>
         </div>
       </div>
-    </article>
+      </article>
+    </Link>
   );
 }

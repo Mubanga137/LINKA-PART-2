@@ -16,7 +16,9 @@ import {
   ChevronRight,
   Grid3X3,
   List,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Store,
+  ExternalLink
 } from "lucide-react"
 import { Product } from "@/contexts/cart-context"
 import { useCart } from "@/contexts/cart-context"
@@ -276,12 +278,12 @@ export function ProductGrid({
                     </div>
                   </div>
 
-                  {/* Add to Cart Button */}
-                  <div className="flex gap-2">
+                  {/* Action Buttons */}
+                  <div className="space-y-2">
                     {product.inStock ? (
                       <>
                         <Button
-                          className="flex-1 bg-emerald-600 hover:bg-emerald-700"
+                          className="w-full bg-emerald-600 hover:bg-emerald-700"
                           onClick={() => handleAddToCart(product)}
                         >
                           <ShoppingCart className="h-4 w-4 mr-2" />
@@ -292,14 +294,23 @@ export function ProductGrid({
                             </Badge>
                           )}
                         </Button>
-                        <Link href={`/products/${product.id}`}>
-                          <Button variant="outline" size="sm">
-                            View
-                          </Button>
-                        </Link>
+                        <div className="flex gap-2">
+                          <Link href={`/products/${product.id}`} className="flex-1">
+                            <Button variant="outline" className="w-full">
+                              <ExternalLink className="h-3 w-3 mr-1" />
+                              View
+                            </Button>
+                          </Link>
+                          <Link href={`/vendors/${product.retailerName?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/--+/g, '-').replace(/^-|-$/g, '')}`} className="flex-1">
+                            <Button variant="outline" className="w-full">
+                              <Store className="h-3 w-3 mr-1" />
+                              Store
+                            </Button>
+                          </Link>
+                        </div>
                       </>
                     ) : (
-                      <Button disabled className="flex-1">
+                      <Button disabled className="w-full">
                         Out of Stock
                       </Button>
                     )}

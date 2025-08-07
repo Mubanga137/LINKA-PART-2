@@ -12,7 +12,7 @@ import {
   Heart,
   Share2,
   Clock,
-  FlameIcon as Fire,
+  Flame as Fire,
   Zap,
   Music,
   Gamepad2,

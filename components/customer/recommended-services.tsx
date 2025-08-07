@@ -3,12 +3,14 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Star, 
-  MapPin, 
-  Clock, 
+import {
+  Star,
+  MapPin,
+  Clock,
   ArrowRight,
-  Zap
+  Zap,
+  ShoppingCart,
+  Store
 } from "lucide-react"
 import Link from "next/link"
 import { Product } from "@/contexts/cart-context"
@@ -126,24 +128,37 @@ export function RecommendedServices({ products, isLoading }: RecommendedServices
                   </div>
                 </div>
 
-                {/* Price and Action */}
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-xl font-bold text-emerald-600">
-                      ZMW {product.price.toLocaleString()}
-                    </div>
-                    {product.originalPrice && (
-                      <div className="text-sm text-slate-500 line-through">
-                        ZMW {product.originalPrice.toLocaleString()}
-                      </div>
-                    )}
+                {/* Price */}
+                <div className="mb-3">
+                  <div className="text-xl font-bold text-emerald-600">
+                    ZMW {product.price.toLocaleString()}
                   </div>
+                  {product.originalPrice && (
+                    <div className="text-sm text-slate-500 line-through">
+                      ZMW {product.originalPrice.toLocaleString()}
+                    </div>
+                  )}
+                </div>
 
-                  <Link href={`/products/${product.id}`}>
-                    <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700">
-                      View Details
-                    </Button>
-                  </Link>
+                {/* Action Buttons */}
+                <div className="space-y-2">
+                  <Button
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 text-sm rounded-lg transition-all"
+                  >
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Book Service
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    className="w-full border-gray-300 text-gray-600 hover:border-emerald-300 hover:text-emerald-600 py-2 text-sm rounded-lg transition-all"
+                    asChild
+                  >
+                    <Link href={`/vendors/${product.retailerName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/--+/g, '-').replace(/^-|-$/g, '')}`}>
+                      <Store className="h-4 w-4 mr-2" />
+                      Visit Store
+                    </Link>
+                  </Button>
                 </div>
 
                 {/* Features */}

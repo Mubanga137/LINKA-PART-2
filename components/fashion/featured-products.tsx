@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -16,7 +17,8 @@ import {
   Filter,
   Grid3X3,
   List,
-  ChevronDown
+  ChevronDown,
+  Store
 } from "lucide-react"
 import {
   Select,
@@ -212,6 +214,15 @@ export function FeaturedProducts({ category }: FeaturedProductsProps) {
     setFilteredProducts(filtered)
   }, [category, sortBy])
 
+  // Generate store slug from vendor name
+  const generateStoreSlug = (vendorName: string) => {
+    return vendorName.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
   const ProductCard = ({ product }: { product: Product }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -312,11 +323,32 @@ export function FeaturedProducts({ category }: FeaturedProductsProps) {
               )}
             </div>
 
-            <div className="flex space-x-2">
-              <Button className="flex-1 bg-purple-600 hover:bg-purple-700">
+            <div className="space-y-2">
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">
                 <ShoppingCart className="h-4 w-4 mr-2" />
-                Add to Cart
+                Buy Now
               </Button>
+
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  className="flex-1 border-purple-200 text-purple-600 hover:bg-purple-50 text-sm"
+                  asChild
+                >
+                  <Link href={`/vendors/${generateStoreSlug(product.vendor.name)}`}>
+                    <Store className="h-3 w-3 mr-1" />
+                    Visit Store
+                  </Link>
+                </Button>
+
+                <Button
+                  variant="outline"
+                  className="flex-1 border-gray-200 text-gray-600 hover:bg-gray-50 text-sm"
+                >
+                  <Eye className="h-3 w-3 mr-1" />
+                  Details
+                </Button>
+              </div>
             </div>
           </div>
         </CardContent>

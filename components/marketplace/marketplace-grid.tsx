@@ -34,11 +34,13 @@ import {
   AlertCircle,
   Timer,
   Flame,
-  Camera
+  Camera,
+  Store
 } from "lucide-react"
 import { Product } from "@/contexts/cart-context"
 import { useCart } from "@/contexts/cart-context"
 import { ProductSortOptions } from "@/services/product-service"
+import { ResponsiveProductGrid } from "./ResponsiveProductGrid"
 
 interface MarketplaceGridProps {
   products: Product[]
@@ -99,6 +101,15 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }: P
   const isFlashSale = product.tags?.includes('flash-sale')
   const isChoice = product.tags?.includes('top-choice')
   const hasVideoReview = product.tags?.includes('video-review')
+
+  // Generate store slug from vendor name
+  const getStoreSlug = (vendorName: string) => {
+    return vendorName.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
 
   return (
     <motion.div
@@ -296,7 +307,7 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }: P
             </div>
             <div className="flex items-center gap-1 text-xs text-gray-500">
               <Eye className="h-3 w-3" />
-              <span>{Math.floor(Math.random() * 1000) + 100}</span>
+              <span>{150 + (product.id.charCodeAt(0) * 10) % 500}</span>
             </div>
           </div>
 
@@ -325,22 +336,46 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }: P
           )}
 
           {/* Actions */}
-          <div className="flex gap-2 pt-1">
+          <div className="space-y-2 pt-1">
+            {/* Primary Action - Buy Now */}
             <Button
               onClick={() => onAddToCart(product)}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white text-xs py-2 h-8 rounded-lg"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white text-xs py-2 h-8 rounded-lg"
               size="sm"
             >
               <ShoppingCart className="h-3 w-3 mr-1" />
-              {product.category === 'services' ? 'Book' : 'Add'}
+              {product.category === 'services' ? 'Book Now' : 'Buy Now'}
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="px-2 h-8 text-xs border-orange-200 text-orange-600 hover:bg-orange-50"
-            >
-              <MessageCircle className="h-3 w-3" />
-            </Button>
+
+            {/* Secondary Actions Row */}
+            <div className="flex gap-2">
+              {/* Visit Store Button - Only show for non-flash-sale items */}
+              {!isFlashSale && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-xs border-orange-200 text-orange-600 hover:bg-orange-50 h-7"
+                  asChild
+                >
+                  <Link href={`/vendors/${getStoreSlug(product.retailerName || 'unknown-vendor')}`}>
+                    <Store className="h-3 w-3 mr-1" />
+                    Visit Store
+                  </Link>
+                </Button>
+              )}
+
+              {/* Contact/Message Button */}
+              <Button
+                variant="outline"
+                size="sm"
+                className={`text-xs border-orange-200 text-orange-600 hover:bg-orange-50 h-7 ${
+                  !isFlashSale ? 'px-2' : 'flex-1'
+                }`}
+              >
+                <MessageCircle className="h-3 w-3 mr-1" />
+                {!isFlashSale ? '' : 'Contact'}
+              </Button>
+            </div>
           </div>
 
           {/* Trust Indicators */}
@@ -495,11 +530,13 @@ export function MarketplaceGrid({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <ProductCard
+              <OptimizedProductCard3D
                 product={product}
                 onAddToCart={addToCart}
-                onToggleWishlist={handleToggleWishlist}
-                isWishlisted={wishlistedItems.has(product.id)}
+                onToggleFavorite={handleToggleWishlist}
+                isFavorite={wishlistedItems.has(product.id)}
+                index={index}
+                priority={index < 4}
               />
             </motion.div>
           ))}

@@ -28,7 +28,8 @@ import {
   Truck,
   Shield,
   Award,
-  Zap
+  Zap,
+  Store
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -261,7 +262,7 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
   // Filter products by category if selected
   const filteredProducts = filterCategory
     ? recommendedProducts.filter(p => p.category === filterCategory)
-    : recommendedProducts;
+    : displayedProducts;
 
   const handleRefreshRecommendations = async () => {
     setRefreshing(true);
@@ -452,10 +453,10 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr"
         >
           <AnimatePresence mode="wait">
-            {displayedProducts.map((product, index) => (
+            {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 variants={{
@@ -474,51 +475,51 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="group"
               >
-                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
-                  <div className="relative">
-                    <div className="aspect-square bg-gray-100 overflow-hidden">
-                      <Image
-                        src={product.images[0]}
-                        alt={product.name}
-                        width={300}
-                        height={300}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      
-                      {/* Match Score Badge */}
-                      <div className="absolute top-3 left-3">
-                        <Badge className="bg-purple-500 text-white px-2 py-1 text-xs">
-                          <Target className="h-3 w-3 mr-1" />
-                          {product.matchScore}% match
+                <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Product Image */}
+                  <div className="relative aspect-square bg-gray-100 overflow-hidden">
+                    <Image
+                      src={product.images[0]}
+                      alt={product.name}
+                      width={300}
+                      height={300}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+
+                    {/* Match Score Badge */}
+                    <div className="absolute top-3 left-3">
+                      <Badge className="bg-purple-500 text-white px-2 py-1 text-xs">
+                        <Target className="h-3 w-3 mr-1" />
+                        {product.matchScore}% match
+                      </Badge>
+                    </div>
+
+                    {/* Discount Badge */}
+                    {product.discountPercentage && (
+                      <div className="absolute top-3 right-3">
+                        <Badge className="bg-green-500 text-white px-2 py-1 text-xs">
+                          -{product.discountPercentage}%
                         </Badge>
                       </div>
+                    )}
 
-                      {/* Discount Badge */}
-                      {product.discountPercentage && (
-                        <div className="absolute top-3 right-3">
-                          <Badge className="bg-green-500 text-white px-2 py-1 text-xs">
-                            -{product.discountPercentage}%
-                          </Badge>
-                        </div>
-                      )}
-
-                      {/* Wishlist Button */}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleToggleWishlist(product.id)}
-                        className={`absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 rounded-full ${
-                          wishlistedItems.has(product.id) 
-                            ? 'bg-red-100 text-red-600' 
-                            : 'bg-white/90 text-gray-600 hover:text-red-500'
-                        }`}
-                      >
-                        <Heart className={`h-4 w-4 ${wishlistedItems.has(product.id) ? 'fill-current' : ''}`} />
-                      </Button>
-                    </div>
+                    {/* Wishlist Button */}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleToggleWishlist(product.id)}
+                      className={`absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 rounded-full ${
+                        wishlistedItems.has(product.id)
+                          ? 'bg-red-100 text-red-600'
+                          : 'bg-white/90 text-gray-600 hover:text-red-500'
+                      }`}
+                    >
+                      <Heart className={`h-4 w-4 ${wishlistedItems.has(product.id) ? 'fill-current' : ''}`} />
+                    </Button>
                   </div>
 
-                  <CardContent className="p-4 flex flex-col h-full">
+                  {/* Product Content */}
+                  <CardContent className="p-4">
                     {/* Vendor Info */}
                     <div className="flex items-center gap-2 mb-2">
                       <Image
@@ -606,52 +607,25 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                     </div>
 
                     {/* Actions */}
-                    <div className="mt-auto space-y-2">
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                    <div className="mt-6 pt-4 border-t border-gray-100 space-y-3">
+                      <Button
+                        onClick={() => handleAddToCart(product)}
+                        className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-2.5 shadow-md"
                       >
-                        <Button
-                          onClick={() => handleAddToCart(product)}
-                          className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white"
-                        >
-                          <ShoppingCart className="h-4 w-4 mr-2" />
-                          Add to Cart
-                        </Button>
-                      </motion.div>
+                        <ShoppingCart className="h-4 w-4 mr-2" />
+                        Add to Cart
+                      </Button>
 
-                      {/* Feedback Buttons */}
-                      {!feedbackGiven.has(product.id) && (
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-gray-500">Is this helpful?</span>
-                          <div className="flex gap-1">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleProductFeedback(product.id, true)}
-                              className="w-8 h-8 p-0 hover:bg-green-50 hover:text-green-600"
-                            >
-                              <ThumbsUp className="h-3 w-3" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleProductFeedback(product.id, false)}
-                              className="w-8 h-8 p-0 hover:bg-red-50 hover:text-red-600"
-                            >
-                              <ThumbsDown className="h-3 w-3" />
-                            </Button>
-                          </div>
-                        </div>
-                      )}
-
-                      {feedbackGiven.has(product.id) && (
-                        <div className="text-center">
-                          <Badge variant="outline" className="text-xs text-green-600 border-green-200">
-                            Thanks for your feedback!
-                          </Badge>
-                        </div>
-                      )}
+                      <Button
+                        variant="outline"
+                        className="w-full border-purple-300 text-purple-600 hover:bg-purple-50 hover:border-purple-400 font-semibold py-2.5 shadow-sm"
+                        asChild
+                      >
+                        <Link href={`/vendors/${product.vendor.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/--+/g, '-').replace(/^-|-$/g, '')}`}>
+                          <Store className="h-4 w-4 mr-2" />
+                          Visit Store
+                        </Link>
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
