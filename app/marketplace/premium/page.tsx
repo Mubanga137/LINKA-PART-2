@@ -286,13 +286,32 @@ export default function PremiumItemsPage() {
     });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-400/20 via-amber-300/30 to-yellow-600/25 relative overflow-hidden">
+      {/* Golden shine overlay */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-amber-200/40 via-yellow-300/30 to-amber-400/35 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-200/20 to-amber-300/25 pointer-events-none"></div>
+
+      {/* Animated golden particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-10 left-10 w-2 h-2 bg-amber-400/60 rounded-full animate-pulse"></div>
+        <div className="absolute top-32 right-20 w-1 h-1 bg-yellow-400/70 rounded-full animate-bounce"></div>
+        <div className="absolute top-64 left-1/4 w-1.5 h-1.5 bg-amber-300/50 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-40 right-1/3 w-2 h-2 bg-yellow-500/40 rounded-full animate-ping"></div>
+        <div className="absolute bottom-20 left-1/2 w-1 h-1 bg-amber-400/60 rounded-full animate-bounce"></div>
+      </div>
+
       <Header />
-      
-      <main>
+
+      <main className="relative z-10">
         {/* Luxury Hero Section */}
-        <section className="relative py-20 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-600/10 to-orange-600/10"></div>
+        <section className="relative py-24 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/15 via-yellow-400/20 to-amber-600/15 backdrop-blur-sm"></div>
+
+          {/* Professional golden pattern overlay */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-300/30 to-transparent transform rotate-12"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent transform -rotate-12"></div>
+          </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
