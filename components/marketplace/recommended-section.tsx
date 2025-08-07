@@ -33,6 +33,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useCart, useFavorites } from "@/contexts/marketplace-context";
+import type { Product } from "@/lib/types";
 
 interface RecommendedProduct {
   id: string;
@@ -259,6 +261,10 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
   const [refreshing, setRefreshing] = useState(false);
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
 
+  // Use cart and favorites context
+  const { addToCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
+
   // Filter products by category if selected
   const filteredProducts = filterCategory
     ? recommendedProducts.filter(p => p.category === filterCategory)
@@ -283,10 +289,37 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
   };
 
   const handleAddToCart = (product: RecommendedProduct) => {
+    // Convert RecommendedProduct to Product format
+    const cartProduct: Product = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      images: product.images,
+      category: product.category,
+      inStock: product.inStock,
+      rating: product.rating,
+      reviewCount: product.reviewCount,
+      tags: product.tags,
+      vendor: product.vendor,
+      fastDelivery: product.fastDelivery,
+      freeShipping: product.freeShipping,
+      discountPercentage: product.discountPercentage,
+      featured: false,
+      hotDeal: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    addToCart(cartProduct, 1);
+
+    // Also call the prop callback if provided
     onAddToCart?.(product);
   };
 
   const handleToggleWishlist = (productId: string) => {
+    toggleFavorite(productId);
     onToggleWishlist?.(productId);
   };
 
@@ -509,12 +542,12 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                       size="icon"
                       onClick={() => handleToggleWishlist(product.id)}
                       className={`absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 rounded-full ${
-                        wishlistedItems.has(product.id)
+                        isFavorite(product.id)
                           ? 'bg-red-100 text-red-600'
                           : 'bg-white/90 text-gray-600 hover:text-red-500'
                       }`}
                     >
-                      <Heart className={`h-4 w-4 ${wishlistedItems.has(product.id) ? 'fill-current' : ''}`} />
+                      <Heart className={`h-4 w-4 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
                     </Button>
                   </div>
 
