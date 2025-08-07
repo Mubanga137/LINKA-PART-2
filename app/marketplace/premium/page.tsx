@@ -656,22 +656,58 @@ export default function PremiumItemsPage() {
                         </Badge>
                       </motion.div>
                       {product.handcrafted && (
-                        <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1.5 text-sm shadow-lg border border-white/30">
-                          <Award className="h-3 w-3 mr-1.5" />
-                          Handcrafted
-                        </Badge>
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.15 + 0.4 }}
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 text-sm shadow-xl border-2 border-white/40 backdrop-blur-sm font-semibold">
+                            <motion.div
+                              animate={{ scale: [1, 1.2, 1] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              <Award className="h-4 w-4 mr-2" />
+                            </motion.div>
+                            Handcrafted
+                          </Badge>
+                        </motion.div>
                       )}
                       {product.limitedEdition && (
-                        <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-3 py-1.5 text-sm shadow-lg border border-white/30">
-                          <Medal className="h-3 w-3 mr-1.5" />
-                          Limited
-                        </Badge>
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.15 + 0.5 }}
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-4 py-2 text-sm shadow-xl border-2 border-white/40 backdrop-blur-sm font-semibold">
+                            <motion.div
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            >
+                              <Medal className="h-4 w-4 mr-2" />
+                            </motion.div>
+                            Limited
+                          </Badge>
+                        </motion.div>
                       )}
                       {product.exclusiveDesign && (
-                        <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-3 py-1.5 text-sm shadow-lg border border-white/30">
-                          <Sparkles className="h-3 w-3 mr-1.5" />
-                          Exclusive
-                        </Badge>
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.15 + 0.6 }}
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 text-sm shadow-xl border-2 border-white/40 backdrop-blur-sm font-semibold">
+                            <motion.div
+                              animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              <Sparkles className="h-4 w-4 mr-2" />
+                            </motion.div>
+                            Exclusive
+                          </Badge>
+                        </motion.div>
                       )}
                     </div>
 
