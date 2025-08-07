@@ -26,7 +26,7 @@ import {
   ChevronRight
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
 import { useFavorites } from "@/contexts/marketplace-context"
 
 interface SidebarProps {
