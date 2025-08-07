@@ -33,7 +33,7 @@ import {
 import { MarketplaceMainHeader } from "@/components/marketplace/marketplace-main-header"
 import { Footer } from "@/components/footer"
 import { useCart } from "@/contexts/cart-context"
-import { Product } from "@/contexts/cart-context"
+import { Product } from "@/lib/types"
 
 // Mock wishlist data - in real app this would come from API/context
 const MOCK_WISHLIST_ITEMS: (Product & { 
