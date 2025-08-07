@@ -56,6 +56,24 @@ export function OptimizedProductCard({
   const rotateX = useTransform(y, [-100, 100], [15, -15]);
   const rotateY = useTransform(x, [-100, 100], [-15, 15]);
 
+  // Handle mouse move for 3D tilt effect
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    x.set((event.clientX - centerX) / 8);
+    y.set((event.clientY - centerY) / 8);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    setIsHovered(false);
+  };
+
   const handleImageError = () => {
     setImageError(true);
     setImageLoading(false);
@@ -63,6 +81,16 @@ export function OptimizedProductCard({
 
   const handleImageLoad = () => {
     setImageLoading(false);
+  };
+
+  const handleAddToCart = async () => {
+    setAddingToCart(true);
+    onAddToCart({ ...product, quantity });
+
+    // Simulate loading delay for visual feedback
+    setTimeout(() => {
+      setAddingToCart(false);
+    }, 600);
   };
 
   // Fallback image URL
