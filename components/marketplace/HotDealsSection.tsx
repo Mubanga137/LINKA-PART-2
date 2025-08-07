@@ -220,7 +220,7 @@ export function HotDealsSection() {
           <div className="inline-flex items-center gap-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-6 py-3 shadow-lg mb-6 animate-pulse">
             <Flame className="h-5 w-5" />
             <span className="font-bold">HOT DEALS</span>
-            <Bolt className="h-5 w-5" />
+            <Zap className="h-5 w-5" />
           </div>
           <h2 className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-red-700 via-orange-600 to-yellow-600 bg-clip-text text-transparent mb-4">
             🔥 Flash Sales & Hot Deals
