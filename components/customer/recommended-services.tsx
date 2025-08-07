@@ -3,12 +3,14 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Star, 
-  MapPin, 
-  Clock, 
+import {
+  Star,
+  MapPin,
+  Clock,
   ArrowRight,
-  Zap
+  Zap,
+  ShoppingCart,
+  Store
 } from "lucide-react"
 import Link from "next/link"
 import { Product } from "@/contexts/cart-context"
