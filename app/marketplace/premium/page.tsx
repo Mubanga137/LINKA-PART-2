@@ -621,13 +621,22 @@ export default function PremiumItemsPage() {
               {filteredProducts.map((product, index) => (
                 <motion.div
                   key={product.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    delay: index * 0.15,
+                    duration: 0.8,
+                    ease: "easeOut"
+                  }}
+                  whileHover={{
+                    y: -15,
+                    scale: 1.03,
+                    boxShadow: "0 35px 70px rgba(245, 158, 11, 0.25)"
+                  }}
                   className="group"
                 >
-                  <Card className="overflow-hidden border-2 border-amber-200/60 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-gradient-to-br from-white/98 via-amber-50/30 to-white/95 backdrop-blur-sm hover:scale-[1.02] hover:border-amber-300/80">
+                  <Card className="overflow-hidden border-2 border-amber-200/70 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-gradient-to-br from-white/98 via-amber-50/40 to-yellow-50/30 backdrop-blur-md hover:border-amber-400/90 relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     {/* Premium Badges */}
                     <div className="absolute top-6 left-6 z-20 flex flex-col gap-2">
                       <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-4 py-2 shadow-lg border border-white/30">
