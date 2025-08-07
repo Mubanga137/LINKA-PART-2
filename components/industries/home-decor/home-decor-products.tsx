@@ -244,12 +244,21 @@ export function HomeDecorProducts() {
                         <span className="text-sm text-slate-500 line-through">{product.originalPrice}</span>
                       </div>
                     </div>
-                    <Button
-                      size="sm"
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-                    >
-                      Add to Cart
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button
+                        size="sm"
+                        className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                      >
+                        <ShoppingCart className="h-3 w-3 mr-1" />
+                        Add to Cart
+                      </Button>
+                      <Link href={`/vendors/${product.retailer.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/--+/g, '-').replace(/^-|-$/g, '')}`}>
+                        <Button size="sm" variant="outline">
+                          <Store className="h-3 w-3 mr-1" />
+                          Store
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
 
                   {/* Progress Bar */}
