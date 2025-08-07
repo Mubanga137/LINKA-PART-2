@@ -414,13 +414,13 @@ export default function PremiumItemsPage() {
                 </div>
 
                 {/* Sort and View Options */}
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-gray-700">Sort:</span>
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-3">
+                    <span className="text-lg font-semibold text-amber-900">Sort:</span>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as any)}
-                      className="text-sm border rounded-lg px-3 py-1 bg-white"
+                      className="text-base border-2 border-amber-300 rounded-xl px-4 py-2 bg-white/90 backdrop-blur-sm text-amber-900 font-medium focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-200"
                     >
                       <option value="luxury">Luxury Rating</option>
                       <option value="price">Highest Price</option>
@@ -429,22 +429,30 @@ export default function PremiumItemsPage() {
                     </select>
                   </div>
 
-                  <div className="flex gap-1 border rounded-lg overflow-hidden">
+                  <div className="flex gap-2 border-2 border-amber-300 rounded-xl overflow-hidden bg-white/50 backdrop-blur-sm">
                     <Button
                       variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                      size="sm"
+                      size="lg"
                       onClick={() => setViewMode('grid')}
-                      className="rounded-none"
+                      className={`rounded-none px-4 py-2 ${
+                        viewMode === 'grid'
+                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white'
+                          : 'text-amber-800 hover:bg-amber-100'
+                      }`}
                     >
-                      <Grid3X3 className="h-4 w-4" />
+                      <Grid3X3 className="h-5 w-5" />
                     </Button>
                     <Button
                       variant={viewMode === 'list' ? 'default' : 'ghost'}
-                      size="sm"
+                      size="lg"
                       onClick={() => setViewMode('list')}
-                      className="rounded-none"
+                      className={`rounded-none px-4 py-2 ${
+                        viewMode === 'list'
+                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white'
+                          : 'text-amber-800 hover:bg-amber-100'
+                      }`}
                     >
-                      <List className="h-4 w-4" />
+                      <List className="h-5 w-5" />
                     </Button>
                   </div>
                 </div>
