@@ -621,6 +621,23 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                         </Button>
                       </motion.div>
 
+                      {/* Visit Store Button */}
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Button
+                          variant="outline"
+                          className="w-full border-purple-300 text-purple-600 hover:bg-purple-50 hover:border-purple-400"
+                          asChild
+                        >
+                          <Link href={`/vendors/${product.vendor.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/--+/g, '-').replace(/^-|-$/g, '')}`}>
+                            <Store className="h-4 w-4 mr-2" />
+                            Visit Store
+                          </Link>
+                        </Button>
+                      </motion.div>
+
                       {/* Feedback Buttons */}
                       {!feedbackGiven.has(product.id) && (
                         <div className="flex items-center justify-between">
