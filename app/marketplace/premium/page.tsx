@@ -304,64 +304,81 @@ export default function LinkaRoyalePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-800 relative overflow-hidden">
-      {/* Royal Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400/10 via-amber-500/5 to-yellow-600/10 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-300/5 to-amber-400/10 pointer-events-none"></div>
-      
-      {/* Animated Royal Particles */}
+    <div className="min-h-screen bg-luxury-gradient relative overflow-hidden texture-luxury">
+      {/* Professional Luxury Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-royal-gold/8 via-luxury-gold/4 to-champagne-gold/6 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-royal-gold/3 to-luxury-gold/5 pointer-events-none"></div>
+
+      {/* Sophisticated Floating Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
+        {[...Array(25)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-yellow-400/30 rounded-full animate-float"
+            className="absolute w-0.5 h-0.5 bg-royal-gold/40 rounded-full animate-royal-float shadow-sm"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${5 + Math.random() * 10}s`
+              animationDelay: `${Math.random() * 15}s`,
+              animationDuration: `${8 + Math.random() * 12}s`
             }}
           />
         ))}
       </div>
 
-      {/* Royal Sidebar Navigation */}
-      <div className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-b from-white/98 via-amber-50/95 to-white/98 backdrop-blur-xl shadow-2xl transform transition-all duration-500 z-50 border-r-2 border-yellow-400/20 ${
+      {/* Luxury Light Rays */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-royal-gold/5 via-luxury-gold/3 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-gradient-radial from-champagne-gold/4 via-royal-gold/2 to-transparent rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Professional Luxury Sidebar Navigation */}
+      <div className={`fixed top-0 left-0 h-full w-80 nav-luxury transform transition-all duration-700 z-50 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="p-8 space-y-8">
-          {/* Royal Logo */}
+          {/* Luxury Brand Logo */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 rounded-xl flex items-center justify-center shadow-xl border-2 border-yellow-300/50">
-                <Crown className="h-8 w-8 text-white drop-shadow-lg" />
+              <div className="w-16 h-16 bg-gold-luxury-gradient rounded-2xl flex items-center justify-center shadow-2xl border border-royal-gold/30 relative">
+                <Crown className="h-9 w-9 text-midnight-blue drop-shadow-lg" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
               </div>
               <div className="text-left">
-                <h1 className="text-2xl font-bold text-blue-900 font-serif tracking-wide">Linka</h1>
-                <p className="text-lg font-semibold text-yellow-600 font-serif">Royale</p>
+                <h1 className="text-3xl font-bold text-midnight-blue font-royal tracking-wide text-luxury-title">Linka</h1>
+                <p className="text-xl font-semibold text-luxury-gold font-royal italic tracking-wide">Royale</p>
+                <div className="w-12 h-0.5 bg-gradient-to-r from-royal-gold to-luxury-gold mt-1 rounded-full"></div>
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)}>
-              <X className="h-6 w-6 text-blue-900" />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setSidebarOpen(false)}
+              className="hover:bg-royal-gold/10 rounded-xl p-2 transition-all duration-300"
+            >
+              <X className="h-6 w-6 text-charcoal-luxury" />
             </Button>
           </div>
 
-          {/* Concierge Access */}
-          <div className="bg-gradient-to-r from-yellow-400/10 via-amber-100/20 to-yellow-400/10 rounded-2xl p-4 border border-yellow-400/30">
+          {/* Luxury Concierge Access */}
+          <div className="luxury-card rounded-3xl p-6 border border-royal-gold/20">
+            <div className="text-center mb-4">
+              <h3 className="text-luxury-caption text-charcoal-luxury mb-2">Personal Assistant</h3>
+              <p className="text-sm text-luxury-body text-charcoal-luxury/70">Available 24/7 for your luxury experience</p>
+            </div>
             <Button
               onClick={() => setConciergeOpen(true)}
-              className="w-full bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:from-yellow-600 hover:via-amber-600 hover:to-yellow-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full btn-luxury py-4 rounded-xl shadow-xl text-lg font-semibold transition-all duration-400"
             >
-              <MessageCircle className="h-5 w-5 mr-2" />
-              <Crown className="h-4 w-4 mr-2 animate-pulse" />
+              <MessageCircle className="h-5 w-5 mr-3" />
+              <Crown className="h-4 w-4 mr-2 animate-royal-pulse" />
               Royal Concierge
             </Button>
           </div>
 
-          {/* Navigation Menu */}
-          <nav className="space-y-3">
+          {/* Luxury Navigation Menu */}
+          <nav className="space-y-2">
             {[
-              { icon: Home, label: 'Home', href: '/', isActive: false },
+              { icon: Home, label: 'Home', href: '/', isActive: true },
               { icon: Flame, label: 'Hot Deals', href: '/hot-deals', isActive: false },
               { icon: ShoppingBag, label: 'About', href: '/about', isActive: false },
               { icon: UserPlus, label: 'For Retailers', href: '/for-retailers', isActive: false },
@@ -374,13 +391,31 @@ export default function LinkaRoyalePage() {
               <Link
                 key={item.label}
                 href={item.href}
-                className={`flex items-center gap-4 px-6 py-4 rounded-xl transition-all duration-300 group hover:bg-gradient-to-r hover:from-yellow-50 hover:to-amber-50 hover:shadow-lg ${
-                  item.isActive ? 'bg-gradient-to-r from-yellow-100 to-amber-100 shadow-md border border-yellow-300/30' : ''
+                className={`royal-nav-item flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-400 group ${
+                  item.isActive
+                    ? 'bg-gradient-to-r from-royal-gold/15 via-luxury-gold/10 to-royal-gold/15 shadow-lg border border-royal-gold/25'
+                    : 'hover:bg-gradient-to-r hover:from-royal-gold/8 hover:to-luxury-gold/8 hover:shadow-md'
                 }`}
               >
-                <item.icon className="h-6 w-6 text-blue-800 group-hover:text-yellow-600 transition-colors" />
-                <span className="font-semibold text-blue-900 group-hover:text-yellow-700 text-lg">{item.label}</span>
-                <ChevronRight className="h-4 w-4 text-blue-600 group-hover:text-yellow-500 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className={`p-2 rounded-xl transition-all duration-300 ${
+                  item.isActive
+                    ? 'bg-royal-gold/20 text-luxury-gold'
+                    : 'text-charcoal-luxury group-hover:bg-royal-gold/10 group-hover:text-luxury-gold'
+                }`}>
+                  <item.icon className="h-5 w-5" />
+                </div>
+                <span className={`font-semibold text-lg text-luxury-body transition-colors duration-300 ${
+                  item.isActive
+                    ? 'text-midnight-blue'
+                    : 'text-charcoal-luxury group-hover:text-midnight-blue'
+                }`}>
+                  {item.label}
+                </span>
+                <ChevronRight className={`h-4 w-4 ml-auto transition-all duration-300 ${
+                  item.isActive
+                    ? 'text-luxury-gold opacity-100'
+                    : 'text-charcoal-luxury/50 opacity-0 group-hover:opacity-100 group-hover:text-luxury-gold'
+                }`} />
               </Link>
             ))}
           </nav>
@@ -406,47 +441,48 @@ export default function LinkaRoyalePage() {
         />
       )}
 
-      {/* Premium Hero Header */}
-      <div className="relative z-20 bg-gradient-to-r from-blue-900/95 via-indigo-900/95 to-blue-800/95 backdrop-blur-xl border-b border-yellow-400/20 shadow-xl">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6">
+      {/* Professional Luxury Header */}
+      <div className="relative z-20 glass-luxury-dark border-b border-royal-gold/15 shadow-2xl">
+        <div className="max-w-7xl mx-auto px-8 lg:px-12 py-8">
           <div className="flex items-center justify-between">
             {/* Menu Button & Welcome */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-8">
               <Button
                 variant="outline"
                 size="lg"
                 onClick={() => setSidebarOpen(true)}
-                className="bg-yellow-400/10 border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:border-yellow-400/50 rounded-xl shadow-lg"
+                className="glass-luxury border-royal-gold/20 text-royal-gold hover:bg-royal-gold/10 hover:border-royal-gold/40 rounded-2xl shadow-lg transition-all duration-400 p-3"
               >
                 <Menu className="h-6 w-6" />
               </Button>
-              <div>
-                <h1 className="text-3xl font-bold text-yellow-400 font-serif tracking-wide">
-                  Welcome to Linka Royale
+              <div className="space-y-2">
+                <h1 className="text-4xl font-bold text-pearl-white font-royal tracking-wide text-luxury-title">
+                  Welcome to <span className="text-royal-gold">Linka Royale</span>
                 </h1>
-                <p className="text-lg text-blue-200">Experience Luxury Beyond Compare</p>
+                <p className="text-xl text-platinum/90 font-luxury">Experience Luxury Beyond Compare</p>
+                <div className="w-24 h-0.5 bg-gradient-to-r from-royal-gold to-luxury-gold rounded-full"></div>
               </div>
             </div>
 
-            {/* Search Bar */}
-            <div className="flex-1 max-w-2xl mx-8">
+            {/* Luxury Search Bar */}
+            <div className="flex-1 max-w-3xl mx-12">
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Search className="h-6 w-6 text-yellow-400" />
+                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                  <Search className="h-6 w-6 text-royal-gold" />
                 </div>
                 <input
                   type="text"
-                  placeholder="Search royal products and services..."
+                  placeholder="Search exclusive luxury collections..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-16 py-4 bg-white/95 backdrop-blur-xl border-2 border-yellow-400/30 rounded-xl text-blue-900 placeholder-blue-600/60 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 shadow-lg font-medium text-lg"
+                  className="w-full pl-16 pr-20 py-5 glass-luxury border border-royal-gold/20 rounded-2xl text-midnight-blue placeholder-charcoal-luxury/60 focus:border-royal-gold/40 focus:ring-2 focus:ring-royal-gold/20 shadow-xl font-medium text-lg text-luxury-body transition-all duration-400"
                 />
                 <Button
                   onClick={() => setVoiceSearch(!voiceSearch)}
-                  className={`absolute inset-y-0 right-1 my-1 px-3 rounded-lg transition-all duration-300 ${
-                    voiceSearch 
-                      ? 'bg-red-500 hover:bg-red-600 text-white' 
-                      : 'bg-yellow-400 hover:bg-yellow-500 text-blue-900'
+                  className={`absolute inset-y-0 right-2 my-2 px-4 rounded-xl transition-all duration-400 ${
+                    voiceSearch
+                      ? 'bg-burgundy-luxury hover:bg-burgundy-luxury/80 text-white shadow-lg'
+                      : 'btn-luxury shadow-lg hover:scale-105'
                   }`}
                 >
                   {voiceSearch ? <Volume2 className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
@@ -454,28 +490,28 @@ export default function LinkaRoyalePage() {
               </div>
             </div>
 
-            {/* Action Icons */}
+            {/* Luxury Action Icons */}
             <div className="flex items-center gap-4">
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-yellow-400/10 border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:border-yellow-400/50 rounded-full w-14 h-14 shadow-lg relative"
+                className="glass-luxury border-royal-gold/25 text-royal-gold hover:bg-royal-gold/15 hover:border-royal-gold/40 rounded-2xl w-16 h-16 shadow-xl relative transition-all duration-400 hover:scale-105"
               >
                 <ShoppingCart className="h-6 w-6" />
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold">3</span>
+                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-burgundy-luxury to-red-600 text-white text-xs rounded-full w-7 h-7 flex items-center justify-center font-bold shadow-lg border border-white/20">3</span>
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-yellow-400/10 border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:border-yellow-400/50 rounded-full w-14 h-14 shadow-lg relative"
+                className="glass-luxury border-royal-gold/25 text-royal-gold hover:bg-royal-gold/15 hover:border-royal-gold/40 rounded-2xl w-16 h-16 shadow-xl relative transition-all duration-400 hover:scale-105"
               >
                 <Bell className="h-6 w-6" />
-                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold">7</span>
+                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-emerald-luxury to-green-600 text-white text-xs rounded-full w-7 h-7 flex items-center justify-center font-bold shadow-lg border border-white/20 animate-pulse">7</span>
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-yellow-400/10 border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:border-yellow-400/50 rounded-full w-14 h-14 shadow-lg"
+                className="glass-luxury border-royal-gold/25 text-royal-gold hover:bg-royal-gold/15 hover:border-royal-gold/40 rounded-2xl w-16 h-16 shadow-xl transition-all duration-400 hover:scale-105"
               >
                 <User className="h-6 w-6" />
               </Button>
