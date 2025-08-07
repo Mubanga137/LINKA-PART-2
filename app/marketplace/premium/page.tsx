@@ -864,22 +864,44 @@ export default function PremiumItemsPage() {
                       </div>
 
                       {/* Actions */}
-                      <div className="flex gap-3">
-                        <Button
-                          className="flex-1 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 hover:from-amber-700 hover:via-yellow-600 hover:to-amber-700 text-white font-bold py-4 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
+                      <div className="flex gap-4">
+                        <motion.div
+                          className="flex-1"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                         >
-                          <ShoppingCart className="h-5 w-5 mr-3" />
-                          Add to Cart
-                        </Button>
-                        <Button
-                          variant="outline"
-                          className="px-6 py-4 border-2 border-amber-400 hover:border-amber-600 hover:bg-amber-50 text-amber-800 hover:text-amber-900 rounded-2xl font-semibold transition-all duration-300"
-                          asChild
+                          <Button
+                            className="w-full bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 hover:from-amber-700 hover:via-yellow-600 hover:to-amber-700 text-white font-black py-5 text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 relative overflow-hidden group"
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
+                            <motion.div
+                              animate={{ rotate: [0, 5, -5, 0] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              <ShoppingCart className="h-6 w-6 mr-3 relative z-10" />
+                            </motion.div>
+                            <span className="relative z-10">Add to Cart</span>
+                          </Button>
+                        </motion.div>
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
                         >
-                          <Link href={`/products/${product.id}`}>
-                            <ExternalLink className="h-5 w-5" />
-                          </Link>
-                        </Button>
+                          <Button
+                            variant="outline"
+                            className="px-8 py-5 border-3 border-amber-400 hover:border-amber-600 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 text-amber-800 hover:text-amber-900 rounded-2xl font-bold transition-all duration-500 shadow-lg hover:shadow-xl"
+                            asChild
+                          >
+                            <Link href={`/products/${product.id}`}>
+                              <motion.div
+                                animate={{ scale: [1, 1.2, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                              >
+                                <ExternalLink className="h-6 w-6" />
+                              </motion.div>
+                            </Link>
+                          </Button>
+                        </motion.div>
                       </div>
 
                       {/* Certifications */}
