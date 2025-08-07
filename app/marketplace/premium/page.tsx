@@ -638,11 +638,23 @@ export default function PremiumItemsPage() {
                   <Card className="overflow-hidden border-2 border-amber-200/70 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-gradient-to-br from-white/98 via-amber-50/40 to-yellow-50/30 backdrop-blur-md hover:border-amber-400/90 relative">
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     {/* Premium Badges */}
-                    <div className="absolute top-6 left-6 z-20 flex flex-col gap-2">
-                      <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-4 py-2 shadow-lg border border-white/30">
-                        <Crown className="h-4 w-4 mr-2" />
-                        Premium
-                      </Badge>
+                    <div className="absolute top-6 left-6 z-20 flex flex-col gap-3">
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.15 + 0.3, type: "spring" }}
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-5 py-2.5 shadow-xl border-2 border-white/40 backdrop-blur-sm font-bold text-base">
+                          <motion.div
+                            animate={{ rotate: [0, 10, -10, 0] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          >
+                            <Crown className="h-5 w-5 mr-2" />
+                          </motion.div>
+                          Premium
+                        </Badge>
+                      </motion.div>
                       {product.handcrafted && (
                         <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1.5 text-sm shadow-lg border border-white/30">
                           <Award className="h-3 w-3 mr-1.5" />
