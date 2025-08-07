@@ -378,14 +378,14 @@ export default function PremiumItemsPage() {
         </section>
 
         {/* Filters and Controls */}
-        <section className="py-8">
+        <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-2xl border shadow-lg p-6">
-              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="bg-gradient-to-r from-white/95 via-amber-50/90 to-white/95 backdrop-blur-md rounded-3xl border border-amber-200/60 shadow-2xl p-8">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
                 {/* Premium Filters */}
                 <div className="flex-1">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <Diamond className="h-4 w-4" />
+                  <h3 className="text-lg font-bold text-amber-900 mb-4 flex items-center gap-3">
+                    <Diamond className="h-5 w-5 text-amber-600" />
                     Premium Categories
                   </h3>
                   <div className="flex flex-wrap gap-2">
