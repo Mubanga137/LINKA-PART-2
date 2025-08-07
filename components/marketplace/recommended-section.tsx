@@ -606,11 +606,8 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                       )}
                     </div>
 
-                    {/* Spacer */}
-                    <div className="flex-1"></div>
-
                     {/* Actions */}
-                    <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
+                    <div className="mt-6 pt-4 border-t border-gray-100 space-y-3">
                       <Button
                         onClick={() => handleAddToCart(product)}
                         className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-2.5 shadow-md"
