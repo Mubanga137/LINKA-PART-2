@@ -25,7 +25,7 @@ interface TrendingProductsProps {
 
 export function TrendingProducts({ products, isLoading }: TrendingProductsProps) {
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
-  const { addToCart } = useCart()
+  const { addToCart, getItemQuantity } = useCart()
 
   const toggleFavorite = (productId: string) => {
     setFavorites(prev => {
