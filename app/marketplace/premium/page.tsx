@@ -651,10 +651,10 @@ export default function PremiumItemsPage() {
 
                       {/* Certifications */}
                       {product.certifications && product.certifications.length > 0 && (
-                        <div className="mt-3 text-center">
-                          <div className="flex items-center justify-center gap-1 text-xs text-gray-500">
-                            <CheckCircle className="h-3 w-3 text-green-500" />
-                            <span>{product.certifications.join(" • ")}</span>
+                        <div className="mt-4 pt-4 border-t border-gray-100">
+                          <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500">
+                            <CheckCircle className="h-3 w-3 text-green-600" />
+                            <span className="font-medium">{product.certifications.join(" • ")}</span>
                           </div>
                         </div>
                       )}
@@ -665,14 +665,14 @@ export default function PremiumItemsPage() {
             </div>
 
             {filteredProducts.length === 0 && (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Crown className="h-8 w-8 text-amber-500" />
+              <div className="text-center py-16">
+                <div className="w-20 h-20 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                  <Crown className="h-10 w-10 text-amber-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   No premium items found
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 text-lg">
                   Try adjusting your filters to see more luxury products
                 </p>
               </div>
