@@ -342,7 +342,7 @@ export function ShopByCategorySection({ showAll = false, maxItems = 6 }: ShopByC
               "
               asChild
             >
-              <Link href="/services" className="group">
+              <Link href="/categories" className="group">
                 <motion.div
                   whileHover={{ rotate: 180 }}
                   transition={{ duration: 0.3 }}
