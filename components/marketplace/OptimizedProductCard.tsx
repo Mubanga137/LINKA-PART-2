@@ -44,6 +44,17 @@ export function OptimizedProductCard({
 }: OptimizedProductCardProps) {
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [addingToCart, setAddingToCart] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Motion values for 3D transforms
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-100, 100], [15, -15]);
+  const rotateY = useTransform(x, [-100, 100], [-15, 15]);
 
   const handleImageError = () => {
     setImageError(true);
