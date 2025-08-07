@@ -366,13 +366,9 @@ export function HotDealsSection() {
                           {remaining} left
                         </span>
                       </div>
-                      <div className="relative">
-                        <Progress
-                          value={soldPercentage}
-                          className="h-2"
-                        />
+                      <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div
-                          className="absolute inset-0 h-2 rounded-full"
+                          className="h-full rounded-full transition-all duration-300"
                           style={{
                             background: `linear-gradient(to right,
                               ${soldPercentage > 80 ? '#ef4444' : soldPercentage > 60 ? '#f97316' : '#22c55e'} 0%,
