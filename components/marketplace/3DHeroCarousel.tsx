@@ -163,31 +163,31 @@ export function HeroCarousel3D() {
             <div className="space-y-8 z-20 relative">
               {/* Category & Badges */}
               <div className="flex items-center gap-3 flex-wrap">
-                <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-4 py-2 text-sm font-bold rounded-xl shadow-lg">
+                <Badge className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-blue-900 px-4 py-2 text-sm font-bold rounded-xl shadow-lg border border-yellow-300/30">
                   <Crown className="h-4 w-4 mr-2" />
                   {currentProduct.category}
                 </Badge>
                 {currentProduct.isNew && (
-                  <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-3 py-1.5 text-sm rounded-lg animate-pulse">
-                    NEW
+                  <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-3 py-1.5 text-sm rounded-lg animate-pulse border border-emerald-300/30">
+                    EXCLUSIVE
                   </Badge>
                 )}
                 {currentProduct.flashSale && (
-                  <Badge className="bg-gradient-to-r from-red-500 to-orange-600 text-white px-3 py-1.5 text-sm rounded-lg animate-bounce">
+                  <Badge className="bg-gradient-to-r from-red-500 to-orange-600 text-white px-3 py-1.5 text-sm rounded-lg animate-bounce border border-red-300/30">
                     <Zap className="h-3 w-3 mr-1" />
-                    FLASH SALE
+                    ROYAL SALE
                   </Badge>
                 )}
               </div>
 
               {/* Main Title */}
               <div className="space-y-4">
-                <h1 className="text-4xl lg:text-6xl xl:text-7xl font-black text-white leading-tight">
-                  <span className="bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 bg-clip-text text-transparent drop-shadow-2xl">
+                <h1 className="text-4xl lg:text-6xl xl:text-7xl font-black leading-tight font-serif">
+                  <span className="bg-gradient-to-r from-yellow-200 via-amber-100 to-yellow-200 bg-clip-text text-transparent drop-shadow-2xl">
                     {currentProduct.name}
                   </span>
                 </h1>
-                <p className="text-xl lg:text-2xl text-amber-100/90 leading-relaxed max-w-2xl">
+                <p className="text-xl lg:text-2xl text-blue-100/90 leading-relaxed max-w-2xl font-sans">
                   {currentProduct.description}
                 </p>
               </div>
