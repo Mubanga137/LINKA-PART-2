@@ -875,8 +875,8 @@ function MarketplaceContent() {
           />
 
           <main>
-        <EnhancedHeroSection />
-        <RecommendedSection
+            <EnhancedHeroSection />
+            <RecommendedSection
           onAddToCart={(product) => {
             // Convert RecommendedProduct to cart-compatible format
             const cartProduct = {
