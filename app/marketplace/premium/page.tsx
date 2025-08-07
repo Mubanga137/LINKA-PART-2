@@ -418,26 +418,59 @@ export default function PremiumItemsPage() {
               </div>
 
               {/* Premium Features */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto">
                 {[
-                  { icon: Shield, label: "Quality Guaranteed", desc: "Premium materials only" },
-                  { icon: Award, label: "Master Crafted", desc: "By skilled artisans" },
-                  { icon: Verified, label: "Authenticity", desc: "Certified genuine" },
-                  { icon: Gift, label: "Luxury Packaging", desc: "Gift-ready presentation" }
+                  { icon: Shield, label: "Quality Guaranteed", desc: "Premium materials only", color: "from-amber-400 to-yellow-500" },
+                  { icon: Award, label: "Master Crafted", desc: "By skilled artisans", color: "from-yellow-400 to-amber-500" },
+                  { icon: Verified, label: "Authenticity", desc: "Certified genuine", color: "from-amber-500 to-yellow-600" },
+                  { icon: Gift, label: "Luxury Packaging", desc: "Gift-ready presentation", color: "from-yellow-500 to-amber-600" }
                 ].map((feature, index) => (
                   <motion.div
                     key={feature.label}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.15 }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="bg-gradient-to-br from-white/95 to-amber-50/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-amber-200/50 hover:border-amber-300/70 transition-all duration-300"
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{
+                      delay: index * 0.2,
+                      duration: 0.8,
+                      ease: "easeOut"
+                    }}
+                    whileHover={{
+                      scale: 1.08,
+                      y: -10,
+                      boxShadow: "0 25px 50px rgba(245, 158, 11, 0.3)"
+                    }}
+                    className="group bg-gradient-to-br from-white/98 via-amber-50/60 to-yellow-50/80 backdrop-blur-md rounded-3xl p-10 shadow-2xl border-2 border-amber-200/60 hover:border-amber-300/80 transition-all duration-500 relative overflow-hidden"
                   >
-                    <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <feature.icon className="h-8 w-8 text-white drop-shadow-sm" />
-                    </div>
-                    <h3 className="font-bold text-amber-900 mb-2 text-lg">{feature.label}</h3>
-                    <p className="text-amber-800/70 text-sm leading-relaxed">{feature.desc}</p>
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                    <motion.div
+                      className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl relative overflow-hidden`}
+                      whileHover={{
+                        rotate: 360,
+                        scale: 1.1
+                      }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent animate-pulse"></div>
+                      <feature.icon className="h-10 w-10 text-white drop-shadow-lg relative z-10" />
+                    </motion.div>
+
+                    <motion.h3
+                      className="font-black text-amber-900 mb-3 text-xl tracking-wide"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.2 + 0.3 }}
+                    >
+                      {feature.label}
+                    </motion.h3>
+                    <motion.p
+                      className="text-amber-800/80 text-base leading-relaxed font-medium"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.2 + 0.4 }}
+                    >
+                      {feature.desc}
+                    </motion.p>
                   </motion.div>
                 ))}
               </div>
