@@ -40,7 +40,7 @@ import {
   Upload,
   X
 } from "lucide-react"
-import { Product } from "@/contexts/cart-context"
+import { Product } from "@/lib/types"
 import { productService } from "@/services/product-service"
 
 interface ProductFormData {
