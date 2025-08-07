@@ -18,7 +18,7 @@ import {
   Filter,
   X,
   History,
-  Fire,
+  Flame,
   Zap,
   Heart,
   ArrowUpRight,
