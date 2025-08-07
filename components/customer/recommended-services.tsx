@@ -139,11 +139,6 @@ export function RecommendedServices({ products, isLoading }: RecommendedServices
                     )}
                   </div>
 
-                  <Link href={`/products/${product.id}`}>
-                    <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700">
-                      View Details
-                    </Button>
-                  </Link>
                 </div>
 
                 {/* Features */}
