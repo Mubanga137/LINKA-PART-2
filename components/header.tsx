@@ -66,15 +66,15 @@ export function Header() {
   return (
     <>
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200/50 shadow-sm">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center space-x-3 group">
+            <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
               <div className="relative">
-                <LinkIcon className="h-9 w-9 text-indigo-600 group-hover:text-indigo-700 transition-colors" />
+                <LinkIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 text-indigo-600 group-hover:text-indigo-700 transition-colors" />
                 <div className="absolute inset-0 bg-indigo-600/20 rounded-full blur-xl group-hover:bg-indigo-700/30 transition-all"></div>
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
                 Linka
               </span>
             </Link>
@@ -144,7 +144,7 @@ export function Header() {
             )}
           </nav>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             {/* Shopping Cart & Wishlist - Only show on shopping pages */}
             {isShoppingPage && (
               <>
@@ -152,10 +152,10 @@ export function Header() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative text-sm px-2 lg:px-3"
                   >
-                    <Heart className="h-4 w-4 mr-2" />
-                    Wishlist
+                    <Heart className="h-4 w-4 mr-1 lg:mr-2" />
+                    <span className="hidden lg:inline">Wishlist</span>
                     {favoritesCount > 0 && (
                       <Badge className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
                         {favoritesCount}
@@ -167,10 +167,10 @@ export function Header() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative"
+                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative text-sm px-2 lg:px-3"
                   >
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    Cart
+                    <ShoppingCart className="h-4 w-4 mr-1 lg:mr-2" />
+                    <span className="hidden lg:inline">Cart</span>
                     {totalItems > 0 && (
                       <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
                         {totalItems}
@@ -250,20 +250,23 @@ export function Header() {
             {/* CTA Button - Role specific */}
             {user?.role === 'retailer' ? (
               <Link href="/retailer-dashboard">
-                <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/30 transition-all">
-                  My Dashboard
+                <Button className="hidden sm:flex bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/30 transition-all text-sm md:text-base px-3 md:px-4 py-2">
+                  <span className="hidden md:inline">My Dashboard</span>
+                  <span className="md:hidden">Dashboard</span>
                 </Button>
               </Link>
             ) : user?.role === 'customer' ? (
               <Link href="/customer-dashboard">
-                <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all">
-                  My Account
+                <Button className="hidden sm:flex bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all text-sm md:text-base px-3 md:px-4 py-2">
+                  <span className="hidden md:inline">My Account</span>
+                  <span className="md:hidden">Account</span>
                 </Button>
               </Link>
             ) : (
               <Link href="/signup?role=retailer">
-                <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 transition-all">
-                  Sell on Linka
+                <Button className="hidden sm:flex bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 transition-all text-sm md:text-base px-3 md:px-4 py-2">
+                  <span className="hidden lg:inline">Sell on Linka</span>
+                  <span className="lg:hidden">Sell</span>
                 </Button>
               </Link>
             )}
