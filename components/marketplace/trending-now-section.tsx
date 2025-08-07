@@ -32,6 +32,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { getAllVendors, getProductsByVendorId, generateStoreSlug } from "@/services/vendor-service";
+import { useCart, useFavorites } from "@/contexts/marketplace-context";
 import type { Product, Vendor } from "@/lib/types";
 
 // Using the Product type from our service instead of custom interface
