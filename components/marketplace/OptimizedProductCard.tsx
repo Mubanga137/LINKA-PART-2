@@ -114,7 +114,8 @@ export function OptimizedProductCard({
   const isFlashSale = product.tags?.includes('flash-sale') || (product as any).hotDeal;
 
   return (
-    <article className="group bg-white rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blue-200 flex flex-col h-full w-full">
+    <Link href={`/products/${product.id}`} className="block w-full h-full group">
+      <article className="bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 flex flex-col h-full w-full cursor-pointer">
       {/* Product Image Container */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         {imageLoading && !imageError && (
@@ -262,7 +263,7 @@ export function OptimizedProductCard({
           </Button>
 
           {/* Secondary Buttons Row */}
-          <div className="grid grid-cols-2 gap-2">
+          <div className={`${showVisitStore && !isFlashSale ? 'block' : 'hidden'}`}>
             {/* Visit Store Button - Only show for non-flash-sale items */}
             {showVisitStore && !isFlashSale && (
               <Button
@@ -277,22 +278,10 @@ export function OptimizedProductCard({
               </Button>
             )}
 
-            {/* View Details Button */}
-            <Button
-              variant="outline"
-              className={`border-gray-300 text-gray-600 hover:bg-gray-50 hover:border-blue-300 hover:text-blue-600 py-2.5 text-xs rounded-lg transition-all duration-200 tap-target focus-visible-enhanced ${
-                showVisitStore && !isFlashSale ? '' : 'col-span-2'
-              }`}
-              asChild
-            >
-              <Link href={`/products/${product.id}`}>
-                <Eye className="h-3 w-3 mr-1" />
-                {showVisitStore && !isFlashSale ? 'Details' : 'View Details'}
-              </Link>
-            </Button>
           </div>
         </div>
       </div>
-    </article>
+      </article>
+    </Link>
   );
 }
