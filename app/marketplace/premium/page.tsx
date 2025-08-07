@@ -43,7 +43,17 @@ import {
   Flame,
   Zap,
   Filter,
-  SortAsc
+  SortAsc,
+  MessageCircle,
+  ShoppingBag,
+  MapPin,
+  Phone,
+  Mail,
+  UserPlus,
+  Mic,
+  Volume2,
+  ChevronRight,
+  LogOut
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -76,207 +86,130 @@ interface PremiumProduct {
   views: number;
   soldCount: number;
   tags: string[];
+  stockLevel?: number;
+  trending?: boolean;
+  flashSale?: boolean;
+  saleEndTime?: Date;
 }
 
 const premiumProducts: PremiumProduct[] = [
   {
     id: "p1",
-    name: "Handcrafted Malachite Jewelry Collection",
-    description: "Exquisite handcrafted jewelry featuring authentic Zambian malachite stones, showcasing the rich green beauty of Zambia's national gemstone",
-    price: 299.99,
-    originalPrice: 449.99,
+    name: "Royal Malachite Crown Collection",
+    description: "Exquisite handcrafted crown featuring authentic Zambian malachite stones, showcasing the rich heritage of Zambian royalty",
+    price: 2999.99,
+    originalPrice: 4499.99,
     images: [
       "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80",
       "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&q=80"
     ],
-    category: "Jewelry & Accessories",
+    category: "Royal Jewelry",
     vendor: {
       id: "v1",
-      name: "Zambian Gemstone Artisans",
+      name: "Royal Zambian Artisans",
       logo: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=100&q=80",
-      verified: true,
-      premiumSeller: true
-    },
-    rating: 4.9,
-    reviewCount: 156,
-    premiumFeatures: ["Authentic Malachite", "Handcrafted Design", "Limited Edition", "Certificate of Authenticity"],
-    luxuryRating: 5,
-    handcrafted: true,
-    limitedEdition: true,
-    exclusiveDesign: true,
-    premiumMaterials: ["Zambian Malachite", "Sterling Silver", "18k Gold Plating"],
-    certifications: ["Authentic Gemstone Certificate", "Artisan Crafted"],
-    warranty: "Lifetime Craftsmanship Guarantee",
-    views: 4230,
-    soldCount: 67,
-    tags: ["luxury", "handmade", "malachite", "jewelry"]
-  },
-  {
-    id: "p2",
-    name: "Royal Chitenge Ceremonial Attire",
-    description: "Luxurious ceremonial chitenge outfit worn by Zambian royalty, featuring intricate traditional patterns and premium silk materials",
-    price: 459.99,
-    originalPrice: 699.99,
-    images: [
-      "https://images.unsplash.com/photo-1594736797933-d0300ad942ed?w=800&q=80",
-      "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800&q=80"
-    ],
-    category: "Traditional Fashion",
-    vendor: {
-      id: "v2",
-      name: "Royal Heritage Fashion House",
-      logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&q=80",
       verified: true,
       premiumSeller: true
     },
     rating: 5.0,
     reviewCount: 89,
-    premiumFeatures: ["Royal Design", "Premium Silk", "Custom Tailoring", "Historical Significance"],
+    premiumFeatures: ["Authentic Malachite", "Royal Heritage", "Limited Edition", "Certificate of Authenticity"],
+    luxuryRating: 5,
+    handcrafted: true,
+    limitedEdition: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Zambian Malachite", "24k Gold", "Sterling Silver"],
+    certifications: ["Royal Heritage Certificate", "Artisan Crafted"],
+    warranty: "Lifetime Royal Guarantee",
+    views: 8450,
+    soldCount: 12,
+    tags: ["luxury", "royal", "malachite", "crown"],
+    stockLevel: 3,
+    trending: true,
+    flashSale: true,
+    saleEndTime: new Date(Date.now() + 24 * 60 * 60 * 1000)
+  },
+  {
+    id: "p2",
+    name: "Imperial Chitenge Ceremonial Robes",
+    description: "Magnificent ceremonial robes worn by Zambian royalty, featuring intricate gold threading and premium silk materials",
+    price: 1899.99,
+    originalPrice: 2799.99,
+    images: [
+      "https://images.unsplash.com/photo-1594736797933-d0300ad942ed?w=800&q=80",
+      "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800&q=80"
+    ],
+    category: "Royal Fashion",
+    vendor: {
+      id: "v2",
+      name: "Imperial Fashion House",
+      logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&q=80",
+      verified: true,
+      premiumSeller: true
+    },
+    rating: 4.9,
+    reviewCount: 156,
+    premiumFeatures: ["Imperial Design", "Premium Silk", "Gold Threading", "Royal Certification"],
     luxuryRating: 5,
     handcrafted: true,
     exclusiveDesign: true,
-    premiumMaterials: ["Pure Silk", "Gold Thread", "Traditional Dyes"],
-    certifications: ["Cultural Heritage Approved", "Royal Design Certified"],
-    warranty: "6 Month Premium Guarantee",
-    views: 6780,
-    soldCount: 23,
-    tags: ["royal", "traditional", "silk", "ceremonial"]
+    premiumMaterials: ["Pure Silk", "24k Gold Thread", "Traditional Dyes"],
+    certifications: ["Royal Fashion Approved", "Imperial Design Certified"],
+    warranty: "12 Month Imperial Guarantee",
+    views: 12340,
+    soldCount: 34,
+    tags: ["imperial", "ceremonial", "silk", "royal"],
+    stockLevel: 8,
+    trending: true
   },
   {
     id: "p3",
-    name: "Artisan Wood Sculpture Collection",
-    description: "Masterfully carved wooden sculptures representing Zambian wildlife, created by master craftsmen using sustainable hardwoods",
-    price: 189.99,
-    originalPrice: 289.99,
+    name: "Sovereign Wood Sculpture Collection",
+    description: "Masterfully carved royal sculptures representing Zambian wildlife and heritage, created by master craftsmen using rare hardwoods",
+    price: 799.99,
+    originalPrice: 1199.99,
     images: [
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
       "https://images.unsplash.com/photo-1580669337089-59ade28c4115?w=800&q=80"
     ],
-    category: "Art & Crafts",
+    category: "Royal Art",
     vendor: {
       id: "v3",
-      name: "Master Craftsmen Collective",
+      name: "Sovereign Craftsmen Guild",
       logo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=100&q=80",
       verified: true,
       premiumSeller: true
     },
     rating: 4.8,
     reviewCount: 234,
-    premiumFeatures: ["Master Crafted", "Sustainable Wood", "Wildlife Theme", "Unique Design"],
+    premiumFeatures: ["Master Crafted", "Rare Wood", "Royal Theme", "Unique Design"],
     luxuryRating: 4,
     handcrafted: true,
     exclusiveDesign: true,
-    premiumMaterials: ["Mahogany Wood", "Teak", "Natural Oils"],
-    certifications: ["Sustainable Sourcing", "Master Artisan Certified"],
-    warranty: "12 Month Craftsmanship Warranty",
-    views: 3450,
-    soldCount: 156,
-    tags: ["art", "wood", "sculpture", "wildlife"]
-  },
-  {
-    id: "p4",
-    name: "Premium Copper Wire Baskets",
-    description: "Elegant copper wire baskets handwoven by skilled artisans, combining traditional techniques with modern luxury appeal",
-    price: 134.99,
-    originalPrice: 199.99,
-    images: [
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
-    ],
-    category: "Home & Decor",
-    vendor: {
-      id: "v4",
-      name: "Luxury Home Crafters",
-      logo: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=100&q=80",
-      verified: true,
-      premiumSeller: true
-    },
-    rating: 4.7,
-    reviewCount: 178,
-    premiumFeatures: ["Pure Copper", "Handwoven Design", "Luxury Finish", "Functional Art"],
-    luxuryRating: 4,
-    handcrafted: true,
-    premiumMaterials: ["Pure Copper Wire", "Protective Coating"],
-    certifications: ["Artisan Quality", "Pure Copper Verified"],
-    warranty: "24 Month Quality Guarantee",
-    views: 2890,
-    soldCount: 89,
-    tags: ["copper", "baskets", "luxury", "home"]
-  },
-  {
-    id: "p5",
-    name: "Premium Zambian Coffee Luxury Set",
-    description: "Exclusive collection of single-origin Zambian coffee beans with premium brewing accessories and gold-plated serving set",
-    price: 89.99,
-    originalPrice: 149.99,
-    images: [
-      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80",
-      "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&q=80"
-    ],
-    category: "Gourmet Food",
-    vendor: {
-      id: "v5",
-      name: "Zambian Premium Coffee Co.",
-      logo: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=100&q=80",
-      verified: true,
-      premiumSeller: true
-    },
-    rating: 4.9,
-    reviewCount: 267,
-    premiumFeatures: ["Single Origin", "Premium Roast", "Luxury Packaging", "Brewing Accessories"],
-    luxuryRating: 4,
-    limitedEdition: true,
-    premiumMaterials: ["Premium Coffee Beans", "Gold-Plated Accessories"],
-    certifications: ["Organic Certified", "Fair Trade", "Premium Grade"],
-    warranty: "Satisfaction Guarantee",
-    views: 5670,
-    soldCount: 234,
-    tags: ["coffee", "gourmet", "luxury", "organic"]
-  },
-  {
-    id: "p6",
-    name: "Executive Leather Briefcase",
-    description: "Handcrafted executive briefcase made from premium Zambian leather with gold hardware and silk-lined interior",
-    price: 349.99,
-    originalPrice: 499.99,
-    images: [
-      "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80",
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"
-    ],
-    category: "Business Accessories",
-    vendor: {
-      id: "v6",
-      name: "Executive Leather Works",
-      logo: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=100&q=80",
-      verified: true,
-      premiumSeller: true
-    },
-    rating: 4.8,
-    reviewCount: 145,
-    premiumFeatures: ["Premium Leather", "Gold Hardware", "Silk Lining", "Executive Design"],
-    luxuryRating: 5,
-    handcrafted: true,
-    exclusiveDesign: true,
-    premiumMaterials: ["Premium Leather", "Gold Hardware", "Silk Lining"],
-    certifications: ["Leather Quality Certified", "Handcraft Verified"],
-    warranty: "5 Year Premium Warranty",
-    views: 3780,
-    soldCount: 78,
-    tags: ["leather", "briefcase", "executive", "business"]
+    premiumMaterials: ["Rare Mahogany", "Royal Teak", "Natural Oils"],
+    certifications: ["Master Artisan Certified", "Royal Guild Approved"],
+    warranty: "24 Month Craftsmanship Warranty",
+    views: 6780,
+    soldCount: 67,
+    tags: ["art", "wood", "sculpture", "royal"],
+    stockLevel: 15
   }
 ];
 
-export default function PremiumItemsPage() {
+export default function LinkaRoyalePage() {
   const [sortBy, setSortBy] = useState<'luxury' | 'price' | 'rating' | 'newest'>('luxury');
   const [filterBy, setFilterBy] = useState<'all' | 'handcrafted' | 'limited' | 'exclusive'>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [conciergeOpen, setConciergeOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [voiceSearch, setVoiceSearch] = useState(false);
 
   // Luxury loading animation
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
+    const timer = setTimeout(() => setIsLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -322,25 +255,47 @@ export default function PremiumItemsPage() {
       }
     });
 
-  // Luxury Loading Screen
+  // Royal Loading Screen
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="text-center space-y-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-800 flex items-center justify-center relative overflow-hidden">
+        {/* Royal Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-amber-500/5 to-yellow-600/10"></div>
+        
+        {/* Floating Royal Elements */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-yellow-400/20 rounded-full animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 4}s`
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="text-center space-y-8 z-10">
           <div className="relative">
-            <div className="w-32 h-32 border-4 border-amber-200/30 rounded-full animate-spin border-t-amber-400"></div>
+            <div className="w-40 h-40 border-4 border-yellow-400/30 rounded-full animate-spin border-t-yellow-400 shadow-2xl"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <Crown className="h-12 w-12 text-amber-400 animate-pulse" />
+              <Crown className="h-16 w-16 text-yellow-400 animate-pulse drop-shadow-lg" />
             </div>
           </div>
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 bg-clip-text text-transparent">
-              ✨ Loading Premium Experience
+          <div className="space-y-6">
+            <h1 className="text-4xl font-bold text-yellow-400 font-serif tracking-wide">
+              Linka Royale
+            </h1>
+            <h2 className="text-2xl font-semibold bg-gradient-to-r from-yellow-200 via-amber-100 to-yellow-200 bg-clip-text text-transparent">
+              ✨ Preparing Your Royal Experience
             </h2>
-            <div className="flex justify-center space-x-1">
-              <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce delay-100"></div>
-              <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce delay-200"></div>
+            <div className="flex justify-center space-x-2">
+              <div className="w-3 h-3 bg-yellow-400 rounded-full animate-bounce"></div>
+              <div className="w-3 h-3 bg-yellow-400 rounded-full animate-bounce delay-100"></div>
+              <div className="w-3 h-3 bg-yellow-400 rounded-full animate-bounce delay-200"></div>
             </div>
           </div>
         </div>
@@ -349,17 +304,17 @@ export default function PremiumItemsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 relative overflow-hidden">
-      {/* Advanced 3D Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-amber-400/10 via-purple-500/5 to-blue-500/10 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-amber-300/5 to-yellow-400/10 pointer-events-none"></div>
-
-      {/* Animated Luxury Particles */}
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-800 relative overflow-hidden">
+      {/* Royal Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400/10 via-amber-500/5 to-yellow-600/10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-300/5 to-amber-400/10 pointer-events-none"></div>
+      
+      {/* Animated Royal Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(50)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-amber-300/30 rounded-full animate-float"
+            className="absolute w-1 h-1 bg-yellow-400/30 rounded-full animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -370,87 +325,217 @@ export default function PremiumItemsPage() {
         ))}
       </div>
 
-      {/* 3D Navigation Sidebar */}
-      <div className={`fixed top-0 left-0 h-full w-80 bg-white/95 backdrop-blur-xl shadow-2xl transform transition-all duration-500 z-50 border-r border-amber-100/50 ${
+      {/* Royal Sidebar Navigation */}
+      <div className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-b from-white/98 via-amber-50/95 to-white/98 backdrop-blur-xl shadow-2xl transform transition-all duration-500 z-50 border-r-2 border-yellow-400/20 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div className="p-6 space-y-6">
+        <div className="p-8 space-y-8">
+          {/* Royal Logo */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-xl flex items-center justify-center">
-                <Crown className="h-6 w-6 text-white" />
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 rounded-xl flex items-center justify-center shadow-xl border-2 border-yellow-300/50">
+                <Crown className="h-8 w-8 text-white drop-shadow-lg" />
               </div>
-              <span className="font-bold text-xl text-gray-900">Premium</span>
+              <div className="text-left">
+                <h1 className="text-2xl font-bold text-blue-900 font-serif tracking-wide">Linka</h1>
+                <p className="text-lg font-semibold text-yellow-600 font-serif">Royale</p>
+              </div>
             </div>
             <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)}>
-              <X className="h-5 w-5" />
+              <X className="h-6 w-6 text-blue-900" />
             </Button>
           </div>
-          <nav className="space-y-2">
+
+          {/* Concierge Access */}
+          <div className="bg-gradient-to-r from-yellow-400/10 via-amber-100/20 to-yellow-400/10 rounded-2xl p-4 border border-yellow-400/30">
+            <Button
+              onClick={() => setConciergeOpen(true)}
+              className="w-full bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:from-yellow-600 hover:via-amber-600 hover:to-yellow-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <MessageCircle className="h-5 w-5 mr-2" />
+              <Crown className="h-4 w-4 mr-2 animate-pulse" />
+              Royal Concierge
+            </Button>
+          </div>
+
+          {/* Navigation Menu */}
+          <nav className="space-y-3">
             {[
-              { icon: Home, label: 'Home', href: '/' },
-              { icon: Package, label: 'Products', href: '/categories' },
-              { icon: Sparkles, label: 'Services', href: '/services' },
-              { icon: TrendingUp, label: 'Trending', href: '/trending' },
-              { icon: Flame, label: 'Hot Deals', href: '/hot-deals' },
-              { icon: Crown, label: 'Premium', href: '/marketplace/premium' },
-              { icon: User, label: 'Profile', href: '/profile' },
-              { icon: Settings, label: 'Settings', href: '/settings' }
+              { icon: Home, label: 'Home', href: '/', isActive: false },
+              { icon: Flame, label: 'Hot Deals', href: '/hot-deals', isActive: false },
+              { icon: ShoppingBag, label: 'About', href: '/about', isActive: false },
+              { icon: UserPlus, label: 'For Retailers', href: '/for-retailers', isActive: false },
+              { icon: Mail, label: 'Contact', href: '/contact', isActive: false },
+              { icon: Sparkles, label: 'Services', href: '/services', isActive: false },
+              { icon: Heart, label: 'Wishlist', href: '/wishlist', isActive: false },
+              { icon: Settings, label: 'Settings', href: '/settings', isActive: false },
+              { icon: User, label: 'Profile', href: '/profile', isActive: false }
             ].map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-amber-50 transition-all duration-300 group"
+                className={`flex items-center gap-4 px-6 py-4 rounded-xl transition-all duration-300 group hover:bg-gradient-to-r hover:from-yellow-50 hover:to-amber-50 hover:shadow-lg ${
+                  item.isActive ? 'bg-gradient-to-r from-yellow-100 to-amber-100 shadow-md border border-yellow-300/30' : ''
+                }`}
               >
-                <item.icon className="h-5 w-5 text-gray-600 group-hover:text-amber-600 transition-colors" />
-                <span className="font-medium text-gray-700 group-hover:text-amber-700">{item.label}</span>
+                <item.icon className="h-6 w-6 text-blue-800 group-hover:text-yellow-600 transition-colors" />
+                <span className="font-semibold text-blue-900 group-hover:text-yellow-700 text-lg">{item.label}</span>
+                <ChevronRight className="h-4 w-4 text-blue-600 group-hover:text-yellow-500 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300" />
               </Link>
             ))}
           </nav>
+
+          {/* Logout Button */}
+          <div className="pt-6 border-t border-yellow-400/20">
+            <Button
+              variant="outline"
+              className="w-full border-2 border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg"
+            >
+              <LogOut className="h-5 w-5 mr-2" />
+              Royal Logout
+            </Button>
+          </div>
         </div>
       </div>
 
       {/* Sidebar Overlay */}
       {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all duration-300"
+        <div 
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-all duration-300"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
+      {/* Premium Hero Header */}
+      <div className="relative z-20 bg-gradient-to-r from-blue-900/95 via-indigo-900/95 to-blue-800/95 backdrop-blur-xl border-b border-yellow-400/20 shadow-xl">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6">
+          <div className="flex items-center justify-between">
+            {/* Menu Button & Welcome */}
+            <div className="flex items-center gap-6">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => setSidebarOpen(true)}
+                className="bg-yellow-400/10 border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:border-yellow-400/50 rounded-xl shadow-lg"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+              <div>
+                <h1 className="text-3xl font-bold text-yellow-400 font-serif tracking-wide">
+                  Welcome to Linka Royale
+                </h1>
+                <p className="text-lg text-blue-200">Experience Luxury Beyond Compare</p>
+              </div>
+            </div>
+
+            {/* Search Bar */}
+            <div className="flex-1 max-w-2xl mx-8">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Search className="h-6 w-6 text-yellow-400" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search royal products and services..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-16 py-4 bg-white/95 backdrop-blur-xl border-2 border-yellow-400/30 rounded-xl text-blue-900 placeholder-blue-600/60 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 shadow-lg font-medium text-lg"
+                />
+                <Button
+                  onClick={() => setVoiceSearch(!voiceSearch)}
+                  className={`absolute inset-y-0 right-1 my-1 px-3 rounded-lg transition-all duration-300 ${
+                    voiceSearch 
+                      ? 'bg-red-500 hover:bg-red-600 text-white' 
+                      : 'bg-yellow-400 hover:bg-yellow-500 text-blue-900'
+                  }`}
+                >
+                  {voiceSearch ? <Volume2 className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
+                </Button>
+              </div>
+            </div>
+
+            {/* Action Icons */}
+            <div className="flex items-center gap-4">
+              <Button
+                variant="outline"
+                size="lg"
+                className="bg-yellow-400/10 border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:border-yellow-400/50 rounded-full w-14 h-14 shadow-lg relative"
+              >
+                <ShoppingCart className="h-6 w-6" />
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold">3</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="bg-yellow-400/10 border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:border-yellow-400/50 rounded-full w-14 h-14 shadow-lg relative"
+              >
+                <Bell className="h-6 w-6" />
+                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold">7</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="bg-yellow-400/10 border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:border-yellow-400/50 rounded-full w-14 h-14 shadow-lg"
+              >
+                <User className="h-6 w-6" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Mobile Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-amber-100/50 shadow-2xl z-40 md:hidden">
-        <div className="flex items-center justify-around py-3">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-white/98 via-amber-50/95 to-white/98 backdrop-blur-xl border-t-2 border-yellow-400/20 shadow-2xl z-40 md:hidden">
+        <div className="flex items-center justify-around py-4">
           {[
-            { icon: Home, label: 'Home' },
-            { icon: Search, label: 'Search' },
-            { icon: Heart, label: 'Wishlist' },
-            { icon: ShoppingCart, label: 'Cart' },
-            { icon: User, label: 'Profile' }
+            { icon: Home, label: 'Home', href: '/' },
+            { icon: Search, label: 'Search', href: '/search' },
+            { icon: Heart, label: 'Wishlist', href: '/wishlist' },
+            { icon: ShoppingCart, label: 'Cart', href: '/cart' },
+            { icon: User, label: 'Profile', href: '/profile' }
           ].map((item) => (
-            <button key={item.label} className="flex flex-col items-center gap-1 p-2 rounded-xl hover:bg-amber-50 transition-all duration-300">
-              <item.icon className="h-5 w-5 text-gray-600" />
-              <span className="text-xs text-gray-600">{item.label}</span>
-            </button>
+            <Link key={item.label} href={item.href} className="flex flex-col items-center gap-1 p-3 rounded-xl hover:bg-yellow-50 transition-all duration-300">
+              <item.icon className="h-6 w-6 text-blue-800" />
+              <span className="text-xs text-blue-800 font-medium">{item.label}</span>
+            </Link>
           ))}
         </div>
       </div>
 
-      <Header />
-
-      <main className="relative z-10 space-y-0">
-        {/* Mobile Menu Button */}
-        <Button
-          variant="outline"
-          size="lg"
-          onClick={() => setSidebarOpen(true)}
-          className="fixed top-20 left-4 z-40 bg-white/90 backdrop-blur-xl border-2 border-amber-200 hover:border-amber-300 rounded-xl shadow-xl md:hidden"
-        >
-          <Menu className="h-5 w-5 text-amber-700" />
-        </Button>
-
+      {/* Main Content */}
+      <main className="relative z-10 space-y-0 pb-20 md:pb-0">
         {/* 3D Hero Carousel */}
         <HeroCarousel3D />
+
+        {/* Recommended Products Section */}
+        <section className="py-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/30 via-amber-50/20 to-yellow-50/30"></div>
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-blue-900 font-serif mb-4">
+                👑 Royal Recommendations
+              </h2>
+              <p className="text-xl text-blue-700 max-w-3xl mx-auto leading-relaxed">
+                Curated exclusively for your royal taste and discerning preferences
+              </p>
+            </div>
+
+            <div className={`gap-8 ${
+              viewMode === 'grid'
+                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                : 'flex flex-col space-y-8'
+            }`}>
+              {filteredProducts.map((product, index) => (
+                <Enhanced3DProductCard
+                  key={product.id}
+                  product={product}
+                  variant={index === 0 ? 'featured' : 'standard'}
+                  className={viewMode === 'list' ? 'w-full' : ''}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Hot Deals Section */}
         <HotDealsSection />
@@ -461,212 +546,124 @@ export default function PremiumItemsPage() {
         {/* Premium Brands Carousel */}
         <PremiumBrandsCarousel />
 
-        {/* Advanced Filters and Controls */}
+        {/* Shop by Category Section */}
         <section className="py-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/30 via-purple-50/20 to-pink-50/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-indigo-50/20 to-blue-50/30"></div>
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-            <div className="bg-white/95 backdrop-blur-xl rounded-3xl border-2 border-purple-100/60 shadow-2xl p-8 lg:p-12">
-              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-8 xl:gap-12">
-                {/* Advanced Premium Filters */}
-                <div className="flex-1 w-full">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                    <Filter className="h-6 w-6 text-purple-600" />
-                    Premium Categories
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:flex xl:flex-wrap gap-3">
-                    {[
-                      { value: 'all', label: 'All Premium', icon: Crown, color: 'from-purple-500 to-indigo-500' },
-                      { value: 'handcrafted', label: 'Handcrafted', icon: Award, color: 'from-amber-500 to-orange-500' },
-                      { value: 'limited', label: 'Limited Edition', icon: Medal, color: 'from-emerald-500 to-teal-500' },
-                      { value: 'exclusive', label: 'Exclusive Design', icon: Sparkles, color: 'from-pink-500 to-rose-500' }
-                    ].map((filter) => (
-                      <Button
-                        key={filter.value}
-                        variant={filterBy === filter.value ? "default" : "outline"}
-                        size="lg"
-                        onClick={() => setFilterBy(filter.value as any)}
-                        className={`transition-all duration-300 font-semibold px-6 py-3 rounded-xl border-2 transform hover:scale-105 hover:shadow-lg ${
-                          filterBy === filter.value
-                            ? `bg-gradient-to-r ${filter.color} text-white shadow-lg border-transparent hover:shadow-xl`
-                            : 'border-purple-200 text-purple-800 bg-white hover:border-purple-300 hover:bg-purple-50 hover:text-purple-900'
-                        }`}
-                      >
-                        <filter.icon className="h-4 w-4 mr-2" />
-                        {filter.label}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Sort and View Options */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full xl:w-auto">
-                  <div className="flex items-center gap-4">
-                    <SortAsc className="h-5 w-5 text-purple-600" />
-                    <span className="text-lg font-semibold text-gray-900 whitespace-nowrap">Sort by:</span>
-                    <select
-                      value={sortBy}
-                      onChange={(e) => setSortBy(e.target.value as any)}
-                      className="text-base border-2 border-purple-200 rounded-xl px-4 py-3 bg-white text-gray-900 font-medium focus:border-purple-400 focus:ring-2 focus:ring-purple-100 transition-all duration-200 min-w-[160px] shadow-sm"
-                    >
-                      <option value="luxury">Luxury Rating</option>
-                      <option value="price">Highest Price</option>
-                      <option value="rating">Best Rated</option>
-                      <option value="newest">Most Popular</option>
-                    </select>
-                  </div>
-
-                  <div className="flex border-2 border-purple-200 rounded-xl overflow-hidden bg-white shadow-sm">
-                    <Button
-                      variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                      size="lg"
-                      onClick={() => setViewMode('grid')}
-                      className={`rounded-none px-5 py-3 border-none transition-all duration-300 ${
-                        viewMode === 'grid'
-                          ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-sm'
-                          : 'text-purple-700 hover:bg-purple-50'
-                      }`}
-                    >
-                      <Grid3X3 className="h-5 w-5" />
-                    </Button>
-                    <Button
-                      variant={viewMode === 'list' ? 'default' : 'ghost'}
-                      size="lg"
-                      onClick={() => setViewMode('list')}
-                      className={`rounded-none px-5 py-3 border-none transition-all duration-300 ${
-                        viewMode === 'list'
-                          ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-sm'
-                          : 'text-purple-700 hover:bg-purple-50'
-                      }`}
-                    >
-                      <List className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Enhanced Premium Products Grid */}
-        <section className="py-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 via-gray-50/30 to-slate-50/50"></div>
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-            <div className="flex items-center justify-between mb-12">
-              <div>
-                <h2 className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-slate-800 via-gray-700 to-slate-900 bg-clip-text text-transparent mb-3">
-                  💎 Curated Collection
-                </h2>
-                <p className="text-xl text-gray-600">
-                  {filteredProducts.length} exclusive {filteredProducts.length === 1 ? 'item' : 'items'} available
-                </p>
-              </div>
-              <div className="hidden md:flex items-center gap-3">
-                <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 text-sm font-bold rounded-xl shadow-lg">
-                  <Shield className="h-4 w-4 mr-2" />
-                  Verified Authentic
-                </Badge>
-                <Badge className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 text-sm font-bold rounded-xl shadow-lg">
-                  <Truck className="h-4 w-4 mr-2" />
-                  Premium Shipping
-                </Badge>
-              </div>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-blue-900 font-serif mb-4">
+                🏛️ Royal Categories
+              </h2>
+              <p className="text-xl text-blue-700 max-w-3xl mx-auto leading-relaxed">
+                Explore our curated collections of premium products and services
+              </p>
             </div>
 
-            <div className={`gap-8 ${
-              viewMode === 'grid'
-                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-                : 'flex flex-col space-y-8'
-            }`}>
-              {filteredProducts.map((product, index) => {
-                // Convert to Enhanced3DProductCard format
-                const enhancedProduct = {
-                  ...product,
-                  trending: index < 2,
-                  flashSale: product.originalPrice ? true : false,
-                  stockLevel: 15 - (index * 2),
-                  saleEndTime: product.originalPrice ? new Date(Date.now() + (24 * 60 * 60 * 1000)) : undefined
-                };
-
-                return (
-                  <Enhanced3DProductCard
-                    key={product.id}
-                    product={enhancedProduct}
-                    variant={index === 0 ? 'featured' : 'standard'}
-                    className={viewMode === 'list' ? 'w-full' : ''}
-                  />
-                );
-              })}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { name: 'Royal Jewelry', icon: Crown, count: 156, image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80', href: '/categories/jewelry' },
+                { name: 'Imperial Fashion', icon: Sparkles, count: 89, image: 'https://images.unsplash.com/photo-1594736797933-d0300ad942ed?w=400&q=80', href: '/categories/fashion' },
+                { name: 'Sovereign Art', icon: Award, count: 234, image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80', href: '/categories/art' },
+                { name: 'Luxury Services', icon: Diamond, count: 67, image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80', href: '/services' }
+              ].map((category) => (
+                <Link
+                  key={category.name}
+                  href={category.href}
+                  className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                >
+                  <div className="aspect-[4/3] relative">
+                    <Image
+                      src={category.image}
+                      alt={category.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/40 to-transparent"></div>
+                    <div className="absolute inset-0 bg-yellow-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center">
+                        <category.icon className="h-6 w-6 text-blue-900" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold font-serif">{category.name}</h3>
+                        <p className="text-blue-200">{category.count} items</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="text-yellow-400 font-semibold">Explore Collection</span>
+                      <ChevronRight className="h-4 w-4 text-yellow-400" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-
-            {filteredProducts.length === 0 && (
-              <div className="text-center py-20">
-                <div className="w-32 h-32 bg-gradient-to-r from-purple-100 via-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
-                  <Crown className="h-16 w-16 text-purple-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  No premium items found
-                </h3>
-                <p className="text-gray-600 text-lg mb-8">
-                  Try adjusting your filters to see more luxury products
-                </p>
-                <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl">
-                  <Sparkles className="h-5 w-5 mr-2" />
-                  Browse All Categories
-                </Button>
-              </div>
-            )}
           </div>
         </section>
       </main>
+
+      {/* Concierge Chatbot */}
+      {conciergeOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md h-96 flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-yellow-200">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
+                  <Crown className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-blue-900 font-serif">Royal Concierge</h3>
+                  <p className="text-sm text-blue-600">Your Personal Shopping Assistant</p>
+                </div>
+              </div>
+              <Button variant="ghost" size="sm" onClick={() => setConciergeOpen(false)}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="flex-1 p-6 bg-yellow-50/30">
+              <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
+                <p className="text-blue-900">
+                  👑 Good day! I'm your Royal Concierge. How may I assist you with your luxury shopping experience today?
+                </p>
+              </div>
+            </div>
+            <div className="p-6 border-t border-yellow-200">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Ask your Royal Concierge..."
+                  className="flex-1 px-4 py-2 border border-yellow-300 rounded-lg focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20"
+                />
+                <Button className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-4 py-2 rounded-lg">
+                  Send
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Concierge Button */}
+      <Button
+        onClick={() => setConciergeOpen(true)}
+        className="fixed bottom-24 right-6 z-50 bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 hover:from-yellow-500 hover:via-amber-600 hover:to-yellow-700 text-blue-900 rounded-full w-16 h-16 shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 md:bottom-6"
+      >
+        <MessageCircle className="h-7 w-7" />
+        <Crown className="h-4 w-4 absolute -top-1 -right-1 text-blue-900 animate-pulse" />
+      </Button>
 
       {/* Scroll to Top Button */}
       {showScrollTop && (
         <Button
           onClick={scrollToTop}
-          className="fixed bottom-24 right-6 z-50 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white rounded-full w-14 h-14 shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 md:bottom-6"
+          className="fixed bottom-24 left-6 z-50 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full w-14 h-14 shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 md:bottom-6"
         >
           <Crown className="h-6 w-6" />
         </Button>
       )}
 
-      {/* Notification Bell */}
-      <Button
-        variant="outline"
-        className="fixed top-20 right-4 z-40 bg-white/90 backdrop-blur-xl border-2 border-amber-200 hover:border-amber-300 rounded-full w-12 h-12 shadow-xl"
-      >
-        <Bell className="h-5 w-5 text-amber-700" />
-      </Button>
-
       <Footer />
     </div>
   );
 }
-
-// Add these CSS animations to globals.css
-const customAnimations = `
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
-  33% { transform: translateY(-20px) rotate(120deg); opacity: 1; }
-  66% { transform: translateY(-10px) rotate(240deg); opacity: 0.8; }
-}
-
-.animate-float {
-  animation: float linear infinite;
-}
-
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.transform-gpu {
-  transform: translateZ(0);
-}
-
-.shadow-3xl {
-  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
-}
-
-.backdrop-blur-3xl {
-  backdrop-filter: blur(64px);
-}
-`;
