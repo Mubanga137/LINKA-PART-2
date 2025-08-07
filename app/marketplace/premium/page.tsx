@@ -350,7 +350,7 @@ export default function PremiumItemsPage() {
               </div>
 
               {/* Premium Features */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
                 {[
                   { icon: Shield, label: "Quality Guaranteed", desc: "Premium materials only" },
                   { icon: Award, label: "Master Crafted", desc: "By skilled artisans" },
@@ -361,14 +361,15 @@ export default function PremiumItemsPage() {
                     key={feature.label}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-2xl p-6 shadow-lg border border-amber-100"
+                    transition={{ delay: index * 0.15 }}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="bg-gradient-to-br from-white/95 to-amber-50/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-amber-200/50 hover:border-amber-300/70 transition-all duration-300"
                   >
-                    <div className="w-12 h-12 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                      <feature.icon className="h-6 w-6 text-amber-600" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                      <feature.icon className="h-8 w-8 text-white drop-shadow-sm" />
                     </div>
-                    <h3 className="font-semibold text-gray-900 mb-1">{feature.label}</h3>
-                    <p className="text-sm text-gray-600">{feature.desc}</p>
+                    <h3 className="font-bold text-amber-900 mb-2 text-lg">{feature.label}</h3>
+                    <p className="text-amber-800/70 text-sm leading-relaxed">{feature.desc}</p>
                   </motion.div>
                 ))}
               </div>
