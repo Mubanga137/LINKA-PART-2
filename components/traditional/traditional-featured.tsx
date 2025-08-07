@@ -59,8 +59,9 @@ export function TraditionalFeatured() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="p-0">
+              <Link href={`/products/${item.title.toLowerCase().replace(/\s+/g, '-')}`} className="block">
+                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                  <CardContent className="p-0">
                   <div className="relative">
                     <img
                       src={item.image}
@@ -92,13 +93,11 @@ export function TraditionalFeatured() {
                       <span className="text-2xl font-bold text-orange-600">
                         {item.price}
                       </span>
-                      <Button size="sm">
-                        View Details <ArrowRight className="h-4 w-4 ml-1" />
-                      </Button>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Link>
             </motion.div>
           ))}
         </div>
