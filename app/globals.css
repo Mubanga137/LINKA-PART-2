@@ -5,29 +5,69 @@
 /* Import 3D Marketplace Styles */
 @import '../styles/marketplace-3d.css';
 
-/* Linka Royale Royal Theme */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Linka Royale Professional Luxury Theme */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
-/* Royal Typography */
+/* Professional Luxury Typography */
 .font-serif {
-  font-family: 'Playfair Display', 'Cinzel', serif;
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+  font-feature-settings: "liga" on, "kern" on;
 }
 
 .font-royal {
-  font-family: 'Cinzel', serif;
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-feature-settings: "liga" on, "kern" on, "swsh" on;
 }
 
 .font-sans {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-feature-settings: "liga" on, "kern" on;
 }
 
-/* Royal Color Variables */
+.font-luxury {
+  font-family: 'Crimson Text', 'Playfair Display', serif;
+  font-feature-settings: "liga" on, "kern" on, "oldstyle-nums" on;
+}
+
+/* Professional Text Styling */
+.text-luxury-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.text-luxury-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+.text-luxury-caption {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* Professional Luxury Color Variables */
 :root {
-  --royal-gold: #FFD700;
-  --midnight-blue: #001f3f;
-  --pearl-white: #F8F9FA;
-  --charcoal-gray: #36393F;
-  --emerald-green: #2ECC71;
+  --royal-gold: #D4AF37;
+  --luxury-gold: #B8860B;
+  --champagne-gold: #F7E7CE;
+  --midnight-blue: #0B1426;
+  --royal-blue: #1E3A8A;
+  --navy-luxury: #172554;
+  --pearl-white: #FEFEFE;
+  --platinum: #E5E4E2;
+  --charcoal-luxury: #1F2937;
+  --emerald-luxury: #059669;
+  --burgundy-luxury: #7C2D12;
+  --cream-luxury: #FEF3E2;
+  --shadow-luxury: rgba(11, 20, 38, 0.15);
+  --shadow-gold: rgba(212, 175, 55, 0.25);
 }
 
 /* Royal Animations */
@@ -78,53 +118,178 @@
   animation: royalPulse 2s ease-in-out infinite;
 }
 
-/* Royal Gradient Backgrounds */
-.bg-royal-gradient {
-  background: linear-gradient(135deg, #001f3f 0%, #1a3a5c 25%, #2d5a87 50%, #4a7ba7 75%, #FFD700 100%);
+/* Professional Luxury Gradients */
+.bg-luxury-gradient {
+  background: linear-gradient(135deg,
+    var(--midnight-blue) 0%,
+    var(--navy-luxury) 15%,
+    var(--royal-blue) 35%,
+    var(--navy-luxury) 65%,
+    var(--midnight-blue) 100%);
 }
 
-.bg-royal-gold-gradient {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FF8C00 50%, #FFD700 75%, #FFF8DC 100%);
+.bg-gold-luxury-gradient {
+  background: linear-gradient(135deg,
+    var(--luxury-gold) 0%,
+    var(--royal-gold) 25%,
+    var(--champagne-gold) 50%,
+    var(--royal-gold) 75%,
+    var(--luxury-gold) 100%);
 }
 
-/* Royal Card Styles */
-.royal-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 215, 0, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 31, 63, 0.1), 0 0 0 1px rgba(255, 215, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.bg-platinum-gradient {
+  background: linear-gradient(135deg,
+    var(--pearl-white) 0%,
+    var(--platinum) 50%,
+    var(--pearl-white) 100%);
 }
 
-.royal-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 31, 63, 0.15), 0 0 0 1px rgba(255, 215, 0, 0.3);
-  border-color: rgba(255, 215, 0, 0.4);
+/* Luxury Textures */
+.texture-luxury {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(212, 175, 55, 0.05) 1px, transparent 0);
+  background-size: 20px 20px;
 }
 
-/* Royal Button Styles */
-.btn-royal {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-  color: #001f3f;
+.texture-royal {
+  background-image:
+    linear-gradient(45deg, transparent 25%, rgba(212, 175, 55, 0.02) 25%, rgba(212, 175, 55, 0.02) 50%, transparent 50%, transparent 75%, rgba(212, 175, 55, 0.02) 75%);
+  background-size: 40px 40px;
+}
+
+/* Professional Luxury Card Styles */
+.luxury-card {
+  background: linear-gradient(145deg, rgba(254, 254, 254, 0.98) 0%, rgba(254, 254, 254, 0.95) 100%);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 12px 40px var(--shadow-luxury),
+    0 4px 12px rgba(212, 175, 55, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+.luxury-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, transparent 0%, rgba(212, 175, 55, 0.03) 50%, transparent 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.luxury-card:hover {
+  transform: translateY(-12px) scale(1.01);
+  box-shadow:
+    0 25px 60px var(--shadow-luxury),
+    0 8px 25px var(--shadow-gold),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+
+.luxury-card:hover::before {
+  opacity: 1;
+}
+
+/* Professional Luxury Button Styles */
+.btn-luxury {
+  background: linear-gradient(135deg,
+    var(--royal-gold) 0%,
+    var(--luxury-gold) 25%,
+    var(--royal-gold) 50%,
+    var(--luxury-gold) 75%,
+    var(--royal-gold) 100%);
+  color: var(--midnight-blue);
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border: 2px solid rgba(255, 215, 0, 0.3);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-  transition: all 0.3s ease;
+  letter-spacing: 0.025em;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow:
+    0 6px 20px var(--shadow-gold),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
 }
 
-.btn-royal:hover {
-  background: linear-gradient(135deg, #FFA500 0%, #FFD700 50%, #FFA500 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
 }
 
-/* Royal Glassmorphism */
-.glass-royal {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 31, 63, 0.1);
+.btn-luxury:hover {
+  background: linear-gradient(135deg,
+    var(--luxury-gold) 0%,
+    var(--royal-gold) 25%,
+    var(--luxury-gold) 50%,
+    var(--royal-gold) 75%,
+    var(--luxury-gold) 100%);
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 35px var(--shadow-gold),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-luxury:hover::before {
+  left: 100%;
+}
+
+.btn-luxury:active {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 20px var(--shadow-gold),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Professional Luxury Glassmorphism */
+.glass-luxury {
+  background: linear-gradient(145deg,
+    rgba(254, 254, 254, 0.12) 0%,
+    rgba(254, 254, 254, 0.08) 100%);
+  backdrop-filter: blur(30px) saturate(1.2);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 12px 40px rgba(11, 20, 38, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(212, 175, 55, 0.05);
+}
+
+.glass-luxury-dark {
+  background: linear-gradient(145deg,
+    rgba(11, 20, 38, 0.15) 0%,
+    rgba(11, 20, 38, 0.10) 100%);
+  backdrop-filter: blur(30px) saturate(1.2);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  box-shadow:
+    0 12px 40px rgba(11, 20, 38, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Professional Navigation Effects */
+.nav-luxury {
+  background: linear-gradient(145deg,
+    rgba(254, 254, 254, 0.98) 0%,
+    rgba(254, 254, 254, 0.95) 100%);
+  backdrop-filter: blur(35px) saturate(1.3);
+  border-right: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow:
+    4px 0 25px rgba(11, 20, 38, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Royal Text Effects */
