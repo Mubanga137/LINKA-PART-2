@@ -14,6 +14,7 @@ import {
   Truck,
   Filter,
   Grid3X3,
+  Store,
   List,
   Search
 } from "lucide-react"
