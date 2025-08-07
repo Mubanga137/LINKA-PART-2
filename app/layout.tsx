@@ -72,13 +72,11 @@ html {
         >
           <AuthProvider>
             <RetailerAuthProvider>
-              <CartProvider>
-                <MarketplaceProvider>
-                  <AuthRedirectWrapper>
-                    {children}
-                  </AuthRedirectWrapper>
-                </MarketplaceProvider>
-              </CartProvider>
+              <MarketplaceProvider>
+                <AuthRedirectWrapper>
+                  {children}
+                </AuthRedirectWrapper>
+              </MarketplaceProvider>
             </RetailerAuthProvider>
           </AuthProvider>
         </ThemeProvider>
