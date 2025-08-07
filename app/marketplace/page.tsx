@@ -920,6 +920,9 @@ function MarketplaceContent() {
     sortBy: 'relevance'
   });
 
+  // Use cart context
+  const { addToCart } = useCart();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
