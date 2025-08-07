@@ -52,16 +52,17 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Only initialize useScroll after component is mounted
-  const { scrollXProgress } = useScroll({
-    container: mounted ? containerRef : undefined
-  });
-  const x = useTransform(scrollXProgress, [0, 1], [0, -100]);
-
   // Ensure component is mounted before using scroll hooks
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Only initialize useScroll after component is mounted
+  const { scrollXProgress } = useScroll({
+    container: mounted && containerRef.current ? containerRef : undefined,
+    layoutEffect: false // Disable layoutEffect to prevent hydration issues
+  });
+  const x = useTransform(scrollXProgress, [0, 1], [0, -100]);
 
   // Load trending products from vendors
   useEffect(() => {
