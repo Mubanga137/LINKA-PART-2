@@ -1,4 +1,4 @@
-import { Product } from '@/contexts/cart-context'
+import { Product } from '@/lib/types'
 
 // Mock product database
 const MOCK_PRODUCTS: Product[] = [
