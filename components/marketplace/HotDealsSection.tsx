@@ -366,15 +366,21 @@ export function HotDealsSection() {
                           {remaining} left
                         </span>
                       </div>
-                      <Progress 
-                        value={soldPercentage} 
-                        className="h-2"
-                        style={{
-                          background: `linear-gradient(to right, 
-                            ${soldPercentage > 80 ? '#ef4444' : soldPercentage > 60 ? '#f97316' : '#22c55e'} 0%, 
-                            ${soldPercentage > 80 ? '#dc2626' : soldPercentage > 60 ? '#ea580c' : '#16a34a'} 100%)`
-                        }}
-                      />
+                      <div className="relative">
+                        <Progress
+                          value={soldPercentage}
+                          className="h-2"
+                        />
+                        <div
+                          className="absolute inset-0 h-2 rounded-full"
+                          style={{
+                            background: `linear-gradient(to right,
+                              ${soldPercentage > 80 ? '#ef4444' : soldPercentage > 60 ? '#f97316' : '#22c55e'} 0%,
+                              ${soldPercentage > 80 ? '#dc2626' : soldPercentage > 60 ? '#ea580c' : '#16a34a'} 100%)`,
+                            width: `${soldPercentage}%`
+                          }}
+                        />
+                      </div>
                     </div>
 
                     {/* Countdown Timer */}
