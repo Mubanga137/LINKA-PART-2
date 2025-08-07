@@ -339,38 +339,81 @@ export default function PremiumItemsPage() {
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-20"
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="text-center mb-24"
             >
-              <div className="flex items-center justify-center gap-6 mb-8">
+              <div className="flex items-center justify-center gap-8 mb-12">
                 <motion.div
                   animate={{
                     rotate: 360,
-                    scale: [1, 1.15, 1]
+                    scale: [1, 1.2, 1],
+                    boxShadow: ["0 0 20px rgba(245, 158, 11, 0.3)", "0 0 40px rgba(245, 158, 11, 0.6)", "0 0 20px rgba(245, 158, 11, 0.3)"]
                   }}
                   transition={{
-                    rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 3, repeat: Infinity }
+                    rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                    boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="w-20 h-20 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/50 backdrop-blur-sm"
+                  className="w-28 h-28 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/60 backdrop-blur-sm relative overflow-hidden"
                 >
-                  <Crown className="text-white text-3xl drop-shadow-lg" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent animate-pulse"></div>
+                  <Crown className="text-white text-4xl drop-shadow-2xl relative z-10" />
                 </motion.div>
                 <div>
-                  <h1 className="text-6xl md:text-8xl font-extrabold bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent flex items-center gap-4 drop-shadow-sm">
-                    ✨ Premium
-                    <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white text-xl px-6 py-3 shadow-xl border border-white/20">
-                      <Diamond className="h-5 w-5 mr-2 animate-pulse" />
-                      LUXURY
-                    </Badge>
-                  </h1>
-                  <p className="text-2xl text-amber-900/80 mt-6 font-medium drop-shadow-sm">
+                  <motion.h1
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                    className="text-7xl md:text-9xl font-black bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 bg-clip-text text-transparent flex items-center gap-6 drop-shadow-lg"
+                  >
+                    <motion.span
+                      animate={{
+                        scale: [1, 1.1, 1],
+                        rotate: [0, 5, -5, 0]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      ✨
+                    </motion.span>
+                    Premium
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="relative"
+                    >
+                      <Badge className="bg-gradient-to-br from-amber-500 via-yellow-400 to-amber-600 text-white text-2xl px-8 py-4 shadow-2xl border-2 border-white/30 backdrop-blur-sm">
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                        >
+                          <Diamond className="h-6 w-6 mr-3" />
+                        </motion.div>
+                        LUXURY
+                      </Badge>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse rounded-full"></div>
+                    </motion.div>
+                  </motion.h1>
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.8 }}
+                    className="text-3xl text-amber-900/90 mt-8 font-semibold drop-shadow-md tracking-wide"
+                  >
                     Curated luxury items from Zambia's finest artisans
-                  </p>
-                  <p className="text-lg text-amber-800/70 mt-2">
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.9, duration: 0.8 }}
+                    className="text-xl text-amber-800/80 mt-4 tracking-wide font-medium"
+                  >
                     Experience unparalleled craftsmanship and exclusive designs
-                  </p>
+                  </motion.p>
                 </div>
               </div>
 
