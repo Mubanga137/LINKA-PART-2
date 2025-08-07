@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import 3D Marketplace Styles */
+@import '../styles/marketplace-3d.css';
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
