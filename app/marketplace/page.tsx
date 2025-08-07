@@ -929,12 +929,12 @@ function MarketplaceContent() {
       <Header />
       
       <main>
+        <EnhancedHeroSection />
         <RecommendedSection
           onAddToCart={(product) => console.log('Add to cart:', product)}
           onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
           wishlistedItems={new Set()}
         />
-        <EnhancedHeroSection />
         <ShopByCategorySection maxItems={6} />
         <FlashSalesSection />
         <TrendingNowSection
