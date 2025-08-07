@@ -213,34 +213,22 @@ export default function ProductShowcasePage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {featuredProducts.map((product, index) => (
-                <motion.div
-                  key={product.id}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className="relative"
-                >
-                  {/* Highlight badge for demonstration */}
-                  <div className="absolute -top-3 -right-3 z-10">
-                    <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1 rounded-xl shadow-lg">
-                      <TrendingUp className="h-3 w-3 mr-1" />
-                      Live Store
-                    </Badge>
-                  </div>
-                  
-                  <OptimizedProductCard3D
-                    product={product}
-                    onAddToCart={handleAddToCart}
-                    onToggleFavorite={handleToggleFavorite}
-                    isFavorite={favorites.has(product.id)}
-                    showVisitStore={true}
-                    priority={index < 3}
-                    index={index}
-                  />
-                </motion.div>
-              ))}
-            </div>
+            <ResponsiveProductGrid
+              products={featuredProducts}
+              onAddToCart={handleAddToCart}
+              onToggleFavorite={handleToggleFavorite}
+              onViewProduct={(productId) => {
+                const product = featuredProducts.find(p => p.id === productId);
+                if (product) {
+                  // Navigate to product details
+                  window.location.href = `/products/${productId}`;
+                }
+              }}
+              favorites={favorites}
+              searchable={true}
+              filterable={true}
+              className="mb-12"
+            />
 
             {/* Vendor Highlights */}
             <motion.div variants={itemVariants} className="mb-12">
