@@ -312,36 +312,39 @@ export default function PremiumItemsPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-300/30 to-transparent transform rotate-12"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent transform -rotate-12"></div>
           </div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
-              <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="flex items-center justify-center gap-6 mb-8">
                 <motion.div
-                  animate={{ 
+                  animate={{
                     rotate: 360,
-                    scale: [1, 1.1, 1]
+                    scale: [1, 1.15, 1]
                   }}
                   transition={{
-                    rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 2, repeat: Infinity }
+                    rotate: { duration: 25, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 3, repeat: Infinity }
                   }}
-                  className="w-16 h-16 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full flex items-center justify-center shadow-xl"
+                  className="w-20 h-20 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/50 backdrop-blur-sm"
                 >
-                  <Crown className="text-white text-2xl" />
+                  <Crown className="text-white text-3xl drop-shadow-lg" />
                 </motion.div>
                 <div>
-                  <h1 className="text-5xl md:text-7xl font-bold text-gray-900 flex items-center gap-3">
-                    ⭐ Premium
-                    <Badge className="bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-lg px-4 py-2">
-                      <Diamond className="h-4 w-4 mr-1" />
+                  <h1 className="text-6xl md:text-8xl font-extrabold bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent flex items-center gap-4 drop-shadow-sm">
+                    ✨ Premium
+                    <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white text-xl px-6 py-3 shadow-xl border border-white/20">
+                      <Diamond className="h-5 w-5 mr-2 animate-pulse" />
                       LUXURY
                     </Badge>
                   </h1>
-                  <p className="text-xl text-gray-600 mt-4">
+                  <p className="text-2xl text-amber-900/80 mt-6 font-medium drop-shadow-sm">
                     Curated luxury items from Zambia's finest artisans
+                  </p>
+                  <p className="text-lg text-amber-800/70 mt-2">
+                    Experience unparalleled craftsmanship and exclusive designs
                   </p>
                 </div>
               </div>
