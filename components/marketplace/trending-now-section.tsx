@@ -52,24 +52,14 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Initialize scroll progress values with safe defaults
-  const [scrollXProgress, setScrollXProgress] = useState({ get: () => 0 });
-
   // Ensure component is mounted before using scroll hooks
   useEffect(() => {
     setMounted(true);
-
-    // Only initialize useScroll on the client side
-    if (typeof window !== 'undefined' && containerRef.current) {
-      const { useScroll, useTransform } = require('framer-motion');
-      const { scrollXProgress: scrollProgress } = useScroll({
-        container: containerRef
-      });
-      setScrollXProgress(scrollProgress);
-    }
   }, []);
 
-  const x = useTransform(scrollXProgress, [0, 1], [0, -100]);
+  // Only use scroll hooks after mounting to prevent hydration errors
+  const scrollData = mounted ? useScroll({ container: containerRef }) : { scrollXProgress: { get: () => 0 } };
+  const x = useTransform(scrollData.scrollXProgress, [0, 1], [0, -100]);
 
   // Load trending products from vendors
   useEffect(() => {
