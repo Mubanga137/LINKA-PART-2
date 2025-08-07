@@ -412,7 +412,7 @@ export function HotDealsSection() {
             <Link href="/hot-deals">
               <Flame className="h-5 w-5 mr-2" />
               View All Hot Deals
-              <Lightning className="h-5 w-5 ml-2" />
+              <Bolt className="h-5 w-5 ml-2" />
             </Link>
           </Button>
         </div>
