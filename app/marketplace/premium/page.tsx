@@ -713,10 +713,27 @@ export default function PremiumItemsPage() {
 
                     {/* Luxury Rating */}
                     <div className="absolute top-6 right-6 z-20">
-                      <div className="bg-gradient-to-r from-white/95 to-amber-50/90 backdrop-blur-md rounded-2xl px-4 py-2 flex items-center gap-2 shadow-xl border border-amber-200/50">
-                        <Diamond className="h-4 w-4 text-amber-600" />
-                        <span className="text-sm font-bold text-amber-900">{product.luxuryRating}/5</span>
-                      </div>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.15 + 0.2, type: "spring" }}
+                        whileHover={{ scale: 1.1 }}
+                        className="bg-gradient-to-br from-white/98 via-amber-50/90 to-yellow-50/80 backdrop-blur-xl rounded-2xl px-5 py-3 flex items-center gap-3 shadow-2xl border-2 border-amber-300/60"
+                      >
+                        <motion.div
+                          animate={{
+                            rotate: 360,
+                            scale: [1, 1.2, 1]
+                          }}
+                          transition={{
+                            rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                            scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                          }}
+                        >
+                          <Diamond className="h-5 w-5 text-amber-600" />
+                        </motion.div>
+                        <span className="text-base font-black text-amber-900">{product.luxuryRating}/5</span>
+                      </motion.div>
                     </div>
 
                     {/* Product Image */}
