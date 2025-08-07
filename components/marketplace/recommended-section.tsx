@@ -262,7 +262,7 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
   // Filter products by category if selected
   const filteredProducts = filterCategory
     ? recommendedProducts.filter(p => p.category === filterCategory)
-    : recommendedProducts;
+    : displayedProducts;
 
   const handleRefreshRecommendations = async () => {
     setRefreshing(true);
