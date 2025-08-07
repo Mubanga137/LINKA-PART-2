@@ -388,53 +388,24 @@ export default function PremiumItemsPage() {
                   { icon: Verified, label: "Authenticity", desc: "Certified genuine", color: "from-amber-500 to-yellow-600" },
                   { icon: Gift, label: "Luxury Packaging", desc: "Gift-ready presentation", color: "from-yellow-500 to-amber-600" }
                 ].map((feature, index) => (
-                  <motion.div
+                  <div
                     key={feature.label}
-                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{
-                      delay: index * 0.2,
-                      duration: 0.8,
-                      ease: "easeOut"
-                    }}
-                    whileHover={{
-                      scale: 1.08,
-                      y: -10,
-                      boxShadow: "0 25px 50px rgba(245, 158, 11, 0.3)"
-                    }}
-                    className="group bg-gradient-to-br from-white/98 via-amber-50/60 to-yellow-50/80 backdrop-blur-md rounded-3xl p-10 shadow-2xl border-2 border-amber-200/60 hover:border-amber-300/80 transition-all duration-500 relative overflow-hidden"
+                    className="group bg-gradient-to-br from-white/98 via-amber-50/60 to-yellow-50/80 backdrop-blur-md rounded-3xl p-10 shadow-2xl border-2 border-amber-200/60 hover:border-amber-300/80 transition-all duration-300 hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-100/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                    <motion.div
-                      className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl relative overflow-hidden`}
-                      whileHover={{
-                        rotate: 360,
-                        scale: 1.1
-                      }}
-                      transition={{ duration: 0.6 }}
-                    >
+                    <div className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl relative overflow-hidden group-hover:scale-110 transition-transform duration-300`}>
                       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent animate-pulse"></div>
                       <feature.icon className="h-10 w-10 text-white drop-shadow-lg relative z-10" />
-                    </motion.div>
+                    </div>
 
-                    <motion.h3
-                      className="font-black text-amber-900 mb-3 text-xl tracking-wide"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: index * 0.2 + 0.3 }}
-                    >
+                    <h3 className="font-black text-amber-900 mb-3 text-xl tracking-wide">
                       {feature.label}
-                    </motion.h3>
-                    <motion.p
-                      className="text-amber-800/80 text-base leading-relaxed font-medium"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: index * 0.2 + 0.4 }}
-                    >
+                    </h3>
+                    <p className="text-amber-800/80 text-base leading-relaxed font-medium">
                       {feature.desc}
-                    </motion.p>
-                  </motion.div>
+                    </p>
+                  </div>
                 ))}
               </div>
             </motion.div>
