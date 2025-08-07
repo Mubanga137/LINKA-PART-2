@@ -5,7 +5,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { OptimizedProductCard3D } from "@/components/marketplace/OptimizedProductCard3D"
+import { ResponsiveProductGrid } from "@/components/marketplace/ResponsiveProductGrid"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { 
