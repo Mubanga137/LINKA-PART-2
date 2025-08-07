@@ -626,39 +626,6 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                           Visit Store
                         </Link>
                       </Button>
-
-                      {/* Feedback Buttons */}
-                      {!feedbackGiven.has(product.id) && (
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-gray-500">Is this helpful?</span>
-                          <div className="flex gap-1">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleProductFeedback(product.id, true)}
-                              className="w-8 h-8 p-0 hover:bg-green-50 hover:text-green-600"
-                            >
-                              <ThumbsUp className="h-3 w-3" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleProductFeedback(product.id, false)}
-                              className="w-8 h-8 p-0 hover:bg-red-50 hover:text-red-600"
-                            >
-                              <ThumbsDown className="h-3 w-3" />
-                            </Button>
-                          </div>
-                        </div>
-                      )}
-
-                      {feedbackGiven.has(product.id) && (
-                        <div className="text-center">
-                          <Badge variant="outline" className="text-xs text-green-600 border-green-200">
-                            Thanks for your feedback!
-                          </Badge>
-                        </div>
-                      )}
                     </div>
                   </CardContent>
                 </Card>
