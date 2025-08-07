@@ -388,7 +388,7 @@ export default function PremiumItemsPage() {
                     <Diamond className="h-5 w-5 text-amber-600" />
                     Premium Categories
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {[
                       { value: 'all', label: 'All Premium', icon: Crown },
                       { value: 'handcrafted', label: 'Handcrafted', icon: Award },
@@ -398,15 +398,15 @@ export default function PremiumItemsPage() {
                       <Button
                         key={filter.value}
                         variant={filterBy === filter.value ? "default" : "outline"}
-                        size="sm"
+                        size="lg"
                         onClick={() => setFilterBy(filter.value as any)}
-                        className={`transition-all duration-200 ${
-                          filterBy === filter.value 
-                            ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white' 
-                            : ''
+                        className={`transition-all duration-300 font-semibold px-6 py-3 rounded-2xl ${
+                          filterBy === filter.value
+                            ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white shadow-xl border-0 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700'
+                            : 'border-amber-300 text-amber-800 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-900'
                         }`}
                       >
-                        <filter.icon className="h-3 w-3 mr-1" />
+                        <filter.icon className="h-4 w-4 mr-2" />
                         {filter.label}
                       </Button>
                     ))}
