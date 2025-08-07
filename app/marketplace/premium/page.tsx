@@ -516,40 +516,40 @@ export default function PremiumItemsPage() {
                     </div>
 
                     {/* Luxury Rating */}
-                    <div className="absolute top-4 right-4 z-20">
-                      <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
-                        <Diamond className="h-3 w-3 text-amber-500" />
-                        <span className="text-xs font-bold text-gray-900">{product.luxuryRating}/5</span>
+                    <div className="absolute top-6 right-6 z-20">
+                      <div className="bg-gradient-to-r from-white/95 to-amber-50/90 backdrop-blur-md rounded-2xl px-4 py-2 flex items-center gap-2 shadow-xl border border-amber-200/50">
+                        <Diamond className="h-4 w-4 text-amber-600" />
+                        <span className="text-sm font-bold text-amber-900">{product.luxuryRating}/5</span>
                       </div>
                     </div>
 
                     {/* Product Image */}
-                    <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
+                    <div className="relative aspect-[4/3] bg-gradient-to-br from-amber-100 to-yellow-50 overflow-hidden">
                       <Image
                         src={product.images[0]}
                         alt={product.name}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                       />
-                      
+
                       {/* Premium Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="flex gap-2">
+                      <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <div className="flex gap-3">
                             <Button
-                              size="sm"
+                              size="lg"
                               variant="outline"
-                              className="flex-1 bg-white/90 backdrop-blur-sm border-0 hover:bg-white"
+                              className="flex-1 bg-white/95 backdrop-blur-md border-0 hover:bg-white shadow-xl text-amber-800 hover:text-amber-900 font-semibold"
                             >
-                              <Heart className="h-4 w-4 mr-1" />
+                              <Heart className="h-4 w-4 mr-2" />
                               Save
                             </Button>
                             <Button
-                              size="sm"
+                              size="lg"
                               variant="outline"
-                              className="flex-1 bg-white/90 backdrop-blur-sm border-0 hover:bg-white"
+                              className="flex-1 bg-white/95 backdrop-blur-md border-0 hover:bg-white shadow-xl text-amber-800 hover:text-amber-900 font-semibold"
                             >
-                              <Share2 className="h-4 w-4 mr-1" />
+                              <Share2 className="h-4 w-4 mr-2" />
                               Share
                             </Button>
                           </div>
