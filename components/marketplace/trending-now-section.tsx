@@ -52,6 +52,10 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
   const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Use cart and favorites context
+  const { addToCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
+
   // Load trending products from vendors
   useEffect(() => {
     const loadTrendingProducts = async () => {
