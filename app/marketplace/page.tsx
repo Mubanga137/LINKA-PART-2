@@ -74,6 +74,8 @@ import { RecommendedSection } from "@/components/marketplace/recommended-section
 import { VerifiedVendorsSection } from "@/components/marketplace/verified-vendors-section";
 import { MobileBottomNav } from "@/components/marketplace/mobile-bottom-nav";
 import { ShopByCategorySection } from "@/components/marketplace/shop-by-category";
+import { MarketplaceSidebar } from "@/components/marketplace/marketplace-sidebar";
+import { MarketplaceHeader } from "@/components/marketplace/marketplace-header";
 import type { Product, MarketplaceFilters, Category } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
