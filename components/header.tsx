@@ -17,7 +17,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { LinkIcon, ShoppingCart, User, ChevronDown, LogOut, Settings, Package, BarChart3, Heart } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
 
 export function Header() {
   const { user, logout } = useAuth()
