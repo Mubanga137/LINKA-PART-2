@@ -335,7 +335,7 @@ export default function PremiumItemsPage() {
               </div>
 
               {/* Premium Features */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
                 {[
                   { icon: Shield, label: "Quality Guaranteed", desc: "Premium materials only" },
                   { icon: Award, label: "Master Crafted", desc: "By skilled artisans" },
@@ -344,13 +344,13 @@ export default function PremiumItemsPage() {
                 ].map((feature, index) => (
                   <div
                     key={feature.label}
-                    className="group bg-gradient-to-br from-white/98 via-amber-50/60 to-yellow-50/80 backdrop-blur-md rounded-3xl p-8 shadow-xl border-2 border-amber-200/60 hover:border-amber-300/80 transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+                    className="group bg-white/95 backdrop-blur-md rounded-2xl p-6 lg:p-8 shadow-lg border border-amber-100/80 hover:border-amber-200 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl"
                   >
-                    <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <feature.icon className="h-8 w-8 text-white drop-shadow-lg" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-xl flex items-center justify-center mx-auto mb-5 shadow-md group-hover:scale-110 transition-transform duration-300">
+                      <feature.icon className="h-7 w-7 text-white drop-shadow-sm" />
                     </div>
-                    <h3 className="font-bold text-amber-900 mb-2 text-lg">{feature.label}</h3>
-                    <p className="text-amber-800/70 text-sm leading-relaxed">{feature.desc}</p>
+                    <h3 className="font-bold text-amber-900 mb-3 text-lg text-center">{feature.label}</h3>
+                    <p className="text-amber-800/75 text-sm leading-relaxed text-center">{feature.desc}</p>
                   </div>
                 ))}
               </div>
