@@ -173,7 +173,7 @@ function HotDealsContent() {
 
           <div className="grid grid-cols-2 gap-4 sm:gap-4 md:gap-4 lg:gap-4 md:grid-cols-3 lg:grid-cols-4">
             {hotDealsProducts.map((product, index) => (
-              <OptimizedProductCard
+              <OptimizedProductCard3D
                 key={product.id}
                 product={product}
                 onAddToCart={handleAddToCart}
@@ -181,6 +181,7 @@ function HotDealsContent() {
                 isFavorite={isFavorite(product.id)}
                 priority={index < 4}
                 showVisitStore={false} // Disable Visit Store for flash sale items
+                index={index}
               />
             ))}
           </div>
