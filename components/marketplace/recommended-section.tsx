@@ -606,6 +606,9 @@ export function RecommendedSection({ onAddToCart, onToggleWishlist, wishlistedIt
                       )}
                     </div>
 
+                    {/* Spacer */}
+                    <div className="flex-1"></div>
+
                     {/* Actions */}
                     <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
                       <Button
