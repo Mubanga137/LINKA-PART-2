@@ -16,7 +16,9 @@ import {
   ChevronRight,
   Grid3X3,
   List,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Store,
+  ExternalLink
 } from "lucide-react"
 import { Product } from "@/contexts/cart-context"
 import { useCart } from "@/contexts/cart-context"
