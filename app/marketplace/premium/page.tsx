@@ -443,18 +443,23 @@ export default function PremiumItemsPage() {
         </section>
 
         {/* Premium Products Grid */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-4xl font-bold bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent">
-                Premium Collection ({filteredProducts.length})
-              </h2>
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-800 via-yellow-700 to-amber-900 bg-clip-text text-transparent mb-2">
+                  Premium Collection
+                </h2>
+                <p className="text-amber-700/70 text-lg">
+                  {filteredProducts.length} exclusive {filteredProducts.length === 1 ? 'item' : 'items'} available
+                </p>
+              </div>
             </div>
 
-            <div className={`grid gap-8 ${
-              viewMode === 'grid' 
-                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-                : 'grid-cols-1'
+            <div className={`gap-8 ${
+              viewMode === 'grid'
+                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'
+                : 'flex flex-col space-y-6'
             }`}>
               {filteredProducts.map((product, index) => (
                 <div
