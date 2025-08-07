@@ -780,8 +780,9 @@ function FlashSalesSection() {
                     </div>
                   </div>
 
-                  <Button 
+                  <Button
                     className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
+                    onClick={() => addToCart(product, 1)}
                   >
                     <ShoppingCart className="h-4 w-4 mr-2" />
                     Buy Now
