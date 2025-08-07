@@ -13,7 +13,7 @@ import {
   Store
 } from "lucide-react"
 import Link from "next/link"
-import { Product } from "@/contexts/cart-context"
+import { Product } from "@/lib/types"
 
 interface RecommendedServicesProps {
   products: Product[]
