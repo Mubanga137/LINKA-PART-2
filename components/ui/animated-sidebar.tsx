@@ -95,7 +95,8 @@ export function AnimatedSidebar({ className }: SidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { user, logout } = useAuth()
-  const { totalItems } = useCart()
+  const { getCartItemCount } = useCart()
+  const totalItems = getCartItemCount()
   const { favorites } = useFavorites()
 
   useEffect(() => {
