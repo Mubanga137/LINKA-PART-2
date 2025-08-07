@@ -654,39 +654,51 @@ export default function LinkaRoyalePage() {
         </section>
       </main>
 
-      {/* Concierge Chatbot */}
+      {/* Luxury Concierge Modal */}
       {conciergeOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md h-96 flex flex-col">
-            <div className="flex items-center justify-between p-6 border-b border-yellow-200">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
-                  <Crown className="h-6 w-6 text-white" />
+        <div className="fixed inset-0 bg-midnight-blue/60 backdrop-blur-lg z-50 flex items-center justify-center p-6">
+          <div className="luxury-card rounded-3xl shadow-2xl w-full max-w-lg h-[500px] flex flex-col border border-royal-gold/20">
+            <div className="flex items-center justify-between p-8 border-b border-royal-gold/15">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 bg-gold-luxury-gradient rounded-2xl flex items-center justify-center shadow-xl border border-royal-gold/30">
+                  <Crown className="h-8 w-8 text-midnight-blue" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-blue-900 font-serif">Royal Concierge</h3>
-                  <p className="text-sm text-blue-600">Your Personal Shopping Assistant</p>
+                  <h3 className="text-2xl font-bold text-midnight-blue font-royal text-luxury-title">Royal Concierge</h3>
+                  <p className="text-charcoal-luxury/70 text-luxury-caption">Your Personal Luxury Assistant</p>
                 </div>
               </div>
-              <Button variant="ghost" size="sm" onClick={() => setConciergeOpen(false)}>
-                <X className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setConciergeOpen(false)}
+                className="hover:bg-royal-gold/10 rounded-xl p-2"
+              >
+                <X className="h-6 w-6 text-charcoal-luxury" />
               </Button>
             </div>
-            <div className="flex-1 p-6 bg-yellow-50/30">
-              <div className="bg-white rounded-lg p-4 shadow-sm border border-yellow-200">
-                <p className="text-blue-900">
-                  👑 Good day! I'm your Royal Concierge. How may I assist you with your luxury shopping experience today?
-                </p>
+            <div className="flex-1 p-8 bg-gradient-to-b from-cream-luxury/20 to-champagne-gold/10">
+              <div className="glass-luxury rounded-2xl p-6 shadow-lg border border-royal-gold/15">
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 bg-royal-gold/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Crown className="h-5 w-5 text-royal-gold" />
+                  </div>
+                  <div>
+                    <p className="text-midnight-blue text-luxury-body leading-relaxed">
+                      Good day! I'm your Royal Concierge. How may I assist you with your luxury shopping experience today?
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="p-6 border-t border-yellow-200">
-              <div className="flex gap-2">
+            <div className="p-8 border-t border-royal-gold/15">
+              <div className="flex gap-3">
                 <input
                   type="text"
                   placeholder="Ask your Royal Concierge..."
-                  className="flex-1 px-4 py-2 border border-yellow-300 rounded-lg focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20"
+                  className="flex-1 px-6 py-4 glass-luxury border border-royal-gold/20 rounded-2xl text-midnight-blue placeholder-charcoal-luxury/60 focus:border-royal-gold/40 focus:ring-2 focus:ring-royal-gold/20 text-luxury-body"
                 />
-                <Button className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-4 py-2 rounded-lg">
+                <Button className="btn-luxury px-6 py-4 rounded-2xl shadow-lg font-semibold">
                   Send
                 </Button>
               </div>
@@ -695,22 +707,22 @@ export default function LinkaRoyalePage() {
         </div>
       )}
 
-      {/* Floating Concierge Button */}
+      {/* Luxury Floating Concierge Button */}
       <Button
         onClick={() => setConciergeOpen(true)}
-        className="fixed bottom-24 right-6 z-50 bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 hover:from-yellow-500 hover:via-amber-600 hover:to-yellow-700 text-blue-900 rounded-full w-16 h-16 shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 md:bottom-6"
+        className="fixed bottom-28 right-8 z-50 btn-luxury rounded-full w-20 h-20 shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-500 md:bottom-8 animate-royal-glow"
       >
-        <MessageCircle className="h-7 w-7" />
-        <Crown className="h-4 w-4 absolute -top-1 -right-1 text-blue-900 animate-pulse" />
+        <MessageCircle className="h-8 w-8" />
+        <Crown className="h-5 w-5 absolute -top-2 -right-2 text-midnight-blue animate-royal-pulse bg-pearl-white rounded-full p-1 shadow-lg" />
       </Button>
 
-      {/* Scroll to Top Button */}
+      {/* Luxury Scroll to Top Button */}
       {showScrollTop && (
         <Button
           onClick={scrollToTop}
-          className="fixed bottom-24 left-6 z-50 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full w-14 h-14 shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 md:bottom-6"
+          className="fixed bottom-28 left-8 z-50 glass-luxury-dark border-royal-gold/30 text-royal-gold hover:bg-royal-gold/20 hover:border-royal-gold/50 rounded-full w-16 h-16 shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-500 md:bottom-8"
         >
-          <Crown className="h-6 w-6" />
+          <Crown className="h-7 w-7" />
         </Button>
       )}
 
