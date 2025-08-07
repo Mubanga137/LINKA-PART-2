@@ -286,19 +286,37 @@ export default function PremiumItemsPage() {
     });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-400/20 via-amber-300/30 to-yellow-600/25 relative overflow-hidden">
-      {/* Golden shine overlay */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-amber-200/40 via-yellow-300/30 to-amber-400/35 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-200/20 to-amber-300/25 pointer-events-none"></div>
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-100/80 to-amber-100 relative overflow-hidden">
+      {/* Sophisticated golden base layers */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-amber-300/25 via-yellow-200/20 to-amber-400/30 pointer-events-none animate-pulse"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-yellow-300/15 to-amber-200/25 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-amber-100/40 via-transparent to-yellow-100/40 pointer-events-none"></div>
 
-      {/* Animated golden particles */}
+      {/* Luxury golden wave animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-2 h-2 bg-amber-400/60 rounded-full animate-pulse"></div>
-        <div className="absolute top-32 right-20 w-1 h-1 bg-yellow-400/70 rounded-full animate-bounce"></div>
-        <div className="absolute top-64 left-1/4 w-1.5 h-1.5 bg-amber-300/50 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-40 right-1/3 w-2 h-2 bg-yellow-500/40 rounded-full animate-ping"></div>
-        <div className="absolute bottom-20 left-1/2 w-1 h-1 bg-amber-400/60 rounded-full animate-bounce"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-300/20 to-transparent transform -skew-y-12 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-yellow-300/15 to-transparent transform skew-y-6 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
+
+      {/* Enhanced floating golden particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large luxury particles */}
+        <div className="absolute top-20 left-16 w-3 h-3 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full animate-bounce shadow-xl" style={{animationDelay: '0s', animationDuration: '3s'}}></div>
+        <div className="absolute top-40 right-32 w-2 h-2 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full animate-ping shadow-lg" style={{animationDelay: '1s', animationDuration: '4s'}}></div>
+        <div className="absolute top-80 left-1/3 w-2.5 h-2.5 bg-gradient-to-br from-amber-300 to-yellow-400 rounded-full animate-pulse shadow-xl" style={{animationDelay: '2s', animationDuration: '5s'}}></div>
+
+        {/* Medium elegant particles */}
+        <div className="absolute bottom-60 right-1/4 w-2 h-2 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-full animate-bounce shadow-lg" style={{animationDelay: '3s', animationDuration: '3.5s'}}></div>
+        <div className="absolute bottom-32 left-2/3 w-1.5 h-1.5 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full animate-ping shadow-md" style={{animationDelay: '1.5s', animationDuration: '4.5s'}}></div>
+
+        {/* Small sophisticated particles */}
+        <div className="absolute top-96 right-16 w-1 h-1 bg-amber-400 rounded-full animate-pulse shadow-sm" style={{animationDelay: '2.5s'}}></div>
+        <div className="absolute bottom-96 left-20 w-1 h-1 bg-yellow-500 rounded-full animate-bounce shadow-sm" style={{animationDelay: '4s'}}></div>
+        <div className="absolute top-1/2 right-1/2 w-1.5 h-1.5 bg-amber-500 rounded-full animate-ping shadow-md" style={{animationDelay: '0.5s'}}></div>
+      </div>
+
+      {/* Luxury shimmer effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform translate-x-full animate-pulse pointer-events-none" style={{animationDuration: '8s', animationIterationCount: 'infinite'}}></div>
 
       <Header />
 
