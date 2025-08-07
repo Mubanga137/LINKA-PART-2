@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Heart, Star, ShoppingCart, Eye, Filter, Search } from "lucide-react"
+import { Heart, Star, ShoppingCart, Eye, Filter, Search, Store } from "lucide-react"
 
 const products = [
   {
