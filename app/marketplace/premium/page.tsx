@@ -539,31 +539,31 @@ export default function PremiumItemsPage() {
                       </div>
                     </div>
 
-                    <CardContent className="p-6">
+                    <CardContent className={`${viewMode === 'list' ? 'flex-1 p-6' : 'p-5'}`}>
                       {/* Vendor Info */}
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-2.5 mb-4">
                         <Image
                           src={product.vendor.logo}
                           alt={product.vendor.name}
-                          width={24}
-                          height={24}
+                          width={20}
+                          height={20}
                           className="rounded-full object-cover"
                         />
                         <span className="text-sm font-medium text-amber-900">{product.vendor.name}</span>
                         {product.vendor.premiumSeller && (
-                          <Badge className="bg-amber-100 text-amber-700 text-xs px-2 py-0.5">
-                            <Crown className="h-2.5 w-2.5 mr-1" />
-                            Premium Seller
+                          <Badge className="bg-amber-50 text-amber-700 text-xs px-2 py-0.5 border border-amber-200">
+                            <Crown className="h-2 w-2 mr-1" />
+                            Premium
                           </Badge>
                         )}
                       </div>
 
                       {/* Product Info */}
                       <div className="mb-4">
-                        <h3 className="font-bold text-amber-900 text-lg mb-2 line-clamp-2 group-hover:text-amber-700 transition-colors">
+                        <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2 leading-tight group-hover:text-amber-800 transition-colors">
                           {product.name}
                         </h3>
-                        <p className="text-amber-800/80 text-sm line-clamp-2">
+                        <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed">
                           {product.description}
                         </p>
                       </div>
