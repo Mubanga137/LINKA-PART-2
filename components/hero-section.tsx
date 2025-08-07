@@ -1,6 +1,7 @@
 "use client"
 
 import { memo } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ShoppingBag, Sparkles, Star } from "lucide-react"
 
@@ -50,10 +51,10 @@ export const HeroSection = memo(function HeroSection() {
           <div className="inline-flex items-center rounded-full bg-white/60 backdrop-blur-sm px-6 py-3 text-sm text-slate-700 shadow-lg shadow-slate-900/5 border border-white/20 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
             <Sparkles className="mr-2 h-4 w-4 text-indigo-500" />
             Connecting local businesses with customers.
-            <button className="ml-3 text-indigo-600 hover:text-indigo-700 font-medium flex items-center group">
+            <Link href="/about" className="ml-3 text-indigo-600 hover:text-indigo-700 font-medium flex items-center group">
               Learn more
               <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -79,21 +80,25 @@ export const HeroSection = memo(function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-14 md:mb-16 px-4">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
-            >
-              <ShoppingBag className="mr-3 h-5 w-5" />
-              Start Shopping
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg bg-white shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
-            >
-              Become a Retailer
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
+            <Link href="/marketplace">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
+              >
+                <ShoppingBag className="mr-3 h-5 w-5" />
+                Start Shopping
+              </Button>
+            </Link>
+            <Link href="/for-retailers">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg bg-white shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
+              >
+                Become a Retailer
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </Link>
           </div>
 
           {/* Interactive Stats */}
