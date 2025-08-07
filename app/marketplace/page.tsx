@@ -910,10 +910,10 @@ function MarketplaceContent() {
           onAddToCart={(product) => console.log('Add to cart:', product)}
           onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
           wishlistedItems={new Set()}
-        />
+            />
 
-        {/* Additional CTA Section for more marketplace features */}
-        <motion.section
+            {/* Additional CTA Section for more marketplace features */}
+            <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
