@@ -298,21 +298,12 @@ export default function PremiumItemsPage() {
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-yellow-300/15 to-transparent transform skew-y-6 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
 
-      {/* Enhanced floating golden particles */}
+      {/* Simplified floating golden particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Large luxury particles */}
-        <div className="absolute top-20 left-16 w-3 h-3 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full animate-bounce shadow-xl" style={{animationDelay: '0s', animationDuration: '3s'}}></div>
-        <div className="absolute top-40 right-32 w-2 h-2 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full animate-ping shadow-lg" style={{animationDelay: '1s', animationDuration: '4s'}}></div>
-        <div className="absolute top-80 left-1/3 w-2.5 h-2.5 bg-gradient-to-br from-amber-300 to-yellow-400 rounded-full animate-pulse shadow-xl" style={{animationDelay: '2s', animationDuration: '5s'}}></div>
-
-        {/* Medium elegant particles */}
-        <div className="absolute bottom-60 right-1/4 w-2 h-2 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-full animate-bounce shadow-lg" style={{animationDelay: '3s', animationDuration: '3.5s'}}></div>
-        <div className="absolute bottom-32 left-2/3 w-1.5 h-1.5 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full animate-ping shadow-md" style={{animationDelay: '1.5s', animationDuration: '4.5s'}}></div>
-
-        {/* Small sophisticated particles */}
-        <div className="absolute top-96 right-16 w-1 h-1 bg-amber-400 rounded-full animate-pulse shadow-sm" style={{animationDelay: '2.5s'}}></div>
-        <div className="absolute bottom-96 left-20 w-1 h-1 bg-yellow-500 rounded-full animate-bounce shadow-sm" style={{animationDelay: '4s'}}></div>
-        <div className="absolute top-1/2 right-1/2 w-1.5 h-1.5 bg-amber-500 rounded-full animate-ping shadow-md" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute top-20 left-16 w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+        <div className="absolute top-40 right-32 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce"></div>
+        <div className="absolute bottom-40 right-1/4 w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-32 left-1/3 w-1 h-1 bg-amber-400 rounded-full animate-bounce"></div>
       </div>
 
       {/* Luxury shimmer effect */}
