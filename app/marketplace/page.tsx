@@ -937,7 +937,7 @@ function MarketplaceContent() {
       </div>
 
       {/* Main Content Area */}
-      <div className="lg:flex-1 lg:pl-0">
+      <div className="lg:flex-1 lg:pl-0 lg:min-w-0">
         <MinimalHeader variant="marketplace" showSearch={true} />
       
       <main>
