@@ -344,7 +344,7 @@ function EnhancedHeroSection() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-green-50 py-12 md:py-20"
+      className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-green-50 py-8 md:py-12"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -366,8 +366,8 @@ function EnhancedHeroSection() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Left Content */}
           <motion.div variants={itemVariants} className="space-y-8">
             <div className="space-y-6">
