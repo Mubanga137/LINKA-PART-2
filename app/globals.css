@@ -372,6 +372,192 @@
   animation: goldenPulse 2s ease-in-out infinite;
 }
 
+/* Advanced Sidebar Glassmorphism */
+.sidebar-royal-glass {
+  background: linear-gradient(145deg,
+    rgba(11, 20, 38, 0.85) 0%,
+    rgba(30, 41, 59, 0.75) 25%,
+    rgba(51, 65, 85, 0.65) 50%,
+    rgba(30, 41, 59, 0.75) 75%,
+    rgba(11, 20, 38, 0.85) 100%);
+  backdrop-filter: blur(40px) saturate(1.8);
+  border-right: 2px solid rgba(212, 175, 55, 0.2);
+  box-shadow:
+    4px 0 40px rgba(11, 20, 38, 0.3),
+    inset 1px 0 2px rgba(255, 255, 255, 0.1),
+    inset -1px 0 2px rgba(212, 175, 55, 0.1);
+}
+
+/* Animated Icon Morphing */
+.icon-morph {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.icon-morph:hover {
+  transform: rotate(15deg) scale(1.2);
+  filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
+}
+
+/* Navigation Item Glow Effect */
+@keyframes navItemGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(212, 175, 55, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 20px rgba(212, 175, 55, 0.1);
+  }
+}
+
+.nav-item-royal {
+  position: relative;
+  background: linear-gradient(145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.nav-item-royal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(212, 175, 55, 0.2),
+    transparent);
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item-royal:hover::before {
+  left: 100%;
+}
+
+.nav-item-royal:hover {
+  background: linear-gradient(145deg,
+    rgba(212, 175, 55, 0.15) 0%,
+    rgba(255, 215, 0, 0.08) 50%,
+    rgba(212, 175, 55, 0.15) 100%);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateX(8px);
+  animation: navItemGlow 2s ease-in-out infinite;
+}
+
+.nav-item-active {
+  background: linear-gradient(145deg,
+    rgba(212, 175, 55, 0.25) 0%,
+    rgba(255, 215, 0, 0.15) 50%,
+    rgba(212, 175, 55, 0.25) 100%);
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  box-shadow:
+    0 8px 32px rgba(212, 175, 55, 0.2),
+    inset 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar Slide Animation */
+@keyframes sidebarSlideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sidebarSlideOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.sidebar-slide-in {
+  animation: sidebarSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.sidebar-slide-out {
+  animation: sidebarSlideOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Mobile Gold Dust Effect */
+@keyframes mobileGoldDust {
+  0% {
+    transform: translateX(-20px) translateY(0px) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(400px) translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.mobile-gold-dust {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.8), rgba(255, 215, 0, 0.4));
+  border-radius: 50%;
+  animation: mobileGoldDust 1.5s ease-out forwards;
+}
+
+/* Enhanced Button Glow */
+.btn-royal-concierge {
+  background: linear-gradient(135deg,
+    #d4af37 0%,
+    #ffd700 25%,
+    #b8860b 50%,
+    #ffd700 75%,
+    #d4af37 100%);
+  box-shadow:
+    0 8px 32px rgba(212, 175, 55, 0.4),
+    inset 0 2px 8px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-royal-concierge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-royal-concierge:hover::before {
+  left: 100%;
+}
+
+.btn-royal-concierge:hover {
+  box-shadow:
+    0 12px 48px rgba(212, 175, 55, 0.6),
+    inset 0 2px 8px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px) scale(1.02);
+}
+
 @keyframes royalPulse {
   0%, 100% {
     transform: scale(1);
