@@ -390,7 +390,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
       } lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen ${className}`}>
         
         {/* Header */}
-        <div className="flex items-center justify-between h-16 px-6 border-b border-white/10">
+        <div className="flex items-center justify-between h-16 px-6 border-b border-white/10 flex-shrink-0">
           <Link href="/" className="flex items-center space-x-3">
             <div className={`p-2 rounded-xl ${
               isPremium 
@@ -423,7 +423,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
+        <nav className="flex-1 px-4 py-4 space-y-4 overflow-y-auto max-h-[calc(100vh-8rem)]">
           {/* Core Navigation */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
