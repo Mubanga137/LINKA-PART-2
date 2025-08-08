@@ -56,7 +56,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
   let favoritesCount = 0;
   if (typeof window !== 'undefined') {
     try {
-      const storedFavorites = localStorage.getItem('marketplace-favorites');
+      const storedFavorites = localStorage.getItem('marketplace_favorites');
       if (storedFavorites && storedFavorites.trim() !== '') {
         const parsed = JSON.parse(storedFavorites);
         favoritesCount = Array.isArray(parsed) ? parsed.length : 0;
