@@ -257,6 +257,12 @@ export function useMarketplace(): MarketplaceContextType {
 // Custom hooks for specific functionality
 export function useCart() {
   const { cart, addToCart, removeFromCart, updateCartQuantity, clearCart, getCartTotal, getCartItemCount } = useMarketplace();
+
+  const getItemQuantity = (productId: string): number => {
+    const item = cart.find(item => item.productId === productId);
+    return item ? item.quantity : 0;
+  };
+
   return {
     cart,
     addToCart,
@@ -264,7 +270,8 @@ export function useCart() {
     updateCartQuantity,
     clearCart,
     getCartTotal,
-    getCartItemCount
+    getCartItemCount,
+    getItemQuantity
   };
 }
 

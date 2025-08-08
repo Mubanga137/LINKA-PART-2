@@ -90,7 +90,7 @@ export function RetailersSuccessSection() {
                 </div>
 
                 {/* Testimonial */}
-                <p className="text-slate-700 mb-6 leading-relaxed italic text-center">"{story.testimonial}"</p>
+                <p className="text-slate-700 mb-6 leading-relaxed font-bold text-center">"{story.testimonial}"</p>
 
                 {/* Author Info */}
                 <div className="text-center border-t border-slate-200 pt-6">

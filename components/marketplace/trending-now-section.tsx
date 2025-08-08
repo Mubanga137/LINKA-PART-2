@@ -32,6 +32,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { getAllVendors, getProductsByVendorId, generateStoreSlug } from "@/services/vendor-service";
+import { useCart, useFavorites } from "@/contexts/marketplace-context";
 import type { Product, Vendor } from "@/lib/types";
 
 // Using the Product type from our service instead of custom interface
@@ -50,6 +51,10 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
   const [trendingProducts, setTrendingProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Use cart and favorites context
+  const { addToCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   // Load trending products from vendors
   useEffect(() => {
@@ -113,10 +118,12 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
   };
 
   const handleAddToCart = (product: Product) => {
+    addToCart(product, 1);
     onAddToCart?.(product);
   };
 
   const handleToggleWishlist = (productId: string) => {
+    toggleFavorite(productId);
     onToggleWishlist?.(productId);
   };
 
@@ -348,12 +355,12 @@ export function TrendingNowSection({ onAddToCart, onToggleWishlist, wishlistedIt
                             size="icon"
                             onClick={() => handleToggleWishlist(product.id)}
                             className={`w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm border-0 shadow-lg ${
-                              wishlistedItems.has(product.id) 
-                                ? 'text-red-500 bg-red-50' 
+                              isFavorite(product.id)
+                                ? 'text-red-500 bg-red-50'
                                 : 'hover:text-red-500'
                             }`}
                           >
-                            <Heart className={`h-5 w-5 ${wishlistedItems.has(product.id) ? 'fill-current' : ''}`} />
+                            <Heart className={`h-5 w-5 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
                           </Button>
                           
                           <Button

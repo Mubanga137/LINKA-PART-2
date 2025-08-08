@@ -154,9 +154,19 @@ export const loadFromLocalStorage = <T>(key: string, defaultValue: T): T => {
   if (typeof window !== 'undefined') {
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : defaultValue;
+      if (!item || item.trim() === '') {
+        return defaultValue;
+      }
+      const parsed = JSON.parse(item);
+      return parsed !== null && parsed !== undefined ? parsed : defaultValue;
     } catch (error) {
       console.warn('Failed to load from localStorage:', error);
+      // Clear corrupted data
+      try {
+        localStorage.removeItem(key);
+      } catch (removeError) {
+        console.warn('Failed to remove corrupted localStorage item:', removeError);
+      }
       return defaultValue;
     }
   }

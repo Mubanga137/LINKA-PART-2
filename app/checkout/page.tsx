@@ -27,7 +27,7 @@ import {
   AlertCircle,
   Loader2
 } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
 import { useAuth } from "@/contexts/auth-context"
 import Link from "next/link"
 

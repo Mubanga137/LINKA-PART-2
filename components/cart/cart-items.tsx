@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Trash2, Heart, Minus, Plus, MapPin, Truck, Package } from "lucide-react"
-import { CartItem } from "@/contexts/cart-context"
+import { CartItem } from "@/lib/types"
 import Link from "next/link"
 
 interface CartItemsProps {

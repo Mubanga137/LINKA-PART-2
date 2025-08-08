@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 
 interface AuthRedirectWrapperProps {
@@ -10,13 +10,14 @@ interface AuthRedirectWrapperProps {
   fallbackRoute?: string
 }
 
-export function AuthRedirectWrapper({ 
-  children, 
-  requiredRole, 
-  fallbackRoute = '/login' 
+export function AuthRedirectWrapper({
+  children,
+  requiredRole,
+  fallbackRoute = '/login'
 }: AuthRedirectWrapperProps) {
   const { user, isLoading, getRoleBasedRedirectUrl } = useAuth()
   const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     if (isLoading) return // Wait for auth to finish loading
@@ -35,7 +36,7 @@ export function AuthRedirectWrapper({
     }
 
     // If user exists but accessing login/signup pages, redirect to dashboard
-    if (user && (window.location.pathname === '/login' || window.location.pathname === '/signup')) {
+    if (user && (pathname === '/login' || pathname === '/signup')) {
       const redirectUrl = getRoleBasedRedirectUrl(user)
       router.replace(redirectUrl)
       return

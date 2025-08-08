@@ -11,25 +11,34 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { ShoppingBag, ArrowLeft } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
 import { useAuth } from "@/contexts/auth-context"
 import Link from "next/link"
 
 export default function CartPage() {
   const [selectedItems, setSelectedItems] = useState<string[]>([])
   const [savedItems, setSavedItems] = useState<string[]>([])
-  const { items, totalItems, totalPrice, removeFromCart, updateQuantity } = useCart()
+  const { cart, getCartItemCount, getCartTotal, removeFromCart, updateCartQuantity } = useCart()
+  const items = cart
+  const totalItems = getCartItemCount()
+  const totalPrice = getCartTotal()
   const { user } = useAuth()
   const router = useRouter()
 
   // Load saved items from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('linka_saved_items')
-    if (saved) {
+    if (saved && saved.trim() !== '') {
       try {
-        setSavedItems(JSON.parse(saved))
+        const parsed = JSON.parse(saved)
+        if (Array.isArray(parsed)) {
+          setSavedItems(parsed)
+        } else {
+          localStorage.removeItem('linka_saved_items')
+        }
       } catch (error) {
         console.error('Error parsing saved items:', error)
+        localStorage.removeItem('linka_saved_items')
       }
     }
   }, [])

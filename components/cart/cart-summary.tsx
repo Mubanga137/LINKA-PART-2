@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { AlertCircle, Tag, Shield, CreditCard, ArrowRight } from "lucide-react"
-import { CartItem } from "@/contexts/cart-context"
+import { CartItem } from "@/lib/types"
 
 interface CartSummaryProps {
   items: CartItem[]

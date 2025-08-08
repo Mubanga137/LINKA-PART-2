@@ -15,8 +15,8 @@ import {
   Store
 } from "lucide-react"
 import Link from "next/link"
-import { Product } from "@/contexts/cart-context"
-import { useCart } from "@/contexts/cart-context"
+import { Product } from "@/lib/types"
+import { useCart } from "@/contexts/marketplace-context"
 
 interface TrendingProductsProps {
   products: Product[]

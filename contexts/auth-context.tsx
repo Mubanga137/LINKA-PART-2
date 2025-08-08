@@ -43,9 +43,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Initialize auth state from localStorage
   useEffect(() => {
     const savedUser = localStorage.getItem('linka_user')
-    if (savedUser) {
+    if (savedUser && savedUser.trim() !== '') {
       try {
-        setUser(JSON.parse(savedUser))
+        const parsed = JSON.parse(savedUser)
+        if (parsed && typeof parsed === 'object' && parsed.id) {
+          setUser(parsed)
+        } else {
+          localStorage.removeItem('linka_user')
+        }
       } catch (error) {
         console.error('Error parsing saved user:', error)
         localStorage.removeItem('linka_user')

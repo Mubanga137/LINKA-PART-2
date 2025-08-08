@@ -20,8 +20,8 @@ import {
   Store,
   ExternalLink
 } from "lucide-react"
-import { Product } from "@/contexts/cart-context"
-import { useCart } from "@/contexts/cart-context"
+import { Product } from "@/lib/types"
+import { useCart } from "@/contexts/marketplace-context"
 import { ProductSortOptions } from "@/services/product-service"
 
 interface ProductGridProps {

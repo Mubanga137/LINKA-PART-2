@@ -23,10 +23,11 @@ import {
   Gift,
   TrendingUp,
   Zap,
-  ChevronRight
+  ChevronRight,
+  Crown
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
 import { useFavorites } from "@/contexts/marketplace-context"
 
 interface SidebarProps {
@@ -95,7 +96,8 @@ export function AnimatedSidebar({ className }: SidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { user, logout } = useAuth()
-  const { totalItems } = useCart()
+  const { getCartItemCount } = useCart()
+  const totalItems = getCartItemCount()
   const { favorites } = useFavorites()
 
   useEffect(() => {
@@ -141,6 +143,15 @@ export function AnimatedSidebar({ className }: SidebarProps) {
       href: '/services',
       color: 'green',
       gradient: 'from-green-500 to-green-600'
+    },
+    {
+      id: 'premium',
+      label: 'Premium Listings',
+      icon: Crown,
+      href: '/marketplace/premium-listings',
+      color: 'yellow',
+      gradient: 'from-yellow-500 to-amber-600',
+      premium: true
     },
     {
       id: 'orders',
@@ -313,7 +324,7 @@ export function AnimatedSidebar({ className }: SidebarProps) {
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href
                 const Icon = item.icon
-                
+
                 return (
                   <motion.div
                     key={item.id}
@@ -326,7 +337,9 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                       className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group relative overflow-hidden ${
                         isActive
                           ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg`
-                          : 'text-gray-700 hover:bg-gray-50'
+                          : item.premium
+                            ? 'text-gray-700 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-amber-50 border border-yellow-200/50'
+                            : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
                       {/* Hover effect background */}
@@ -343,11 +356,22 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                           ? 'bg-white/20 shadow-inner'
                           : `bg-${item.color}-100 text-${item.color}-600 group-hover:scale-110`
                       }`}>
-                        <Icon className="h-4 w-4" />
+                        <Icon className={`h-4 w-4 ${item.premium ? 'crown-glow' : ''}`} />
                       </div>
-                      
+
                       <span className="font-medium flex-1">{item.label}</span>
-                      
+
+                      {/* Premium sparkle effect */}
+                      {item.premium && (
+                        <motion.div
+                          animate={{ rotate: [0, 360] }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                          className="mr-2"
+                        >
+                          <Star className="h-3 w-3 text-yellow-500" />
+                        </motion.div>
+                      )}
+
                       {item.badge !== undefined && item.badge > 0 && (
                         <Badge className="bg-red-500 text-white text-xs px-2 py-0.5 min-w-[1.25rem] h-5 flex items-center justify-center">
                           {item.badge}

@@ -37,40 +37,40 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-32 relative">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="py-12 sm:py-16 md:py-24 lg:py-32 relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {features.map((feature, index) => (
             <div key={feature.number} className="group relative" style={{ animationDelay: `${index * 100}ms` }}>
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${feature.bgGradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               ></div>
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-slate-900/5 border border-white/20 hover:shadow-2xl hover:shadow-slate-900/10 transition-all duration-500 hover:-translate-y-2">
-                <div className="relative mb-8">
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-900/5 border border-white/20 hover:shadow-2xl hover:shadow-slate-900/10 transition-all duration-500 hover:-translate-y-2">
+                <div className="relative mb-6 sm:mb-8">
                   <div
-                    className={`mx-auto w-20 h-20 bg-gradient-to-br ${feature.bgGradient} rounded-2xl flex items-center justify-center shadow-lg`}
+                    className={`mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br ${feature.bgGradient} rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg`}
                   >
                     <feature.icon
-                      className={`h-10 w-10 bg-gradient-to-br ${feature.gradient} bg-clip-text text-transparent`}
+                      className={`h-8 w-8 sm:h-10 sm:w-10 bg-gradient-to-br ${feature.gradient} bg-clip-text text-transparent`}
                       style={{ WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}
                     />
                   </div>
                   <div
-                    className={`absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br ${feature.gradient} text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg`}
+                    className={`absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br ${feature.gradient} text-white rounded-full flex items-center justify-center text-xs sm:text-sm font-bold shadow-lg`}
                   >
                     {feature.number}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">{feature.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4 text-center sm:text-left">{feature.title}</h3>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed text-center sm:text-left">{feature.description}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-20">
-          <div className="inline-flex items-center rounded-full bg-gradient-to-r from-orange-100 to-pink-100 px-8 py-4 text-orange-700 border border-orange-200/50 shadow-lg backdrop-blur-sm">
-            <span className="text-lg font-medium">Ready to get started?</span>
+        <div className="text-center mt-12 sm:mt-16 md:mt-20 px-4">
+          <div className="inline-flex items-center rounded-full bg-gradient-to-r from-orange-100 to-pink-100 px-6 sm:px-8 py-3 sm:py-4 text-orange-700 border border-orange-200/50 shadow-lg backdrop-blur-sm">
+            <span className="text-base sm:text-lg font-medium">Ready to get started?</span>
             <span className="ml-2 text-2xl">✨</span>
           </div>
         </div>

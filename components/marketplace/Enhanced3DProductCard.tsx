@@ -1,610 +1,443 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Heart, 
-  ShoppingCart, 
-  Star, 
-  MapPin, 
-  Truck, 
-  Clock, 
-  Package,
-  Zap,
-  Store,
-  ExternalLink,
-  Eye,
-  Sparkles,
-  Timer,
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Star,
+  ShoppingCart,
+  Heart,
+  Crown,
   Award,
+  Diamond,
   Shield,
+  Truck,
+  RefreshCw,
   Gift,
-  Plus,
-  Minus,
-  MoreHorizontal
+  Eye,
+  Share2,
+  ExternalLink,
+  CheckCircle,
+  Verified,
+  Sparkles,
+  Medal,
+  Clock,
+  Zap,
+  TrendingUp
 } from "lucide-react";
-import type { Product } from "@/lib/types";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Enhanced3DProductCardProps {
-  product: Product;
-  onAddToCart: (product: Product) => void;
-  onToggleFavorite: (productId: string) => void;
-  isFavorite: boolean;
-  priority?: boolean;
-  showVisitStore?: boolean;
-  index?: number; // For staggered animations
+  product: {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    originalPrice?: number;
+    images: string[];
+    category: string;
+    vendor: {
+      id: string;
+      name: string;
+      logo: string;
+      verified: boolean;
+      premiumSeller: boolean;
+    };
+    rating: number;
+    reviewCount: number;
+    premiumFeatures: string[];
+    luxuryRating: number;
+    handcrafted?: boolean;
+    limitedEdition?: boolean;
+    exclusiveDesign?: boolean;
+    premiumMaterials?: string[];
+    certifications?: string[];
+    warranty: string;
+    views: number;
+    soldCount: number;
+    tags: string[];
+    stockLevel?: number;
+    trending?: boolean;
+    flashSale?: boolean;
+    saleEndTime?: Date;
+  };
+  variant?: 'standard' | 'hero' | 'featured';
+  className?: string;
 }
 
-export function Enhanced3DProductCard({
-  product,
-  onAddToCart,
-  onToggleFavorite,
-  isFavorite,
-  priority = false,
-  showVisitStore = true,
-  index = 0
+export function Enhanced3DProductCard({ 
+  product, 
+  variant = 'standard',
+  className = "" 
 }: Enhanced3DProductCardProps) {
-  const [imageError, setImageError] = useState(false);
-  const [imageLoading, setImageLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  const [showQuickView, setShowQuickView] = useState(false);
-  const [addingToCart, setAddingToCart] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isInWishlist, setIsInWishlist] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  
-  // Motion values for 3D transforms
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [30, -30]);
-  const rotateY = useTransform(x, [-100, 100], [-30, 30]);
-  
-  // Handle mouse move for 3D tilt effect
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     
     const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     
-    x.set((event.clientX - centerX) / 5);
-    y.set((event.clientY - centerY) / 5);
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+    
+    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
   };
-  
+
   const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
     setIsHovered(false);
   };
 
-  const handleImageError = () => {
-    setImageError(true);
-    setImageLoading(false);
-  };
-
-  const handleImageLoad = () => {
-    setImageLoading(false);
-  };
-
-  const handleAddToCart = async () => {
-    setAddingToCart(true);
-    onAddToCart({ ...product, quantity });
-    
-    // Simulate loading delay for visual feedback
-    setTimeout(() => {
-      setAddingToCart(false);
-    }, 800);
-  };
-
-  // Fallback image URL
-  const fallbackImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z' transform='translate(180,180)'/%3E%3C/svg%3E";
-
-  const getImageSrc = () => {
-    if (imageError) return fallbackImage;
-    return product.images[0] || fallbackImage;
-  };
-
-  // Generate store slug from vendor name
-  const getStoreSlug = (vendorName: string) => {
-    return vendorName.toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, '')
-      .replace(/--+/g, '-')
-      .replace(/^-|-$/g, '');
-  };
-
-  // Check if this is a flash sale item
-  const isFlashSale = product.tags?.includes('flash-sale') || (product as any).hotDeal;
-
-  // Card variants for entrance animation
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 60,
-      scale: 0.9,
-      rotateX: 20
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      rotateX: 0,
-      transition: {
-        duration: 0.6,
-        delay: index * 0.1,
-        type: "spring",
-        stiffness: 100,
-        damping: 20
-      }
+  const getCardSize = () => {
+    switch (variant) {
+      case 'hero':
+        return 'aspect-[16/9] lg:aspect-[21/9]';
+      case 'featured':
+        return 'aspect-[4/5]';
+      default:
+        return 'aspect-[4/3]';
     }
   };
 
-  // Hover animation variants
-  const hoverVariants = {
-    initial: {
-      scale: 1,
-      y: 0,
-      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)"
-    },
-    hover: {
-      scale: 1.05,
-      y: -10,
-      boxShadow: "0 25px 50px rgba(0, 0, 0, 0.25)",
-      transition: {
-        duration: 0.4,
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
-    }
-  };
+  const discountPercentage = product.originalPrice 
+    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    : 0;
 
-  // Floating badge animation
-  const badgeVariants = {
-    initial: { scale: 1 },
-    animate: {
-      scale: [1, 1.1, 1],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        repeatType: "reverse" as const
-      }
-    }
-  };
+  const isLowStock = product.stockLevel && product.stockLevel <= 5;
+  const isVeryLowStock = product.stockLevel && product.stockLevel <= 2;
 
   return (
-    <motion.article
-      ref={cardRef}
-      className="group relative perspective-1000 w-full"
-      variants={cardVariants}
-      initial="hidden"
-      animate="visible"
-      whileHover="hover"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      style={{ perspective: 1000 }}
+    <div 
+      className={`group relative ${className}`}
+      style={{ transformStyle: 'preserve-3d' }}
     >
-      <motion.div
-        className="relative w-full h-full preserve-3d"
+      {/* Floating Light Effects */}
+      <div className="absolute -inset-4 bg-gradient-to-r from-amber-400/20 via-yellow-300/30 to-amber-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700 -z-10"></div>
+      <div className="absolute -inset-2 bg-gradient-to-r from-amber-300/10 via-yellow-200/20 to-amber-400/10 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
+
+      <Card
+        ref={cardRef}
+        className={`
+          overflow-hidden border-2 border-amber-100/60 shadow-xl hover:shadow-2xl 
+          transition-all duration-500 bg-white/95 backdrop-blur-xl
+          hover:border-amber-200/80 group-hover:-translate-y-2
+          ${variant === 'hero' ? 'min-h-[400px] lg:min-h-[500px]' : ''}
+          ${variant === 'featured' ? 'min-h-[480px]' : ''}
+        `}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={handleMouseLeave}
         style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d"
+          transformStyle: 'preserve-3d',
+          transition: 'transform 0.1s ease-out, box-shadow 0.5s ease, border-color 0.3s ease'
         }}
-        variants={hoverVariants}
       >
-        {/* Main Card */}
-        <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl">
-          {/* Glassmorphism overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent pointer-events-none" />
+        {/* Premium Badges - Multiple Layers */}
+        <div className="absolute top-4 left-4 z-30 flex flex-col gap-2">
+          {/* Primary Premium Badge */}
+          <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white px-3 py-1.5 shadow-lg border border-white/30 text-sm font-bold rounded-xl">
+            <Crown className="h-4 w-4 mr-1.5" />
+            Premium
+          </Badge>
           
-          {/* Animated background gradient */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            animate={isHovered ? {
-              background: [
-                "linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05), rgba(236, 72, 153, 0.05))",
-                "linear-gradient(45deg, rgba(236, 72, 153, 0.05), rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05))",
-                "linear-gradient(45deg, rgba(147, 51, 234, 0.05), rgba(236, 72, 153, 0.05), rgba(59, 130, 246, 0.05))"
-              ]
-            } : {}}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-
-          {/* Product Image Container with enhanced effects */}
-          <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-            {imageLoading && !imageError && (
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                style={{ backgroundSize: "200% 100%" }}
-              />
+          {/* Special Attributes */}
+          <div className="flex flex-col gap-1.5">
+            {product.trending && (
+              <Badge className="bg-gradient-to-r from-rose-500 to-pink-600 text-white px-2.5 py-1 text-xs shadow-md border border-white/20 rounded-lg animate-pulse">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                Trending
+              </Badge>
             )}
-            
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="w-full h-full"
-            >
+            {product.flashSale && (
+              <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-2.5 py-1 text-xs shadow-md border border-white/20 rounded-lg animate-bounce">
+                <Zap className="h-3 w-3 mr-1" />
+                Flash Sale
+              </Badge>
+            )}
+            {product.handcrafted && (
+              <Badge className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-2.5 py-1 text-xs shadow-md border border-white/20 rounded-lg">
+                <Award className="h-3 w-3 mr-1" />
+                Handcrafted
+              </Badge>
+            )}
+            {product.limitedEdition && (
+              <Badge className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-2.5 py-1 text-xs shadow-md border border-white/20 rounded-lg">
+                <Medal className="h-3 w-3 mr-1" />
+                Limited
+              </Badge>
+            )}
+            {product.exclusiveDesign && (
+              <Badge className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-2.5 py-1 text-xs shadow-md border border-white/20 rounded-lg">
+                <Sparkles className="h-3 w-3 mr-1" />
+                Exclusive
+              </Badge>
+            )}
+          </div>
+        </div>
+
+        {/* Top Right - Luxury Rating & Stock Status */}
+        <div className="absolute top-4 right-4 z-30 flex flex-col gap-2 items-end">
+          {/* Luxury Rating */}
+          <div className="bg-white/95 backdrop-blur-xl rounded-xl px-3 py-2 flex items-center gap-2 shadow-lg border border-amber-100/60">
+            <Diamond className="h-4 w-4 text-amber-600" />
+            <span className="text-sm font-bold text-amber-900">{product.luxuryRating}/5</span>
+          </div>
+          
+          {/* Stock Status */}
+          {isVeryLowStock && (
+            <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 text-xs shadow-md animate-pulse">
+              Only {product.stockLevel} left!
+            </Badge>
+          )}
+          {isLowStock && !isVeryLowStock && (
+            <Badge className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 text-xs shadow-md">
+              Low Stock ({product.stockLevel})
+            </Badge>
+          )}
+        </div>
+
+        {/* Main Image Container */}
+        <div className={`relative ${getCardSize()} bg-gradient-to-br from-amber-50/80 to-yellow-50/80 overflow-hidden`}>
+          {/* Primary Image */}
+          <Image
+            src={product.images[currentImageIndex]}
+            alt={product.name}
+            fill
+            className="object-cover transition-all duration-700 group-hover:scale-110"
+            priority={variant === 'hero'}
+          />
+          
+          {/* Glassmorphism Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+          
+          {/* Floating Action Buttons */}
+          <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                className="flex-1 bg-white/90 backdrop-blur-xl border-0 hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
+                onClick={() => setIsInWishlist(!isInWishlist)}
+              >
+                <Heart className={`h-4 w-4 mr-1 ${isInWishlist ? 'fill-red-500 text-red-500' : ''}`} />
+                {isInWishlist ? 'Saved' : 'Save'}
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="flex-1 bg-white/90 backdrop-blur-xl border-0 hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <Share2 className="h-4 w-4 mr-1" />
+                Share
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="flex-1 bg-white/90 backdrop-blur-xl border-0 hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
+                asChild
+              >
+                <Link href={`/vendors/${product.vendor.id}`}>
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Store
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Image Indicators */}
+          {product.images.length > 1 && (
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-all duration-300">
+              {product.images.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentImageIndex 
+                      ? 'bg-white shadow-lg' 
+                      : 'bg-white/50 hover:bg-white/75'
+                  }`}
+                  onClick={() => setCurrentImageIndex(index)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Content Section */}
+        <CardContent className={`${variant === 'hero' ? 'p-8' : variant === 'featured' ? 'p-6' : 'p-5'}`}>
+          {/* Vendor Information */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="relative">
               <Image
-                src={getImageSrc()}
-                alt={`${product.name} - ${product.description}`}
-                fill
-                className={`object-cover transition-all duration-700 ${
-                  imageLoading ? 'opacity-0' : 'opacity-100'
-                } ${isHovered ? 'brightness-110 contrast-110' : ''}`}
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                loading={priority ? "eager" : "lazy"}
-                priority={priority}
-                onLoad={handleImageLoad}
-                onError={handleImageError}
+                src={product.vendor.logo}
+                alt={product.vendor.name}
+                width={24}
+                height={24}
+                className="rounded-full object-cover ring-2 ring-amber-100"
               />
-            </motion.div>
-            
-            {/* Enhanced Top Badges with glassmorphism */}
-            <div className="absolute top-3 left-3 right-3 flex justify-between items-start z-20">
-              <div className="flex flex-col gap-2">
-                {(product as any).hotDeal && (
-                  <motion.div
-                    variants={badgeVariants}
-                    initial="initial"
-                    animate="animate"
-                  >
-                    <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm border border-red-400/30">
-                      <motion.span
-                        animate={{ rotate: [0, 5, -5, 0] }}
-                        transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
-                      >
-                        🔥
-                      </motion.span>
-                      <span className="ml-1">HOT DEAL</span>
-                    </Badge>
-                  </motion.div>
-                )}
-                
-                {product.freeShipping && (
-                  <Badge className="bg-green-500/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg border border-green-400/30">
-                    <Truck className="h-3 w-3" />
-                    <span>Free Ship</span>
-                  </Badge>
-                )}
-                
-                {product.featured && !((product as any).hotDeal) && (
-                  <Badge className="bg-blue-500/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg border border-blue-400/30">
-                    <Zap className="h-3 w-3" />
-                    <span>Featured</span>
-                  </Badge>
-                )}
-                
-                {product.discountPercentage && (
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
-                    <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm border border-orange-400/30">
-                      -{product.discountPercentage}% OFF
-                    </Badge>
-                  </motion.div>
-                )}
-              </div>
-              
-              {/* Enhanced Favorite Button with glassmorphism */}
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="w-12 h-12 p-0 bg-white/20 backdrop-blur-md hover:bg-white/30 text-gray-600 rounded-full shadow-lg border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300"
-                  onClick={() => onToggleFavorite(product.id)}
-                  aria-label={`${isFavorite ? 'Remove from' : 'Add to'} favorites`}
-                >
-                  <motion.div
-                    animate={isFavorite ? { scale: [1, 1.2, 1] } : {}}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Heart
-                      className={`h-5 w-5 transition-colors ${
-                        isFavorite ? 'fill-red-500 text-red-500' : 'hover:text-red-400'
-                      }`}
-                    />
-                  </motion.div>
-                </Button>
-              </motion.div>
-            </div>
-
-            {/* Quick Action Overlay - shown on hover */}
-            <AnimatePresence>
-              {isHovered && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  className="absolute bottom-3 left-3 right-3 flex gap-2 z-20"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1"
-                  >
-                    <Button
-                      size="sm"
-                      className="w-full bg-white/20 backdrop-blur-md hover:bg-white/30 text-white border border-white/20 shadow-lg font-semibold"
-                      asChild
-                    >
-                      <Link href={`/products/${product.id}`}>
-                        <Eye className="h-4 w-4 mr-1" />
-                        Quick View
-                      </Link>
-                    </Button>
-                  </motion.div>
-                  
-                  {showVisitStore && !isFlashSale && (
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex-1"
-                    >
-                      <Button
-                        size="sm"
-                        className="w-full bg-blue-500/80 backdrop-blur-md hover:bg-blue-600/80 text-white border border-blue-400/30 shadow-lg font-semibold"
-                        asChild
-                      >
-                        <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
-                          <Store className="h-4 w-4 mr-1" />
-                          Store
-                        </Link>
-                      </Button>
-                    </motion.div>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Enhanced Product Content with glassmorphism panels */}
-          <div className="p-4 relative">
-            {/* Vendor Info with enhanced styling */}
-            <motion.div 
-              className="flex items-center justify-between mb-3"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="flex items-center gap-3 min-w-0 flex-1">
-                <motion.div 
-                  className="w-8 h-8 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg border-2 border-white/50"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  {product.vendor.name.charAt(0)}
-                </motion.div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-gray-900 truncate">
-                    {product.vendor.name}
-                  </p>
-                  <div className="flex items-center gap-1 text-xs text-gray-500">
-                    <MapPin className="h-3 w-3 flex-shrink-0" />
-                    <span className="truncate">Lusaka, Zambia</span>
-                    <Shield className="h-3 w-3 text-green-500 ml-1" />
-                  </div>
+              {product.vendor.verified && (
+                <div className="absolute -top-1 -right-1 bg-blue-500 rounded-full p-0.5">
+                  <Verified className="h-2.5 w-2.5 text-white" />
                 </div>
-              </div>
-
-              {/* Enhanced Rating with animation */}
-              <motion.div 
-                className="flex items-center gap-1 bg-yellow-50/80 backdrop-blur-sm px-2 py-1 rounded-full border border-yellow-200/50"
-                whileHover={{ scale: 1.05 }}
-              >
-                <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                >
-                  <Star className="h-3 w-3 text-yellow-400 fill-current" />
-                </motion.div>
-                <span className="text-xs font-bold text-gray-800">
-                  {product.rating?.toFixed(1)}
-                </span>
-              </motion.div>
-            </motion.div>
-
-            {/* Enhanced Product Name */}
-            <motion.h3 
-              className="text-sm font-bold text-gray-900 mb-2 line-clamp-2 leading-tight"
-              whileHover={{ scale: 1.02 }}
-            >
-              {product.name}
-            </motion.h3>
-
-            {/* Enhanced Price Section with glassmorphism */}
-            <motion.div 
-              className="mb-3 p-3 bg-gradient-to-r from-gray-50/80 to-white/80 backdrop-blur-sm rounded-xl border border-gray-200/50"
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="flex items-baseline gap-2">
-                <motion.span 
-                  className="text-lg font-bold text-gray-900"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  K{product.price.toFixed(2)}
-                </motion.span>
-                {product.originalPrice && (
-                  <span className="text-sm text-gray-400 line-through">
-                    K{product.originalPrice.toFixed(2)}
-                  </span>
-                )}
-              </div>
-              {product.originalPrice && (
-                <motion.p 
-                  className="text-xs text-green-600 font-semibold flex items-center gap-1"
-                  animate={{ opacity: [0.7, 1, 0.7] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <Gift className="h-3 w-3" />
-                  Save K{(product.originalPrice - product.price).toFixed(2)}
-                </motion.p>
               )}
-            </motion.div>
+            </div>
+            <span className="text-sm font-semibold text-amber-900">{product.vendor.name}</span>
+            {product.vendor.premiumSeller && (
+              <Badge className="bg-amber-50 text-amber-700 text-xs px-2 py-0.5 border border-amber-200 rounded-md">
+                <Crown className="h-2.5 w-2.5 mr-1" />
+                Premium
+              </Badge>
+            )}
+          </div>
 
-            {/* Enhanced Stock Status */}
-            <motion.div 
-              className="mb-4"
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className={`flex items-center gap-2 text-xs px-3 py-1.5 rounded-full backdrop-blur-sm ${
-                product.inStock 
-                  ? 'text-green-700 bg-green-50/80 border border-green-200/50' 
-                  : 'text-red-700 bg-red-50/80 border border-red-200/50'
-              }`}>
-                <Package className="h-3 w-3" />
-                <span className="font-semibold">{product.inStock ? 'In Stock' : 'Out of Stock'}</span>
-                {product.inStock && product.stockQuantity && product.stockQuantity <= 10 && (
-                  <motion.span 
-                    className="text-orange-600 font-bold"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  >
-                    (Only {product.stockQuantity} left!)
-                  </motion.span>
-                )}
-              </div>
-            </motion.div>
+          {/* Product Title & Description */}
+          <div className="mb-5">
+            <h3 className={`font-bold text-gray-900 mb-2 line-clamp-2 leading-tight group-hover:text-amber-800 transition-colors ${
+              variant === 'hero' ? 'text-2xl lg:text-3xl' : 
+              variant === 'featured' ? 'text-xl' : 'text-lg'
+            }`}>
+              {product.name}
+            </h3>
+            <p className={`text-gray-600 line-clamp-2 leading-relaxed ${
+              variant === 'hero' ? 'text-base' : 'text-sm'
+            }`}>
+              {product.description}
+            </p>
+          </div>
 
-            {/* Enhanced Action Buttons */}
-            <div className="space-y-3">
-              {/* Quantity Selector */}
-              <div className="flex items-center justify-center gap-3 p-2 bg-gray-50/80 backdrop-blur-sm rounded-xl border border-gray-200/50">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-gray-600 hover:text-blue-600 transition-colors"
+          {/* Premium Features Pills */}
+          <div className="mb-5">
+            <div className="flex flex-wrap gap-2">
+              {product.premiumFeatures.slice(0, variant === 'hero' ? 5 : 3).map((feature) => (
+                <Badge 
+                  key={feature} 
+                  variant="outline" 
+                  className="text-xs border-amber-200 text-amber-700 bg-amber-50/50 hover:bg-amber-100/50 transition-colors rounded-full px-3 py-1"
                 >
-                  <Minus className="h-4 w-4" />
-                </motion.button>
-                
-                <span className="font-bold text-gray-900 w-8 text-center">{quantity}</span>
-                
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-gray-600 hover:text-blue-600 transition-colors"
+                  {feature}
+                </Badge>
+              ))}
+              {product.premiumFeatures.length > (variant === 'hero' ? 5 : 3) && (
+                <Badge 
+                  variant="outline" 
+                  className="text-xs border-gray-200 text-gray-500 bg-gray-50 rounded-full px-3 py-1"
                 >
-                  <Plus className="h-4 w-4" />
-                </motion.button>
-              </div>
-
-              {/* Enhanced Buy Now Button */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button
-                  onClick={handleAddToCart}
-                  disabled={!product.inStock || addingToCart}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 text-sm rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 transition-all duration-300 relative overflow-hidden"
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
-                    animate={addingToCart ? {
-                      x: ["-100%", "100%"],
-                      transition: { duration: 0.8, repeat: Infinity }
-                    } : {}}
-                  />
-                  
-                  <AnimatePresence mode="wait">
-                    {addingToCart ? (
-                      <motion.div
-                        key="loading"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="flex items-center gap-2"
-                      >
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        >
-                          <ShoppingCart className="h-4 w-4" />
-                        </motion.div>
-                        Adding to Cart...
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="add"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="flex items-center gap-2"
-                      >
-                        <ShoppingCart className="h-4 w-4" />
-                        Add to Cart ({quantity})
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </Button>
-              </motion.div>
-
-              {/* Secondary Action Button */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button
-                  variant="outline"
-                  className="w-full border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 py-3 text-sm rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm"
-                  asChild
-                >
-                  <Link href={`/products/${product.id}`}>
-                    <Eye className="h-4 w-4 mr-2" />
-                    View Full Details
-                  </Link>
-                </Button>
-              </motion.div>
+                  +{product.premiumFeatures.length - (variant === 'hero' ? 5 : 3)} more
+                </Badge>
+              )}
             </div>
           </div>
 
-          {/* Floating particles effect */}
-          <AnimatePresence>
-            {isHovered && (
-              <>
+          {/* Pricing Section */}
+          <div className="flex items-center gap-3 mb-5">
+            <span className={`font-bold text-amber-600 ${
+              variant === 'hero' ? 'text-3xl' : variant === 'featured' ? 'text-2xl' : 'text-xl'
+            }`}>
+              K{product.price.toFixed(2)}
+            </span>
+            {product.originalPrice && (
+              <div className="flex items-center gap-2">
+                <span className={`text-gray-400 line-through ${
+                  variant === 'hero' ? 'text-xl' : 'text-lg'
+                }`}>
+                  K{product.originalPrice.toFixed(2)}
+                </span>
+                <Badge className="bg-green-50 text-green-700 border border-green-200 text-xs px-2 py-1 rounded-md">
+                  -{discountPercentage}%
+                </Badge>
+              </div>
+            )}
+          </div>
+
+          {/* Rating and Social Proof */}
+          <div className="flex items-center justify-between text-sm text-gray-600 mb-5">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-60 pointer-events-none"
-                    initial={{
-                      opacity: 0,
-                      scale: 0,
-                      x: Math.random() * 300,
-                      y: Math.random() * 400
-                    }}
-                    animate={{
-                      opacity: [0, 1, 0],
-                      scale: [0, 1, 0],
-                      y: [400, -50],
-                    }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 2,
-                      delay: i * 0.2,
-                      repeat: Infinity,
-                      repeatDelay: 2
-                    }}
+                  <Star 
+                    key={i} 
+                    className={`h-4 w-4 ${
+                      i < Math.floor(product.rating) 
+                        ? 'text-yellow-500 fill-current' 
+                        : 'text-gray-300'
+                    }`} 
                   />
                 ))}
-              </>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.div>
-    </motion.article>
+              </div>
+              <span className="font-semibold text-gray-900">{product.rating}</span>
+              <span>({product.reviewCount})</span>
+            </div>
+            <div className="flex items-center gap-4 text-xs">
+              <div className="flex items-center gap-1">
+                <Eye className="h-3 w-3" />
+                <span>{product.views.toLocaleString()}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <ShoppingCart className="h-3 w-3" />
+                <span>{product.soldCount} sold</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust & Security Guarantees */}
+          <div className="bg-gradient-to-r from-amber-50/80 via-yellow-50/60 to-amber-50/80 rounded-xl p-4 mb-5 border border-amber-100/60">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-amber-700">
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-amber-600" />
+                <span className="font-medium">{product.warranty}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Truck className="h-4 w-4 text-amber-600" />
+                <span className="font-medium">Premium Delivery</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <RefreshCw className="h-4 w-4 text-amber-600" />
+                <span className="font-medium">Easy Returns</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3 mb-4">
+            <Button 
+              className="flex-1 bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-600 hover:from-amber-700 hover:via-yellow-700 hover:to-amber-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Add to Cart
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="px-4 py-3 border-2 border-amber-200 hover:border-amber-300 hover:bg-amber-50 text-amber-700 hover:text-amber-800 rounded-xl transition-all duration-300 hover:scale-105"
+              asChild
+            >
+              <Link href={`/products/${product.id}`}>
+                <ExternalLink className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+
+          {/* Certifications & Trust Signals */}
+          {product.certifications && product.certifications.length > 0 && (
+            <div className="pt-4 border-t border-gray-100">
+              <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
+                <CheckCircle className="h-3 w-3 text-green-600" />
+                <span className="font-medium">{product.certifications.join(" • ")}</span>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   );
 }

@@ -295,7 +295,7 @@ export function RentalsHosting() {
                     </div>
                   </div>
 
-                  <p className="text-slate-700 leading-relaxed italic mb-4 text-sm sm:text-base">"{story.story}"</p>
+                  <p className="text-slate-700 leading-relaxed font-bold mb-4 text-sm sm:text-base">"{story.story}"</p>
 
                   <div className="flex items-center text-sm text-slate-500">
                     <Calendar className="h-4 w-4 mr-2" />

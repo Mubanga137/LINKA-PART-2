@@ -30,12 +30,13 @@ import {
   Star
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/marketplace-context"
 
 export function CustomerHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { user, logout } = useAuth()
-  const { totalItems } = useCart()
+  const { getCartItemCount } = useCart()
+  const totalItems = getCartItemCount()
   const router = useRouter()
 
   const handleLogout = () => {

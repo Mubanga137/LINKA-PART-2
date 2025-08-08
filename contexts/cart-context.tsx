@@ -64,9 +64,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem('linka_cart')
-    if (savedCart) {
+    if (savedCart && savedCart.trim() !== '') {
       try {
-        setItems(JSON.parse(savedCart))
+        const parsed = JSON.parse(savedCart)
+        if (Array.isArray(parsed)) {
+          setItems(parsed)
+        } else {
+          localStorage.removeItem('linka_cart')
+        }
       } catch (error) {
         console.error('Error parsing saved cart:', error)
         localStorage.removeItem('linka_cart')

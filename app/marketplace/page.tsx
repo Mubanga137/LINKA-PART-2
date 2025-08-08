@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Header } from "@/components/header";
+import { SideNavigation } from "@/components/ui/side-navigation";
+import { MinimalHeader } from "@/components/ui/minimal-header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -436,11 +437,11 @@ function EnhancedHeroSection() {
                 },
                 {
                   icon: Crown,
-                  label: "Premium",
-                  color: "from-purple-400 to-indigo-400",
-                  hoverColor: "from-purple-500 to-indigo-500",
-                  textColor: "text-purple-700",
-                  href: "/marketplace/premium"
+                  label: "Premium Listings",
+                  color: "from-yellow-400 to-amber-400",
+                  hoverColor: "from-yellow-500 to-amber-500",
+                  textColor: "text-yellow-700",
+                  href: "/marketplace/premium-listings"
                 },
                 {
                   icon: Truck,
@@ -780,8 +781,9 @@ function FlashSalesSection() {
                     </div>
                   </div>
 
-                  <Button 
+                  <Button
                     className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white"
+                    onClick={() => addToCart(product, 1)}
                   >
                     <ShoppingCart className="h-4 w-4 mr-2" />
                     Buy Now
@@ -920,85 +922,99 @@ function MarketplaceContent() {
     sortBy: 'relevance'
   });
 
+  // Use cart context
+  const { addToCart } = useCart();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="min-h-screen bg-white"
     >
-      <Header />
+      {/* Side Navigation */}
+      <SideNavigation variant="marketplace" />
+
+      {/* Main Content Area */}
+      <div className="lg:pl-64">
+        <MinimalHeader variant="marketplace" showSearch={true} />
       
       <main>
         <EnhancedHeroSection />
-        <RecommendedSection
-          onAddToCart={(product) => {
-            // Convert RecommendedProduct to cart-compatible format
-            const cartProduct = {
-              id: product.id,
-              name: product.name,
-              price: product.price,
-              image: product.images[0],
-              retailerName: product.vendor.name,
-              retailerLocation: product.location,
-              category: product.category,
-              rating: product.rating,
-              reviewCount: product.reviewCount,
-              inStock: product.inStock,
-              features: product.tags,
-              variants: {},
-              shippingInfo: {
-                freeShipping: product.freeShipping,
-                estimatedDays: product.fastDelivery ? 1 : 3,
-                shippingCost: product.freeShipping ? 0 : 25
-              }
-            };
-            // In a real app, this would use the cart context
-            console.log('Add to cart:', cartProduct);
-          }}
-          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
-          wishlistedItems={new Set()}
-        />
+        <RecommendedSection />
         <ShopByCategorySection maxItems={6} />
         <FlashSalesSection />
-        <TrendingNowSection
-          onAddToCart={(product) => console.log('Add to cart:', product)}
-          onToggleWishlist={(productId) => console.log('Toggle wishlist:', productId)}
-          wishlistedItems={new Set()}
-        />
+        <TrendingNowSection />
 
-        {/* Additional CTA Section for more marketplace features */}
+        {/* Premium Listings Feature Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="py-16 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
+          className="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 relative overflow-hidden"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Explore More Marketplace Features
+          {/* Background Effects */}
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-transparent to-emerald-400/10"></div>
+          <div className="absolute inset-0 opacity-20">
+            {[...Array(15)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-yellow-400/40 rounded-full animate-pulse"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Hero Premium Listings Banner */}
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
+                <Crown className="h-6 w-6 text-yellow-400" />
+                <span className="text-white font-medium">Now Available</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                <span className="bg-gradient-to-r from-yellow-400 to-amber-300 bg-clip-text text-transparent">
+                  Premium Listings
+                </span>
+                <br />
+                Curated Excellence
               </h2>
-              <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
-                Discover trending products, browse verified vendors, and shop amazing sales
+              <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+                Discover handpicked luxury products and exclusive services from verified premium vendors
               </p>
+              <Link href="/marketplace/premium-listings">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-slate-900 font-bold px-8 py-4 rounded-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
+                >
+                  <Crown className="h-6 w-6 mr-3" />
+                  Explore Premium Listings
+                  <ArrowRight className="h-6 w-6 ml-3" />
+                </Button>
+              </Link>
             </div>
 
+            {/* Feature Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
+                {
+                  title: "Premium Listings",
+                  desc: "Curated luxury & exclusive items",
+                  href: "/marketplace/premium-listings",
+                  icon: Crown,
+                  color: "from-yellow-400 to-amber-500",
+                  featured: true
+                },
                 {
                   title: "Trending Now",
                   desc: "See what's hot right now",
                   href: "/marketplace/trending",
                   icon: TrendingUp,
                   color: "from-pink-500 to-red-500"
-                },
-                {
-                  title: "Shop the Sale",
-                  desc: "Massive discounts available",
-                  href: "/marketplace/shop-sale",
-                  icon: Tag,
-                  color: "from-red-500 to-orange-500"
                 },
                 {
                   title: "Browse Vendors",
@@ -1025,16 +1041,40 @@ function MarketplaceContent() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link href={feature.href}>
-                    <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
-                      <CardContent className="p-6 text-center">
-                        <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                    <Card className={`backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer ${
+                      feature.featured
+                        ? 'bg-gradient-to-br from-yellow-400/20 to-amber-500/20 border-yellow-400/40 shadow-2xl hover:shadow-yellow-400/25'
+                        : 'bg-white/10'
+                    }`}>
+                      <CardContent className="p-6 text-center relative">
+                        {feature.featured && (
+                          <div className="absolute -top-2 -right-2">
+                            <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900 font-bold shadow-lg">
+                              <Sparkles className="h-3 w-3 mr-1" />
+                              NEW
+                            </Badge>
+                          </div>
+                        )}
+                        <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ${
+                          feature.featured ? 'shadow-yellow-400/30' : ''
+                        }`}>
                           <feature.icon className="h-8 w-8 text-white" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
+                        <h3 className={`text-xl font-bold mb-2 ${
+                          feature.featured
+                            ? 'bg-gradient-to-r from-yellow-200 to-amber-200 bg-clip-text text-transparent'
+                            : 'text-white'
+                        }`}>
+                          {feature.title}
+                        </h3>
                         <p className="text-indigo-100 text-sm">{feature.desc}</p>
                         <div className="mt-4">
-                          <Badge className="bg-white/20 text-white border-white/30">
-                            Explore Now
+                          <Badge className={`${
+                            feature.featured
+                              ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900 font-bold'
+                              : 'bg-white/20 text-white border-white/30'
+                          }`}>
+                            {feature.featured ? 'Explore Premium' : 'Explore Now'}
                           </Badge>
                         </div>
                       </CardContent>
@@ -1087,12 +1127,12 @@ function MarketplaceContent() {
                   description: "Limited time offers"
                 },
                 {
-                  title: "Premium",
-                  href: "/marketplace/premium",
+                  title: "Premium Listings",
+                  href: "/marketplace/premium-listings",
                   icon: Crown,
-                  color: "from-purple-400 to-indigo-400",
-                  bgColor: "from-purple-50 to-indigo-50",
-                  description: "Luxury & exclusive"
+                  color: "from-yellow-400 to-amber-400",
+                  bgColor: "from-yellow-50 to-amber-50",
+                  description: "Curated Excellence"
                 },
                 {
                   title: "Free Ship",
@@ -1259,10 +1299,11 @@ function MarketplaceContent() {
         </motion.section>
       </main>
 
-      <Footer />
+        <Footer />
 
-      {/* Mobile Bottom Navigation */}
-      <MobileBottomNav />
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav />
+      </div>
     </motion.div>
   );
 }
