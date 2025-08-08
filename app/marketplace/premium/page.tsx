@@ -1099,7 +1099,8 @@ export default function LinkaRoyalePage() {
                     <action.icon className="h-5 w-5" />
                     <span className="text-xs font-medium">{action.label}</span>
                   </Button>
-                ))}\n              </div>
+                ))}
+              </div>
 
               {/* Chat Input */}
               <div className="flex gap-3">
