@@ -260,10 +260,48 @@ export default function LinkaRoyalePage() {
   // Animation delays for cards
   const getAnimationDelay = (index: number) => `${index * 100}ms`;
 
-  // Cart bounce animation
-  const handleAddToCart = () => {
+  // Enhanced cart fly-in animation
+  const handleAddToCart = (productElement?: HTMLElement) => {
     setCartCount(prev => prev + 1);
-    // Trigger bounce animation
+
+    // Create flying product animation
+    if (productElement) {
+      const productImage = productElement.querySelector('img');
+      if (productImage) {
+        const rect = productImage.getBoundingClientRect();
+        const cartIcon = document.getElementById('cart-icon');
+        const cartRect = cartIcon?.getBoundingClientRect();
+
+        if (cartRect) {
+          // Create flying element
+          const flyingElement = productImage.cloneNode(true) as HTMLElement;
+          flyingElement.style.position = 'fixed';
+          flyingElement.style.top = `${rect.top}px`;
+          flyingElement.style.left = `${rect.left}px`;
+          flyingElement.style.width = `${rect.width}px`;
+          flyingElement.style.height = `${rect.height}px`;
+          flyingElement.style.zIndex = '1000';
+          flyingElement.style.pointerEvents = 'none';
+          flyingElement.classList.add('cart-fly-animation');
+
+          // Calculate animation direction
+          const deltaX = cartRect.left - rect.left;
+          const deltaY = cartRect.top - rect.top;
+
+          flyingElement.style.setProperty('--target-x', `${deltaX}px`);
+          flyingElement.style.setProperty('--target-y', `${deltaY}px`);
+
+          document.body.appendChild(flyingElement);
+
+          // Remove after animation
+          setTimeout(() => {
+            document.body.removeChild(flyingElement);
+          }, 1200);
+        }
+      }
+    }
+
+    // Trigger cart icon bounce
     const cartIcon = document.getElementById('cart-icon');
     if (cartIcon) {
       cartIcon.style.animation = 'bounce 0.6s ease-in-out';
@@ -366,21 +404,62 @@ export default function LinkaRoyalePage() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Parallax scrolling effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.pageYOffset;
+      const parallaxElements = document.querySelectorAll('.parallax-layer');
+
+      parallaxElements.forEach((element) => {
+        const rate = scrolled * -0.5;
+        (element as HTMLElement).style.setProperty('--scroll-y', `${rate}px`);
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Section reveal on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('section-reveal');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const sections = document.querySelectorAll('.reveal-on-scroll');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-royal-particles relative overflow-hidden">
       {/* Advanced Royal Background Effects */}
       <div className="absolute inset-0 bg-royal-overlay animate-layered-gradient pointer-events-none"></div>
 
-      {/* Parallax Crown Silhouettes */}
+      {/* Enhanced Parallax Crown Silhouettes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 animate-parallax-drift">
+        <div className="parallax-layer parallax-slow absolute top-1/4 left-1/4 w-32 h-32 animate-parallax-drift">
           <Crown className="w-full h-full text-yellow-400/10" />
         </div>
-        <div className="absolute top-3/4 right-1/4 w-24 h-24 animate-parallax-drift" style={{animationDelay: '2s', animationDuration: '15s'}}>
+        <div className="parallax-layer parallax-medium absolute top-3/4 right-1/4 w-24 h-24 animate-parallax-drift" style={{animationDelay: '2s', animationDuration: '15s'}}>
           <Diamond className="w-full h-full text-yellow-400/8" />
         </div>
-        <div className="absolute top-1/2 left-3/4 w-20 h-20 animate-parallax-drift" style={{animationDelay: '4s', animationDuration: '12s'}}>
+        <div className="parallax-layer parallax-fast absolute top-1/2 left-3/4 w-20 h-20 animate-parallax-drift" style={{animationDelay: '4s', animationDuration: '12s'}}>
           <Sparkles className="w-full h-full text-yellow-400/12" />
+        </div>
+        <div className="parallax-layer parallax-slow absolute top-1/3 right-1/3 w-16 h-16 animate-parallax-drift" style={{animationDelay: '6s', animationDuration: '18s'}}>
+          <Award className="w-full h-full text-yellow-400/6" />
+        </div>
+        <div className="parallax-layer parallax-medium absolute bottom-1/4 left-1/3 w-28 h-28 animate-parallax-drift" style={{animationDelay: '8s', animationDuration: '14s'}}>
+          <Medal className="w-full h-full text-yellow-400/8" />
         </div>
       </div>
       
@@ -668,15 +747,15 @@ export default function LinkaRoyalePage() {
       {/* Main Content */}
       <main className="relative z-10 space-y-8">
         {/* Royal Recommendations - Above the Fold */}
-        <section className="py-16">
+        <section className="reveal-on-scroll py-16 gpu-accelerated">
           <div className="max-w-7xl mx-auto px-8">
-            {/* Section Header */}
-            <div className="text-center mb-12" style={{ animationDelay: '200ms' }}>
+            {/* Enhanced Section Header */}
+            <div className="text-center mb-12 cinematic-load" style={{ animationDelay: '200ms' }}>
               <div className="inline-flex items-center gap-2 glass-luxury rounded-full px-6 py-3 mb-6 border border-yellow-400/20">
                 <Crown className="h-4 w-4 text-yellow-400" />
                 <span className="text-sm font-medium text-yellow-400 uppercase tracking-wide">Curated For You</span>
               </div>
-              <h2 className="text-4xl font-bold text-white font-serif mb-4">
+              <h2 className="text-4xl font-bold text-white font-serif mb-4 text-light-sweep hover-royal-glow">
                 Royal Recommendations
               </h2>
               <div className="w-16 h-0.5 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto mb-4"></div>
@@ -842,8 +921,11 @@ export default function LinkaRoyalePage() {
                       <div className="flex gap-3 pt-3">
                         <Button
                           size="sm"
-                          onClick={handleAddToCart}
-                          className="add-to-cart-royal flex-1 text-slate-900 font-bold py-3 rounded-xl shadow-lg text-sm"
+                          onClick={(e) => {
+                            const productCard = e.currentTarget.closest('.card-3d-floating') as HTMLElement;
+                            handleAddToCart(productCard);
+                          }}
+                          className="add-to-cart-royal btn-ripple flex-1 text-slate-900 font-bold py-3 rounded-xl shadow-lg text-sm hover-royal-glow"
                         >
                           <ShoppingCart className="h-4 w-4 mr-2" />
                           Add to Cart
