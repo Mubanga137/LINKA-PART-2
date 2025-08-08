@@ -447,7 +447,11 @@ export default function LinkaRoyalePage() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setSidebarOpen(true)}
+                onClick={() => {
+                  setSidebarOpen(true);
+                  setSidebarAnimating(true);
+                  setTimeout(() => setSidebarAnimating(false), 1500);
+                }}
                 className="glass-luxury border-yellow-400/20 text-yellow-400 hover:bg-yellow-400/10 rounded-xl p-2"
               >
                 <Menu className="h-5 w-5" />
