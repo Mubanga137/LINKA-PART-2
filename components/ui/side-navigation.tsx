@@ -63,7 +63,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
       }
     } catch (error) {
       // Clear corrupted data and reset
-      localStorage.removeItem('marketplace-favorites');
+      localStorage.removeItem('marketplace_favorites');
       favoritesCount = 0;
     }
   }
