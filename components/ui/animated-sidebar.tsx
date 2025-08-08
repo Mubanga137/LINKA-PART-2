@@ -23,7 +23,8 @@ import {
   Gift,
   TrendingUp,
   Zap,
-  ChevronRight
+  ChevronRight,
+  Crown
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/marketplace-context"
