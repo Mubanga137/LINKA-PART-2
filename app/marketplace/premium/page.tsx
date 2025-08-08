@@ -1107,7 +1107,7 @@ export default function LinkaRoyalePage() {
                 <input
                   type="text"
                   placeholder="Ask your Royal Concierge anything..."
-                  className="flex-1 px-6 py-4 sidebar-royal-glass border-2 border-yellow-400/30 rounded-xl text-white placeholder-slate-400 text-sm focus:border-yellow-400/50 focus:outline-none transition-all duration-300"
+                  className="flex-1 px-6 py-4 efficient-blur bg-slate-900/50 border-2 border-yellow-400/30 rounded-xl text-white placeholder-slate-400 text-sm focus:border-yellow-400/50 focus:outline-none transition-all duration-300"
                 />
                 <Button className="btn-royal-concierge btn-ripple px-6 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                   <Send className="h-5 w-5" />
