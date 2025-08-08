@@ -436,11 +436,11 @@ function EnhancedHeroSection() {
                 },
                 {
                   icon: Crown,
-                  label: "Premium",
-                  color: "from-purple-400 to-indigo-400",
-                  hoverColor: "from-purple-500 to-indigo-500",
-                  textColor: "text-purple-700",
-                  href: "/marketplace/premium"
+                  label: "Premium Listings",
+                  color: "from-yellow-400 to-amber-400",
+                  hoverColor: "from-yellow-500 to-amber-500",
+                  textColor: "text-yellow-700",
+                  href: "/marketplace/premium-listings"
                 },
                 {
                   icon: Truck,
@@ -1060,12 +1060,12 @@ function MarketplaceContent() {
                   description: "Limited time offers"
                 },
                 {
-                  title: "Premium",
-                  href: "/marketplace/premium",
+                  title: "Premium Listings",
+                  href: "/marketplace/premium-listings",
                   icon: Crown,
-                  color: "from-purple-400 to-indigo-400",
-                  bgColor: "from-purple-50 to-indigo-50",
-                  description: "Luxury & exclusive"
+                  color: "from-yellow-400 to-amber-400",
+                  bgColor: "from-yellow-50 to-amber-50",
+                  description: "Curated Excellence"
                 },
                 {
                   title: "Free Ship",
