@@ -145,6 +145,15 @@ export function AnimatedSidebar({ className }: SidebarProps) {
       gradient: 'from-green-500 to-green-600'
     },
     {
+      id: 'premium',
+      label: 'Premium Listings',
+      icon: Crown,
+      href: '/marketplace/premium-listings',
+      color: 'yellow',
+      gradient: 'from-yellow-500 to-amber-600',
+      premium: true
+    },
+    {
       id: 'orders',
       label: 'My Orders',
       icon: Package,
