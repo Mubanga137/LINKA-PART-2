@@ -55,7 +55,8 @@ import {
   ChevronRight,
   LogOut,
   Plus,
-  ArrowUp
+  ArrowUp,
+  Send
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
