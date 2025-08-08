@@ -31,7 +31,7 @@ export function Header() {
   if (typeof window !== 'undefined') {
     try {
       // Check if we're in marketplace context
-      const storedFavorites = localStorage.getItem('marketplace-favorites')
+      const storedFavorites = localStorage.getItem('marketplace_favorites')
       if (storedFavorites && storedFavorites.trim() !== '') {
         const parsed = JSON.parse(storedFavorites)
         favoritesCount = Array.isArray(parsed) ? parsed.length : 0
