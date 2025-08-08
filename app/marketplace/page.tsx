@@ -939,39 +939,76 @@ function MarketplaceContent() {
         <FlashSalesSection />
         <TrendingNowSection />
 
-        {/* Additional CTA Section for more marketplace features */}
+        {/* Premium Listings Feature Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="py-16 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
+          className="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 relative overflow-hidden"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Explore More Marketplace Features
+          {/* Background Effects */}
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-transparent to-emerald-400/10"></div>
+          <div className="absolute inset-0 opacity-20">
+            {[...Array(15)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-yellow-400/40 rounded-full animate-pulse"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Hero Premium Listings Banner */}
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
+                <Crown className="h-6 w-6 text-yellow-400" />
+                <span className="text-white font-medium">Now Available</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                <span className="bg-gradient-to-r from-yellow-400 to-amber-300 bg-clip-text text-transparent">
+                  Premium Listings
+                </span>
+                <br />
+                Curated Excellence
               </h2>
-              <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
-                Discover trending products, browse verified vendors, and shop amazing sales
+              <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+                Discover handpicked luxury products and exclusive services from verified premium vendors
               </p>
+              <Link href="/marketplace/premium-listings">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-slate-900 font-bold px-8 py-4 rounded-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
+                >
+                  <Crown className="h-6 w-6 mr-3" />
+                  Explore Premium Listings
+                  <ArrowRight className="h-6 w-6 ml-3" />
+                </Button>
+              </Link>
             </div>
 
+            {/* Feature Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
+                {
+                  title: "Premium Listings",
+                  desc: "Curated luxury & exclusive items",
+                  href: "/marketplace/premium-listings",
+                  icon: Crown,
+                  color: "from-yellow-400 to-amber-500",
+                  featured: true
+                },
                 {
                   title: "Trending Now",
                   desc: "See what's hot right now",
                   href: "/marketplace/trending",
                   icon: TrendingUp,
                   color: "from-pink-500 to-red-500"
-                },
-                {
-                  title: "Shop the Sale",
-                  desc: "Massive discounts available",
-                  href: "/marketplace/shop-sale",
-                  icon: Tag,
-                  color: "from-red-500 to-orange-500"
                 },
                 {
                   title: "Browse Vendors",
