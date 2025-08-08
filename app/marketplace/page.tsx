@@ -929,13 +929,15 @@ function MarketplaceContent() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-white lg:flex"
     >
       {/* Side Navigation */}
-      <SideNavigation variant="marketplace" />
+      <div className="lg:w-64 lg:flex-shrink-0">
+        <SideNavigation variant="marketplace" />
+      </div>
 
       {/* Main Content Area */}
-      <div className="lg:pl-64">
+      <div className="lg:flex-1 lg:pl-0">
         <MinimalHeader variant="marketplace" showSearch={true} />
       
       <main>
