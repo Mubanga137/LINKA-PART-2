@@ -536,9 +536,9 @@ export default function LinkaRoyalePage() {
         </div>
       </header>
 
-      {/* Animated Side Navigation */}
-      <div className={`fixed top-0 left-0 h-full w-72 glass-luxury border-r border-yellow-400/15 transform transition-all duration-500 z-50 ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      {/* Enhanced Royal Side Navigation */}
+      <div className={`fixed top-0 left-0 h-full w-80 sidebar-royal-glass transform transition-all duration-700 z-50 ${
+        sidebarOpen ? 'translate-x-0 sidebar-slide-in' : '-translate-x-full sidebar-slide-out'
       }`}>
         <div className="p-6 space-y-6">
           {/* Compact Logo */}
@@ -567,54 +567,70 @@ export default function LinkaRoyalePage() {
             </Button>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="space-y-1">
+          {/* Enhanced Navigation Links */}
+          <nav className="space-y-2">
             {[
-              { icon: Home, label: 'Home', href: '/', isActive: true },
-              { icon: Flame, label: 'Hot Deals', href: '/hot-deals' },
-              { icon: Package, label: 'About', href: '/about' },
-              { icon: UserPlus, label: 'For Retailers', href: '/for-retailers' },
-              { icon: Mail, label: 'Contact', href: '/contact' },
-              { icon: Sparkles, label: 'Services', href: '/services' },
+              { icon: Home, label: 'Royal Home', href: '/', isActive: true },
+              { icon: Flame, label: 'Flash Deals', href: '/hot-deals' },
+              { icon: Package, label: 'Our Story', href: '/about' },
+              { icon: UserPlus, label: 'Partner with Us', href: '/for-retailers' },
+              { icon: Mail, label: 'Royal Contact', href: '/contact' },
+              { icon: Sparkles, label: 'Premium Services', href: '/services' },
               { icon: Heart, label: 'Wishlist', href: '/wishlist' },
-              { icon: Settings, label: 'Settings', href: '/settings' },
-              { icon: User, label: 'Profile', href: '/profile' }
+              { icon: Settings, label: 'Preferences', href: '/settings' },
+              { icon: User, label: 'Royal Profile', href: '/profile' }
             ].map((item, index) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group ${
-                  item.isActive 
-                    ? 'bg-gradient-to-r from-yellow-400/20 to-amber-500/20 border border-yellow-400/30' 
-                    : 'hover:bg-yellow-400/10 hover:border-yellow-400/20 border border-transparent'
+                className={`nav-item-royal flex items-center gap-4 px-5 py-4 rounded-xl group relative ${
+                  item.isActive ? 'nav-item-active' : ''
                 }`}
-                style={{ animationDelay: `${index * 50}ms` }}
+                style={{
+                  animationDelay: `${index * 80}ms`,
+                  transform: 'translateX(0)'
+                }}
               >
-                <item.icon className={`h-4 w-4 ${
-                  item.isActive ? 'text-yellow-400' : 'text-slate-400 group-hover:text-yellow-400'
+                <item.icon className={`icon-morph h-5 w-5 ${
+                  item.isActive ? 'text-yellow-400' : 'text-slate-300 group-hover:text-yellow-400'
                 }`} />
-                <span className={`font-medium ${
+                <span className={`font-semibold text-sm ${
                   item.isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'
                 }`}>
                   {item.label}
                 </span>
-                <ChevronRight className={`h-3 w-3 ml-auto transition-all duration-300 ${
-                  item.isActive ? 'text-yellow-400 opacity-100' : 'text-slate-500 opacity-0 group-hover:opacity-100 group-hover:text-yellow-400'
+                <ChevronRight className={`h-4 w-4 ml-auto transition-all duration-500 ${
+                  item.isActive ? 'text-yellow-400 opacity-100 transform rotate-90' : 'text-slate-500 opacity-0 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:translate-x-1'
                 }`} />
+                {/* Gold dust trail on hover */}
+                {sidebarOpen && (
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <div className="mobile-gold-dust opacity-0 group-hover:opacity-100" style={{animationDelay: `${index * 100}ms`}} />
+                  </div>
+                )}
               </Link>
             ))}
           </nav>
 
-          {/* Compact Concierge */}
-          <div className="border-t border-yellow-400/20 pt-6">
-            <Button
-              onClick={() => setConciergeOpen(true)}
-              className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-slate-900 font-semibold py-3 rounded-xl shadow-lg transition-all duration-300"
-            >
-              <MessageCircle className="h-4 w-4 mr-2" />
-              <Crown className="h-3 w-3 mr-2 animate-pulse" />
-              Royal Concierge
-            </Button>
+          {/* Enhanced Royal Concierge */}
+          <div className="border-t border-yellow-400/30 pt-8 mt-8">
+            <div className="space-y-4">
+              <div className="text-center">
+                <p className="text-xs text-yellow-400/80 font-medium uppercase tracking-wider">Royal Assistance</p>
+              </div>
+              <Button
+                onClick={() => setConciergeOpen(true)}
+                className="btn-royal-concierge w-full text-slate-900 font-bold py-4 rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-105"
+              >
+                <MessageCircle className="h-5 w-5 mr-3 animate-pulse" />
+                <Crown className="h-4 w-4 mr-2 animate-royal-pulse" />
+                Royal Concierge
+                <Sparkles className="h-3 w-3 ml-2 animate-pulse" style={{animationDelay: '1s'}} />
+              </Button>
+              <div className="text-center">
+                <p className="text-xs text-slate-400">Available 24/7 for your luxury needs</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
