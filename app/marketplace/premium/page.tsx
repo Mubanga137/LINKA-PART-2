@@ -1001,51 +1001,133 @@ export default function LinkaRoyalePage() {
         </Button>
       )}
 
-      {/* Enhanced Concierge Modal */}
+      {/* Royal Concierge Modal - Enhanced */}
       {conciergeOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-lg z-50 flex items-center justify-center p-6">
-          <div className="luxury-card rounded-2xl shadow-2xl w-full max-w-md border border-yellow-400/20">
-            <div className="flex items-center justify-between p-6 border-b border-yellow-400/20">
-              <div className="flex items-center gap-3">
-            <div
-              className="w-12 h-12 logo-3d-metallic logo-mouse-responsive rounded-xl flex items-center justify-center animate-golden-pulse cursor-pointer transform hover:scale-110 transition-all duration-300"
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-                e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
-              }}
-            >
-              <Crown className="h-7 w-7 text-slate-900 drop-shadow-lg" />
-              <div className="logo-dynamic-reflection" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-white font-serif animate-emerald-shimmer">Royal Concierge</h3>
-              <p className="text-sm text-yellow-400 font-bold">Premium Assistant</p>
-            </div>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-xl z-50 flex items-center justify-center p-6">
+          {/* Floating Gold Particles in Modal */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(8)].map((_, i) => (
+              <div
+                key={`modal-particle-${i}`}
+                className="absolute w-1 h-1 bg-yellow-400/40 rounded-full animate-gold-particle"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 4}s`,
+                  animationDuration: `${6 + Math.random() * 4}s`
+                }}
+              />
+            ))}
           </div>
-              <Button variant="ghost" size="sm" onClick={() => setConciergeOpen(false)}>
-                <X className="h-5 w-5 text-slate-400" />
+
+          <div className="sidebar-royal-glass rounded-3xl shadow-2xl w-full max-w-lg border-2 border-yellow-400/30 transform scale-100 animate-fade-in-up">
+            {/* Enhanced Header */}
+            <div className="flex items-center justify-between p-8 border-b border-yellow-400/30">
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-16 h-16 logo-3d-metallic logo-mouse-responsive rounded-2xl flex items-center justify-center animate-golden-pulse cursor-pointer transform hover:scale-110 transition-all duration-300 relative"
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+                  }}
+                >
+                  <Crown className="h-8 w-8 text-slate-900 drop-shadow-lg animate-royal-pulse" />
+                  <div className="logo-dynamic-reflection" />
+                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center animate-pulse">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white font-serif text-light-sweep">Royal Concierge</h3>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <p className="text-sm text-yellow-400 font-bold">Available 24/7</p>
+                  </div>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setConciergeOpen(false)}
+                className="hover-royal-glow p-3 rounded-xl hover:bg-red-500/20 transition-all duration-300"
+              >
+                <X className="h-6 w-6 text-slate-400 hover:text-red-400" />
               </Button>
             </div>
-            
-            <div className="p-6 space-y-4">
-              <div className="glass-luxury rounded-xl p-4 border border-yellow-400/20">
-                <p className="text-white text-sm">
-                  👑 Welcome! I'm your Royal Concierge. How may I assist you with your luxury shopping experience today?
-                </p>
+
+            {/* Enhanced Chat Area */}
+            <div className="p-8 space-y-6">
+              {/* Welcome Message */}
+              <div className="trust-badge-glow rounded-2xl p-6 border border-yellow-400/30 relative overflow-hidden">
+                <div className="gold-shimmer-overlay"></div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Crown className="h-5 w-5 text-slate-900 animate-pulse" />
+                  </div>
+                  <div>
+                    <p className="text-white text-sm leading-relaxed font-medium">
+                      👑 Welcome to Linka Royale! I'm your personal Royal Concierge. How may I assist you with your luxury shopping experience today?
+                    </p>
+                    <div className="flex gap-2 mt-4">
+                      <Badge className="bg-yellow-400/20 text-yellow-400 text-xs px-2 py-1 border border-yellow-400/30">
+                        Luxury Expert
+                      </Badge>
+                      <Badge className="bg-emerald-400/20 text-emerald-400 text-xs px-2 py-1 border border-emerald-400/30">
+                        24/7 Available
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
               </div>
-              
-              <div className="flex gap-2">
+
+              {/* Quick Action Buttons */}
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { icon: Search, label: 'Find Products', color: 'from-blue-500 to-cyan-500' },
+                  { icon: Heart, label: 'Wish List Help', color: 'from-pink-500 to-rose-500' },
+                  { icon: Truck, label: 'Track Orders', color: 'from-green-500 to-emerald-500' },
+                  { icon: Gift, label: 'Gift Ideas', color: 'from-purple-500 to-indigo-500' }
+                ].map((action) => (
+                  <Button
+                    key={action.label}
+                    className={`floating-action-btn p-4 h-auto flex-col gap-2 bg-gradient-to-r ${action.color} hover:scale-105 transition-all duration-300 text-white border-0 rounded-xl`}
+                  >
+                    <action.icon className="h-5 w-5" />
+                    <span className="text-xs font-medium">{action.label}</span>
+                  </Button>
+                ))}\n              </div>
+
+              {/* Chat Input */}
+              <div className="flex gap-3">
                 <input
                   type="text"
-                  placeholder="Ask your Royal Concierge..."
-                  className="flex-1 px-4 py-2 glass-luxury border border-yellow-400/20 rounded-lg text-white placeholder-slate-400 text-sm"
+                  placeholder="Ask your Royal Concierge anything..."
+                  className="flex-1 px-6 py-4 sidebar-royal-glass border-2 border-yellow-400/30 rounded-xl text-white placeholder-slate-400 text-sm focus:border-yellow-400/50 focus:outline-none transition-all duration-300"
                 />
-                <Button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900 px-4 py-2 rounded-lg font-medium">
-                  Send
+                <Button className="btn-royal-concierge btn-ripple px-6 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                  <Send className="h-5 w-5" />
                 </Button>
+              </div>
+
+              {/* Premium Features */}
+              <div className="text-center pt-4 border-t border-yellow-400/20">
+                <div className="flex items-center justify-center gap-4 text-xs text-slate-400">
+                  <div className="flex items-center gap-1">
+                    <Shield className="h-3 w-3 text-yellow-400" />
+                    <span>Secure Chat</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Zap className="h-3 w-3 text-yellow-400" />
+                    <span>Instant Response</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Crown className="h-3 w-3 text-yellow-400" />
+                    <span>VIP Service</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
