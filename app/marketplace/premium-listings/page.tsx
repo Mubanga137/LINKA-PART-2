@@ -399,7 +399,7 @@ export default function PremiumListingsPage() {
             ? 'border-yellow-400/20 bg-slate-900/80' 
             : 'border-blue-400/20 bg-white/80'
         }`}>
-          <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8 py-4">
             {/* Filters Bar */}
             <div className="flex items-center justify-between pt-4 border-t border-current/10">
               <div className="flex items-center gap-4">
@@ -479,7 +479,7 @@ export default function PremiumListingsPage() {
         </div>
 
         {/* Main Content */}
-        <main className="relative z-10 max-w-7xl mx-auto px-6 py-8 space-y-12">
+        <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8 py-6 lg:py-8 space-y-8 lg:space-y-12">
           {/* Royal Recommendations */}
           {royalRecommendations.length > 0 && (
             <section className="space-y-6">
