@@ -291,7 +291,7 @@ export function ShopByCategorySection({ showAll = false, maxItems = 6 }: ShopByC
                       </div>
 
                       {/* Tagline */}
-                      <p className="text-xs text-gray-500 italic mb-4">
+                      <p className="text-xs text-gray-500 font-bold mb-4">
                         {service.tagline}
                       </p>
 
