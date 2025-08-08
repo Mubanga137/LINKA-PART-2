@@ -371,7 +371,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
         variant="ghost"
         size="sm"
         onClick={toggleSidebar}
-        className="lg:hidden fixed top-4 left-4 z-50 bg-white shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white transition-all duration-200"
       >
         <Menu className="h-5 w-5" />
       </Button>
@@ -387,7 +387,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
       {/* Sidebar */}
       <div className={`fixed inset-y-0 left-0 z-50 w-64 ${navConfig.theme.base} shadow-2xl transform transition-transform duration-300 ease-in-out ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen ${className}`}>
+      } lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden ${className}`}>
         
         {/* Header */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-white/10 flex-shrink-0">
