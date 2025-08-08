@@ -327,26 +327,93 @@ export default function LinkaRoyalePage() {
     );
   }
 
+  // Mouse tracking for cursor glow effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const glowElement = document.getElementById('cursor-glow');
+      if (glowElement) {
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        glowElement.style.setProperty('--mouse-x', `${x}%`);
+        glowElement.style.setProperty('--mouse-y', `${y}%`);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-800 relative overflow-hidden">
-      {/* Refined Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400/8 via-amber-500/4 to-yellow-600/6 pointer-events-none"></div>
+    <div className="min-h-screen bg-royal-particles relative overflow-hidden">
+      {/* Advanced Royal Background Effects */}
+      <div className="absolute inset-0 bg-royal-overlay animate-layered-gradient pointer-events-none"></div>
+
+      {/* Parallax Crown Silhouettes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 animate-parallax-drift">
+          <Crown className="w-full h-full text-yellow-400/10" />
+        </div>
+        <div className="absolute top-3/4 right-1/4 w-24 h-24 animate-parallax-drift" style={{animationDelay: '2s', animationDuration: '15s'}}>
+          <Diamond className="w-full h-full text-yellow-400/8" />
+        </div>
+        <div className="absolute top-1/2 left-3/4 w-20 h-20 animate-parallax-drift" style={{animationDelay: '4s', animationDuration: '12s'}}>
+          <Sparkles className="w-full h-full text-yellow-400/12" />
+        </div>
+      </div>
       
-      {/* Sophisticated Floating Particles */}
+      {/* Advanced Gold Particle System */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
+        {/* Large Gold Particles */}
+        {[...Array(8)].map((_, i) => (
           <div
-            key={i}
-            className="absolute w-0.5 h-0.5 bg-yellow-400/30 rounded-full animate-float"
+            key={`large-${i}`}
+            className="absolute w-2 h-2 bg-gradient-to-br from-yellow-400/40 to-amber-500/30 rounded-full animate-gold-particle shadow-lg"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 8}s`,
+              animationDuration: `${12 + Math.random() * 8}s`
+            }}
+          />
+        ))}
+
+        {/* Medium Gold Dust */}
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={`medium-${i}`}
+            className="absolute w-1 h-1 bg-yellow-400/50 rounded-full animate-gold-dust"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${8 + Math.random() * 8}s`
+              animationDuration: `${8 + Math.random() * 6}s`
+            }}
+          />
+        ))}
+
+        {/* Fine Gold Sparkles */}
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={`fine-${i}`}
+            className="absolute w-0.5 h-0.5 bg-yellow-400/60 rounded-full animate-royal-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 12}s`,
+              animationDuration: `${6 + Math.random() * 10}s`
             }}
           />
         ))}
       </div>
+
+      {/* Cursor-Reactive Glow Effect */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        id="cursor-glow"
+        style={{
+          background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.1), transparent 80%)'
+        }}
+      />
 
       {/* Compact Premium Header with Glassmorphism */}
       <header className="sticky top-0 z-40 glass-luxury border-b border-yellow-400/10 backdrop-blur-xl">
