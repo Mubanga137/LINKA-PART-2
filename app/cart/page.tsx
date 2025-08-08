@@ -28,11 +28,17 @@ export default function CartPage() {
   // Load saved items from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('linka_saved_items')
-    if (saved) {
+    if (saved && saved.trim() !== '') {
       try {
-        setSavedItems(JSON.parse(saved))
+        const parsed = JSON.parse(saved)
+        if (Array.isArray(parsed)) {
+          setSavedItems(parsed)
+        } else {
+          localStorage.removeItem('linka_saved_items')
+        }
       } catch (error) {
         console.error('Error parsing saved items:', error)
+        localStorage.removeItem('linka_saved_items')
       }
     }
   }, [])
