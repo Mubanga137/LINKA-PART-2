@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import {
   Menu,
@@ -42,11 +41,9 @@ interface SideNavigationProps {
 }
 
 export function SideNavigation({ variant = "marketplace", className = "" }: SideNavigationProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
   
   const router = useRouter();
   const pathname = usePathname();
@@ -67,17 +64,6 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
       // No favorites stored
     }
   }
-
-  // Detect mobile
-  useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
-  }, []);
 
   // Dark mode detection for premium variant
   useEffect(() => {
@@ -103,27 +89,28 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
       text: isPremium ? "Linka Royale" : "Linka",
       className: isPremium 
         ? "logo-3d-premium font-serif" 
-        : "text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent"
+        : "text-lg font-bold text-white"
     },
     theme: {
       base: isPremium 
         ? (isDarkMode 
-          ? "bg-slate-900/95 border-yellow-400/20 text-white" 
-          : "bg-white/95 border-blue-400/20 text-slate-900")
-        : "bg-white/95 border-slate-200/50 text-slate-900",
+          ? "bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900" 
+          : "bg-gradient-to-b from-blue-900 via-indigo-900 to-blue-900")
+        : "bg-gradient-to-b from-blue-900 via-indigo-900 to-blue-900",
+      text: "text-white",
       accent: isPremium 
-        ? (isDarkMode ? "text-yellow-400" : "text-blue-600")
-        : "text-blue-600",
+        ? (isDarkMode ? "text-yellow-400" : "text-yellow-300")
+        : "text-blue-200",
       hover: isPremium 
         ? (isDarkMode 
           ? "hover:bg-yellow-400/10 hover:text-yellow-300" 
-          : "hover:bg-blue-50 hover:text-blue-700")
-        : "hover:bg-slate-50 hover:text-slate-900",
+          : "hover:bg-blue-800/50 hover:text-white")
+        : "hover:bg-blue-800/50 hover:text-white",
       active: isPremium 
         ? (isDarkMode 
-          ? "bg-yellow-400/20 text-yellow-300 border-r-2 border-yellow-400" 
-          : "bg-blue-50 text-blue-700 border-r-2 border-blue-500")
-        : "bg-blue-50 text-blue-700 border-r-2 border-blue-500"
+          ? "bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900" 
+          : "bg-gradient-to-r from-blue-400 to-blue-500 text-white")
+        : "bg-gradient-to-r from-blue-400 to-blue-500 text-white"
     }
   };
 
@@ -131,38 +118,43 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
   const navigationItems = [
     {
       id: "home",
-      label: "Home",
-      icon: Home,
+      title: "Home",
       href: "/marketplace",
+      icon: Home,
+      description: "Marketplace overview",
       active: pathname === "/marketplace"
     },
     {
       id: "hot-deals",
-      label: "Hot Deals",
-      icon: Flame,
+      title: "Hot Deals",
       href: "/hot-deals",
+      icon: Flame,
+      description: "Limited time offers",
       active: pathname === "/hot-deals",
       badge: "🔥"
     },
     {
       id: "shop",
-      label: "Shop",
-      icon: Store,
+      title: "Shop",
       href: "/shop",
+      icon: Store,
+      description: "All products",
       active: pathname === "/shop"
     },
     {
       id: "services",
-      label: "Services",
-      icon: Headphones,
+      title: "Services",
       href: "/services",
+      icon: Headphones,
+      description: "Service marketplace",
       active: pathname === "/services"
     },
     {
       id: "premium",
-      label: "Premium Listings",
-      icon: Crown,
+      title: "Premium Listings",
       href: "/marketplace/premium-listings",
+      icon: Crown,
+      description: "Curated excellence",
       active: pathname === "/marketplace/premium-listings",
       premium: true,
       glow: true
@@ -173,24 +165,27 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
   const accountItems = [
     {
       id: "account",
-      label: "My Account",
-      icon: User,
+      title: "My Account",
       href: user?.role === 'retailer' ? '/retailer-dashboard' : user?.role === 'customer' ? '/customer-dashboard' : '/profile',
+      icon: User,
+      description: "Account settings",
       active: false
     },
     {
       id: "wishlist",
-      label: "Wishlist",
-      icon: Heart,
+      title: "Wishlist",
       href: "/wishlist",
+      icon: Heart,
+      description: "Saved items",
       active: pathname === "/wishlist",
       badge: favoritesCount > 0 ? favoritesCount : undefined
     },
     {
       id: "cart",
-      label: "Cart",
-      icon: ShoppingCart,
+      title: "Cart",
       href: "/cart",
+      icon: ShoppingCart,
+      description: "Shopping cart",
       active: pathname === "/cart",
       badge: totalItems > 0 ? totalItems : undefined
     }
@@ -200,16 +195,18 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
   const supportItems = [
     {
       id: "contact",
-      label: "Contact Us",
-      icon: Phone,
+      title: "Contact Us",
       href: "/contact",
+      icon: Phone,
+      description: "Get in touch",
       active: pathname === "/contact"
     },
     {
       id: "help",
-      label: "Help & Support",
-      icon: HelpCircle,
+      title: "Help & Support",
       href: "/help",
+      icon: HelpCircle,
+      description: "Help center",
       active: pathname === "/help"
     }
   ];
@@ -218,32 +215,32 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
   const premiumSections = isPremium ? [
     {
       id: "royal",
-      label: "Royal Recommendations",
+      title: "Royal Recommendations",
       icon: Crown,
       items: [
-        { label: "Heritage Collection", href: "/marketplace/premium-listings?filter=royal&category=heritage" },
-        { label: "Artisan Masterpieces", href: "/marketplace/premium-listings?filter=royal&category=artisan" },
-        { label: "Royal Services", href: "/marketplace/premium-listings?filter=royal&type=service" }
+        { title: "Heritage Collection", href: "/marketplace/premium-listings?filter=royal&category=heritage" },
+        { title: "Artisan Masterpieces", href: "/marketplace/premium-listings?filter=royal&category=artisan" },
+        { title: "Royal Services", href: "/marketplace/premium-listings?filter=royal&type=service" }
       ]
     },
     {
       id: "trending",
-      label: "Trending Premium Deals",
+      title: "Trending Premium Deals",
       icon: TrendingUp,
       items: [
-        { label: "Flash Premium Sales", href: "/marketplace/premium-listings?filter=trending&sale=flash" },
-        { label: "Limited Editions", href: "/marketplace/premium-listings?filter=trending&category=limited" },
-        { label: "Exclusive Offers", href: "/marketplace/premium-listings?filter=trending&category=exclusive" }
+        { title: "Flash Premium Sales", href: "/marketplace/premium-listings?filter=trending&sale=flash" },
+        { title: "Limited Editions", href: "/marketplace/premium-listings?filter=trending&category=limited" },
+        { title: "Exclusive Offers", href: "/marketplace/premium-listings?filter=trending&category=exclusive" }
       ]
     },
     {
       id: "luxury",
-      label: "Luxury Categories",
+      title: "Luxury Categories",
       icon: Gem,
       items: [
-        { label: "Jewelry & Accessories", href: "/marketplace/premium-listings?category=jewelry" },
-        { label: "Art & Collectibles", href: "/marketplace/premium-listings?category=art" },
-        { label: "Luxury Services", href: "/marketplace/premium-listings?category=luxury-services" }
+        { title: "Jewelry & Accessories", href: "/marketplace/premium-listings?category=jewelry" },
+        { title: "Art & Collectibles", href: "/marketplace/premium-listings?category=art" },
+        { title: "Luxury Services", href: "/marketplace/premium-listings?category=luxury-services" }
       ]
     }
   ] : [];
@@ -259,102 +256,90 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
   const handleLogout = () => {
     logout();
     router.push('/');
-    setIsSheetOpen(false);
+    setSidebarOpen(false);
   };
 
-  const NavItem = ({ item, expanded = false }: { item: any; expanded?: boolean }) => {
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  const NavItem = ({ item }: { item: any }) => {
+    const Icon = item.icon;
     const isActive = item.active;
     
     return (
-      <motion.div
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <Link href={item.href}>
-          <div className={`
-            flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 group cursor-pointer
-            ${isActive ? navConfig.theme.active : `${navConfig.theme.hover} text-slate-600`}
-            ${item.premium && !isPremium ? 'relative overflow-hidden' : ''}
-          `}>
-            {/* Premium glow effect */}
-            {item.premium && item.glow && (
-              <div className={`absolute inset-0 rounded-lg ${
-                isDarkMode 
-                  ? 'bg-gradient-to-r from-yellow-400/10 to-amber-500/10' 
-                  : 'bg-gradient-to-r from-blue-400/10 to-blue-600/10'
-              } opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-            )}
-            
-            <div className="relative z-10 flex items-center gap-3 w-full">
-              <item.icon className={`h-5 w-5 transition-all duration-300 ${
-                item.premium ? (isActive ? 'crown-glow' : 'group-hover:text-yellow-500') : ''
-              }`} />
-              
-              <AnimatePresence>
-                {(expanded || !isMobile) && (
-                  <motion.span
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: "auto" }}
-                    exit={{ opacity: 0, width: 0 }}
-                    className="font-medium transition-all duration-300 whitespace-nowrap"
-                  >
-                    {item.label}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-              
-              {/* Badges */}
-              {item.badge && (expanded || !isMobile) && (
-                <Badge className={`ml-auto text-xs ${
-                  typeof item.badge === 'string' 
-                    ? 'bg-transparent text-orange-500 border-0' 
-                    : 'bg-orange-500 text-white'
-                }`}>
-                  {item.badge}
-                </Badge>
-              )}
-              
-              {/* Premium sparkle effect */}
-              {item.premium && (
-                <Sparkles className={`h-3 w-3 ml-auto ${
-                  isActive ? 'text-yellow-500' : 'text-slate-400 group-hover:text-yellow-500'
-                } transition-all duration-300`} />
-              )}
+      <Link href={item.href} onClick={() => setSidebarOpen(false)}>
+        <div className={`group flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 ${
+          isActive
+            ? navConfig.theme.active + ' shadow-lg transform scale-105'
+            : navConfig.theme.accent + ' ' + navConfig.theme.hover + ' hover:transform hover:scale-102'
+        }`}>
+          <div className="flex items-center space-x-3">
+            <div className={`p-2 rounded-lg transition-colors ${
+              isActive
+                ? 'bg-white/20'
+                : 'bg-white/10 group-hover:bg-white/20'
+            }`}>
+              <Icon className={`h-4 w-4 ${item.premium && item.glow ? 'crown-glow' : ''}`} />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-medium">{item.title}</p>
+              <p className={`text-xs ${
+                isActive
+                  ? 'text-white/80'
+                  : 'text-blue-300 group-hover:text-blue-200'
+              }`}>
+                {item.description}
+              </p>
             </div>
           </div>
-        </Link>
-      </motion.div>
+          {item.badge && (
+            <Badge className={
+              typeof item.badge === 'string' 
+                ? 'bg-transparent text-orange-400 border-0' 
+                : 'bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs shadow-md animate-pulse ml-2'
+            }>
+              {item.badge}
+            </Badge>
+          )}
+          {item.premium && (
+            <Sparkles className={`h-3 w-3 ml-2 ${
+              isActive ? 'text-yellow-400' : 'text-blue-300 group-hover:text-yellow-400'
+            } transition-all duration-300`} />
+          )}
+        </div>
+      </Link>
     );
   };
 
-  const PremiumSection = ({ section, expanded = false }: { section: any; expanded?: boolean }) => {
+  const PremiumSection = ({ section }: { section: any }) => {
     const isExpanded = expandedSections.includes(section.id);
+    const Icon = section.icon;
     
     return (
       <div className="space-y-1">
         <button
           onClick={() => toggleSection(section.id)}
-          className={`
-            w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 group
-            ${navConfig.theme.hover} text-slate-600
-          `}
+          className={`w-full flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group ${
+            navConfig.theme.accent + ' ' + navConfig.theme.hover
+          }`}
         >
-          <section.icon className="h-5 w-5" />
-          {(expanded || !isMobile) && (
-            <>
-              <span className="font-medium flex-1 text-left">{section.label}</span>
-              <motion.div
-                animate={{ rotate: isExpanded ? 90 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <ChevronRight className="h-4 w-4" />
-              </motion.div>
-            </>
-          )}
+          <div className="flex items-center space-x-3">
+            <div className="p-2 rounded-lg transition-colors bg-white/10 group-hover:bg-white/20">
+              <Icon className="h-4 w-4" />
+            </div>
+            <div className="flex-1 text-left">
+              <p className="text-sm font-medium">{section.title}</p>
+            </div>
+          </div>
+          <motion.div
+            animate={{ rotate: isExpanded ? 90 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </motion.div>
         </button>
         
         <AnimatePresence>
-          {isExpanded && (expanded || !isMobile) && (
+          {isExpanded && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
@@ -362,10 +347,10 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
               className="ml-8 space-y-1"
             >
               {section.items.map((item: any, index: number) => (
-                <Link key={index} href={item.href}>
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-all duration-200">
-                    <div className="w-1 h-1 bg-slate-400 rounded-full" />
-                    {item.label}
+                <Link key={index} href={item.href} onClick={() => setSidebarOpen(false)}>
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-blue-300 hover:text-white hover:bg-white/10 transition-all duration-200">
+                    <div className="w-1 h-1 bg-blue-400 rounded-full" />
+                    {item.title}
                   </div>
                 </Link>
               ))}
@@ -376,163 +361,157 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
     );
   };
 
-  const SidebarContent = ({ expanded = false }: { expanded?: boolean }) => (
-    <div className="flex flex-col h-full">
-      {/* Logo & Branding */}
-      <div className="p-4 border-b border-current/10">
-        <Link href="/" className="flex items-center gap-3 group">
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            className={`p-2 rounded-xl ${
+  return (
+    <>
+      {/* Mobile Menu Button */}
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={toggleSidebar}
+        className="lg:hidden fixed top-4 left-4 z-50 bg-white shadow-lg"
+      >
+        <Menu className="h-5 w-5" />
+      </Button>
+
+      {/* Mobile sidebar overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 ${navConfig.theme.base} shadow-2xl transform transition-transform duration-300 ease-in-out ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      } lg:translate-x-0 lg:static lg:inset-0 ${className}`}>
+        
+        {/* Header */}
+        <div className="flex items-center justify-between h-16 px-6 border-b border-white/10">
+          <Link href="/" className="flex items-center space-x-3">
+            <div className={`p-2 rounded-xl ${
               isPremium 
-                ? (isDarkMode 
-                  ? 'bg-gradient-to-br from-yellow-400/20 to-amber-500/20' 
-                  : 'bg-gradient-to-br from-blue-400/20 to-blue-600/20')
+                ? 'bg-gradient-to-br from-yellow-400/20 to-amber-500/20' 
                 : 'bg-gradient-to-br from-blue-400/20 to-blue-600/20'
-            }`}
-          >
-            {isPremium ? (
-              <Crown className="h-6 w-6 crown-glow" />
-            ) : (
-              <Store className="h-6 w-6 text-blue-600" />
-            )}
-          </motion.div>
-          
-          {(expanded || !isMobile) && (
+            }`}>
+              {isPremium ? (
+                <Crown className="h-6 w-6 crown-glow" />
+              ) : (
+                <Store className="h-6 w-6 text-blue-400" />
+              )}
+            </div>
             <div>
               <h1 className={navConfig.logo.className}>
                 {navConfig.logo.text}
               </h1>
               {isPremium && (
-                <p className="text-xs text-slate-500">Curated Excellence</p>
+                <p className="text-xs text-blue-300">Curated Excellence</p>
               )}
             </div>
-          )}
-        </Link>
-      </div>
+          </Link>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setSidebarOpen(false)}
+            className="lg:hidden text-white"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
 
-      {/* Navigation Sections */}
-      <div className="flex-1 p-4 space-y-6 overflow-y-auto">
-        {/* Core Navigation */}
-        <div className="space-y-1">
-          {(expanded || !isMobile) && (
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">
+        {/* Navigation */}
+        <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
+          {/* Core Navigation */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
               Navigation
             </h3>
-          )}
-          {navigationItems.map((item) => (
-            <NavItem key={item.id} item={item} expanded={expanded} />
-          ))}
-        </div>
+            <div className="space-y-1">
+              {navigationItems.map((item) => (
+                <NavItem key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
 
-        {/* Premium Sections (Premium Listings only) */}
-        {isPremium && premiumSections.length > 0 && (
-          <div className="space-y-1">
-            {(expanded || !isMobile) && (
-              <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">
+          {/* Premium Sections */}
+          {isPremium && premiumSections.length > 0 && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
                 Premium Collections
               </h3>
-            )}
-            {premiumSections.map((section) => (
-              <PremiumSection key={section.id} section={section} expanded={expanded} />
-            ))}
-          </div>
-        )}
+              <div className="space-y-1">
+                {premiumSections.map((section) => (
+                  <PremiumSection key={section.id} section={section} />
+                ))}
+              </div>
+            </div>
+          )}
 
-        {/* User Account */}
-        <div className="space-y-1">
-          {(expanded || !isMobile) && (
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">
+          {/* User Account */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
               Account
             </h3>
-          )}
-          {accountItems.map((item) => (
-            <NavItem key={item.id} item={item} expanded={expanded} />
-          ))}
-        </div>
+            <div className="space-y-1">
+              {accountItems.map((item) => (
+                <NavItem key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
 
-        {/* Support */}
-        <div className="space-y-1">
-          {(expanded || !isMobile) && (
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">
+          {/* Support */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
               Support
             </h3>
+            <div className="space-y-1">
+              {supportItems.map((item) => (
+                <NavItem key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </nav>
+
+        {/* Footer */}
+        <div className="p-4 border-t border-white/10 bg-white/5">
+          {/* Dark Mode Toggle (Premium only) */}
+          {isPremium && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="w-full justify-start gap-3 mb-2 bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+            </Button>
           )}
-          {supportItems.map((item) => (
-            <NavItem key={item.id} item={item} expanded={expanded} />
-          ))}
+          
+          {/* User info and logout */}
+          {user && (
+            <div className="space-y-2">
+              <div className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-white/10">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center">
+                  <User className="h-4 w-4 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-white truncate">{user.name}</p>
+                  <p className="text-xs text-blue-300 capitalize">{user.role}</p>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="w-full justify-start gap-3 bg-red-500/20 border-red-400/30 text-red-300 hover:bg-red-500/30"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </Button>
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Mode Switcher & Logout */}
-      <div className="p-4 border-t border-current/10 space-y-2">
-        {/* Dark Mode Toggle (Premium only) */}
-        {isPremium && (expanded || !isMobile) && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="w-full justify-start gap-3"
-          >
-            {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-          </Button>
-        )}
-        
-        {/* Logout */}
-        {user && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleLogout}
-            className="w-full justify-start gap-3 text-red-600 border-red-200 hover:bg-red-50"
-          >
-            <LogOut className="h-4 w-4" />
-            {(expanded || !isMobile) && 'Logout'}
-          </Button>
-        )}
-      </div>
-    </div>
-  );
-
-  // Mobile version
-  if (isMobile) {
-    return (
-      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-        <SheetTrigger asChild>
-          <Button 
-            variant="ghost" 
-            size="sm"
-            className="md:hidden"
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
-        </SheetTrigger>
-        <SheetContent 
-          side="left" 
-          className={`w-80 p-0 ${navConfig.theme.base} backdrop-blur-xl border-r-2`}
-        >
-          <SidebarContent expanded={true} />
-        </SheetContent>
-      </Sheet>
-    );
-  }
-
-  // Desktop version
-  return (
-    <motion.aside
-      initial={false}
-      animate={{ width: isExpanded ? 280 : 72 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={`
-        hidden md:flex fixed left-0 top-0 h-screen z-40 
-        ${navConfig.theme.base} backdrop-blur-xl border-r-2 shadow-xl
-        ${className}
-      `}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
-    >
-      <SidebarContent expanded={isExpanded} />
-    </motion.aside>
+    </>
   );
 }
