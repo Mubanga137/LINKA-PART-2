@@ -172,7 +172,7 @@ export function RetailerTestimonials() {
 
                 <div className="relative mb-8">
                   <Quote className="absolute -top-4 -left-4 h-12 w-12 text-yellow-500/20" />
-                  <blockquote className="text-2xl text-slate-700 leading-relaxed italic font-medium pl-8">
+                  <blockquote className="text-2xl text-slate-700 leading-relaxed font-bold font-medium pl-8">
                     "{testimonials[currentTestimonial].quote}"
                   </blockquote>
                 </div>

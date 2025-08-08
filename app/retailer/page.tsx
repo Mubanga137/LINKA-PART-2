@@ -407,7 +407,7 @@ export default function RetailerHomepage() {
                     ))}
                   </div>
                   
-                  <p className="text-gray-700 leading-relaxed italic">
+                  <p className="text-gray-700 leading-relaxed font-bold">
                     "{testimonial.content}"
                   </p>
                 </CardContent>

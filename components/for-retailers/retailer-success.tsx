@@ -219,7 +219,7 @@ export function RetailerSuccess() {
 
                 <div className="relative mb-8">
                   <Quote className="absolute -top-2 -left-2 h-8 w-8 text-emerald-500/30" />
-                  <blockquote className="text-lg text-slate-700 leading-relaxed italic pl-6">
+                  <blockquote className="text-lg text-slate-700 leading-relaxed font-bold pl-6">
                     "{story.quote}"
                   </blockquote>
                 </div>

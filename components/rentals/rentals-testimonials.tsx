@@ -100,7 +100,7 @@ export function RentalsTestimonials() {
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-slate-700 mb-6 leading-relaxed italic text-sm sm:text-base">"{testimonial.text}"</p>
+                <p className="text-slate-700 mb-6 leading-relaxed font-bold text-sm sm:text-base">"{testimonial.text}"</p>
 
                 {/* Verification & Stats */}
                 <div className="flex flex-wrap items-center gap-3 mb-6">

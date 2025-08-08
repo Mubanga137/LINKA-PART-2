@@ -67,7 +67,7 @@ export function RetailerTestimonialsSection() {
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-slate-700 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
+                <p className="text-slate-700 mb-6 leading-relaxed font-bold">"{testimonial.text}"</p>
 
                 {/* Revenue Highlight */}
                 <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-xl p-4 mb-6 border border-emerald-200/50">
