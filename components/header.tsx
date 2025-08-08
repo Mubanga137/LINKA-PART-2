@@ -32,11 +32,14 @@ export function Header() {
     try {
       // Check if we're in marketplace context
       const storedFavorites = localStorage.getItem('marketplace-favorites')
-      if (storedFavorites) {
-        favoritesCount = JSON.parse(storedFavorites).length
+      if (storedFavorites && storedFavorites.trim() !== '') {
+        const parsed = JSON.parse(storedFavorites)
+        favoritesCount = Array.isArray(parsed) ? parsed.length : 0
       }
-    } catch {
-      // No favorites stored
+    } catch (error) {
+      // Clear corrupted data and reset
+      localStorage.removeItem('marketplace-favorites')
+      favoritesCount = 0
     }
   }
 
