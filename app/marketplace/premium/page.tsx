@@ -452,12 +452,22 @@ export default function LinkaRoyalePage() {
                 <Menu className="h-5 w-5" />
               </Button>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
-                  <Crown className="h-5 w-5 text-slate-900" />
+                <div
+                  className="w-10 h-10 logo-3d-metallic logo-mouse-responsive rounded-xl flex items-center justify-center animate-golden-pulse cursor-pointer transform hover:scale-110 transition-all duration-300"
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+                  }}
+                >
+                  <Crown className="h-6 w-6 text-slate-900 drop-shadow-lg" />
+                  <div className="logo-dynamic-reflection" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold text-white font-serif">
-                    Welcome to <span className="text-yellow-400">Linka Royale</span>
+                  <h1 className="text-xl font-bold text-white font-serif animate-emerald-shimmer">
+                    Welcome to <span className="text-royal-gold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">Linka Royale</span>
                   </h1>
                 </div>
               </div>
@@ -534,12 +544,22 @@ export default function LinkaRoyalePage() {
           {/* Compact Logo */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Crown className="h-6 w-6 text-slate-900" />
+              <div
+                className="w-12 h-12 logo-3d-metallic logo-mouse-responsive rounded-xl flex items-center justify-center animate-golden-pulse cursor-pointer transform hover:scale-110 transition-all duration-300"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+                }}
+              >
+                <Crown className="h-7 w-7 text-slate-900 drop-shadow-lg" />
+                <div className="logo-dynamic-reflection" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-white font-serif">Linka Royale</h2>
-                <p className="text-xs text-yellow-400 font-bold">Luxury Marketplace</p>
+                <h2 className="text-xl font-bold text-white font-serif animate-emerald-shimmer">Linka Royale</h2>
+                <p className="text-sm text-yellow-400 font-bold">Luxury Marketplace</p>
               </div>
             </div>
             <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)}>
@@ -831,14 +851,24 @@ export default function LinkaRoyalePage() {
           <div className="luxury-card rounded-2xl shadow-2xl w-full max-w-md border border-yellow-400/20">
             <div className="flex items-center justify-between p-6 border-b border-yellow-400/20">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-xl flex items-center justify-center">
-                  <Crown className="h-6 w-6 text-slate-900" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white font-serif">Royal Concierge</h3>
-                  <p className="text-sm text-yellow-400 font-bold">Premium Assistant</p>
-                </div>
-              </div>
+            <div
+              className="w-12 h-12 logo-3d-metallic logo-mouse-responsive rounded-xl flex items-center justify-center animate-golden-pulse cursor-pointer transform hover:scale-110 transition-all duration-300"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+              }}
+            >
+              <Crown className="h-7 w-7 text-slate-900 drop-shadow-lg" />
+              <div className="logo-dynamic-reflection" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white font-serif animate-emerald-shimmer">Royal Concierge</h3>
+              <p className="text-sm text-yellow-400 font-bold">Premium Assistant</p>
+            </div>
+          </div>
               <Button variant="ghost" size="sm" onClick={() => setConciergeOpen(false)}>
                 <X className="h-5 w-5 text-slate-400" />
               </Button>
