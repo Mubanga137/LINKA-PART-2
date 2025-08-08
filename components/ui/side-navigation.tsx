@@ -387,7 +387,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
       {/* Sidebar */}
       <div className={`fixed inset-y-0 left-0 z-50 w-64 ${navConfig.theme.base} shadow-2xl transform transition-transform duration-300 ease-in-out ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:translate-x-0 lg:static lg:inset-0 ${className}`}>
+      } lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen ${className}`}>
         
         {/* Header */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-white/10">
