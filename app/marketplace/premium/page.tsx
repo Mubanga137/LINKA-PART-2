@@ -440,57 +440,6 @@ export default function LinkaRoyalePage() {
     );
   }
 
-  // Mouse tracking for cursor glow effect
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const glowElement = document.getElementById('cursor-glow');
-      if (glowElement) {
-        const x = (e.clientX / window.innerWidth) * 100;
-        const y = (e.clientY / window.innerHeight) * 100;
-        glowElement.style.setProperty('--mouse-x', `${x}%`);
-        glowElement.style.setProperty('--mouse-y', `${y}%`);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // Parallax scrolling effect
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      const parallaxElements = document.querySelectorAll('.parallax-layer');
-
-      parallaxElements.forEach((element) => {
-        const rate = scrolled * -0.5;
-        (element as HTMLElement).style.setProperty('--scroll-y', `${rate}px`);
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Section reveal on scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('section-reveal');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const sections = document.querySelectorAll('.reveal-on-scroll');
-    sections.forEach((section) => observer.observe(section));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div className="min-h-screen bg-royal-particles relative overflow-hidden perf-optimized">
       {/* Advanced Royal Background Effects */}
