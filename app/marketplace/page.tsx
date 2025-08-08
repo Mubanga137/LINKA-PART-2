@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Header } from "@/components/header";
+import { SideNavigation } from "@/components/ui/side-navigation";
+import { MinimalHeader } from "@/components/ui/minimal-header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -930,7 +931,12 @@ function MarketplaceContent() {
       animate={{ opacity: 1 }}
       className="min-h-screen bg-white"
     >
-      <Header />
+      {/* Side Navigation */}
+      <SideNavigation variant="marketplace" />
+
+      {/* Main Content Area */}
+      <div className="md:ml-[72px] transition-all duration-300">
+        <MinimalHeader variant="marketplace" showSearch={true} />
       
       <main>
         <EnhancedHeroSection />
@@ -1293,10 +1299,11 @@ function MarketplaceContent() {
         </motion.section>
       </main>
 
-      <Footer />
+        <Footer />
 
-      {/* Mobile Bottom Navigation */}
-      <MobileBottomNav />
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav />
+      </div>
     </motion.div>
   );
 }
