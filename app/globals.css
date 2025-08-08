@@ -928,11 +928,215 @@
   animation: cinematicLoad 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Performance Optimizations */
+/* Comprehensive Performance Optimizations for 60fps */
 .gpu-accelerated {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
+  will-change: transform;
+}
+
+/* High Performance Animation Classes */
+.perf-optimized {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  contain: layout style paint;
+}
+
+.perf-optimized:hover {
+  will-change: transform, opacity, box-shadow;
+}
+
+.perf-optimized:not(:hover) {
+  will-change: auto;
+}
+
+/* Mobile-First Performance Optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  .card-3d-floating:hover {
+    transform: translateY(-8px) scale(1.02);
+  }
+
+  .logo-3d-metallic:hover {
+    transform: scale(1.05);
+  }
+
+  .nav-item-royal:hover {
+    transform: translateX(4px);
+  }
+
+  /* Simplified particle animations */
+  .animate-gold-particle {
+    animation-duration: 8s;
+  }
+
+  .animate-parallax-drift {
+    animation-duration: 20s;
+  }
+
+  /* Reduce blur effects on mobile for better performance */
+  .sidebar-royal-glass {
+    backdrop-filter: blur(20px) saturate(1.2);
+  }
+
+  .trust-badge-glow {
+    backdrop-filter: blur(5px);
+  }
+
+  /* Optimize mobile scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Ultra-light animations for low-end devices */
+@media (max-width: 480px) {
+  .card-3d-floating:hover {
+    transform: translateY(-4px);
+  }
+
+  .product-image-3d {
+    transition-duration: 0.3s;
+  }
+
+  .floating-actions {
+    transition-duration: 0.3s;
+  }
+
+  /* Disable complex animations on very small screens */
+  .animate-gold-dust,
+  .animate-emerald-shimmer,
+  .text-light-sweep {
+    animation: none;
+  }
+}
+
+/* Battery and performance aware optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gold-particle,
+  .animate-gold-dust,
+  .animate-parallax-drift,
+  .animate-royal-float,
+  .animate-royal-glow,
+  .animate-royal-pulse,
+  .animate-golden-pulse,
+  .animate-layered-gradient,
+  .animate-emerald-shimmer,
+  .cart-fly-animation,
+  .section-reveal,
+  .cinematic-load,
+  .text-light-sweep,
+  .crown-badge-floating,
+  .diamond-badge-floating {
+    animation: none !important;
+  }
+
+  .card-3d-floating:hover,
+  .hover-royal-glow:hover,
+  .logo-3d-metallic:hover {
+    transform: none;
+  }
+
+  .parallax-layer {
+    transform: none !important;
+  }
+}
+
+/* Force GPU acceleration for key elements */
+.force-gpu {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* Smooth scrolling optimizations */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Mobile touch optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch-optimized hover states */
+  .card-3d-floating:active {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .btn-royal-concierge:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  .floating-action-btn:active {
+    transform: translateY(-2px) scale(1.05);
+  }
+}
+
+/* Critical path optimizations */
+.above-fold {
+  contain: layout style;
+  content-visibility: visible;
+}
+
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
+}
+
+/* Efficient backdrop filters */
+.efficient-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  .efficient-blur {
+    background: rgba(11, 20, 38, 0.8);
+  }
+}
+
+/* Memory efficient gradients */
+.memory-efficient-gradient {
+  background-image: linear-gradient(145deg, #0b1426 0%, #1e293b 50%, #0b1426 100%);
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  .memory-efficient-gradient {
+    background-attachment: scroll;
+  }
+}
+
+/* Optimized z-index stacking */
+.z-layer-bg { z-index: 1; }
+.z-layer-content { z-index: 10; }
+.z-layer-nav { z-index: 40; }
+.z-layer-modal { z-index: 50; }
+.z-layer-tooltip { z-index: 60; }
+
+/* High refresh rate support */
+@media (min-resolution: 120dpi) and (min-refresh-rate: 90Hz) {
+  .smooth-animations {
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Container queries for adaptive design */
+@container (max-width: 640px) {
+  .container-responsive {
+    padding: 0.5rem;
+  }
+}
+
+@container (min-width: 641px) {
+  .container-responsive {
+    padding: 1rem;
+  }
 }
 
 @keyframes royalPulse {
