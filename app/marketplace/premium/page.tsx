@@ -450,7 +450,7 @@ export default function LinkaRoyalePage() {
               </div>
               <div>
                 <h2 className="text-lg font-bold text-white font-serif">Linka Royale</h2>
-                <p className="text-xs text-yellow-400">Luxury Marketplace</p>
+                <p className="text-xs text-yellow-400 font-bold">Luxury Marketplace</p>
               </div>
             </div>
             <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)}>
@@ -533,7 +533,7 @@ export default function LinkaRoyalePage() {
                 Royal Recommendations
               </h2>
               <div className="w-16 h-0.5 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto mb-4"></div>
-              <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              <p className="text-lg text-slate-300 max-w-2xl mx-auto font-bold">
                 Discover our handpicked selection of premium products crafted for discerning taste
               </p>
             </div>
@@ -747,7 +747,7 @@ export default function LinkaRoyalePage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white font-serif">Royal Concierge</h3>
-                  <p className="text-sm text-yellow-400">Premium Assistant</p>
+                  <p className="text-sm text-yellow-400 font-bold">Premium Assistant</p>
                 </div>
               </div>
               <Button variant="ghost" size="sm" onClick={() => setConciergeOpen(false)}>
