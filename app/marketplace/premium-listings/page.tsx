@@ -361,302 +361,268 @@ export default function PremiumListingsPage() {
     <div className={`min-h-screen relative overflow-hidden ${
       isDarkMode ? 'premium-bg-dark' : 'premium-bg-light'
     }`}>
-      {/* Premium Background Effects */}
-      <div className={`absolute inset-0 ${
-        isDarkMode ? 'premium-overlay-dark' : 'premium-overlay-light'
-      } pointer-events-none`}></div>
+      {/* Royal Side Navigation */}
+      <SideNavigation variant="premium" />
       
-      {/* Floating Premium Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={`particle-${i}`}
-            className={`absolute w-1 h-1 rounded-full animate-premium-float ${
-              isDarkMode ? 'bg-yellow-400/30' : 'bg-blue-400/30'
-            }`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${6 + Math.random() * 8}s`
-            }}
-          />
-        ))}
-      </div>
+      {/* Main Content Area */}
+      <div className="md:ml-[72px] transition-all duration-300">
+        <MinimalHeader variant="premium" showSearch={true} />
+        
+        {/* Premium Background Effects */}
+        <div className={`absolute inset-0 ${
+          isDarkMode ? 'premium-overlay-dark' : 'premium-overlay-light'
+        } pointer-events-none`}></div>
+        
+        {/* Floating Premium Particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={`particle-${i}`}
+              className={`absolute w-1 h-1 rounded-full animate-premium-float ${
+                isDarkMode ? 'bg-yellow-400/30' : 'bg-blue-400/30'
+              }`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 8}s`,
+                animationDuration: `${6 + Math.random() * 8}s`
+              }}
+            />
+          ))}
+        </div>
 
-      {/* Premium Header */}
-      <header className={`sticky top-0 z-40 backdrop-blur-xl border-b-2 ${
-        isDarkMode 
-          ? 'border-yellow-400/20 bg-slate-900/80' 
-          : 'border-blue-400/20 bg-white/80'
-      }`}>
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Premium Title */}
-            <div className="flex items-center gap-4">
-              <Crown className="h-8 w-8 crown-glow" />
-              <div>
-                <h1 className="text-2xl font-bold logo-3d-premium font-serif">
-                  Premium Listings
-                </h1>
-                <p className={`text-sm font-medium ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-600'
-                }`}>Curated Excellence</p>
+        {/* Premium Content Header */}
+        <div className={`relative z-10 backdrop-blur-xl border-b-2 ${
+          isDarkMode 
+            ? 'border-yellow-400/20 bg-slate-900/80' 
+            : 'border-blue-400/20 bg-white/80'
+        }`}>
+          <div className="max-w-7xl mx-auto px-6 py-4">
+            {/* Filters Bar */}
+            <div className="flex items-center justify-between pt-4 border-t border-current/10">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <Filter className="h-4 w-4" />
+                  <span className="text-sm font-medium">Filter:</span>
+                </div>
+                <div className="flex gap-2">
+                  {[
+                    { key: 'all', label: 'All' },
+                    { key: 'royal', label: 'Royal', icon: Crown },
+                    { key: 'trending', label: 'Trending', icon: TrendingUp },
+                    { key: 'products', label: 'Products' },
+                    { key: 'services', label: 'Services' }
+                  ].map((filter) => (
+                    <Button
+                      key={filter.key}
+                      variant={filterBy === filter.key ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setFilterBy(filter.key as any)}
+                      className={`btn-premium text-xs ${
+                        filterBy === filter.key 
+                          ? '' 
+                          : isDarkMode 
+                            ? 'bg-slate-800/50 text-slate-300 border-slate-600' 
+                            : 'bg-white/50 text-slate-700 border-slate-300'
+                      }`}
+                    >
+                      {filter.icon && <filter.icon className="h-3 w-3 mr-1" />}
+                      {filter.label}
+                    </Button>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Search and Actions */}
-            <div className="flex items-center gap-4">
-              <div className="relative">
-                <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${
-                  isDarkMode ? 'text-yellow-400/70' : 'text-blue-400/70'
-                }`} />
-                <input
-                  type="text"
-                  placeholder="Search premium listings..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className={`pl-10 pr-4 py-2 rounded-xl border-2 text-sm focus:outline-none transition-all duration-300 ${
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <SortAsc className="h-4 w-4" />
+                  <span className="text-sm font-medium">Sort:</span>
+                </div>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as any)}
+                  className={`px-3 py-1 rounded-lg border text-sm focus:outline-none ${
                     isDarkMode 
-                      ? 'bg-slate-800/50 border-yellow-400/20 text-white placeholder-slate-400 focus:border-yellow-400/40' 
-                      : 'bg-white/50 border-blue-400/20 text-slate-900 placeholder-slate-500 focus:border-blue-400/40'
+                      ? 'bg-slate-800/50 border-yellow-400/20 text-white' 
+                      : 'bg-white/50 border-blue-400/20 text-slate-900'
                   }`}
-                />
-              </div>
+                >
+                  <option value="featured">Featured</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="price">Price High-Low</option>
+                  <option value="newest">Newest</option>
+                </select>
 
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/marketplace">
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  All Vendors
-                </Link>
-              </Button>
-            </div>
-          </div>
-
-          {/* Filters Bar */}
-          <div className="flex items-center justify-between mt-4 pt-4 border-t border-current/10">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Filter className="h-4 w-4" />
-                <span className="text-sm font-medium">Filter:</span>
-              </div>
-              <div className="flex gap-2">
-                {[
-                  { key: 'all', label: 'All' },
-                  { key: 'royal', label: 'Royal', icon: Crown },
-                  { key: 'trending', label: 'Trending', icon: TrendingUp },
-                  { key: 'products', label: 'Products' },
-                  { key: 'services', label: 'Services' }
-                ].map((filter) => (
+                <div className="flex border rounded-lg overflow-hidden">
                   <Button
-                    key={filter.key}
-                    variant={filterBy === filter.key ? "default" : "outline"}
+                    variant={viewMode === 'grid' ? "default" : "outline"}
                     size="sm"
-                    onClick={() => setFilterBy(filter.key as any)}
-                    className={`btn-premium text-xs ${
-                      filterBy === filter.key 
-                        ? '' 
-                        : isDarkMode 
-                          ? 'bg-slate-800/50 text-slate-300 border-slate-600' 
-                          : 'bg-white/50 text-slate-700 border-slate-300'
-                    }`}
+                    onClick={() => setViewMode('grid')}
+                    className="rounded-none border-0"
                   >
-                    {filter.icon && <filter.icon className="h-3 w-3 mr-1" />}
-                    {filter.label}
+                    <Grid3X3 className="h-4 w-4" />
                   </Button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <SortAsc className="h-4 w-4" />
-                <span className="text-sm font-medium">Sort:</span>
-              </div>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className={`px-3 py-1 rounded-lg border text-sm focus:outline-none ${
-                  isDarkMode 
-                    ? 'bg-slate-800/50 border-yellow-400/20 text-white' 
-                    : 'bg-white/50 border-blue-400/20 text-slate-900'
-                }`}
-              >
-                <option value="featured">Featured</option>
-                <option value="rating">Highest Rated</option>
-                <option value="price">Price High-Low</option>
-                <option value="newest">Newest</option>
-              </select>
-
-              <div className="flex border rounded-lg overflow-hidden">
-                <Button
-                  variant={viewMode === 'grid' ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode('grid')}
-                  className="rounded-none border-0"
-                >
-                  <Grid3X3 className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant={viewMode === 'list' ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                  className="rounded-none border-0"
-                >
-                  <List className="h-4 w-4" />
-                </Button>
+                  <Button
+                    variant={viewMode === 'list' ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setViewMode('list')}
+                    className="rounded-none border-0"
+                  >
+                    <List className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </header>
 
-      {/* Main Content */}
-      <main className="relative z-10 max-w-7xl mx-auto px-6 py-8 space-y-12">
-        {/* Royal Recommendations */}
-        {royalRecommendations.length > 0 && (
-          <section className="space-y-6">
-            <div className="text-center">
-              <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                isDarkMode 
-                  ? 'bg-slate-800/50 border-yellow-400/30' 
-                  : 'bg-white/50 border-blue-400/30'
-              }`}>
-                <Crown className="h-5 w-5 crown-glow" />
-                <span className="text-sm font-medium uppercase tracking-wide">Royal Collection</span>
+        {/* Main Content */}
+        <main className="relative z-10 max-w-7xl mx-auto px-6 py-8 space-y-12">
+          {/* Royal Recommendations */}
+          {royalRecommendations.length > 0 && (
+            <section className="space-y-6">
+              <div className="text-center">
+                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
+                  isDarkMode 
+                    ? 'bg-slate-800/50 border-yellow-400/30' 
+                    : 'bg-white/50 border-blue-400/30'
+                }`}>
+                  <Crown className="h-5 w-5 crown-glow" />
+                  <span className="text-sm font-medium uppercase tracking-wide">Royal Collection</span>
+                </div>
+                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
+                  Royal Recommendations
+                </h2>
+                <div className={`w-16 h-0.5 mx-auto mb-4 ${
+                  isDarkMode 
+                    ? 'bg-gradient-to-r from-yellow-400 to-amber-500' 
+                    : 'bg-gradient-to-r from-blue-400 to-blue-600'
+                }`}></div>
+                <p className={`text-lg max-w-2xl mx-auto ${
+                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                }`}>
+                  Handpicked selections of the finest premium products and services
+                </p>
               </div>
-              <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
-                Royal Recommendations
-              </h2>
-              <div className={`w-16 h-0.5 mx-auto mb-4 ${
-                isDarkMode 
-                  ? 'bg-gradient-to-r from-yellow-400 to-amber-500' 
-                  : 'bg-gradient-to-r from-blue-400 to-blue-600'
-              }`}></div>
-              <p className={`text-lg max-w-2xl mx-auto ${
+
+              <div className={`grid gap-6 ${
+                viewMode === 'grid' 
+                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                  : 'grid-cols-1'
+              }`}>
+                {royalRecommendations.map((listing, index) => (
+                  <PremiumListingCard 
+                    key={listing.id} 
+                    listing={listing} 
+                    viewMode={viewMode}
+                    isDarkMode={isDarkMode}
+                    animationDelay={index * 100}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Trending Premium Deals */}
+          {trendingDeals.length > 0 && (
+            <section className="space-y-6">
+              <div className="text-center">
+                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
+                  isDarkMode 
+                    ? 'bg-slate-800/50 border-emerald-400/30' 
+                    : 'bg-white/50 border-emerald-400/30'
+                }`}>
+                  <Flame className="h-5 w-5 text-emerald-500" />
+                  <span className="text-sm font-medium uppercase tracking-wide text-emerald-500">Hot Deals</span>
+                </div>
+                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
+                  Trending Premium Deals
+                </h2>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto mb-4"></div>
+                <p className={`text-lg max-w-2xl mx-auto ${
+                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                }`}>
+                  Limited time offers on premium products and services
+                </p>
+              </div>
+
+              <div className={`grid gap-6 ${
+                viewMode === 'grid' 
+                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                  : 'grid-cols-1'
+              }`}>
+                {trendingDeals.map((listing, index) => (
+                  <PremiumListingCard 
+                    key={listing.id} 
+                    listing={listing} 
+                    viewMode={viewMode}
+                    isDarkMode={isDarkMode}
+                    animationDelay={index * 100}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Luxury Categories */}
+          {remainingListings.length > 0 && (
+            <section className="space-y-6">
+              <div className="text-center">
+                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
+                  isDarkMode 
+                    ? 'bg-slate-800/50 border-blue-400/30' 
+                    : 'bg-white/50 border-blue-400/30'
+                }`}>
+                  <Sparkles className="h-5 w-5 text-blue-500" />
+                  <span className="text-sm font-medium uppercase tracking-wide text-blue-500">Premium Collection</span>
+                </div>
+                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
+                  Luxury Categories
+                </h2>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto mb-4"></div>
+                <p className={`text-lg max-w-2xl mx-auto ${
+                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                }`}>
+                  Explore our curated selection of premium products and services
+                </p>
+              </div>
+
+              <div className={`grid gap-6 ${
+                viewMode === 'grid' 
+                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                  : 'grid-cols-1'
+              }`}>
+                {remainingListings.map((listing, index) => (
+                  <PremiumListingCard 
+                    key={listing.id} 
+                    listing={listing} 
+                    viewMode={viewMode}
+                    isDarkMode={isDarkMode}
+                    animationDelay={index * 100}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Empty State */}
+          {filteredListings.length === 0 && (
+            <div className="text-center py-12">
+              <Crown className={`h-16 w-16 mx-auto mb-4 ${
+                isDarkMode ? 'text-slate-600' : 'text-slate-400'
+              }`} />
+              <h3 className={`text-xl font-semibold mb-2 ${
                 isDarkMode ? 'text-slate-300' : 'text-slate-600'
               }`}>
-                Handpicked selections of the finest premium products and services
+                No premium listings found
+              </h3>
+              <p className={`${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                Try adjusting your search or filters to find what you're looking for
               </p>
             </div>
-
-            <div className={`grid gap-6 ${
-              viewMode === 'grid' 
-                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                : 'grid-cols-1'
-            }`}>
-              {royalRecommendations.map((listing, index) => (
-                <PremiumListingCard 
-                  key={listing.id} 
-                  listing={listing} 
-                  viewMode={viewMode}
-                  isDarkMode={isDarkMode}
-                  animationDelay={index * 100}
-                />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Trending Premium Deals */}
-        {trendingDeals.length > 0 && (
-          <section className="space-y-6">
-            <div className="text-center">
-              <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                isDarkMode 
-                  ? 'bg-slate-800/50 border-emerald-400/30' 
-                  : 'bg-white/50 border-emerald-400/30'
-              }`}>
-                <Flame className="h-5 w-5 text-emerald-500" />
-                <span className="text-sm font-medium uppercase tracking-wide text-emerald-500">Hot Deals</span>
-              </div>
-              <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
-                Trending Premium Deals
-              </h2>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto mb-4"></div>
-              <p className={`text-lg max-w-2xl mx-auto ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                Limited time offers on premium products and services
-              </p>
-            </div>
-
-            <div className={`grid gap-6 ${
-              viewMode === 'grid' 
-                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                : 'grid-cols-1'
-            }`}>
-              {trendingDeals.map((listing, index) => (
-                <PremiumListingCard 
-                  key={listing.id} 
-                  listing={listing} 
-                  viewMode={viewMode}
-                  isDarkMode={isDarkMode}
-                  animationDelay={index * 100}
-                />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Luxury Categories */}
-        {remainingListings.length > 0 && (
-          <section className="space-y-6">
-            <div className="text-center">
-              <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                isDarkMode 
-                  ? 'bg-slate-800/50 border-blue-400/30' 
-                  : 'bg-white/50 border-blue-400/30'
-              }`}>
-                <Sparkles className="h-5 w-5 text-blue-500" />
-                <span className="text-sm font-medium uppercase tracking-wide text-blue-500">Premium Collection</span>
-              </div>
-              <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
-                Luxury Categories
-              </h2>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto mb-4"></div>
-              <p className={`text-lg max-w-2xl mx-auto ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                Explore our curated selection of premium products and services
-              </p>
-            </div>
-
-            <div className={`grid gap-6 ${
-              viewMode === 'grid' 
-                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                : 'grid-cols-1'
-            }`}>
-              {remainingListings.map((listing, index) => (
-                <PremiumListingCard 
-                  key={listing.id} 
-                  listing={listing} 
-                  viewMode={viewMode}
-                  isDarkMode={isDarkMode}
-                  animationDelay={index * 100}
-                />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Empty State */}
-        {filteredListings.length === 0 && (
-          <div className="text-center py-12">
-            <Crown className={`h-16 w-16 mx-auto mb-4 ${
-              isDarkMode ? 'text-slate-600' : 'text-slate-400'
-            }`} />
-            <h3 className={`text-xl font-semibold mb-2 ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              No premium listings found
-            </h3>
-            <p className={`${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-              Try adjusting your search or filters to find what you're looking for
-            </p>
-          </div>
-        )}
-      </main>
+          )}
+        </main>
+      </div>
     </div>
   );
 }
