@@ -696,76 +696,99 @@ export default function LinkaRoyalePage() {
                     animationFillMode: 'forwards'
                   }}
                 >
-                  <Card className="group luxury-card h-full overflow-hidden border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl bg-gradient-to-b from-slate-800/90 to-slate-900/90">
-                    {/* Compact Image */}
-                    <div className="relative aspect-[4/3] overflow-hidden">
+                  <Card className="group card-3d-floating h-full overflow-hidden">
+                    {/* Enhanced 3D Image */}
+                    <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-amber-50/80 to-yellow-50/80">
                       <Image
                         src={product.images[0]}
                         alt={product.name}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                        className="product-image-3d object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                      <div className="gold-shimmer-overlay"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-60"></div>
                       
-                      {/* Badges */}
-                      <div className="absolute top-3 left-3 flex flex-col gap-1">
-                        <Badge className="bg-yellow-400/90 text-slate-900 text-xs px-2 py-1">
-                          <Crown className="h-2 w-2 mr-1" />
-                          Premium
+                      {/* Enhanced Floating Badges */}
+                      <div className="absolute top-4 left-4 flex flex-col gap-2">
+                        <Badge className="crown-badge-floating bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-slate-900 text-xs px-3 py-1.5 shadow-lg border border-yellow-300/50">
+                          <Crown className="h-3 w-3 mr-1.5" />
+                          Royal Premium
                         </Badge>
                         {product.trending && (
-                          <Badge className="bg-green-500/90 text-white text-xs px-2 py-1 animate-pulse">
+                          <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs px-2.5 py-1 animate-pulse shadow-md">
+                            <TrendingUp className="h-2.5 w-2.5 mr-1" />
                             Trending
+                          </Badge>
+                        )}
+                        {product.handcrafted && (
+                          <Badge className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-xs px-2.5 py-1 shadow-md">
+                            <Award className="h-2.5 w-2.5 mr-1" />
+                            Handcrafted
                           </Badge>
                         )}
                       </div>
 
-                      {/* Luxury Rating */}
-                      <div className="absolute top-3 right-3">
-                        <div className="glass-luxury rounded-lg px-2 py-1 border border-yellow-400/30">
-                          <div className="flex items-center gap-1">
-                            <Diamond className="h-3 w-3 text-yellow-400" />
-                            <span className="text-xs font-bold text-white">{product.luxuryRating}/5</span>
+                      {/* Enhanced Luxury Rating */}
+                      <div className="absolute top-4 right-4">
+                        <div className="trust-badge-glow rounded-xl px-3 py-2">
+                          <div className="flex items-center gap-2">
+                            <Diamond className="diamond-badge-floating h-4 w-4 text-yellow-600" />
+                            <span className="text-sm font-bold text-amber-900">{product.luxuryRating}/5</span>
                           </div>
                         </div>
                       </div>
 
-                      {/* Quick Actions Overlay */}
-                      <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      {/* Enhanced Floating Actions */}
+                      <div className="floating-actions absolute bottom-4 left-4 right-4">
                         <div className="flex gap-2">
                           <Button
                             size="sm"
-                            variant="outline"
-                            className="flex-1 glass-luxury border-0 text-white hover:bg-white/20 text-xs"
+                            className="floating-action-btn flex-1 text-slate-700 hover:text-slate-900 text-xs font-medium"
                           >
                             <Heart className="h-3 w-3 mr-1" />
                             Save
                           </Button>
                           <Button
                             size="sm"
-                            variant="outline"
-                            className="flex-1 glass-luxury border-0 text-white hover:bg-white/20 text-xs"
+                            className="floating-action-btn flex-1 text-slate-700 hover:text-slate-900 text-xs font-medium"
                           >
                             <Share2 className="h-3 w-3 mr-1" />
                             Share
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="floating-action-btn flex-1 text-slate-700 hover:text-slate-900 text-xs font-medium"
+                          >
+                            <Eye className="h-3 w-3 mr-1" />
+                            View
                           </Button>
                         </div>
                       </div>
                     </div>
 
                     <CardContent className="p-4 space-y-3">
-                      {/* Vendor */}
-                      <div className="flex items-center gap-2">
-                        <Image
-                          src={product.vendor.logo}
-                          alt={product.vendor.name}
-                          width={16}
-                          height={16}
-                          className="rounded-full"
-                        />
-                        <span className="text-xs text-slate-400">{product.vendor.name}</span>
-                        {product.vendor.verified && (
-                          <Verified className="h-3 w-3 text-blue-400" />
+                      {/* Enhanced Vendor */}
+                      <div className="vendor-badge-premium flex items-center gap-3 p-2 rounded-lg">
+                        <div className="relative">
+                          <Image
+                            src={product.vendor.logo}
+                            alt={product.vendor.name}
+                            width={20}
+                            height={20}
+                            className="rounded-full ring-2 ring-yellow-400/30"
+                          />
+                          {product.vendor.verified && (
+                            <div className="absolute -top-1 -right-1 bg-blue-500 rounded-full p-0.5">
+                              <Verified className="h-2 w-2 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        <span className="text-sm font-semibold text-amber-900">{product.vendor.name}</span>
+                        {product.vendor.premiumSeller && (
+                          <Badge className="bg-amber-100 text-amber-700 text-xs px-2 py-0.5 border border-amber-200">
+                            <Crown className="h-2 w-2 mr-1" />
+                            Royal
+                          </Badge>
                         )}
                       </div>
 
@@ -788,15 +811,20 @@ export default function LinkaRoyalePage() {
                         ))}
                       </div>
 
-                      {/* Price */}
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold text-yellow-400">
+                      {/* Enhanced Price Display */}
+                      <div className="flex items-center gap-3">
+                        <span className="text-xl font-bold text-amber-600 price-glow">
                           K{product.price.toFixed(2)}
                         </span>
                         {product.originalPrice && (
-                          <span className="text-sm text-slate-500 line-through">
-                            K{product.originalPrice.toFixed(2)}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm text-gray-400 line-through">
+                              K{product.originalPrice.toFixed(2)}
+                            </span>
+                            <Badge className="bg-green-100 text-green-700 border border-green-200 text-xs px-2 py-1">
+                              -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
+                            </Badge>
+                          </div>
                         )}
                       </div>
 
@@ -810,24 +838,24 @@ export default function LinkaRoyalePage() {
                         <span className="text-slate-400">{product.soldCount} sold</span>
                       </div>
 
-                      {/* Action Buttons */}
-                      <div className="flex gap-2 pt-2">
-                        <Button 
+                      {/* Enhanced Action Buttons */}
+                      <div className="flex gap-3 pt-3">
+                        <Button
                           size="sm"
                           onClick={handleAddToCart}
-                          className="flex-1 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-slate-900 font-medium py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-xs"
+                          className="add-to-cart-royal flex-1 text-slate-900 font-bold py-3 rounded-xl shadow-lg text-sm"
                         >
-                          <Plus className="h-3 w-3 mr-1" />
+                          <ShoppingCart className="h-4 w-4 mr-2" />
                           Add to Cart
                         </Button>
                         <Button
                           size="sm"
                           variant="outline"
-                          className="px-3 border border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10 rounded-lg text-xs"
+                          className="px-4 py-3 border-2 border-amber-200 hover:border-amber-300 hover:bg-amber-50 text-amber-700 hover:text-amber-800 rounded-xl transition-all duration-300 hover:scale-105"
                           asChild
                         >
                           <Link href={`/products/${product.id}`}>
-                            <Eye className="h-3 w-3" />
+                            <ExternalLink className="h-4 w-4" />
                           </Link>
                         </Button>
                       </div>
