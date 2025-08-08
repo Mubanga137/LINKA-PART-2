@@ -220,6 +220,158 @@
   animation: emeraldShimmer 4s ease-in-out infinite;
 }
 
+/* 3D Metallic Glass Logo Effects */
+.logo-3d-metallic {
+  position: relative;
+  transform-style: preserve-3d;
+  background: linear-gradient(145deg,
+    rgba(212, 175, 55, 0.9) 0%,
+    rgba(255, 215, 0, 0.95) 25%,
+    rgba(184, 134, 11, 0.85) 50%,
+    rgba(255, 215, 0, 0.95) 75%,
+    rgba(212, 175, 55, 0.9) 100%);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  box-shadow:
+    0 8px 32px rgba(212, 175, 55, 0.4),
+    inset 0 2px 8px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-3d-metallic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(255, 255, 255, 0.1) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.logo-3d-metallic::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.2) 45deg,
+    rgba(255, 255, 255, 0.4) 90deg,
+    rgba(255, 255, 255, 0.2) 135deg,
+    transparent 180deg,
+    transparent 360deg);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.5s ease;
+  pointer-events: none;
+  animation: logoReflectionRotate 8s linear infinite;
+}
+
+@keyframes logoReflectionRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.logo-3d-metallic:hover::after {
+  opacity: 0.6;
+}
+
+/* Dynamic Light Reflections */
+@keyframes dynamicReflection {
+  0%, 100% {
+    transform: translateX(-100%) rotate(-45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(200%) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+.logo-dynamic-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent);
+  transform: translateX(-100%) rotate(-45deg);
+  animation: dynamicReflection 3s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Mouse-Responsive Reflection */
+.logo-mouse-responsive {
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-mouse-responsive::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 40%,
+    transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.logo-mouse-responsive:hover::before {
+  opacity: 1;
+}
+
+/* Golden Pulse Animation */
+@keyframes goldenPulse {
+  0%, 100% {
+    box-shadow:
+      0 8px 32px rgba(212, 175, 55, 0.4),
+      inset 0 2px 8px rgba(255, 255, 255, 0.2),
+      inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 12px 48px rgba(212, 175, 55, 0.6),
+      0 0 40px rgba(255, 215, 0, 0.3),
+      inset 0 2px 8px rgba(255, 255, 255, 0.3),
+      inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.animate-golden-pulse {
+  animation: goldenPulse 2s ease-in-out infinite;
+}
+
 @keyframes royalPulse {
   0%, 100% {
     transform: scale(1);
