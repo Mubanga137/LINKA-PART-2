@@ -324,7 +324,7 @@ export function AnimatedSidebar({ className }: SidebarProps) {
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href
                 const Icon = item.icon
-                
+
                 return (
                   <motion.div
                     key={item.id}
@@ -337,7 +337,9 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                       className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group relative overflow-hidden ${
                         isActive
                           ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg`
-                          : 'text-gray-700 hover:bg-gray-50'
+                          : item.premium
+                            ? 'text-gray-700 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-amber-50 border border-yellow-200/50'
+                            : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
                       {/* Hover effect background */}
