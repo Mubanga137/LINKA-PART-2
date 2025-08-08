@@ -240,6 +240,7 @@ export default function LinkaRoyalePage() {
   const [voiceSearch, setVoiceSearch] = useState(false);
   const [cartCount, setCartCount] = useState(3);
   const [notificationCount, setNotificationCount] = useState(7);
+  const [sidebarAnimating, setSidebarAnimating] = useState(false);
 
   // Luxury loading animation
   useEffect(() => {
