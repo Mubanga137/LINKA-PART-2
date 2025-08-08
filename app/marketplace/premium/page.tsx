@@ -308,19 +308,41 @@ export default function LinkaRoyalePage() {
   // Royal Loading Screen
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-800 flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 via-amber-500/3 to-yellow-600/5"></div>
-        
+      <div className="min-h-screen bg-royal-particles flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-royal-overlay animate-layered-gradient"></div>
+
+        {/* Loading Particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(12)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-yellow-400/40 rounded-full animate-gold-particle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${4 + Math.random() * 4}s`
+              }}
+            />
+          ))}
+        </div>
+
         <div className="text-center space-y-8 z-10">
           <div className="relative">
-            <div className="w-24 h-24 border-2 border-yellow-400/30 rounded-full animate-spin border-t-yellow-400 shadow-xl"></div>
+            <div className="w-32 h-32 border-3 border-yellow-400/20 rounded-full animate-spin border-t-yellow-400 shadow-2xl bg-gradient-to-br from-yellow-400/5 to-amber-500/5 backdrop-blur-xl"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <Crown className="h-10 w-10 text-yellow-400 animate-pulse" />
+              <Crown className="h-12 w-12 text-yellow-400 animate-royal-pulse drop-shadow-lg" />
             </div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400/10 to-amber-500/10 animate-royal-glow"></div>
           </div>
           <div className="space-y-4">
-            <h1 className="text-2xl font-bold text-yellow-400 font-serif">Linka Royale</h1>
-            <p className="text-lg text-slate-300">Preparing your luxury experience...</p>
+            <h1 className="text-3xl font-bold text-yellow-400 font-serif animate-emerald-shimmer">Linka Royale</h1>
+            <p className="text-xl text-slate-300 font-bold">Preparing your royal experience...</p>
+            <div className="flex items-center justify-center gap-2 text-yellow-400/60">
+              <Diamond className="h-4 w-4 animate-pulse" />
+              <Sparkles className="h-4 w-4 animate-pulse" style={{animationDelay: '0.5s'}} />
+              <Crown className="h-4 w-4 animate-pulse" style={{animationDelay: '1s'}} />
+            </div>
           </div>
         </div>
       </div>
