@@ -1035,16 +1035,40 @@ function MarketplaceContent() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link href={feature.href}>
-                    <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
-                      <CardContent className="p-6 text-center">
-                        <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                    <Card className={`backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer ${
+                      feature.featured
+                        ? 'bg-gradient-to-br from-yellow-400/20 to-amber-500/20 border-yellow-400/40 shadow-2xl hover:shadow-yellow-400/25'
+                        : 'bg-white/10'
+                    }`}>
+                      <CardContent className="p-6 text-center relative">
+                        {feature.featured && (
+                          <div className="absolute -top-2 -right-2">
+                            <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900 font-bold shadow-lg">
+                              <Sparkles className="h-3 w-3 mr-1" />
+                              NEW
+                            </Badge>
+                          </div>
+                        )}
+                        <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg ${
+                          feature.featured ? 'shadow-yellow-400/30' : ''
+                        }`}>
                           <feature.icon className="h-8 w-8 text-white" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
+                        <h3 className={`text-xl font-bold mb-2 ${
+                          feature.featured
+                            ? 'bg-gradient-to-r from-yellow-200 to-amber-200 bg-clip-text text-transparent'
+                            : 'text-white'
+                        }`}>
+                          {feature.title}
+                        </h3>
                         <p className="text-indigo-100 text-sm">{feature.desc}</p>
                         <div className="mt-4">
-                          <Badge className="bg-white/20 text-white border-white/30">
-                            Explore Now
+                          <Badge className={`${
+                            feature.featured
+                              ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900 font-bold'
+                              : 'bg-white/20 text-white border-white/30'
+                          }`}>
+                            {feature.featured ? 'Explore Premium' : 'Explore Now'}
                           </Badge>
                         </div>
                       </CardContent>
