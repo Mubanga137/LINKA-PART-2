@@ -640,12 +640,29 @@ export default function LinkaRoyalePage() {
         </div>
       </div>
 
-      {/* Sidebar Overlay */}
+      {/* Enhanced Sidebar Overlay with Gold Dust */}
       {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-md z-40"
           onClick={() => setSidebarOpen(false)}
-        />
+        >
+          {/* Mobile Gold Dust Animation */}
+          {sidebarAnimating && (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              {[...Array(15)].map((_, i) => (
+                <div
+                  key={`dust-${i}`}
+                  className="mobile-gold-dust"
+                  style={{
+                    left: '0px',
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${i * 100}ms`,
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       )}
 
       {/* Main Content */}
