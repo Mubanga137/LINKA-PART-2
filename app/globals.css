@@ -1547,13 +1547,7 @@ html {
   left: 100%;
 }
 
-/* Enhanced Glassmorphism */
-.glass-luxury {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  backdrop-filter: blur(20px) saturate(1.2);
-  border: 1px solid rgba(255, 215, 0, 0.15);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
+/* Enhanced Glassmorphism - removed duplicate definition */
 
 /* Mobile Responsive Animations */
 @media (max-width: 768px) {
