@@ -358,14 +358,16 @@ export default function PremiumListingsPage() {
   }
 
   return (
-    <div className={`min-h-screen relative overflow-hidden ${
+    <div className={`min-h-screen relative overflow-hidden lg:flex ${
       isDarkMode ? 'premium-bg-dark' : 'premium-bg-light'
     }`}>
       {/* Royal Side Navigation */}
-      <SideNavigation variant="premium" />
+      <div className="lg:w-64 lg:flex-shrink-0">
+        <SideNavigation variant="premium" />
+      </div>
 
       {/* Main Content Area */}
-      <div className="lg:pl-64">
+      <div className="lg:flex-1 lg:pl-0 lg:min-w-0">
         <MinimalHeader variant="premium" showSearch={true} />
         
         {/* Premium Background Effects */}
