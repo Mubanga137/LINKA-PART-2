@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { SideNavigation } from "@/components/ui/side-navigation";
+import { MinimalHeader } from "@/components/ui/minimal-header";
 import {
   Star,
   ShoppingCart,
