@@ -1021,7 +1021,7 @@ export default function LinkaRoyalePage() {
             ))}
           </div>
 
-          <div className="sidebar-royal-glass rounded-3xl shadow-2xl w-full max-w-lg border-2 border-yellow-400/30 transform scale-100 animate-fade-in-up">
+          <div className="efficient-blur bg-gradient-to-b from-slate-900/95 to-slate-800/95 rounded-3xl shadow-2xl w-full max-w-lg border-2 border-yellow-400/30 transform scale-100 animate-fade-in-up">
             {/* Enhanced Header */}
             <div className="flex items-center justify-between p-8 border-b border-yellow-400/30">
               <div className="flex items-center gap-4">
