@@ -441,9 +441,9 @@ export default function LinkaRoyalePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-royal-particles relative overflow-hidden">
+    <div className="min-h-screen bg-royal-particles relative overflow-hidden perf-optimized">
       {/* Advanced Royal Background Effects */}
-      <div className="absolute inset-0 bg-royal-overlay animate-layered-gradient pointer-events-none"></div>
+      <div className="absolute inset-0 bg-royal-overlay animate-layered-gradient pointer-events-none force-gpu"></div>
 
       {/* Enhanced Parallax Crown Silhouettes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
@@ -748,7 +748,7 @@ export default function LinkaRoyalePage() {
       {/* Main Content */}
       <main className="relative z-10 space-y-8">
         {/* Royal Recommendations - Above the Fold */}
-        <section className="reveal-on-scroll py-16 gpu-accelerated">
+        <section className="reveal-on-scroll py-16 gpu-accelerated above-fold container-responsive">
           <div className="max-w-7xl mx-auto px-8">
             {/* Enhanced Section Header */}
             <div className="text-center mb-12 cinematic-load" style={{ animationDelay: '200ms' }}>
@@ -765,8 +765,8 @@ export default function LinkaRoyalePage() {
               </p>
             </div>
 
-            {/* Compact Product Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Optimized Product Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 perf-optimized">
               {filteredProducts.map((product, index) => (
                 <div
                   key={product.id}
@@ -776,7 +776,7 @@ export default function LinkaRoyalePage() {
                     animationFillMode: 'forwards'
                   }}
                 >
-                  <Card className="group card-3d-floating h-full overflow-hidden">
+                  <Card className="group card-3d-floating h-full overflow-hidden perf-optimized force-gpu">
                     {/* Enhanced 3D Image */}
                     <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-amber-50/80 to-yellow-50/80">
                       <Image
