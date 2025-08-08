@@ -953,43 +953,51 @@ export default function LinkaRoyalePage() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent"></div>
 
         {/* 3D Hero Carousel */}
-        <HeroCarousel3D />
+        <div className="reveal-on-scroll cinematic-load gpu-accelerated">
+          <HeroCarousel3D />
+        </div>
 
         {/* Section Divider */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent"></div>
 
         {/* Hot Deals Section */}
-        <HotDealsSection />
+        <div className="reveal-on-scroll cinematic-load gpu-accelerated">
+          <HotDealsSection />
+        </div>
 
         {/* Section Divider */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent"></div>
 
         {/* Premium Services Section */}
-        <PremiumServicesSection />
+        <div className="reveal-on-scroll cinematic-load gpu-accelerated">
+          <PremiumServicesSection />
+        </div>
 
         {/* Section Divider */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent"></div>
 
         {/* Premium Brands Carousel */}
-        <PremiumBrandsCarousel />
+        <div className="reveal-on-scroll cinematic-load gpu-accelerated">
+          <PremiumBrandsCarousel />
+        </div>
       </main>
 
-      {/* Refined Floating Concierge */}
+      {/* Enhanced Floating Concierge */}
       <Button
         onClick={() => setConciergeOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-slate-900 rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 btn-royal-concierge btn-ripple rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 hover-royal-glow gpu-accelerated"
       >
-        <MessageCircle className="h-6 w-6" />
-        <Crown className="h-3 w-3 absolute -top-1 -right-1 bg-yellow-400 rounded-full p-0.5 text-slate-900 animate-pulse" />
+        <MessageCircle className="h-6 w-6 animate-pulse" />
+        <Crown className="h-4 w-4 absolute -top-1 -right-1 bg-yellow-400 rounded-full p-1 text-slate-900 animate-royal-pulse shadow-lg" />
       </Button>
 
-      {/* Scroll to Top */}
+      {/* Enhanced Scroll to Top */}
       {showScrollTop && (
         <Button
           onClick={scrollToTop}
-          className="fixed bottom-6 left-6 z-50 w-12 h-12 glass-luxury border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 rounded-full shadow-xl transition-all duration-300 hover:scale-110"
+          className="fixed bottom-6 left-6 z-50 w-14 h-14 sidebar-royal-glass border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 rounded-full shadow-xl transition-all duration-300 hover:scale-110 hover-royal-glow btn-ripple gpu-accelerated"
         >
-          <ArrowUp className="h-5 w-5" />
+          <ArrowUp className="h-6 w-6 animate-bounce" />
         </Button>
       )}
 
