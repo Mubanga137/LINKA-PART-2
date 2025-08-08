@@ -354,11 +354,22 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                           ? 'bg-white/20 shadow-inner'
                           : `bg-${item.color}-100 text-${item.color}-600 group-hover:scale-110`
                       }`}>
-                        <Icon className="h-4 w-4" />
+                        <Icon className={`h-4 w-4 ${item.premium ? 'crown-glow' : ''}`} />
                       </div>
-                      
+
                       <span className="font-medium flex-1">{item.label}</span>
-                      
+
+                      {/* Premium sparkle effect */}
+                      {item.premium && (
+                        <motion.div
+                          animate={{ rotate: [0, 360] }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                          className="mr-2"
+                        >
+                          <Star className="h-3 w-3 text-yellow-500" />
+                        </motion.div>
+                      )}
+
                       {item.badge !== undefined && item.badge > 0 && (
                         <Badge className="bg-red-500 text-white text-xs px-2 py-0.5 min-w-[1.25rem] h-5 flex items-center justify-center">
                           {item.badge}
