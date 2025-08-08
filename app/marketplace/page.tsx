@@ -366,8 +366,8 @@ function EnhancedHeroSection() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {/* Left Content */}
           <motion.div variants={itemVariants} className="space-y-8">
             <div className="space-y-6">
