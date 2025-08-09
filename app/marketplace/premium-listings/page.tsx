@@ -1298,11 +1298,9 @@ function PremiumListingCard({
 
         {/* Trust Signals */}
         {listing.certifications && listing.certifications.length > 0 && (
-          <div className="pt-3 mt-3 border-t border-current/10">
-            <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
-              <Shield className="h-3 w-3 text-green-600" />
-              <span className="font-medium">{listing.certifications[0]}</span>
-            </div>
+          <div className="flex items-center justify-center gap-1 text-xs text-slate-500">
+            <Shield className="h-3 w-3 text-green-600" />
+            <span>{listing.certifications[0]}</span>
           </div>
         )}
       </CardContent>
