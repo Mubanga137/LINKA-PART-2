@@ -1255,8 +1255,8 @@ function PremiumListingCard({
         )}
       </div>
 
-      {/* Enhanced Content Section */}
-      <CardContent className={`p-5 ${viewMode === 'list' ? 'flex-1' : ''}`}>
+      {/* Premium Content Section with Perfect Spacing */}
+      <CardContent className={`p-6 flex-1 flex flex-col justify-between space-y-4 ${viewMode === 'list' ? '' : ''}`}>
         {/* Premium Vendor Info */}
         <div className="flex items-center gap-3 mb-4">
           <div className="relative">
