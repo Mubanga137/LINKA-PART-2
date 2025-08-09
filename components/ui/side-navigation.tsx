@@ -293,7 +293,19 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
     // Ensure href is defined
     if (!item.href) {
       console.warn('NavItem: Missing href for item:', item.title);
-      return null;
+      return (
+        <div className="px-4 py-4 rounded-2xl bg-slate-100/50 text-slate-500">
+          <div className="flex items-center space-x-4">
+            <div className="p-2.5 rounded-xl bg-slate-200">
+              <Icon className="h-5 w-5" />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold">{item.title}</p>
+              <p className="text-xs">Link unavailable</p>
+            </div>
+          </div>
+        </div>
+      );
     }
 
     return (
