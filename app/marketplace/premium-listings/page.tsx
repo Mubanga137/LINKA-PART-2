@@ -1144,15 +1144,22 @@ function PremiumListingCard({
           quality={85}
         />
 
+        {/* Premium Gold Shimmer Border on Hover */}
+        <div className={`absolute inset-0 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 ${
+          listing.royal
+            ? 'border-2 border-yellow-400/60 shadow-lg shadow-yellow-400/20'
+            : 'border-2 border-blue-400/60 shadow-lg shadow-blue-400/20'
+        }`}></div>
+
+        {/* Enhanced Shimmer Effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1200 ease-out rounded-t-2xl"></div>
+
         {/* Premium Overlay */}
-        <div className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+        <div className={`absolute inset-0 rounded-t-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
           listing.royal
             ? 'bg-gradient-to-br from-yellow-400/30 to-amber-500/30'
             : 'bg-gradient-to-br from-blue-400/30 to-blue-600/30'
         }`}></div>
-
-        {/* Shimmer Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
         
         {/* Enhanced Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
