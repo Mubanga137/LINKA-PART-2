@@ -197,7 +197,7 @@ export default function LoginPage() {
                   </div>
                 </div>
 
-                <div className="mt-4 grid grid-cols-3 gap-2">
+                <div className="mt-4 grid grid-cols-2 gap-2">
                   <Button
                     variant="outline"
                     size="sm"
@@ -217,16 +217,6 @@ export default function LoginPage() {
                   >
                     <span className="text-lg mb-1">🏪</span>
                     <span className="text-xs">Retailer</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDemoLogin('admin')}
-                    disabled={isLoading}
-                    className="flex flex-col items-center py-3 h-auto"
-                  >
-                    <span className="text-lg mb-1">⚙️</span>
-                    <span className="text-xs">Admin</span>
                   </Button>
                 </div>
 
