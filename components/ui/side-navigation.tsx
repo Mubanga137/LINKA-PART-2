@@ -488,14 +488,17 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
 
   return (
     <>
-      {/* Mobile Menu Button */}
+      {/* Accessible Mobile Menu Button */}
       <Button
         variant="ghost"
         size="sm"
         onClick={toggleSidebar}
-        className="lg:hidden fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white transition-all duration-200"
+        className="lg:hidden fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white transition-all duration-200 focus:ring-4 focus:ring-blue-400/20"
+        aria-label={sidebarOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={sidebarOpen}
+        aria-controls="premium-navigation"
       >
-        <Menu className="h-5 w-5" />
+        <Menu className="h-5 w-5" aria-hidden="true" />
       </Button>
 
       {/* Mobile sidebar overlay */}
@@ -567,7 +570,12 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
         </div>
 
         {/* Enhanced Navigation with Full Height */}
-        <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto custom-scrollbar" role="navigation" aria-label="Premium Navigation">
+        <nav
+          id="premium-navigation"
+          className="flex-1 px-4 py-6 space-y-6 overflow-y-auto custom-scrollbar"
+          role="navigation"
+          aria-label="Premium Navigation Menu"
+        >
           {/* Enhanced Core Navigation with Expandable Sections */}
           <div className="space-y-4">
             <div className={`flex items-center gap-3 px-4 py-2 rounded-xl backdrop-blur-sm ${
