@@ -6,7 +6,7 @@ export interface User {
   id: string
   email: string
   name: string
-  role: 'customer' | 'retailer' | 'admin'
+  role: 'customer' | 'retailer'
   avatar?: string
   phone?: string
   location?: string
