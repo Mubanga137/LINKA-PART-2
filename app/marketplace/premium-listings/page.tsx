@@ -1215,21 +1215,19 @@ function PremiumListingCard({
         </div>
 
         {/* Features */}
-        <div className="flex flex-wrap gap-1 mb-3">
-          {listing.premiumFeatures.slice(0, 3).map((feature) => (
-            <Badge 
-              key={feature} 
-              variant="outline" 
-              className={`text-xs border-current/30 bg-current/5 ${
-                isDarkMode ? 'text-yellow-400' : 'text-blue-600'
-              }`}
+        <div className="flex flex-wrap gap-1">
+          {listing.premiumFeatures.slice(0, 2).map((feature) => (
+            <Badge
+              key={feature}
+              variant="outline"
+              className="text-xs border-blue-200 text-blue-700 bg-blue-50 px-2 py-1"
             >
               {feature}
             </Badge>
           ))}
-          {listing.premiumFeatures.length > 3 && (
-            <Badge variant="outline" className="text-xs border-slate-300 text-slate-500 bg-slate-50">
-              +{listing.premiumFeatures.length - 3} more
+          {listing.premiumFeatures.length > 2 && (
+            <Badge variant="outline" className="text-xs border-slate-200 text-slate-600 bg-slate-50 px-2 py-1">
+              +{listing.premiumFeatures.length - 2}
             </Badge>
           )}
         </div>
