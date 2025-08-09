@@ -36,7 +36,10 @@ import {
   Store,
   ChevronRight,
   Clock,
-  MapPin
+  MapPin,
+  Package,
+  Gem,
+  Home
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -586,15 +589,25 @@ export default function PremiumListingsPage() {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Filter and sort listings
+  // Enhanced filter and sort listings
   const filteredListings = premiumListings
     .filter(listing => {
+      // Search filter
       if (searchQuery) {
-        return listing.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-               listing.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-               listing.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        const query = searchQuery.toLowerCase();
+        const matchesName = listing.name.toLowerCase().includes(query);
+        const matchesDescription = listing.description.toLowerCase().includes(query);
+        const matchesCategory = listing.category.toLowerCase().includes(query);
+        const matchesVendor = listing.vendor.name.toLowerCase().includes(query);
+        const matchesTags = listing.tags.some(tag => tag.toLowerCase().includes(query));
+        const matchesFeatures = listing.premiumFeatures.some(feature => feature.toLowerCase().includes(query));
+
+        if (!(matchesName || matchesDescription || matchesCategory || matchesVendor || matchesTags || matchesFeatures)) {
+          return false;
+        }
       }
-      
+
+      // Category filter
       switch (filterBy) {
         case 'products':
           return listing.type === 'product';
@@ -611,11 +624,14 @@ export default function PremiumListingsPage() {
     .sort((a, b) => {
       switch (sortBy) {
         case 'featured':
-          return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+          // Prioritize royal > featured > trending
+          const aScore = (a.royal ? 3 : 0) + (a.featured ? 2 : 0) + (a.trending ? 1 : 0);
+          const bScore = (b.royal ? 3 : 0) + (b.featured ? 2 : 0) + (b.trending ? 1 : 0);
+          return bScore - aScore;
         case 'price':
           return b.price - a.price;
         case 'rating':
-          return b.rating - a.rating;
+          return b.rating - a.rating || b.reviewCount - a.reviewCount;
         case 'newest':
           return b.views - a.views;
         default:
