@@ -560,44 +560,86 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
           </div>
         </nav>
 
-        {/* Footer */}
-        <div className="p-4 border-t border-white/10 bg-white/5">
-          {/* Dark Mode Toggle (Premium only) */}
-          {isPremium && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              className="w-full justify-start gap-3 mb-2 bg-white/10 border-white/20 text-white hover:bg-white/20"
-            >
-              {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-              {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-            </Button>
-          )}
-          
-          {/* User info and logout */}
-          {user && (
-            <div className="space-y-2">
-              <div className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-white/10">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center">
-                  <User className="h-4 w-4 text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white truncate">{user.name}</p>
-                  <p className="text-xs text-blue-300 capitalize">{user.role}</p>
-                </div>
-              </div>
+        {/* Enhanced Premium Footer */}
+        <div className={`relative p-6 border-t flex-shrink-0 ${
+          isPremium
+            ? 'border-yellow-400/20 bg-gradient-to-t from-slate-900 via-slate-800 to-slate-800/50'
+            : 'border-white/10 bg-gradient-to-t from-blue-900 via-indigo-900 to-indigo-900/50'
+        }`}>
+          {/* Premium shimmer overlay */}
+          <div className={`absolute inset-0 opacity-20 ${
+            isPremium
+              ? 'bg-gradient-to-t from-yellow-400/5 via-transparent to-amber-500/5'
+              : 'bg-gradient-to-t from-blue-400/5 via-transparent to-blue-600/5'
+          }`}></div>
+
+          <div className="relative z-10 space-y-4">
+            {/* Dark Mode Toggle (Premium only) */}
+            {isPremium && (
               <Button
                 variant="outline"
                 size="sm"
-                onClick={handleLogout}
-                className="w-full justify-start gap-3 bg-red-500/20 border-red-400/30 text-red-300 hover:bg-red-500/30"
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className={`w-full justify-start gap-3 transition-all duration-300 hover:scale-[1.02] ${
+                  isDarkMode
+                    ? 'bg-yellow-400/10 border-yellow-400/30 text-yellow-300 hover:bg-yellow-400/20'
+                    : 'bg-blue-400/10 border-blue-400/30 text-blue-300 hover:bg-blue-400/20'
+                } backdrop-blur-sm`}
+                aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
               >
-                <LogOut className="h-4 w-4" />
-                Logout
+                {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {isDarkMode ? 'Light Mode' : 'Dark Mode'}
               </Button>
-            </div>
-          )}
+            )}
+
+            {/* Enhanced User info and logout */}
+            {user && (
+              <div className="space-y-3">
+                <div className={`flex items-center space-x-4 p-4 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] ${
+                  isPremium
+                    ? 'bg-yellow-400/10 border border-yellow-400/20 shadow-lg shadow-yellow-400/10'
+                    : 'bg-white/10 border border-white/20 shadow-lg'
+                }`}>
+                  <div className={`relative w-10 h-10 rounded-full flex items-center justify-center ${
+                    isPremium
+                      ? 'bg-gradient-to-br from-yellow-400 to-amber-500 shadow-lg shadow-yellow-400/30'
+                      : 'bg-gradient-to-br from-blue-400 to-indigo-600 shadow-lg'
+                  }`}>
+                    <User className="h-5 w-5 text-white" />
+                    {user.role === 'premium' && (
+                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <Crown className="h-2.5 w-2.5 text-slate-900" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white truncate">{user.name}</p>
+                    <p className={`text-xs capitalize font-medium ${
+                      isPremium ? 'text-yellow-300/80' : 'text-blue-300/80'
+                    }`}>{user.role}</p>
+                  </div>
+                </div>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="w-full justify-start gap-3 bg-red-500/20 border-red-400/30 text-red-300 hover:bg-red-500/30 hover:scale-[1.02] transition-all duration-300 backdrop-blur-sm"
+                  aria-label="Logout from account"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </Button>
+              </div>
+            )}
+
+            {/* Premium branding */}
+            {isPremium && (
+              <div className="text-center pt-2 border-t border-yellow-400/20">
+                <p className="text-xs text-yellow-300/60 font-medium">Linka Royale Premium</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>
