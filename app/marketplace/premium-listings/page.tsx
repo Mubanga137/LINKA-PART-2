@@ -721,20 +721,20 @@ export default function PremiumListingsPage() {
         } shadow-sm`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Premium Header Title */}
-            <div className="py-6 text-center border-b border-current/10">
-              <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="py-8 text-center">
+              <div className="flex items-center justify-center gap-3 mb-6">
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                   isDarkMode
                     ? 'bg-gradient-to-br from-yellow-400/20 to-amber-500/20 border border-yellow-400/30'
                     : 'bg-gradient-to-br from-blue-400/20 to-blue-600/20 border border-blue-400/30'
                 }`}>
-                  <Crown className="h-6 w-6 crown-glow" />
+                  <Crown className="h-6 w-6 text-yellow-500" />
                 </div>
                 <div>
-                  <h1 className="text-2xl md:text-3xl font-bold logo-3d-premium font-serif">
+                  <h1 className="text-3xl md:text-4xl font-bold text-slate-900">
                     Premium Listings
                   </h1>
-                  <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                  <p className="text-sm text-slate-600">
                     Curated Excellence • {filteredListings.length} Items
                   </p>
                 </div>
