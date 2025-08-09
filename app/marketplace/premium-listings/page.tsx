@@ -564,7 +564,7 @@ export default function PremiumListingsPage() {
   const [sortBy, setSortBy] = useState<'featured' | 'price' | 'rating' | 'newest'>('featured');
   const [filterBy, setFilterBy] = useState<'all' | 'products' | 'services' | 'royal' | 'trending'>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
