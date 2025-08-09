@@ -1205,25 +1205,28 @@ function PremiumListingCard({
           )}
         </div>
 
-        {/* Quick Actions */}
-        <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {/* Quick Action Buttons - On Hover */}
+        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
           <div className="flex gap-2">
             <Button
               size="sm"
               variant="outline"
-              onClick={() => setIsWishlisted(!isWishlisted)}
-              className={`flex-1 bg-white/90 backdrop-blur-xl border-0 hover:bg-white text-slate-900 text-xs`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsWishlisted(!isWishlisted);
+              }}
+              className="bg-white/95 backdrop-blur-xl border-0 hover:bg-white shadow-xl hover:shadow-2xl text-slate-900 px-3 py-2 rounded-xl transition-all duration-300"
+              aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
             >
-              <Heart className={`h-3 w-3 mr-1 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
-              {isWishlisted ? 'Saved' : 'Save'}
+              <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-slate-600'}`} />
             </Button>
             <Button
               size="sm"
               variant="outline"
-              className="flex-1 bg-white/90 backdrop-blur-xl border-0 hover:bg-white text-slate-900 text-xs"
+              className="bg-white/95 backdrop-blur-xl border-0 hover:bg-white shadow-xl hover:shadow-2xl text-slate-900 px-3 py-2 rounded-xl transition-all duration-300"
+              aria-label="Share this item"
             >
-              <Share2 className="h-3 w-3 mr-1" />
-              Share
+              <Share2 className="h-4 w-4 text-slate-600" />
             </Button>
           </div>
         </div>
