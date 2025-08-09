@@ -1080,54 +1080,21 @@ function PremiumListingCard({
           )}
         </div>
 
-        {/* Quick Action Buttons - On Hover */}
-        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-          <div className="flex gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsWishlisted(!isWishlisted);
-              }}
-              className="bg-white/95 backdrop-blur-xl border-0 hover:bg-white shadow-xl hover:shadow-2xl text-slate-900 px-3 py-2 rounded-xl transition-all duration-300"
-              aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
-            >
-              <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-slate-600'}`} />
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              className="bg-white/95 backdrop-blur-xl border-0 hover:bg-white shadow-xl hover:shadow-2xl text-slate-900 px-3 py-2 rounded-xl transition-all duration-300"
-              aria-label="Share this item"
-            >
-              <Share2 className="h-4 w-4 text-slate-600" />
-            </Button>
-          </div>
+        {/* Wishlist Button */}
+        <div className="absolute bottom-2 right-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsWishlisted(!isWishlisted);
+            }}
+            className="bg-white/90 border-slate-200 hover:bg-white text-slate-600 p-1.5"
+            aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+          >
+            <Heart className={`h-3 w-3 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
+          </Button>
         </div>
-
-        {/* Image Indicators */}
-        {listing.images.length > 1 && (
-          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {listing.images.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  index === currentImageIndex
-                    ? listing.royal
-                      ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50'
-                      : 'bg-blue-400 shadow-lg shadow-blue-400/50'
-                    : 'bg-white/60 hover:bg-white/90'
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentImageIndex(index);
-                }}
-                aria-label={`View image ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Card Content */}
