@@ -117,40 +117,49 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
     }
   };
 
-  // Main navigation items
-  const navigationItems = [
+  // Enhanced navigation with expandable sections
+  const navigationSections = [
     {
-      id: "home",
-      title: "Home",
-      href: "/marketplace",
-      icon: Home,
-      description: "Marketplace overview",
-      active: pathname === "/marketplace"
-    },
-    {
-      id: "hot-deals",
-      title: "Hot Deals",
-      href: "/hot-deals",
-      icon: Flame,
-      description: "Limited time offers",
-      active: pathname === "/hot-deals",
-      badge: "🔥"
-    },
-    {
-      id: "shop",
-      title: "Shop",
-      href: "/shop",
+      id: "marketplace",
+      title: "Marketplace",
       icon: Store,
-      description: "All products",
-      active: pathname === "/shop"
-    },
-    {
-      id: "services",
-      title: "Services",
-      href: "/services",
-      icon: Headphones,
-      description: "Service marketplace",
-      active: pathname === "/services"
+      description: "Browse all products & services",
+      expandable: true,
+      items: [
+        {
+          id: "home",
+          title: "Home",
+          href: "/marketplace",
+          icon: Home,
+          description: "Marketplace overview",
+          active: pathname === "/marketplace"
+        },
+        {
+          id: "hot-deals",
+          title: "Hot Deals",
+          href: "/hot-deals",
+          icon: Flame,
+          description: "Limited time offers",
+          active: pathname === "/hot-deals",
+          badge: "🔥"
+        },
+        {
+          id: "shop",
+          title: "Shop",
+          href: "/shop",
+          icon: Store,
+          description: "All products",
+          active: pathname === "/shop"
+        },
+        {
+          id: "services",
+          title: "Services",
+          href: "/services",
+          icon: Headphones,
+          description: "Service marketplace",
+          active: pathname === "/services"
+        }
+      ]
     },
     {
       id: "premium",
@@ -160,7 +169,8 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
       description: "Curated excellence",
       active: pathname === "/marketplace/premium-listings",
       premium: true,
-      glow: true
+      glow: true,
+      expandable: false
     }
   ];
 
@@ -248,13 +258,25 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
     }
   ] : [];
 
+  // Enhanced section toggle with better state management
   const toggleSection = (sectionId: string) => {
-    setExpandedSections(prev => 
-      prev.includes(sectionId) 
-        ? prev.filter(id => id !== sectionId)
-        : [...prev, sectionId]
-    );
+    setExpandedSections(prev => {
+      const isExpanded = prev.includes(sectionId);
+      if (isExpanded) {
+        return prev.filter(id => id !== sectionId);
+      } else {
+        // Auto-expand marketplace section by default
+        return sectionId === 'marketplace' ? [sectionId] : [...prev, sectionId];
+      }
+    });
   };
+
+  // Auto-expand marketplace section on mount
+  useEffect(() => {
+    if (expandedSections.length === 0) {
+      setExpandedSections(['marketplace']);
+    }
+  }, []);
 
   const handleLogout = () => {
     logout();
