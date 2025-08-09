@@ -49,9 +49,6 @@ export function useAuthRedirect() {
         case 'retailer':
           router.push('/retailer/dashboard');
           break;
-        case 'admin':
-          router.push('/admin');
-          break;
       }
     }
   }, [user, isLoading, pathname, router]);
