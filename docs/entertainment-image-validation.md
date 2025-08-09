@@ -238,7 +238,7 @@ test('should render validated entertainment image', () => {
 - Dynamic image selection based on user preferences
 
 ### 2. Content Management Integration
-- Admin interface for image approval workflow
+- Content manager tools for image approval workflow
 - Bulk validation tools for content managers
 - Integration with asset management systems
 
