@@ -53,8 +53,6 @@ export function MinimalHeader({
     switch (user.role) {
       case 'retailer':
         return '/retailer-dashboard';
-      case 'admin':
-        return '/admin-dashboard';
       default:
         return '/profile';
     }
