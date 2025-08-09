@@ -721,85 +721,143 @@ export default function PremiumListingsPage() {
           ))}
         </div>
 
-        {/* Premium Content Header */}
-        <div className={`relative z-10 backdrop-blur-xl border-b-2 ${
-          isDarkMode 
-            ? 'border-yellow-400/20 bg-slate-900/80' 
-            : 'border-blue-400/20 bg-white/80'
-        }`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8 py-4">
-            {/* Filters Bar */}
-            <div className="flex items-center justify-between pt-4 border-t border-current/10">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Filter className="h-4 w-4" />
-                  <span className="text-sm font-medium">Filter:</span>
+        {/* Modern Premium Header */}
+        <div className={`relative z-10 backdrop-blur-xl border-b ${
+          isDarkMode
+            ? 'border-yellow-400/20 bg-gradient-to-r from-slate-900/95 via-slate-800/90 to-slate-900/95'
+            : 'border-blue-400/20 bg-gradient-to-r from-white/95 via-blue-50/80 to-white/95'
+        } shadow-xl`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8">
+            {/* Premium Header Title */}
+            <div className="py-6 text-center border-b border-current/10">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                  isDarkMode
+                    ? 'bg-gradient-to-br from-yellow-400/20 to-amber-500/20 border border-yellow-400/30'
+                    : 'bg-gradient-to-br from-blue-400/20 to-blue-600/20 border border-blue-400/30'
+                }`}>
+                  <Crown className="h-6 w-6 crown-glow" />
                 </div>
-                <div className="flex gap-2">
-                  {[
-                    { key: 'all', label: 'All' },
-                    { key: 'royal', label: 'Royal', icon: Crown },
-                    { key: 'trending', label: 'Trending', icon: TrendingUp },
-                    { key: 'products', label: 'Products' },
-                    { key: 'services', label: 'Services' }
-                  ].map((filter) => (
-                    <Button
-                      key={filter.key}
-                      variant={filterBy === filter.key ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setFilterBy(filter.key as any)}
-                      className={`btn-premium text-xs ${
-                        filterBy === filter.key 
-                          ? '' 
-                          : isDarkMode 
-                            ? 'bg-slate-800/50 text-slate-300 border-slate-600' 
-                            : 'bg-white/50 text-slate-700 border-slate-300'
-                      }`}
-                    >
-                      {filter.icon && <filter.icon className="h-3 w-3 mr-1" />}
-                      {filter.label}
-                    </Button>
-                  ))}
+                <div>
+                  <h1 className="text-2xl md:text-3xl font-bold logo-3d-premium font-serif">
+                    Premium Listings
+                  </h1>
+                  <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                    Curated Excellence • {filteredListings.length} Items
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Advanced Filters & Search */}
+            <div className="py-4 space-y-4">
+              {/* Search Bar */}
+              <div className="flex items-center gap-4">
+                <div className="flex-1 relative">
+                  <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${
+                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                  }`} />
+                  <input
+                    type="text"
+                    placeholder="Search premium products and services..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className={`w-full pl-10 pr-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none ${
+                      isDarkMode
+                        ? 'bg-slate-800/50 border-yellow-400/20 text-white placeholder-slate-400 focus:border-yellow-400/40 focus:bg-slate-800/70'
+                        : 'bg-white/70 border-blue-400/20 text-slate-900 placeholder-slate-500 focus:border-blue-400/40 focus:bg-white/90'
+                    } focus:ring-4 focus:ring-current/10`}
+                  />
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <SortAsc className="h-4 w-4" />
-                  <span className="text-sm font-medium">Sort:</span>
+              {/* Filter Pills & Controls */}
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    <Filter className="h-4 w-4" />
+                    <span className="text-sm font-medium">Categories:</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { key: 'all', label: 'All Categories', icon: null },
+                      { key: 'royal', label: 'Royal Collection', icon: Crown },
+                      { key: 'trending', label: 'Trending Now', icon: TrendingUp },
+                      { key: 'products', label: 'Products', icon: Package },
+                      { key: 'services', label: 'Services', icon: User }
+                    ].map((filter) => (
+                      <Button
+                        key={filter.key}
+                        variant={filterBy === filter.key ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setFilterBy(filter.key as any)}
+                        className={`transition-all duration-300 hover:scale-105 ${
+                          filterBy === filter.key
+                            ? `btn-premium shadow-lg`
+                            : isDarkMode
+                              ? 'bg-slate-800/30 text-slate-300 border-slate-600/50 hover:bg-slate-700/50'
+                              : 'bg-white/50 text-slate-700 border-slate-300/50 hover:bg-white/80'
+                        }`}
+                      >
+                        {filter.icon && <filter.icon className="h-3 w-3 mr-2" />}
+                        {filter.label}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className={`px-3 py-1 rounded-lg border text-sm focus:outline-none ${
-                    isDarkMode 
-                      ? 'bg-slate-800/50 border-yellow-400/20 text-white' 
-                      : 'bg-white/50 border-blue-400/20 text-slate-900'
-                  }`}
-                >
-                  <option value="featured">Featured</option>
-                  <option value="rating">Highest Rated</option>
-                  <option value="price">Price High-Low</option>
-                  <option value="newest">Newest</option>
-                </select>
 
-                <div className="flex border rounded-lg overflow-hidden">
-                  <Button
-                    variant={viewMode === 'grid' ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                    className="rounded-none border-0"
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <SortAsc className="h-4 w-4" />
+                    <span className="text-sm font-medium">Sort:</span>
+                  </div>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as any)}
+                    className={`px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-current/10 ${
+                      isDarkMode
+                        ? 'bg-slate-800/50 border-yellow-400/20 text-white focus:border-yellow-400/40'
+                        : 'bg-white/70 border-blue-400/20 text-slate-900 focus:border-blue-400/40'
+                    }`}
                   >
-                    <Grid3X3 className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant={viewMode === 'list' ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setViewMode('list')}
-                    className="rounded-none border-0"
-                  >
-                    <List className="h-4 w-4" />
-                  </Button>
+                    <option value="featured">✨ Featured First</option>
+                    <option value="rating">⭐ Highest Rated</option>
+                    <option value="price">💎 Price High-Low</option>
+                    <option value="newest">🆕 Newest Arrivals</option>
+                  </select>
+
+                  <div className={`flex border-2 rounded-xl overflow-hidden ${
+                    isDarkMode ? 'border-yellow-400/20' : 'border-blue-400/20'
+                  }`}>
+                    <Button
+                      variant={viewMode === 'grid' ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => setViewMode('grid')}
+                      className={`rounded-none border-0 ${
+                        viewMode === 'grid'
+                          ? 'btn-premium'
+                          : isDarkMode
+                            ? 'text-slate-300 hover:bg-slate-700/50'
+                            : 'text-slate-600 hover:bg-blue-50'
+                      }`}
+                    >
+                      <Grid3X3 className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant={viewMode === 'list' ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => setViewMode('list')}
+                      className={`rounded-none border-0 ${
+                        viewMode === 'list'
+                          ? 'btn-premium'
+                          : isDarkMode
+                            ? 'text-slate-300 hover:bg-slate-700/50'
+                            : 'text-slate-600 hover:bg-blue-50'
+                      }`}
+                    >
+                      <List className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
