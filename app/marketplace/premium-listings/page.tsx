@@ -1297,16 +1297,20 @@ function PremiumListingCard({
           </div>
         </div>
 
-        {/* Enhanced Title & Description */}
-        <div className="mb-4">
-          <h3 className={`font-bold text-xl line-clamp-2 leading-tight mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r transition-all duration-300 ${
+        {/* Premium Title & Description with Perfect Alignment */}
+        <div className="space-y-3">
+          <h3 className={`font-bold text-xl leading-tight line-clamp-2 transition-all duration-300 ${
+            viewMode === 'list' ? 'text-left' : 'text-left md:text-center lg:text-left'
+          } ${
             isDarkMode
-              ? 'text-white group-hover:from-yellow-400 group-hover:to-amber-300'
-              : 'text-slate-900 group-hover:from-blue-600 group-hover:to-blue-500'
+              ? 'text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-yellow-400 group-hover:to-amber-300'
+              : 'text-slate-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-blue-500'
           }`}>
-            {listing.name}
+            {listing.name.toUpperCase()}
           </h3>
-          <p className={`text-sm line-clamp-3 leading-relaxed ${
+          <p className={`text-sm line-clamp-2 leading-relaxed font-medium ${
+            viewMode === 'list' ? 'text-left' : 'text-left md:text-center lg:text-left'
+          } ${
             isDarkMode ? 'text-slate-400' : 'text-slate-600'
           }`}>
             {listing.description}
