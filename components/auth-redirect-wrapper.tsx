@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/auth-context"
 
 interface AuthRedirectWrapperProps {
   children: React.ReactNode
-  requiredRole?: 'customer' | 'retailer' | 'admin'
+  requiredRole?: 'customer' | 'retailer'
   fallbackRoute?: string
 }
 
