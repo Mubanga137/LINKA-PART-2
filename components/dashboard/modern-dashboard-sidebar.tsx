@@ -151,7 +151,7 @@ export function ModernDashboardSidebar({
               {user.name}
             </div>
             <div className="text-xs text-gray-500 truncate">
-              Administrator
+              {user.role === 'retailer' ? 'Retailer' : 'Customer'}
             </div>
           </div>
         </div>
