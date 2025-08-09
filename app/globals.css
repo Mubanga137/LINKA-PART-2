@@ -195,11 +195,11 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Crown Glow Effect */
+/* Enhanced Crown Glow Effect */
 .crown-glow {
   color: var(--metallic-gold);
-  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
-  animation: crownPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.4));
+  animation: crownPulse 3s ease-in-out infinite;
 }
 
 [data-theme="dark"] .crown-glow {
@@ -263,6 +263,42 @@
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
+}
+
+/* Custom Scrollbar for Premium Navigation */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(212, 175, 55, 0.4), rgba(184, 134, 11, 0.4));
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(212, 175, 55, 0.6), rgba(184, 134, 11, 0.6));
+}
+
+[data-theme="dark"] .custom-scrollbar {
+  scrollbar-color: rgba(251, 191, 36, 0.4) transparent;
+}
+
+[data-theme="dark"] .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(251, 191, 36, 0.4), rgba(245, 158, 11, 0.4));
+}
+
+[data-theme="dark"] .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(251, 191, 36, 0.6), rgba(245, 158, 11, 0.6));
 }
 
 /* Premium Buttons */
