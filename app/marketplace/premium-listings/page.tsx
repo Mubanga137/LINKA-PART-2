@@ -865,32 +865,55 @@ export default function PremiumListingsPage() {
         </div>
 
         {/* Main Content */}
-        <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8 py-6 lg:py-8 space-y-8 lg:space-y-12">
+        <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8 py-8 lg:py-12 space-y-12 lg:space-y-16">
           {/* Royal Recommendations */}
           {royalRecommendations.length > 0 && (
-            <section className="space-y-6">
-              <div className="text-center">
-                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                  isDarkMode 
-                    ? 'bg-slate-800/50 border-yellow-400/30' 
-                    : 'bg-white/50 border-blue-400/30'
-                }`}>
-                  <Crown className="h-5 w-5 crown-glow" />
-                  <span className="text-sm font-medium uppercase tracking-wide">Royal Collection</span>
+            <section className="space-y-8">
+              <div className="relative">
+                {/* Background decoration */}
+                <div className={`absolute inset-0 rounded-3xl ${
+                  isDarkMode
+                    ? 'bg-gradient-to-br from-yellow-400/5 via-transparent to-amber-500/5'
+                    : 'bg-gradient-to-br from-blue-400/5 via-transparent to-blue-600/5'
+                } blur-3xl`}></div>
+
+                <div className="relative text-center py-8">
+                  <div className={`inline-flex items-center gap-3 rounded-full px-8 py-4 mb-6 border-2 backdrop-blur-sm ${
+                    isDarkMode
+                      ? 'bg-gradient-to-r from-slate-800/60 to-slate-700/40 border-yellow-400/30 shadow-xl shadow-yellow-400/10'
+                      : 'bg-gradient-to-r from-white/80 to-blue-50/60 border-blue-400/30 shadow-xl shadow-blue-400/10'
+                  }`}>
+                    <Crown className="h-6 w-6 crown-glow" />
+                    <span className="text-sm font-semibold uppercase tracking-wider">Royal Collection</span>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-bold logo-3d-premium font-serif mb-6">
+                    Royal Recommendations
+                  </h2>
+                  <div className={`w-24 h-1 mx-auto mb-6 rounded-full ${
+                    isDarkMode
+                      ? 'bg-gradient-to-r from-yellow-400 to-amber-500'
+                      : 'bg-gradient-to-r from-blue-400 to-blue-600'
+                  }`}></div>
+                  <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${
+                    isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                  }`}>
+                    Handpicked selections of the finest premium products and services, curated for discerning customers
+                  </p>
+                  <div className="flex items-center justify-center gap-6 mt-6 text-sm">
+                    <div className="flex items-center gap-2">
+                      <Diamond className={`h-4 w-4 ${isDarkMode ? 'text-yellow-400' : 'text-blue-500'}`} />
+                      <span>Authenticated</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Award className={`h-4 w-4 ${isDarkMode ? 'text-yellow-400' : 'text-blue-500'}`} />
+                      <span>Verified Quality</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Shield className={`h-4 w-4 ${isDarkMode ? 'text-yellow-400' : 'text-blue-500'}`} />
+                      <span>Premium Guarantee</span>
+                    </div>
+                  </div>
                 </div>
-                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
-                  Royal Recommendations
-                </h2>
-                <div className={`w-16 h-0.5 mx-auto mb-4 ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-r from-yellow-400 to-amber-500' 
-                    : 'bg-gradient-to-r from-blue-400 to-blue-600'
-                }`}></div>
-                <p className={`text-lg max-w-2xl mx-auto ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  Handpicked selections of the finest premium products and services
-                </p>
               </div>
 
               <div className={`grid gap-4 lg:gap-6 ${
@@ -913,25 +936,39 @@ export default function PremiumListingsPage() {
 
           {/* Trending Premium Deals */}
           {trendingDeals.length > 0 && (
-            <section className="space-y-6">
-              <div className="text-center">
-                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                  isDarkMode 
-                    ? 'bg-slate-800/50 border-emerald-400/30' 
-                    : 'bg-white/50 border-emerald-400/30'
-                }`}>
-                  <Flame className="h-5 w-5 text-emerald-500" />
-                  <span className="text-sm font-medium uppercase tracking-wide text-emerald-500">Hot Deals</span>
+            <section className="space-y-8">
+              <div className="relative">
+                {/* Animated background */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/5 via-transparent to-teal-500/5 blur-3xl"></div>
+
+                <div className="relative text-center py-8">
+                  <div className={`inline-flex items-center gap-3 rounded-full px-8 py-4 mb-6 border-2 backdrop-blur-sm animate-pulse ${
+                    isDarkMode
+                      ? 'bg-gradient-to-r from-slate-800/60 to-emerald-900/40 border-emerald-400/40 shadow-xl shadow-emerald-400/20'
+                      : 'bg-gradient-to-r from-white/80 to-emerald-50/60 border-emerald-400/40 shadow-xl shadow-emerald-400/20'
+                  }`}>
+                    <Flame className="h-6 w-6 text-emerald-500 animate-bounce" />
+                    <span className="text-sm font-semibold uppercase tracking-wider text-emerald-500">Flash Deals</span>
+                    <Badge className="bg-red-500 text-white text-xs px-2 py-1 animate-pulse">
+                      <Clock className="h-3 w-3 mr-1" />
+                      Limited Time
+                    </Badge>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-bold logo-3d-premium font-serif mb-6">
+                    Trending Premium Deals
+                  </h2>
+                  <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto mb-6 rounded-full"></div>
+                  <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${
+                    isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                  }`}>
+                    Exclusive limited-time offers on premium products and luxury services
+                  </p>
+                  <div className="flex items-center justify-center gap-2 mt-4">
+                    <span className="text-sm text-emerald-600 font-medium">⚡ Flash Sale Active</span>
+                    <span className="text-sm text-slate-500">•</span>
+                    <span className="text-sm text-slate-500">Up to 50% Off</span>
+                  </div>
                 </div>
-                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
-                  Trending Premium Deals
-                </h2>
-                <div className="w-16 h-0.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto mb-4"></div>
-                <p className={`text-lg max-w-2xl mx-auto ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  Limited time offers on premium products and services
-                </p>
               </div>
 
               <div className={`grid gap-4 lg:gap-6 ${
@@ -954,25 +991,53 @@ export default function PremiumListingsPage() {
 
           {/* Luxury Categories */}
           {remainingListings.length > 0 && (
-            <section className="space-y-6">
-              <div className="text-center">
-                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                  isDarkMode 
-                    ? 'bg-slate-800/50 border-blue-400/30' 
-                    : 'bg-white/50 border-blue-400/30'
-                }`}>
-                  <Sparkles className="h-5 w-5 text-blue-500" />
-                  <span className="text-sm font-medium uppercase tracking-wide text-blue-500">Premium Collection</span>
+            <section className="space-y-8">
+              <div className="relative">
+                <div className={`absolute inset-0 rounded-3xl ${
+                  isDarkMode
+                    ? 'bg-gradient-to-br from-blue-400/5 via-transparent to-indigo-500/5'
+                    : 'bg-gradient-to-br from-blue-400/5 via-transparent to-blue-600/5'
+                } blur-3xl`}></div>
+
+                <div className="relative text-center py-8">
+                  <div className={`inline-flex items-center gap-3 rounded-full px-8 py-4 mb-6 border-2 backdrop-blur-sm ${
+                    isDarkMode
+                      ? 'bg-gradient-to-r from-slate-800/60 to-blue-900/40 border-blue-400/30 shadow-xl shadow-blue-400/10'
+                      : 'bg-gradient-to-r from-white/80 to-blue-50/60 border-blue-400/30 shadow-xl shadow-blue-400/10'
+                  }`}>
+                    <Sparkles className="h-6 w-6 text-blue-500 animate-pulse" />
+                    <span className="text-sm font-semibold uppercase tracking-wider text-blue-500">Premium Collection</span>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-bold logo-3d-premium font-serif mb-6">
+                    Luxury Categories
+                  </h2>
+                  <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto mb-6 rounded-full"></div>
+                  <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${
+                    isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                  }`}>
+                    Discover our extensive collection of premium products and luxury services across multiple categories
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-2xl mx-auto">
+                    {[
+                      { icon: Gem, label: "Jewelry", count: "12" },
+                      { icon: Sparkles, label: "Fashion", count: "8" },
+                      { icon: Home, label: "Services", count: "15" },
+                      { icon: Crown, label: "Art", count: "6" }
+                    ].map((cat, index) => (
+                      <div key={index} className={`p-4 rounded-xl border ${
+                        isDarkMode
+                          ? 'bg-slate-800/30 border-slate-700/50'
+                          : 'bg-white/50 border-slate-200/50'
+                      }`}>
+                        <cat.icon className={`h-6 w-6 mx-auto mb-2 ${
+                          isDarkMode ? 'text-blue-400' : 'text-blue-500'
+                        }`} />
+                        <div className="text-sm font-medium">{cat.label}</div>
+                        <div className="text-xs text-slate-500">{cat.count} items</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
-                  Luxury Categories
-                </h2>
-                <div className="w-16 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto mb-4"></div>
-                <p className={`text-lg max-w-2xl mx-auto ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  Explore our curated selection of premium products and services
-                </p>
               </div>
 
               <div className={`grid gap-4 lg:gap-6 ${
