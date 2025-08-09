@@ -883,37 +883,25 @@ export default function PremiumListingsPage() {
           {/* Trending Premium Deals */}
           {trendingDeals.length > 0 && (
             <section className="space-y-8">
-              <div className="relative">
-                {/* Animated background */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/5 via-transparent to-teal-500/5 blur-3xl"></div>
-
-                <div className="relative text-center py-8">
-                  <div className={`inline-flex items-center gap-3 rounded-full px-8 py-4 mb-6 border-2 backdrop-blur-sm animate-pulse ${
-                    isDarkMode
-                      ? 'bg-gradient-to-r from-slate-800/60 to-emerald-900/40 border-emerald-400/40 shadow-xl shadow-emerald-400/20'
-                      : 'bg-gradient-to-r from-white/80 to-emerald-50/60 border-emerald-400/40 shadow-xl shadow-emerald-400/20'
-                  }`}>
-                    <Flame className="h-6 w-6 text-emerald-500 animate-bounce" />
-                    <span className="text-sm font-semibold uppercase tracking-wider text-emerald-500">Flash Deals</span>
-                    <Badge className="bg-red-500 text-white text-xs px-2 py-1 animate-pulse">
-                      <Clock className="h-3 w-3 mr-1" />
-                      Limited Time
-                    </Badge>
-                  </div>
-                  <h2 className="text-4xl md:text-5xl font-bold logo-3d-premium font-serif mb-6">
-                    Trending Premium Deals
-                  </h2>
-                  <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto mb-6 rounded-full"></div>
-                  <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                  }`}>
-                    Exclusive limited-time offers on premium products and luxury services
-                  </p>
-                  <div className="flex items-center justify-center gap-2 mt-4">
-                    <span className="text-sm text-emerald-600 font-medium">⚡ Flash Sale Active</span>
-                    <span className="text-sm text-slate-500">•</span>
-                    <span className="text-sm text-slate-500">Up to 50% Off</span>
-                  </div>
+              <div className="text-center py-8">
+                <div className="inline-flex items-center gap-3 bg-red-50 border border-red-200 rounded-full px-6 py-3 mb-6">
+                  <Flame className="h-5 w-5 text-red-600" />
+                  <span className="text-sm font-semibold text-red-800 uppercase tracking-wider">Flash Deals</span>
+                  <Badge className="bg-red-500 text-white text-xs px-2 py-1">
+                    <Clock className="h-3 w-3 mr-1" />
+                    Limited Time
+                  </Badge>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                  Trending Premium Deals
+                </h2>
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4">
+                  Exclusive limited-time offers on premium products and luxury services
+                </p>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-sm text-red-600 font-medium">⚡ Flash Sale Active</span>
+                  <span className="text-sm text-slate-500">•</span>
+                  <span className="text-sm text-slate-500">Up to 50% Off</span>
                 </div>
               </div>
 
