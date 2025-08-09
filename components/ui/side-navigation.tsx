@@ -365,49 +365,119 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
     );
   };
 
-  const PremiumSection = ({ section }: { section: any }) => {
+  // Enhanced Expandable Section Component
+  const ExpandableSection = ({ section }: { section: any }) => {
     const isExpanded = expandedSections.includes(section.id);
     const Icon = section.icon;
-    
+    const hasActiveChild = section.items?.some((item: any) => item.active);
+
+    if (!section.expandable) {
+      return <NavItem item={section} />;
+    }
+
     return (
-      <div className="space-y-1">
+      <div className="space-y-2">
         <button
           onClick={() => toggleSection(section.id)}
-          className={`w-full flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group ${
-            navConfig.theme.accent + ' ' + navConfig.theme.hover
+          className={`w-full flex items-center justify-between px-4 py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] group ${
+            hasActiveChild || isExpanded
+              ? isPremium
+                ? 'bg-gradient-to-r from-yellow-400/20 to-amber-500/20 border border-yellow-400/30 shadow-lg shadow-yellow-400/10'
+                : 'bg-gradient-to-r from-blue-400/20 to-blue-600/20 border border-blue-400/30 shadow-lg shadow-blue-400/10'
+              : navConfig.theme.accent + ' ' + navConfig.theme.hover + ' hover:shadow-lg'
           }`}
+          role="button"
+          aria-expanded={isExpanded}
+          aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${section.title} section`}
         >
-          <div className="flex items-center space-x-3">
-            <div className="p-2 rounded-lg transition-colors bg-white/10 group-hover:bg-white/20">
-              <Icon className="h-4 w-4" />
+          <div className="flex items-center space-x-4">
+            <div className={`p-2.5 rounded-xl transition-all duration-300 group-hover:scale-110 ${
+              hasActiveChild || isExpanded
+                ? isPremium
+                  ? 'bg-yellow-400/20 shadow-lg shadow-yellow-400/20'
+                  : 'bg-blue-400/20 shadow-lg shadow-blue-400/20'
+                : 'bg-white/10 group-hover:bg-white/20'
+            }`}>
+              <Icon className={`h-5 w-5 transition-all duration-300 ${
+                hasActiveChild || isExpanded
+                  ? isPremium ? 'text-yellow-300' : 'text-blue-300'
+                  : ''
+              }`} />
             </div>
             <div className="flex-1 text-left">
-              <p className="text-sm font-medium">{section.title}</p>
+              <p className={`text-sm font-semibold transition-all duration-300 ${
+                hasActiveChild || isExpanded
+                  ? 'text-white'
+                  : 'group-hover:text-white'
+              }`}>{section.title}</p>
+              <p className={`text-xs transition-all duration-300 ${
+                hasActiveChild || isExpanded
+                  ? 'text-white/80'
+                  : 'text-blue-300/80 group-hover:text-blue-200/90'
+              }`}>
+                {section.description}
+              </p>
             </div>
           </div>
+
           <motion.div
-            animate={{ rotate: isExpanded ? 90 : 0 }}
-            transition={{ duration: 0.2 }}
+            animate={{
+              rotate: isExpanded ? 90 : 0,
+              scale: isExpanded ? 1.1 : 1
+            }}
+            transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
+            className={`${
+              hasActiveChild || isExpanded
+                ? isPremium ? 'text-yellow-300' : 'text-blue-300'
+                : 'text-slate-400 group-hover:text-white'
+            }`}
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronDown className="h-5 w-5" />
           </motion.div>
         </button>
-        
+
         <AnimatePresence>
           {isExpanded && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="ml-8 space-y-1"
+              initial={{ opacity: 0, height: 0, y: -10 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="ml-6 space-y-1 pl-4 border-l-2 border-current/20"
             >
               {section.items.map((item: any, index: number) => (
-                <Link key={index} href={item.href} onClick={() => setSidebarOpen(false)}>
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-blue-300 hover:text-white hover:bg-white/10 transition-all duration-200">
-                    <div className="w-1 h-1 bg-blue-400 rounded-full" />
-                    {item.title}
-                  </div>
-                </Link>
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                >
+                  <Link href={item.href} onClick={() => setSidebarOpen(false)}>
+                    <div className={`flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-all duration-300 hover:scale-[1.02] ${
+                      item.active
+                        ? isPremium
+                          ? 'bg-gradient-to-r from-yellow-400/20 to-amber-500/20 text-yellow-200 border border-yellow-400/30'
+                          : 'bg-gradient-to-r from-blue-400/20 to-blue-600/20 text-blue-200 border border-blue-400/30'
+                        : 'text-blue-300/80 hover:text-white hover:bg-white/10'
+                    }`}
+                    role="menuitem"
+                    aria-label={`Navigate to ${item.title}`}
+                    >
+                      <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        item.active
+                          ? isPremium ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50' : 'bg-blue-400 shadow-lg shadow-blue-400/50'
+                          : 'bg-blue-400/50'
+                      }`} />
+                      <item.icon className="h-4 w-4" />
+                      <span className="font-medium">{item.title}</span>
+                      {item.badge && (
+                        <Badge className="ml-auto text-xs bg-red-500/80 text-white border-0">
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           )}
@@ -498,14 +568,14 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
 
         {/* Enhanced Navigation with Full Height */}
         <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto custom-scrollbar" role="navigation" aria-label="Premium Navigation">
-          {/* Enhanced Core Navigation */}
+          {/* Enhanced Core Navigation with Expandable Sections */}
           <div className="space-y-4">
-            <div className={`flex items-center gap-3 px-4 py-2 rounded-xl ${
+            <div className={`flex items-center gap-3 px-4 py-2 rounded-xl backdrop-blur-sm ${
               isPremium
-                ? 'bg-gradient-to-r from-yellow-400/10 to-amber-500/10 border border-yellow-400/20'
-                : 'bg-gradient-to-r from-blue-400/10 to-blue-600/10 border border-blue-400/20'
+                ? 'bg-gradient-to-r from-yellow-400/10 to-amber-500/10 border border-yellow-400/20 shadow-lg shadow-yellow-400/5'
+                : 'bg-gradient-to-r from-blue-400/10 to-blue-600/10 border border-blue-400/20 shadow-lg shadow-blue-400/5'
             }`}>
-              <div className={`w-2 h-2 rounded-full ${
+              <div className={`w-2 h-2 rounded-full animate-pulse ${
                 isPremium ? 'bg-yellow-400' : 'bg-blue-400'
               }`}></div>
               <h3 className={`text-xs font-bold uppercase tracking-wider ${
@@ -514,9 +584,9 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
                 Navigation
               </h3>
             </div>
-            <div className="space-y-2" role="menu">
-              {navigationItems.map((item) => (
-                <NavItem key={item.id} item={item} />
+            <div className="space-y-3" role="menu">
+              {navigationSections.map((section) => (
+                <ExpandableSection key={section.id} section={section} />
               ))}
             </div>
           </div>
