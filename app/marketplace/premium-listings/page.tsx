@@ -1117,19 +1117,37 @@ function PremiumListingCard({
     : 0;
 
   return (
-    <Card
-      className={`premium-card group gpu-premium overflow-hidden relative transform transition-all duration-500 hover:scale-[1.02] ${
-        viewMode === 'list' ? 'flex flex-row' : ''
-      } ${
-        listing.royal
-          ? 'ring-2 ring-yellow-400/20 shadow-yellow-400/10'
-          : 'ring-1 ring-slate-200/50'
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: animationDelay / 1000, duration: 0.6, ease: "easeOut" }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className={`group h-full ${
+        viewMode === 'list' ? 'flex flex-row max-w-4xl mx-auto' : ''
       }`}
-      style={{
-        animationDelay: `${animationDelay}ms`,
-        animationFillMode: 'forwards'
-      }}
     >
+      <Card
+        className={`premium-card-redesigned overflow-hidden relative h-full flex flex-col transition-all duration-500 rounded-2xl ${
+          viewMode === 'list' ? 'flex-row' : ''
+        } ${
+          listing.royal
+            ? isDarkMode
+              ? 'bg-gradient-to-br from-slate-800/95 to-slate-900/95 border-2 border-yellow-400/30 shadow-2xl shadow-yellow-400/10'
+              : 'bg-gradient-to-br from-white to-blue-50/50 border-2 border-yellow-400/20 shadow-2xl shadow-yellow-400/5'
+            : isDarkMode
+              ? 'bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-slate-700/50 shadow-xl'
+              : 'bg-gradient-to-br from-white to-slate-50/30 border border-slate-200/50 shadow-xl'
+        }`}
+        style={{
+          transform: isHovered ? 'translateY(-8px) scale(1.02)' : 'translateY(0) scale(1)',
+          boxShadow: isHovered
+            ? listing.royal
+              ? '0 20px 40px rgba(212, 175, 55, 0.15), 0 8px 20px rgba(212, 175, 55, 0.1)'
+              : '0 20px 40px rgba(59, 130, 246, 0.15), 0 8px 20px rgba(59, 130, 246, 0.1)'
+            : undefined
+        }}
+      >
       {/* Premium Image Section with Fixed Proportions */}
       <div className={`relative overflow-hidden rounded-t-2xl ${
         viewMode === 'list' ? 'w-72 flex-shrink-0' : 'aspect-[4/3]'
@@ -1433,6 +1451,7 @@ function PremiumListingCard({
           </div>
         )}
       </CardContent>
-    </Card>
+      </Card>
+    </motion.div>
   );
 }
