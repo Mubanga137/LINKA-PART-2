@@ -458,31 +458,39 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.3 }}
                 >
-                  <Link href={item.href} onClick={() => setSidebarOpen(false)}>
-                    <div className={`flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-all duration-300 hover:scale-[1.02] ${
-                      item.active
-                        ? isPremium
-                          ? 'bg-gradient-to-r from-yellow-400/20 to-amber-500/20 text-yellow-200 border border-yellow-400/30'
-                          : 'bg-gradient-to-r from-blue-400/20 to-blue-600/20 text-blue-200 border border-blue-400/30'
-                        : 'text-blue-300/80 hover:text-white hover:bg-white/10'
-                    }`}
-                    role="menuitem"
-                    aria-label={`Navigate to ${item.title}`}
-                    >
-                      <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  {item.href ? (
+                    <Link href={item.href} onClick={() => setSidebarOpen(false)}>
+                      <div className={`flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-all duration-300 hover:scale-[1.02] ${
                         item.active
-                          ? isPremium ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50' : 'bg-blue-400 shadow-lg shadow-blue-400/50'
-                          : 'bg-blue-400/50'
-                      }`} />
+                          ? isPremium
+                            ? 'bg-gradient-to-r from-yellow-400/20 to-amber-500/20 text-yellow-200 border border-yellow-400/30'
+                            : 'bg-gradient-to-r from-blue-400/20 to-blue-600/20 text-blue-200 border border-blue-400/30'
+                          : 'text-blue-300/80 hover:text-white hover:bg-white/10'
+                      }`}
+                      role="menuitem"
+                      aria-label={`Navigate to ${item.title}`}
+                      >
+                        <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          item.active
+                            ? isPremium ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50' : 'bg-blue-400 shadow-lg shadow-blue-400/50'
+                            : 'bg-blue-400/50'
+                        }`} />
+                        <item.icon className="h-4 w-4" />
+                        <span className="font-medium">{item.title}</span>
+                        {item.badge && (
+                          <Badge className="ml-auto text-xs bg-red-500/80 text-white border-0">
+                            {item.badge}
+                          </Badge>
+                        )}
+                      </div>
+                    </Link>
+                  ) : (
+                    <div className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm text-slate-500">
+                      <div className="w-2 h-2 rounded-full bg-slate-400/50" />
                       <item.icon className="h-4 w-4" />
-                      <span className="font-medium">{item.title}</span>
-                      {item.badge && (
-                        <Badge className="ml-auto text-xs bg-red-500/80 text-white border-0">
-                          {item.badge}
-                        </Badge>
-                      )}
+                      <span className="font-medium">{item.title} (No link)</span>
                     </div>
-                  </Link>
+                  )}
                 </motion.div>
               ))}
             </motion.div>
