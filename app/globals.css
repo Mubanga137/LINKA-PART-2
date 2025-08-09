@@ -484,6 +484,33 @@
   will-change: transform, opacity;
 }
 
+/* Redesigned Premium Cards */
+.premium-card-redesigned {
+  will-change: transform, box-shadow;
+  contain: layout style paint;
+  border-radius: 1rem;
+}
+
+.premium-card-redesigned:hover {
+  will-change: transform, box-shadow;
+}
+
+/* Premium Typography */
+.font-luxury-serif {
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+  font-feature-settings: "liga" on, "kern" on;
+}
+
+/* Equal Height Cards */
+.premium-grid {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.premium-grid > * {
+  height: 100%;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .premium-card:hover {
