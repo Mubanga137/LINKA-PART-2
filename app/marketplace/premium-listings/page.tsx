@@ -1161,47 +1161,48 @@ function PremiumListingCard({
             : 'bg-gradient-to-br from-blue-400/30 to-blue-600/30'
         }`}></div>
         
-        {/* Enhanced Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
-          <Badge className={`backdrop-blur-sm shadow-xl border ${
+        {/* Premium Badge with Gold Gradient */}
+        <div className="absolute top-4 left-4 z-20">
+          <Badge className={`backdrop-blur-md shadow-2xl font-bold px-4 py-2 text-sm rounded-xl ${
             listing.royal
-              ? 'bg-gradient-to-r from-yellow-400/90 to-amber-500/90 text-slate-900 border-yellow-300/50'
-              : 'bg-gradient-to-r from-blue-500/90 to-blue-600/90 text-white border-blue-400/50'
-          } px-3 py-1.5 font-semibold`}>
-            <Crown className="h-3 w-3 mr-1.5" />
-            {listing.royal ? 'Royal Collection' : 'Premium'}
+              ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900 border-2 border-emerald-300/50 shadow-yellow-400/30'
+              : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white border-2 border-emerald-300/30 shadow-blue-400/30'
+          }`}>
+            <Crown className="h-4 w-4 mr-2" />
+            PREMIUM
           </Badge>
+        </div>
 
+        {/* Rating Badge - Top Right */}
+        {listing.rating >= 4.5 && (
+          <div className="absolute top-4 right-4 z-20">
+            <Badge className="backdrop-blur-md bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-3 py-1.5 text-xs font-semibold shadow-xl rounded-xl">
+              <Star className="h-3 w-3 mr-1 fill-current" />
+              {listing.rating}
+            </Badge>
+          </div>
+        )}
+
+        {/* Status Badges */}
+        <div className="absolute bottom-4 left-4 flex gap-2 z-20">
           {listing.trending && (
-            <Badge className="backdrop-blur-sm bg-gradient-to-r from-emerald-500/90 to-teal-600/90 text-white px-2 py-1 text-xs animate-pulse shadow-lg border border-emerald-400/50">
+            <Badge className="backdrop-blur-md bg-gradient-to-r from-emerald-500/95 to-teal-600/95 text-white px-2 py-1 text-xs animate-pulse shadow-lg rounded-lg">
               <TrendingUp className="h-2.5 w-2.5 mr-1" />
-              Trending Now
+              Trending
             </Badge>
           )}
-
           {listing.flashSale && (
-            <Badge className="backdrop-blur-sm bg-gradient-to-r from-red-500/90 to-orange-600/90 text-white px-2 py-1 text-xs animate-pulse shadow-lg border border-red-400/50">
+            <Badge className="backdrop-blur-md bg-gradient-to-r from-red-500/95 to-orange-600/95 text-white px-2 py-1 text-xs animate-pulse shadow-lg rounded-lg">
               <Zap className="h-2.5 w-2.5 mr-1" />
-              Flash Sale
+              Sale
             </Badge>
           )}
-
           {listing.limitedEdition && (
-            <Badge className="backdrop-blur-sm bg-gradient-to-r from-purple-500/90 to-violet-600/90 text-white px-2 py-1 text-xs shadow-lg border border-purple-400/50">
+            <Badge className="backdrop-blur-md bg-gradient-to-r from-purple-500/95 to-violet-600/95 text-white px-2 py-1 text-xs shadow-lg rounded-lg">
               <Sparkles className="h-2.5 w-2.5 mr-1" />
               Limited
             </Badge>
           )}
-        </div>
-
-        {/* Type Badge */}
-        <div className="absolute top-3 right-3">
-          <Badge variant="outline" className={`text-xs ${
-            isDarkMode ? 'bg-slate-800/80 border-slate-600' : 'bg-white/80 border-slate-300'
-          }`}>
-            {listing.type === 'service' ? <User className="h-2.5 w-2.5 mr-1" /> : <Store className="h-2.5 w-2.5 mr-1" />}
-            {listing.type === 'service' ? 'Service' : 'Product'}
-          </Badge>
         </div>
 
         {/* Quick Actions */}
