@@ -68,11 +68,10 @@ export default function LoginPage() {
     }
   }
 
-  const handleDemoLogin = async (role: 'customer' | 'retailer' | 'admin') => {
+  const handleDemoLogin = async (role: 'customer' | 'retailer') => {
     const demoCredentials = {
       customer: { email: 'customer@demo.com', password: 'demo123' },
-      retailer: { email: 'retailer@demo.com', password: 'demo123' },
-      admin: { email: 'admin@demo.com', password: 'demo123' }
+      retailer: { email: 'retailer@demo.com', password: 'demo123' }
     }
 
     const creds = demoCredentials[role]
