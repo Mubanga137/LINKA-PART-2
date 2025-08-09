@@ -607,7 +607,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
               </h3>
               <div className="space-y-1">
                 {premiumSections.map((section) => (
-                  <PremiumSection key={section.id} section={section} />
+                  <ExpandableSection key={section.id} section={section} />
                 ))}
               </div>
             </div>
