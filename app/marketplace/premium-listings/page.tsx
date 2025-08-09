@@ -741,26 +741,18 @@ export default function PremiumListingsPage() {
               </div>
             </div>
 
-            {/* Advanced Filters & Search */}
-            <div className="py-4 space-y-4">
+            {/* Search and Filters */}
+            <div className="border-t border-slate-200 py-6 space-y-6">
               {/* Search Bar */}
-              <div className="flex items-center gap-4">
-                <div className="flex-1 relative">
-                  <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
-                  }`} />
-                  <input
-                    type="text"
-                    placeholder="Search premium products and services..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none ${
-                      isDarkMode
-                        ? 'bg-slate-800/50 border-yellow-400/20 text-white placeholder-slate-400 focus:border-yellow-400/40 focus:bg-slate-800/70'
-                        : 'bg-white/70 border-blue-400/20 text-slate-900 placeholder-slate-500 focus:border-blue-400/40 focus:bg-white/90'
-                    } focus:ring-4 focus:ring-current/10`}
-                  />
-                </div>
+              <div className="relative max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-500" />
+                <input
+                  type="text"
+                  placeholder="Search premium products and services..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                />
               </div>
 
               {/* Filter Pills & Controls */}
