@@ -257,12 +257,42 @@
   animation: premium-float 6s ease-in-out infinite;
 }
 
-/* GPU Acceleration */
+/* Enhanced GPU Acceleration */
 .gpu-premium {
   will-change: transform, opacity;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
+}
+
+/* Navigation Performance Optimization */
+.nav-item-optimized {
+  transform: translateZ(0);
+  will-change: transform, opacity, box-shadow;
+  contain: layout style paint;
+}
+
+.nav-item-optimized:hover {
+  transform: translateZ(0) scale(1.02);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .crown-glow {
+    animation: none;
+  }
+
+  .animate-pulse {
+    animation: none;
+  }
+
+  .nav-item-optimized {
+    transition: none;
+  }
+
+  .nav-item-optimized:hover {
+    transform: none;
+  }
 }
 
 /* Custom Scrollbar for Premium Navigation */
