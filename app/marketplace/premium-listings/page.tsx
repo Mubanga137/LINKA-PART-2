@@ -1426,20 +1426,31 @@ function PremiumListingCard({
             <ShoppingCart className="h-4 w-4 mr-2" />
             {listing.type === 'service' ? 'BOOK NOW' : 'ADD TO CART'}
           </Button>
-          <Button
-            variant="outline"
-            className={`flex-1 py-4 border-2 rounded-xl transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm font-bold text-sm ${
-              isDarkMode
-                ? 'border-yellow-400/40 text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/60 shadow-lg shadow-yellow-400/20'
-                : 'border-blue-400/40 text-blue-600 hover:bg-blue-400/10 hover:border-blue-400/60 shadow-lg shadow-blue-400/20'
-            }`}
-            asChild
-          >
-            <Link href={`/vendors/${listing.vendor.id}`} aria-label={`Visit ${listing.vendor.name} store`}>
+          {listing.vendor?.id ? (
+            <Button
+              variant="outline"
+              className={`flex-1 py-4 border-2 rounded-xl transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm font-bold text-sm ${
+                isDarkMode
+                  ? 'border-yellow-400/40 text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/60 shadow-lg shadow-yellow-400/20'
+                  : 'border-blue-400/40 text-blue-600 hover:bg-blue-400/10 hover:border-blue-400/60 shadow-lg shadow-blue-400/20'
+              }`}
+              asChild
+            >
+              <Link href={`/vendors/${listing.vendor.id}`} aria-label={`Visit ${listing.vendor.name} store`}>
+                <ExternalLink className="h-4 w-4 mr-2" />
+                VISIT STORE
+              </Link>
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              disabled
+              className="flex-1 py-4 border-2 rounded-xl backdrop-blur-sm font-bold text-sm border-slate-300 text-slate-400 cursor-not-allowed"
+            >
               <ExternalLink className="h-4 w-4 mr-2" />
-              VISIT STORE
-            </Link>
-          </Button>
+              STORE UNAVAILABLE
+            </Button>
+          )}
         </div>
 
         {/* Trust Signals */}
