@@ -149,11 +149,6 @@ export function MinimalHeader({
                         <BarChart3 className="mr-2 h-4 w-4" />
                         Dashboard
                       </>
-                    ) : user.role === 'admin' ? (
-                      <>
-                        <Settings className="mr-2 h-4 w-4" />
-                        Admin Panel
-                      </>
                     ) : (
                       <>
                         <User className="mr-2 h-4 w-4" />
