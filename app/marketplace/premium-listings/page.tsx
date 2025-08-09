@@ -758,10 +758,7 @@ export default function PremiumListingsPage() {
               {/* Filter Pills & Controls */}
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-wrap items-center gap-3">
-                  <div className="flex items-center gap-2">
-                    <Filter className="h-4 w-4" />
-                    <span className="text-sm font-medium">Categories:</span>
-                  </div>
+                  <span className="text-sm font-medium text-slate-700">Filter:</span>
                   <div className="flex flex-wrap gap-2">
                     {[
                       { key: 'all', label: 'All Categories', icon: null },
@@ -775,12 +772,10 @@ export default function PremiumListingsPage() {
                         variant={filterBy === filter.key ? "default" : "outline"}
                         size="sm"
                         onClick={() => setFilterBy(filter.key as any)}
-                        className={`transition-all duration-300 hover:scale-105 ${
+                        className={`${
                           filterBy === filter.key
-                            ? `btn-premium shadow-lg`
-                            : isDarkMode
-                              ? 'bg-slate-800/30 text-slate-300 border-slate-600/50 hover:bg-slate-700/50'
-                              : 'bg-white/50 text-slate-700 border-slate-300/50 hover:bg-white/80'
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
                         }`}
                       >
                         {filter.icon && <filter.icon className="h-3 w-3 mr-2" />}
@@ -791,38 +786,27 @@ export default function PremiumListingsPage() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <SortAsc className="h-4 w-4" />
-                    <span className="text-sm font-medium">Sort:</span>
-                  </div>
+                  <span className="text-sm font-medium text-slate-700">Sort:</span>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as any)}
-                    className={`px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-current/10 ${
-                      isDarkMode
-                        ? 'bg-slate-800/50 border-yellow-400/20 text-white focus:border-yellow-400/40'
-                        : 'bg-white/70 border-blue-400/20 text-slate-900 focus:border-blue-400/40'
-                    }`}
+                    className="px-4 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                   >
-                    <option value="featured">✨ Featured First</option>
-                    <option value="rating">⭐ Highest Rated</option>
-                    <option value="price">💎 Price High-Low</option>
-                    <option value="newest">🆕 Newest Arrivals</option>
+                    <option value="featured">Featured First</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="price">Price High-Low</option>
+                    <option value="newest">Newest Arrivals</option>
                   </select>
 
-                  <div className={`flex border-2 rounded-xl overflow-hidden ${
-                    isDarkMode ? 'border-yellow-400/20' : 'border-blue-400/20'
-                  }`}>
+                  <div className="flex border border-slate-300 rounded-lg overflow-hidden">
                     <Button
                       variant={viewMode === 'grid' ? "default" : "ghost"}
                       size="sm"
                       onClick={() => setViewMode('grid')}
                       className={`rounded-none border-0 ${
                         viewMode === 'grid'
-                          ? 'btn-premium'
-                          : isDarkMode
-                            ? 'text-slate-300 hover:bg-slate-700/50'
-                            : 'text-slate-600 hover:bg-blue-50'
+                          ? 'bg-blue-600 text-white'
+                          : 'text-slate-600 hover:bg-slate-50'
                       }`}
                     >
                       <Grid3X3 className="h-4 w-4" />
@@ -833,10 +817,8 @@ export default function PremiumListingsPage() {
                       onClick={() => setViewMode('list')}
                       className={`rounded-none border-0 ${
                         viewMode === 'list'
-                          ? 'btn-premium'
-                          : isDarkMode
-                            ? 'text-slate-300 hover:bg-slate-700/50'
-                            : 'text-slate-600 hover:bg-blue-50'
+                          ? 'bg-blue-600 text-white'
+                          : 'text-slate-600 hover:bg-slate-50'
                       }`}
                     >
                       <List className="h-4 w-4" />
