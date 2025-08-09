@@ -1096,13 +1096,13 @@ export default function PremiumListingsPage() {
   );
 }
 
-// Premium Listing Card Component
-function PremiumListingCard({ 
-  listing, 
-  viewMode, 
-  isDarkMode, 
-  animationDelay 
-}: { 
+// Redesigned Premium Listing Card Component with Uniform Layout
+function PremiumListingCard({
+  listing,
+  viewMode,
+  isDarkMode,
+  animationDelay
+}: {
   listing: PremiumListing;
   viewMode: 'grid' | 'list';
   isDarkMode: boolean;
@@ -1110,8 +1110,9 @@ function PremiumListingCard({
 }) {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const discountPercentage = listing.originalPrice 
+  const discountPercentage = listing.originalPrice
     ? Math.round(((listing.originalPrice - listing.price) / listing.originalPrice) * 100)
     : 0;
 
