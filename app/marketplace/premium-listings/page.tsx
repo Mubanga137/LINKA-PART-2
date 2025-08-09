@@ -1233,16 +1233,22 @@ function PremiumListingCard({
 
         {/* Image Indicators */}
         {listing.images.length > 1 && (
-          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {listing.images.map((_, index) => (
               <button
                 key={index}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentImageIndex 
-                    ? 'bg-white shadow-lg' 
-                    : 'bg-white/50 hover:bg-white/75'
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  index === currentImageIndex
+                    ? listing.royal
+                      ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50'
+                      : 'bg-blue-400 shadow-lg shadow-blue-400/50'
+                    : 'bg-white/60 hover:bg-white/90'
                 }`}
-                onClick={() => setCurrentImageIndex(index)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImageIndex(index);
+                }}
+                aria-label={`View image ${index + 1}`}
               />
             ))}
           </div>
