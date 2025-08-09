@@ -290,6 +290,12 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
     const Icon = item.icon;
     const isActive = item.active;
 
+    // Ensure href is defined
+    if (!item.href) {
+      console.warn('NavItem: Missing href for item:', item.title);
+      return null;
+    }
+
     return (
       <Link href={item.href} onClick={() => setSidebarOpen(false)}>
         <div className={`group relative flex items-center justify-between px-4 py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] ${
