@@ -1166,45 +1166,41 @@ function PremiumListingCard({
         )}
       </div>
 
-      {/* Premium Content Section with Perfect Spacing */}
-      <CardContent className={`p-6 flex-1 flex flex-col justify-between space-y-4 ${viewMode === 'list' ? '' : ''}`}>
-        {/* Premium Vendor Info */}
-        <div className="flex items-center gap-3 mb-4">
+      {/* Card Content */}
+      <CardContent className="p-4 flex-1 flex flex-col space-y-3">
+        {/* Vendor Info */}
+        <div className="flex items-center gap-2">
           <div className="relative">
             <Image
               src={listing.vendor.logo}
               alt={listing.vendor.name}
-              width={24}
-              height={24}
-              className={`rounded-full ring-2 ${
-                listing.vendor.premiumSeller
-                  ? 'ring-yellow-400/50'
-                  : 'ring-slate-300/50'
-              }`}
+              width={20}
+              height={20}
+              className="rounded-full ring-1 ring-slate-200"
             />
             {listing.vendor.premiumSeller && (
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full flex items-center justify-center">
-                <Crown className="h-1.5 w-1.5 text-slate-900" />
+              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-yellow-400 rounded-full flex items-center justify-center">
+                <Crown className="h-1 w-1 text-slate-900" />
               </div>
             )}
           </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-2">
-              <span className={`text-sm font-semibold ${isDarkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1">
+              <span className="text-xs font-medium text-slate-700 truncate">
                 {listing.vendor.name}
               </span>
               {listing.vendor.verified && (
-                <Verified className="h-3.5 w-3.5 text-blue-500" />
+                <Verified className="h-3 w-3 text-blue-500 flex-shrink-0" />
               )}
             </div>
             <div className="flex items-center gap-1">
-              <MapPin className="h-3 w-3 text-slate-400" />
-              <span className="text-xs text-slate-500">{listing.vendor.location}</span>
+              <MapPin className="h-2.5 w-2.5 text-slate-400 flex-shrink-0" />
+              <span className="text-xs text-slate-500 truncate">{listing.vendor.location}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5">
             <Star className="h-3 w-3 text-yellow-400 fill-current" />
-            <span className="text-xs font-medium">{listing.vendor.rating}</span>
+            <span className="text-xs font-medium text-slate-600">{listing.vendor.rating}</span>
           </div>
         </div>
 
