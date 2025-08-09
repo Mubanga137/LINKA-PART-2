@@ -568,10 +568,6 @@ export default function PremiumListingsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Initialize loading state
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
 
   // Dark mode detection
   useEffect(() => {
