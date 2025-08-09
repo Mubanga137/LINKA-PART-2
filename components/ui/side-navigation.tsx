@@ -267,47 +267,77 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
   const NavItem = ({ item }: { item: any }) => {
     const Icon = item.icon;
     const isActive = item.active;
-    
+
     return (
       <Link href={item.href} onClick={() => setSidebarOpen(false)}>
-        <div className={`group flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 ${
+        <div className={`group relative flex items-center justify-between px-4 py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] ${
           isActive
-            ? navConfig.theme.active + ' shadow-lg transform scale-105'
-            : navConfig.theme.accent + ' ' + navConfig.theme.hover + ' hover:transform hover:scale-102'
-        }`}>
-          <div className="flex items-center space-x-3">
-            <div className={`p-2 rounded-lg transition-colors ${
+            ? navConfig.theme.active + ' shadow-xl ring-2 ring-current/20'
+            : navConfig.theme.accent + ' ' + navConfig.theme.hover + ' hover:shadow-lg'
+        }`}
+        role="menuitem"
+        tabIndex={0}
+        aria-label={`Navigate to ${item.title}`}
+        >
+          {/* Active state gold border */}
+          {isActive && (
+            <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-r-full ${
+              isPremium
+                ? 'bg-gradient-to-b from-yellow-400 to-amber-500 shadow-lg shadow-yellow-400/50'
+                : 'bg-gradient-to-b from-blue-400 to-blue-600 shadow-lg shadow-blue-400/50'
+            }`}></div>
+          )}
+
+          <div className="flex items-center space-x-4 flex-1">
+            <div className={`p-2.5 rounded-xl transition-all duration-300 group-hover:scale-110 ${
               isActive
-                ? 'bg-white/20'
+                ? isPremium
+                  ? 'bg-yellow-400/20 shadow-lg shadow-yellow-400/20'
+                  : 'bg-blue-400/20 shadow-lg shadow-blue-400/20'
                 : 'bg-white/10 group-hover:bg-white/20'
             }`}>
-              <Icon className={`h-4 w-4 ${item.premium && item.glow ? 'crown-glow' : ''}`} />
+              <Icon className={`h-5 w-5 transition-all duration-300 ${
+                item.premium && item.glow
+                  ? 'crown-glow'
+                  : isActive
+                    ? isPremium ? 'text-yellow-300' : 'text-blue-300'
+                    : ''
+              }`} />
             </div>
-            <div className="flex-1">
-              <p className="text-sm font-medium">{item.title}</p>
-              <p className={`text-xs ${
+            <div className="flex-1 min-w-0">
+              <p className={`text-sm font-semibold truncate transition-all duration-300 ${
+                isActive
+                  ? 'text-white'
+                  : 'group-hover:text-white'
+              }`}>{item.title}</p>
+              <p className={`text-xs truncate transition-all duration-300 ${
                 isActive
                   ? 'text-white/80'
-                  : 'text-blue-300 group-hover:text-blue-200'
+                  : 'text-blue-300/80 group-hover:text-blue-200/90'
               }`}>
                 {item.description}
               </p>
             </div>
           </div>
-          {item.badge && (
-            <Badge className={
-              typeof item.badge === 'string' 
-                ? 'bg-transparent text-orange-400 border-0' 
-                : 'bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs shadow-md animate-pulse ml-2'
-            }>
-              {item.badge}
-            </Badge>
-          )}
-          {item.premium && (
-            <Sparkles className={`h-3 w-3 ml-2 ${
-              isActive ? 'text-yellow-400' : 'text-blue-300 group-hover:text-yellow-400'
-            } transition-all duration-300`} />
-          )}
+
+          <div className="flex items-center gap-2">
+            {item.badge && (
+              <Badge className={
+                typeof item.badge === 'string'
+                  ? 'bg-transparent text-orange-400 border-0 text-xs'
+                  : 'bg-gradient-to-r from-red-400 to-pink-500 text-white text-xs shadow-md animate-pulse'
+              }>
+                {item.badge}
+              </Badge>
+            )}
+            {item.premium && (
+              <Sparkles className={`h-4 w-4 transition-all duration-300 ${
+                isActive
+                  ? 'text-yellow-400 animate-pulse'
+                  : 'text-blue-300 group-hover:text-yellow-400'
+              }`} />
+            )}
+          </div>
         </div>
       </Link>
     );
@@ -446,12 +476,23 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
 
         {/* Enhanced Navigation with Full Height */}
         <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto custom-scrollbar" role="navigation" aria-label="Premium Navigation">
-          {/* Core Navigation */}
-          <div className="space-y-3">
-            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
-              Navigation
-            </h3>
-            <div className="space-y-1">
+          {/* Enhanced Core Navigation */}
+          <div className="space-y-4">
+            <div className={`flex items-center gap-3 px-4 py-2 rounded-xl ${
+              isPremium
+                ? 'bg-gradient-to-r from-yellow-400/10 to-amber-500/10 border border-yellow-400/20'
+                : 'bg-gradient-to-r from-blue-400/10 to-blue-600/10 border border-blue-400/20'
+            }`}>
+              <div className={`w-2 h-2 rounded-full ${
+                isPremium ? 'bg-yellow-400' : 'bg-blue-400'
+              }`}></div>
+              <h3 className={`text-xs font-bold uppercase tracking-wider ${
+                isPremium ? 'text-yellow-300' : 'text-blue-300'
+              }`}>
+                Navigation
+              </h3>
+            </div>
+            <div className="space-y-2" role="menu">
               {navigationItems.map((item) => (
                 <NavItem key={item.id} item={item} />
               ))}
@@ -472,24 +513,46 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
             </div>
           )}
 
-          {/* User Account */}
-          <div className="space-y-3">
-            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
-              Account
-            </h3>
-            <div className="space-y-1">
+          {/* Enhanced User Account */}
+          <div className="space-y-4">
+            <div className={`flex items-center gap-3 px-4 py-2 rounded-xl ${
+              isPremium
+                ? 'bg-gradient-to-r from-emerald-400/10 to-teal-500/10 border border-emerald-400/20'
+                : 'bg-gradient-to-r from-purple-400/10 to-indigo-500/10 border border-purple-400/20'
+            }`}>
+              <div className={`w-2 h-2 rounded-full ${
+                isPremium ? 'bg-emerald-400' : 'bg-purple-400'
+              }`}></div>
+              <h3 className={`text-xs font-bold uppercase tracking-wider ${
+                isPremium ? 'text-emerald-300' : 'text-purple-300'
+              }`}>
+                Account
+              </h3>
+            </div>
+            <div className="space-y-2" role="menu">
               {accountItems.map((item) => (
                 <NavItem key={item.id} item={item} />
               ))}
             </div>
           </div>
 
-          {/* Support */}
-          <div className="space-y-3">
-            <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
-              Support
-            </h3>
-            <div className="space-y-1">
+          {/* Enhanced Support */}
+          <div className="space-y-4">
+            <div className={`flex items-center gap-3 px-4 py-2 rounded-xl ${
+              isPremium
+                ? 'bg-gradient-to-r from-rose-400/10 to-pink-500/10 border border-rose-400/20'
+                : 'bg-gradient-to-r from-green-400/10 to-emerald-500/10 border border-green-400/20'
+            }`}>
+              <div className={`w-2 h-2 rounded-full ${
+                isPremium ? 'bg-rose-400' : 'bg-green-400'
+              }`}></div>
+              <h3 className={`text-xs font-bold uppercase tracking-wider ${
+                isPremium ? 'text-rose-300' : 'text-green-300'
+              }`}>
+                Support
+              </h3>
+            </div>
+            <div className="space-y-2" role="menu">
               {supportItems.map((item) => (
                 <NavItem key={item.id} item={item} />
               ))}
