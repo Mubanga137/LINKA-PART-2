@@ -1264,44 +1264,34 @@ function PremiumListingCard({
           </div>
         </div>
 
-        {/* Premium Action Buttons with Equal Width */}
-        <div className={`flex gap-3 mt-auto ${
-          viewMode === 'list' ? 'flex-row' : 'flex-col sm:flex-row'
-        }`}>
+        {/* Action Buttons */}
+        <div className="flex gap-2 pt-2 border-t border-slate-100">
           <Button
-            className={`btn-premium flex-1 text-sm font-bold py-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] rounded-xl ${
-              listing.royal
-                ? 'bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-slate-900'
-                : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white'
-            }`}
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-3"
             aria-label={`${listing.type === 'service' ? 'Book' : 'Add to cart'} ${listing.name}`}
           >
-            <ShoppingCart className="h-4 w-4 mr-2" />
-            {listing.type === 'service' ? 'BOOK NOW' : 'ADD TO CART'}
+            <ShoppingCart className="h-4 w-4 mr-1" />
+            {listing.type === 'service' ? 'Book Now' : 'Add to Cart'}
           </Button>
           {listing.vendor?.id ? (
             <Button
               variant="outline"
-              className={`flex-1 py-4 border-2 rounded-xl transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm font-bold text-sm ${
-                isDarkMode
-                  ? 'border-yellow-400/40 text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/60 shadow-lg shadow-yellow-400/20'
-                  : 'border-blue-400/40 text-blue-600 hover:bg-blue-400/10 hover:border-blue-400/60 shadow-lg shadow-blue-400/20'
-              }`}
+              className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-medium py-2 px-3"
               asChild
             >
               <Link href={`/vendors/${listing.vendor.id}`} aria-label={`Visit ${listing.vendor.name} store`}>
-                <ExternalLink className="h-4 w-4 mr-2" />
-                VISIT STORE
+                <ExternalLink className="h-4 w-4 mr-1" />
+                Visit Store
               </Link>
             </Button>
           ) : (
             <Button
               variant="outline"
               disabled
-              className="flex-1 py-4 border-2 rounded-xl backdrop-blur-sm font-bold text-sm border-slate-300 text-slate-400 cursor-not-allowed"
+              className="flex-1 border-slate-200 text-slate-400 cursor-not-allowed text-sm font-medium py-2 px-3"
             >
-              <ExternalLink className="h-4 w-4 mr-2" />
-              STORE UNAVAILABLE
+              <ExternalLink className="h-4 w-4 mr-1" />
+              Store Unavailable
             </Button>
           )}
         </div>
