@@ -81,7 +81,7 @@ interface PremiumListing {
 }
 
 const premiumListings: PremiumListing[] = [
-  // Royal Recommendations
+  // Royal Recommendations - Jewelry & Accessories
   {
     id: "rl001",
     name: "Royal Malachite Crown Collection",
@@ -122,6 +122,46 @@ const premiumListings: PremiumListing[] = [
     royal: true
   },
   {
+    id: "rl001b",
+    name: "Emerald Dynasty Necklace Set",
+    description: "Rare Zambian emerald necklace with matching earrings, crafted by master jewelers",
+    price: 5999.99,
+    originalPrice: 8999.99,
+    images: [
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80",
+      "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80"
+    ],
+    category: "Royal Jewelry",
+    type: "product",
+    vendor: {
+      id: "v001",
+      name: "Royal Zambian Artisans",
+      logo: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.9,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.9,
+    reviewCount: 156,
+    premiumFeatures: ["Rare Emeralds", "Handcrafted", "Royal Collection", "Certified Authentic"],
+    luxuryRating: 5,
+    handcrafted: true,
+    limitedEdition: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Zambian Emerald", "18k White Gold", "Platinum"],
+    certifications: ["GIA Certified", "Royal Heritage Certificate"],
+    warranty: "Lifetime Guarantee",
+    views: 12340,
+    soldCount: 8,
+    tags: ["emerald", "royal", "necklace", "luxury", "premium"],
+    stockLevel: 2,
+    trending: true,
+    featured: true,
+    royal: true
+  },
+  // Premium Services
+  {
     id: "rl002",
     name: "Imperial Concierge Service",
     description: "24/7 personal concierge service for luxury lifestyle management and exclusive experiences",
@@ -155,7 +195,41 @@ const premiumListings: PremiumListing[] = [
     featured: true,
     royal: true
   },
-  // Trending Premium Deals
+  {
+    id: "rl002b",
+    name: "Private Jet Charter Service",
+    description: "Exclusive private jet charter with luxury amenities and personalized flight experiences",
+    price: 12999.99,
+    images: [
+      "https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=600&q=80",
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80"
+    ],
+    category: "Luxury Services",
+    type: "service",
+    vendor: {
+      id: "v002b",
+      name: "Elite Aviation Zambia",
+      logo: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 5.0,
+      location: "Lusaka International Airport"
+    },
+    rating: 5.0,
+    reviewCount: 67,
+    premiumFeatures: ["Private Fleet", "Luxury Amenities", "Personal Crew", "Global Access"],
+    luxuryRating: 5,
+    exclusiveDesign: true,
+    certifications: ["IATA Certified", "Premium Aviation License"],
+    warranty: "Flight Safety Guarantee",
+    views: 5670,
+    soldCount: 23,
+    tags: ["aviation", "private-jet", "luxury", "travel", "premium"],
+    trending: true,
+    featured: true,
+    royal: true
+  },
+  // Art & Collectibles
   {
     id: "rl003",
     name: "Sovereign Wood Sculpture Collection",
@@ -194,6 +268,44 @@ const premiumListings: PremiumListing[] = [
     flashSale: true
   },
   {
+    id: "rl003b",
+    name: "Contemporary African Art Collection",
+    description: "Limited edition paintings by renowned Zambian contemporary artists",
+    price: 2499.99,
+    originalPrice: 3499.99,
+    images: [
+      "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&q=80",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80"
+    ],
+    category: "Art & Collectibles",
+    type: "product",
+    vendor: {
+      id: "v003b",
+      name: "Lusaka Contemporary Gallery",
+      logo: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.9,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.8,
+    reviewCount: 127,
+    premiumFeatures: ["Limited Edition", "Artist Signed", "Certificate of Authenticity", "Gallery Curated"],
+    luxuryRating: 4,
+    handcrafted: true,
+    limitedEdition: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Canvas", "Oil Paint", "Gold Leaf"],
+    certifications: ["Gallery Authentication", "Artist Certificate"],
+    warranty: "Lifetime Authenticity Guarantee",
+    views: 4320,
+    soldCount: 18,
+    tags: ["art", "painting", "contemporary", "african", "premium"],
+    stockLevel: 5,
+    trending: true,
+    flashSale: true
+  },
+  {
     id: "rl004",
     name: "Premium Interior Design Consultation",
     description: "Luxury home and office design consultation with 3D visualization and premium material selection",
@@ -223,6 +335,222 @@ const premiumListings: PremiumListing[] = [
     views: 2890,
     soldCount: 45,
     tags: ["design", "interior", "luxury", "consultation", "premium"],
+    trending: true,
+    flashSale: true
+  },
+
+  // Luxury Electronics
+  {
+    id: "rl005",
+    name: "Diamond-Encrusted Smart Watch",
+    description: "Limited edition smartwatch with genuine diamonds and 24k gold casing",
+    price: 15999.99,
+    originalPrice: 22999.99,
+    images: [
+      "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=600&q=80",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80"
+    ],
+    category: "Luxury Electronics",
+    type: "product",
+    vendor: {
+      id: "v005",
+      name: "Prestige Tech Zambia",
+      logo: "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.8,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.9,
+    reviewCount: 89,
+    premiumFeatures: ["Diamond Encrusted", "24k Gold", "Swiss Movement", "Smart Features"],
+    luxuryRating: 5,
+    handcrafted: true,
+    limitedEdition: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Genuine Diamonds", "24k Gold", "Sapphire Crystal"],
+    certifications: ["Swiss Made", "Diamond Certification"],
+    warranty: "5 Year Premium Warranty",
+    views: 9876,
+    soldCount: 12,
+    tags: ["smartwatch", "luxury", "diamonds", "gold", "premium"],
+    stockLevel: 3,
+    trending: true,
+    flashSale: true
+  },
+
+  // Luxury Fashion
+  {
+    id: "rl006",
+    name: "Bespoke Luxury Suit Collection",
+    description: "Hand-tailored suits using premium Italian fabrics with personalized fitting",
+    price: 3999.99,
+    originalPrice: 5499.99,
+    images: [
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80"
+    ],
+    category: "Luxury Fashion",
+    type: "product",
+    vendor: {
+      id: "v006",
+      name: "Savile Row Zambia",
+      logo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.9,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.8,
+    reviewCount: 156,
+    premiumFeatures: ["Bespoke Tailoring", "Italian Fabrics", "Personal Fitting", "Custom Design"],
+    luxuryRating: 5,
+    handcrafted: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Italian Wool", "Silk Lining", "Mother of Pearl Buttons"],
+    certifications: ["Master Tailor Certified", "Italian Fabric Authentic"],
+    warranty: "Lifetime Fit Guarantee",
+    views: 7654,
+    soldCount: 34,
+    tags: ["suits", "bespoke", "luxury", "fashion", "premium"],
+    stockLevel: 10,
+    trending: true,
+    flashSale: true
+  },
+
+  // Premium Real Estate Services
+  {
+    id: "rl007",
+    name: "Luxury Property Investment Consultation",
+    description: "Expert consultation for high-end real estate investments and portfolio management",
+    price: 2999.99,
+    images: [
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
+    ],
+    category: "Real Estate Services",
+    type: "service",
+    vendor: {
+      id: "v007",
+      name: "Elite Property Advisors",
+      logo: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.9,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.8,
+    reviewCount: 203,
+    premiumFeatures: ["Expert Analysis", "Market Insights", "Investment Strategy", "Portfolio Management"],
+    luxuryRating: 4,
+    certifications: ["Real Estate License", "Investment Advisor Certified"],
+    warranty: "Results Guarantee",
+    views: 4567,
+    soldCount: 78,
+    tags: ["real-estate", "investment", "luxury", "consultation", "premium"],
+    trending: true
+  },
+
+  // Luxury Automotive
+  {
+    id: "rl008",
+    name: "Custom Luxury Vehicle Detailing",
+    description: "Premium automotive detailing service for luxury and exotic vehicles",
+    price: 899.99,
+    originalPrice: 1299.99,
+    images: [
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80"
+    ],
+    category: "Automotive Services",
+    type: "service",
+    vendor: {
+      id: "v008",
+      name: "Premium Auto Care",
+      logo: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.7,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.8,
+    reviewCount: 267,
+    premiumFeatures: ["Paint Protection", "Interior Detailing", "Ceramic Coating", "Mobile Service"],
+    luxuryRating: 4,
+    certifications: ["Professional Detailer Certified", "Premium Service Provider"],
+    warranty: "6 Month Protection Guarantee",
+    views: 5432,
+    soldCount: 123,
+    tags: ["automotive", "detailing", "luxury", "service", "premium"],
+    trending: true,
+    flashSale: true
+  },
+
+  // Fine Dining & Culinary
+  {
+    id: "rl009",
+    name: "Private Chef Fine Dining Experience",
+    description: "Michelin-trained chef creates bespoke dining experiences in your home",
+    price: 1599.99,
+    images: [
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=600&q=80"
+    ],
+    category: "Culinary Services",
+    type: "service",
+    vendor: {
+      id: "v009",
+      name: "Elite Culinary Experiences",
+      logo: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 5.0,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.9,
+    reviewCount: 98,
+    premiumFeatures: ["Michelin Training", "Bespoke Menu", "Premium Ingredients", "Table Service"],
+    luxuryRating: 5,
+    exclusiveDesign: true,
+    certifications: ["Michelin Trained", "Culinary Arts Certified"],
+    warranty: "Satisfaction Guarantee",
+    views: 3210,
+    soldCount: 56,
+    tags: ["dining", "chef", "luxury", "culinary", "premium"],
+    trending: true
+  },
+
+  // Wellness & Spa
+  {
+    id: "rl010",
+    name: "Luxury Spa Retreat Package",
+    description: "Exclusive wellness retreat with premium treatments and personalized therapy",
+    price: 2499.99,
+    originalPrice: 3499.99,
+    images: [
+      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
+    ],
+    category: "Wellness Services",
+    type: "service",
+    vendor: {
+      id: "v010",
+      name: "Serenity Luxury Spa",
+      logo: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.8,
+      location: "Livingstone, Zambia"
+    },
+    rating: 4.9,
+    reviewCount: 189,
+    premiumFeatures: ["Luxury Treatments", "Personal Therapist", "Organic Products", "Wellness Program"],
+    luxuryRating: 5,
+    certifications: ["International Spa Association", "Wellness Certified"],
+    warranty: "Relaxation Guarantee",
+    views: 6789,
+    soldCount: 67,
+    tags: ["spa", "wellness", "luxury", "retreat", "premium"],
     trending: true,
     flashSale: true
   }
