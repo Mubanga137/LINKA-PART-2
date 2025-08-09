@@ -1130,15 +1130,18 @@ function PremiumListingCard({
         animationFillMode: 'forwards'
       }}
     >
-      {/* Image Section */}
-      <div className={`relative overflow-hidden ${
-        viewMode === 'list' ? 'w-48 flex-shrink-0' : 'aspect-[4/3]'
-      } ${isDarkMode ? 'bg-slate-800/50' : 'bg-slate-100/50'}`}>
+      {/* Premium Image Section with Fixed Proportions */}
+      <div className={`relative overflow-hidden rounded-t-2xl ${
+        viewMode === 'list' ? 'w-72 flex-shrink-0' : 'aspect-[4/3]'
+      } ${isDarkMode ? 'bg-slate-800/30' : 'bg-slate-100/30'}`}>
         <Image
           src={listing.images[currentImageIndex]}
-          alt={listing.name}
+          alt={`${listing.name} - Premium ${listing.type}`}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-700"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          sizes={viewMode === 'list' ? '288px' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'}
+          loading="lazy"
+          quality={85}
         />
 
         {/* Premium Overlay */}
