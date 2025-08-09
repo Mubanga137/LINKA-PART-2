@@ -1252,34 +1252,15 @@ function PremiumListingCard({
         </div>
 
         {/* Rating & Stats */}
-        <div className={`flex items-center justify-between text-sm mb-4 ${
-          isDarkMode ? 'text-slate-400' : 'text-slate-600'
-        }`}>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star 
-                  key={i} 
-                  className={`h-3 w-3 ${
-                    i < Math.floor(listing.rating) 
-                      ? 'text-yellow-500 fill-current' 
-                      : 'text-slate-300'
-                  }`} 
-                />
-              ))}
-            </div>
+        <div className="flex items-center justify-between text-sm text-slate-600">
+          <div className="flex items-center gap-1">
+            <Star className="h-3 w-3 text-yellow-400 fill-current" />
             <span className="font-medium">{listing.rating}</span>
-            <span>({listing.reviewCount})</span>
+            <span className="text-slate-400">({listing.reviewCount})</span>
           </div>
-          <div className="flex items-center gap-3 text-xs">
-            <div className="flex items-center gap-1">
-              <Eye className="h-3 w-3" />
-              <span>{listing.views.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <ShoppingCart className="h-3 w-3" />
-              <span>{listing.soldCount} sold</span>
-            </div>
+          <div className="flex items-center gap-3 text-xs text-slate-500">
+            <span>{listing.views.toLocaleString()} views</span>
+            <span>{listing.soldCount} sold</span>
           </div>
         </div>
 
