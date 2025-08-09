@@ -1025,53 +1025,36 @@ function PremiumListingCard({
           listing.royal ? 'ring-1 ring-yellow-200' : ''
         }`}
       >
-      {/* Premium Image Section with Fixed Proportions */}
-      <div className={`relative overflow-hidden rounded-t-2xl ${
+      {/* Image Section */}
+      <div className={`relative overflow-hidden rounded-t-lg ${
         viewMode === 'list' ? 'w-72 flex-shrink-0' : 'aspect-[4/3]'
-      } ${isDarkMode ? 'bg-slate-800/30' : 'bg-slate-100/30'}`}>
+      } bg-slate-100`}>
         <Image
           src={listing.images[currentImageIndex]}
           alt={`${listing.name} - Premium ${listing.type}`}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes={viewMode === 'list' ? '288px' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'}
           loading="lazy"
           quality={85}
         />
 
-        {/* Premium Gold Shimmer Border on Hover */}
-        <div className={`absolute inset-0 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 ${
-          listing.royal
-            ? 'border-2 border-yellow-400/60 shadow-lg shadow-yellow-400/20'
-            : 'border-2 border-blue-400/60 shadow-lg shadow-blue-400/20'
-        }`}></div>
-
-        {/* Enhanced Shimmer Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1200 ease-out rounded-t-2xl"></div>
-
-        {/* Premium Overlay */}
-        <div className={`absolute inset-0 rounded-t-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
-          listing.royal
-            ? 'bg-gradient-to-br from-yellow-400/30 to-amber-500/30'
-            : 'bg-gradient-to-br from-blue-400/30 to-blue-600/30'
-        }`}></div>
-        
-        {/* Premium Badge with Gold Gradient */}
-        <div className="absolute top-4 left-4 z-20">
-          <Badge className={`backdrop-blur-md shadow-2xl font-bold px-4 py-2 text-sm rounded-xl ${
+        {/* Premium Badge */}
+        <div className="absolute top-2 left-2">
+          <Badge className={`text-xs font-medium px-2 py-1 ${
             listing.royal
-              ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900 border-2 border-emerald-300/50 shadow-yellow-400/30'
-              : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white border-2 border-emerald-300/30 shadow-blue-400/30'
+              ? 'bg-yellow-100 text-yellow-800 border border-yellow-200'
+              : 'bg-blue-100 text-blue-800 border border-blue-200'
           }`}>
-            <Crown className="h-4 w-4 mr-2" />
-            PREMIUM
+            <Crown className="h-3 w-3 mr-1" />
+            Premium
           </Badge>
         </div>
 
-        {/* Rating Badge - Top Right */}
+        {/* Rating Badge */}
         {listing.rating >= 4.5 && (
-          <div className="absolute top-4 right-4 z-20">
-            <Badge className="backdrop-blur-md bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-3 py-1.5 text-xs font-semibold shadow-xl rounded-xl">
+          <div className="absolute top-2 right-2">
+            <Badge className="bg-green-100 text-green-800 border border-green-200 text-xs font-medium px-2 py-1">
               <Star className="h-3 w-3 mr-1 fill-current" />
               {listing.rating}
             </Badge>
