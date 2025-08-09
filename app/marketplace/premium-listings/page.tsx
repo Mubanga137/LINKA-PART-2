@@ -1204,22 +1204,12 @@ function PremiumListingCard({
           </div>
         </div>
 
-        {/* Premium Title & Description with Perfect Alignment */}
-        <div className="space-y-3">
-          <h3 className={`font-bold text-xl leading-tight line-clamp-2 transition-all duration-300 ${
-            viewMode === 'list' ? 'text-left' : 'text-left md:text-center lg:text-left'
-          } ${
-            isDarkMode
-              ? 'text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-yellow-400 group-hover:to-amber-300'
-              : 'text-slate-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-blue-500'
-          }`}>
-            {listing.name.toUpperCase()}
+        {/* Title & Description */}
+        <div className="space-y-2">
+          <h3 className="font-semibold text-base leading-tight line-clamp-2 text-slate-900">
+            {listing.name}
           </h3>
-          <p className={`text-sm line-clamp-2 leading-relaxed font-medium ${
-            viewMode === 'list' ? 'text-left' : 'text-left md:text-center lg:text-left'
-          } ${
-            isDarkMode ? 'text-slate-400' : 'text-slate-600'
-          }`}>
+          <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
             {listing.description}
           </p>
         </div>
