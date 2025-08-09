@@ -1100,11 +1100,15 @@ function PremiumListingCard({
     : 0;
 
   return (
-    <Card 
-      className={`premium-card group gpu-premium overflow-hidden ${
+    <Card
+      className={`premium-card group gpu-premium overflow-hidden relative transform transition-all duration-500 hover:scale-[1.02] ${
         viewMode === 'list' ? 'flex flex-row' : ''
+      } ${
+        listing.royal
+          ? 'ring-2 ring-yellow-400/20 shadow-yellow-400/10'
+          : 'ring-1 ring-slate-200/50'
       }`}
-      style={{ 
+      style={{
         animationDelay: `${animationDelay}ms`,
         animationFillMode: 'forwards'
       }}
@@ -1119,32 +1123,46 @@ function PremiumListingCard({
           fill
           className="object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        
+
+        {/* Premium Overlay */}
+        <div className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+          listing.royal
+            ? 'bg-gradient-to-br from-yellow-400/30 to-amber-500/30'
+            : 'bg-gradient-to-br from-blue-400/30 to-blue-600/30'
+        }`}></div>
+
         {/* Shimmer Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
         
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
-          <Badge className={`${
-            listing.royal 
-              ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900' 
-              : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
-          } px-3 py-1 shadow-lg`}>
-            <Crown className="h-3 w-3 mr-1" />
-            {listing.royal ? 'Royal' : 'Premium'}
+        {/* Enhanced Badges */}
+        <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
+          <Badge className={`backdrop-blur-sm shadow-xl border ${
+            listing.royal
+              ? 'bg-gradient-to-r from-yellow-400/90 to-amber-500/90 text-slate-900 border-yellow-300/50'
+              : 'bg-gradient-to-r from-blue-500/90 to-blue-600/90 text-white border-blue-400/50'
+          } px-3 py-1.5 font-semibold`}>
+            <Crown className="h-3 w-3 mr-1.5" />
+            {listing.royal ? 'Royal Collection' : 'Premium'}
           </Badge>
-          
+
           {listing.trending && (
-            <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-2 py-1 text-xs animate-pulse">
+            <Badge className="backdrop-blur-sm bg-gradient-to-r from-emerald-500/90 to-teal-600/90 text-white px-2 py-1 text-xs animate-pulse shadow-lg border border-emerald-400/50">
               <TrendingUp className="h-2.5 w-2.5 mr-1" />
-              Trending
+              Trending Now
             </Badge>
           )}
-          
+
           {listing.flashSale && (
-            <Badge className="bg-gradient-to-r from-red-500 to-orange-600 text-white px-2 py-1 text-xs animate-pulse">
+            <Badge className="backdrop-blur-sm bg-gradient-to-r from-red-500/90 to-orange-600/90 text-white px-2 py-1 text-xs animate-pulse shadow-lg border border-red-400/50">
               <Zap className="h-2.5 w-2.5 mr-1" />
               Flash Sale
+            </Badge>
+          )}
+
+          {listing.limitedEdition && (
+            <Badge className="backdrop-blur-sm bg-gradient-to-r from-purple-500/90 to-violet-600/90 text-white px-2 py-1 text-xs shadow-lg border border-purple-400/50">
+              <Sparkles className="h-2.5 w-2.5 mr-1" />
+              Limited
             </Badge>
           )}
         </div>
@@ -1200,37 +1218,58 @@ function PremiumListingCard({
         )}
       </div>
 
-      {/* Content Section */}
-      <CardContent className={`p-4 ${viewMode === 'list' ? 'flex-1' : ''}`}>
-        {/* Vendor Info */}
-        <div className="flex items-center gap-2 mb-3">
-          <Image
-            src={listing.vendor.logo}
-            alt={listing.vendor.name}
-            width={20}
-            height={20}
-            className="rounded-full ring-2 ring-current/20"
-          />
-          <span className={`text-sm font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
-            {listing.vendor.name}
-          </span>
-          {listing.vendor.verified && (
-            <Verified className="h-3 w-3 text-blue-500" />
-          )}
-          <div className="flex items-center gap-1 ml-auto">
-            <MapPin className="h-3 w-3 text-slate-400" />
-            <span className="text-xs text-slate-400">{listing.vendor.location}</span>
+      {/* Enhanced Content Section */}
+      <CardContent className={`p-5 ${viewMode === 'list' ? 'flex-1' : ''}`}>
+        {/* Premium Vendor Info */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="relative">
+            <Image
+              src={listing.vendor.logo}
+              alt={listing.vendor.name}
+              width={24}
+              height={24}
+              className={`rounded-full ring-2 ${
+                listing.vendor.premiumSeller
+                  ? 'ring-yellow-400/50'
+                  : 'ring-slate-300/50'
+              }`}
+            />
+            {listing.vendor.premiumSeller && (
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full flex items-center justify-center">
+                <Crown className="h-1.5 w-1.5 text-slate-900" />
+              </div>
+            )}
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <span className={`text-sm font-semibold ${isDarkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+                {listing.vendor.name}
+              </span>
+              {listing.vendor.verified && (
+                <Verified className="h-3.5 w-3.5 text-blue-500" />
+              )}
+            </div>
+            <div className="flex items-center gap-1">
+              <MapPin className="h-3 w-3 text-slate-400" />
+              <span className="text-xs text-slate-500">{listing.vendor.location}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-1">
+            <Star className="h-3 w-3 text-yellow-400 fill-current" />
+            <span className="text-xs font-medium">{listing.vendor.rating}</span>
           </div>
         </div>
 
-        {/* Title & Description */}
-        <div className="mb-3">
-          <h3 className={`font-bold text-lg line-clamp-2 leading-tight mb-2 ${
-            isDarkMode ? 'text-white' : 'text-slate-900'
+        {/* Enhanced Title & Description */}
+        <div className="mb-4">
+          <h3 className={`font-bold text-xl line-clamp-2 leading-tight mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r transition-all duration-300 ${
+            isDarkMode
+              ? 'text-white group-hover:from-yellow-400 group-hover:to-amber-300'
+              : 'text-slate-900 group-hover:from-blue-600 group-hover:to-blue-500'
           }`}>
             {listing.name}
           </h3>
-          <p className={`text-sm line-clamp-2 ${
+          <p className={`text-sm line-clamp-3 leading-relaxed ${
             isDarkMode ? 'text-slate-400' : 'text-slate-600'
           }`}>
             {listing.description}
@@ -1257,20 +1296,20 @@ function PremiumListingCard({
           )}
         </div>
 
-        {/* Price */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className={`text-xl font-bold ${
+        {/* Enhanced Price Display */}
+        <div className="flex items-center gap-3 mb-4">
+          <span className={`text-2xl font-bold ${
             isDarkMode ? 'text-yellow-400' : 'text-blue-600'
           }`}>
             K{listing.price.toFixed(2)}
           </span>
           {listing.originalPrice && (
             <div className="flex items-center gap-2">
-              <span className="text-sm text-slate-400 line-through">
+              <span className="text-sm text-slate-400 line-through font-medium">
                 K{listing.originalPrice.toFixed(2)}
               </span>
-              <Badge className="bg-green-100 text-green-700 border border-green-200 text-xs">
-                -{discountPercentage}%
+              <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0 text-xs font-semibold px-2 py-1 shadow-lg">
+                -{discountPercentage}% OFF
               </Badge>
             </div>
           )}
@@ -1308,21 +1347,21 @@ function PremiumListingCard({
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="flex gap-2">
-          <Button 
-            className="btn-premium flex-1 text-sm font-semibold py-2 shadow-lg"
+        {/* Enhanced Actions */}
+        <div className="flex gap-3">
+          <Button
+            className="btn-premium flex-1 text-sm font-semibold py-3 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]"
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
-            {listing.type === 'service' ? 'Book Now' : 'Add to Cart'}
+            {listing.type === 'service' ? 'Book Service' : 'Add to Cart'}
           </Button>
           <Button
             variant="outline"
             size="sm"
-            className={`px-3 border-2 rounded-lg transition-all duration-300 hover:scale-105 ${
-              isDarkMode 
-                ? 'border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10' 
-                : 'border-blue-400/30 text-blue-600 hover:bg-blue-400/10'
+            className={`px-4 py-3 border-2 rounded-xl transition-all duration-300 hover:scale-105 backdrop-blur-sm ${
+              isDarkMode
+                ? 'border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/50'
+                : 'border-blue-400/30 text-blue-600 hover:bg-blue-400/10 hover:border-blue-400/50'
             }`}
             asChild
           >
