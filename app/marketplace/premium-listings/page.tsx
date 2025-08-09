@@ -703,10 +703,8 @@ export default function PremiumListingsPage() {
   }
 
   return (
-    <div className={`min-h-screen relative overflow-hidden ${
-      isDarkMode ? 'premium-bg-dark bg-white lg:flex' : 'premium-bg-light bg-white lg:flex'
-    }`}>
-      {/* Royal Side Navigation */}
+    <div className="min-h-screen bg-white lg:flex">
+      {/* Side Navigation */}
       <div className="lg:w-64 lg:flex-shrink-0">
         <SideNavigation variant="premium" />
       </div>
@@ -714,37 +712,14 @@ export default function PremiumListingsPage() {
       {/* Main Content Area */}
       <div className="lg:flex-1 lg:pl-0 lg:min-w-0">
         <MinimalHeader variant="premium" showSearch={true} />
-        
-        {/* Premium Background Effects */}
-        <div className={`absolute inset-0 ${
-          isDarkMode ? 'premium-overlay-dark' : 'premium-overlay-light'
-        } pointer-events-none`}></div>
-        
-        {/* Floating Premium Particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={`particle-${i}`}
-              className={`absolute w-1 h-1 rounded-full animate-premium-float ${
-                isDarkMode ? 'bg-yellow-400/30' : 'bg-blue-400/30'
-              }`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${6 + Math.random() * 8}s`
-              }}
-            />
-          ))}
-        </div>
 
-        {/* Modern Premium Header */}
-        <div className={`relative z-10 backdrop-blur-xl border-b ${
+        {/* Premium Page Header */}
+        <div className={`border-b ${
           isDarkMode
             ? 'border-yellow-400/20 bg-gradient-to-r from-slate-900/95 via-slate-800/90 to-slate-900/95'
             : 'border-blue-400/20 bg-gradient-to-r from-white/95 via-blue-50/80 to-white/95'
-        } shadow-xl`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8">
+        } shadow-sm`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Premium Header Title */}
             <div className="py-6 text-center border-b border-current/10">
               <div className="flex items-center justify-center gap-3 mb-4">
