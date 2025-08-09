@@ -1062,22 +1062,19 @@ function PremiumListingCard({
         )}
 
         {/* Status Badges */}
-        <div className="absolute bottom-4 left-4 flex gap-2 z-20">
+        <div className="absolute bottom-2 left-2 flex gap-1">
           {listing.trending && (
-            <Badge className="backdrop-blur-md bg-gradient-to-r from-emerald-500/95 to-teal-600/95 text-white px-2 py-1 text-xs animate-pulse shadow-lg rounded-lg">
-              <TrendingUp className="h-2.5 w-2.5 mr-1" />
+            <Badge className="bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs px-2 py-1">
               Trending
             </Badge>
           )}
           {listing.flashSale && (
-            <Badge className="backdrop-blur-md bg-gradient-to-r from-red-500/95 to-orange-600/95 text-white px-2 py-1 text-xs animate-pulse shadow-lg rounded-lg">
-              <Zap className="h-2.5 w-2.5 mr-1" />
+            <Badge className="bg-red-100 text-red-800 border border-red-200 text-xs px-2 py-1">
               Sale
             </Badge>
           )}
           {listing.limitedEdition && (
-            <Badge className="backdrop-blur-md bg-gradient-to-r from-purple-500/95 to-violet-600/95 text-white px-2 py-1 text-xs shadow-lg rounded-lg">
-              <Sparkles className="h-2.5 w-2.5 mr-1" />
+            <Badge className="bg-purple-100 text-purple-800 border border-purple-200 text-xs px-2 py-1">
               Limited
             </Badge>
           )}
