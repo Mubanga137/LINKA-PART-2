@@ -835,49 +835,29 @@ export default function PremiumListingsPage() {
           {/* Royal Recommendations */}
           {royalRecommendations.length > 0 && (
             <section className="space-y-8">
-              <div className="relative">
-                {/* Background decoration */}
-                <div className={`absolute inset-0 rounded-3xl ${
-                  isDarkMode
-                    ? 'bg-gradient-to-br from-yellow-400/5 via-transparent to-amber-500/5'
-                    : 'bg-gradient-to-br from-blue-400/5 via-transparent to-blue-600/5'
-                } blur-3xl`}></div>
-
-                <div className="relative text-center py-8">
-                  <div className={`inline-flex items-center gap-3 rounded-full px-8 py-4 mb-6 border-2 backdrop-blur-sm ${
-                    isDarkMode
-                      ? 'bg-gradient-to-r from-slate-800/60 to-slate-700/40 border-yellow-400/30 shadow-xl shadow-yellow-400/10'
-                      : 'bg-gradient-to-r from-white/80 to-blue-50/60 border-blue-400/30 shadow-xl shadow-blue-400/10'
-                  }`}>
-                    <Crown className="h-6 w-6 crown-glow" />
-                    <span className="text-sm font-semibold uppercase tracking-wider">Royal Collection</span>
+              <div className="text-center py-8">
+                <div className="inline-flex items-center gap-3 bg-yellow-50 border border-yellow-200 rounded-full px-6 py-3 mb-6">
+                  <Crown className="h-5 w-5 text-yellow-600" />
+                  <span className="text-sm font-semibold text-yellow-800 uppercase tracking-wider">Royal Collection</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                  Royal Recommendations
+                </h2>
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-6">
+                  Handpicked selections of the finest premium products and services, curated for discerning customers
+                </p>
+                <div className="flex items-center justify-center gap-6 text-sm text-slate-500">
+                  <div className="flex items-center gap-2">
+                    <Diamond className="h-4 w-4 text-blue-500" />
+                    <span>Authenticated</span>
                   </div>
-                  <h2 className="text-4xl md:text-5xl font-bold logo-3d-premium font-serif mb-6">
-                    Royal Recommendations
-                  </h2>
-                  <div className={`w-24 h-1 mx-auto mb-6 rounded-full ${
-                    isDarkMode
-                      ? 'bg-gradient-to-r from-yellow-400 to-amber-500'
-                      : 'bg-gradient-to-r from-blue-400 to-blue-600'
-                  }`}></div>
-                  <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                  }`}>
-                    Handpicked selections of the finest premium products and services, curated for discerning customers
-                  </p>
-                  <div className="flex items-center justify-center gap-6 mt-6 text-sm">
-                    <div className="flex items-center gap-2">
-                      <Diamond className={`h-4 w-4 ${isDarkMode ? 'text-yellow-400' : 'text-blue-500'}`} />
-                      <span>Authenticated</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Award className={`h-4 w-4 ${isDarkMode ? 'text-yellow-400' : 'text-blue-500'}`} />
-                      <span>Verified Quality</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Shield className={`h-4 w-4 ${isDarkMode ? 'text-yellow-400' : 'text-blue-500'}`} />
-                      <span>Premium Guarantee</span>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <Award className="h-4 w-4 text-blue-500" />
+                    <span>Verified Quality</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-blue-500" />
+                    <span>Premium Guarantee</span>
                   </div>
                 </div>
               </div>
