@@ -384,46 +384,68 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
         />
       )}
 
-      {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 ${navConfig.theme.base} shadow-2xl transform transition-transform duration-300 ease-in-out ${
+      {/* Enhanced Linka Royale Sidebar */}
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 ${navConfig.theme.base} shadow-2xl transform transition-all duration-300 ease-in-out ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden ${className}`}>
+      } lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:flex lg:flex-col ${className}`}>
         
-        {/* Header */}
-        <div className="flex items-center justify-between h-16 px-6 border-b border-white/10 flex-shrink-0">
-          <Link href="/" className="flex items-center space-x-3">
-            <div className={`p-2 rounded-xl ${
-              isPremium 
-                ? 'bg-gradient-to-br from-yellow-400/20 to-amber-500/20' 
-                : 'bg-gradient-to-br from-blue-400/20 to-blue-600/20'
+        {/* Enhanced Linka Royale Header */}
+        <div className={`relative flex items-center justify-between h-20 px-6 border-b flex-shrink-0 ${
+          isPremium
+            ? 'border-yellow-400/20 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900'
+            : 'border-white/10 bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-900'
+        }`}>
+          {/* Background shimmer effect */}
+          <div className={`absolute inset-0 opacity-30 ${
+            isPremium
+              ? 'bg-gradient-to-r from-yellow-400/5 via-transparent to-amber-500/5'
+              : 'bg-gradient-to-r from-blue-400/5 via-transparent to-blue-600/5'
+          }`}></div>
+
+          <Link href="/" className="flex items-center space-x-4 relative z-10 group">
+            <div className={`p-3 rounded-2xl transition-all duration-300 group-hover:scale-110 ${
+              isPremium
+                ? 'bg-gradient-to-br from-yellow-400/30 to-amber-500/30 shadow-lg shadow-yellow-400/20'
+                : 'bg-gradient-to-br from-blue-400/30 to-blue-600/30 shadow-lg shadow-blue-400/20'
             }`}>
               {isPremium ? (
-                <Crown className="h-6 w-6 crown-glow" />
+                <Crown className="h-7 w-7 crown-glow" />
               ) : (
-                <Store className="h-6 w-6 text-blue-400" />
+                <Store className="h-7 w-7 text-blue-400" />
               )}
             </div>
-            <div>
-              <h1 className={navConfig.logo.className}>
+            <div className="space-y-1">
+              <h1 className={`text-xl font-bold transition-all duration-300 group-hover:scale-105 ${
+                isPremium
+                  ? 'logo-3d-premium font-serif'
+                  : 'text-white'
+              }`}>
                 {navConfig.logo.text}
               </h1>
               {isPremium && (
-                <p className="text-xs text-blue-300">Curated Excellence</p>
+                <p className={`text-xs font-medium ${
+                  isDarkMode ? 'text-yellow-300/80' : 'text-blue-300/80'
+                }`}>Curated Excellence</p>
               )}
             </div>
           </Link>
+
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-white"
+            className={`lg:hidden p-2 rounded-xl transition-all duration-300 hover:scale-110 ${
+              isPremium
+                ? 'text-yellow-300 hover:bg-yellow-400/20'
+                : 'text-white hover:bg-white/20'
+            }`}
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </Button>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 px-4 py-4 space-y-4 overflow-y-auto max-h-[calc(100vh-8rem)]">
+        {/* Enhanced Navigation with Full Height */}
+        <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto custom-scrollbar" role="navigation" aria-label="Premium Navigation">
           {/* Core Navigation */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold text-blue-300 uppercase tracking-wider px-3">
