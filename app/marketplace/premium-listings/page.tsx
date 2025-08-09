@@ -703,8 +703,8 @@ export default function PremiumListingsPage() {
   }
 
   return (
-    <div className={`min-h-screen relative overflow-hidden lg:flex ${
-      isDarkMode ? 'premium-bg-dark' : 'premium-bg-light'
+    <div className={`min-h-screen relative overflow-hidden ${
+      isDarkMode ? 'premium-bg-dark bg-white lg:flex' : 'premium-bg-light bg-white lg:flex'
     }`}>
       {/* Royal Side Navigation */}
       <div className="lg:w-64 lg:flex-shrink-0">
