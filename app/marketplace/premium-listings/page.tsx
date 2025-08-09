@@ -974,15 +974,11 @@ export default function PremiumListingsPage() {
           {/* Empty State */}
           {filteredListings.length === 0 && (
             <div className="text-center py-12">
-              <Crown className={`h-16 w-16 mx-auto mb-4 ${
-                isDarkMode ? 'text-slate-600' : 'text-slate-400'
-              }`} />
-              <h3 className={`text-xl font-semibold mb-2 ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}>
+              <Crown className="h-16 w-16 mx-auto mb-4 text-slate-400" />
+              <h3 className="text-xl font-semibold mb-2 text-slate-600">
                 No premium listings found
               </h3>
-              <p className={`${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+              <p className="text-slate-500">
                 Try adjusting your search or filters to find what you're looking for
               </p>
             </div>
