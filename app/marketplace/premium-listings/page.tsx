@@ -1337,19 +1337,23 @@ function PremiumListingCard({
           )}
         </div>
 
-        {/* Enhanced Price Display */}
-        <div className="flex items-center gap-3 mb-4">
-          <span className={`text-2xl font-bold ${
-            isDarkMode ? 'text-yellow-400' : 'text-blue-600'
+        {/* Premium Price Display with Luxury Colors */}
+        <div className={`flex items-center gap-3 ${
+          viewMode === 'list' ? 'justify-start' : 'justify-center md:justify-start'
+        }`}>
+          <span className={`text-3xl font-bold font-serif transition-all duration-300 ${
+            isDarkMode
+              ? 'text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500 drop-shadow-lg'
+              : 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 to-amber-600 drop-shadow-lg'
           }`}>
             K{listing.price.toFixed(2)}
           </span>
           {listing.originalPrice && (
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col">
               <span className="text-sm text-slate-400 line-through font-medium">
                 K{listing.originalPrice.toFixed(2)}
               </span>
-              <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0 text-xs font-semibold px-2 py-1 shadow-lg">
+              <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0 text-xs font-bold px-2 py-1 shadow-lg rounded-full">
                 -{discountPercentage}% OFF
               </Badge>
             </div>
