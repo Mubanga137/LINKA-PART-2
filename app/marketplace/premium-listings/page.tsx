@@ -926,51 +926,30 @@ export default function PremiumListingsPage() {
           {/* Luxury Categories */}
           {remainingListings.length > 0 && (
             <section className="space-y-8">
-              <div className="relative">
-                <div className={`absolute inset-0 rounded-3xl ${
-                  isDarkMode
-                    ? 'bg-gradient-to-br from-blue-400/5 via-transparent to-indigo-500/5'
-                    : 'bg-gradient-to-br from-blue-400/5 via-transparent to-blue-600/5'
-                } blur-3xl`}></div>
-
-                <div className="relative text-center py-8">
-                  <div className={`inline-flex items-center gap-3 rounded-full px-8 py-4 mb-6 border-2 backdrop-blur-sm ${
-                    isDarkMode
-                      ? 'bg-gradient-to-r from-slate-800/60 to-blue-900/40 border-blue-400/30 shadow-xl shadow-blue-400/10'
-                      : 'bg-gradient-to-r from-white/80 to-blue-50/60 border-blue-400/30 shadow-xl shadow-blue-400/10'
-                  }`}>
-                    <Sparkles className="h-6 w-6 text-blue-500 animate-pulse" />
-                    <span className="text-sm font-semibold uppercase tracking-wider text-blue-500">Premium Collection</span>
-                  </div>
-                  <h2 className="text-4xl md:text-5xl font-bold logo-3d-premium font-serif mb-6">
-                    Luxury Categories
-                  </h2>
-                  <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto mb-6 rounded-full"></div>
-                  <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                  }`}>
-                    Discover our extensive collection of premium products and luxury services across multiple categories
-                  </p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-2xl mx-auto">
-                    {[
-                      { icon: Gem, label: "Jewelry", count: "12" },
-                      { icon: Sparkles, label: "Fashion", count: "8" },
-                      { icon: Home, label: "Services", count: "15" },
-                      { icon: Crown, label: "Art", count: "6" }
-                    ].map((cat, index) => (
-                      <div key={index} className={`p-4 rounded-xl border ${
-                        isDarkMode
-                          ? 'bg-slate-800/30 border-slate-700/50'
-                          : 'bg-white/50 border-slate-200/50'
-                      }`}>
-                        <cat.icon className={`h-6 w-6 mx-auto mb-2 ${
-                          isDarkMode ? 'text-blue-400' : 'text-blue-500'
-                        }`} />
-                        <div className="text-sm font-medium">{cat.label}</div>
-                        <div className="text-xs text-slate-500">{cat.count} items</div>
-                      </div>
-                    ))}
-                  </div>
+              <div className="text-center py-8">
+                <div className="inline-flex items-center gap-3 bg-blue-50 border border-blue-200 rounded-full px-6 py-3 mb-6">
+                  <Sparkles className="h-5 w-5 text-blue-600" />
+                  <span className="text-sm font-semibold text-blue-800 uppercase tracking-wider">Premium Collection</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                  Luxury Categories
+                </h2>
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
+                  Discover our extensive collection of premium products and luxury services across multiple categories
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                  {[
+                    { icon: Gem, label: "Jewelry", count: "12" },
+                    { icon: Sparkles, label: "Fashion", count: "8" },
+                    { icon: Home, label: "Services", count: "15" },
+                    { icon: Crown, label: "Art", count: "6" }
+                  ].map((cat, index) => (
+                    <div key={index} className="p-4 rounded-lg border bg-white border-slate-200">
+                      <cat.icon className="h-6 w-6 mx-auto mb-2 text-blue-500" />
+                      <div className="text-sm font-medium text-slate-900">{cat.label}</div>
+                      <div className="text-xs text-slate-500">{cat.count} items</div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
