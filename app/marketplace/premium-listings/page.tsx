@@ -831,7 +831,7 @@ export default function PremiumListingsPage() {
         </div>
 
         {/* Main Content */}
-        <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8 py-8 lg:py-12 space-y-12 lg:space-y-16">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
           {/* Royal Recommendations */}
           {royalRecommendations.length > 0 && (
             <section className="space-y-8">
