@@ -59,18 +59,20 @@ export default function LinkaLogo({
         `} />
 
         {/* Main Logo Image */}
-        <img 
+        <img
           src={logoUrl}
           alt="Linka - Zambian E-Commerce Platform"
           className={`
-            relative z-10 w-full h-full object-contain
+            relative z-10 w-full h-full object-contain object-center
+            max-w-full max-h-full
             ${animated ? 'transition-all duration-500' : ''}
             ${isHovered && animated ? 'brightness-110 saturate-110' : ''}
           `}
           style={{
             filter: variant === 'sidebar'
               ? 'drop-shadow(0 4px 8px rgba(0, 115, 230, 0.3))'
-              : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
+              : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
+            aspectRatio: 'auto'
           }}
         />
 
