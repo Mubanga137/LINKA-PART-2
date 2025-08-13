@@ -88,3 +88,85 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Linka Brand Logo Animations */
+@layer utilities {
+  /* Professional logo animation keyframes */
+  @keyframes linka-brand-pulse {
+    0%, 100% {
+      background: linear-gradient(45deg, rgba(0, 115, 230, 0.1), rgba(255, 107, 0, 0.1));
+      transform: scale(1);
+    }
+    50% {
+      background: linear-gradient(45deg, rgba(0, 115, 230, 0.2), rgba(255, 107, 0, 0.15));
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes linka-glow-pulse {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(0, 115, 230, 0.3);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 115, 230, 0.5);
+    }
+  }
+
+  @keyframes linka-shimmer {
+    0% { transform: translateX(-200%) skewX(-12deg); }
+    100% { transform: translateX(200%) skewX(-12deg); }
+  }
+
+  /* Animation utility classes */
+  .animate-linka-brand-pulse {
+    animation: linka-brand-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-linka-glow-pulse {
+    animation: linka-glow-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-linka-shimmer {
+    animation: linka-shimmer 0.8s ease-out;
+  }
+
+  /* Accessibility: Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-linka-brand-pulse,
+    .animate-linka-glow-pulse,
+    .animate-linka-shimmer {
+      animation: none;
+    }
+
+    /* Provide subtle hover feedback for reduced motion users */
+    .linka-logo-hover:hover {
+      transform: scale(1.02);
+      transition: transform 0.2s ease;
+    }
+  }
+
+  /* Official Linka brand colors as utilities */
+  .text-linka-blue { color: #0073e6; }
+  .text-linka-orange { color: #FF6B00; }
+  .bg-linka-blue { background-color: #0073e6; }
+  .bg-linka-orange { background-color: #FF6B00; }
+  .border-linka-blue { border-color: #0073e6; }
+  .border-linka-orange { border-color: #FF6B00; }
+
+  /* Glassmorphism effects for Linka branding */
+  .linka-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .linka-glass-dark {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
