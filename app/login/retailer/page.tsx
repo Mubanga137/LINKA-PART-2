@@ -68,7 +68,7 @@ export default function RetailerLoginPage() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
               <LinkaLogo
-                size="xl"
+                size="desktop"
                 variant="header"
                 animated={true}
                 className="mr-3"
