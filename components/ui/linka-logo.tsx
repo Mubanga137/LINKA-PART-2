@@ -10,10 +10,10 @@ interface LinkaLogoProps {
 }
 
 const sizeClasses = {
-  sm: 'w-10 h-10', // Minimum 40px height for mobile
-  md: 'w-12 h-12',
-  lg: 'w-16 h-16',
-  xl: 'w-24 h-24'
+  sm: 'w-10 h-10 min-w-[2.5rem] min-h-[2.5rem]', // Minimum 40px height for mobile
+  md: 'w-12 h-12 min-w-[3rem] min-h-[3rem]',
+  lg: 'w-16 h-16 min-w-[4rem] min-h-[4rem]',
+  xl: 'w-24 h-24 min-w-[6rem] min-h-[6rem]'
 };
 
 export default function LinkaLogo({ 
