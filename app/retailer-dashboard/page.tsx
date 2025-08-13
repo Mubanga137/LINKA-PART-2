@@ -249,25 +249,54 @@ function RetailerDashboardContent() {
   const renderActiveView = () => {
     if (!dashboardData) return null
 
-    switch (activeView) {
-      case 'overview':
-        return <ModernDashboardOverview data={dashboardData} />
-      case 'analytics':
-        return <AnalyticsView data={dashboardData} />
-      case 'reports':
-        return <ReportsView data={dashboardData} />
-      case 'insights':
-        return <InsightsView data={dashboardData} />
-      case 'orders':
-        return <OrdersView data={dashboardData} />
-      case 'products':
-        return <ProductsView data={dashboardData} />
-      case 'customers':
-        return <CustomersView data={dashboardData} />
-      case 'marketing':
-        return <MarketingView data={dashboardData} />
-      default:
-        return <ModernDashboardOverview data={dashboardData} />
+    try {
+      switch (activeView) {
+        case 'overview':
+          return <ModernDashboardOverview data={dashboardData} />
+        case 'analytics':
+        case 'reports':
+        case 'insights':
+        case 'orders':
+        case 'products':
+        case 'customers':
+        case 'marketing':
+          return (
+            <div className="p-6">
+              <div className="glass-card rounded-2xl p-8 text-center">
+                <h2 className="text-2xl font-bold text-white mb-4">
+                  {activeView.charAt(0).toUpperCase() + activeView.slice(1)} View
+                </h2>
+                <p className="text-white/70 mb-6">
+                  This section is being updated with the new premium design.
+                </p>
+                <button
+                  onClick={() => setActiveView('overview')}
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300"
+                >
+                  Return to Dashboard
+                </button>
+              </div>
+            </div>
+          )
+        default:
+          return <ModernDashboardOverview data={dashboardData} />
+      }
+    } catch (error) {
+      console.error('Error rendering dashboard view:', error);
+      return (
+        <div className="p-6">
+          <div className="glass-card rounded-2xl p-8 text-center">
+            <h2 className="text-xl font-bold text-white mb-4">Something went wrong</h2>
+            <p className="text-white/70 mb-6">Please refresh the page or try again.</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+            >
+              Refresh Page
+            </button>
+          </div>
+        </div>
+      );
     }
   }
 
