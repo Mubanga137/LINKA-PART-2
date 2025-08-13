@@ -73,11 +73,13 @@ export function Header() {
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
-              <div className="relative">
-                <LinkIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 text-indigo-600 group-hover:text-indigo-700 transition-colors" />
-                <div className="absolute inset-0 bg-indigo-600/20 rounded-full blur-xl group-hover:bg-indigo-700/30 transition-all"></div>
-              </div>
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+              <LinkaLogo
+                size="md"
+                variant="header"
+                animated={true}
+                className="transition-all duration-300 group-hover:scale-105"
+              />
+              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-900 via-blue-700 to-orange-600 bg-clip-text text-transparent tracking-wide">
                 Linka
               </span>
             </Link>
