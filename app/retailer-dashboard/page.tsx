@@ -255,7 +255,31 @@ function RetailerDashboardContent() {
     try {
       switch (activeView) {
         case 'overview':
-          return <ModernDashboardOverview data={dashboardData} />
+          return (
+            <div className="p-6">
+              <div className="glass-card rounded-2xl p-8">
+                <h1 className="text-3xl font-bold text-white mb-6">Modern Dashboard</h1>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                  <div className="glass-card rounded-xl p-4">
+                    <h3 className="text-white/70 text-sm">Revenue</h3>
+                    <p className="text-2xl font-bold text-white">${(dashboardData.revenue.total / 1000).toFixed(0)}K</p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4">
+                    <h3 className="text-white/70 text-sm">Orders</h3>
+                    <p className="text-2xl font-bold text-white">{dashboardData.orders.total}</p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4">
+                    <h3 className="text-white/70 text-sm">Products</h3>
+                    <p className="text-2xl font-bold text-white">{dashboardData.products.total}</p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4">
+                    <h3 className="text-white/70 text-sm">Rating</h3>
+                    <p className="text-2xl font-bold text-white">{dashboardData.customers.satisfaction.toFixed(1)}★</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
         case 'analytics':
         case 'reports':
         case 'insights':
