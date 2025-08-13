@@ -31,16 +31,25 @@
   --slate-navy-dark: #0f172a;
   --slate-navy-light: #334155;
   
-  /* Vibrant Teal - Primary Actions */
-  --vibrant-teal: #14b8a6;
-  --vibrant-teal-light: #5eead4;
-  --vibrant-teal-dark: #0d9488;
-  --vibrant-teal-darker: #0f766e;
+  /* Official Linka Blue - Primary Actions */
+  --linka-blue: #0073e6;
+  --linka-blue-light: #3d8bff;
+  --linka-blue-dark: #0056b3;
+  --linka-blue-darker: #004080;
+  /* Legacy teal names for backward compatibility */
+  --vibrant-teal: #0073e6;
+  --vibrant-teal-light: #3d8bff;
+  --vibrant-teal-dark: #0056b3;
+  --vibrant-teal-darker: #004080;
   
-  /* Coral Orange - Alerts & Status */
-  --coral-orange: #f97316;
-  --coral-orange-light: #fed7aa;
-  --coral-orange-dark: #ea580c;
+  /* Official Linka Orange - Alerts & Status */
+  --linka-orange: #FF6B00;
+  --linka-orange-light: #ff8533;
+  --linka-orange-dark: #cc5500;
+  /* Legacy orange names for backward compatibility */
+  --coral-orange: #FF6B00;
+  --coral-orange-light: #ff8533;
+  --coral-orange-dark: #cc5500;
   --sunset-red: #ef4444;
   --sunset-red-light: #fca5a5;
   
@@ -298,7 +307,7 @@
 }
 
 .retailer-nav-item:hover {
-  background: rgba(20, 184, 166, 0.1);
+  background: rgba(0, 115, 230, 0.1);
   color: var(--text-white);
   transform: translateX(4px);
 }
@@ -308,9 +317,9 @@
 }
 
 .retailer-nav-item.active {
-  background: rgba(20, 184, 166, 0.2);
+  background: rgba(0, 115, 230, 0.2);
   color: var(--text-white);
-  box-shadow: var(--shadow-glow-teal);
+  box-shadow: 0 0 20px rgba(0, 115, 230, 0.3);
 }
 
 .retailer-nav-item.active::before {
@@ -324,8 +333,8 @@
 }
 
 .retailer-nav-item.active .retailer-nav-icon {
-  color: var(--vibrant-teal-light);
-  filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6));
+  color: var(--linka-blue-light);
+  filter: drop-shadow(0 0 8px rgba(0, 115, 230, 0.6));
 }
 
 .retailer-nav-text {
