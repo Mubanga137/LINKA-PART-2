@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { PremiumKPICards } from './premium-kpi-cards';
 import { AnimatedCharts } from './animated-charts';
-import { useTheme } from '@/contexts/theme-context';
+// Removed conflicting theme import
 import { 
   TrendingUp, 
   Package, 
