@@ -267,7 +267,7 @@ function RetailerDashboardContent() {
       case 'marketing':
         return <MarketingView data={dashboardData} />
       default:
-        return <DashboardOverview data={dashboardData} />
+        return <ModernDashboardOverview data={dashboardData} />
     }
   }
 
