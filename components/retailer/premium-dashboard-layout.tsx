@@ -264,15 +264,19 @@ export default function PremiumDashboardLayout({ children }: PremiumDashboardLay
         <div className="relative z-10 flex items-center justify-between p-6 border-b border-slate-700/50">
           <div className={`flex items-center space-x-3 ${sidebarCollapsed ? 'justify-center' : ''}`}>
             <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/25">
-                <Store className="h-6 w-6 text-white" />
-              </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-orange-400 to-red-500 rounded-full border-2 border-slate-800 animate-pulse"></div>
+              <LinkaLogo
+                size={sidebarCollapsed ? "md" : "lg"}
+                variant="sidebar"
+                animated={true}
+                className="transition-all duration-300"
+              />
+              {/* Status indicator */}
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full border-2 border-slate-800 animate-pulse shadow-lg shadow-green-400/50"></div>
             </div>
             {!sidebarCollapsed && (
-              <div>
-                <h1 className="text-xl font-bold text-white">LINKA</h1>
-                <p className="text-xs text-teal-300 font-medium">Retailer Portal</p>
+              <div className="ml-2">
+                <h1 className="text-xl font-bold text-white tracking-wide">LINKA</h1>
+                <p className="text-xs text-teal-300 font-medium tracking-wider">RETAILER PORTAL</p>
               </div>
             )}
           </div>
