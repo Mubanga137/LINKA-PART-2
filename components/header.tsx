@@ -60,8 +60,6 @@ export function Header() {
     switch (user.role) {
       case 'retailer':
         return '/retailer-dashboard'
-      case 'admin':
-        return '/admin-dashboard'
       default:
         return '/profile'
     }
@@ -208,11 +206,6 @@ export function Header() {
                       <>
                         <BarChart3 className="mr-2 h-4 w-4" />
                         Dashboard
-                      </>
-                    ) : user.role === 'admin' ? (
-                      <>
-                        <Settings className="mr-2 h-4 w-4" />
-                        Admin Panel
                       </>
                     ) : (
                       <>

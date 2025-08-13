@@ -188,7 +188,7 @@ export default function RetailerDashboardPage() {
 
   return (
     <RetailerDashboardLayout>
-      <div className="p-6 space-y-6 bg-gradient-to-br from-purple-50/50 via-transparent to-indigo-50/50">
+      <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between">
           <div>

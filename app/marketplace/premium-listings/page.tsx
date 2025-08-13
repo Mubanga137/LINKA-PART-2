@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -36,7 +37,10 @@ import {
   Store,
   ChevronRight,
   Clock,
-  MapPin
+  MapPin,
+  Package,
+  Gem,
+  Home
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -81,7 +85,7 @@ interface PremiumListing {
 }
 
 const premiumListings: PremiumListing[] = [
-  // Royal Recommendations
+  // Royal Recommendations - Jewelry & Accessories
   {
     id: "rl001",
     name: "Royal Malachite Crown Collection",
@@ -122,6 +126,46 @@ const premiumListings: PremiumListing[] = [
     royal: true
   },
   {
+    id: "rl001b",
+    name: "Emerald Dynasty Necklace Set",
+    description: "Rare Zambian emerald necklace with matching earrings, crafted by master jewelers",
+    price: 5999.99,
+    originalPrice: 8999.99,
+    images: [
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80",
+      "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80"
+    ],
+    category: "Royal Jewelry",
+    type: "product",
+    vendor: {
+      id: "v001",
+      name: "Royal Zambian Artisans",
+      logo: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.9,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.9,
+    reviewCount: 156,
+    premiumFeatures: ["Rare Emeralds", "Handcrafted", "Royal Collection", "Certified Authentic"],
+    luxuryRating: 5,
+    handcrafted: true,
+    limitedEdition: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Zambian Emerald", "18k White Gold", "Platinum"],
+    certifications: ["GIA Certified", "Royal Heritage Certificate"],
+    warranty: "Lifetime Guarantee",
+    views: 12340,
+    soldCount: 8,
+    tags: ["emerald", "royal", "necklace", "luxury", "premium"],
+    stockLevel: 2,
+    trending: true,
+    featured: true,
+    royal: true
+  },
+  // Premium Services
+  {
     id: "rl002",
     name: "Imperial Concierge Service",
     description: "24/7 personal concierge service for luxury lifestyle management and exclusive experiences",
@@ -155,7 +199,41 @@ const premiumListings: PremiumListing[] = [
     featured: true,
     royal: true
   },
-  // Trending Premium Deals
+  {
+    id: "rl002b",
+    name: "Private Jet Charter Service",
+    description: "Exclusive private jet charter with luxury amenities and personalized flight experiences",
+    price: 12999.99,
+    images: [
+      "https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=600&q=80",
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80"
+    ],
+    category: "Luxury Services",
+    type: "service",
+    vendor: {
+      id: "v002b",
+      name: "Elite Aviation Zambia",
+      logo: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 5.0,
+      location: "Lusaka International Airport"
+    },
+    rating: 5.0,
+    reviewCount: 67,
+    premiumFeatures: ["Private Fleet", "Luxury Amenities", "Personal Crew", "Global Access"],
+    luxuryRating: 5,
+    exclusiveDesign: true,
+    certifications: ["IATA Certified", "Premium Aviation License"],
+    warranty: "Flight Safety Guarantee",
+    views: 5670,
+    soldCount: 23,
+    tags: ["aviation", "private-jet", "luxury", "travel", "premium"],
+    trending: true,
+    featured: true,
+    royal: true
+  },
+  // Art & Collectibles
   {
     id: "rl003",
     name: "Sovereign Wood Sculpture Collection",
@@ -194,6 +272,44 @@ const premiumListings: PremiumListing[] = [
     flashSale: true
   },
   {
+    id: "rl003b",
+    name: "Contemporary African Art Collection",
+    description: "Limited edition paintings by renowned Zambian contemporary artists",
+    price: 2499.99,
+    originalPrice: 3499.99,
+    images: [
+      "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&q=80",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80"
+    ],
+    category: "Art & Collectibles",
+    type: "product",
+    vendor: {
+      id: "v003b",
+      name: "Lusaka Contemporary Gallery",
+      logo: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.9,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.8,
+    reviewCount: 127,
+    premiumFeatures: ["Limited Edition", "Artist Signed", "Certificate of Authenticity", "Gallery Curated"],
+    luxuryRating: 4,
+    handcrafted: true,
+    limitedEdition: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Canvas", "Oil Paint", "Gold Leaf"],
+    certifications: ["Gallery Authentication", "Artist Certificate"],
+    warranty: "Lifetime Authenticity Guarantee",
+    views: 4320,
+    soldCount: 18,
+    tags: ["art", "painting", "contemporary", "african", "premium"],
+    stockLevel: 5,
+    trending: true,
+    flashSale: true
+  },
+  {
     id: "rl004",
     name: "Premium Interior Design Consultation",
     description: "Luxury home and office design consultation with 3D visualization and premium material selection",
@@ -225,6 +341,222 @@ const premiumListings: PremiumListing[] = [
     tags: ["design", "interior", "luxury", "consultation", "premium"],
     trending: true,
     flashSale: true
+  },
+
+  // Luxury Electronics
+  {
+    id: "rl005",
+    name: "Diamond-Encrusted Smart Watch",
+    description: "Limited edition smartwatch with genuine diamonds and 24k gold casing",
+    price: 15999.99,
+    originalPrice: 22999.99,
+    images: [
+      "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=600&q=80",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80"
+    ],
+    category: "Luxury Electronics",
+    type: "product",
+    vendor: {
+      id: "v005",
+      name: "Prestige Tech Zambia",
+      logo: "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.8,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.9,
+    reviewCount: 89,
+    premiumFeatures: ["Diamond Encrusted", "24k Gold", "Swiss Movement", "Smart Features"],
+    luxuryRating: 5,
+    handcrafted: true,
+    limitedEdition: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Genuine Diamonds", "24k Gold", "Sapphire Crystal"],
+    certifications: ["Swiss Made", "Diamond Certification"],
+    warranty: "5 Year Premium Warranty",
+    views: 9876,
+    soldCount: 12,
+    tags: ["smartwatch", "luxury", "diamonds", "gold", "premium"],
+    stockLevel: 3,
+    trending: true,
+    flashSale: true
+  },
+
+  // Luxury Fashion
+  {
+    id: "rl006",
+    name: "Bespoke Luxury Suit Collection",
+    description: "Hand-tailored suits using premium Italian fabrics with personalized fitting",
+    price: 3999.99,
+    originalPrice: 5499.99,
+    images: [
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80"
+    ],
+    category: "Luxury Fashion",
+    type: "product",
+    vendor: {
+      id: "v006",
+      name: "Savile Row Zambia",
+      logo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.9,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.8,
+    reviewCount: 156,
+    premiumFeatures: ["Bespoke Tailoring", "Italian Fabrics", "Personal Fitting", "Custom Design"],
+    luxuryRating: 5,
+    handcrafted: true,
+    exclusiveDesign: true,
+    premiumMaterials: ["Italian Wool", "Silk Lining", "Mother of Pearl Buttons"],
+    certifications: ["Master Tailor Certified", "Italian Fabric Authentic"],
+    warranty: "Lifetime Fit Guarantee",
+    views: 7654,
+    soldCount: 34,
+    tags: ["suits", "bespoke", "luxury", "fashion", "premium"],
+    stockLevel: 10,
+    trending: true,
+    flashSale: true
+  },
+
+  // Premium Real Estate Services
+  {
+    id: "rl007",
+    name: "Luxury Property Investment Consultation",
+    description: "Expert consultation for high-end real estate investments and portfolio management",
+    price: 2999.99,
+    images: [
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
+    ],
+    category: "Real Estate Services",
+    type: "service",
+    vendor: {
+      id: "v007",
+      name: "Elite Property Advisors",
+      logo: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.9,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.8,
+    reviewCount: 203,
+    premiumFeatures: ["Expert Analysis", "Market Insights", "Investment Strategy", "Portfolio Management"],
+    luxuryRating: 4,
+    certifications: ["Real Estate License", "Investment Advisor Certified"],
+    warranty: "Results Guarantee",
+    views: 4567,
+    soldCount: 78,
+    tags: ["real-estate", "investment", "luxury", "consultation", "premium"],
+    trending: true
+  },
+
+  // Luxury Automotive
+  {
+    id: "rl008",
+    name: "Custom Luxury Vehicle Detailing",
+    description: "Premium automotive detailing service for luxury and exotic vehicles",
+    price: 899.99,
+    originalPrice: 1299.99,
+    images: [
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80"
+    ],
+    category: "Automotive Services",
+    type: "service",
+    vendor: {
+      id: "v008",
+      name: "Premium Auto Care",
+      logo: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.7,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.8,
+    reviewCount: 267,
+    premiumFeatures: ["Paint Protection", "Interior Detailing", "Ceramic Coating", "Mobile Service"],
+    luxuryRating: 4,
+    certifications: ["Professional Detailer Certified", "Premium Service Provider"],
+    warranty: "6 Month Protection Guarantee",
+    views: 5432,
+    soldCount: 123,
+    tags: ["automotive", "detailing", "luxury", "service", "premium"],
+    trending: true,
+    flashSale: true
+  },
+
+  // Fine Dining & Culinary
+  {
+    id: "rl009",
+    name: "Private Chef Fine Dining Experience",
+    description: "Michelin-trained chef creates bespoke dining experiences in your home",
+    price: 1599.99,
+    images: [
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=600&q=80"
+    ],
+    category: "Culinary Services",
+    type: "service",
+    vendor: {
+      id: "v009",
+      name: "Elite Culinary Experiences",
+      logo: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 5.0,
+      location: "Lusaka, Zambia"
+    },
+    rating: 4.9,
+    reviewCount: 98,
+    premiumFeatures: ["Michelin Training", "Bespoke Menu", "Premium Ingredients", "Table Service"],
+    luxuryRating: 5,
+    exclusiveDesign: true,
+    certifications: ["Michelin Trained", "Culinary Arts Certified"],
+    warranty: "Satisfaction Guarantee",
+    views: 3210,
+    soldCount: 56,
+    tags: ["dining", "chef", "luxury", "culinary", "premium"],
+    trending: true
+  },
+
+  // Wellness & Spa
+  {
+    id: "rl010",
+    name: "Luxury Spa Retreat Package",
+    description: "Exclusive wellness retreat with premium treatments and personalized therapy",
+    price: 2499.99,
+    originalPrice: 3499.99,
+    images: [
+      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
+    ],
+    category: "Wellness Services",
+    type: "service",
+    vendor: {
+      id: "v010",
+      name: "Serenity Luxury Spa",
+      logo: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=100&q=80",
+      verified: true,
+      premiumSeller: true,
+      rating: 4.8,
+      location: "Livingstone, Zambia"
+    },
+    rating: 4.9,
+    reviewCount: 189,
+    premiumFeatures: ["Luxury Treatments", "Personal Therapist", "Organic Products", "Wellness Program"],
+    luxuryRating: 5,
+    certifications: ["International Spa Association", "Wellness Certified"],
+    warranty: "Relaxation Guarantee",
+    views: 6789,
+    soldCount: 67,
+    tags: ["spa", "wellness", "luxury", "retreat", "premium"],
+    trending: true,
+    flashSale: true
   }
 ];
 
@@ -232,15 +564,10 @@ export default function PremiumListingsPage() {
   const [sortBy, setSortBy] = useState<'featured' | 'price' | 'rating' | 'newest'>('featured');
   const [filterBy, setFilterBy] = useState<'all' | 'products' | 'services' | 'royal' | 'trending'>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Premium loading animation
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1200);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Dark mode detection
   useEffect(() => {
@@ -258,15 +585,25 @@ export default function PremiumListingsPage() {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Filter and sort listings
+  // Enhanced filter and sort listings
   const filteredListings = premiumListings
     .filter(listing => {
+      // Search filter
       if (searchQuery) {
-        return listing.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-               listing.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-               listing.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        const query = searchQuery.toLowerCase();
+        const matchesName = listing.name.toLowerCase().includes(query);
+        const matchesDescription = listing.description.toLowerCase().includes(query);
+        const matchesCategory = listing.category.toLowerCase().includes(query);
+        const matchesVendor = listing.vendor.name.toLowerCase().includes(query);
+        const matchesTags = listing.tags.some(tag => tag.toLowerCase().includes(query));
+        const matchesFeatures = listing.premiumFeatures.some(feature => feature.toLowerCase().includes(query));
+
+        if (!(matchesName || matchesDescription || matchesCategory || matchesVendor || matchesTags || matchesFeatures)) {
+          return false;
+        }
       }
-      
+
+      // Category filter
       switch (filterBy) {
         case 'products':
           return listing.type === 'product';
@@ -283,11 +620,14 @@ export default function PremiumListingsPage() {
     .sort((a, b) => {
       switch (sortBy) {
         case 'featured':
-          return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+          // Prioritize royal > featured > trending
+          const aScore = (a.royal ? 3 : 0) + (a.featured ? 2 : 0) + (a.trending ? 1 : 0);
+          const bScore = (b.royal ? 3 : 0) + (b.featured ? 2 : 0) + (b.trending ? 1 : 0);
+          return bScore - aScore;
         case 'price':
           return b.price - a.price;
         case 'rating':
-          return b.rating - a.rating;
+          return b.rating - a.rating || b.reviewCount - a.reviewCount;
         case 'newest':
           return b.views - a.views;
         default:
@@ -358,118 +698,127 @@ export default function PremiumListingsPage() {
   }
 
   return (
-    <div className={`min-h-screen relative overflow-hidden ${
-      isDarkMode ? 'premium-bg-dark' : 'premium-bg-light'
-    }`}>
-      {/* Royal Side Navigation */}
-      <SideNavigation variant="premium" />
+    <div className="min-h-screen bg-white lg:flex">
+      {/* Side Navigation */}
+      <div className="lg:w-64 lg:flex-shrink-0">
+        <SideNavigation variant="premium" />
+      </div>
 
       {/* Main Content Area */}
-      <div className="lg:pl-64">
+      <div className="lg:flex-1 lg:pl-0 lg:min-w-0">
         <MinimalHeader variant="premium" showSearch={true} />
-        
-        {/* Premium Background Effects */}
-        <div className={`absolute inset-0 ${
-          isDarkMode ? 'premium-overlay-dark' : 'premium-overlay-light'
-        } pointer-events-none`}></div>
-        
-        {/* Floating Premium Particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={`particle-${i}`}
-              className={`absolute w-1 h-1 rounded-full animate-premium-float ${
-                isDarkMode ? 'bg-yellow-400/30' : 'bg-blue-400/30'
-              }`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${6 + Math.random() * 8}s`
-              }}
-            />
-          ))}
-        </div>
 
-        {/* Premium Content Header */}
-        <div className={`relative z-10 backdrop-blur-xl border-b-2 ${
-          isDarkMode 
-            ? 'border-yellow-400/20 bg-slate-900/80' 
-            : 'border-blue-400/20 bg-white/80'
-        }`}>
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            {/* Filters Bar */}
-            <div className="flex items-center justify-between pt-4 border-t border-current/10">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Filter className="h-4 w-4" />
-                  <span className="text-sm font-medium">Filter:</span>
+        {/* Premium Page Header */}
+        <div className={`border-b ${
+          isDarkMode
+            ? 'border-yellow-400/20 bg-gradient-to-r from-slate-900/95 via-slate-800/90 to-slate-900/95'
+            : 'border-blue-400/20 bg-gradient-to-r from-white/95 via-blue-50/80 to-white/95'
+        } shadow-sm`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Premium Header Title */}
+            <div className="py-8 text-center">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                  isDarkMode
+                    ? 'bg-gradient-to-br from-yellow-400/20 to-amber-500/20 border border-yellow-400/30'
+                    : 'bg-gradient-to-br from-blue-400/20 to-blue-600/20 border border-blue-400/30'
+                }`}>
+                  <Crown className="h-6 w-6 text-yellow-500" />
                 </div>
-                <div className="flex gap-2">
-                  {[
-                    { key: 'all', label: 'All' },
-                    { key: 'royal', label: 'Royal', icon: Crown },
-                    { key: 'trending', label: 'Trending', icon: TrendingUp },
-                    { key: 'products', label: 'Products' },
-                    { key: 'services', label: 'Services' }
-                  ].map((filter) => (
-                    <Button
-                      key={filter.key}
-                      variant={filterBy === filter.key ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setFilterBy(filter.key as any)}
-                      className={`btn-premium text-xs ${
-                        filterBy === filter.key 
-                          ? '' 
-                          : isDarkMode 
-                            ? 'bg-slate-800/50 text-slate-300 border-slate-600' 
-                            : 'bg-white/50 text-slate-700 border-slate-300'
-                      }`}
-                    >
-                      {filter.icon && <filter.icon className="h-3 w-3 mr-1" />}
-                      {filter.label}
-                    </Button>
-                  ))}
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-slate-900">
+                    Premium Listings
+                  </h1>
+                  <p className="text-sm text-slate-600">
+                    Curated Excellence • {filteredListings.length} Items
+                  </p>
                 </div>
               </div>
+            </div>
 
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <SortAsc className="h-4 w-4" />
-                  <span className="text-sm font-medium">Sort:</span>
+            {/* Search and Filters */}
+            <div className="border-t border-slate-200 py-6 space-y-6">
+              {/* Search Bar */}
+              <div className="relative max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-500" />
+                <input
+                  type="text"
+                  placeholder="Search premium products and services..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                />
+              </div>
+
+              {/* Filter Pills & Controls */}
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="text-sm font-medium text-slate-700">Filter:</span>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { key: 'all', label: 'All Categories', icon: null },
+                      { key: 'royal', label: 'Royal Collection', icon: Crown },
+                      { key: 'trending', label: 'Trending Now', icon: TrendingUp },
+                      { key: 'products', label: 'Products', icon: Package },
+                      { key: 'services', label: 'Services', icon: User }
+                    ].map((filter) => (
+                      <Button
+                        key={filter.key}
+                        variant={filterBy === filter.key ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setFilterBy(filter.key as any)}
+                        className={`${
+                          filterBy === filter.key
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                        }`}
+                      >
+                        {filter.icon && <filter.icon className="h-3 w-3 mr-2" />}
+                        {filter.label}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className={`px-3 py-1 rounded-lg border text-sm focus:outline-none ${
-                    isDarkMode 
-                      ? 'bg-slate-800/50 border-yellow-400/20 text-white' 
-                      : 'bg-white/50 border-blue-400/20 text-slate-900'
-                  }`}
-                >
-                  <option value="featured">Featured</option>
-                  <option value="rating">Highest Rated</option>
-                  <option value="price">Price High-Low</option>
-                  <option value="newest">Newest</option>
-                </select>
 
-                <div className="flex border rounded-lg overflow-hidden">
-                  <Button
-                    variant={viewMode === 'grid' ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                    className="rounded-none border-0"
+                <div className="flex items-center gap-4">
+                  <span className="text-sm font-medium text-slate-700">Sort:</span>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as any)}
+                    className="px-4 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                   >
-                    <Grid3X3 className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant={viewMode === 'list' ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setViewMode('list')}
-                    className="rounded-none border-0"
-                  >
-                    <List className="h-4 w-4" />
-                  </Button>
+                    <option value="featured">Featured First</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="price">Price High-Low</option>
+                    <option value="newest">Newest Arrivals</option>
+                  </select>
+
+                  <div className="flex border border-slate-300 rounded-lg overflow-hidden">
+                    <Button
+                      variant={viewMode === 'grid' ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => setViewMode('grid')}
+                      className={`rounded-none border-0 ${
+                        viewMode === 'grid'
+                          ? 'bg-blue-600 text-white'
+                          : 'text-slate-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      <Grid3X3 className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant={viewMode === 'list' ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => setViewMode('list')}
+                      className={`rounded-none border-0 ${
+                        viewMode === 'list'
+                          ? 'bg-blue-600 text-white'
+                          : 'text-slate-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      <List className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -477,38 +826,41 @@ export default function PremiumListingsPage() {
         </div>
 
         {/* Main Content */}
-        <main className="relative z-10 max-w-7xl mx-auto px-6 py-8 space-y-12">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
           {/* Royal Recommendations */}
           {royalRecommendations.length > 0 && (
-            <section className="space-y-6">
-              <div className="text-center">
-                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                  isDarkMode 
-                    ? 'bg-slate-800/50 border-yellow-400/30' 
-                    : 'bg-white/50 border-blue-400/30'
-                }`}>
-                  <Crown className="h-5 w-5 crown-glow" />
-                  <span className="text-sm font-medium uppercase tracking-wide">Royal Collection</span>
+            <section className="space-y-8">
+              <div className="text-center py-8">
+                <div className="inline-flex items-center gap-3 bg-yellow-50 border border-yellow-200 rounded-full px-6 py-3 mb-6">
+                  <Crown className="h-5 w-5 text-yellow-600" />
+                  <span className="text-sm font-semibold text-yellow-800 uppercase tracking-wider">Royal Collection</span>
                 </div>
-                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                   Royal Recommendations
                 </h2>
-                <div className={`w-16 h-0.5 mx-auto mb-4 ${
-                  isDarkMode 
-                    ? 'bg-gradient-to-r from-yellow-400 to-amber-500' 
-                    : 'bg-gradient-to-r from-blue-400 to-blue-600'
-                }`}></div>
-                <p className={`text-lg max-w-2xl mx-auto ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  Handpicked selections of the finest premium products and services
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-6">
+                  Handpicked selections of the finest premium products and services, curated for discerning customers
                 </p>
+                <div className="flex items-center justify-center gap-6 text-sm text-slate-500">
+                  <div className="flex items-center gap-2">
+                    <Diamond className="h-4 w-4 text-blue-500" />
+                    <span>Authenticated</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Award className="h-4 w-4 text-blue-500" />
+                    <span>Verified Quality</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-blue-500" />
+                    <span>Premium Guarantee</span>
+                  </div>
+                </div>
               </div>
 
               <div className={`grid gap-6 ${
-                viewMode === 'grid' 
-                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                  : 'grid-cols-1'
+                viewMode === 'grid'
+                  ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                  : 'grid-cols-1 max-w-4xl mx-auto'
               }`}>
                 {royalRecommendations.map((listing, index) => (
                   <PremiumListingCard 
@@ -525,31 +877,33 @@ export default function PremiumListingsPage() {
 
           {/* Trending Premium Deals */}
           {trendingDeals.length > 0 && (
-            <section className="space-y-6">
-              <div className="text-center">
-                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                  isDarkMode 
-                    ? 'bg-slate-800/50 border-emerald-400/30' 
-                    : 'bg-white/50 border-emerald-400/30'
-                }`}>
-                  <Flame className="h-5 w-5 text-emerald-500" />
-                  <span className="text-sm font-medium uppercase tracking-wide text-emerald-500">Hot Deals</span>
+            <section className="space-y-8">
+              <div className="text-center py-8">
+                <div className="inline-flex items-center gap-3 bg-red-50 border border-red-200 rounded-full px-6 py-3 mb-6">
+                  <Flame className="h-5 w-5 text-red-600" />
+                  <span className="text-sm font-semibold text-red-800 uppercase tracking-wider">Flash Deals</span>
+                  <Badge className="bg-red-500 text-white text-xs px-2 py-1">
+                    <Clock className="h-3 w-3 mr-1" />
+                    Limited Time
+                  </Badge>
                 </div>
-                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                   Trending Premium Deals
                 </h2>
-                <div className="w-16 h-0.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto mb-4"></div>
-                <p className={`text-lg max-w-2xl mx-auto ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  Limited time offers on premium products and services
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4">
+                  Exclusive limited-time offers on premium products and luxury services
                 </p>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-sm text-red-600 font-medium">⚡ Flash Sale Active</span>
+                  <span className="text-sm text-slate-500">•</span>
+                  <span className="text-sm text-slate-500">Up to 50% Off</span>
+                </div>
               </div>
 
               <div className={`grid gap-6 ${
-                viewMode === 'grid' 
-                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                  : 'grid-cols-1'
+                viewMode === 'grid'
+                  ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                  : 'grid-cols-1 max-w-4xl mx-auto'
               }`}>
                 {trendingDeals.map((listing, index) => (
                   <PremiumListingCard 
@@ -566,31 +920,38 @@ export default function PremiumListingsPage() {
 
           {/* Luxury Categories */}
           {remainingListings.length > 0 && (
-            <section className="space-y-6">
-              <div className="text-center">
-                <div className={`inline-flex items-center gap-2 rounded-full px-6 py-3 mb-4 border-2 ${
-                  isDarkMode 
-                    ? 'bg-slate-800/50 border-blue-400/30' 
-                    : 'bg-white/50 border-blue-400/30'
-                }`}>
-                  <Sparkles className="h-5 w-5 text-blue-500" />
-                  <span className="text-sm font-medium uppercase tracking-wide text-blue-500">Premium Collection</span>
+            <section className="space-y-8">
+              <div className="text-center py-8">
+                <div className="inline-flex items-center gap-3 bg-blue-50 border border-blue-200 rounded-full px-6 py-3 mb-6">
+                  <Sparkles className="h-5 w-5 text-blue-600" />
+                  <span className="text-sm font-semibold text-blue-800 uppercase tracking-wider">Premium Collection</span>
                 </div>
-                <h2 className="text-3xl font-bold logo-3d-premium font-serif mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                   Luxury Categories
                 </h2>
-                <div className="w-16 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto mb-4"></div>
-                <p className={`text-lg max-w-2xl mx-auto ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  Explore our curated selection of premium products and services
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
+                  Discover our extensive collection of premium products and luxury services across multiple categories
                 </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                  {[
+                    { icon: Gem, label: "Jewelry", count: "12" },
+                    { icon: Sparkles, label: "Fashion", count: "8" },
+                    { icon: Home, label: "Services", count: "15" },
+                    { icon: Crown, label: "Art", count: "6" }
+                  ].map((cat, index) => (
+                    <div key={index} className="p-4 rounded-lg border bg-white border-slate-200">
+                      <cat.icon className="h-6 w-6 mx-auto mb-2 text-blue-500" />
+                      <div className="text-sm font-medium text-slate-900">{cat.label}</div>
+                      <div className="text-xs text-slate-500">{cat.count} items</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className={`grid gap-6 ${
-                viewMode === 'grid' 
-                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                  : 'grid-cols-1'
+                viewMode === 'grid'
+                  ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                  : 'grid-cols-1 max-w-4xl mx-auto'
               }`}>
                 {remainingListings.map((listing, index) => (
                   <PremiumListingCard 
@@ -608,15 +969,11 @@ export default function PremiumListingsPage() {
           {/* Empty State */}
           {filteredListings.length === 0 && (
             <div className="text-center py-12">
-              <Crown className={`h-16 w-16 mx-auto mb-4 ${
-                isDarkMode ? 'text-slate-600' : 'text-slate-400'
-              }`} />
-              <h3 className={`text-xl font-semibold mb-2 ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}>
+              <Crown className="h-16 w-16 mx-auto mb-4 text-slate-400" />
+              <h3 className="text-xl font-semibold mb-2 text-slate-600">
                 No premium listings found
               </h3>
-              <p className={`${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+              <p className="text-slate-500">
                 Try adjusting your search or filters to find what you're looking for
               </p>
             </div>
@@ -627,13 +984,13 @@ export default function PremiumListingsPage() {
   );
 }
 
-// Premium Listing Card Component
-function PremiumListingCard({ 
-  listing, 
-  viewMode, 
-  isDarkMode, 
-  animationDelay 
-}: { 
+// Redesigned Premium Listing Card Component with Uniform Layout
+function PremiumListingCard({
+  listing,
+  viewMode,
+  isDarkMode,
+  animationDelay
+}: {
   listing: PremiumListing;
   viewMode: 'grid' | 'list';
   isDarkMode: boolean;
@@ -641,254 +998,239 @@ function PremiumListingCard({
 }) {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const discountPercentage = listing.originalPrice 
+  const discountPercentage = listing.originalPrice
     ? Math.round(((listing.originalPrice - listing.price) / listing.originalPrice) * 100)
     : 0;
 
   return (
-    <Card 
-      className={`premium-card group gpu-premium overflow-hidden ${
-        viewMode === 'list' ? 'flex flex-row' : ''
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: animationDelay / 1000, duration: 0.4 }}
+      className={`group h-full ${
+        viewMode === 'list' ? 'flex flex-row max-w-4xl mx-auto' : ''
       }`}
-      style={{ 
-        animationDelay: `${animationDelay}ms`,
-        animationFillMode: 'forwards'
-      }}
     >
+      <Card
+        className={`overflow-hidden h-full flex flex-col bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-200 rounded-lg ${
+          viewMode === 'list' ? 'flex-row' : ''
+        } ${
+          listing.royal ? 'ring-1 ring-yellow-200' : ''
+        }`}
+      >
       {/* Image Section */}
-      <div className={`relative overflow-hidden ${
-        viewMode === 'list' ? 'w-48 flex-shrink-0' : 'aspect-[4/3]'
-      } ${isDarkMode ? 'bg-slate-800/50' : 'bg-slate-100/50'}`}>
+      <div className={`relative overflow-hidden rounded-t-lg ${
+        viewMode === 'list' ? 'w-72 flex-shrink-0' : 'aspect-[4/3]'
+      } bg-slate-100`}>
         <Image
           src={listing.images[currentImageIndex]}
-          alt={listing.name}
+          alt={`${listing.name} - Premium ${listing.type}`}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-700"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes={viewMode === 'list' ? '288px' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'}
+          loading="lazy"
+          quality={85}
         />
-        
-        {/* Shimmer Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-        
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
-          <Badge className={`${
-            listing.royal 
-              ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900' 
-              : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
-          } px-3 py-1 shadow-lg`}>
+
+        {/* Premium Badge */}
+        <div className="absolute top-2 left-2">
+          <Badge className={`text-xs font-medium px-2 py-1 ${
+            listing.royal
+              ? 'bg-yellow-100 text-yellow-800 border border-yellow-200'
+              : 'bg-blue-100 text-blue-800 border border-blue-200'
+          }`}>
             <Crown className="h-3 w-3 mr-1" />
-            {listing.royal ? 'Royal' : 'Premium'}
+            Premium
           </Badge>
-          
+        </div>
+
+        {/* Rating Badge */}
+        {listing.rating >= 4.5 && (
+          <div className="absolute top-2 right-2">
+            <Badge className="bg-green-100 text-green-800 border border-green-200 text-xs font-medium px-2 py-1">
+              <Star className="h-3 w-3 mr-1 fill-current" />
+              {listing.rating}
+            </Badge>
+          </div>
+        )}
+
+        {/* Status Badges */}
+        <div className="absolute bottom-2 left-2 flex gap-1">
           {listing.trending && (
-            <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-2 py-1 text-xs animate-pulse">
-              <TrendingUp className="h-2.5 w-2.5 mr-1" />
+            <Badge className="bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs px-2 py-1">
               Trending
             </Badge>
           )}
-          
           {listing.flashSale && (
-            <Badge className="bg-gradient-to-r from-red-500 to-orange-600 text-white px-2 py-1 text-xs animate-pulse">
-              <Zap className="h-2.5 w-2.5 mr-1" />
-              Flash Sale
+            <Badge className="bg-red-100 text-red-800 border border-red-200 text-xs px-2 py-1">
+              Sale
+            </Badge>
+          )}
+          {listing.limitedEdition && (
+            <Badge className="bg-purple-100 text-purple-800 border border-purple-200 text-xs px-2 py-1">
+              Limited
             </Badge>
           )}
         </div>
 
-        {/* Type Badge */}
-        <div className="absolute top-3 right-3">
-          <Badge variant="outline" className={`text-xs ${
-            isDarkMode ? 'bg-slate-800/80 border-slate-600' : 'bg-white/80 border-slate-300'
-          }`}>
-            {listing.type === 'service' ? <User className="h-2.5 w-2.5 mr-1" /> : <Store className="h-2.5 w-2.5 mr-1" />}
-            {listing.type === 'service' ? 'Service' : 'Product'}
-          </Badge>
+        {/* Wishlist Button */}
+        <div className="absolute bottom-2 right-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsWishlisted(!isWishlisted);
+            }}
+            className="bg-white/90 border-slate-200 hover:bg-white text-slate-600 p-1.5"
+            aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+          >
+            <Heart className={`h-3 w-3 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
+          </Button>
         </div>
-
-        {/* Quick Actions */}
-        <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="flex gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setIsWishlisted(!isWishlisted)}
-              className={`flex-1 bg-white/90 backdrop-blur-xl border-0 hover:bg-white text-slate-900 text-xs`}
-            >
-              <Heart className={`h-3 w-3 mr-1 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
-              {isWishlisted ? 'Saved' : 'Save'}
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              className="flex-1 bg-white/90 backdrop-blur-xl border-0 hover:bg-white text-slate-900 text-xs"
-            >
-              <Share2 className="h-3 w-3 mr-1" />
-              Share
-            </Button>
-          </div>
-        </div>
-
-        {/* Image Indicators */}
-        {listing.images.length > 1 && (
-          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            {listing.images.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentImageIndex 
-                    ? 'bg-white shadow-lg' 
-                    : 'bg-white/50 hover:bg-white/75'
-                }`}
-                onClick={() => setCurrentImageIndex(index)}
-              />
-            ))}
-          </div>
-        )}
       </div>
 
-      {/* Content Section */}
-      <CardContent className={`p-4 ${viewMode === 'list' ? 'flex-1' : ''}`}>
+      {/* Card Content */}
+      <CardContent className="p-4 flex-1 flex flex-col space-y-3">
         {/* Vendor Info */}
-        <div className="flex items-center gap-2 mb-3">
-          <Image
-            src={listing.vendor.logo}
-            alt={listing.vendor.name}
-            width={20}
-            height={20}
-            className="rounded-full ring-2 ring-current/20"
-          />
-          <span className={`text-sm font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
-            {listing.vendor.name}
-          </span>
-          {listing.vendor.verified && (
-            <Verified className="h-3 w-3 text-blue-500" />
-          )}
-          <div className="flex items-center gap-1 ml-auto">
-            <MapPin className="h-3 w-3 text-slate-400" />
-            <span className="text-xs text-slate-400">{listing.vendor.location}</span>
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <Image
+              src={listing.vendor.logo}
+              alt={listing.vendor.name}
+              width={20}
+              height={20}
+              className="rounded-full ring-1 ring-slate-200"
+            />
+            {listing.vendor.premiumSeller && (
+              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-yellow-400 rounded-full flex items-center justify-center">
+                <Crown className="h-1 w-1 text-slate-900" />
+              </div>
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1">
+              <span className="text-xs font-medium text-slate-700 truncate">
+                {listing.vendor.name}
+              </span>
+              {listing.vendor.verified && (
+                <Verified className="h-3 w-3 text-blue-500 flex-shrink-0" />
+              )}
+            </div>
+            <div className="flex items-center gap-1">
+              <MapPin className="h-2.5 w-2.5 text-slate-400 flex-shrink-0" />
+              <span className="text-xs text-slate-500 truncate">{listing.vendor.location}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-0.5">
+            <Star className="h-3 w-3 text-yellow-400 fill-current" />
+            <span className="text-xs font-medium text-slate-600">{listing.vendor.rating}</span>
           </div>
         </div>
 
         {/* Title & Description */}
-        <div className="mb-3">
-          <h3 className={`font-bold text-lg line-clamp-2 leading-tight mb-2 ${
-            isDarkMode ? 'text-white' : 'text-slate-900'
-          }`}>
+        <div className="space-y-2">
+          <h3 className="font-semibold text-base leading-tight line-clamp-2 text-slate-900">
             {listing.name}
           </h3>
-          <p className={`text-sm line-clamp-2 ${
-            isDarkMode ? 'text-slate-400' : 'text-slate-600'
-          }`}>
+          <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
             {listing.description}
           </p>
         </div>
 
         {/* Features */}
-        <div className="flex flex-wrap gap-1 mb-3">
-          {listing.premiumFeatures.slice(0, 3).map((feature) => (
-            <Badge 
-              key={feature} 
-              variant="outline" 
-              className={`text-xs border-current/30 bg-current/5 ${
-                isDarkMode ? 'text-yellow-400' : 'text-blue-600'
-              }`}
+        <div className="flex flex-wrap gap-1">
+          {listing.premiumFeatures.slice(0, 2).map((feature) => (
+            <Badge
+              key={feature}
+              variant="outline"
+              className="text-xs border-blue-200 text-blue-700 bg-blue-50 px-2 py-1"
             >
               {feature}
             </Badge>
           ))}
-          {listing.premiumFeatures.length > 3 && (
-            <Badge variant="outline" className="text-xs border-slate-300 text-slate-500 bg-slate-50">
-              +{listing.premiumFeatures.length - 3} more
+          {listing.premiumFeatures.length > 2 && (
+            <Badge variant="outline" className="text-xs border-slate-200 text-slate-600 bg-slate-50 px-2 py-1">
+              +{listing.premiumFeatures.length - 2}
             </Badge>
           )}
         </div>
 
         {/* Price */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className={`text-xl font-bold ${
-            isDarkMode ? 'text-yellow-400' : 'text-blue-600'
-          }`}>
-            K{listing.price.toFixed(2)}
-          </span>
-          {listing.originalPrice && (
-            <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-bold text-slate-900">
+              K{listing.price.toFixed(2)}
+            </span>
+            {listing.originalPrice && (
               <span className="text-sm text-slate-400 line-through">
                 K{listing.originalPrice.toFixed(2)}
               </span>
-              <Badge className="bg-green-100 text-green-700 border border-green-200 text-xs">
-                -{discountPercentage}%
-              </Badge>
-            </div>
+            )}
+          </div>
+          {listing.originalPrice && (
+            <Badge className="bg-green-100 text-green-800 border-0 text-xs font-medium px-2 py-1">
+              -{discountPercentage}% OFF
+            </Badge>
           )}
         </div>
 
         {/* Rating & Stats */}
-        <div className={`flex items-center justify-between text-sm mb-4 ${
-          isDarkMode ? 'text-slate-400' : 'text-slate-600'
-        }`}>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star 
-                  key={i} 
-                  className={`h-3 w-3 ${
-                    i < Math.floor(listing.rating) 
-                      ? 'text-yellow-500 fill-current' 
-                      : 'text-slate-300'
-                  }`} 
-                />
-              ))}
-            </div>
+        <div className="flex items-center justify-between text-sm text-slate-600">
+          <div className="flex items-center gap-1">
+            <Star className="h-3 w-3 text-yellow-400 fill-current" />
             <span className="font-medium">{listing.rating}</span>
-            <span>({listing.reviewCount})</span>
+            <span className="text-slate-400">({listing.reviewCount})</span>
           </div>
-          <div className="flex items-center gap-3 text-xs">
-            <div className="flex items-center gap-1">
-              <Eye className="h-3 w-3" />
-              <span>{listing.views.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <ShoppingCart className="h-3 w-3" />
-              <span>{listing.soldCount} sold</span>
-            </div>
+          <div className="flex items-center gap-3 text-xs text-slate-500">
+            <span>{listing.views.toLocaleString()} views</span>
+            <span>{listing.soldCount} sold</span>
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="flex gap-2">
-          <Button 
-            className="btn-premium flex-1 text-sm font-semibold py-2 shadow-lg"
+        {/* Action Buttons */}
+        <div className="flex gap-2 pt-2 border-t border-slate-100">
+          <Button
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-3"
+            aria-label={`${listing.type === 'service' ? 'Book' : 'Add to cart'} ${listing.name}`}
           >
-            <ShoppingCart className="h-4 w-4 mr-2" />
+            <ShoppingCart className="h-4 w-4 mr-1" />
             {listing.type === 'service' ? 'Book Now' : 'Add to Cart'}
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className={`px-3 border-2 rounded-lg transition-all duration-300 hover:scale-105 ${
-              isDarkMode 
-                ? 'border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10' 
-                : 'border-blue-400/30 text-blue-600 hover:bg-blue-400/10'
-            }`}
-            asChild
-          >
-            <Link href={`/vendors/${listing.vendor.id}`}>
-              <ExternalLink className="h-4 w-4" />
-            </Link>
-          </Button>
+          {listing.vendor?.id ? (
+            <Button
+              variant="outline"
+              className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-medium py-2 px-3"
+              asChild
+            >
+              <Link href={`/vendors/${listing.vendor.id}`} aria-label={`Visit ${listing.vendor.name} store`}>
+                <ExternalLink className="h-4 w-4 mr-1" />
+                Visit Store
+              </Link>
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              disabled
+              className="flex-1 border-slate-200 text-slate-400 cursor-not-allowed text-sm font-medium py-2 px-3"
+            >
+              <ExternalLink className="h-4 w-4 mr-1" />
+              Store Unavailable
+            </Button>
+          )}
         </div>
 
         {/* Trust Signals */}
         {listing.certifications && listing.certifications.length > 0 && (
-          <div className="pt-3 mt-3 border-t border-current/10">
-            <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
-              <Shield className="h-3 w-3 text-green-600" />
-              <span className="font-medium">{listing.certifications[0]}</span>
-            </div>
+          <div className="flex items-center justify-center gap-1 text-xs text-slate-500">
+            <Shield className="h-3 w-3 text-green-600" />
+            <span>{listing.certifications[0]}</span>
           </div>
         )}
       </CardContent>
-    </Card>
+      </Card>
+    </motion.div>
   );
 }

@@ -6,7 +6,7 @@ export interface User {
   id: string
   email: string
   name: string
-  role: 'customer' | 'retailer' | 'admin'
+  role: 'customer' | 'retailer'
   avatar?: string
   phone?: string
   location?: string
@@ -79,8 +79,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const mockUser: User = {
         id: Math.random().toString(36).substr(2, 9),
         email,
-        name: email.includes('retailer') ? 'John Retailer' : email.includes('admin') ? 'Admin User' : 'Jane Customer',
-        role: email.includes('retailer') ? 'retailer' : email.includes('admin') ? 'admin' : 'customer',
+        name: email.includes('retailer') ? 'John Retailer' : 'Jane Customer',
+        role: email.includes('retailer') ? 'retailer' : 'customer',
         avatar: '/placeholder.svg?height=100&width=100',
         phone: '+260 97 123-4567',
         location: 'Lusaka, Zambia',
@@ -149,8 +149,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return '/customer-dashboard'
       case 'retailer':
         return '/retailer/dashboard'
-      case 'admin':
-        return '/admin'
       default:
         return '/customer-dashboard'
     }

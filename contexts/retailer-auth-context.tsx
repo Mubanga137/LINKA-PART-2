@@ -8,7 +8,7 @@ interface User {
   id: string;
   name: string;
   email: string;
-  role: 'retailer' | 'customer' | 'admin';
+  role: 'retailer' | 'customer';
   avatar?: string;
   storeId?: string;
   verified: boolean;

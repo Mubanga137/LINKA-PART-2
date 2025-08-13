@@ -14,10 +14,9 @@ export function useAuthRedirect() {
     if (isLoading || !user) return;
 
     // Don't redirect if already on the correct dashboard
-    const isOnCorrectDashboard = 
+    const isOnCorrectDashboard =
       (user.role === 'customer' && pathname === '/customer-dashboard') ||
-      (user.role === 'retailer' && pathname === '/retailer/dashboard') ||
-      (user.role === 'admin' && pathname === '/admin');
+      (user.role === 'retailer' && pathname === '/retailer/dashboard');
 
     if (isOnCorrectDashboard) return;
 
@@ -49,9 +48,6 @@ export function useAuthRedirect() {
           break;
         case 'retailer':
           router.push('/retailer/dashboard');
-          break;
-        case 'admin':
-          router.push('/admin');
           break;
       }
     }

@@ -121,7 +121,7 @@ export default function ProtectedRoute({
           </CardHeader>
           <CardContent className="text-center">
             <p className="text-gray-600 mb-6">
-              You don't have permission to access this feature. Please contact your administrator or upgrade your plan.
+              You don't have permission to access this feature. Please upgrade your plan to access this functionality.
             </p>
             <div className="space-y-3">
               <Button onClick={() => router.push('/retailer/dashboard')} className="w-full">
