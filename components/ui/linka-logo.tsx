@@ -40,11 +40,11 @@ export default function LinkaLogo({
     >
       {/* Main Logo Container with Glassmorphism */}
       <div className={`
-        relative w-full h-full rounded-xl overflow-hidden
+        relative w-full h-full rounded-xl overflow-hidden flex items-center justify-center
         ${variant === 'sidebar' ? 'bg-white/10 backdrop-blur-md border border-white/20' : ''}
         ${variant === 'header' ? 'bg-slate-900/5 backdrop-blur-sm' : ''}
         ${animated ? 'transition-all duration-500 ease-out' : ''}
-        ${isHovered && animated ? 'scale-110 rotate-2' : ''}
+        ${isHovered && animated ? 'scale-105' : ''}
       `}>
         
         {/* Glassmorphism Background Overlay - Official Colors */}
