@@ -275,8 +275,7 @@ export default function PremiumDashboardLayout({ children }: PremiumDashboardLay
             </div>
             {!sidebarCollapsed && (
               <div className="ml-2">
-                <h1 className="text-xl font-bold text-white tracking-wide">LINKA</h1>
-                <p className="text-xs text-teal-300 font-medium tracking-wider">RETAILER PORTAL</p>
+                <p className="text-sm text-teal-300 font-medium tracking-wider">RETAILER PORTAL</p>
               </div>
             )}
           </div>
