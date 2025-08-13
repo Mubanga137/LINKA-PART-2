@@ -10,8 +10,8 @@ interface LinkaLogoProps {
 }
 
 const sizeClasses = {
-  sm: 'w-8 h-8',
-  md: 'w-12 h-12', 
+  sm: 'w-10 h-10', // Minimum 40px height for mobile
+  md: 'w-12 h-12',
   lg: 'w-16 h-16',
   xl: 'w-24 h-24'
 };
@@ -30,7 +30,7 @@ export default function LinkaLogo({
     ${className}
   `;
 
-  const logoUrl = "https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F3e296daad070404d931a2c96e402c03e?format=webp&width=800";
+  const logoUrl = "https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb698d20708434ac697cb59a6650bb8ed?format=webp&width=800";
 
   return (
     <div 
@@ -47,12 +47,12 @@ export default function LinkaLogo({
         ${isHovered && animated ? 'scale-110 rotate-2' : ''}
       `}>
         
-        {/* Glassmorphism Background Overlay */}
+        {/* Glassmorphism Background Overlay - Official Colors */}
         <div className={`
           absolute inset-0 rounded-xl
-          ${variant === 'sidebar' 
-            ? 'bg-gradient-to-br from-teal-400/20 via-blue-500/10 to-orange-400/20' 
-            : 'bg-gradient-to-br from-blue-500/5 via-transparent to-orange-400/5'
+          ${variant === 'sidebar'
+            ? 'bg-gradient-to-br from-blue-500/15 via-blue-600/8 to-orange-500/15'
+            : 'bg-gradient-to-br from-blue-500/5 via-transparent to-orange-500/5'
           }
           ${animated ? 'transition-opacity duration-700' : ''}
           ${isHovered ? 'opacity-100' : 'opacity-60'}
@@ -68,8 +68,8 @@ export default function LinkaLogo({
             ${isHovered && animated ? 'brightness-110 saturate-110' : ''}
           `}
           style={{
-            filter: variant === 'sidebar' 
-              ? 'drop-shadow(0 4px 8px rgba(20, 184, 166, 0.3))' 
+            filter: variant === 'sidebar'
+              ? 'drop-shadow(0 4px 8px rgba(0, 115, 230, 0.3))'
               : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
           }}
         />
@@ -89,8 +89,8 @@ export default function LinkaLogo({
         <div className={`
           absolute inset-0 rounded-xl
           shadow-inner
-          ${variant === 'sidebar' 
-            ? 'shadow-teal-400/20' 
+          ${variant === 'sidebar'
+            ? 'shadow-blue-500/20'
             : 'shadow-blue-500/10'
           }
           ${animated ? 'transition-all duration-500' : ''}
@@ -103,7 +103,7 @@ export default function LinkaLogo({
             absolute inset-0 rounded-xl pointer-events-none
             ${variant === 'loading' ? 'animate-pulse-brand' : ''}
           `}>
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-orange-400/20 rounded-xl animate-pulse-slow" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-orange-500/20 rounded-xl animate-pulse-slow" />
           </div>
         )}
 
@@ -111,25 +111,14 @@ export default function LinkaLogo({
         {isHovered && animated && (
           <div className={`
             absolute -inset-1 rounded-xl
-            bg-gradient-to-r from-blue-400/30 via-teal-400/30 to-orange-400/30
+            bg-gradient-to-r from-blue-500/30 via-blue-600/30 to-orange-500/30
             blur-sm -z-10
             animate-glow-pulse
           `} />
         )}
       </div>
 
-      {/* Text Label for Certain Variants */}
-      {(variant === 'sidebar' || variant === 'header') && size !== 'sm' && (
-        <div className={`
-          absolute -bottom-6 left-1/2 transform -translate-x-1/2
-          text-xs font-bold tracking-wider
-          ${variant === 'sidebar' ? 'text-teal-300' : 'text-slate-600'}
-          ${animated ? 'transition-all duration-300' : ''}
-          ${isHovered ? 'text-white scale-105' : ''}
-        `}>
-          LINKA
-        </div>
-      )}
+      {/* Remove redundant text label - logo is self-explanatory */}
 
       {/* Custom Animations Styles */}
       <style jsx>{`
@@ -144,12 +133,12 @@ export default function LinkaLogo({
         }
 
         @keyframes pulse-brand {
-          0%, 100% { 
-            background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(249, 115, 22, 0.1));
+          0%, 100% {
+            background: linear-gradient(45deg, rgba(0, 115, 230, 0.1), rgba(255, 107, 0, 0.1));
             transform: scale(1);
           }
-          50% { 
-            background: linear-gradient(45deg, rgba(20, 184, 166, 0.2), rgba(239, 68, 68, 0.15));
+          50% {
+            background: linear-gradient(45deg, rgba(0, 115, 230, 0.2), rgba(255, 107, 0, 0.15));
             transform: scale(1.02);
           }
         }
