@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Linka Logo System */
+@import './linka-logo-system.css';
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
