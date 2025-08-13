@@ -74,7 +74,7 @@ export function Header() {
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center group">
               <LinkaLogo
-                size="lg"
+                size="xl"
                 variant="header"
                 animated={true}
                 className="transition-all duration-300 group-hover:scale-105"
