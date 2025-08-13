@@ -401,9 +401,7 @@ function RetailerDashboardContent() {
 export default function ModernRetailerDashboard() {
   return (
     <AuthRedirectWrapper requiredRole="retailer">
-      <ThemeProvider defaultTheme="dark">
-        <RetailerDashboardContent />
-      </ThemeProvider>
+      <RetailerDashboardContent />
     </AuthRedirectWrapper>
   );
 }
