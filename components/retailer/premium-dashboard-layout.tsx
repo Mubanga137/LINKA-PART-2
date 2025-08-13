@@ -265,7 +265,7 @@ export default function PremiumDashboardLayout({ children }: PremiumDashboardLay
           <div className={`flex items-center space-x-3 ${sidebarCollapsed ? 'justify-center' : ''}`}>
             <div className="relative">
               <LinkaLogo
-                size={sidebarCollapsed ? "md" : "lg"}
+                size={sidebarCollapsed ? "lg" : "xl"}
                 variant="sidebar"
                 animated={true}
                 className="transition-all duration-300"
