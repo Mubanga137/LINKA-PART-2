@@ -30,7 +30,7 @@ export default function LinkaLogo({
     ${className}
   `;
 
-  const logoUrl = "https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb698d20708434ac697cb59a6650bb8ed?format=webp&width=800";
+  const logoUrl = "https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=webp&width=800";
 
   return (
     <div 
