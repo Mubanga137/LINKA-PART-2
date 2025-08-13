@@ -4,7 +4,9 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { ModernDashboardSidebar } from "@/components/dashboard/modern-dashboard-sidebar"
 import { ModernDashboardHeader } from "@/components/dashboard/modern-dashboard-header"
-import { DashboardOverview } from "@/components/dashboard/dashboard-overview"
+import { ModernDashboardOverview } from "@/components/dashboard/modern-dashboard-overview"
+import { MobileActionBar } from "@/components/dashboard/mobile-action-bar"
+import { ThemeProvider, useTheme } from "@/contexts/theme-context"
 import { AnalyticsView } from "@/components/dashboard/analytics-view"
 import { ReportsView } from "@/components/dashboard/reports-view"
 import { InsightsView } from "@/components/dashboard/insights-view"
@@ -70,6 +72,9 @@ function RetailerDashboardContent() {
   const [activeView, setActiveView] = useState('overview')
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { theme, toggleTheme, actualTheme } = useTheme()
 
   // Load dashboard data
   useEffect(() => {
@@ -223,10 +228,18 @@ function RetailerDashboardContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading dashboard...</p>
+          <div className="relative">
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500/30 border-t-blue-500 mx-auto mb-6"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 opacity-20 animate-pulse"></div>
+          </div>
+          <p className="text-white/80 text-lg font-medium">Loading your premium dashboard...</p>
+          <div className="mt-4 flex items-center justify-center space-x-1">
+            <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+            <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+            <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          </div>
         </div>
       </div>
     )
@@ -237,7 +250,7 @@ function RetailerDashboardContent() {
 
     switch (activeView) {
       case 'overview':
-        return <DashboardOverview data={dashboardData} />
+        return <ModernDashboardOverview data={dashboardData} />
       case 'analytics':
         return <AnalyticsView data={dashboardData} />
       case 'reports':
@@ -258,30 +271,72 @@ function RetailerDashboardContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
-      <ModernDashboardSidebar
-        activeView={activeView}
-        onViewChange={setActiveView}
-        user={user!}
-        pendingOrders={dashboardData?.orders.pending || 0}
-        lowStock={dashboardData?.products.lowStock || 0}
-      />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 flex relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-purple-900/20 pointer-events-none" />
+
+      {/* Desktop Sidebar */}
+      <div className={`hidden lg:block transition-all duration-300 ${sidebarCollapsed ? 'w-20' : 'w-80'}`}>
+        <ModernDashboardSidebar
+          activeView={activeView}
+          onViewChange={setActiveView}
+          user={user!}
+          pendingOrders={dashboardData?.orders.pending || 0}
+          lowStock={dashboardData?.products.lowStock || 0}
+          isCollapsed={sidebarCollapsed}
+          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+        />
+      </div>
+
+      {/* Mobile Sidebar Overlay */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="absolute left-0 top-0 bottom-0 w-80">
+            <ModernDashboardSidebar
+              activeView={activeView}
+              onViewChange={(view) => {
+                setActiveView(view);
+                setMobileMenuOpen(false);
+              }}
+              user={user!}
+              pendingOrders={dashboardData?.orders.pending || 0}
+              lowStock={dashboardData?.products.lowStock || 0}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 relative">
         {/* Header */}
         <ModernDashboardHeader
           user={user!}
           currentView={activeView}
           onViewChange={setActiveView}
+          onSidebarToggle={() => setMobileMenuOpen(true)}
+          isDarkMode={actualTheme === 'dark'}
+          onThemeToggle={toggleTheme}
         />
 
         {/* Content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 overflow-auto">
           {renderActiveView()}
         </main>
       </div>
+
+      {/* Mobile Action Bar */}
+      <MobileActionBar
+        activeView={activeView}
+        onViewChange={setActiveView}
+        onSearchOpen={() => console.log('Search opened')}
+        onMenuOpen={() => setMobileMenuOpen(true)}
+        pendingNotifications={3}
+        className="lg:hidden"
+      />
     </div>
   )
 }
