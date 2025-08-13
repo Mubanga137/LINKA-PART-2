@@ -23,12 +23,12 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://linka.zm'),
   icons: {
     icon: [
-      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F3e296daad070404d931a2c96e402c03e?format=ico&width=32', sizes: '32x32', type: 'image/x-icon' },
-      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F3e296daad070404d931a2c96e402c03e?format=png&width=16', sizes: '16x16', type: 'image/png' },
-      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F3e296daad070404d931a2c96e402c03e?format=png&width=32', sizes: '32x32', type: 'image/png' },
+      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb698d20708434ac697cb59a6650bb8ed?format=ico&width=32', sizes: '32x32', type: 'image/x-icon' },
+      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb698d20708434ac697cb59a6650bb8ed?format=png&width=16', sizes: '16x16', type: 'image/png' },
+      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb698d20708434ac697cb59a6650bb8ed?format=png&width=32', sizes: '32x32', type: 'image/png' },
     ],
     apple: [
-      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2F3e296daad070404d931a2c96e402c03e?format=png&width=180', sizes: '180x180', type: 'image/png' },
+      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb698d20708434ac697cb59a6650bb8ed?format=png&width=180', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
