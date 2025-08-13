@@ -74,11 +74,47 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Theme color meta tags for browser chrome */}
+        <meta name="theme-color" content="#0073e6" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#FF6B00" media="(prefers-color-scheme: dark)" />
+        <meta name="color-scheme" content="light dark" />
+
         <style>{`
 html {
   font-family: ${GeistSans.style.fontFamily};
   --font-sans: ${GeistSans.variable};
   --font-mono: ${GeistMono.variable};
+
+  /* Linka theme system integration */
+  --linka-primary: #0073e6;
+  --linka-accent: #FF6B00;
+  --theme-mode: light;
+}
+
+html[data-theme="dark"] {
+  --theme-mode: dark;
+}
+
+html[data-theme="light"] {
+  --theme-mode: light;
+}
+
+/* Auto-detect system theme preference */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --theme-mode: dark;
+  }
+}
+
+/* Performance optimization for logo animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent cumulative layout shift for logos */
+.linka-logo-container {
+  contain: layout style paint;
 }
         `}</style>
       </head>
