@@ -75,7 +75,10 @@ function RetailerDashboardContent() {
   const [isLoading, setIsLoading] = useState(true)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { theme, toggleTheme, actualTheme } = useTheme()
+  // Temporarily disable theme to isolate error
+  // const { theme, toggleTheme, actualTheme } = useTheme()
+  const actualTheme = 'dark'
+  const toggleTheme = () => {}
 
   // Load dashboard data
   useEffect(() => {
