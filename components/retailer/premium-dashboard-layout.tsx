@@ -263,9 +263,9 @@ export default function PremiumDashboardLayout({ children }: PremiumDashboardLay
         {/* Header */}
         <div className="relative z-10 flex items-center justify-between p-6 border-b border-slate-700/50">
           <div className={`flex items-center space-x-3 ${sidebarCollapsed ? 'justify-center' : ''}`}>
-            <div className="relative">
+            <div className="relative flex items-center justify-center">
               <LinkaLogo
-                size={sidebarCollapsed ? "lg" : "xl"}
+                size="sidebar"
                 variant="sidebar"
                 animated={true}
                 className="transition-all duration-300"
