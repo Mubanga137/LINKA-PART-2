@@ -2,21 +2,12 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { ModernDashboardSidebar } from "@/components/dashboard/modern-dashboard-sidebar"
-import { ModernDashboardHeader } from "@/components/dashboard/modern-dashboard-header"
-import { ModernDashboardOverview } from "@/components/dashboard/modern-dashboard-overview"
-import { MobileActionBar } from "@/components/dashboard/mobile-action-bar"
-// Removed conflicting theme import
-import { AnalyticsView } from "@/components/dashboard/analytics-view"
-import { ReportsView } from "@/components/dashboard/reports-view"
-import { InsightsView } from "@/components/dashboard/insights-view"
-import { OrdersView } from "@/components/dashboard/orders-view"
-import { ProductsView } from "@/components/dashboard/products-view"
-import { CustomersView } from "@/components/dashboard/customers-view"
-import { MarketingView } from "@/components/dashboard/marketing-view"
+import { ProfessionalDashboardSidebar } from "@/components/retailer/professional-dashboard-sidebar"
+import { ProfessionalDashboardHeader } from "@/components/retailer/professional-dashboard-header"
+import { ProfessionalDashboardOverview } from "@/components/retailer/professional-dashboard-overview"
+import { MobileDashboardNav } from "@/components/retailer/mobile-dashboard-nav"
 import { useAuth } from "@/contexts/auth-context"
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
-// import '@/styles/modern-dashboard.css'
 
 interface DashboardData {
   revenue: {
@@ -27,26 +18,22 @@ interface DashboardData {
   }
   orders: {
     total: number
+    today: number
     pending: number
-    processing: number
-    delivered: number
     growth: number
   }
   products: {
     total: number
-    active: number
+    inStock: number
     lowStock: number
     growth: number
   }
   customers: {
-    total: number
-    new: number
+    avgOrderValue: number
     growth: number
     satisfaction: number
-    returnRate: number
   }
   insights: {
-    topCategories: Array<{ name: string; value: number; color: string }>
     recentOrders: Array<{
       id: string
       customer: string
@@ -56,29 +43,26 @@ interface DashboardData {
       date: string
       items: number
     }>
-    topProducts: Array<{
+    lowStockProducts: Array<{
       id: string
       name: string
       category: string
-      sales: number
-      growth: number
+      currentStock: number
+      minStock: number
       price: number
     }>
+    salesData: Array<{ date: string; sales: number; orders: number }>
+    productPerformance: Array<{ category: string; sales: number; growth: number }>
   }
 }
 
 function RetailerDashboardContent() {
   const { user } = useAuth()
   const router = useRouter()
-  const [activeView, setActiveView] = useState('overview')
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  // Temporarily disable theme to isolate error
-  // const { theme, toggleTheme, actualTheme } = useTheme()
-  const actualTheme = 'dark'
-  const toggleTheme = () => {}
 
   // Load dashboard data
   useEffect(() => {
@@ -91,134 +75,132 @@ function RetailerDashboardContent() {
       // Generate realistic mock data
       const mockData: DashboardData = {
         revenue: {
-          total: 1108000,
-          thisMonth: 168500,
-          growth: 28.4,
+          total: 1425000,
+          thisMonth: 185500,
+          growth: 24.7,
           monthlyData: [
-            { month: 'Jan', revenue: 145000, orders: 320, customers: 189 },
-            { month: 'Feb', revenue: 158000, orders: 350, customers: 220 },
-            { month: 'Mar', revenue: 142000, orders: 335, customers: 205 },
-            { month: 'Apr', revenue: 175000, orders: 390, customers: 250 },
-            { month: 'May', revenue: 162000, orders: 370, customers: 235 },
-            { month: 'Jun', revenue: 190000, orders: 420, customers: 280 },
+            { month: 'Jan', revenue: 125000, orders: 280, customers: 165 },
+            { month: 'Feb', revenue: 142000, orders: 320, customers: 195 },
+            { month: 'Mar', revenue: 138000, orders: 305, customers: 180 },
+            { month: 'Apr', revenue: 168000, orders: 375, customers: 220 },
+            { month: 'May', revenue: 195000, orders: 425, customers: 265 },
+            { month: 'Jun', revenue: 185500, orders: 410, customers: 250 },
           ]
         },
         orders: {
-          total: 2472,
-          pending: 23,
-          processing: 45,
-          delivered: 2350,
-          growth: 15.2
+          total: 3247,
+          today: 12,
+          pending: 28,
+          growth: 18.5
         },
         products: {
-          total: 3847,
-          active: 3842,
-          lowStock: 5,
-          growth: 8.7
+          total: 4589,
+          inStock: 4543,
+          lowStock: 8,
+          growth: 12.3
         },
         customers: {
-          total: 12429,
-          new: 325,
-          growth: 12.8,
-          satisfaction: 4.5,
-          returnRate: 1.8
+          avgOrderValue: 139,
+          growth: 15.8,
+          satisfaction: 4.7
         },
         insights: {
-          topCategories: [
-            { name: 'Electronics', value: 35, color: '#3B82F6' },
-            { name: 'Fashion', value: 28, color: '#10B981' },
-            { name: 'Home & Garden', value: 18, color: '#F59E0B' },
-            { name: 'Sports & Fitness', value: 12, color: '#EF4444' },
-            { name: 'Books & Media', value: 7, color: '#8B5CF6' },
-          ],
           recentOrders: [
             {
-              id: 'ORD-2024-001',
-              customer: 'Alexandra Chen',
-              avatar: 'AC',
-              amount: 459.99,
-              status: 'Delivered',
+              id: '2024-001',
+              customer: 'Sarah Mwanza',
+              avatar: 'SM',
+              amount: 524.99,
+              status: 'Processing',
               date: '2024-01-15',
               items: 3
             },
             {
-              id: 'ORD-2024-002',
-              customer: 'Marcus Johnson',
-              avatar: 'MJ',
-              amount: 289.5,
-              status: 'Processing',
+              id: '2024-002',
+              customer: 'James Banda',
+              avatar: 'JB',
+              amount: 299.50,
+              status: 'Shipped',
               date: '2024-01-15',
               items: 2
             },
             {
-              id: 'ORD-2024-003',
-              customer: 'Sofia Rodriguez',
-              avatar: 'SR',
-              amount: 129.99,
-              status: 'Shipped',
+              id: '2024-003',
+              customer: 'Grace Phiri',
+              avatar: 'GP',
+              amount: 159.99,
+              status: 'Delivered',
               date: '2024-01-14',
               items: 1
             },
             {
-              id: 'ORD-2024-004',
-              customer: 'David Kim',
-              avatar: 'DK',
-              amount: 699.99,
+              id: '2024-004',
+              customer: 'Peter Lungu',
+              avatar: 'PL',
+              amount: 789.99,
               status: 'Pending',
               date: '2024-01-14',
-              items: 4
+              items: 5
             },
             {
-              id: 'ORD-2024-005',
-              customer: 'Emma Thompson',
-              avatar: 'ET',
-              amount: 189.99,
-              status: 'Cancelled',
+              id: '2024-005',
+              customer: 'Mary Tembo',
+              avatar: 'MT',
+              amount: 245.50,
+              status: 'Processing',
               date: '2024-01-13',
               items: 2
             }
           ],
-          topProducts: [
+          lowStockProducts: [
             {
               id: '1',
-              name: 'Premium Wireless Headphones',
-              category: 'Electronics',
-              sales: 847,
-              growth: 18.2,
-              price: 259.99
+              name: 'Premium Cotton T-Shirt',
+              category: 'Clothing',
+              currentStock: 3,
+              minStock: 10,
+              price: 29.99
             },
             {
               id: '2',
-              name: 'Smart Fitness Watch',
+              name: 'Wireless Bluetooth Headphones',
               category: 'Electronics',
-              sales: 623,
-              growth: 12.8,
-              price: 456.9
+              currentStock: 2,
+              minStock: 8,
+              price: 89.99
             },
             {
               id: '3',
-              name: 'Ergonomic Office Chair',
-              category: 'Home & Garden',
-              sales: 524,
-              growth: 24.5,
-              price: 178.4
+              name: 'Traditional Chitenge Fabric',
+              category: 'Textiles',
+              currentStock: 5,
+              minStock: 15,
+              price: 45.00
             },
             {
               id: '4',
-              name: 'Professional Camera Lens',
-              category: 'Electronics',
-              sales: 334,
-              growth: 8.7,
-              price: 190.2
-            },
-            {
-              id: '5',
-              name: 'Designer Backpack',
-              category: 'Fashion',
-              sales: 289,
-              growth: 15.3,
-              price: 95.4
+              name: 'Organic Coffee Beans',
+              category: 'Food & Beverages',
+              currentStock: 4,
+              minStock: 12,
+              price: 18.75
             }
+          ],
+          salesData: [
+            { date: '2024-01-08', sales: 2450, orders: 18 },
+            { date: '2024-01-09', sales: 3200, orders: 24 },
+            { date: '2024-01-10', sales: 2850, orders: 21 },
+            { date: '2024-01-11', sales: 4100, orders: 31 },
+            { date: '2024-01-12', sales: 3750, orders: 28 },
+            { date: '2024-01-13', sales: 4500, orders: 35 },
+            { date: '2024-01-14', sales: 3950, orders: 29 },
+          ],
+          productPerformance: [
+            { category: 'Electronics', sales: 45000, growth: 28.5 },
+            { category: 'Clothing & Fashion', sales: 38500, growth: 15.2 },
+            { category: 'Home & Garden', sales: 22000, growth: 8.7 },
+            { category: 'Food & Beverages', sales: 18500, growth: 22.1 },
+            { category: 'Traditional Crafts', sales: 15000, growth: 35.4 },
           ]
         }
       }
@@ -232,173 +214,84 @@ function RetailerDashboardContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
           <div className="relative">
-            <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500/30 border-t-blue-500 mx-auto mb-6"></div>
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mx-auto mb-6"></div>
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 opacity-20 animate-pulse"></div>
           </div>
-          <p className="text-white/80 text-lg font-medium">Loading your premium dashboard...</p>
+          <h3 className="text-lg font-semibold text-slate-900 mb-2">Loading Dashboard</h3>
+          <p className="text-slate-600">Setting up your professional dashboard...</p>
           <div className="mt-4 flex items-center justify-center space-x-1">
             <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-            <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-            <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+            <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+            <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
           </div>
         </div>
       </div>
     )
   }
 
-  const renderActiveView = () => {
-    if (!dashboardData) return null
-
-    try {
-      switch (activeView) {
-        case 'overview':
-          return (
-            <div className="p-6">
-              <div className="glass-card rounded-2xl p-8">
-                <h1 className="text-3xl font-bold text-white mb-6">Modern Dashboard</h1>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                  <div className="glass-card rounded-xl p-4">
-                    <h3 className="text-white/70 text-sm">Revenue</h3>
-                    <p className="text-2xl font-bold text-white">${(dashboardData.revenue.total / 1000).toFixed(0)}K</p>
-                  </div>
-                  <div className="glass-card rounded-xl p-4">
-                    <h3 className="text-white/70 text-sm">Orders</h3>
-                    <p className="text-2xl font-bold text-white">{dashboardData.orders.total}</p>
-                  </div>
-                  <div className="glass-card rounded-xl p-4">
-                    <h3 className="text-white/70 text-sm">Products</h3>
-                    <p className="text-2xl font-bold text-white">{dashboardData.products.total}</p>
-                  </div>
-                  <div className="glass-card rounded-xl p-4">
-                    <h3 className="text-white/70 text-sm">Rating</h3>
-                    <p className="text-2xl font-bold text-white">{dashboardData.customers.satisfaction.toFixed(1)}★</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
-        case 'analytics':
-        case 'reports':
-        case 'insights':
-        case 'orders':
-        case 'products':
-        case 'customers':
-        case 'marketing':
-          return (
-            <div className="p-6">
-              <div className="glass-card rounded-2xl p-8 text-center">
-                <h2 className="text-2xl font-bold text-white mb-4">
-                  {activeView.charAt(0).toUpperCase() + activeView.slice(1)} View
-                </h2>
-                <p className="text-white/70 mb-6">
-                  This section is being updated with the new premium design.
-                </p>
-                <button
-                  onClick={() => setActiveView('overview')}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300"
-                >
-                  Return to Dashboard
-                </button>
-              </div>
-            </div>
-          )
-        default:
-          return <ModernDashboardOverview data={dashboardData} />
-      }
-    } catch (error) {
-      console.error('Error rendering dashboard view:', error);
-      return (
-        <div className="p-6">
-          <div className="glass-card rounded-2xl p-8 text-center">
-            <h2 className="text-xl font-bold text-white mb-4">Something went wrong</h2>
-            <p className="text-white/70 mb-6">Please refresh the page or try again.</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
-            >
-              Refresh Page
-            </button>
-          </div>
-        </div>
-      );
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 flex relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-purple-900/20 pointer-events-none" />
-
+    <div className="min-h-screen bg-slate-50 flex">
       {/* Desktop Sidebar */}
       <div className={`hidden lg:block transition-all duration-300 ${sidebarCollapsed ? 'w-20' : 'w-80'}`}>
-        <ModernDashboardSidebar
-          activeView={activeView}
-          onViewChange={setActiveView}
-          user={user!}
-          pendingOrders={dashboardData?.orders.pending || 0}
-          lowStock={dashboardData?.products.lowStock || 0}
+        <ProfessionalDashboardSidebar
           isCollapsed={sidebarCollapsed}
-          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+          onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
+          user={{
+            name: user?.name || 'Retailer',
+            email: user?.email || 'retailer@example.com',
+            avatar: user?.avatar,
+            storeName: 'Zambian Crafts Store'
+          }}
+          notifications={{
+            orders: dashboardData?.orders.pending || 0,
+            lowStock: dashboardData?.products.lowStock || 0,
+            messages: 5
+          }}
         />
       </div>
 
-      {/* Mobile Sidebar Overlay */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50">
-          <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          <div className="absolute left-0 top-0 bottom-0 w-80">
-            <ModernDashboardSidebar
-              activeView={activeView}
-              onViewChange={(view) => {
-                setActiveView(view);
-                setMobileMenuOpen(false);
-              }}
-              user={user!}
-              pendingOrders={dashboardData?.orders.pending || 0}
-              lowStock={dashboardData?.products.lowStock || 0}
-            />
-          </div>
-        </div>
-      )}
+      {/* Mobile Navigation */}
+      <MobileDashboardNav
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        notifications={{
+          orders: dashboardData?.orders.pending || 0,
+          lowStock: dashboardData?.products.lowStock || 0,
+          messages: 5
+        }}
+      />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0 relative">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <ModernDashboardHeader
-          user={user!}
-          currentView={activeView}
-          onViewChange={setActiveView}
-          onSidebarToggle={() => setMobileMenuOpen(true)}
-          isDarkMode={actualTheme === 'dark'}
-          onThemeToggle={toggleTheme}
+        <ProfessionalDashboardHeader
+          user={{
+            name: user?.name || 'Retailer',
+            email: user?.email || 'retailer@example.com',
+            avatar: user?.avatar,
+            storeName: 'Zambian Crafts Store',
+            storeUrl: '/store/zambian-crafts'
+          }}
+          onMenuToggle={() => setMobileMenuOpen(true)}
+          notifications={{
+            total: 12,
+            unread: 3
+          }}
         />
 
-        {/* Content */}
+        {/* Dashboard Content */}
         <main className="flex-1 overflow-auto">
-          {renderActiveView()}
+          <ProfessionalDashboardOverview data={dashboardData!} />
         </main>
       </div>
-
-      {/* Mobile Action Bar */}
-      <MobileActionBar
-        activeView={activeView}
-        onViewChange={setActiveView}
-        onSearchOpen={() => console.log('Search opened')}
-        onMenuOpen={() => setMobileMenuOpen(true)}
-        pendingNotifications={3}
-        className="lg:hidden"
-      />
     </div>
   )
 }
 
-export default function ModernRetailerDashboard() {
+export default function ProfessionalRetailerDashboard() {
   return (
     <AuthRedirectWrapper requiredRole="retailer">
       <RetailerDashboardContent />
