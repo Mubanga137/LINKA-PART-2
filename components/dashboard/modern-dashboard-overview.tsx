@@ -74,7 +74,6 @@ interface ModernDashboardOverviewProps {
 }
 
 export function ModernDashboardOverview({ data }: ModernDashboardOverviewProps) {
-  const { actualTheme } = useTheme();
   const [animationPhase, setAnimationPhase] = useState(0);
 
   // Stagger animations
