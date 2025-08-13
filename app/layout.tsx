@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Linka - Zambian E-Commerce Platform',
     description: 'Connecting local businesses with customers across Zambia',
-    images: ['https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fb698d20708434ac697cb59a6650bb8ed?format=webp&width=1200'],
+    images: ['https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=webp&width=1200'],
   },
   robots: {
     index: true,
