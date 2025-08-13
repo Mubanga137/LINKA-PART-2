@@ -72,16 +72,13 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
+            <Link href="/" className="flex items-center group">
               <LinkaLogo
-                size="md"
+                size="lg"
                 variant="header"
                 animated={true}
                 className="transition-all duration-300 group-hover:scale-105"
               />
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-900 via-blue-700 to-orange-600 bg-clip-text text-transparent tracking-wide">
-                Linka
-              </span>
             </Link>
 
             {/* Enhanced Navigation */}
