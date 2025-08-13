@@ -25,7 +25,7 @@ export default function LinkaLogo({
   const [isHovered, setIsHovered] = useState(false);
 
   const baseClasses = `
-    relative inline-block select-none
+    relative inline-flex items-center justify-center select-none overflow-hidden
     ${sizeClasses[size]}
     ${className}
   `;
