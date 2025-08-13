@@ -16,6 +16,7 @@ import { CustomersView } from "@/components/dashboard/customers-view"
 import { MarketingView } from "@/components/dashboard/marketing-view"
 import { useAuth } from "@/contexts/auth-context"
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
+import '@/styles/modern-dashboard.css'
 
 interface DashboardData {
   revenue: {
