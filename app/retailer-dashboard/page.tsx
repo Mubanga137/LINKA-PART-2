@@ -6,7 +6,7 @@ import { ModernDashboardSidebar } from "@/components/dashboard/modern-dashboard-
 import { ModernDashboardHeader } from "@/components/dashboard/modern-dashboard-header"
 import { ModernDashboardOverview } from "@/components/dashboard/modern-dashboard-overview"
 import { MobileActionBar } from "@/components/dashboard/mobile-action-bar"
-import { ThemeProvider, useTheme } from "@/contexts/theme-context"
+// Removed conflicting theme import
 import { AnalyticsView } from "@/components/dashboard/analytics-view"
 import { ReportsView } from "@/components/dashboard/reports-view"
 import { InsightsView } from "@/components/dashboard/insights-view"
