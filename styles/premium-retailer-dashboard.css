@@ -1,0 +1,669 @@
+/* Premium Retailer Dashboard CSS
+ * Colors: Deep Royal Blue/Slate Navy, Vibrant Teal, Coral Orange
+ * Typography: Poppins/Inter for professional feel
+ * Animations: Smooth transitions, floating particles, gradient shifts
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Premium Retailer Color System */
+:root {
+  /* Primary Base Colors - Deep Royal Blue/Slate Navy */
+  --retailer-primary-50: #f0f9ff;
+  --retailer-primary-100: #e0f2fe;
+  --retailer-primary-200: #bae6fd;
+  --retailer-primary-300: #7dd3fc;
+  --retailer-primary-400: #38bdf8;
+  --retailer-primary-500: #0ea5e9;
+  --retailer-primary-600: #0284c7;
+  --retailer-primary-700: #0369a1;
+  --retailer-primary-800: #075985;
+  --retailer-primary-900: #0c4a6e;
+  --retailer-primary-950: #082f49;
+  
+  /* Deep Royal Blue - Main Interface */
+  --deep-royal-blue: #1e3a8a;
+  --deep-royal-blue-dark: #1e40af;
+  --deep-royal-blue-darker: #1d4ed8;
+  
+  /* Slate Navy - Sidebar Background */
+  --slate-navy: #1e293b;
+  --slate-navy-dark: #0f172a;
+  --slate-navy-light: #334155;
+  
+  /* Vibrant Teal - Primary Actions */
+  --vibrant-teal: #14b8a6;
+  --vibrant-teal-light: #5eead4;
+  --vibrant-teal-dark: #0d9488;
+  --vibrant-teal-darker: #0f766e;
+  
+  /* Coral Orange - Alerts & Status */
+  --coral-orange: #f97316;
+  --coral-orange-light: #fed7aa;
+  --coral-orange-dark: #ea580c;
+  --sunset-red: #ef4444;
+  --sunset-red-light: #fca5a5;
+  
+  /* Background Gradients */
+  --gradient-royal-teal: linear-gradient(135deg, var(--deep-royal-blue) 0%, var(--vibrant-teal) 100%);
+  --gradient-slate-navy: linear-gradient(180deg, var(--slate-navy) 0%, var(--slate-navy-dark) 100%);
+  --gradient-animated: linear-gradient(270deg, var(--deep-royal-blue), var(--vibrant-teal), var(--deep-royal-blue-dark));
+  
+  /* Text Colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-white: #ffffff;
+  --text-teal: var(--vibrant-teal-dark);
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  
+  /* Border & Shadow */
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow-teal: 0 0 20px rgba(20, 184, 166, 0.3);
+  --shadow-glow-orange: 0 0 20px rgba(249, 115, 22, 0.3);
+}
+
+/* Dark Mode Variants */
+[data-theme="dark"] {
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --bg-primary: var(--slate-navy-dark);
+  --bg-secondary: var(--slate-navy);
+  --bg-tertiary: var(--slate-navy-light);
+  --border-light: #374151;
+  --border-medium: #4b5563;
+}
+
+/* Premium Typography */
+.retailer-font-heading {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.retailer-font-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.retailer-font-button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Premium Sidebar Navigation */
+.retailer-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 280px;
+  background: var(--gradient-slate-navy);
+  border-right: 1px solid rgba(20, 184, 166, 0.2);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.retailer-sidebar.collapsed {
+  width: 80px;
+}
+
+/* Animated Background Elements */
+.retailer-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(20, 184, 166, 0.1), transparent);
+  animation: float-diagonal 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.retailer-sidebar::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.05) 0%, transparent 70%);
+  animation: rotate-slow 20s linear infinite;
+  pointer-events: none;
+}
+
+/* Floating Particle Animation */
+@keyframes float-diagonal {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(10px) translateY(-10px);
+    opacity: 0.6;
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Gradient Background Animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-bg {
+  background: var(--gradient-animated);
+  background-size: 200% 200%;
+  animation: gradient-shift 10s ease infinite;
+}
+
+/* Sidebar Header */
+.retailer-sidebar-header {
+  position: relative;
+  z-index: 10;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.retailer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.retailer-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-royal-teal);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-glow-teal);
+  position: relative;
+  overflow: hidden;
+}
+
+.retailer-logo-icon::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.retailer-logo-text {
+  color: var(--text-white);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.retailer-logo-subtitle {
+  color: var(--vibrant-teal-light);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* Navigation Items */
+.retailer-nav {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  padding: 1.5rem 1rem;
+  overflow-y: auto;
+}
+
+.retailer-nav-section {
+  margin-bottom: 2rem;
+}
+
+.retailer-nav-section-title {
+  color: var(--vibrant-teal-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  padding: 0 0.75rem;
+}
+
+.retailer-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 10px;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.retailer-nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--vibrant-teal);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.retailer-nav-item:hover {
+  background: rgba(20, 184, 166, 0.1);
+  color: var(--text-white);
+  transform: translateX(4px);
+}
+
+.retailer-nav-item:hover::before {
+  transform: scaleY(1);
+}
+
+.retailer-nav-item.active {
+  background: rgba(20, 184, 166, 0.2);
+  color: var(--text-white);
+  box-shadow: var(--shadow-glow-teal);
+}
+
+.retailer-nav-item.active::before {
+  transform: scaleY(1);
+}
+
+.retailer-nav-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.retailer-nav-item.active .retailer-nav-icon {
+  color: var(--vibrant-teal-light);
+  filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6));
+}
+
+.retailer-nav-text {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.retailer-nav-badge {
+  background: var(--coral-orange);
+  color: white;
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: auto;
+  animation: pulse-orange 2s infinite;
+}
+
+@keyframes pulse-orange {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(249, 115, 22, 0);
+  }
+}
+
+/* Main Content Area */
+.retailer-main {
+  margin-left: 280px;
+  min-height: 100vh;
+  background: var(--bg-secondary);
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.retailer-main.sidebar-collapsed {
+  margin-left: 80px;
+}
+
+/* Top Header */
+.retailer-header {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(10px);
+}
+
+.retailer-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.retailer-header-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: var(--gradient-royal-teal);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.retailer-header-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.retailer-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Premium Buttons */
+.btn-retailer-primary {
+  background: var(--gradient-royal-teal);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+}
+
+.btn-retailer-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-retailer-primary:hover::before {
+  left: 100%;
+}
+
+.btn-retailer-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4);
+}
+
+.btn-retailer-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-medium);
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-retailer-secondary:hover {
+  border-color: var(--vibrant-teal);
+  color: var(--vibrant-teal);
+  transform: translateY(-1px);
+}
+
+/* Premium KPI Cards */
+.retailer-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.retailer-kpi-card {
+  background: var(--bg-primary);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-premium);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.retailer-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-royal-teal);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.retailer-kpi-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.retailer-kpi-card:hover::before {
+  transform: scaleX(1);
+}
+
+.retailer-kpi-card.total-sales {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(255, 255, 255, 0.95));
+}
+
+.retailer-kpi-card.pending-orders {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(255, 255, 255, 0.95));
+}
+
+.retailer-kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: between;
+  margin-bottom: 1rem;
+}
+
+.retailer-kpi-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.retailer-kpi-icon.teal {
+  background: linear-gradient(135deg, var(--vibrant-teal), var(--vibrant-teal-dark));
+  box-shadow: var(--shadow-glow-teal);
+}
+
+.retailer-kpi-icon.orange {
+  background: linear-gradient(135deg, var(--coral-orange), var(--coral-orange-dark));
+  box-shadow: var(--shadow-glow-orange);
+}
+
+.retailer-kpi-value {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  background: var(--gradient-royal-teal);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.retailer-kpi-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.retailer-kpi-change {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.retailer-kpi-change.positive {
+  color: var(--vibrant-teal-dark);
+}
+
+.retailer-kpi-change.negative {
+  color: var(--sunset-red);
+}
+
+/* 3D Hover Effects */
+.hover-3d {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateZ(10px);
+}
+
+/* Animated Number Counters */
+.animated-counter {
+  display: inline-block;
+  animation: countUp 2s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .retailer-sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .retailer-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .retailer-main {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .retailer-header {
+    padding: 1rem;
+  }
+  
+  .retailer-kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .retailer-kpi-card {
+    padding: 1.5rem;
+  }
+  
+  .retailer-kpi-value {
+    font-size: 2rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus States */
+.retailer-nav-item:focus,
+.btn-retailer-primary:focus,
+.btn-retailer-secondary:focus {
+  outline: 2px solid var(--vibrant-teal);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .retailer-sidebar,
+  .retailer-header-actions {
+    display: none !important;
+  }
+  
+  .retailer-main {
+    margin-left: 0 !important;
+  }
+}
