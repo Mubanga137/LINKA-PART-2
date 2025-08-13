@@ -1,178 +1,216 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface LinkaLogoProps {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'mobile' | 'desktop' | 'header' | 'footer' | 'sidebar';
   variant?: 'default' | 'sidebar' | 'header' | 'loading';
   animated?: boolean;
   className?: string;
 }
 
-const sizeClasses = {
-  sm: 'w-10 h-10 min-w-[2.5rem] min-h-[2.5rem]', // Minimum 40px height for mobile
-  md: 'w-12 h-12 min-w-[3rem] min-h-[3rem]',
-  lg: 'w-16 h-16 min-w-[4rem] min-h-[4rem]',
-  xl: 'w-24 h-24 min-w-[6rem] min-h-[6rem]'
+// Strict size constraints based on requirements
+const sizeConstraints = {
+  mobile: {
+    maxWidth: '20vw',
+    minWidth: '60px',
+    height: 'auto',
+    aspectRatio: '1'
+  },
+  desktop: {
+    maxWidth: '25%', // 25% of header width
+    minWidth: '120px',
+    height: 'auto',
+    aspectRatio: '1'
+  },
+  header: {
+    maxWidth: 'min(25%, 200px)',
+    minWidth: '120px',
+    height: 'auto',
+    aspectRatio: '1'
+  },
+  sidebar: {
+    maxWidth: '100%',
+    minWidth: '60px',
+    maxHeight: '80px',
+    aspectRatio: '1'
+  },
+  footer: {
+    maxWidth: '150px',
+    minWidth: '80px',
+    height: 'auto',
+    aspectRatio: '1'
+  }
 };
 
 export default function LinkaLogo({ 
-  size = 'md', 
+  size = 'desktop', 
   variant = 'default', 
   animated = true,
   className = '' 
 }: LinkaLogoProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const baseClasses = `
-    relative inline-flex items-center justify-center select-none overflow-hidden
-    ${sizeClasses[size]}
-    ${className}
-  `;
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Use mobile size constraints on mobile devices
+  const effectiveSize = isMobile && size === 'desktop' ? 'mobile' : size;
+  const constraints = sizeConstraints[effectiveSize];
+  
+  // Official brand colors - exact HEX only
+  const brandColors = {
+    primary: '#0073e6',
+    accent: '#FF6B00'
+  };
 
   const logoUrl = "https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=webp&width=800";
 
   return (
     <div 
-      className={baseClasses}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={`
+        linka-logo-container relative inline-flex items-center justify-center
+        select-none overflow-hidden cursor-pointer
+        ${className}
+      `}
+      style={{
+        maxWidth: constraints.maxWidth,
+        minWidth: constraints.minWidth,
+        height: constraints.height,
+        maxHeight: constraints.maxHeight || 'none',
+        aspectRatio: constraints.aspectRatio,
+        padding: '1.5rem' // Grid alignment padding
+      }}
+      onMouseEnter={() => animated && setIsHovered(true)}
+      onMouseLeave={() => animated && setIsHovered(false)}
     >
-      {/* Main Logo Container with Glassmorphism */}
-      <div className={`
-        relative w-full h-full rounded-xl overflow-hidden flex items-center justify-center
-        ${variant === 'sidebar' ? 'bg-white/10 backdrop-blur-md border border-white/20' : ''}
-        ${variant === 'header' ? 'bg-slate-900/5 backdrop-blur-sm' : ''}
-        ${animated ? 'transition-all duration-500 ease-out' : ''}
-        ${isHovered && animated ? 'scale-105' : ''}
-      `}>
-        
-        {/* Glassmorphism Background Overlay - Official Colors */}
-        <div className={`
-          absolute inset-0 rounded-xl
-          ${variant === 'sidebar'
-            ? 'bg-gradient-to-br from-blue-500/15 via-blue-600/8 to-orange-500/15'
-            : 'bg-gradient-to-br from-blue-500/5 via-transparent to-orange-500/5'
-          }
-          ${animated ? 'transition-opacity duration-700' : ''}
-          ${isHovered ? 'opacity-100' : 'opacity-60'}
-        `} />
+      {/* Main Logo Container - Boundary Discipline */}
+      <div 
+        className={`
+          relative w-full h-full flex items-center justify-center
+          overflow-hidden rounded-xl
+          ${variant === 'sidebar' ? 'bg-white/5' : ''}
+          ${animated ? 'transition-all duration-500 ease-out' : ''}
+          ${isHovered && animated ? 'scale-105' : ''}
+        `}
+        style={{
+          aspectRatio: '1',
+          maxWidth: '100%',
+          maxHeight: '100%'
+        }}
+      >
+        {/* Glassmorphism Effect - Desktop Only */}
+        {!isMobile && variant !== 'loading' && (
+          <div 
+            className={`
+              absolute inset-0 rounded-xl pointer-events-none
+              ${animated ? 'transition-opacity duration-700' : ''}
+              ${isHovered ? 'opacity-100' : 'opacity-75'}
+            `}
+            style={{
+              background: `linear-gradient(135deg, ${brandColors.primary}15 0%, transparent 50%, ${brandColors.accent}15 100%)`,
+              backdropFilter: 'blur(3px)',
+              border: `1px solid ${brandColors.primary}20`
+            }}
+          />
+        )}
 
-        {/* Main Logo Image */}
-        <img
+        {/* Main Logo Image - Proportional Scaling */}
+        <img 
           src={logoUrl}
           alt="Linka - Zambian E-Commerce Platform"
           className={`
-            relative z-10 w-full h-full object-contain object-center
-            max-w-full max-h-full
+            relative z-10 w-full h-full
             ${animated ? 'transition-all duration-500' : ''}
-            ${isHovered && animated ? 'brightness-110 saturate-110' : ''}
+            ${isHovered && animated ? 'brightness-110' : ''}
           `}
           style={{
-            filter: variant === 'sidebar'
-              ? 'drop-shadow(0 4px 8px rgba(0, 115, 230, 0.3))'
-              : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
-            aspectRatio: 'auto'
+            objectFit: 'contain',
+            objectPosition: 'center',
+            maxWidth: '100%',
+            maxHeight: '100%',
+            aspectRatio: 'auto',
+            filter: `drop-shadow(0 2px 8px ${brandColors.primary}40)`,
+            background: 'transparent'
           }}
         />
 
-        {/* Animated Shimmer Effect */}
-        {animated && (
-          <div className={`
-            absolute inset-0 rounded-xl
-            bg-gradient-to-r from-transparent via-white/30 to-transparent
-            transform -skew-x-12
-            ${variant === 'loading' ? 'animate-shimmer-continuous' : ''}
-            ${isHovered ? 'animate-shimmer' : 'translate-x-[-200%]'}
-          `} />
+        {/* Hover Animation - Orange to Blue Gradient Pulse */}
+        {animated && isHovered && (
+          <div 
+            className="absolute inset-0 rounded-xl pointer-events-none animate-gradient-pulse"
+            style={{
+              background: `linear-gradient(45deg, ${brandColors.accent}30, ${brandColors.primary}30)`,
+              animation: 'gradientPulse 0.5s ease-out'
+            }}
+          />
         )}
 
-        {/* Subtle Inner Glow */}
-        <div className={`
-          absolute inset-0 rounded-xl
-          shadow-inner
-          ${variant === 'sidebar'
-            ? 'shadow-blue-500/20'
-            : 'shadow-blue-500/10'
-          }
-          ${animated ? 'transition-all duration-500' : ''}
-          ${isHovered ? 'shadow-lg' : ''}
-        `} />
-
-        {/* Pulsing Brand Colors Animation */}
-        {animated && variant !== 'header' && (
-          <div className={`
-            absolute inset-0 rounded-xl pointer-events-none
-            ${variant === 'loading' ? 'animate-pulse-brand' : ''}
-          `}>
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-orange-500/20 rounded-xl animate-pulse-slow" />
-          </div>
-        )}
-
-        {/* Hover Glow Effect */}
-        {isHovered && animated && (
-          <div className={`
-            absolute -inset-1 rounded-xl
-            bg-gradient-to-r from-blue-500/30 via-blue-600/30 to-orange-500/30
-            blur-sm -z-10
-            animate-glow-pulse
-          `} />
+        {/* Loading Animation Overlay */}
+        {variant === 'loading' && (
+          <div 
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            style={{
+              background: `conic-gradient(from 0deg, transparent, ${brandColors.primary}50, transparent)`,
+              animation: 'spin 2s linear infinite'
+            }}
+          />
         )}
       </div>
 
-      {/* Remove redundant text label - logo is self-explanatory */}
-
-      {/* Custom Animations Styles */}
+      {/* CSS Animations */}
       <style jsx>{`
-        @keyframes shimmer {
-          0% { transform: translateX(-200%) skewX(-12deg); }
-          100% { transform: translateX(200%) skewX(-12deg); }
-        }
-
-        @keyframes shimmer-continuous {
-          0% { transform: translateX(-200%) skewX(-12deg); }
-          100% { transform: translateX(200%) skewX(-12deg); }
-        }
-
-        @keyframes pulse-brand {
-          0%, 100% {
-            background: linear-gradient(45deg, rgba(0, 115, 230, 0.1), rgba(255, 107, 0, 0.1));
+        @keyframes gradientPulse {
+          0% { 
+            opacity: 0;
             transform: scale(1);
+            background: linear-gradient(45deg, ${brandColors.accent}00, ${brandColors.primary}00);
           }
-          50% {
-            background: linear-gradient(45deg, rgba(0, 115, 230, 0.2), rgba(255, 107, 0, 0.15));
+          50% { 
+            opacity: 0.3;
             transform: scale(1.02);
+            background: linear-gradient(45deg, ${brandColors.accent}40, ${brandColors.primary}20);
+          }
+          100% { 
+            opacity: 0;
+            transform: scale(1);
+            background: linear-gradient(45deg, ${brandColors.primary}00, ${brandColors.accent}00);
           }
         }
 
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.6; }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
 
-        @keyframes glow-pulse {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50% { opacity: 0.8; transform: scale(1.05); }
+        .animate-gradient-pulse {
+          animation: gradientPulse 0.5s ease-out;
         }
 
-        .animate-shimmer {
-          animation: shimmer 0.8s ease-out;
+        /* Responsive Breakpoints - 360px to 4K */
+        @media (max-width: 360px) {
+          .linka-logo-container {
+            min-width: 50px !important;
+            max-width: 18vw !important;
+          }
         }
 
-        .animate-shimmer-continuous {
-          animation: shimmer-continuous 2s ease-in-out infinite;
+        @media (min-width: 3840px) {
+          .linka-logo-container {
+            max-width: 300px !important;
+          }
         }
 
-        .animate-pulse-brand {
-          animation: pulse-brand 3s ease-in-out infinite;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-
-        .animate-glow-pulse {
-          animation: glow-pulse 2s ease-in-out infinite;
+        /* Boundary enforcement */
+        .linka-logo-container * {
+          box-sizing: border-box;
+          overflow: hidden;
         }
       `}</style>
     </div>
@@ -180,27 +218,27 @@ export default function LinkaLogo({
 }
 
 // Loading Spinner Variant
-export function LinkaLogoSpinner({ size = 'lg' }: { size?: 'sm' | 'md' | 'lg' | 'xl' }) {
+export function LinkaLogoSpinner({ size = 'desktop' }: { size?: LinkaLogoProps['size'] }) {
   return (
     <div className="flex flex-col items-center space-y-4">
       <LinkaLogo 
         size={size} 
         variant="loading" 
         animated={true}
-        className="animate-bounce"
+        className="animate-pulse"
       />
       <div className="text-sm text-slate-600 font-medium animate-pulse">
-        Loading Linka...
+        Loading...
       </div>
     </div>
   );
 }
 
-// Favicon/Small Icon Variant
+// Favicon/Small Icon Variant  
 export function LinkaIcon({ className = '' }: { className?: string }) {
   return (
     <LinkaLogo 
-      size="sm" 
+      size="mobile" 
       variant="default" 
       animated={false}
       className={className}
