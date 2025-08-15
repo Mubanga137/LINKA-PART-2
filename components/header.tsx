@@ -17,50 +17,6 @@ import {
 import { User } from "lucide-react"
 
 export function Header() {
-  const { user, logout } = useAuth()
-  const { getCartItemCount } = useCart()
-  const totalItems = getCartItemCount()
-  const router = useRouter()
-  const pathname = usePathname()
-
-  // For wishlist functionality - only use on shopping pages
-  let favoritesCount = 0
-  if (typeof window !== 'undefined') {
-    try {
-      // Check if we're in marketplace context
-      const storedFavorites = localStorage.getItem('marketplace_favorites')
-      if (storedFavorites && storedFavorites.trim() !== '') {
-        const parsed = JSON.parse(storedFavorites)
-        favoritesCount = Array.isArray(parsed) ? parsed.length : 0
-      }
-    } catch (error) {
-      // Clear corrupted data and reset
-      localStorage.removeItem('marketplace_favorites')
-      favoritesCount = 0
-    }
-  }
-
-  // Show cart only on shopping-related pages
-  const isShoppingPage = pathname?.includes('/marketplace') ||
-                        pathname?.includes('/shop') ||
-                        pathname?.includes('/cart') ||
-                        pathname?.includes('/checkout') ||
-                        pathname?.includes('/products')
-
-  const handleLogout = () => {
-    logout()
-    router.push('/')
-  }
-
-  const getUserDashboardLink = () => {
-    if (!user) return '/'
-    switch (user.role) {
-      case 'retailer':
-        return '/retailer-dashboard'
-      default:
-        return '/profile'
-    }
-  }
 
   return (
     <>
