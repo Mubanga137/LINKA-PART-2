@@ -10,7 +10,7 @@ import { Footer } from "@/components/footer"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30 animate-fadeInUp">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFF7F2] to-[#FFFFFF] animate-fadeInUp">
       <Header />
       <main>
         <HeroSection />
