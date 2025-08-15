@@ -15,10 +15,8 @@ export function Header() {
           {/* Logo - Left side */}
           <Link href="/" className="flex items-center group">
             <div className="flex items-center gap-2">
-              <div className="bg-gradient-to-r from-orange-500 to-teal-600 p-2 rounded-lg">
-                <span className="text-white text-lg">🔗</span>
-              </div>
-              <span className="bg-gradient-to-r from-orange-500 to-teal-600 bg-clip-text text-transparent font-bold text-xl">
+              <span className="text-xl" style={{background: 'linear-gradient(to right, #F7931E, #007C91)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>🔗</span>
+              <span className="font-bold text-xl" style={{background: 'linear-gradient(to right, #F7931E, #007C91)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>
                 Linka
               </span>
             </div>
