@@ -26,7 +26,7 @@ function FloatingParticles() {
             left: `${particle.x}%`,
             top: `${particle.y}%`,
             animationDelay: `${particle.delay}s`,
-            animationDuration: `${3 + (i * 0.2)}s`,
+            animationDuration: `${3 + (particle.id * 0.2)}s`,
           }}
         />
       ))}
