@@ -1,19 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { MobileNavigation } from "@/components/mobile-navigation"
-import { MobileCartWishlistFAB } from "@/components/mobile-cart-wishlist-fab"
-import { EnhancedNavigation } from "@/components/enhanced-navigation"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu"
 import { User } from "lucide-react"
 
 export function Header() {
