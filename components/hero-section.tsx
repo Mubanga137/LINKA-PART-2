@@ -48,10 +48,10 @@ export const HeroSection = memo(function HeroSection() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Top Banner with Animation */}
         <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-          <div className="inline-flex items-center rounded-full bg-white/60 backdrop-blur-sm px-6 py-3 text-sm text-slate-700 shadow-lg shadow-slate-900/5 border border-white/20 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
-            <Sparkles className="mr-2 h-4 w-4 text-orange-500" />
+          <div className="inline-flex items-center rounded-full bg-white/80 backdrop-blur-sm px-6 py-3 text-sm text-gray-600 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+            <Sparkles className="mr-2 h-4 w-4 text-blue-500" />
             Connecting local businesses with customers.
-            <Link href="/about" className="ml-3 text-orange-600 hover:text-orange-700 font-medium flex items-center group">
+            <Link href="/about" className="ml-3 text-blue-600 hover:text-blue-700 font-medium flex items-center group">
               Learn more
               <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
@@ -93,7 +93,7 @@ export const HeroSection = memo(function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg bg-white shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
+                className="border-2 border-blue-500 text-blue-500 hover:bg-blue-50 hover:border-blue-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg bg-white shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
               >
                 Become a Retailer
                 <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
