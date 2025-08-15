@@ -5,13 +5,15 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ShoppingBag, Sparkles, Star } from "lucide-react"
 
-// Optimized floating particles with reduced count
+// Optimized floating particles with orange and blue colors
 function FloatingParticles() {
-  const particles = Array.from({ length: 6 }, (_, i) => ({
+  const particles = Array.from({ length: 8 }, (_, i) => ({
     id: i,
-    x: (i * 20) + Math.random() * 10,
-    y: (i * 15) + Math.random() * 10,
-    delay: i * 0.5,
+    x: (i * 15) + Math.random() * 15,
+    y: (i * 12) + Math.random() * 20,
+    delay: i * 0.3,
+    color: i % 2 === 0 ? 'bg-orange-400/20' : 'bg-blue-400/20',
+    size: i % 3 === 0 ? 'w-3 h-3' : 'w-2 h-2',
   }))
 
   return (
@@ -19,11 +21,12 @@ function FloatingParticles() {
       {particles.map((particle) => (
         <div
           key={particle.id}
-          className="absolute w-2 h-2 bg-indigo-400/30 rounded-full animate-float"
+          className={`absolute ${particle.color} ${particle.size} rounded-full animate-bounce`}
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
             animationDelay: `${particle.delay}s`,
+            animationDuration: `${3 + (i * 0.2)}s`,
           }}
         />
       ))}
