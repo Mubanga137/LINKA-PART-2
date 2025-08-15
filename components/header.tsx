@@ -15,9 +15,11 @@ export function Header() {
           {/* Logo - Left side */}
           <Link href="/" className="flex items-center group">
             <div className="bg-orange-500 hover:bg-orange-600 transition-all duration-200 px-4 py-2 rounded-full shadow-md hover:shadow-lg group-hover:scale-105">
-              <span className="text-white font-semibold text-base flex items-center gap-1">
+              <span className="text-white font-bold text-base flex items-center gap-2">
                 <span className="text-lg">🔗</span>
-                Linka
+                <span className="bg-gradient-to-r from-orange-400 to-teal-500 bg-clip-text text-transparent font-bold">
+                  Linka
+                </span>
               </span>
             </div>
           </Link>
