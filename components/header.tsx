@@ -114,127 +114,21 @@ export function Header() {
             </Link>
           </nav>
 
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            {/* Shopping Cart & Wishlist - Only show on shopping pages */}
-            {isShoppingPage && (
-              <>
-                <Link href="/wishlist">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative text-sm px-2 lg:px-3"
-                  >
-                    <Heart className="h-4 w-4 mr-1 lg:mr-2" />
-                    <span className="hidden lg:inline">Wishlist</span>
-                    {favoritesCount > 0 && (
-                      <Badge className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
-                        {favoritesCount}
-                      </Badge>
-                    )}
-                  </Button>
-                </Link>
-                <Link href="/cart">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 relative text-sm px-2 lg:px-3"
-                  >
-                    <ShoppingCart className="h-4 w-4 mr-1 lg:mr-2" />
-                    <span className="hidden lg:inline">Cart</span>
-                    {totalItems > 0 && (
-                      <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center rounded-full">
-                        {totalItems}
-                      </Badge>
-                    )}
-                  </Button>
-                </Link>
-              </>
-            )}
+          {/* Right side - Login and Sell on Linka button */}
+          <div className="flex items-center space-x-4">
+            <Link href="/login" className="flex items-center text-gray-600 hover:text-gray-900">
+              <User className="h-4 w-4 mr-1" />
+              <span className="font-medium">Login</span>
+            </Link>
+
+            <Link href="/signup?role=retailer">
+              <Button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md font-medium transition-colors">
+                Sell on Linka
+              </Button>
+            </Link>
 
             {/* Mobile Navigation */}
             <MobileNavigation />
-
-            {/* User Authentication */}
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
-                  >
-                    <User className="h-4 w-4 mr-2" />
-                    {user.name}
-                    <ChevronDown className="h-3 w-3 ml-1" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuItem onClick={() => router.push(getUserDashboardLink())}>
-                    {user.role === 'retailer' ? (
-                      <>
-                        <BarChart3 className="mr-2 h-4 w-4" />
-                        Dashboard
-                      </>
-                    ) : (
-                      <>
-                        <User className="mr-2 h-4 w-4" />
-                        Profile
-                      </>
-                    )}
-                  </DropdownMenuItem>
-                  {user.role === 'customer' && (
-                    <DropdownMenuItem onClick={() => router.push('/orders')}>
-                      <Package className="mr-2 h-4 w-4" />
-                      My Orders
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuItem onClick={() => router.push('/settings')}>
-                    <Settings className="mr-2 h-4 w-4" />
-                    Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Link href="/login">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="hidden md:flex text-slate-600 hover:text-slate-900 hover:bg-slate-100/50"
-                >
-                  <User className="h-4 w-4 mr-2" />
-                  Login
-                </Button>
-              </Link>
-            )}
-
-            {/* CTA Button - Role specific */}
-            {user?.role === 'retailer' ? (
-              <Link href="/retailer-dashboard">
-                <Button className="hidden sm:flex bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/30 transition-all text-sm md:text-base px-3 md:px-4 py-2">
-                  <span className="hidden md:inline">My Dashboard</span>
-                  <span className="md:hidden">Dashboard</span>
-                </Button>
-              </Link>
-            ) : user?.role === 'customer' ? (
-              <Link href="/customer-dashboard">
-                <Button className="hidden sm:flex bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all text-sm md:text-base px-3 md:px-4 py-2">
-                  <span className="hidden md:inline">My Account</span>
-                  <span className="md:hidden">Account</span>
-                </Button>
-              </Link>
-            ) : (
-              <Link href="/signup?role=retailer">
-                <Button className="hidden sm:flex bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/30 transition-all text-sm md:text-base px-3 md:px-4 py-2">
-                  <span className="hidden lg:inline">Sell on Linka</span>
-                  <span className="lg:hidden">Sell</span>
-                </Button>
-              </Link>
-            )}
           </div>
         </div>
       </div>
