@@ -49,9 +49,9 @@ export const HeroSection = memo(function HeroSection() {
         {/* Top Banner with Animation */}
         <div className="mb-8 sm:mb-12 md:mb-16 text-center">
           <div className="inline-flex items-center rounded-full bg-white/60 backdrop-blur-sm px-6 py-3 text-sm text-slate-700 shadow-lg shadow-slate-900/5 border border-white/20 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
-            <Sparkles className="mr-2 h-4 w-4 text-indigo-500" />
+            <Sparkles className="mr-2 h-4 w-4 text-orange-500" />
             Connecting local businesses with customers.
-            <Link href="/about" className="ml-3 text-indigo-600 hover:text-indigo-700 font-medium flex items-center group">
+            <Link href="/about" className="ml-3 text-orange-600 hover:text-orange-700 font-medium flex items-center group">
               Learn more
               <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
@@ -65,11 +65,11 @@ export const HeroSection = memo(function HeroSection() {
               Your Local
             </span>
             <br />
-            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">
               E-commerce
             </span>
             <br />
-            <span className="bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-slate-900">
               Platform
             </span>
           </h1>
@@ -83,7 +83,7 @@ export const HeroSection = memo(function HeroSection() {
             <Link href="/marketplace">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
               >
                 <ShoppingBag className="mr-3 h-5 w-5" />
                 Start Shopping
