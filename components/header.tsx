@@ -71,6 +71,12 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
           <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center">
+              <div className="bg-orange-500 hover:bg-orange-600 transition-colors px-3 py-1.5 rounded-full">
+                <span className="text-white font-semibold text-lg">🔗 Linka</span>
+              </div>
+            </Link>
+
             {/* Enhanced Navigation */}
             <EnhancedNavigation />
           </div>
