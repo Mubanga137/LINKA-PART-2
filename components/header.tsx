@@ -77,9 +77,6 @@ export function Header() {
 
 
       </header>
-
-      {/* Mobile Cart & Wishlist Floating Action Buttons */}
-      <MobileCartWishlistFAB />
     </>
   )
 }
