@@ -70,49 +70,45 @@ export function Header() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm transition-all duration-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center group">
-              <div className="bg-orange-500 hover:bg-orange-600 transition-all duration-200 px-4 py-2 rounded-full shadow-md hover:shadow-lg group-hover:scale-105">
-                <span className="text-white font-semibold text-base flex items-center gap-1">
-                  <span className="text-lg">🔗</span>
-                  Linka
-                </span>
-              </div>
-            </Link>
+          {/* Logo - Left side */}
+          <Link href="/" className="flex items-center group">
+            <div className="bg-orange-500 hover:bg-orange-600 transition-all duration-200 px-4 py-2 rounded-full shadow-md hover:shadow-lg group-hover:scale-105">
+              <span className="text-white font-semibold text-base flex items-center gap-1">
+                <span className="text-lg">🔗</span>
+                Linka
+              </span>
+            </div>
+          </Link>
 
-            {/* Enhanced Navigation */}
-            <EnhancedNavigation />
-          </div>
-
+          {/* Center Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {/* Default navigation matching screenshot */}
             <Link
               href="/marketplace"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               Shop
             </Link>
             <Link
               href="/about"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               About
             </Link>
             <Link
               href="/for-retailers"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               For Retailers
             </Link>
             <Link
               href="/contact"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               Contact
             </Link>
             <Link
               href="/industries"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               Industries
             </Link>
