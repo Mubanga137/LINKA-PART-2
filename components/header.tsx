@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import { MobileCartWishlistFAB } from "@/components/mobile-cart-wishlist-fab"
 import { EnhancedNavigation } from "@/components/enhanced-navigation"
-import LinkaLogo from "@/components/ui/linka-logo"
 import {
   DropdownMenu,
   DropdownMenuContent,
