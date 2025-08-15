@@ -3,54 +3,53 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { MobileNavigation } from "@/components/mobile-navigation"
+import { LinkaLogo } from "@/components/linka-logo"
 import { User } from "lucide-react"
 
 export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <header className="sticky top-0 z-50 backdrop-blur-lg bg-white/90 border-b border-gray-200/50 shadow-lg">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
-          {/* Logo - Left side */}
-          <Link href="/" className="flex items-center group">
-            <div className="flex items-center gap-2">
-              <span className="text-xl" style={{background: 'linear-gradient(to right, #F7931E, #007C91)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>🔗</span>
-              <span className="font-bold text-xl" style={{background: 'linear-gradient(to right, #F7931E, #007C91)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>
-                Linka
-              </span>
-            </div>
-          </Link>
+          {/* Logo - Left side with increased size */}
+          <LinkaLogo size="lg" />
 
           {/* Center Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link
               href="/marketplace"
-              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              className="font-medium transition-colors duration-300 hover:scale-105"
+              style={{ color: '#333333' }}
             >
               Shop
             </Link>
             <Link
               href="/about"
-              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              className="font-medium transition-colors duration-300 hover:scale-105"
+              style={{ color: '#333333' }}
             >
               About
             </Link>
             <Link
               href="/for-retailers"
-              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              className="font-medium transition-colors duration-300 hover:scale-105"
+              style={{ color: '#333333' }}
             >
               For Retailers
             </Link>
             <Link
               href="/contact"
-              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              className="font-medium transition-colors duration-300 hover:scale-105"
+              style={{ color: '#333333' }}
             >
               Contact
             </Link>
             <Link
               href="/industries"
-              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              className="font-medium transition-colors duration-300 hover:scale-105"
+              style={{ color: '#333333' }}
             >
               Industries
             </Link>
@@ -58,13 +57,23 @@ export function Header() {
 
           {/* Right side - Login and Sell on Linka button */}
           <div className="flex items-center space-x-4">
-            <Link href="/login" className="flex items-center text-gray-600 hover:text-gray-900">
+            <Link
+              href="/login"
+              className="flex items-center font-medium transition-colors duration-300 hover:scale-105"
+              style={{ color: '#333333' }}
+            >
               <User className="h-4 w-4 mr-1" />
-              <span className="font-medium">Login</span>
+              <span>Login</span>
             </Link>
 
             <Link href="/signup?role=retailer">
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md font-medium transition-colors">
+              <Button
+                className="px-6 py-3 rounded-lg font-bold text-white border-none transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                style={{
+                  background: 'linear-gradient(90deg, #0099cc 0%, #ff6600 100%)',
+                  boxShadow: '0 4px 15px rgba(0, 153, 204, 0.3)'
+                }}
+              >
                 Sell on Linka
               </Button>
             </Link>
