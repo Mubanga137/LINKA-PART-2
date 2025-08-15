@@ -116,9 +116,9 @@ export const HeroSection = memo(function HeroSection() {
                 key={index}
                 className="group cursor-pointer"
               >
-                <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
-                  <div className="text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">{stat.icon}</div>
-                  <div className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">
+                <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 border-2 border-transparent hover:border-orange-200">
+                  <div className="text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2 transition-transform duration-200 group-hover:scale-110">{stat.icon}</div>
+                  <div className={`text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-1 transition-colors duration-200 ${index % 2 === 0 ? 'group-hover:text-orange-500' : 'group-hover:text-blue-500'}`}>
                     {stat.number}
                   </div>
                   <div className="text-xs sm:text-sm text-slate-600">{stat.label}</div>
