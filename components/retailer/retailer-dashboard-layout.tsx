@@ -204,8 +204,7 @@ export default function RetailerDashboardLayout({ children }: RetailerDashboardL
                 </div>
                 {!sidebarCollapsed && (
                   <div>
-                    <h1 className="text-lg font-bold text-gray-900">LINKA</h1>
-                    <p className="text-xs text-gray-500">Retailer Portal</p>
+                    <p className="text-xs text-gray-500 font-medium tracking-wider">RETAILER PORTAL</p>
                   </div>
                 )}
               </div>

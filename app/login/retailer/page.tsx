@@ -14,6 +14,7 @@ import {
   CheckCircle 
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import LinkaLogo from '@/components/ui/linka-logo';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -66,12 +67,14 @@ export default function RetailerLoginPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
-                <Store className="h-6 w-6 text-white" />
-              </div>
+              <LinkaLogo
+                size="desktop"
+                variant="header"
+                animated={true}
+                className="mr-3"
+              />
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">LINKA</h1>
-                <p className="text-sm text-gray-600">Business Dashboard</p>
+                <p className="text-sm text-gray-600 font-medium">Business Dashboard</p>
               </div>
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back, Retailer</h2>

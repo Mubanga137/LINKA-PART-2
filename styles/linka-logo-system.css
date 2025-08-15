@@ -1,0 +1,270 @@
+/**
+ * LINKA LOGO SYSTEM
+ * Strict proportional scaling, boundary discipline, and brand consistency
+ * Tested breakpoints: 360px → 4K (3840px)
+ */
+
+/* ===== BRAND CONSTANTS ===== */
+:root {
+  --linka-primary: #0073e6;
+  --linka-accent: #FF6B00;
+  --linka-primary-alpha: #0073e625;
+  --linka-accent-alpha: #FF6B0025;
+}
+
+/* ===== LOGO CONTAINER BASE ===== */
+.linka-logo-container {
+  /* Proportional scaling foundation */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  
+  /* Boundary discipline */
+  overflow: hidden;
+  box-sizing: border-box;
+  
+  /* Brand consistency */
+  background: transparent;
+  border-radius: 0.75rem; /* 12px */
+  
+  /* Grid alignment */
+  padding: 1.5rem;
+  margin: 0;
+}
+
+/* ===== STRICT SIZE CONSTRAINTS ===== */
+
+/* Mobile Constraints: Max 20% viewport, min 60px */
+@media (max-width: 767px) {
+  .linka-logo-container[data-size="mobile"],
+  .linka-logo-container[data-size="header"] {
+    max-width: 20vw !important;
+    min-width: 60px !important;
+    height: auto !important;
+    aspect-ratio: 1 !important;
+  }
+  
+  /* Ultra-small screens - 360px */
+  @media (max-width: 360px) {
+    .linka-logo-container {
+      max-width: 18vw !important;
+      min-width: 50px !important;
+    }
+  }
+}
+
+/* Desktop Constraints: Max 25% header width, min 120px */
+@media (min-width: 768px) {
+  .linka-logo-container[data-size="desktop"],
+  .linka-logo-container[data-size="header"] {
+    max-width: min(25%, 200px) !important;
+    min-width: 120px !important;
+    height: auto !important;
+    aspect-ratio: 1 !important;
+  }
+}
+
+/* Sidebar Specific Constraints */
+.linka-logo-container[data-size="sidebar"] {
+  max-width: 100% !important;
+  min-width: 60px !important;
+  max-height: 80px !important;
+  aspect-ratio: 1 !important;
+}
+
+/* Footer Constraints */
+.linka-logo-container[data-size="footer"] {
+  max-width: 150px !important;
+  min-width: 80px !important;
+  height: auto !important;
+  aspect-ratio: 1 !important;
+}
+
+/* 4K Display Support */
+@media (min-width: 3840px) {
+  .linka-logo-container {
+    max-width: 300px !important;
+  }
+}
+
+/* ===== BOUNDARY ENFORCEMENT ===== */
+.linka-logo-container * {
+  box-sizing: border-box;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.linka-logo-container img {
+  object-fit: contain !important;
+  object-position: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+  background: transparent !important;
+}
+
+/* ===== GLASSMORPHISM - Desktop Only ===== */
+@media (min-width: 768px) {
+  .linka-logo-glassmorphism {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    pointer-events: none;
+    opacity: 0.15;
+    backdrop-filter: blur(3px);
+    background: linear-gradient(
+      135deg, 
+      var(--linka-primary-alpha) 0%, 
+      transparent 50%, 
+      var(--linka-accent-alpha) 100%
+    );
+    border: 1px solid var(--linka-primary-alpha);
+    transition: opacity 0.7s ease;
+  }
+  
+  .linka-logo-container:hover .linka-logo-glassmorphism {
+    opacity: 0.25;
+  }
+}
+
+/* ===== HOVER ANIMATIONS ===== */
+.linka-logo-container {
+  transition: transform 0.5s ease-out;
+  cursor: pointer;
+}
+
+.linka-logo-container:hover {
+  transform: scale(1.05);
+}
+
+.linka-logo-container img {
+  transition: filter 0.5s ease;
+  filter: drop-shadow(0 2px 8px var(--linka-primary-alpha));
+}
+
+.linka-logo-container:hover img {
+  filter: 
+    drop-shadow(0 4px 12px var(--linka-primary-alpha))
+    brightness(1.1);
+}
+
+/* Gradient Pulse Animation - Hover Only */
+@keyframes linka-gradient-pulse {
+  0% { 
+    opacity: 0;
+    transform: scale(1);
+    background: linear-gradient(45deg, transparent, transparent);
+  }
+  50% { 
+    opacity: 0.3;
+    transform: scale(1.02);
+    background: linear-gradient(45deg, var(--linka-accent-alpha), var(--linka-primary-alpha));
+  }
+  100% { 
+    opacity: 0;
+    transform: scale(1);
+    background: linear-gradient(45deg, transparent, transparent);
+  }
+}
+
+.linka-logo-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  pointer-events: none;
+  animation: linka-gradient-pulse 0.5s ease-out;
+}
+
+/* ===== LOADING VARIANT ===== */
+@keyframes linka-loading-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.linka-logo-loading {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg, 
+    transparent, 
+    var(--linka-primary-alpha), 
+    transparent
+  );
+  animation: linka-loading-spin 2s linear infinite;
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .linka-logo-container,
+  .linka-logo-container *,
+  .linka-logo-glassmorphism,
+  .linka-logo-pulse,
+  .linka-logo-loading {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .linka-logo-container:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* ===== FOCUS STATES ===== */
+.linka-logo-container:focus-visible {
+  outline: 2px solid var(--linka-primary);
+  outline-offset: 4px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .linka-logo-container {
+    max-width: 2cm !important;
+    max-height: 2cm !important;
+    break-inside: avoid;
+  }
+  
+  .linka-logo-glassmorphism,
+  .linka-logo-pulse,
+  .linka-logo-loading {
+    display: none !important;
+  }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.linka-no-overflow {
+  overflow: hidden !important;
+}
+
+.linka-proportional {
+  object-fit: contain !important;
+  object-position: center !important;
+  aspect-ratio: auto !important;
+}
+
+.linka-boundary-strict {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* ===== DEBUG MODE (Development Only) ===== */
+.linka-debug .linka-logo-container {
+  border: 2px dashed var(--linka-primary);
+  background: var(--linka-primary-alpha);
+}
+
+.linka-debug .linka-logo-container::after {
+  content: attr(data-size);
+  position: absolute;
+  top: -20px;
+  left: 0;
+  font-size: 10px;
+  color: var(--linka-primary);
+  background: white;
+  padding: 2px 4px;
+  border-radius: 2px;
+}

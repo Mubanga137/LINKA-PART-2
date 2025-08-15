@@ -213,8 +213,7 @@ export function ProfessionalDashboardSidebar({
           </div>
           {!isCollapsed && (
             <div>
-              <h1 className="text-lg font-bold text-white">LINKA</h1>
-              <p className="text-xs text-slate-400">Retailer Portal</p>
+              <p className="text-xs text-slate-400 font-medium tracking-wider">RETAILER PORTAL</p>
             </div>
           )}
         </div>

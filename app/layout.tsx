@@ -21,6 +21,16 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL('https://linka.zm'),
+  icons: {
+    icon: [
+      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=ico&width=32', sizes: '32x32', type: 'image/x-icon' },
+      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=png&width=16', sizes: '16x16', type: 'image/png' },
+      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=png&width=32', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=png&width=180', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'Linka - Zambian E-Commerce Platform',
     description: 'Connecting local businesses with customers across Zambia',
@@ -28,11 +38,20 @@ export const metadata: Metadata = {
     siteName: 'Linka',
     locale: 'en_ZM',
     type: 'website',
+    images: [
+      {
+        url: 'https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=webp&width=1200',
+        width: 1200,
+        height: 630,
+        alt: 'Linka - Zambian E-Commerce Platform Logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Linka - Zambian E-Commerce Platform',
     description: 'Connecting local businesses with customers across Zambia',
+    images: ['https://cdn.builder.io/api/v1/image/assets%2F64659d81f7594bc7853ad37ab97b2333%2Fec5b7aa408204c46a290a3d64bcb02ca?format=webp&width=1200'],
   },
   robots: {
     index: true,
@@ -55,11 +74,47 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Theme color meta tags for browser chrome */}
+        <meta name="theme-color" content="#0073e6" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#FF6B00" media="(prefers-color-scheme: dark)" />
+        <meta name="color-scheme" content="light dark" />
+
         <style>{`
 html {
   font-family: ${GeistSans.style.fontFamily};
   --font-sans: ${GeistSans.variable};
   --font-mono: ${GeistMono.variable};
+
+  /* Linka theme system integration */
+  --linka-primary: #0073e6;
+  --linka-accent: #FF6B00;
+  --theme-mode: light;
+}
+
+html[data-theme="dark"] {
+  --theme-mode: dark;
+}
+
+html[data-theme="light"] {
+  --theme-mode: light;
+}
+
+/* Auto-detect system theme preference */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --theme-mode: dark;
+  }
+}
+
+/* Performance optimization for logo animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent cumulative layout shift for logos */
+.linka-logo-container {
+  contain: layout style paint;
 }
         `}</style>
       </head>
