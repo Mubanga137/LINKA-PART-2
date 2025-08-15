@@ -257,7 +257,7 @@ export function Header() {
               </Link>
             ) : (
               <Link href="/signup?role=retailer">
-                <Button className="hidden sm:flex bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 transition-all text-sm md:text-base px-3 md:px-4 py-2">
+                <Button className="hidden sm:flex bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/30 transition-all text-sm md:text-base px-3 md:px-4 py-2">
                   <span className="hidden lg:inline">Sell on Linka</span>
                   <span className="lg:hidden">Sell</span>
                 </Button>
