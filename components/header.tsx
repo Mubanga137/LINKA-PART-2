@@ -88,31 +88,31 @@ export function Header() {
             {/* Default navigation matching screenshot */}
             <Link
               href="/marketplace"
-              className="text-gray-600 hover:text-orange-500 font-medium transition-colors py-2"
+              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
             >
               Shop
             </Link>
             <Link
               href="/about"
-              className="text-gray-600 hover:text-orange-500 font-medium transition-colors py-2"
+              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
             >
               About
             </Link>
             <Link
               href="/for-retailers"
-              className="text-gray-600 hover:text-orange-500 font-medium transition-colors py-2"
+              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
             >
               For Retailers
             </Link>
             <Link
               href="/contact"
-              className="text-gray-600 hover:text-orange-500 font-medium transition-colors py-2"
+              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
             >
               Contact
             </Link>
             <Link
               href="/industries"
-              className="text-gray-600 hover:text-orange-500 font-medium transition-colors py-2"
+              className="text-gray-600 hover:text-blue-600 font-medium transition-all duration-200 py-2 px-3 rounded-md hover:bg-blue-50"
             >
               Industries
             </Link>
