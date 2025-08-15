@@ -14,12 +14,12 @@ export function Header() {
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
           {/* Logo - Left side */}
           <Link href="/" className="flex items-center group">
-            <div className="bg-orange-500 hover:bg-orange-600 transition-all duration-200 px-4 py-2 rounded-full shadow-md hover:shadow-lg group-hover:scale-105">
-              <span className="text-white font-bold text-base flex items-center gap-2">
-                <span className="text-lg">🔗</span>
-                <span className="bg-gradient-to-r from-orange-400 to-teal-500 bg-clip-text text-transparent font-bold">
-                  Linka
-                </span>
+            <div className="flex items-center gap-2">
+              <div className="bg-gradient-to-r from-orange-500 to-teal-600 p-2 rounded-lg">
+                <span className="text-white text-lg">🔗</span>
+              </div>
+              <span className="bg-gradient-to-r from-orange-500 to-teal-600 bg-clip-text text-transparent font-bold text-xl">
+                Linka
               </span>
             </div>
           </Link>
