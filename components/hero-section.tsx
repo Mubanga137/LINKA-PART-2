@@ -87,7 +87,7 @@ export const HeroSection = memo(function HeroSection() {
             <Link href="/marketplace">
               <Button
                 size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-200 group w-full sm:w-auto"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-xl hover:shadow-orange-500/25 transition-all duration-200 group w-full sm:w-auto transform hover:-translate-y-1 hover:scale-105"
               >
                 <ShoppingBag className="mr-3 h-5 w-5" />
                 Start Shopping
