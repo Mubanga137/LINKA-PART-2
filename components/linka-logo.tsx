@@ -13,9 +13,9 @@ export const LinkaLogo = memo(function LinkaLogo({
   className = '' 
 }: LinkaLogoProps) {
   const sizeClasses = {
-    sm: 'text-lg',
-    md: 'text-2xl',
-    lg: 'text-3xl'
+    sm: 'text-base',
+    md: 'text-xl',
+    lg: 'text-2xl'
   }
   
   return (
@@ -25,8 +25,8 @@ export const LinkaLogo = memo(function LinkaLogo({
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2Fff70a9d1d4c94f05abf49c16f38a3166%2Fc1466dbe53ca47d2aa868423f1920755?format=webp&width=800"
           alt="Linka Logo"
-          width={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
-          height={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
+          width={size === 'sm' ? '36' : size === 'md' ? '48' : '56'}
+          height={size === 'sm' ? '36' : size === 'md' ? '48' : '56'}
           className="transition-transform duration-300 group-hover:scale-110"
           style={{
             objectFit: 'contain',
