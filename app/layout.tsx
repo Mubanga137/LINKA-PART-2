@@ -121,20 +121,50 @@ html[data-theme="light"] {
 
         <script dangerouslySetInnerHTML={{
           __html: `
-            // Handle fetch errors in development
+            // Enhanced fetch error handling for development
             if (typeof window !== 'undefined') {
+              // Store original fetch
               const originalFetch = window.fetch;
+
+              // Override fetch with error handling
               window.fetch = function(...args) {
+                const url = args[0];
                 return originalFetch.apply(this, args).catch(error => {
-                  // Silently handle HMR fetch errors
-                  if (error.message.includes('Failed to fetch') &&
-                      (args[0]?.includes('_next') || args[0]?.includes('webpack'))) {
-                    console.warn('HMR fetch error (non-critical):', error.message);
-                    return Promise.reject(error);
+                  // Check if this is an HMR or webpack related request
+                  const isHMRRequest = url && (
+                    url.includes('_next') ||
+                    url.includes('webpack') ||
+                    url.includes('hot-update') ||
+                    url.includes('__nextjs_original-stack-frame')
+                  );
+
+                  if (error.message.includes('Failed to fetch') && isHMRRequest) {
+                    // Log but don't propagate HMR fetch errors
+                    console.warn('[HMR] Non-critical fetch error:', error.message);
+                    return Promise.resolve(new Response('{}', { status: 200 }));
                   }
+
+                  // Re-throw other errors
                   throw error;
                 });
               };
+
+              // Handle unhandled promise rejections
+              window.addEventListener('unhandledrejection', function(event) {
+                if (event.reason && event.reason.message &&
+                    event.reason.message.includes('Failed to fetch')) {
+                  const isHMRError = event.reason.stack && (
+                    event.reason.stack.includes('webpack') ||
+                    event.reason.stack.includes('_next') ||
+                    event.reason.stack.includes('hmr')
+                  );
+
+                  if (isHMRError) {
+                    console.warn('[HMR] Handled unhandled rejection:', event.reason.message);
+                    event.preventDefault();
+                  }
+                }
+              });
             }
           `
         }} />
