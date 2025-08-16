@@ -590,12 +590,14 @@ export default function ServicesPage() {
                               <Users className="h-4 w-4 mr-2" />
                               {service.providers} providers
                             </div>
-                            <motion.div 
+                            <motion.div
                               className="flex items-center text-blue-600 group-hover:text-blue-700 font-medium"
                               whileHover={{ x: 5 }}
                             >
-                              <span className="text-sm mr-2">View Services</span>
-                              <ExternalLink className="h-4 w-4" />
+                              <span className="text-sm mr-2">
+                                {service.isPremiumHub ? "Enter Hub" : "View Services"}
+                              </span>
+                              {service.isPremiumHub ? <Sparkles className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}
                             </motion.div>
                           </motion.div>
                         </div>
