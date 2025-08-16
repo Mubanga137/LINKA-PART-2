@@ -31,17 +31,19 @@ export const HeroSection = memo(function HeroSection() {
         {/* Main Heading */}
         <div className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
-            <div style={{color: '#000000'}} className="mb-2">Your Local</div>
-            <div
-              className="mb-2 bg-clip-text text-transparent"
-              style={{
-                background: 'linear-gradient(135deg, #ff6600 0%, #0099cc 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                filter: 'drop-shadow(0 2px 4px rgba(0, 153, 204, 0.1))'
-              }}
-            >
-              E-commerce
+            <div className="flex flex-wrap items-baseline justify-center gap-x-4 mb-2">
+              <div style={{color: '#000000'}}>Your Local</div>
+              <div
+                className="bg-clip-text text-transparent"
+                style={{
+                  background: 'linear-gradient(135deg, #ff6600 0%, #0099cc 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 2px 4px rgba(0, 153, 204, 0.1))'
+                }}
+              >
+                E-commerce
+              </div>
             </div>
             <div style={{color: '#000000'}}>Platform</div>
           </h1>
