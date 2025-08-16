@@ -21,44 +21,18 @@ export const LinkaLogo = memo(function LinkaLogo({
   return (
     <Link href="/" className={`flex items-center group ${className}`}>
       <div className="flex items-center gap-3">
-        {/* Chain link icon - clean SVG design */}
-        <svg
+        {/* Linka logo image */}
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets%2Fff70a9d1d4c94f05abf49c16f38a3166%2Fc1466dbe53ca47d2aa868423f1920755?format=webp&width=800"
+          alt="Linka Logo"
           width={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
           height={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
           className="transition-transform duration-300 group-hover:scale-110"
-        >
-          {/* Blue Link */}
-          <g transform="rotate(-45 100 100)">
-            <rect
-              x="50"
-              y="85"
-              width="100"
-              height="30"
-              rx="15"
-              ry="15"
-              fill="none"
-              stroke="#1976d2"
-              strokeWidth="12"
-            />
-          </g>
-
-          {/* Orange Link */}
-          <g transform="rotate(45 100 100)">
-            <rect
-              x="50"
-              y="85"
-              width="100"
-              height="30"
-              rx="15"
-              ry="15"
-              fill="none"
-              stroke="#f57c00"
-              strokeWidth="12"
-            />
-          </g>
-        </svg>
+          style={{
+            objectFit: 'contain',
+            background: 'transparent'
+          }}
+        />
         
         {/* Linka text */}
         <span 
