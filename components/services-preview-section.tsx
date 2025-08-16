@@ -83,24 +83,51 @@ export function ServicesPreviewSection() {
     <section className="py-24 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-br from-blue-400/5 to-cyan-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-br from-orange-400/5 to-red-400/5 rounded-full blur-3xl"></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(0, 153, 204, 0.015) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 102, 0, 0.015) 100%)'
+          }}
+        />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 px-6 py-3 text-indigo-700 border border-indigo-200/50 shadow-lg backdrop-blur-sm mb-6">
+          <div
+            className="inline-flex items-center rounded-full px-6 py-3 border shadow-lg backdrop-blur-sm mb-6"
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 153, 204, 0.1) 0%, rgba(255, 102, 0, 0.05) 100%)',
+              color: '#0099cc',
+              borderColor: 'rgba(0, 153, 204, 0.2)'
+            }}
+          >
             <Briefcase className="h-5 w-5 mr-2" />
             <span className="text-sm font-medium">Local Services</span>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Discover Amazing 
+            <span
+              className="bg-gradient-to-r bg-clip-text text-transparent"
+              style={{
+                background: 'linear-gradient(135deg, #0099cc 0%, #333333 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
+            >
+              Discover Amazing
             </span>
             <br />
-            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <span
+              className="bg-gradient-to-r bg-clip-text text-transparent"
+              style={{
+                background: 'linear-gradient(135deg, #ff6600 0%, #0099cc 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
+            >
               Local Services
             </span>
           </h2>
@@ -170,7 +197,13 @@ export function ServicesPreviewSection() {
 
         {/* Call to Action */}
         <div className="text-center">
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-8 md:p-12 shadow-2xl shadow-indigo-500/25">
+          <div
+            className="rounded-3xl p-8 md:p-12 shadow-2xl"
+            style={{
+              background: 'linear-gradient(135deg, #0099cc 0%, #ff6600 100%)',
+              boxShadow: '0 32px 64px rgba(0, 153, 204, 0.25)'
+            }}
+          >
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Ready to find the perfect service?
             </h3>
@@ -180,7 +213,13 @@ export function ServicesPreviewSection() {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/marketplace?category=services">
-                <Button size="lg" className="bg-white text-indigo-600 hover:bg-gray-50 shadow-lg">
+                <Button
+                  size="lg"
+                  className="bg-white shadow-lg hover:shadow-xl transition-all duration-300"
+                  style={{
+                    color: '#0099cc'
+                  }}
+                >
                   <Briefcase className="h-5 w-5 mr-2" />
                   Browse All Services
                 </Button>
