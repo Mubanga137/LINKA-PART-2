@@ -533,22 +533,47 @@ export default function ServicesPage() {
 
                           {/* Enhanced Features */}
                           <div className="mb-6">
-                            <p className="text-sm text-slate-500 mb-3 font-medium">Popular Services:</p>
+                            <p className="text-sm text-slate-500 mb-3 font-medium">
+                              {service.isPremiumHub ? "Entertainment Categories:" : "Popular Services:"}
+                            </p>
                             <div className="flex flex-wrap gap-2">
-                              {service.features.slice(0, 3).map((feature, idx) => (
-                                <motion.div
-                                  key={idx}
-                                  whileHover={{ scale: 1.05 }}
-                                >
-                                  <Badge 
-                                    variant="secondary" 
-                                    className="text-xs px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-purple-100 hover:to-blue-100 transition-all duration-300"
+                              {service.isPremiumHub && service.hubCategories ? (
+                                service.hubCategories.map((category, idx) => (
+                                  <motion.div
+                                    key={idx}
+                                    whileHover={{ scale: 1.1, y: -2 }}
+                                    className="relative"
                                   >
-                                    {feature}
-                                  </Badge>
-                                </motion.div>
-                              ))}
-                              {service.features.length > 3 && (
+                                    <Badge
+                                      variant="secondary"
+                                      className={`text-xs px-3 py-1 transition-all duration-300 ${
+                                        idx === 0 ? "bg-gradient-to-r from-pink-100 to-blue-100 text-pink-700 border-pink-200" :
+                                        idx === 1 ? "bg-gradient-to-r from-purple-100 to-violet-100 text-purple-700 border-purple-200" :
+                                        idx === 2 ? "bg-gradient-to-r from-teal-100 to-yellow-100 text-teal-700 border-teal-200" :
+                                        idx === 3 ? "bg-gradient-to-r from-red-100 to-orange-100 text-red-700 border-red-200" :
+                                        "bg-gradient-to-r from-emerald-100 to-green-100 text-emerald-700 border-emerald-200"
+                                      }`}
+                                    >
+                                      {category}
+                                    </Badge>
+                                  </motion.div>
+                                ))
+                              ) : (
+                                service.features.slice(0, 3).map((feature, idx) => (
+                                  <motion.div
+                                    key={idx}
+                                    whileHover={{ scale: 1.05 }}
+                                  >
+                                    <Badge
+                                      variant="secondary"
+                                      className="text-xs px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-purple-100 hover:to-blue-100 transition-all duration-300"
+                                    >
+                                      {feature}
+                                    </Badge>
+                                  </motion.div>
+                                ))
+                              )}
+                              {!service.isPremiumHub && service.features.length > 3 && (
                                 <Badge variant="secondary" className="text-xs px-3 py-1">
                                   +{service.features.length - 3} more
                                 </Badge>
