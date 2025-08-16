@@ -24,84 +24,86 @@ export const LinkaLogo = memo(function LinkaLogo({
         {/* Chain link icon - exact recreation of reference image */}
         <div className="relative">
           <svg
-            width={size === 'sm' ? '28' : size === 'md' ? '36' : '44'}
-            height={size === 'sm' ? '28' : size === 'md' ? '36' : '44'}
-            viewBox="0 0 100 100"
+            width={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
+            height={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
+            viewBox="0 0 120 120"
             className="transition-transform duration-300 group-hover:scale-110"
           >
             <defs>
               {/* Orange gradient for top link */}
-              <linearGradient id="orangeLinkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#ff7b38" />
-                <stop offset="100%" stopColor="#e55a28" />
+              <linearGradient id="orangeChainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff6b35" />
+                <stop offset="50%" stopColor="#ff5722" />
+                <stop offset="100%" stopColor="#e64a19" />
               </linearGradient>
 
               {/* Blue gradient for bottom link */}
-              <linearGradient id="blueLinkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#4a8bc2" />
-                <stop offset="100%" stopColor="#2563eb" />
+              <linearGradient id="blueChainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#2196f3" />
+                <stop offset="50%" stopColor="#1976d2" />
+                <stop offset="100%" stopColor="#0d47a1" />
               </linearGradient>
             </defs>
 
-            {/* Top chain link - Orange, rotated counter-clockwise */}
-            <g transform="rotate(-25 50 35)">
+            {/* Top chain link - Orange, positioned diagonally */}
+            <g transform="rotate(-35 60 40)">
               <path
-                d="M25 25
-                   C15 25, 10 30, 10 40
-                   C10 50, 15 55, 25 55
-                   L45 55
-                   C55 55, 60 50, 60 40
-                   C60 30, 55 25, 45 25
-                   L35 25
+                d="M30 30
+                   C20 30, 15 35, 15 45
+                   C15 55, 20 60, 30 60
+                   L60 60
+                   C70 60, 75 55, 75 45
+                   C75 35, 70 30, 60 30
+                   L45 30
 
-                   M35 35
-                   L45 35
-                   C50 35, 50 40, 45 45
-                   L35 45
-                   C30 45, 30 40, 35 35 Z"
-                fill="url(#orangeLinkGradient)"
+                   M45 40
+                   L60 40
+                   C65 40, 65 45, 60 50
+                   L45 50
+                   C40 50, 40 45, 45 40 Z"
+                fill="url(#orangeChainGradient)"
                 stroke="none"
               />
             </g>
 
-            {/* Bottom chain link - Blue, rotated clockwise and positioned to interlock */}
-            <g transform="rotate(25 50 65)">
+            {/* Bottom chain link - Blue, positioned diagonally and interlocked */}
+            <g transform="rotate(35 60 80)">
               <path
-                d="M25 55
-                   C15 55, 10 60, 10 70
-                   C10 80, 15 85, 25 85
-                   L45 85
-                   C55 85, 60 80, 60 70
-                   C60 60, 55 55, 45 55
-                   L35 55
+                d="M30 70
+                   C20 70, 15 75, 15 85
+                   C15 95, 20 100, 30 100
+                   L60 100
+                   C70 100, 75 95, 75 85
+                   C75 75, 70 70, 60 70
+                   L45 70
 
-                   M35 65
-                   L45 65
-                   C50 65, 50 70, 45 75
-                   L35 75
-                   C30 75, 30 70, 35 65 Z"
-                fill="url(#blueLinkGradient)"
+                   M45 80
+                   L60 80
+                   C65 80, 65 85, 60 90
+                   L45 90
+                   C40 90, 40 85, 45 80 Z"
+                fill="url(#blueChainGradient)"
                 stroke="none"
               />
             </g>
 
-            {/* Subtle highlight effects for premium look */}
-            <g transform="rotate(-25 50 35)">
+            {/* Highlight effects for premium look */}
+            <g transform="rotate(-35 60 40)">
               <ellipse
-                cx="40"
-                cy="32"
-                rx="8"
-                ry="3"
+                cx="52"
+                cy="37"
+                rx="12"
+                ry="4"
                 fill="rgba(255, 255, 255, 0.3)"
               />
             </g>
 
-            <g transform="rotate(25 50 65)">
+            <g transform="rotate(35 60 80)">
               <ellipse
-                cx="40"
-                cy="62"
-                rx="8"
-                ry="3"
+                cx="52"
+                cy="77"
+                rx="12"
+                ry="4"
                 fill="rgba(255, 255, 255, 0.3)"
               />
             </g>
