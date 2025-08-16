@@ -27,10 +27,11 @@ export const LinkaLogo = memo(function LinkaLogo({
           alt="Linka Logo"
           width={size === 'sm' ? '36' : size === 'md' ? '48' : '56'}
           height={size === 'sm' ? '36' : size === 'md' ? '48' : '56'}
-          className="transition-transform duration-300 group-hover:scale-110"
+          className="transition-transform duration-300 group-hover:scale-110 relative"
           style={{
             objectFit: 'contain',
-            background: 'transparent'
+            background: 'transparent',
+            top: '-2px'
           }}
         />
         
