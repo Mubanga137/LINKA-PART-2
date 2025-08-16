@@ -31,7 +31,7 @@ export const HeroSection = memo(function HeroSection() {
         {/* Main Heading */}
         <div className="text-center mb-12">
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight">
-            <div style={{color: '#0099cc'}} className="mb-2">Your Local</div>
+            <div style={{color: '#000000'}} className="mb-2 font-bold">Your Local</div>
             <div
               className="mb-2 bg-clip-text text-transparent"
               style={{
@@ -43,7 +43,7 @@ export const HeroSection = memo(function HeroSection() {
             >
               E-commerce
             </div>
-            <div style={{color: '#0099cc'}}>Platform</div>
+            <div style={{color: '#000000'}} className="font-bold">Platform</div>
           </h1>
         </div>
 
