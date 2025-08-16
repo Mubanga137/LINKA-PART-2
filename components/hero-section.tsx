@@ -7,7 +7,7 @@ import { ArrowRight, ShoppingBag } from "lucide-react"
 
 export const HeroSection = memo(function HeroSection() {
   return (
-    <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section className="relative pt-8 pb-20 sm:pt-10 sm:pb-24 md:pt-12 md:pb-32 lg:pt-16 lg:pb-40 overflow-hidden">
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8 z-10">
         {/* Tagline Bar */}
         <div className="mb-1 text-center">
