@@ -10,9 +10,9 @@ export const HeroSection = memo(function HeroSection() {
     <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8 z-10">
         {/* Tagline Bar */}
-        <div className="mb-16 text-center animate-fadeInUp">
+        <div className="mb-16 text-center">
           <div
-            className="inline-flex items-center rounded-full px-8 py-4 text-sm backdrop-blur-lg transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center rounded-full px-8 py-4 text-sm backdrop-blur-lg transition-all duration-200"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%)',
               border: '1px solid rgba(0, 153, 204, 0.2)',
@@ -29,18 +29,16 @@ export const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* Main Heading */}
-        <div className="text-center mb-12 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+        <div className="text-center mb-12">
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight">
             <div style={{color: '#0099cc'}} className="mb-2">Your Local</div>
             <div
-              className="mb-2 bg-clip-text text-transparent animate-pulse"
+              className="mb-2 bg-clip-text text-transparent"
               style={{
-                background: 'linear-gradient(135deg, #ff6600 0%, #0099cc 50%, #ff6600 100%)',
+                background: 'linear-gradient(135deg, #ff6600 0%, #0099cc 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                backgroundSize: '200% 100%',
-                animation: 'shimmer 3s ease-in-out infinite',
-                filter: 'drop-shadow(0 4px 8px rgba(0, 153, 204, 0.15))'
+                filter: 'drop-shadow(0 2px 4px rgba(0, 153, 204, 0.1))'
               }}
             >
               E-commerce
@@ -50,7 +48,7 @@ export const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* Subheading */}
-        <div className="text-center mb-16 animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
+        <div className="text-center mb-16">
           <p
             className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed font-medium"
             style={{color: '#333333'}}
@@ -61,11 +59,11 @@ export const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fadeInUp" style={{ animationDelay: '0.6s' }}>
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <Link href="/marketplace">
             <Button
               size="lg"
-              className="px-10 py-5 text-xl font-bold rounded-xl border-none transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              className="px-10 py-5 text-xl font-bold rounded-xl border-none transition-all duration-200 hover:shadow-xl"
               style={{
                 background: 'linear-gradient(135deg, #0099cc 0%, #ff6600 100%)',
                 color: '#ffffff',
@@ -80,7 +78,7 @@ export const HeroSection = memo(function HeroSection() {
             <Button
               size="lg"
               variant="outline"
-              className="px-10 py-5 text-xl font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              className="px-10 py-5 text-xl font-semibold rounded-xl transition-all duration-200 hover:shadow-lg"
               style={{
                 border: '2px solid #0099cc',
                 color: '#0099cc',
@@ -94,11 +92,6 @@ export const HeroSection = memo(function HeroSection() {
           </Link>
         </div>
 
-        {/* Floating elements for visual interest */}
-        <div className="absolute top-20 left-10 w-3 h-3 rounded-full opacity-60 animate-float" style={{backgroundColor: '#ff6600', animationDelay: '0s'}} />
-        <div className="absolute top-40 right-20 w-2 h-2 rounded-full opacity-60 animate-float" style={{backgroundColor: '#0099cc', animationDelay: '1s'}} />
-        <div className="absolute bottom-20 left-20 w-4 h-4 rounded-full opacity-60 animate-float" style={{backgroundColor: '#ff6600', animationDelay: '2s'}} />
-        <div className="absolute bottom-40 right-10 w-2 h-2 rounded-full opacity-60 animate-float" style={{backgroundColor: '#0099cc', animationDelay: '3s'}} />
       </div>
     </section>
   )

@@ -19,61 +19,38 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
         }}
       />
 
-      {/* Premium floating elements */}
+      {/* Static premium elements */}
       <div className="absolute inset-0">
-        {/* Large professional shapes */}
+        {/* Large static shapes */}
         <div
-          className="absolute w-[32rem] h-[32rem] opacity-[0.03] animate-float"
+          className="absolute w-[32rem] h-[32rem] opacity-[0.015]"
           style={{
             top: '5%',
             left: '10%',
-            background: 'radial-gradient(circle, #0099cc 0%, transparent 65%)',
-            borderRadius: '60% 40% 70% 30%',
-            animationDuration: '12s',
-            animationDelay: '0s'
+            background: 'radial-gradient(circle, #0099cc 0%, transparent 70%)',
+            borderRadius: '60% 40% 70% 30%'
           }}
         />
 
         <div
-          className="absolute w-[28rem] h-[28rem] opacity-[0.025] animate-float"
+          className="absolute w-[28rem] h-[28rem] opacity-[0.012]"
           style={{
             top: '55%',
             right: '15%',
-            background: 'radial-gradient(circle, #ff6600 0%, transparent 65%)',
-            borderRadius: '40% 60% 30% 70%',
-            animationDuration: '15s',
-            animationDelay: '3s'
+            background: 'radial-gradient(circle, #ff6600 0%, transparent 70%)',
+            borderRadius: '40% 60% 30% 70%'
           }}
         />
 
         <div
-          className="absolute w-[24rem] h-[24rem] opacity-[0.02] animate-float"
+          className="absolute w-[24rem] h-[24rem] opacity-[0.01]"
           style={{
             bottom: '15%',
             left: '20%',
-            background: 'radial-gradient(circle, #0099cc 0%, transparent 60%)',
-            borderRadius: '70% 30% 40% 60%',
-            animationDuration: '18s',
-            animationDelay: '6s'
+            background: 'radial-gradient(circle, #0099cc 0%, transparent 65%)',
+            borderRadius: '70% 30% 40% 60%'
           }}
         />
-      </div>
-
-      {/* Premium micro particles */}
-      <div className="absolute inset-0">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 rounded-full opacity-10 animate-float"
-            style={{
-              background: i % 2 === 0 ? '#0099cc' : '#ff6600',
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${8 + Math.random() * 12}s`,
-              animationDelay: `${Math.random() * 6}s`
-            }}
-          />
-        ))}
       </div>
 
       {/* Professional grid overlay */}
@@ -90,28 +67,25 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
         />
       </div>
 
-      {/* Subtle premium lines */}
+      {/* Subtle static accent lines */}
       <div className="absolute inset-0">
         <div
-          className="absolute h-px opacity-5 animate-pulse"
+          className="absolute h-px opacity-3"
           style={{
             top: '30%',
-            left: '0%',
-            right: '0%',
-            background: 'linear-gradient(90deg, transparent 0%, #0099cc 30%, #ff6600 70%, transparent 100%)',
-            animationDuration: '8s'
+            left: '10%',
+            right: '10%',
+            background: 'linear-gradient(90deg, transparent 0%, #0099cc 50%, transparent 100%)'
           }}
         />
 
         <div
-          className="absolute h-px opacity-5 animate-pulse"
+          className="absolute h-px opacity-3"
           style={{
             top: '70%',
-            left: '0%',
-            right: '0%',
-            background: 'linear-gradient(90deg, transparent 0%, #ff6600 30%, #0099cc 70%, transparent 100%)',
-            animationDuration: '12s',
-            animationDelay: '4s'
+            left: '10%',
+            right: '10%',
+            background: 'linear-gradient(90deg, transparent 0%, #ff6600 50%, transparent 100%)'
           }}
         />
       </div>

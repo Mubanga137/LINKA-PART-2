@@ -27,7 +27,7 @@ export const LinkaLogo = memo(function LinkaLogo({
           alt="Linka Logo"
           width={size === 'sm' ? '36' : size === 'md' ? '48' : '56'}
           height={size === 'sm' ? '36' : size === 'md' ? '48' : '56'}
-          className="transition-transform duration-300 group-hover:scale-110 relative"
+          className="transition-transform duration-200 group-hover:scale-105 relative"
           style={{
             objectFit: 'contain',
             background: 'transparent',
@@ -37,7 +37,7 @@ export const LinkaLogo = memo(function LinkaLogo({
         
         {/* Linka text */}
         <span 
-          className={`font-bold ${sizeClasses[size]} transition-all duration-300 group-hover:scale-105`}
+          className={`font-bold ${sizeClasses[size]} transition-all duration-200`}
           style={{
             background: 'linear-gradient(135deg, #ff6600 0%, #0099cc 100%)',
             WebkitBackgroundClip: 'text',

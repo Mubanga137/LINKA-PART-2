@@ -65,7 +65,7 @@ export function Header() {
           <div className="flex items-center space-x-4">
             <Link
               href="/login"
-              className="flex items-center font-medium transition-colors duration-300 hover:scale-105"
+              className="flex items-center font-medium transition-colors duration-200"
               style={{ color: '#333333' }}
             >
               <User className="h-4 w-4 mr-1" />
@@ -74,7 +74,7 @@ export function Header() {
 
             <Link href="/signup?role=retailer">
               <Button
-                className="px-6 py-3 rounded-lg font-bold text-white border-none transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                className="px-6 py-3 rounded-lg font-bold text-white border-none transition-all duration-200 hover:shadow-lg"
                 style={{
                   background: 'linear-gradient(90deg, #0099cc 0%, #ff6600 100%)',
                   boxShadow: '0 4px 15px rgba(0, 153, 204, 0.3)'
