@@ -42,29 +42,49 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Initialize auth state from localStorage
   useEffect(() => {
-    const savedUser = localStorage.getItem('linka_user')
-    if (savedUser && savedUser.trim() !== '') {
+    const initializeAuth = () => {
       try {
-        const parsed = JSON.parse(savedUser)
-        if (parsed && typeof parsed === 'object' && parsed.id) {
-          setUser(parsed)
-        } else {
-          localStorage.removeItem('linka_user')
+        if (typeof window === 'undefined') {
+          setIsLoading(false)
+          return
+        }
+
+        const savedUser = localStorage.getItem('linka_user')
+        if (savedUser && savedUser.trim() !== '') {
+          try {
+            const parsed = JSON.parse(savedUser)
+            if (parsed && typeof parsed === 'object' && parsed.id) {
+              setUser(parsed)
+            } else {
+              localStorage.removeItem('linka_user')
+            }
+          } catch (error) {
+            console.warn('Error parsing saved user:', error)
+            localStorage.removeItem('linka_user')
+          }
         }
       } catch (error) {
-        console.error('Error parsing saved user:', error)
-        localStorage.removeItem('linka_user')
+        console.warn('localStorage access error:', error)
+      } finally {
+        setIsLoading(false)
       }
     }
-    setIsLoading(false)
+
+    initializeAuth()
   }, [])
 
   // Save user to localStorage whenever user changes
   useEffect(() => {
-    if (user) {
-      localStorage.setItem('linka_user', JSON.stringify(user))
-    } else {
-      localStorage.removeItem('linka_user')
+    if (typeof window === 'undefined') return
+
+    try {
+      if (user) {
+        localStorage.setItem('linka_user', JSON.stringify(user))
+      } else {
+        localStorage.removeItem('linka_user')
+      }
+    } catch (error) {
+      console.warn('localStorage write error:', error)
     }
   }, [user])
 

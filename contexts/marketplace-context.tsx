@@ -162,27 +162,51 @@ export function MarketplaceProvider({ children }: MarketplaceProviderProps) {
 
   // Load persisted state on mount
   useEffect(() => {
-    const persistedState = {
-      cart: loadFromLocalStorage<CartItem[]>(STORAGE_KEYS.CART, []),
-      favorites: loadFromLocalStorage<string[]>(STORAGE_KEYS.FAVORITES, []),
-      recentlyViewed: [],
-      searchHistory: loadFromLocalStorage<string[]>(STORAGE_KEYS.RECENT_SEARCHES, [])
-    };
-    
-    dispatch({ type: 'LOAD_PERSISTED_STATE', payload: persistedState });
+    try {
+      if (typeof window === 'undefined') return
+
+      const persistedState = {
+        cart: loadFromLocalStorage<CartItem[]>(STORAGE_KEYS.CART, []),
+        favorites: loadFromLocalStorage<string[]>(STORAGE_KEYS.FAVORITES, []),
+        recentlyViewed: [],
+        searchHistory: loadFromLocalStorage<string[]>(STORAGE_KEYS.RECENT_SEARCHES, [])
+      };
+
+      dispatch({ type: 'LOAD_PERSISTED_STATE', payload: persistedState });
+    } catch (error) {
+      console.warn('Error loading persisted marketplace state:', error)
+    }
   }, []);
 
-  // Persist state changes
+  // Persist state changes with error handling
   useEffect(() => {
-    saveToLocalStorage(STORAGE_KEYS.CART, state.cart);
+    if (typeof window === 'undefined') return
+
+    try {
+      saveToLocalStorage(STORAGE_KEYS.CART, state.cart);
+    } catch (error) {
+      console.warn('Error saving cart to localStorage:', error)
+    }
   }, [state.cart]);
 
   useEffect(() => {
-    saveToLocalStorage(STORAGE_KEYS.FAVORITES, state.favorites);
+    if (typeof window === 'undefined') return
+
+    try {
+      saveToLocalStorage(STORAGE_KEYS.FAVORITES, state.favorites);
+    } catch (error) {
+      console.warn('Error saving favorites to localStorage:', error)
+    }
   }, [state.favorites]);
 
   useEffect(() => {
-    saveToLocalStorage(STORAGE_KEYS.RECENT_SEARCHES, state.searchHistory);
+    if (typeof window === 'undefined') return
+
+    try {
+      saveToLocalStorage(STORAGE_KEYS.RECENT_SEARCHES, state.searchHistory);
+    } catch (error) {
+      console.warn('Error saving search history to localStorage:', error)
+    }
   }, [state.searchHistory]);
 
   const addToCart = (product: Product, quantity: number = 1, variantId?: string) => {
