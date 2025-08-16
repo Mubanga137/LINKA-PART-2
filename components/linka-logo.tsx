@@ -26,87 +26,48 @@ export const LinkaLogo = memo(function LinkaLogo({
           <svg
             width={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
             height={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
-            viewBox="0 0 120 120"
+            viewBox="0 0 100 100"
             className="transition-transform duration-300 group-hover:scale-110"
           >
-            <defs>
-              {/* Orange gradient for top link */}
-              <linearGradient id="orangeChainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#ff6b35" />
-                <stop offset="50%" stopColor="#ff5722" />
-                <stop offset="100%" stopColor="#e64a19" />
-              </linearGradient>
+            {/* Top orange chain link - positioned diagonally */}
+            <path
+              d="M20 15
+                 C10 15, 5 25, 5 35
+                 C5 45, 10 55, 20 55
+                 L55 55
+                 C65 55, 70 45, 70 35
+                 C70 25, 65 15, 55 15
+                 Z
 
-              {/* Blue gradient for bottom link */}
-              <linearGradient id="blueChainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#2196f3" />
-                <stop offset="50%" stopColor="#1976d2" />
-                <stop offset="100%" stopColor="#0d47a1" />
-              </linearGradient>
-            </defs>
+                 M35 25
+                 L55 25
+                 C60 25, 60 35, 55 45
+                 L35 45
+                 C30 45, 30 35, 35 25
+                 Z"
+              fill="#ff6b35"
+              transform="rotate(-30 37.5 35)"
+            />
 
-            {/* Top chain link - Orange, positioned diagonally */}
-            <g transform="rotate(-35 60 40)">
-              <path
-                d="M30 30
-                   C20 30, 15 35, 15 45
-                   C15 55, 20 60, 30 60
-                   L60 60
-                   C70 60, 75 55, 75 45
-                   C75 35, 70 30, 60 30
-                   L45 30
+            {/* Bottom blue chain link - positioned diagonally and interlocked */}
+            <path
+              d="M20 35
+                 C10 35, 5 45, 5 55
+                 C5 65, 10 75, 20 75
+                 L55 75
+                 C65 75, 70 65, 70 55
+                 C70 45, 65 35, 55 35
+                 Z
 
-                   M45 40
-                   L60 40
-                   C65 40, 65 45, 60 50
-                   L45 50
-                   C40 50, 40 45, 45 40 Z"
-                fill="url(#orangeChainGradient)"
-                stroke="none"
-              />
-            </g>
-
-            {/* Bottom chain link - Blue, positioned diagonally and interlocked */}
-            <g transform="rotate(35 60 80)">
-              <path
-                d="M30 70
-                   C20 70, 15 75, 15 85
-                   C15 95, 20 100, 30 100
-                   L60 100
-                   C70 100, 75 95, 75 85
-                   C75 75, 70 70, 60 70
-                   L45 70
-
-                   M45 80
-                   L60 80
-                   C65 80, 65 85, 60 90
-                   L45 90
-                   C40 90, 40 85, 45 80 Z"
-                fill="url(#blueChainGradient)"
-                stroke="none"
-              />
-            </g>
-
-            {/* Highlight effects for premium look */}
-            <g transform="rotate(-35 60 40)">
-              <ellipse
-                cx="52"
-                cy="37"
-                rx="12"
-                ry="4"
-                fill="rgba(255, 255, 255, 0.3)"
-              />
-            </g>
-
-            <g transform="rotate(35 60 80)">
-              <ellipse
-                cx="52"
-                cy="77"
-                rx="12"
-                ry="4"
-                fill="rgba(255, 255, 255, 0.3)"
-              />
-            </g>
+                 M35 45
+                 L55 45
+                 C60 45, 60 55, 55 65
+                 L35 65
+                 C30 65, 30 55, 35 45
+                 Z"
+              fill="#1976d2"
+              transform="rotate(30 37.5 55)"
+            />
           </svg>
         </div>
         
