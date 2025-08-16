@@ -20,7 +20,7 @@ export const LinkaLogo = memo(function LinkaLogo({
   
   return (
     <Link href="/" className={`flex items-center group ${className}`}>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         {/* Linka logo image */}
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2Fff70a9d1d4c94f05abf49c16f38a3166%2Fc1466dbe53ca47d2aa868423f1920755?format=webp&width=800"
