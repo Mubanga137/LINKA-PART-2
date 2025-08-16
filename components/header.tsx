@@ -25,13 +25,6 @@ export function Header() {
           {/* Center Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link
-              href="/marketplace"
-              className="font-medium transition-colors duration-200"
-              style={{ color: '#333333' }}
-            >
-              Shop
-            </Link>
-            <Link
               href="/about"
               className="font-medium transition-colors duration-200"
               style={{ color: '#333333' }}
@@ -51,13 +44,6 @@ export function Header() {
               style={{ color: '#333333' }}
             >
               Contact
-            </Link>
-            <Link
-              href="/industries"
-              className="font-medium transition-colors duration-200"
-              style={{ color: '#333333' }}
-            >
-              Industries
             </Link>
           </nav>
 

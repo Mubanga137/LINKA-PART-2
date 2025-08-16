@@ -7,10 +7,10 @@ import { ArrowRight, ShoppingBag } from "lucide-react"
 
 export const HeroSection = memo(function HeroSection() {
   return (
-    <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section className="relative pt-8 pb-20 sm:pt-10 sm:pb-24 md:pt-12 md:pb-32 lg:pt-16 lg:pb-40 overflow-hidden">
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8 z-10">
         {/* Tagline Bar */}
-        <div className="mb-16 text-center">
+        <div className="mb-1 text-center">
           <div
             className="inline-flex items-center rounded-full px-8 py-4 text-sm backdrop-blur-lg transition-all duration-200"
             style={{
@@ -30,20 +30,22 @@ export const HeroSection = memo(function HeroSection() {
 
         {/* Main Heading */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight">
-            <div style={{color: '#0099cc'}} className="mb-2">Your Local</div>
-            <div
-              className="mb-2 bg-clip-text text-transparent"
-              style={{
-                background: 'linear-gradient(135deg, #ff6600 0%, #0099cc 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                filter: 'drop-shadow(0 2px 4px rgba(0, 153, 204, 0.1))'
-              }}
-            >
-              E-commerce
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
+            <div className="flex flex-wrap items-baseline justify-center gap-x-4 mb-2">
+              <div style={{color: '#000000'}}>Your Local</div>
+              <div
+                className="bg-clip-text text-transparent"
+                style={{
+                  background: 'linear-gradient(135deg, #ff6600 0%, #0099cc 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 2px 4px rgba(0, 153, 204, 0.1))'
+                }}
+              >
+                E-commerce
+              </div>
             </div>
-            <div style={{color: '#0099cc'}}>Platform</div>
+            <div style={{color: '#000000'}}>Platform</div>
           </h1>
         </div>
 

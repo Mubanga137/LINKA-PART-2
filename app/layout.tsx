@@ -6,6 +6,7 @@ import { RetailerAuthProvider } from '@/contexts/retailer-auth-context'
 import { MarketplaceProvider } from '@/contexts/marketplace-context'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
+import { ErrorBoundary } from '@/components/error-boundary'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -117,24 +118,76 @@ html[data-theme="light"] {
   contain: layout style paint;
 }
         `}</style>
+
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Enhanced fetch error handling for development
+            if (typeof window !== 'undefined') {
+              // Store original fetch
+              const originalFetch = window.fetch;
+
+              // Override fetch with error handling
+              window.fetch = function(...args) {
+                const url = args[0];
+                return originalFetch.apply(this, args).catch(error => {
+                  // Check if this is an HMR or webpack related request
+                  const isHMRRequest = url && (
+                    url.includes('_next') ||
+                    url.includes('webpack') ||
+                    url.includes('hot-update') ||
+                    url.includes('__nextjs_original-stack-frame')
+                  );
+
+                  if (error.message.includes('Failed to fetch') && isHMRRequest) {
+                    // Log but don't propagate HMR fetch errors
+                    console.warn('[HMR] Non-critical fetch error:', error.message);
+                    return Promise.resolve(new Response('{}', { status: 200 }));
+                  }
+
+                  // Re-throw other errors
+                  throw error;
+                });
+              };
+
+              // Handle unhandled promise rejections
+              window.addEventListener('unhandledrejection', function(event) {
+                if (event.reason && event.reason.message &&
+                    event.reason.message.includes('Failed to fetch')) {
+                  const isHMRError = event.reason.stack && (
+                    event.reason.stack.includes('webpack') ||
+                    event.reason.stack.includes('_next') ||
+                    event.reason.stack.includes('hmr')
+                  );
+
+                  if (isHMRError) {
+                    console.warn('[HMR] Handled unhandled rejection:', event.reason.message);
+                    event.preventDefault();
+                  }
+                }
+              });
+            }
+          `
+        }} />
       </head>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <AuthProvider>
-            <RetailerAuthProvider>
-              <MarketplaceProvider>
-                <AuthRedirectWrapper>
-                  {children}
-                </AuthRedirectWrapper>
-              </MarketplaceProvider>
-            </RetailerAuthProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <ErrorBoundary>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AuthProvider>
+              <RetailerAuthProvider>
+                <MarketplaceProvider>
+                  <AuthRedirectWrapper>
+                    {children}
+                  </AuthRedirectWrapper>
+                </MarketplaceProvider>
+              </RetailerAuthProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )
