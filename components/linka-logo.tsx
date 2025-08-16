@@ -21,61 +21,55 @@ export const LinkaLogo = memo(function LinkaLogo({
   return (
     <Link href="/" className={`flex items-center group ${className}`}>
       <div className="flex items-center gap-3">
-        {/* Chain link icon - properly interlocked like real chain */}
+        {/* Chain link icon - exactly matching reference image */}
         <div className="relative">
           <svg
             width={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
             height={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
-            viewBox="0 0 100 100"
+            viewBox="0 0 80 80"
             className="transition-transform duration-300 group-hover:scale-110"
           >
-            <defs>
-              <mask id="orangeLinkMask">
-                <rect width="100" height="100" fill="white"/>
-                {/* Cut out hole where blue link passes through */}
-                <ellipse cx="50" cy="50" rx="12" ry="8" fill="black" transform="rotate(30 50 50)"/>
-              </mask>
-            </defs>
-
-            {/* Blue chain link - goes through the orange link (behind/through) */}
-            <g transform="rotate(30 50 50)">
-              <path
-                d="M25 40
-                   C15 40, 10 45, 10 55
-                   C10 65, 15 70, 25 70
-                   L75 70
-                   C85 70, 90 65, 90 55
-                   C90 45, 85 40, 75 40
-                   Z
-
-                   M38 50
-                   L62 50
-                   C67 50, 67 55, 62 60
-                   L38 60
-                   C33 60, 33 55, 38 50
-                   Z"
-                fill="#1976d2"
+            {/* Blue chain link - bottom layer, angled bottom-left to top-right */}
+            <g transform="rotate(45 40 40)">
+              <rect
+                x="10"
+                y="30"
+                width="60"
+                height="20"
+                rx="10"
+                ry="10"
+                fill="#2563eb"
+              />
+              <rect
+                x="25"
+                y="35"
+                width="30"
+                height="10"
+                rx="5"
+                ry="5"
+                fill="white"
               />
             </g>
 
-            {/* Orange chain link - on top, with hole cut out for blue link */}
-            <g transform="rotate(-30 50 50)" mask="url(#orangeLinkMask)">
-              <path
-                d="M25 40
-                   C15 40, 10 45, 10 55
-                   C10 65, 15 70, 25 70
-                   L75 70
-                   C85 70, 90 65, 90 55
-                   C90 45, 85 40, 75 40
-                   Z
-
-                   M38 50
-                   L62 50
-                   C67 50, 67 55, 62 60
-                   L38 60
-                   C33 60, 33 55, 38 50
-                   Z"
-                fill="#ff6b35"
+            {/* Orange chain link - top layer, angled top-left to bottom-right */}
+            <g transform="rotate(-45 40 40)">
+              <rect
+                x="10"
+                y="30"
+                width="60"
+                height="20"
+                rx="10"
+                ry="10"
+                fill="#ff5722"
+              />
+              <rect
+                x="25"
+                y="35"
+                width="30"
+                height="10"
+                rx="5"
+                ry="5"
+                fill="white"
               />
             </g>
           </svg>
