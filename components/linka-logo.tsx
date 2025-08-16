@@ -29,45 +29,19 @@ export const LinkaLogo = memo(function LinkaLogo({
             viewBox="0 0 100 100"
             className="transition-transform duration-300 group-hover:scale-110"
           >
-            {/* Blue chain link - bottom layer, angled bottom-left to top-right */}
-            <g transform="rotate(45 50 50)">
-              <path
-                d="M20 35
-                   C12 35, 5 42, 5 50
-                   C5 58, 12 65, 20 65
-                   L80 65
-                   C88 65, 95 58, 95 50
-                   C95 42, 88 35, 80 35
-                   Z
-                   M35 45
-                   L65 45
-                   C70 45, 70 50, 65 55
-                   L35 55
-                   C30 55, 30 50, 35 45
-                   Z"
-                fill="#1976d2"
-              />
-            </g>
+            {/* Blue chain link */}
+            <path
+              d="M20 35 C12 35 5 42 5 50 C5 58 12 65 20 65 L80 65 C88 65 95 58 95 50 C95 42 88 35 80 35 Z M35 45 L65 45 C70 45 70 50 65 55 L35 55 C30 55 30 50 35 45 Z"
+              fill="#1976d2"
+              transform="rotate(45 50 50)"
+            />
 
-            {/* Orange chain link - top layer, angled top-left to bottom-right */}
-            <g transform="rotate(-45 50 50)">
-              <path
-                d="M20 35
-                   C12 35, 5 42, 5 50
-                   C5 58, 12 65, 20 65
-                   L80 65
-                   C88 65, 95 58, 95 50
-                   C95 42, 88 35, 80 35
-                   Z
-                   M35 45
-                   L65 45
-                   C70 45, 70 50, 65 55
-                   L35 55
-                   C30 55, 30 50, 35 45
-                   Z"
-                fill="#ff6600"
-              />
-            </g>
+            {/* Orange chain link */}
+            <path
+              d="M20 35 C12 35 5 42 5 50 C5 58 12 65 20 65 L80 65 C88 65 95 58 95 50 C95 42 88 35 80 35 Z M35 45 L65 45 C70 45 70 50 65 55 L35 55 C30 55 30 50 35 45 Z"
+              fill="#ff6600"
+              transform="rotate(-45 50 50)"
+            />
           </svg>
         </div>
         
