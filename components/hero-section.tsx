@@ -10,7 +10,7 @@ export const HeroSection = memo(function HeroSection() {
     <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8 z-10">
         {/* Tagline Bar */}
-        <div className="mb-4 text-center">
+        <div className="mb-1 text-center">
           <div
             className="inline-flex items-center rounded-full px-8 py-4 text-sm backdrop-blur-lg transition-all duration-200"
             style={{
