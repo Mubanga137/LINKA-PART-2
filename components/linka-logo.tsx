@@ -21,46 +21,44 @@ export const LinkaLogo = memo(function LinkaLogo({
   return (
     <Link href="/" className={`flex items-center group ${className}`}>
       <div className="flex items-center gap-3">
-        {/* Chain link icon - CSS-based design */}
-        <div
-          className="relative transition-transform duration-300 group-hover:scale-110"
-          style={{
-            width: size === 'sm' ? '32px' : size === 'md' ? '40px' : '48px',
-            height: size === 'sm' ? '32px' : size === 'md' ? '40px' : '48px'
-          }}
+        {/* Chain link icon - clean SVG design */}
+        <svg
+          width={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
+          height={size === 'sm' ? '32' : size === 'md' ? '40' : '48'}
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+          className="transition-transform duration-300 group-hover:scale-110"
         >
-          {/* Blue chain link - bottom layer */}
-          <div
-            className="absolute"
-            style={{
-              width: size === 'sm' ? '24px' : size === 'md' ? '30px' : '36px',
-              height: size === 'sm' ? '12px' : size === 'md' ? '15px' : '18px',
-              borderRadius: size === 'sm' ? '6px' : size === 'md' ? '7.5px' : '9px',
-              border: `${size === 'sm' ? '3px' : size === 'md' ? '4px' : '5px'} solid #1976d2`,
-              boxSizing: 'border-box',
-              transform: 'rotate(-45deg)',
-              top: size === 'sm' ? '16px' : size === 'md' ? '20px' : '24px',
-              left: size === 'sm' ? '2px' : size === 'md' ? '2.5px' : '3px',
-              zIndex: 1
-            }}
-          />
+          {/* Blue Link */}
+          <g transform="rotate(-45 100 100)">
+            <rect
+              x="50"
+              y="85"
+              width="100"
+              height="30"
+              rx="15"
+              ry="15"
+              fill="none"
+              stroke="#1976d2"
+              strokeWidth="12"
+            />
+          </g>
 
-          {/* Orange chain link - top layer */}
-          <div
-            className="absolute"
-            style={{
-              width: size === 'sm' ? '24px' : size === 'md' ? '30px' : '36px',
-              height: size === 'sm' ? '12px' : size === 'md' ? '15px' : '18px',
-              borderRadius: size === 'sm' ? '6px' : size === 'md' ? '7.5px' : '9px',
-              border: `${size === 'sm' ? '3px' : size === 'md' ? '4px' : '5px'} solid #ff6600`,
-              boxSizing: 'border-box',
-              transform: 'rotate(45deg)',
-              top: size === 'sm' ? '4px' : size === 'md' ? '5px' : '6px',
-              left: size === 'sm' ? '8px' : size === 'md' ? '10px' : '12px',
-              zIndex: 2
-            }}
-          />
-        </div>
+          {/* Orange Link */}
+          <g transform="rotate(45 100 100)">
+            <rect
+              x="50"
+              y="85"
+              width="100"
+              height="30"
+              rx="15"
+              ry="15"
+              fill="none"
+              stroke="#f57c00"
+              strokeWidth="12"
+            />
+          </g>
+        </svg>
         
         {/* Linka text */}
         <span 
