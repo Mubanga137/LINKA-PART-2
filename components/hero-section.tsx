@@ -30,7 +30,7 @@ export const HeroSection = memo(function HeroSection() {
 
         {/* Main Heading */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
             <div style={{color: '#000000'}} className="mb-2">Your Local</div>
             <div
               className="mb-2 bg-clip-text text-transparent"
@@ -50,7 +50,7 @@ export const HeroSection = memo(function HeroSection() {
         {/* Subheading */}
         <div className="text-center mb-16">
           <p
-            className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed font-medium"
+            className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed font-medium"
             style={{color: '#333333'}}
           >
             Discover amazing products from local retailers in your area. Support your
@@ -63,7 +63,7 @@ export const HeroSection = memo(function HeroSection() {
           <Link href="/marketplace">
             <Button
               size="lg"
-              className="px-10 py-5 text-xl font-bold rounded-xl border-none transition-all duration-200 hover:shadow-xl"
+              className="px-6 py-3 text-base font-bold rounded-xl border-none transition-all duration-200 hover:shadow-xl"
               style={{
                 background: 'linear-gradient(135deg, #0099cc 0%, #ff6600 100%)',
                 color: '#ffffff',
@@ -78,7 +78,7 @@ export const HeroSection = memo(function HeroSection() {
             <Button
               size="lg"
               variant="outline"
-              className="px-10 py-5 text-xl font-semibold rounded-xl transition-all duration-200 hover:shadow-lg"
+              className="px-6 py-3 text-base font-semibold rounded-xl transition-all duration-200 hover:shadow-lg"
               style={{
                 border: '2px solid #0099cc',
                 color: '#0099cc',
