@@ -39,7 +39,8 @@ export const HeroSection = memo(function HeroSection() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundSize: '200% 100%',
-                animation: 'shimmer 3s ease-in-out infinite'
+                animation: 'shimmer 3s ease-in-out infinite',
+                filter: 'drop-shadow(0 4px 8px rgba(0, 153, 204, 0.15))'
               }}
             >
               E-commerce
