@@ -218,20 +218,32 @@ export function VendorShowcase({
   return (
     <section className="py-8 sm:py-12 md:py-16 relative overflow-hidden">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/30"></div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0, 153, 204, 0.02) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 102, 0, 0.02) 100%)'
+        }}
+      ></div>
       
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-4">
-            <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+            <span
+              className="bg-gradient-to-r bg-clip-text text-transparent"
+              style={{
+                background: 'linear-gradient(135deg, #0099cc 0%, #ff6600 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
+            >
               {title}
             </span>
           </h2>
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto px-4">
             {subtitle}
             {user?.location && (
-              <span className="block mt-2 text-indigo-600 font-medium">
+              <span className="block mt-2 font-medium" style={{color: '#0099cc'}}>
                 <MapPin className="inline h-4 w-4 mr-1" />
                 Supporting local businesses in {user.location}
               </span>
@@ -248,7 +260,11 @@ export function VendorShowcase({
           {vendors.map((vendor, index) => (
             <Card
               key={vendor.id}
-              className="group hover:shadow-2xl hover:shadow-slate-900/10 transition-all duration-500 hover:-translate-y-2 sm:hover:-translate-y-4 hover:scale-105 bg-white/90 backdrop-blur-sm border-white/20 overflow-hidden cursor-pointer mx-2 sm:mx-0"
+              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 sm:hover:-translate-y-4 hover:scale-105 bg-white/95 backdrop-blur-sm border-white/30 overflow-hidden cursor-pointer mx-2 sm:mx-0"
+              style={{
+                boxShadow: '0 8px 32px rgba(0, 153, 204, 0.08), 0 1px 0 rgba(255, 255, 255, 0.8) inset',
+                border: '1px solid rgba(0, 153, 204, 0.1)'
+              }}
               style={{ animationDelay: `${index * 150}ms` }}
               onMouseEnter={() => setHoveredVendor(vendor.id)}
               onMouseLeave={() => setHoveredVendor(null)}
