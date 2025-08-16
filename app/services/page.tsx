@@ -410,13 +410,31 @@ export default function ServicesPage() {
                       
                       {/* Special Badge for Featured Services */}
                       {service.isSpecial && (
-                        <motion.div 
+                        <motion.div
                           className="absolute top-4 left-4 z-20"
                           whileHover={{ scale: 1.1, rotate: 10 }}
                         >
                           <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-3 py-1 rounded-xl shadow-lg">
                             <TrendingUp className="h-3 w-3 mr-1" />
                             Featured
+                          </Badge>
+                        </motion.div>
+                      )}
+
+                      {/* Premium Hub Badge for Entertainment */}
+                      {service.isPremiumHub && (
+                        <motion.div
+                          className="absolute top-4 left-4 z-20"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          animate={{
+                            boxShadow: ["0 0 20px #8b5cf6", "0 0 40px #8b5cf6", "0 0 20px #8b5cf6"],
+                            scale: [1, 1.05, 1]
+                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <Badge className="bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 text-white px-4 py-2 rounded-xl shadow-xl">
+                            <Sparkles className="h-4 w-4 mr-2 animate-pulse" />
+                            Premium Hub
                           </Badge>
                         </motion.div>
                       )}
