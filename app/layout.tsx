@@ -6,6 +6,7 @@ import { RetailerAuthProvider } from '@/contexts/retailer-auth-context'
 import { MarketplaceProvider } from '@/contexts/marketplace-context'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
+import { ErrorBoundary } from '@/components/error-boundary'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -139,22 +140,24 @@ html[data-theme="light"] {
         }} />
       </head>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <AuthProvider>
-            <RetailerAuthProvider>
-              <MarketplaceProvider>
-                <AuthRedirectWrapper>
-                  {children}
-                </AuthRedirectWrapper>
-              </MarketplaceProvider>
-            </RetailerAuthProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <ErrorBoundary>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AuthProvider>
+              <RetailerAuthProvider>
+                <MarketplaceProvider>
+                  <AuthRedirectWrapper>
+                    {children}
+                  </AuthRedirectWrapper>
+                </MarketplaceProvider>
+              </RetailerAuthProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )
