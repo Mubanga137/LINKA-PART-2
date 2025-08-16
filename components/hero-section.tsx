@@ -14,9 +14,9 @@ export const HeroSection = memo(function HeroSection() {
           <div
             className="inline-flex items-center rounded-full px-8 py-4 text-sm backdrop-blur-lg transition-all duration-300 hover:scale-105"
             style={{
-              background: 'rgba(255, 255, 255, 0.9)',
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%)',
               border: '1px solid rgba(0, 153, 204, 0.2)',
-              boxShadow: '0 8px 32px rgba(0, 153, 204, 0.15)'
+              boxShadow: '0 8px 32px rgba(0, 153, 204, 0.12), 0 1px 0 rgba(255, 255, 255, 0.8) inset'
             }}
           >
             <span className="mr-3 text-lg">📍</span>
