@@ -16,19 +16,20 @@ const nextConfig = {
   experimental: {
     // Optimize HMR and reduce memory usage
     optimizeCss: false,
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
   webpack: (config, { dev, isServer }) => {
     // Optimize webpack config for development
     if (dev && !isServer) {
-      config.devtool = 'eval-cheap-module-source-map'
+      // Remove problematic devtool override for better HMR
+      // Use Next.js default devtool setting
 
       // Reduce memory usage and improve HMR stability
       config.optimization = {
