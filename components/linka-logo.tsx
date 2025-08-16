@@ -21,43 +21,90 @@ export const LinkaLogo = memo(function LinkaLogo({
   return (
     <Link href="/" className={`flex items-center group ${className}`}>
       <div className="flex items-center gap-3">
-        {/* Chain link icon with exact original design */}
+        {/* Chain link icon - exact recreation of reference image */}
         <div className="relative">
-          <svg 
-            width={size === 'sm' ? '24' : size === 'md' ? '32' : '40'} 
-            height={size === 'sm' ? '24' : size === 'md' ? '32' : '40'} 
-            viewBox="0 0 32 32" 
+          <svg
+            width={size === 'sm' ? '28' : size === 'md' ? '36' : '44'}
+            height={size === 'sm' ? '28' : size === 'md' ? '36' : '44'}
+            viewBox="0 0 100 100"
             className="transition-transform duration-300 group-hover:scale-110"
           >
-            {/* Top chain link - solid orange */}
-            <path
-              d="M8 6 C4 6, 2 8, 2 12 C2 16, 4 18, 8 18 L12 18 C14 18, 15 17, 15 15 C15 13, 14 12, 12 12 L8 12 C7 12, 6 11, 6 10 C6 9, 7 8, 8 8 L12 8 C13 8, 14 9, 14 10"
-              fill="none"
-              stroke="#ff6600"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M8 6 C4 6, 2 8, 2 12 C2 16, 4 18, 8 18 L12 18 C14 18, 15 17, 15 15 C15 13, 14 12, 12 12 L8 12 C7 12, 6 11, 6 10 C6 9, 7 8, 8 8 L12 8 C13 8, 14 9, 14 10"
-              fill="#ff6600"
-              fillOpacity="0.15"
-            />
-            
-            {/* Bottom chain link - solid blue */}
-            <path
-              d="M20 14 C24 14, 26 16, 26 20 C26 24, 24 26, 20 26 L16 26 C14 26, 13 25, 13 23 C13 21, 14 20, 16 20 L20 20 C21 20, 22 19, 22 18 C22 17, 21 16, 20 16 L16 16 C15 16, 14 17, 14 18"
-              fill="none"
-              stroke="#0099cc"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M20 14 C24 14, 26 16, 26 20 C26 24, 24 26, 20 26 L16 26 C14 26, 13 25, 13 23 C13 21, 14 20, 16 20 L20 20 C21 20, 22 19, 22 18 C22 17, 21 16, 20 16 L16 16 C15 16, 14 17, 14 18"
-              fill="#0099cc"
-              fillOpacity="0.15"
-            />
+            <defs>
+              {/* Orange gradient for top link */}
+              <linearGradient id="orangeLinkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff7b38" />
+                <stop offset="100%" stopColor="#e55a28" />
+              </linearGradient>
+
+              {/* Blue gradient for bottom link */}
+              <linearGradient id="blueLinkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#4a8bc2" />
+                <stop offset="100%" stopColor="#2563eb" />
+              </linearGradient>
+            </defs>
+
+            {/* Top chain link - Orange, rotated counter-clockwise */}
+            <g transform="rotate(-25 50 35)">
+              <path
+                d="M25 25
+                   C15 25, 10 30, 10 40
+                   C10 50, 15 55, 25 55
+                   L45 55
+                   C55 55, 60 50, 60 40
+                   C60 30, 55 25, 45 25
+                   L35 25
+
+                   M35 35
+                   L45 35
+                   C50 35, 50 40, 45 45
+                   L35 45
+                   C30 45, 30 40, 35 35 Z"
+                fill="url(#orangeLinkGradient)"
+                stroke="none"
+              />
+            </g>
+
+            {/* Bottom chain link - Blue, rotated clockwise and positioned to interlock */}
+            <g transform="rotate(25 50 65)">
+              <path
+                d="M25 55
+                   C15 55, 10 60, 10 70
+                   C10 80, 15 85, 25 85
+                   L45 85
+                   C55 85, 60 80, 60 70
+                   C60 60, 55 55, 45 55
+                   L35 55
+
+                   M35 65
+                   L45 65
+                   C50 65, 50 70, 45 75
+                   L35 75
+                   C30 75, 30 70, 35 65 Z"
+                fill="url(#blueLinkGradient)"
+                stroke="none"
+              />
+            </g>
+
+            {/* Subtle highlight effects for premium look */}
+            <g transform="rotate(-25 50 35)">
+              <ellipse
+                cx="40"
+                cy="32"
+                rx="8"
+                ry="3"
+                fill="rgba(255, 255, 255, 0.3)"
+              />
+            </g>
+
+            <g transform="rotate(25 50 65)">
+              <ellipse
+                cx="40"
+                cy="62"
+                rx="8"
+                ry="3"
+                fill="rgba(255, 255, 255, 0.3)"
+              />
+            </g>
           </svg>
         </div>
         
