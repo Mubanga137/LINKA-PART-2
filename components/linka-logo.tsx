@@ -49,7 +49,7 @@ export const LinkaLogo = memo(function LinkaLogo({
               transform="rotate(-30 37.5 35)"
             />
 
-            {/* Bottom blue chain link - positioned diagonally and interlocked */}
+            {/* Bottom blue chain link - positioned diagonally from bottom-left to top-right */}
             <path
               d="M20 35
                  C10 35, 5 45, 5 55
@@ -66,7 +66,7 @@ export const LinkaLogo = memo(function LinkaLogo({
                  C30 65, 30 55, 35 45
                  Z"
               fill="#1976d2"
-              transform="rotate(30 37.5 55)"
+              transform="rotate(-30 37.5 55)"
             />
           </svg>
         </div>
