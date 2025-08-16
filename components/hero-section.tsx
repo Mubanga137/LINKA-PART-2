@@ -10,7 +10,7 @@ export const HeroSection = memo(function HeroSection() {
     <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8 z-10">
         {/* Tagline Bar */}
-        <div className="mb-8 text-center">
+        <div className="mb-4 text-center">
           <div
             className="inline-flex items-center rounded-full px-8 py-4 text-sm backdrop-blur-lg transition-all duration-200"
             style={{
@@ -30,7 +30,7 @@ export const HeroSection = memo(function HeroSection() {
 
         {/* Main Heading */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
             <div style={{color: '#000000'}} className="mb-2">Your Local</div>
             <div
               className="mb-2 bg-clip-text text-transparent"
@@ -50,7 +50,7 @@ export const HeroSection = memo(function HeroSection() {
         {/* Subheading */}
         <div className="text-center mb-16">
           <p
-            className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-medium"
+            className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed font-medium"
             style={{color: '#333333'}}
           >
             Discover amazing products from local retailers in your area. Support your
@@ -63,7 +63,7 @@ export const HeroSection = memo(function HeroSection() {
           <Link href="/marketplace">
             <Button
               size="lg"
-              className="px-8 py-4 text-lg font-bold rounded-xl border-none transition-all duration-200 hover:shadow-xl"
+              className="px-10 py-5 text-xl font-bold rounded-xl border-none transition-all duration-200 hover:shadow-xl"
               style={{
                 background: 'linear-gradient(135deg, #0099cc 0%, #ff6600 100%)',
                 color: '#ffffff',
@@ -78,7 +78,7 @@ export const HeroSection = memo(function HeroSection() {
             <Button
               size="lg"
               variant="outline"
-              className="px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-200 hover:shadow-lg"
+              className="px-10 py-5 text-xl font-semibold rounded-xl transition-all duration-200 hover:shadow-lg"
               style={{
                 border: '2px solid #0099cc',
                 color: '#0099cc',
