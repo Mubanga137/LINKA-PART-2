@@ -117,6 +117,26 @@ html[data-theme="light"] {
   contain: layout style paint;
 }
         `}</style>
+
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Handle fetch errors in development
+            if (typeof window !== 'undefined') {
+              const originalFetch = window.fetch;
+              window.fetch = function(...args) {
+                return originalFetch.apply(this, args).catch(error => {
+                  // Silently handle HMR fetch errors
+                  if (error.message.includes('Failed to fetch') &&
+                      (args[0]?.includes('_next') || args[0]?.includes('webpack'))) {
+                    console.warn('HMR fetch error (non-critical):', error.message);
+                    return Promise.reject(error);
+                  }
+                  throw error;
+                });
+              };
+            }
+          `
+        }} />
       </head>
       <body>
         <ThemeProvider
