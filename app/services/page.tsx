@@ -88,20 +88,22 @@ const platformServices = [
   },
   {
     id: 4,
-    name: "Entertainment & Events",
-    icon: Music,
-    description: "Event planning, live entertainment, DJ services, and party equipment",
-    providers: 55,
-    rating: 4.7,
+    name: "Entertainment Hub",
+    icon: Gamepad2,
+    description: "Gaming, movies, music, live events, and premium entertainment experiences",
+    providers: 250,
+    rating: 4.9,
     href: "/services/entertainment-events",
-    gradient: "from-pink-500 to-purple-600",
-    bgGradient: "from-pink-50 to-purple-50",
-    hoverGradient: "hover:from-pink-100 hover:to-purple-100",
-    features: ["Event Planning", "Live Music", "DJ Services", "Equipment Rental"],
-    stats: { entertainers: "55+", events: "100+/month" },
-    image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400&h=300&fit=crop",
-    brandColor: "#ff6f61",
-    shadowColor: "hover:shadow-pink-500/25"
+    gradient: "from-pink-500 via-purple-500 to-blue-500",
+    bgGradient: "from-pink-50 via-purple-50 to-blue-50",
+    hoverGradient: "hover:from-pink-100 hover:via-purple-100 hover:to-blue-100",
+    features: ["Gaming Tournaments", "Movie Streaming", "Live Music", "Premium Events", "VIP Subscriptions", "+10 more"],
+    stats: { creators: "250+", "entertainment hours": "10K+/month" },
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop",
+    brandColor: "#6366f1",
+    shadowColor: "hover:shadow-purple-500/25",
+    isPremiumHub: true,
+    hubCategories: ["Gaming", "Movies", "Music", "Events", "Subscriptions"]
   },
   {
     id: 5,
@@ -408,13 +410,31 @@ export default function ServicesPage() {
                       
                       {/* Special Badge for Featured Services */}
                       {service.isSpecial && (
-                        <motion.div 
+                        <motion.div
                           className="absolute top-4 left-4 z-20"
                           whileHover={{ scale: 1.1, rotate: 10 }}
                         >
                           <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-3 py-1 rounded-xl shadow-lg">
                             <TrendingUp className="h-3 w-3 mr-1" />
                             Featured
+                          </Badge>
+                        </motion.div>
+                      )}
+
+                      {/* Premium Hub Badge for Entertainment */}
+                      {service.isPremiumHub && (
+                        <motion.div
+                          className="absolute top-4 left-4 z-20"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          animate={{
+                            boxShadow: ["0 0 20px #8b5cf6", "0 0 40px #8b5cf6", "0 0 20px #8b5cf6"],
+                            scale: [1, 1.05, 1]
+                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <Badge className="bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 text-white px-4 py-2 rounded-xl shadow-xl">
+                            <Sparkles className="h-4 w-4 mr-2 animate-pulse" />
+                            Premium Hub
                           </Badge>
                         </motion.div>
                       )}
@@ -513,22 +533,47 @@ export default function ServicesPage() {
 
                           {/* Enhanced Features */}
                           <div className="mb-6">
-                            <p className="text-sm text-slate-500 mb-3 font-medium">Popular Services:</p>
+                            <p className="text-sm text-slate-500 mb-3 font-medium">
+                              {service.isPremiumHub ? "Entertainment Categories:" : "Popular Services:"}
+                            </p>
                             <div className="flex flex-wrap gap-2">
-                              {service.features.slice(0, 3).map((feature, idx) => (
-                                <motion.div
-                                  key={idx}
-                                  whileHover={{ scale: 1.05 }}
-                                >
-                                  <Badge 
-                                    variant="secondary" 
-                                    className="text-xs px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-purple-100 hover:to-blue-100 transition-all duration-300"
+                              {service.isPremiumHub && service.hubCategories ? (
+                                service.hubCategories.map((category, idx) => (
+                                  <motion.div
+                                    key={idx}
+                                    whileHover={{ scale: 1.1, y: -2 }}
+                                    className="relative"
                                   >
-                                    {feature}
-                                  </Badge>
-                                </motion.div>
-                              ))}
-                              {service.features.length > 3 && (
+                                    <Badge
+                                      variant="secondary"
+                                      className={`text-xs px-3 py-1 transition-all duration-300 ${
+                                        idx === 0 ? "bg-gradient-to-r from-pink-100 to-blue-100 text-pink-700 border-pink-200" :
+                                        idx === 1 ? "bg-gradient-to-r from-purple-100 to-violet-100 text-purple-700 border-purple-200" :
+                                        idx === 2 ? "bg-gradient-to-r from-teal-100 to-yellow-100 text-teal-700 border-teal-200" :
+                                        idx === 3 ? "bg-gradient-to-r from-red-100 to-orange-100 text-red-700 border-red-200" :
+                                        "bg-gradient-to-r from-emerald-100 to-green-100 text-emerald-700 border-emerald-200"
+                                      }`}
+                                    >
+                                      {category}
+                                    </Badge>
+                                  </motion.div>
+                                ))
+                              ) : (
+                                service.features.slice(0, 3).map((feature, idx) => (
+                                  <motion.div
+                                    key={idx}
+                                    whileHover={{ scale: 1.05 }}
+                                  >
+                                    <Badge
+                                      variant="secondary"
+                                      className="text-xs px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-purple-100 hover:to-blue-100 transition-all duration-300"
+                                    >
+                                      {feature}
+                                    </Badge>
+                                  </motion.div>
+                                ))
+                              )}
+                              {!service.isPremiumHub && service.features.length > 3 && (
                                 <Badge variant="secondary" className="text-xs px-3 py-1">
                                   +{service.features.length - 3} more
                                 </Badge>
@@ -545,12 +590,14 @@ export default function ServicesPage() {
                               <Users className="h-4 w-4 mr-2" />
                               {service.providers} providers
                             </div>
-                            <motion.div 
+                            <motion.div
                               className="flex items-center text-blue-600 group-hover:text-blue-700 font-medium"
                               whileHover={{ x: 5 }}
                             >
-                              <span className="text-sm mr-2">View Services</span>
-                              <ExternalLink className="h-4 w-4" />
+                              <span className="text-sm mr-2">
+                                {service.isPremiumHub ? "Enter Hub" : "View Services"}
+                              </span>
+                              {service.isPremiumHub ? <Sparkles className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}
                             </motion.div>
                           </motion.div>
                         </div>
