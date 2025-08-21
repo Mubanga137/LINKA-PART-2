@@ -157,8 +157,10 @@ html[data-theme="light"] {
               // Handle unhandled promise rejections
               window.addEventListener('unhandledrejection', function(event) {
                 if (event.reason && event.reason.message &&
+                    typeof event.reason.message === 'string' &&
                     event.reason.message.includes('Failed to fetch')) {
-                  const isHMRError = event.reason.stack && (
+                  const isHMRError = event.reason.stack &&
+                    typeof event.reason.stack === 'string' && (
                     event.reason.stack.includes('webpack') ||
                     event.reason.stack.includes('_next') ||
                     event.reason.stack.includes('hmr')
