@@ -283,32 +283,6 @@ export function AnimatedSidebar({ className }: SidebarProps) {
               )}
             </div>
 
-            {/* User Profile */}
-            {user && (
-              <motion.div
-                variants={itemVariants}
-                className="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100/50"
-              >
-                <Avatar className="h-12 w-12 border-2 border-white shadow-md">
-                  <AvatarImage src="/placeholder-user.jpg" />
-                  <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold">
-                    {getInitials(user.name)}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-gray-900 truncate">
-                    {user.name}
-                  </p>
-                  <p className="text-xs text-gray-600 truncate">
-                    {user.email}
-                  </p>
-                  <Badge className="mt-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs">
-                    <Star className="h-3 w-3 mr-1" />
-                    Premium
-                  </Badge>
-                </div>
-              </motion.div>
-            )}
           </div>
 
           {/* Navigation */}

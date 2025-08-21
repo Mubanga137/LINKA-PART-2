@@ -7,7 +7,10 @@ import { MarketplaceProvider } from '@/contexts/marketplace-context'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
 import { ErrorBoundary } from '@/components/error-boundary'
+import { ThemeCustomizationProvider } from '@/contexts/theme-customization-context'
 import './globals.css'
+import '../styles/dashboard-animations.css'
+import '../styles/theme-customization.css'
 
 export const metadata: Metadata = {
   title: 'Linka - Zambian E-Commerce Platform',
@@ -131,11 +134,13 @@ html[data-theme="light"] {
                 const url = args[0];
                 return originalFetch.apply(this, args).catch(error => {
                   // Check if this is an HMR or webpack related request
-                  const isHMRRequest = url && (
-                    url.includes('_next') ||
-                    url.includes('webpack') ||
-                    url.includes('hot-update') ||
-                    url.includes('__nextjs_original-stack-frame')
+                  // Handle both string URLs and Request objects
+                  const urlString = typeof url === 'string' ? url : (url && url.url) || '';
+                  const isHMRRequest = urlString && (
+                    urlString.includes('_next') ||
+                    urlString.includes('webpack') ||
+                    urlString.includes('hot-update') ||
+                    urlString.includes('__nextjs_original-stack-frame')
                   );
 
                   if (error.message.includes('Failed to fetch') && isHMRRequest) {
@@ -152,8 +157,10 @@ html[data-theme="light"] {
               // Handle unhandled promise rejections
               window.addEventListener('unhandledrejection', function(event) {
                 if (event.reason && event.reason.message &&
+                    typeof event.reason.message === 'string' &&
                     event.reason.message.includes('Failed to fetch')) {
-                  const isHMRError = event.reason.stack && (
+                  const isHMRError = event.reason.stack &&
+                    typeof event.reason.stack === 'string' && (
                     event.reason.stack.includes('webpack') ||
                     event.reason.stack.includes('_next') ||
                     event.reason.stack.includes('hmr')
@@ -180,9 +187,11 @@ html[data-theme="light"] {
             <AuthProvider>
               <RetailerAuthProvider>
                 <MarketplaceProvider>
-                  <AuthRedirectWrapper>
-                    {children}
-                  </AuthRedirectWrapper>
+                  <ThemeCustomizationProvider>
+                    <AuthRedirectWrapper>
+                      {children}
+                    </AuthRedirectWrapper>
+                  </ThemeCustomizationProvider>
                 </MarketplaceProvider>
               </RetailerAuthProvider>
             </AuthProvider>
