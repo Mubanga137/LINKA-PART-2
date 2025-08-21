@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import "@/styles/wishlist-animations.css"
 import Link from "next/link"
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
