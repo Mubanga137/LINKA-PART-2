@@ -281,9 +281,6 @@ function CustomerDashboardContent() {
         
         {/* Main Content */}
         <main className="flex-1 min-h-screen">
-          {/* Enhanced Welcome Section */}
-          <EnhancedCustomerWelcome user={user!} />
-
           {/* Customizable Dashboard Content */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12">
             {enabledSections.map((section, index) => renderSection(section, index))}
