@@ -18,6 +18,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { usePageTransition } from "@/hooks/use-animations";
+import { useThemeCustomization } from "@/contexts/theme-customization-context";
 import "@/styles/dashboard-animations.css";
 
 // Mock data for recommended services and trending products
@@ -188,6 +189,81 @@ function CustomerDashboardContent() {
   const { user } = useAuth();
   const router = useRouter();
   const { navigateWithTransition } = usePageTransition();
+  const { dashboardSections, currentTheme } = useThemeCustomization();
+
+  // Sort sections by order and filter enabled ones
+  const enabledSections = dashboardSections
+    .filter(section => section.enabled)
+    .sort((a, b) => a.order - b.order);
+
+  const renderSection = (section: any, index: number) => {
+    const delay = 0.2 + (index * 0.2);
+
+    const sectionProps = {
+      initial: { opacity: 0, y: 30 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.6, delay },
+      className: "section-slide-in"
+    };
+
+    switch (section.component) {
+      case 'EnhancedCustomerWelcome':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <EnhancedCustomerWelcome user={user!} />
+          </motion.section>
+        );
+      case 'RecentOrdersViewed':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <RecentOrdersViewed />
+          </motion.section>
+        );
+      case 'RecommendedServices':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <RecommendedServices
+              products={mockRecommendedProducts}
+              isLoading={false}
+            />
+          </motion.section>
+        );
+      case 'EnhancedCategoryGrid':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <EnhancedCategoryGrid />
+          </motion.section>
+        );
+      case 'TrendingProducts':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <TrendingProducts
+              products={mockTrendingProducts}
+              isLoading={false}
+            />
+          </motion.section>
+        );
+      case 'CTAParallaxBanner':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <CTAParallaxBanner
+              title="Discover More Amazing Products"
+              description="Explore thousands of products from verified local vendors. From traditional crafts to modern electronics, find everything you need while supporting the Zambian economy."
+              primaryAction={{
+                label: "Explore Marketplace",
+                onClick: () => navigateWithTransition('/marketplace')
+              }}
+              secondaryAction={{
+                label: "View Hot Deals 🔥",
+                onClick: () => navigateWithTransition('/hot-deals')
+              }}
+            />
+          </motion.section>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 relative">
@@ -208,74 +284,29 @@ function CustomerDashboardContent() {
           {/* Enhanced Welcome Section */}
           <EnhancedCustomerWelcome user={user!} />
 
-          {/* Main Dashboard Content */}
+          {/* Customizable Dashboard Content */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12">
-            {/* Section 1: Recent Orders & Recently Viewed (Top Priority) */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="section-slide-in"
-            >
-              <RecentOrdersViewed />
-            </motion.section>
+            {enabledSections.map((section, index) => renderSection(section, index))}
 
-            {/* Section 2: Recommended for You (Direct under Recently Viewed) */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="section-slide-in"
-            >
-              <RecommendedServices
-                products={mockRecommendedProducts}
-                isLoading={false}
-              />
-            </motion.section>
-
-            {/* Section 3: Shop by Category */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="section-slide-in"
-            >
-              <EnhancedCategoryGrid />
-            </motion.section>
-
-            {/* Section 4: Trending Now (Bottom Section) */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="section-slide-in"
-            >
-              <TrendingProducts
-                products={mockTrendingProducts}
-                isLoading={false}
-              />
-            </motion.section>
-
-            {/* Enhanced CTA Section with Parallax */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.0 }}
-              className="section-slide-in"
-            >
-              <CTAParallaxBanner
-                title="Discover More Amazing Products"
-                description="Explore thousands of products from verified local vendors. From traditional crafts to modern electronics, find everything you need while supporting the Zambian economy."
-                primaryAction={{
-                  label: "Explore Marketplace",
-                  onClick: () => navigateWithTransition('/marketplace')
-                }}
-                secondaryAction={{
-                  label: "View Hot Deals 🔥",
-                  onClick: () => navigateWithTransition('/hot-deals')
-                }}
-              />
-            </motion.section>
+            {/* Empty state if no sections enabled */}
+            {enabledSections.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center py-16"
+              >
+                <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                  No sections enabled
+                </h3>
+                <p className="text-gray-500 mb-6">
+                  Customize your dashboard layout in your profile settings.
+                </p>
+                <Button onClick={() => navigateWithTransition('/profile')}>
+                  Customize Dashboard
+                </Button>
+              </motion.div>
+            )}
           </div>
         </main>
       </div>

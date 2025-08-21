@@ -7,6 +7,7 @@ import { MarketplaceProvider } from '@/contexts/marketplace-context'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
 import { ErrorBoundary } from '@/components/error-boundary'
+import { ThemeCustomizationProvider } from '@/contexts/theme-customization-context'
 import './globals.css'
 import '../styles/dashboard-animations.css'
 
@@ -181,9 +182,11 @@ html[data-theme="light"] {
             <AuthProvider>
               <RetailerAuthProvider>
                 <MarketplaceProvider>
-                  <AuthRedirectWrapper>
-                    {children}
-                  </AuthRedirectWrapper>
+                  <ThemeCustomizationProvider>
+                    <AuthRedirectWrapper>
+                      {children}
+                    </AuthRedirectWrapper>
+                  </ThemeCustomizationProvider>
                 </MarketplaceProvider>
               </RetailerAuthProvider>
             </AuthProvider>
