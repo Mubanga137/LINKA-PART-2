@@ -8,6 +8,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
 import { ErrorBoundary } from '@/components/error-boundary'
 import './globals.css'
+import '../styles/dashboard-animations.css'
 
 export const metadata: Metadata = {
   title: 'Linka - Zambian E-Commerce Platform',
