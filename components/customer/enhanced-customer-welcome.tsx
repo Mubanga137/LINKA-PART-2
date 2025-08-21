@@ -180,9 +180,10 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
           </StatsCard3D>
 
           {/* Active Orders */}
-          <Card 
-            className="bg-white/80 backdrop-blur-sm border-white/50 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer group overflow-hidden"
+          <StatsCard3D
+            className="cursor-pointer group overflow-hidden"
             onClick={() => router.push('/orders')}
+            glowColor="blue"
           >
             <CardContent className="p-6 relative">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/20 to-purple-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
@@ -207,12 +208,13 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
                 </Badge>
               </div>
             </CardContent>
-          </Card>
+          </StatsCard3D>
 
           {/* Saved Items */}
-          <Card 
-            className="bg-white/80 backdrop-blur-sm border-white/50 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer group overflow-hidden"
+          <StatsCard3D
+            className="cursor-pointer group overflow-hidden"
             onClick={() => router.push('/wishlist')}
+            glowColor="pink"
           >
             <CardContent className="p-6 relative">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-pink-400/20 to-red-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
@@ -237,12 +239,13 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
                 </Badge>
               </div>
             </CardContent>
-          </Card>
+          </StatsCard3D>
 
           {/* Activity Score */}
-          <Card 
-            className="bg-white/80 backdrop-blur-sm border-white/50 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer group overflow-hidden"
+          <StatsCard3D
+            className="cursor-pointer group overflow-hidden"
             onClick={() => router.push('/profile')}
+            glowColor="green"
           >
             <CardContent className="p-6 relative">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-400/20 to-teal-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
@@ -268,7 +271,7 @@ export function EnhancedCustomerWelcome({ user }: EnhancedCustomerWelcomeProps) 
                 </Badge>
               </div>
             </CardContent>
-          </Card>
+          </StatsCard3D>
         </div>
       </div>
     </div>
