@@ -1,397 +1,263 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { CustomerHeader } from "@/components/customer-header"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Header } from '@/components/header'
+import { Footer } from '@/components/footer'
+import { useAuth } from '@/contexts/auth-context'
+import { AuthRedirectWrapper } from '@/components/auth-redirect-wrapper'
+import { ThemeSelector } from '@/components/ui/theme-selector'
+import { LayoutCustomizer } from '@/components/ui/layout-customizer'
+import { LifestyleProfileManager } from '@/components/ui/lifestyle-profile-manager'
+import { GamifiedLoyalty } from '@/components/ui/gamified-loyalty'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { 
   User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Calendar, 
-  Edit, 
-  Save, 
-  X,
-  Shield,
-  Package,
-  Heart,
-  ShoppingBag,
-  Star,
+  Settings, 
+  Palette, 
+  Layout, 
+  Heart, 
+  Trophy,
+  Edit3,
+  Mail,
+  MapPin,
+  Calendar,
+  Save,
   Bell,
-  Settings
-} from "lucide-react"
-import { useAuth } from "@/contexts/auth-context"
-import { useCart } from "@/contexts/marketplace-context"
+  Shield,
+  Download
+} from 'lucide-react'
 
-interface ProfileData {
-  name: string
-  email: string
-  phone: string
-  address: string
-  city: string
-  province: string
-  bio: string
-}
-
-export default function CustomerProfile() {
+function ProfileContent() {
   const { user } = useAuth()
-  const { totalItems } = useCart()
-  const router = useRouter()
-  const [isEditing, setIsEditing] = useState(false)
-  const [isSaving, setIsSaving] = useState(false)
-  
-  const [profileData, setProfileData] = useState<ProfileData>({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    province: "",
-    bio: ""
-  })
-
-  // Redirect if not logged in
-  useEffect(() => {
-    if (!user) {
-      router.push('/login?redirect=/profile')
-      return
-    }
-  }, [user, router])
-
-  // Load user profile data
-  useEffect(() => {
-    if (user) {
-      setProfileData({
-        name: user.name || "",
-        email: user.email || "",
-        phone: user.phone || "",
-        address: user.address || "",
-        city: user.city || "Lusaka",
-        province: user.province || "Lusaka",
-        bio: user.bio || ""
-      })
-    }
-  }, [user])
-
-  const handleSave = async () => {
-    setIsSaving(true)
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      setIsEditing(false)
-      // In a real app, this would update the user context
-    } catch (error) {
-      console.error('Error saving profile:', error)
-    } finally {
-      setIsSaving(false)
-    }
-  }
-
-  const handleCancel = () => {
-    // Reset form data
-    if (user) {
-      setProfileData({
-        name: user.name || "",
-        email: user.email || "",
-        phone: user.phone || "",
-        address: user.address || "",
-        city: user.city || "Lusaka",
-        province: user.province || "Lusaka",
-        bio: user.bio || ""
-      })
-    }
-    setIsEditing(false)
-  }
-
-  if (!user) {
-    return null
-  }
+  const [activeTab, setActiveTab] = useState('overview')
 
   const getInitials = (name: string) => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase()
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
-      <CustomerHeader />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+      <Header />
       
-      <main className="max-w-4xl mx-auto px-6 py-8">
-        {/* Page Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900 mb-2">My Profile</h1>
-              <p className="text-slate-600">Manage your account information and preferences</p>
-            </div>
-            <Button 
-              onClick={() => setIsEditing(!isEditing)}
-              variant={isEditing ? "outline" : "default"}
-              className="gap-2"
-            >
-              {isEditing ? (
-                <>
-                  <X className="h-4 w-4" />
-                  Cancel
-                </>
-              ) : (
-                <>
-                  <Edit className="h-4 w-4" />
-                  Edit Profile
-                </>
-              )}
-            </Button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Profile Overview */}
-          <div className="lg:col-span-1 space-y-6">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex flex-col items-center text-center">
-                  <Avatar className="h-24 w-24 mb-4">
-                    <AvatarImage src="/placeholder-user.jpg" alt={user.name} />
-                    <AvatarFallback className="text-xl font-semibold bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
-                      {getInitials(user.name)}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        {/* Profile Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-8"
+        >
+          <Card className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 text-white overflow-hidden">
+            <CardContent className="p-8">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+                <div className="relative">
+                  <Avatar className="h-24 w-24 border-4 border-white/30">
+                    <AvatarImage src="/placeholder-user.jpg" />
+                    <AvatarFallback className="bg-white/20 text-white text-2xl font-bold">
+                      {getInitials(user?.name || 'User')}
                     </AvatarFallback>
                   </Avatar>
-                  
-                  <h2 className="text-xl font-semibold text-slate-900 mb-1">{user.name}</h2>
-                  <Badge variant="secondary" className="mb-4">
-                    {user.role === 'customer' ? 'Customer' : user.role}
-                  </Badge>
-                  
-                  <div className="w-full space-y-3 text-sm">
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <Mail className="h-4 w-4" />
-                      <span className="truncate">{user.email}</span>
-                    </div>
-                    {profileData.phone && (
-                      <div className="flex items-center gap-2 text-slate-600">
-                        <Phone className="h-4 w-4" />
-                        <span>{profileData.phone}</span>
+                  <Button 
+                    size="sm" 
+                    className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-white text-purple-600 hover:bg-gray-50"
+                  >
+                    <Edit3 className="h-4 w-4" />
+                  </Button>
+                </div>
+                
+                <div className="flex-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                      <h1 className="text-3xl font-bold mb-2">{user?.name || 'Customer'}</h1>
+                      <div className="space-y-1 text-white/80">
+                        <div className="flex items-center gap-2">
+                          <Mail className="h-4 w-4" />
+                          <span>{user?.email}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin className="h-4 w-4" />
+                          <span>{user?.location || 'Lusaka, Zambia'}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Calendar className="h-4 w-4" />
+                          <span>Member since {new Date(user?.joinedAt || Date.now()).getFullYear()}</span>
+                        </div>
                       </div>
-                    )}
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <MapPin className="h-4 w-4" />
-                      <span>{profileData.city}, {profileData.province}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <Calendar className="h-4 w-4" />
-                      <span>Member since Nov 2024</span>
+                    
+                    <div className="flex gap-3">
+                      <Badge className="bg-yellow-500 text-white px-3 py-1">
+                        <Trophy className="h-4 w-4 mr-1" />
+                        Gold Member
+                      </Badge>
+                      <Button className="bg-white/20 hover:bg-white/30 border border-white/30">
+                        <Save className="h-4 w-4 mr-2" />
+                        Save Profile
+                      </Button>
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-            {/* Account Stats */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Account Activity</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Package className="h-4 w-4 text-blue-600" />
-                    <span className="text-sm">Total Orders</span>
-                  </div>
-                  <Badge variant="outline">12</Badge>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Heart className="h-4 w-4 text-red-500" />
-                    <span className="text-sm">Wishlist Items</span>
-                  </div>
-                  <Badge variant="outline">8</Badge>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <ShoppingBag className="h-4 w-4 text-green-600" />
-                    <span className="text-sm">Cart Items</span>
-                  </div>
-                  <Badge variant="outline">{totalItems}</Badge>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Star className="h-4 w-4 text-yellow-500" />
-                    <span className="text-sm">Reviews Written</span>
-                  </div>
-                  <Badge variant="outline">5</Badge>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Profile Details */}
-          <div className="lg:col-span-2 space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <User className="h-5 w-5" />
-                  Personal Information
-                </CardTitle>
-                <CardDescription>
-                  Update your personal details and contact information
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="name">Full Name</Label>
-                    <Input
-                      id="name"
-                      value={profileData.name}
-                      onChange={(e) => setProfileData({...profileData, name: e.target.value})}
-                      disabled={!isEditing}
-                      className={!isEditing ? "bg-slate-50" : ""}
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={profileData.email}
-                      onChange={(e) => setProfileData({...profileData, email: e.target.value})}
-                      disabled={!isEditing}
-                      className={!isEditing ? "bg-slate-50" : ""}
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      value={profileData.phone}
-                      onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
-                      disabled={!isEditing}
-                      className={!isEditing ? "bg-slate-50" : ""}
-                      placeholder="+260..."
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="city">City</Label>
-                    <Input
-                      id="city"
-                      value={profileData.city}
-                      onChange={(e) => setProfileData({...profileData, city: e.target.value})}
-                      disabled={!isEditing}
-                      className={!isEditing ? "bg-slate-50" : ""}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="address">Address</Label>
-                  <Input
-                    id="address"
-                    value={profileData.address}
-                    onChange={(e) => setProfileData({...profileData, address: e.target.value})}
-                    disabled={!isEditing}
-                    className={!isEditing ? "bg-slate-50" : ""}
-                    placeholder="Street address"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="bio">Bio</Label>
-                  <Textarea
-                    id="bio"
-                    value={profileData.bio}
-                    onChange={(e) => setProfileData({...profileData, bio: e.target.value})}
-                    disabled={!isEditing}
-                    className={!isEditing ? "bg-slate-50" : ""}
-                    placeholder="Tell us about yourself..."
-                    rows={3}
-                  />
-                </div>
-
-                {isEditing && (
-                  <div className="flex gap-3 pt-4">
-                    <Button 
-                      onClick={handleSave}
-                      disabled={isSaving}
-                      className="gap-2"
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Sidebar Navigation */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-1"
+          >
+            <Card className="sticky top-8">
+              <CardContent className="p-6">
+                <nav className="space-y-2">
+                  {[
+                    { id: 'overview', label: 'Overview', icon: User },
+                    { id: 'customization', label: 'Theme & Layout', icon: Palette },
+                    { id: 'lifestyle', label: 'Interests & Lifestyle', icon: Heart },
+                    { id: 'loyalty', label: 'Loyalty & Rewards', icon: Trophy },
+                    { id: 'settings', label: 'Settings', icon: Settings },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => setActiveTab(item.id)}
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                        activeTab === item.id
+                          ? 'bg-purple-100 text-purple-700 font-medium'
+                          : 'text-gray-600 hover:bg-gray-50'
+                      }`}
                     >
-                      <Save className="h-4 w-4" />
-                      {isSaving ? 'Saving...' : 'Save Changes'}
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={handleCancel}
-                      disabled={isSaving}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                )}
+                      <item.icon className="h-5 w-5" />
+                      {item.label}
+                    </button>
+                  ))}
+                </nav>
               </CardContent>
             </Card>
+          </motion.div>
 
-            {/* Quick Actions */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => router.push('/orders')}>
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <Package className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900">My Orders</h3>
-                      <p className="text-sm text-slate-600">View order history</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+          {/* Main Content Area */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="lg:col-span-3"
+          >
+            <div className="space-y-6">
+              {activeTab === 'overview' && (
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3">
+                        <User className="h-5 w-5" />
+                        Account Overview
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="text-center p-4 bg-blue-50 rounded-lg">
+                          <div className="text-2xl font-bold text-blue-600">24</div>
+                          <div className="text-sm text-gray-600">Total Orders</div>
+                        </div>
+                        <div className="text-center p-4 bg-green-50 rounded-lg">
+                          <div className="text-2xl font-bold text-green-600">2,450</div>
+                          <div className="text-sm text-gray-600">Loyalty Points</div>
+                        </div>
+                        <div className="text-center p-4 bg-purple-50 rounded-lg">
+                          <div className="text-2xl font-bold text-purple-600">12</div>
+                          <div className="text-sm text-gray-600">Wishlist Items</div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
 
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => router.push('/wishlist')}>
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-red-100 rounded-lg">
-                      <Heart className="h-5 w-5 text-red-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900">Wishlist</h3>
-                      <p className="text-sm text-slate-600">Saved products</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              {activeTab === 'customization' && (
+                <div className="space-y-6">
+                  <ThemeSelector />
+                  <LayoutCustomizer />
+                </div>
+              )}
 
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => router.push('/settings')}>
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-green-100 rounded-lg">
-                      <Settings className="h-5 w-5 text-green-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900">Settings</h3>
-                      <p className="text-sm text-slate-600">Account preferences</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              {activeTab === 'lifestyle' && (
+                <LifestyleProfileManager />
+              )}
+
+              {activeTab === 'loyalty' && (
+                <GamifiedLoyalty />
+              )}
+
+              {activeTab === 'settings' && (
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3">
+                        <Settings className="h-5 w-5" />
+                        Account Settings
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Bell className="h-5 w-5 text-gray-500" />
+                            <div>
+                              <div className="font-medium">Email Notifications</div>
+                              <div className="text-sm text-gray-600">Receive updates about orders and promotions</div>
+                            </div>
+                          </div>
+                          <Button variant="outline" size="sm">Configure</Button>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Shield className="h-5 w-5 text-gray-500" />
+                            <div>
+                              <div className="font-medium">Privacy Settings</div>
+                              <div className="text-sm text-gray-600">Manage your data and privacy preferences</div>
+                            </div>
+                          </div>
+                          <Button variant="outline" size="sm">Manage</Button>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Download className="h-5 w-5 text-gray-500" />
+                            <div>
+                              <div className="font-medium">Export Data</div>
+                              <div className="text-sm text-gray-600">Download your account data and history</div>
+                            </div>
+                          </div>
+                          <Button variant="outline" size="sm">Export</Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
             </div>
-          </div>
+          </motion.div>
         </div>
-      </main>
+      </div>
 
       <Footer />
     </div>
+  )
+}
+
+export default function ProfilePage() {
+  return (
+    <AuthRedirectWrapper requiredRole="customer">
+      <ProfileContent />
+    </AuthRedirectWrapper>
   )
 }
