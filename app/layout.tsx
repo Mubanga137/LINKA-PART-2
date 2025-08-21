@@ -134,11 +134,13 @@ html[data-theme="light"] {
                 const url = args[0];
                 return originalFetch.apply(this, args).catch(error => {
                   // Check if this is an HMR or webpack related request
-                  const isHMRRequest = url && (
-                    url.includes('_next') ||
-                    url.includes('webpack') ||
-                    url.includes('hot-update') ||
-                    url.includes('__nextjs_original-stack-frame')
+                  // Handle both string URLs and Request objects
+                  const urlString = typeof url === 'string' ? url : (url && url.url) || '';
+                  const isHMRRequest = urlString && (
+                    urlString.includes('_next') ||
+                    urlString.includes('webpack') ||
+                    urlString.includes('hot-update') ||
+                    urlString.includes('__nextjs_original-stack-frame')
                   );
 
                   if (error.message.includes('Failed to fetch') && isHMRRequest) {
