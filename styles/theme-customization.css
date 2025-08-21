@@ -1,0 +1,224 @@
+/* Theme Customization CSS Variables */
+
+:root {
+  /* Default theme colors (Ocean Breeze) */
+  --theme-primary: #0ea5e9;
+  --theme-secondary: #0891b2;
+  --theme-accent: #06b6d4;
+  --theme-background: #f0f9ff;
+  --theme-surface: #ffffff;
+  --theme-text: #0f172a;
+  --theme-textSecondary: #64748b;
+  --theme-border: #e2e8f0;
+  --theme-gradient: from-blue-500 to-teal-500;
+}
+
+/* Theme-aware components */
+.theme-primary {
+  color: var(--theme-primary);
+}
+
+.theme-bg-primary {
+  background-color: var(--theme-primary);
+}
+
+.theme-secondary {
+  color: var(--theme-secondary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--theme-secondary);
+}
+
+.theme-accent {
+  color: var(--theme-accent);
+}
+
+.theme-bg-accent {
+  background-color: var(--theme-accent);
+}
+
+.theme-background {
+  background-color: var(--theme-background);
+}
+
+.theme-surface {
+  background-color: var(--theme-surface);
+}
+
+.theme-text {
+  color: var(--theme-text);
+}
+
+.theme-text-secondary {
+  color: var(--theme-textSecondary);
+}
+
+.theme-border {
+  border-color: var(--theme-border);
+}
+
+.theme-gradient {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+}
+
+/* Custom theme buttons */
+.theme-button {
+  background-color: var(--theme-primary);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+  background-color: var(--theme-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.theme-card {
+  background-color: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+}
+
+.theme-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--theme-primary);
+}
+
+/* Dashboard section transitions */
+.dashboard-section {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.dashboard-section.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.dashboard-section.collapsed {
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.dashboard-section.expanded {
+  max-height: none;
+}
+
+/* Drag and drop indicators */
+.section-dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.section-drag-over {
+  background-color: rgba(var(--theme-primary), 0.1);
+  border: 2px dashed var(--theme-primary);
+  border-radius: 8px;
+}
+
+/* Customization animations */
+.theme-transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.layout-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Profile customization effects */
+.interest-tag {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-accent));
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.interest-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.loyalty-ring {
+  --ring-color: var(--theme-primary);
+  stroke: var(--ring-color);
+  filter: drop-shadow(0 0 8px rgba(var(--theme-primary), 0.3));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-section {
+    margin-bottom: 1rem;
+  }
+  
+  .theme-card {
+    padding: 1rem;
+  }
+  
+  .section-dragging {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .theme-card {
+    border-width: 2px;
+  }
+  
+  .theme-button {
+    border: 2px solid transparent;
+  }
+  
+  .theme-button:focus {
+    border-color: var(--theme-accent);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .layout-transition,
+  .dashboard-section,
+  .interest-tag {
+    transition: none;
+  }
+  
+  .interest-tag:hover {
+    transform: none;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .theme-card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .theme-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Print styles */
+@media print {
+  .dashboard-section.hidden {
+    display: none;
+  }
+  
+  .theme-transition,
+  .layout-transition {
+    transition: none;
+  }
+}

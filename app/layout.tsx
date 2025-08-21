@@ -10,6 +10,7 @@ import { ErrorBoundary } from '@/components/error-boundary'
 import { ThemeCustomizationProvider } from '@/contexts/theme-customization-context'
 import './globals.css'
 import '../styles/dashboard-animations.css'
+import '../styles/theme-customization.css'
 
 export const metadata: Metadata = {
   title: 'Linka - Zambian E-Commerce Platform',
