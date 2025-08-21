@@ -11,8 +11,14 @@ import { RecentOrdersViewed } from "@/components/customer/recent-orders-viewed";
 import { RecommendedServices } from "@/components/customer/recommended-services";
 import { EnhancedCategoryGrid } from "@/components/customer/enhanced-category-grid";
 import { TrendingProducts } from "@/components/customer/trending-products";
+import { BackgroundAnimations } from "@/components/ui/background-animations";
+import { NotificationSystem } from "@/components/ui/notification-system";
+import { CTAParallaxBanner } from "@/components/ui/parallax-banner";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { usePageTransition } from "@/hooks/use-animations";
+import "@/styles/dashboard-animations.css";
 
 // Mock data for recommended services and trending products
 const mockRecommendedProducts = [
@@ -180,9 +186,17 @@ const mockTrendingProducts = [
 
 function CustomerDashboardContent() {
   const { user } = useAuth();
+  const router = useRouter();
+  const { navigateWithTransition } = usePageTransition();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 relative">
+      {/* Background Animations */}
+      <BackgroundAnimations />
+
+      {/* Notification System */}
+      <NotificationSystem />
+
       <Header />
       
       <div className="flex">
@@ -201,6 +215,7 @@ function CustomerDashboardContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              className="section-slide-in"
             >
               <RecentOrdersViewed />
             </motion.section>
@@ -210,9 +225,10 @@ function CustomerDashboardContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
+              className="section-slide-in"
             >
-              <RecommendedServices 
-                products={mockRecommendedProducts} 
+              <RecommendedServices
+                products={mockRecommendedProducts}
                 isLoading={false}
               />
             </motion.section>
@@ -222,6 +238,7 @@ function CustomerDashboardContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
+              className="section-slide-in"
             >
               <EnhancedCategoryGrid />
             </motion.section>
@@ -231,49 +248,33 @@ function CustomerDashboardContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
+              className="section-slide-in"
             >
-              <TrendingProducts 
-                products={mockTrendingProducts} 
+              <TrendingProducts
+                products={mockTrendingProducts}
                 isLoading={false}
               />
             </motion.section>
 
-            {/* Call to Action Section */}
+            {/* Enhanced CTA Section with Parallax */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.0 }}
-              className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 text-white relative overflow-hidden rounded-2xl p-8 text-center"
+              className="section-slide-in"
             >
-              <div className="absolute inset-0 bg-black/10"></div>
-              <div className="relative z-10 space-y-6">
-                <h2 className="text-3xl md:text-4xl font-bold">
-                  Discover More Amazing Products
-                </h2>
-                <p className="text-xl opacity-90 max-w-2xl mx-auto">
-                  Explore thousands of products from verified local vendors. From traditional crafts to modern electronics,
-                  find everything you need while supporting the Zambian economy.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link href="/marketplace">
-                    <Button 
-                      size="lg" 
-                      className="bg-white text-purple-600 hover:bg-gray-50 font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                    >
-                      Explore Marketplace
-                    </Button>
-                  </Link>
-                  <Link href="/hot-deals">
-                    <Button 
-                      size="lg" 
-                      variant="outline" 
-                      className="border-white/30 text-white hover:bg-white/10 bg-transparent font-semibold px-8 py-4 rounded-xl"
-                    >
-                      View Hot Deals 🔥
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+              <CTAParallaxBanner
+                title="Discover More Amazing Products"
+                description="Explore thousands of products from verified local vendors. From traditional crafts to modern electronics, find everything you need while supporting the Zambian economy."
+                primaryAction={{
+                  label: "Explore Marketplace",
+                  onClick: () => navigateWithTransition('/marketplace')
+                }}
+                secondaryAction={{
+                  label: "View Hot Deals 🔥",
+                  onClick: () => navigateWithTransition('/hot-deals')
+                }}
+              />
             </motion.section>
           </div>
         </main>
