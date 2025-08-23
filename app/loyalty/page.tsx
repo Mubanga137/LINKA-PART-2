@@ -40,6 +40,8 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useAuth } from "@/contexts/auth-context"
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
+import { MobilePullRefresh } from "@/components/loyalty/mobile-pull-refresh"
+import { StickyPointsTracker } from "@/components/loyalty/sticky-points-tracker"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
