@@ -45,20 +45,31 @@ export interface Product {
   rating?: number;
   reviewCount?: number;
   tags: string[];
-  vendor: {
+  // Flexible vendor structure to support both new and old formats
+  vendor?: {
     id: string;
     name: string;
     logo?: string;
   };
+  // Legacy retailer properties (for backward compatibility)
+  retailerId?: string;
+  retailerName?: string;
+  retailerLocation?: string;
   specifications?: Record<string, string>;
-  variants?: ProductVariant[];
+  variants?: ProductVariant[] | Record<string, string[]>; // Support both formats
+  features?: string[];
+  shippingInfo?: {
+    freeShipping: boolean;
+    estimatedDays: number;
+    shippingCost: number;
+  };
   featured?: boolean;
   discountPercentage?: number;
   fastDelivery?: boolean;
   freeShipping?: boolean;
   hotDeal?: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface ProductVariant {
