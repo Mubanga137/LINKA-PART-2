@@ -272,7 +272,8 @@ export function AnimatedSidebar({ className }: SidebarProps) {
         animate={isOpen ? "open" : "closed"}
         className={`fixed left-0 top-0 h-full w-80 bg-white/95 backdrop-blur-sm border-r border-gray-200 shadow-xl z-50 lg:z-10 overflow-y-auto ${className}`}
       >
-        <div className="flex flex-col h-full">
+        <TooltipProvider>
+          <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-6 border-b border-gray-200/50">
             <div className="flex items-center justify-between mb-4">
@@ -457,7 +458,8 @@ export function AnimatedSidebar({ className }: SidebarProps) {
               </p>
             </div>
           </motion.div>
-        </div>
+          </div>
+        </TooltipProvider>
       </motion.aside>
 
       {/* Main content spacer for desktop */}
