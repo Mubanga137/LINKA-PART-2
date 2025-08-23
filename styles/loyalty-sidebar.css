@@ -1,0 +1,96 @@
+/* Loyalty Points Sidebar Styling */
+
+/* Gold coin glow effect for loyalty points icon */
+.loyalty-icon-glow {
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6)) 
+          drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+  animation: loyaltyGlow 3s ease-in-out infinite;
+}
+
+@keyframes loyaltyGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6)) 
+            drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.8)) 
+            drop-shadow(0 0 8px rgba(255, 215, 0, 0.6))
+            drop-shadow(0 0 12px rgba(255, 215, 0, 0.3));
+  }
+}
+
+/* Enhanced hover effect for loyalty points */
+.loyalty-button:hover .loyalty-icon-glow {
+  animation-duration: 1.5s;
+}
+
+/* Loyalty points premium sparkle enhancement */
+.loyalty-sparkle {
+  animation: loyaltySparkle 2s ease-in-out infinite;
+}
+
+@keyframes loyaltySparkle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    filter: brightness(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    filter: brightness(1.2);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.05);
+    filter: brightness(1.4);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
+    filter: brightness(1.2);
+  }
+}
+
+/* Loyalty points button special hover state */
+.loyalty-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.loyalty-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.loyalty-button:hover::before {
+  left: 100%;
+}
+
+/* Breadcrumb styling for loyalty page */
+.loyalty-breadcrumb {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.loyalty-breadcrumb .breadcrumb-separator {
+  color: rgba(255, 215, 0, 0.7);
+  margin: 0 0.5rem;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .loyalty-icon-glow,
+  .loyalty-sparkle {
+    animation: none;
+  }
+  
+  .loyalty-button::before {
+    display: none;
+  }
+}
