@@ -59,21 +59,14 @@ import {
   Download,
   Upload,
   MapPin,
-  Home,
-  Palette,
-  Layout,
-  Layers
+  Home
 } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useAuth } from "@/contexts/auth-context"
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
-import { EnhancedMobilePullRefresh } from "@/components/loyalty/enhanced-mobile-pull-refresh"
-import { EnhancedStickyPointsTracker } from "@/components/loyalty/enhanced-sticky-points-tracker"
-import { ThemeCustomization } from "@/components/loyalty/theme-customization"
-import { DragDropLayout } from "@/components/loyalty/drag-drop-layout"
-import { NotificationsSystem, generateSampleNotifications } from "@/components/loyalty/notifications-system"
-import { GiftTransferPoints } from "@/components/loyalty/gift-transfer-points"
+import { MobilePullRefresh } from "@/components/loyalty/mobile-pull-refresh"
+import { StickyPointsTracker } from "@/components/loyalty/sticky-points-tracker"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -177,30 +170,6 @@ const REWARDS = [
     available: true,
     popular: false,
     rarity: "common"
-  },
-  {
-    id: "5",
-    title: "VIP Customer Service",
-    description: "Direct line to our premium support team for 3 months",
-    points: 800,
-    image: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=400&q=80",
-    category: "Premium Perks",
-    expiry: "90 days",
-    available: true,
-    popular: false,
-    rarity: "rare"
-  },
-  {
-    id: "6",
-    title: "Golden Weekend Pass",
-    description: "25% off everything during weekend flash sales",
-    points: 1500,
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80",
-    category: "Discounts",
-    expiry: "30 days",
-    available: false,
-    popular: true,
-    rarity: "legendary"
   }
 ]
 
@@ -300,36 +269,6 @@ const RECENT_ACTIVITY = [
   { id: "6", action: "Streak Milestone Bonus", points: 100, date: "1 week ago", type: "earned", icon: Flame }
 ]
 
-const SAMPLE_FRIENDS = [
-  {
-    id: "1",
-    name: "Sarah Mwanza",
-    email: "sarah.mwanza@example.com",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&q=80",
-    tier: "Silver",
-    lastActive: "2 hours ago",
-    canReceivePoints: true
-  },
-  {
-    id: "2",
-    name: "David Banda",
-    email: "david.banda@example.com",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
-    tier: "Gold",
-    lastActive: "1 day ago",
-    canReceivePoints: true
-  },
-  {
-    id: "3",
-    name: "Grace Phiri",
-    email: "grace.phiri@example.com",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
-    tier: "Bronze",
-    lastActive: "3 days ago",
-    canReceivePoints: true
-  }
-]
-
 function LoyaltyPointsContent() {
   const { user } = useAuth()
   const router = useRouter()
@@ -340,25 +279,7 @@ function LoyaltyPointsContent() {
   const [showStickyTracker, setShowStickyTracker] = useState(false)
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [activeTab, setActiveTab] = useState("overview")
-  const [customizationMode, setCustomizationMode] = useState(false)
-  const [layoutMode, setLayoutMode] = useState(false)
-  const [giftMode, setGiftMode] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
-  const [notifications, setNotifications] = useState(generateSampleNotifications())
-  const [currentTheme, setCurrentTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('loyaltyTheme')
-      return saved ? JSON.parse(saved) : { id: 'default', darkMode: false, animationLevel: 75 }
-    }
-    return { id: 'default', darkMode: false, animationLevel: 75 }
-  })
-  const [dashboardLayout, setDashboardLayout] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('loyaltyDashboardLayout')
-      return saved ? JSON.parse(saved) : []
-    }
-    return []
-  })
 
   const currentTierIndex = TIERS.findIndex(tier => tier.name === LOYALTY_DATA.currentTier)
   const nextTierIndex = currentTierIndex + 1 < TIERS.length ? currentTierIndex + 1 : currentTierIndex
@@ -406,51 +327,6 @@ function LoyaltyPointsContent() {
     }
   }
 
-  const handleNotificationRead = (id: string) => {
-    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n))
-  }
-
-  const handleNotificationDismiss = (id: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== id))
-  }
-
-  const handleNotificationAction = (notification: any) => {
-    if (notification.actionUrl) {
-      router.push(notification.actionUrl)
-    }
-  }
-
-  const handleQuickAction = (action: string) => {
-    switch (action) {
-      case 'redeem':
-        setActiveTab('rewards')
-        break
-      case 'earn':
-        setActiveTab('earn')
-        break
-      case 'challenges':
-        setActiveTab('overview')
-        break
-      default:
-        break
-    }
-  }
-
-  const handleThemeChange = (theme: any) => {
-    setCurrentTheme(theme)
-  }
-
-  const handleLayoutChange = (layout: any) => {
-    setDashboardLayout(layout)
-  }
-
-  const handleTransferPoints = async (recipientId: string, amount: number, message: string) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    console.log(`Transferred ${amount} points to ${recipientId} with message: ${message}`)
-    return true
-  }
-
   const filteredRewards = REWARDS.filter(reward => {
     const matchesCategory = selectedRewardCategory === "All" || reward.category === selectedRewardCategory
     const matchesSearch = reward.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -461,15 +337,12 @@ function LoyaltyPointsContent() {
   const categories = ["All", ...Array.from(new Set(REWARDS.map(r => r.category)))]
 
   return (
-    <EnhancedMobilePullRefresh onRefresh={handlePullRefresh}>
-      <EnhancedStickyPointsTracker
+    <MobilePullRefresh onRefresh={handlePullRefresh}>
+      <StickyPointsTracker
         currentPoints={LOYALTY_DATA.currentPoints}
         currentTier={LOYALTY_DATA.currentTier}
         pointsToNextReward={LOYALTY_DATA.pointsToNextReward}
-        pointsToNextTier={LOYALTY_DATA.pointsToNextTier}
         isVisible={showStickyTracker}
-        recentActivity={RECENT_ACTIVITY.slice(0, 3)}
-        onQuickAction={handleQuickAction}
       />
       
       <div className="min-h-screen relative overflow-hidden">
@@ -495,7 +368,7 @@ function LoyaltyPointsContent() {
           
           {/* Floating Animated Elements */}
           <div className="absolute inset-0 overflow-hidden">
-            {[...Array(40)].map((_, i) => (
+            {[...Array(30)].map((_, i) => (
               <motion.div
                 key={i}
                 className={`absolute w-2 h-2 rounded-full ${
@@ -540,21 +413,13 @@ function LoyaltyPointsContent() {
             transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 5 }}
             className="absolute bottom-10 right-10 w-48 h-48 bg-teal-400/25 rounded-full blur-2xl"
           />
-          <motion.div
-            animate={{
-              x: [0, 200, 0],
-              y: [0, -150, 0]
-            }}
-            transition={{ duration: 35, repeat: Infinity, ease: "easeInOut", delay: 10 }}
-            className="absolute top-1/2 right-1/4 w-40 h-40 bg-blue-400/20 rounded-full blur-xl"
-          />
         </div>
 
         {/* Confetti Effect */}
         <AnimatePresence>
           {showConfetti && (
             <div className="fixed inset-0 z-50 pointer-events-none">
-              {[...Array(80)].map((_, i) => (
+              {[...Array(50)].map((_, i) => (
                 <motion.div
                   key={i}
                   className={`absolute w-3 h-3 rounded-full ${
@@ -608,40 +473,15 @@ function LoyaltyPointsContent() {
                 <span className="text-orange-300 font-semibold">Rewards Hub</span>
               </div>
               
-              {/* Action Buttons */}
+              {/* Simple Notification Bell */}
               <div className="flex items-center gap-2">
-                <NotificationsSystem
-                  notifications={notifications}
-                  onNotificationRead={handleNotificationRead}
-                  onNotificationDismiss={handleNotificationDismiss}
-                  onNotificationAction={handleNotificationAction}
-                />
-                
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setGiftMode(true)}
-                  className="text-white hover:bg-white/10"
+                  className="text-white hover:bg-white/10 relative"
                 >
-                  <Gift className="h-5 w-5" />
-                </Button>
-                
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setCustomizationMode(true)}
-                  className="text-white hover:bg-white/10"
-                >
-                  <Palette className="h-5 w-5" />
-                </Button>
-                
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setLayoutMode(true)}
-                  className="text-white hover:bg-white/10"
-                >
-                  <Layout className="h-5 w-5" />
+                  <Bell className="h-5 w-5" />
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full animate-pulse" />
                 </Button>
               </div>
             </motion.div>
@@ -1611,32 +1451,7 @@ function LoyaltyPointsContent() {
           <Footer />
         </div>
       </div>
-
-      {/* Modal Components */}
-      <ThemeCustomization
-        isOpen={customizationMode}
-        onClose={() => setCustomizationMode(false)}
-        onThemeChange={handleThemeChange}
-        currentTheme={currentTheme}
-      />
-
-      <DragDropLayout
-        isOpen={layoutMode}
-        onClose={() => setLayoutMode(false)}
-        onLayoutChange={handleLayoutChange}
-        currentLayout={dashboardLayout}
-      />
-
-      <GiftTransferPoints
-        isOpen={giftMode}
-        onClose={() => setGiftMode(false)}
-        currentPoints={LOYALTY_DATA.currentPoints}
-        friends={SAMPLE_FRIENDS}
-        transferHistory={[]}
-        onTransfer={handleTransferPoints}
-        onAddFriend={() => router.push('/profile')}
-      />
-    </EnhancedMobilePullRefresh>
+    </MobilePullRefresh>
   )
 }
 
