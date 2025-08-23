@@ -345,7 +345,7 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                           ? 'bg-white/20 shadow-inner'
                           : `bg-${item.color}-100 text-${item.color}-600 group-hover:scale-110`
                       }`}>
-                        <Icon className={`h-4 w-4 ${item.premium ? 'crown-glow' : ''}`} />
+                        <Icon className={`h-4 w-4 ${item.premium ? 'crown-glow' : ''} ${item.id === 'loyalty' ? 'loyalty-icon-glow' : ''}`} />
                       </div>
 
                       <span className="font-medium flex-1">{item.label}</span>
