@@ -39,13 +39,6 @@ export function Header() {
               For Retailers
             </Link>
             <Link
-              href="/loyalty"
-              className="font-medium transition-all duration-200 flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              <span className="text-yellow-300">👑</span>
-              Loyalty Rewards
-            </Link>
-            <Link
               href="/contact"
               className="font-medium transition-colors duration-200"
               style={{ color: '#333333' }}
