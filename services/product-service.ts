@@ -589,3 +589,21 @@ class ProductService {
 }
 
 export const productService = new ProductService()
+
+// Convenience functions for common operations
+export const getAllProducts = async (): Promise<Product[]> => {
+  const result = await productService.getProducts()
+  return result.products
+}
+
+export const getProduct = async (id: string): Promise<Product | null> => {
+  return productService.getProduct(id)
+}
+
+export const getFeaturedProducts = async (): Promise<Product[]> => {
+  return productService.getFeaturedProducts()
+}
+
+export const searchProducts = async (query: string): Promise<Product[]> => {
+  return productService.searchProducts(query)
+}

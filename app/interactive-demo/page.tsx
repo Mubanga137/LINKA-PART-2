@@ -9,12 +9,11 @@ import { InteractiveProductCard } from "@/components/marketplace/InteractiveProd
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  Smartphone, 
-  Mouse, 
-  Hand, 
-  Eye, 
-  Touch,
+import {
+  Smartphone,
+  Mouse,
+  Hand,
+  Eye,
   Zap,
   Heart,
   ShoppingCart,
@@ -87,7 +86,7 @@ export default function InteractiveDemoPage() {
       desktop: false
     },
     {
-      icon: Touch,
+      icon: Hand,
       title: "Long Press",
       description: "Long press (500ms) to open a quick preview modal",
       mobile: true,
