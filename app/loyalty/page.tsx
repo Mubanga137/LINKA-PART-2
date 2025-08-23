@@ -175,9 +175,29 @@ function LoyaltyPointsContent() {
 
   const rewardProgress = ((LOYALTY_DATA.currentPoints) / (LOYALTY_DATA.currentPoints + LOYALTY_DATA.pointsToNextReward)) * 100
 
+  // Scroll detection for sticky tracker
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth <= 768) {
+        setShowStickyTracker(window.scrollY > 200)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handlePullRefresh = async () => {
+    setIsRefreshing(true)
+    // Simulate API call to refresh loyalty data
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    setIsRefreshing(false)
+    console.log("Loyalty data refreshed!")
+  }
+
   const handleSpinWheel = () => {
     if (dailySpinUsed) return
-    
+
     setSpinWheel(true)
     setTimeout(() => {
       setSpinWheel(false)
