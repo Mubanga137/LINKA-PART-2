@@ -417,13 +417,13 @@ export function InteractiveProductCard({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                  {product.vendor.name.charAt(0)}
+                  {getVendorName().charAt(0)}
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-900">{product.vendor.name}</p>
+                  <p className="text-xs font-medium text-gray-900">{getVendorName()}</p>
                   <div className="flex items-center gap-1 text-xs text-gray-500">
                     <MapPin className="h-3 w-3" />
-                    <span>Lusaka</span>
+                    <span>{getVendorLocation()}</span>
                     <Shield className="h-3 w-3 text-green-500" />
                   </div>
                 </div>
