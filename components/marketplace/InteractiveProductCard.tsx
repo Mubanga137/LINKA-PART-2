@@ -306,7 +306,7 @@ export function InteractiveProductCard({
                 className="bg-white/90 text-green-600 hover:bg-white shadow-lg"
                 asChild
               >
-                <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
+                <Link href={`/vendors/${getStoreSlug(getVendorName())}`}>
                   <Store className="h-4 w-4 mr-1" />
                   Store
                 </Link>
@@ -586,7 +586,7 @@ export function InteractiveProductCard({
                           className="flex items-center gap-1 text-xs"
                           asChild
                         >
-                          <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
+                          <Link href={`/vendors/${getStoreSlug(getVendorName())}`}>
                             <Store className="h-3 w-3" />
                             Visit Store
                           </Link>
@@ -710,7 +710,7 @@ export function InteractiveProductCard({
                       className="flex-1"
                       asChild
                     >
-                      <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
+                      <Link href={`/vendors/${getStoreSlug(getVendorName())}`}>
                         <Store className="h-4 w-4 mr-2" />
                         Visit Store
                       </Link>
