@@ -220,7 +220,14 @@ function LoyaltyPointsContent() {
     : REWARDS.filter(reward => reward.category === selectedRewardCategory)
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <MobilePullRefresh onRefresh={handlePullRefresh}>
+      <StickyPointsTracker
+        currentPoints={LOYALTY_DATA.currentPoints}
+        currentTier={LOYALTY_DATA.currentTier}
+        pointsToNextReward={LOYALTY_DATA.pointsToNextReward}
+        isVisible={showStickyTracker}
+      />
+      <div className="min-h-screen relative overflow-hidden">
       {/* Unique Loyalty Background */}
       <div className="fixed inset-0 z-0">
         {/* Main Gradient */}
@@ -904,7 +911,8 @@ function LoyaltyPointsContent() {
 
         <Footer />
       </div>
-    </div>
+      </div>
+    </MobilePullRefresh>
   )
 }
 
