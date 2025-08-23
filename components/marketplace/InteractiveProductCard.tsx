@@ -55,6 +55,15 @@ export function InteractiveProductCard({
   index = 0,
   onViewProduct
 }: InteractiveProductCardProps) {
+  // Early return if product is undefined/null
+  if (!product) {
+    return (
+      <div className="w-full h-96 bg-gray-100 rounded-xl flex items-center justify-center">
+        <div className="text-gray-500">Loading product...</div>
+      </div>
+    );
+  }
+
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
