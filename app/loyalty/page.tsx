@@ -332,6 +332,18 @@ function LoyaltyPointsContent() {
         <Header />
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+          {/* Breadcrumb */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="loyalty-breadcrumb flex items-center text-sm text-gray-600 mb-6"
+          >
+            <Link href="/customer-dashboard" className="hover:text-yellow-600 transition-colors">
+              Dashboard
+            </Link>
+            <span className="breadcrumb-separator">→</span>
+            <span className="text-yellow-600 font-semibold">Loyalty Points</span>
+          </motion.div>
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
