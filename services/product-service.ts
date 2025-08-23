@@ -8,7 +8,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Handcrafted Copper Bracelet',
     price: 150,
     originalPrice: 200,
-    image: 'https://images.pexels.com/photos/12026051/pexels-photo-12026051.jpeg',
+    images: ['https://images.pexels.com/photos/12026051/pexels-photo-12026051.jpeg'],
     category: 'jewelry-accessories',
     subcategory: 'bracelets',
     description: 'Beautiful handcrafted copper bracelet with traditional Zambian patterns. Made by local artisans using traditional techniques.',
