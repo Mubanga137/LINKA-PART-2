@@ -24,7 +24,8 @@ import {
   TrendingUp,
   Zap,
   ChevronRight,
-  Crown
+  Crown,
+  Coins
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/marketplace-context"
