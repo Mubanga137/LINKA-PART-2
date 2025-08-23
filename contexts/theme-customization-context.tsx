@@ -172,12 +172,13 @@ const ThemeCustomizationContext = createContext<ThemeCustomizationContextType | 
 
 const defaultSections: DashboardSection[] = [
   { id: 'welcome', name: 'Welcome Section', component: 'EnhancedCustomerWelcome', enabled: true, order: 0, expanded: true },
-  { id: 'wishlist-preview', name: 'Wishlist & Saved Items', component: 'WishlistMiniPreview', enabled: true, order: 1, expanded: true },
-  { id: 'recent-orders', name: 'Recent Orders', component: 'RecentOrdersViewed', enabled: true, order: 2, expanded: true },
-  { id: 'recommended', name: 'Recommended for You', component: 'RecommendedServices', enabled: true, order: 3, expanded: true },
-  { id: 'categories', name: 'Shop by Category', component: 'EnhancedCategoryGrid', enabled: true, order: 4, expanded: true },
-  { id: 'trending', name: 'Trending Now', component: 'TrendingProducts', enabled: true, order: 5, expanded: true },
-  { id: 'cta', name: 'Call to Action', component: 'CTAParallaxBanner', enabled: true, order: 6, expanded: true }
+  { id: 'loyalty-preview', name: 'Loyalty Points Preview', component: 'LoyaltyPointsPreview', enabled: true, order: 1, expanded: true },
+  { id: 'wishlist-preview', name: 'Wishlist & Saved Items', component: 'WishlistMiniPreview', enabled: true, order: 2, expanded: true },
+  { id: 'recent-orders', name: 'Recent Orders', component: 'RecentOrdersViewed', enabled: true, order: 3, expanded: true },
+  { id: 'recommended', name: 'Recommended for You', component: 'RecommendedServices', enabled: true, order: 4, expanded: true },
+  { id: 'categories', name: 'Shop by Category', component: 'EnhancedCategoryGrid', enabled: true, order: 5, expanded: true },
+  { id: 'trending', name: 'Trending Now', component: 'TrendingProducts', enabled: true, order: 6, expanded: true },
+  { id: 'cta', name: 'Call to Action', component: 'CTAParallaxBanner', enabled: true, order: 7, expanded: true }
 ]
 
 const defaultLifestyleProfile: LifestyleProfile = {
