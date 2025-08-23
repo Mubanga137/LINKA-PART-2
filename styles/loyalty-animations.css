@@ -1,100 +1,355 @@
-/* Loyalty Points Page Custom Animations */
+/* Enhanced Loyalty Dashboard Animations */
 
-/* Gold Shimmer Animations */
-@keyframes goldShimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: calc(200px + 100%) 0;
-  }
+/* Global Animation Variables */
+:root {
+  --loyalty-orange: #ff6b35;
+  --loyalty-teal: #14b8a6;
+  --loyalty-blue: #3b82f6;
+  --loyalty-gold: #fbbf24;
+  --loyalty-silver: #9ca3af;
+  --loyalty-bronze: #d97706;
+  --loyalty-platinum: #6366f1;
 }
 
-.gold-shimmer {
-  background: linear-gradient(90deg, transparent 25%, rgba(255, 215, 0, 0.4) 50%, transparent 75%);
-  background-size: 200px 100%;
-  animation: goldShimmer 2s infinite linear;
-}
-
-.gold-shimmer-slow {
-  background: linear-gradient(90deg, transparent 25%, rgba(255, 215, 0, 0.3) 50%, transparent 75%);
-  background-size: 400px 100%;
-  animation: goldShimmer 4s infinite linear;
-}
-
-/* Premium Glow Effects */
-@keyframes premiumGlow {
-  0%, 100% {
-    box-shadow: 
-      0 0 20px rgba(234, 179, 8, 0.3),
-      0 0 40px rgba(234, 179, 8, 0.2),
-      0 0 60px rgba(234, 179, 8, 0.1);
-  }
-  50% {
-    box-shadow: 
-      0 0 25px rgba(234, 179, 8, 0.4),
-      0 0 50px rgba(234, 179, 8, 0.3),
-      0 0 75px rgba(234, 179, 8, 0.2);
-  }
-}
-
-.premium-glow {
-  animation: premiumGlow 3s ease-in-out infinite;
-}
-
-/* Metallic Badge Effects */
-@keyframes metallicRotate {
-  0% {
-    transform: rotateY(0deg);
-  }
-  50% {
-    transform: rotateY(180deg);
-  }
-  100% {
-    transform: rotateY(360deg);
-  }
-}
-
-.metallic-badge {
-  background: linear-gradient(135deg, 
-    #ffd700 0%, 
-    #ffed4a 25%, 
-    #f59e0b 50%, 
-    #d97706 75%, 
-    #92400e 100%);
-  background-size: 400% 400%;
-  animation: metallicShine 3s ease-in-out infinite;
+/* 3D Transforms and Perspective */
+.loyalty-3d-container {
+  perspective: 1000px;
   transform-style: preserve-3d;
 }
 
-@keyframes metallicShine {
-  0%, 100% {
-    background-position: 0% 50%;
+.loyalty-3d-card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.loyalty-3d-card:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+}
+
+/* Metallic Tier Effects */
+.tier-bronze {
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    0 8px 32px rgba(217, 119, 6, 0.3);
+}
+
+.tier-silver {
+  background: linear-gradient(135deg, #6b7280 0%, #9ca3af 50%, #d1d5db 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    0 8px 32px rgba(156, 163, 175, 0.3);
+}
+
+.tier-gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fde047 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    0 8px 32px rgba(251, 191, 36, 0.4),
+    0 0 50px rgba(251, 191, 36, 0.2);
+  animation: goldShimmer 3s ease-in-out infinite alternate;
+}
+
+.tier-platinum {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    0 8px 32px rgba(139, 92, 246, 0.4),
+    0 0 50px rgba(139, 92, 246, 0.2);
+  animation: platinumPulse 2s ease-in-out infinite alternate;
+}
+
+/* Shimmer Animations */
+@keyframes goldShimmer {
+  0% {
+    box-shadow: 
+      inset 0 2px 4px rgba(255, 255, 255, 0.3),
+      0 8px 32px rgba(251, 191, 36, 0.4),
+      0 0 50px rgba(251, 191, 36, 0.2);
   }
-  50% {
-    background-position: 100% 50%;
+  100% {
+    box-shadow: 
+      inset 0 2px 4px rgba(255, 255, 255, 0.4),
+      0 12px 40px rgba(251, 191, 36, 0.6),
+      0 0 70px rgba(251, 191, 36, 0.3);
   }
 }
 
-.metallic-badge:hover {
-  animation: metallicRotate 1s ease-in-out;
+@keyframes platinumPulse {
+  0% {
+    box-shadow: 
+      inset 0 2px 4px rgba(255, 255, 255, 0.3),
+      0 8px 32px rgba(139, 92, 246, 0.4),
+      0 0 50px rgba(139, 92, 246, 0.2);
+  }
+  100% {
+    box-shadow: 
+      inset 0 2px 4px rgba(255, 255, 255, 0.4),
+      0 12px 40px rgba(139, 92, 246, 0.6),
+      0 0 80px rgba(139, 92, 246, 0.4);
+  }
+}
+
+/* Points Counter 3D Animation */
+.points-counter-3d {
+  transform-style: preserve-3d;
+  animation: pointsFloat 6s ease-in-out infinite;
+}
+
+@keyframes pointsFloat {
+  0%, 100% {
+    transform: translateY(0px) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotateY(90deg);
+  }
+  50% {
+    transform: translateY(0px) rotateY(180deg);
+  }
+  75% {
+    transform: translateY(-10px) rotateY(270deg);
+  }
+}
+
+/* Coin Rotation Animation */
+.coin-rotation {
+  animation: coinFlip 3s linear infinite;
+}
+
+@keyframes coinFlip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+/* Spin Wheel Animation */
+.spin-wheel {
+  transition: transform 0.1s ease-out;
+}
+
+.spin-wheel.spinning {
+  animation: wheelSpin 3s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+}
+
+@keyframes wheelSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1800deg); }
 }
 
 /* Progress Ring Animation */
-@keyframes progressRing {
+.progress-ring {
+  animation: progressGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes progressGlow {
   0% {
-    stroke-dasharray: 0 283;
+    filter: drop-shadow(0 0 5px rgba(255, 107, 53, 0.5));
   }
   100% {
-    stroke-dasharray: 283 283;
+    filter: drop-shadow(0 0 15px rgba(255, 107, 53, 0.8));
   }
 }
 
-.progress-ring {
-  animation: progressRing 3s ease-out forwards;
+/* Floating Particles */
+.floating-particle {
+  animation: particleFloat var(--duration, 15s) ease-in-out infinite;
 }
 
-/* Confetti Burst */
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-300px) translateX(100px) rotate(180deg);
+  }
+}
+
+/* Achievement Badge Unlock Animation */
+.achievement-unlock {
+  animation: achievementPop 1s ease-out forwards;
+}
+
+@keyframes achievementPop {
+  0% {
+    transform: scale(0.8) rotateZ(-10deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotateZ(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+  }
+}
+
+/* Reward Card 3D Hover Effect */
+.reward-card-3d {
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.reward-card-3d:hover {
+  transform: perspective(1000px) rotateY(10deg) rotateX(10deg) translateZ(30px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 0 60px rgba(255, 107, 53, 0.2);
+}
+
+/* Glowing Edge Effect */
+.glow-edge {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-edge::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--loyalty-orange), var(--loyalty-teal), var(--loyalty-blue), var(--loyalty-orange));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-edge:hover::before {
+  opacity: 1;
+  animation: glowRotate 2s linear infinite;
+}
+
+@keyframes glowRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Button Shimmer Effect */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-shimmer:hover::before {
+  left: 100%;
+}
+
+/* Number Counter Animation */
+.number-counter {
+  animation: numberScale 0.6s ease-out;
+}
+
+@keyframes numberScale {
+  0% {
+    transform: scale(1.2);
+    color: var(--loyalty-gold);
+  }
+  100% {
+    transform: scale(1);
+    color: inherit;
+  }
+}
+
+/* Tier Progression Animation */
+.tier-progress-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.tier-progress-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  animation: progressSweep 2s ease-in-out infinite;
+}
+
+@keyframes progressSweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Leaderboard Position Glow */
+.leaderboard-gold {
+  animation: goldGlow 2s ease-in-out infinite alternate;
+}
+
+.leaderboard-silver {
+  animation: silverGlow 2s ease-in-out infinite alternate;
+}
+
+.leaderboard-bronze {
+  animation: bronzeGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes goldGlow {
+  0% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.8); }
+}
+
+@keyframes silverGlow {
+  0% { box-shadow: 0 0 10px rgba(156, 163, 175, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(156, 163, 175, 0.8); }
+}
+
+@keyframes bronzeGlow {
+  0% { box-shadow: 0 0 10px rgba(217, 119, 6, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(217, 119, 6, 0.8); }
+}
+
+/* Challenge Progress Bar Animation */
+.challenge-progress {
+  position: relative;
+  overflow: hidden;
+}
+
+.challenge-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--progress, 0%);
+  background: linear-gradient(90deg, var(--loyalty-orange), var(--loyalty-teal));
+  border-radius: inherit;
+  animation: progressFill 2s ease-out;
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+  100% { width: var(--progress, 0%); }
+}
+
+/* Confetti Animation */
+.confetti {
+  animation: confettiFall 4s ease-out forwards;
+}
+
 @keyframes confettiFall {
   0% {
     transform: translateY(-100vh) rotate(0deg);
@@ -106,136 +361,39 @@
   }
 }
 
-.confetti {
-  animation: confettiFall 3s linear forwards;
+/* Floating Action Animation */
+.floating-action {
+  animation: floatBounce 3s ease-in-out infinite;
 }
 
-/* Floating Points Animation */
-@keyframes floatingPoints {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-10px) rotate(120deg);
-  }
-  66% {
-    transform: translateY(-5px) rotate(240deg);
-  }
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
-.floating-points {
-  animation: floatingPoints 6s ease-in-out infinite;
+/* Gradient Text Animation */
+.gradient-text {
+  background: linear-gradient(45deg, var(--loyalty-orange), var(--loyalty-teal), var(--loyalty-blue));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease-in-out infinite;
 }
 
-/* Spin Wheel Animation */
-@keyframes spinWheel {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(1440deg);
-  }
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.spin-wheel {
-  animation: spinWheel 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-/* Streak Fire Animation */
-@keyframes streakFire {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-    filter: hue-rotate(0deg);
-  }
-  25% {
-    transform: scale(1.1) rotate(90deg);
-    filter: hue-rotate(90deg);
-  }
-  50% {
-    transform: scale(0.9) rotate(180deg);
-    filter: hue-rotate(180deg);
-  }
-  75% {
-    transform: scale(1.05) rotate(270deg);
-    filter: hue-rotate(270deg);
-  }
-}
-
-.streak-fire {
-  animation: streakFire 2s ease-in-out infinite;
-}
-
-/* Card Flip Animation */
-@keyframes cardFlip {
-  0% {
-    transform: perspective(1000px) rotateY(0deg);
-  }
-  50% {
-    transform: perspective(1000px) rotateY(90deg);
-  }
-  100% {
-    transform: perspective(1000px) rotateY(0deg);
-  }
-}
-
-.card-flip:hover {
-  animation: cardFlip 0.8s ease-in-out;
-}
-
-/* Reward Card Hover Effects */
-.reward-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-
-.reward-card:hover {
-  transform: translateY(-12px) rotateX(8deg) rotateY(2deg);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 215, 0, 0.1),
-    0 0 20px rgba(255, 215, 0, 0.2);
-}
-
-/* Points Counter Animation */
-@keyframes pointsCounter {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.points-counter {
-  animation: pointsCounter 0.6s ease-out;
-}
-
-/* Tier Badge Pulse */
-@keyframes tierBadgePulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 20px rgba(234, 179, 8, 0);
-  }
-}
-
-.tier-badge-pulse {
-  animation: tierBadgePulse 2s ease-in-out infinite;
-}
-
-/* Ripple Button Effect */
-.ripple-button {
+/* Ripple Effect */
+.ripple-effect {
   position: relative;
   overflow: hidden;
 }
 
-.ripple-button::before {
+.ripple-effect::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -243,193 +401,88 @@
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  animation: ripple 0.6s ease-out;
 }
 
-.ripple-button:active::before {
-  width: 300px;
-  height: 300px;
-}
-
-/* Gradient Text Animation */
-@keyframes gradientText {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animated-gradient-text {
-  background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706, #92400e, #fbbf24);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientText 3s ease-in-out infinite;
-}
-
-/* Floating Elements */
-@keyframes floatUp {
+@keyframes ripple {
   0% {
-    transform: translateY(0px) scale(1);
+    width: 0;
+    height: 0;
     opacity: 1;
   }
   100% {
-    transform: translateY(-100px) scale(0.8);
+    width: 300px;
+    height: 300px;
     opacity: 0;
   }
 }
 
-.float-up {
-  animation: floatUp 2s ease-out forwards;
-}
-
-/* Success Animation */
-@keyframes successBounce {
-  0%, 20%, 53%, 80%, 100% {
-    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    transform: translate3d(0, 0, 0);
-  }
-  40%, 43% {
-    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-    transform: translate3d(0, -30px, 0);
-  }
-  70% {
-    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-    transform: translate3d(0, -15px, 0);
-  }
-  90% {
-    transform: translate3d(0, -4px, 0);
-  }
-}
-
-.success-bounce {
-  animation: successBounce 1.5s ease-out;
-}
-
-/* Loading Shimmer for Cards */
-@keyframes loadingShimmer {
-  0% {
-    background-position: -468px 0;
-  }
-  100% {
-    background-position: 468px 0;
-  }
-}
-
-.loading-shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
-  background-size: 400px 100%;
-  animation: loadingShimmer 1.4s ease-in-out infinite;
-}
-
-/* Tier Progression Animation */
-@keyframes tierProgression {
-  0% {
-    width: 0%;
-    background: linear-gradient(90deg, #dc2626, #ea580c);
-  }
-  33% {
-    background: linear-gradient(90deg, #ea580c, #d97706);
-  }
-  66% {
-    background: linear-gradient(90deg, #d97706, #eab308);
-  }
-  100% {
-    background: linear-gradient(90deg, #eab308, #fbbf24);
-  }
-}
-
-.tier-progression {
-  animation: tierProgression 3s ease-out forwards;
-}
-
 /* Mobile Optimizations */
 @media (max-width: 768px) {
-  .reward-card:hover {
-    transform: none;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  .loyalty-3d-card:hover {
+    transform: translateZ(10px);
   }
   
-  .metallic-badge:hover {
-    animation: none;
+  .reward-card-3d:hover {
+    transform: perspective(1000px) translateZ(15px);
   }
   
-  .card-flip:hover {
-    animation: none;
+  .points-counter-3d {
+    animation: pointsFloatMobile 4s ease-in-out infinite;
+  }
+  
+  @keyframes pointsFloatMobile {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
   }
 }
 
-/* Dark Mode Adaptations */
-@media (prefers-color-scheme: dark) {
-  .premium-glow {
-    animation: premiumGlowDark 3s ease-in-out infinite;
-  }
-  
-  @keyframes premiumGlowDark {
-    0%, 100% {
-      box-shadow: 
-        0 0 20px rgba(59, 130, 246, 0.3),
-        0 0 40px rgba(59, 130, 246, 0.2),
-        0 0 60px rgba(59, 130, 246, 0.1);
-    }
-    50% {
-      box-shadow: 
-        0 0 25px rgba(59, 130, 246, 0.4),
-        0 0 50px rgba(59, 130, 246, 0.3),
-        0 0 75px rgba(59, 130, 246, 0.2);
-    }
-  }
-  
-  .loading-shimmer {
-    background: linear-gradient(90deg, #374151 25%, #4b5563 37%, #374151 63%);
-  }
-}
-
-/* Accessibility */
+/* Accessibility - Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .gold-shimmer,
-  .gold-shimmer-slow,
-  .premium-glow,
-  .metallic-badge,
+  .loyalty-3d-card,
+  .reward-card-3d,
+  .points-counter-3d,
+  .floating-particle,
+  .spin-wheel,
   .progress-ring,
-  .floating-points,
-  .streak-fire,
-  .tier-badge-pulse,
-  .animated-gradient-text,
-  .tier-progression {
-    animation: none;
+  .achievement-unlock,
+  .floating-action {
+    animation: none !important;
+    transition: none !important;
   }
   
-  .reward-card:hover,
-  .card-flip:hover {
-    transform: none;
-    animation: none;
+  .loyalty-3d-card:hover,
+  .reward-card-3d:hover {
+    transform: none !important;
   }
 }
 
-/* Utility Classes */
-.loyalty-gradient-bg {
-  background: linear-gradient(135deg, #4c1d95 0%, #be185d 50%, #3b82f6 100%);
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --loyalty-orange: #ff8c42;
+    --loyalty-teal: #20d5ba;
+    --loyalty-blue: #60a5fa;
+  }
 }
 
-.loyalty-card-bg {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Performance Optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
-.loyalty-button-primary {
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
-  transition: all 0.3s ease;
-}
-
-.loyalty-button-primary:hover {
-  background: linear-gradient(90deg, #f59e0b, #d97706);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
+/* Print Styles */
+@media print {
+  .loyalty-3d-card,
+  .reward-card-3d,
+  .floating-particle,
+  .confetti {
+    transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
 }

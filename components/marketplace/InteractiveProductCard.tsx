@@ -55,6 +55,15 @@ export function InteractiveProductCard({
   index = 0,
   onViewProduct
 }: InteractiveProductCardProps) {
+  // Early return if product is undefined/null
+  if (!product) {
+    return (
+      <div className="w-full h-96 bg-gray-100 rounded-xl flex items-center justify-center">
+        <div className="text-gray-500">Loading product...</div>
+      </div>
+    );
+  }
+
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -195,6 +204,19 @@ export function InteractiveProductCard({
       .replace(/^-|-$/g, '');
   };
 
+  // Helper functions for vendor/retailer compatibility
+  const getVendorName = () => {
+    return product.vendor?.name || product.retailerName || 'Unknown Store';
+  };
+
+  const getVendorId = () => {
+    return product.vendor?.id || product.retailerId || 'unknown';
+  };
+
+  const getVendorLocation = () => {
+    return product.retailerLocation || 'Lusaka';
+  };
+
   const isFlashSale = product.tags?.includes('flash-sale') || (product as any).hotDeal;
 
   // Animation variants
@@ -284,7 +306,7 @@ export function InteractiveProductCard({
                 className="bg-white/90 text-green-600 hover:bg-white shadow-lg"
                 asChild
               >
-                <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
+                <Link href={`/vendors/${getStoreSlug(getVendorName())}`}>
                   <Store className="h-4 w-4 mr-1" />
                   Store
                 </Link>
@@ -395,13 +417,13 @@ export function InteractiveProductCard({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                  {product.vendor.name.charAt(0)}
+                  {getVendorName().charAt(0)}
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-900">{product.vendor.name}</p>
+                  <p className="text-xs font-medium text-gray-900">{getVendorName()}</p>
                   <div className="flex items-center gap-1 text-xs text-gray-500">
                     <MapPin className="h-3 w-3" />
-                    <span>Lusaka</span>
+                    <span>{getVendorLocation()}</span>
                     <Shield className="h-3 w-3 text-green-500" />
                   </div>
                 </div>
@@ -564,7 +586,7 @@ export function InteractiveProductCard({
                           className="flex items-center gap-1 text-xs"
                           asChild
                         >
-                          <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
+                          <Link href={`/vendors/${getStoreSlug(getVendorName())}`}>
                             <Store className="h-3 w-3" />
                             Visit Store
                           </Link>
@@ -688,7 +710,7 @@ export function InteractiveProductCard({
                       className="flex-1"
                       asChild
                     >
-                      <Link href={`/vendors/${getStoreSlug(product.vendor.name)}`}>
+                      <Link href={`/vendors/${getStoreSlug(getVendorName())}`}>
                         <Store className="h-4 w-4 mr-2" />
                         Visit Store
                       </Link>
