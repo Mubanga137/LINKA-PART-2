@@ -155,6 +155,16 @@ export function AnimatedSidebar({ className }: SidebarProps) {
       premium: true
     },
     {
+      id: 'loyalty',
+      label: 'Loyalty Points',
+      icon: Coins,
+      href: '/loyalty',
+      color: 'yellow',
+      gradient: 'from-yellow-400 to-yellow-600',
+      premium: true,
+      tooltip: 'View and redeem your loyalty points'
+    },
+    {
       id: 'orders',
       label: 'My Orders',
       icon: Package,
