@@ -40,7 +40,7 @@ import {
   Heart,
   Bell,
   Settings,
-  RotateCw,
+  RotateCcw,
   Send,
   ArrowUp,
   Rocket,
@@ -59,14 +59,21 @@ import {
   Download,
   Upload,
   MapPin,
-  Home
+  Home,
+  Palette,
+  Layout,
+  Layers
 } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useAuth } from "@/contexts/auth-context"
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
-import { MobilePullRefresh } from "@/components/loyalty/mobile-pull-refresh"
-import { StickyPointsTracker } from "@/components/loyalty/sticky-points-tracker"
+import { EnhancedMobilePullRefresh } from "@/components/loyalty/enhanced-mobile-pull-refresh"
+import { EnhancedStickyPointsTracker } from "@/components/loyalty/enhanced-sticky-points-tracker"
+import { ThemeCustomization } from "@/components/loyalty/theme-customization"
+import { DragDropLayout } from "@/components/loyalty/drag-drop-layout"
+import { NotificationsSystem, generateSampleNotifications } from "@/components/loyalty/notifications-system"
+import { GiftTransferPoints } from "@/components/loyalty/gift-transfer-points"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -293,13 +300,34 @@ const RECENT_ACTIVITY = [
   { id: "6", action: "Streak Milestone Bonus", points: 100, date: "1 week ago", type: "earned", icon: Flame }
 ]
 
-const SPIN_REWARDS = [
-  { label: "10 Points", value: 10, color: "text-orange-600" },
-  { label: "25 Points", value: 25, color: "text-blue-600" },
-  { label: "50 Points", value: 50, color: "text-emerald-600" },
-  { label: "100 Points", value: 100, color: "text-purple-600" },
-  { label: "Free Shipping", value: "shipping", color: "text-yellow-600" },
-  { label: "Try Again", value: 0, color: "text-gray-600" }
+const SAMPLE_FRIENDS = [
+  {
+    id: "1",
+    name: "Sarah Mwanza",
+    email: "sarah.mwanza@example.com",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&q=80",
+    tier: "Silver",
+    lastActive: "2 hours ago",
+    canReceivePoints: true
+  },
+  {
+    id: "2",
+    name: "David Banda",
+    email: "david.banda@example.com",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
+    tier: "Gold",
+    lastActive: "1 day ago",
+    canReceivePoints: true
+  },
+  {
+    id: "3",
+    name: "Grace Phiri",
+    email: "grace.phiri@example.com",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
+    tier: "Bronze",
+    lastActive: "3 days ago",
+    canReceivePoints: true
+  }
 ]
 
 function LoyaltyPointsContent() {
@@ -313,12 +341,24 @@ function LoyaltyPointsContent() {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [activeTab, setActiveTab] = useState("overview")
   const [customizationMode, setCustomizationMode] = useState(false)
+  const [layoutMode, setLayoutMode] = useState(false)
+  const [giftMode, setGiftMode] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
-  const [notifications, setNotifications] = useState([
-    { id: 1, message: "You earned 150 points from your last purchase!", new: true },
-    { id: 2, message: "Your Gold tier benefits are now active!", new: false },
-    { id: 3, message: "Weekend challenge expires in 2 days!", new: true }
-  ])
+  const [notifications, setNotifications] = useState(generateSampleNotifications())
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('loyaltyTheme')
+      return saved ? JSON.parse(saved) : { id: 'default', darkMode: false, animationLevel: 75 }
+    }
+    return { id: 'default', darkMode: false, animationLevel: 75 }
+  })
+  const [dashboardLayout, setDashboardLayout] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('loyaltyDashboardLayout')
+      return saved ? JSON.parse(saved) : []
+    }
+    return []
+  })
 
   const currentTierIndex = TIERS.findIndex(tier => tier.name === LOYALTY_DATA.currentTier)
   const nextTierIndex = currentTierIndex + 1 < TIERS.length ? currentTierIndex + 1 : currentTierIndex
@@ -366,6 +406,51 @@ function LoyaltyPointsContent() {
     }
   }
 
+  const handleNotificationRead = (id: string) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n))
+  }
+
+  const handleNotificationDismiss = (id: string) => {
+    setNotifications(prev => prev.filter(n => n.id !== id))
+  }
+
+  const handleNotificationAction = (notification: any) => {
+    if (notification.actionUrl) {
+      router.push(notification.actionUrl)
+    }
+  }
+
+  const handleQuickAction = (action: string) => {
+    switch (action) {
+      case 'redeem':
+        setActiveTab('rewards')
+        break
+      case 'earn':
+        setActiveTab('earn')
+        break
+      case 'challenges':
+        setActiveTab('overview')
+        break
+      default:
+        break
+    }
+  }
+
+  const handleThemeChange = (theme: any) => {
+    setCurrentTheme(theme)
+  }
+
+  const handleLayoutChange = (layout: any) => {
+    setDashboardLayout(layout)
+  }
+
+  const handleTransferPoints = async (recipientId: string, amount: number, message: string) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    console.log(`Transferred ${amount} points to ${recipientId} with message: ${message}`)
+    return true
+  }
+
   const filteredRewards = REWARDS.filter(reward => {
     const matchesCategory = selectedRewardCategory === "All" || reward.category === selectedRewardCategory
     const matchesSearch = reward.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -376,12 +461,15 @@ function LoyaltyPointsContent() {
   const categories = ["All", ...Array.from(new Set(REWARDS.map(r => r.category)))]
 
   return (
-    <MobilePullRefresh onRefresh={handlePullRefresh}>
-      <StickyPointsTracker
+    <EnhancedMobilePullRefresh onRefresh={handlePullRefresh}>
+      <EnhancedStickyPointsTracker
         currentPoints={LOYALTY_DATA.currentPoints}
         currentTier={LOYALTY_DATA.currentTier}
         pointsToNextReward={LOYALTY_DATA.pointsToNextReward}
+        pointsToNextTier={LOYALTY_DATA.pointsToNextTier}
         isVisible={showStickyTracker}
+        recentActivity={RECENT_ACTIVITY.slice(0, 3)}
+        onQuickAction={handleQuickAction}
       />
       
       <div className="min-h-screen relative overflow-hidden">
@@ -509,26 +597,51 @@ function LoyaltyPointsContent() {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center text-sm text-white/80 mb-6"
+              className="flex items-center justify-between text-sm text-white/80 mb-6"
             >
-              <Link href="/customer-dashboard" className="hover:text-orange-300 transition-colors flex items-center gap-1">
-                <Home className="h-4 w-4" />
-                Dashboard
-              </Link>
-              <ChevronRight className="h-4 w-4 mx-2" />
-              <span className="text-orange-300 font-semibold">Rewards Hub</span>
+              <div className="flex items-center">
+                <Link href="/customer-dashboard" className="hover:text-orange-300 transition-colors flex items-center gap-1">
+                  <Home className="h-4 w-4" />
+                  Dashboard
+                </Link>
+                <ChevronRight className="h-4 w-4 mx-2" />
+                <span className="text-orange-300 font-semibold">Rewards Hub</span>
+              </div>
               
-              {/* Notifications Bell */}
-              <div className="ml-auto relative">
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2">
+                <NotificationsSystem
+                  notifications={notifications}
+                  onNotificationRead={handleNotificationRead}
+                  onNotificationDismiss={handleNotificationDismiss}
+                  onNotificationAction={handleNotificationAction}
+                />
+                
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-white hover:bg-white/10 relative"
+                  onClick={() => setGiftMode(true)}
+                  className="text-white hover:bg-white/10"
                 >
-                  <Bell className="h-5 w-5" />
-                  {notifications.some(n => n.new) && (
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full animate-pulse" />
-                  )}
+                  <Gift className="h-5 w-5" />
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setCustomizationMode(true)}
+                  className="text-white hover:bg-white/10"
+                >
+                  <Palette className="h-5 w-5" />
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setLayoutMode(true)}
+                  className="text-white hover:bg-white/10"
+                >
+                  <Layout className="h-5 w-5" />
                 </Button>
               </div>
             </motion.div>
@@ -1498,7 +1611,32 @@ function LoyaltyPointsContent() {
           <Footer />
         </div>
       </div>
-    </MobilePullRefresh>
+
+      {/* Modal Components */}
+      <ThemeCustomization
+        isOpen={customizationMode}
+        onClose={() => setCustomizationMode(false)}
+        onThemeChange={handleThemeChange}
+        currentTheme={currentTheme}
+      />
+
+      <DragDropLayout
+        isOpen={layoutMode}
+        onClose={() => setLayoutMode(false)}
+        onLayoutChange={handleLayoutChange}
+        currentLayout={dashboardLayout}
+      />
+
+      <GiftTransferPoints
+        isOpen={giftMode}
+        onClose={() => setGiftMode(false)}
+        currentPoints={LOYALTY_DATA.currentPoints}
+        friends={SAMPLE_FRIENDS}
+        transferHistory={[]}
+        onTransfer={handleTransferPoints}
+        onAddFriend={() => router.push('/profile')}
+      />
+    </EnhancedMobilePullRefresh>
   )
 }
 
