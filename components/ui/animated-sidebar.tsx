@@ -354,10 +354,10 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                       {item.premium && (
                         <motion.div
                           animate={{ rotate: [0, 360] }}
-                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                          className="mr-2"
+                          transition={{ duration: item.id === 'loyalty' ? 2 : 3, repeat: Infinity, ease: "linear" }}
+                          className={`mr-2 ${item.id === 'loyalty' ? 'loyalty-sparkle' : ''}`}
                         >
-                          <Star className="h-3 w-3 text-yellow-500" />
+                          <Star className={`h-3 w-3 text-yellow-500 ${item.id === 'loyalty' ? 'drop-shadow-sm' : ''}`} />
                         </motion.div>
                       )}
 
