@@ -329,7 +329,7 @@ export default function InteractiveDemoPage() {
                 </p>
               </div>
               
-              {products.length > 0 && (
+              {products.length > 0 && products[0] && (
                 <InteractiveProductCard
                   product={products[0]}
                   onAddToCart={handleAddToCart}
