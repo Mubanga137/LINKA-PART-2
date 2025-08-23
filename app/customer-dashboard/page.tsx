@@ -7,6 +7,8 @@ import { useAuth } from "@/contexts/auth-context";
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper";
 import { AnimatedSidebar } from "@/components/ui/animated-sidebar";
 import { EnhancedCustomerWelcome } from "@/components/customer/enhanced-customer-welcome";
+import { LoyaltyPointsPreview } from "@/components/customer/loyalty-points-preview";
+import { WishlistMiniPreview } from "@/components/customer/wishlist-mini-preview";
 import { RecentOrdersViewed } from "@/components/customer/recent-orders-viewed";
 import { RecommendedServices } from "@/components/customer/recommended-services";
 import { EnhancedCategoryGrid } from "@/components/customer/enhanced-category-grid";
@@ -213,6 +215,18 @@ function CustomerDashboardContent() {
             <EnhancedCustomerWelcome user={user!} />
           </motion.section>
         );
+      case 'LoyaltyPointsPreview':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <LoyaltyPointsPreview />
+          </motion.section>
+        );
+      case 'WishlistMiniPreview':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <WishlistMiniPreview />
+          </motion.section>
+        );
       case 'RecentOrdersViewed':
         return (
           <motion.section key={section.id} {...sectionProps}>
@@ -281,9 +295,6 @@ function CustomerDashboardContent() {
         
         {/* Main Content */}
         <main className="flex-1 min-h-screen">
-          {/* Enhanced Welcome Section */}
-          <EnhancedCustomerWelcome user={user!} />
-
           {/* Customizable Dashboard Content */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12">
             {enabledSections.map((section, index) => renderSection(section, index))}

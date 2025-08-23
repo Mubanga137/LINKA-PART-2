@@ -1,11 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import "@/styles/loyalty-sidebar.css"
 import { useRouter, usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import {
   Home,
   ShoppingBag,
@@ -24,7 +26,8 @@ import {
   TrendingUp,
   Zap,
   ChevronRight,
-  Crown
+  Crown,
+  Coins
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/marketplace-context"
@@ -154,6 +157,16 @@ export function AnimatedSidebar({ className }: SidebarProps) {
       premium: true
     },
     {
+      id: 'loyalty',
+      label: 'Loyalty Points',
+      icon: Coins,
+      href: '/loyalty',
+      color: 'yellow',
+      gradient: 'from-yellow-400 to-yellow-600',
+      premium: true,
+      tooltip: 'View and redeem your loyalty points'
+    },
+    {
       id: 'orders',
       label: 'My Orders',
       icon: Package,
@@ -260,7 +273,8 @@ export function AnimatedSidebar({ className }: SidebarProps) {
         animate={isOpen ? "open" : "closed"}
         className={`fixed left-0 top-0 h-full w-80 bg-white/95 backdrop-blur-sm border-r border-gray-200 shadow-xl z-50 lg:z-10 overflow-y-auto ${className}`}
       >
-        <div className="flex flex-col h-full">
+        <TooltipProvider>
+          <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-6 border-b border-gray-200/50">
             <div className="flex items-center justify-between mb-4">
@@ -308,11 +322,12 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                   >
                     <button
                       onClick={() => handleNavigation(item.href)}
-                      className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group relative overflow-hidden ${
+                      title={item.tooltip || ''}
+                      className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group relative overflow-hidden ${item.id === 'loyalty' ? 'loyalty-button' : ''} ${
                         isActive
                           ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg`
                           : item.premium
-                            ? 'text-gray-700 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-amber-50 border border-yellow-200/50'
+                            ? `text-gray-700 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-amber-50 border border-yellow-200/50 ${item.id === 'loyalty' ? 'hover:shadow-lg hover:shadow-yellow-200/50 hover:border-yellow-300/70' : ''}`
                             : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
@@ -330,7 +345,7 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                           ? 'bg-white/20 shadow-inner'
                           : `bg-${item.color}-100 text-${item.color}-600 group-hover:scale-110`
                       }`}>
-                        <Icon className={`h-4 w-4 ${item.premium ? 'crown-glow' : ''}`} />
+                        <Icon className={`h-4 w-4 ${item.premium ? 'crown-glow' : ''} ${item.id === 'loyalty' ? 'loyalty-icon-glow' : ''}`} />
                       </div>
 
                       <span className="font-medium flex-1">{item.label}</span>
@@ -339,10 +354,10 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                       {item.premium && (
                         <motion.div
                           animate={{ rotate: [0, 360] }}
-                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                          className="mr-2"
+                          transition={{ duration: item.id === 'loyalty' ? 2 : 3, repeat: Infinity, ease: "linear" }}
+                          className={`mr-2 ${item.id === 'loyalty' ? 'loyalty-sparkle' : ''}`}
                         >
-                          <Star className="h-3 w-3 text-yellow-500" />
+                          <Star className={`h-3 w-3 text-yellow-500 ${item.id === 'loyalty' ? 'drop-shadow-sm' : ''}`} />
                         </motion.div>
                       )}
 
@@ -445,7 +460,8 @@ export function AnimatedSidebar({ className }: SidebarProps) {
               </p>
             </div>
           </motion.div>
-        </div>
+          </div>
+        </TooltipProvider>
       </motion.aside>
 
       {/* Main content spacer for desktop */}
