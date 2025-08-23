@@ -323,7 +323,7 @@ export function AnimatedSidebar({ className }: SidebarProps) {
                     <button
                       onClick={() => handleNavigation(item.href)}
                       title={item.tooltip || ''}
-                      className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group relative overflow-hidden ${
+                      className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group relative overflow-hidden ${item.id === 'loyalty' ? 'loyalty-button' : ''} ${
                         isActive
                           ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg`
                           : item.premium
