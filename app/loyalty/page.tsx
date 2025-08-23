@@ -165,6 +165,8 @@ function LoyaltyPointsContent() {
   const [showConfetti, setShowConfetti] = useState(false)
   const [spinWheel, setSpinWheel] = useState(false)
   const [dailySpinUsed, setDailySpinUsed] = useState(false)
+  const [showStickyTracker, setShowStickyTracker] = useState(false)
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   const currentTierIndex = TIERS.findIndex(tier => tier.name === LOYALTY_DATA.currentTier)
   const nextTierIndex = currentTierIndex + 1 < TIERS.length ? currentTierIndex + 1 : currentTierIndex
