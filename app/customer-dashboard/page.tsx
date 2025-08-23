@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper";
 import { AnimatedSidebar } from "@/components/ui/animated-sidebar";
 import { EnhancedCustomerWelcome } from "@/components/customer/enhanced-customer-welcome";
+import { LoyaltyPointsPreview } from "@/components/customer/loyalty-points-preview";
 import { WishlistMiniPreview } from "@/components/customer/wishlist-mini-preview";
 import { RecentOrdersViewed } from "@/components/customer/recent-orders-viewed";
 import { RecommendedServices } from "@/components/customer/recommended-services";
