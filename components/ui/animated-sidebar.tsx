@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import "@/styles/loyalty-sidebar.css"
 import { useRouter, usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
