@@ -215,6 +215,12 @@ function CustomerDashboardContent() {
             <EnhancedCustomerWelcome user={user!} />
           </motion.section>
         );
+      case 'LoyaltyPointsPreview':
+        return (
+          <motion.section key={section.id} {...sectionProps}>
+            <LoyaltyPointsPreview />
+          </motion.section>
+        );
       case 'WishlistMiniPreview':
         return (
           <motion.section key={section.id} {...sectionProps}>
