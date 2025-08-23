@@ -204,6 +204,19 @@ export function InteractiveProductCard({
       .replace(/^-|-$/g, '');
   };
 
+  // Helper functions for vendor/retailer compatibility
+  const getVendorName = () => {
+    return product.vendor?.name || product.retailerName || 'Unknown Store';
+  };
+
+  const getVendorId = () => {
+    return product.vendor?.id || product.retailerId || 'unknown';
+  };
+
+  const getVendorLocation = () => {
+    return product.retailerLocation || 'Lusaka';
+  };
+
   const isFlashSale = product.tags?.includes('flash-sale') || (product as any).hotDeal;
 
   // Animation variants
