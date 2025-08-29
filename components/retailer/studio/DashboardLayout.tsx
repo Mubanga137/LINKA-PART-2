@@ -19,7 +19,7 @@ import {
   User as UserIcon,
 } from "lucide-react";
 import { StudioSection } from "@/app/retailer/studio/page";
-import { ResizablePanel, ResizablePanelGroup, ResizableHandle } from "react-resizable-panels";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { ContextPanel } from "./ContextPanel";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
