@@ -1022,6 +1022,10 @@ function LoyaltyPointsContent() {
                   <BarChart3 className="h-5 w-5 mr-2" />
                   Leaderboard
                 </TabsTrigger>
+                <TabsTrigger value="history" className="text-white data-[state=active]:bg-amber-500 data-[state=active]:text-white font-medium">
+                  <Clock className="h-5 w-5 mr-2" />
+                  History
+                </TabsTrigger>
               </TabsList>
 
               {/* Dashboard Tab */}
