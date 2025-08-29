@@ -121,8 +121,14 @@ export default function LoginPage() {
             <div className="rounded-2xl p-[1px] bg-gradient-to-r from-[#0099cc40] via-white to-[#ff660040] shadow-xl">
               <Card className="bg-white/90 backdrop-blur border-white/40">
                 <CardHeader>
-                  <CardTitle className="text-xl">Sign In</CardTitle>
-                  <CardDescription>Use your email and password, or explore a demo</CardDescription>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-xl">{mode === 'login' ? 'Sign In' : 'Create Account'}</CardTitle>
+                    <div className="inline-flex items-center rounded-lg border bg-white p-1 text-xs">
+                      <button type="button" aria-label="Switch to Login" onClick={()=>setMode('login')} className={`px-2 py-1 rounded-md ${mode==='login'?'bg-[#0099cc] text-white':'text-slate-700'}`}>Login</button>
+                      <button type="button" aria-label="Switch to Sign up" onClick={()=>setMode('signup')} className={`px-2 py-1 rounded-md ${mode==='signup'?'bg-[#ff6600] text-white':'text-slate-700'}`}>Sign up</button>
+                    </div>
+                  </div>
+                  <CardDescription>{mode === 'login' ? 'Use your email and password, or explore a demo' : 'Create your account to get started'}</CardDescription>
                 </CardHeader>
 
                 <CardContent>
