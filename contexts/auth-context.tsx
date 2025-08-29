@@ -168,7 +168,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       case 'customer':
         return '/customer-dashboard'
       case 'retailer':
-        return '/retailer/dashboard'
+        return '/retailer/studio'
       default:
         return '/customer-dashboard'
     }
