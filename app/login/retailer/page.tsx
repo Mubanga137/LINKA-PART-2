@@ -34,7 +34,7 @@ export default function RetailerLoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  const redirectUrl = searchParams.get('redirect') || '/retailer/dashboard';
+  const redirectUrl = searchParams.get('redirect') || '/retailer/studio';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
