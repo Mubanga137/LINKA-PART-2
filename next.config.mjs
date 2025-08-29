@@ -13,6 +13,8 @@ const nextConfig = {
   sassOptions: {
     includePaths: ['./styles']
   },
+  // Allow Builder preview origins in dev (fixes Failed to fetch from cross-origin iframe)
+  allowedDevOrigins: ['*.fly.dev', '*.builder.io'],
   experimental: {
     // Optimize HMR and reduce memory usage
     optimizeCss: false,
