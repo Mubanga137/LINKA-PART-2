@@ -10,20 +10,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Loader2, Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react"
+import { Loader2, Eye, EyeOff, Mail, Lock, ArrowRight, CheckSquare } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [remember, setRemember] = useState(true)
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   
   const { login, user, isLoading: authLoading, getRoleBasedRedirectUrl } = useAuth()
   const router = useRouter()
 
-  // Redirect if user is already logged in
   useEffect(() => {
     if (!authLoading && user) {
       const redirectUrl = getRoleBasedRedirectUrl(user)
@@ -31,21 +31,18 @@ export default function LoginPage() {
     }
   }, [user, authLoading, router, getRoleBasedRedirectUrl])
 
-  // Prevent rendering if already authenticated
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-[#0099cc0d] via-white to-[#ff66000d] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Checking authentication...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0099cc] mx-auto mb-4"></div>
+          <p className="text-slate-600">Checking authentication...</p>
         </div>
       </div>
     )
   }
 
-  if (user) {
-    return null // Prevent flash of content while redirecting
-  }
+  if (user) return null
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -54,13 +51,15 @@ export default function LoginPage() {
 
     try {
       const result = await login(email, password)
-      
-      if (result.success) {
-        // The useEffect above will handle redirection once user state is updated
-        // No need to manually redirect here
-      } else {
+      if (!result.success) {
         setError(result.error || "Login failed")
         setIsLoading(false)
+      } else {
+        if (remember) {
+          try { localStorage.setItem("linka_remember", "1") } catch {}
+        } else {
+          try { localStorage.removeItem("linka_remember") } catch {}
+        }
       }
     } catch (err) {
       setError("An unexpected error occurred")
@@ -68,58 +67,50 @@ export default function LoginPage() {
     }
   }
 
-  const handleDemoLogin = async (role: 'customer' | 'retailer') => {
-    const demoCredentials = {
-      customer: { email: 'customer@demo.com', password: 'demo123' },
-      retailer: { email: 'retailer@demo.com', password: 'demo123' }
-    }
-
-    const creds = demoCredentials[role]
-    setEmail(creds.email)
-    setPassword(creds.password)
-    setError("")
-    setIsLoading(true)
-
-    try {
-      const result = await login(creds.email, creds.password)
-      
-      if (result.success) {
-        // The useEffect above will handle redirection once user state is updated
-      } else {
-        setError(result.error || "Demo login failed")
-        setIsLoading(false)
-      }
-    } catch (err) {
-      setError("An unexpected error occurred")
-      setIsLoading(false)
-    }
+  const social = (provider: "google" | "facebook") => {
+    alert(`Social login with ${provider} is not configured in this environment.`)
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen relative">
       <Header />
-      
-      <main className="py-20">
+
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl" style={{background: "radial-gradient(closest-side, rgba(0,153,204,0.25), transparent)"}} />
+        <div className="absolute top-32 right-0 h-[28rem] w-[28rem] rounded-full blur-3xl" style={{background: "radial-gradient(closest-side, rgba(255,102,0,0.18), transparent)"}} />
+      </div>
+
+      <main className="py-16">
         <div className="mx-auto max-w-md px-6">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-2">
-              Welcome Back
-            </h1>
-            <p className="text-slate-600">
-              Sign in to your Linka account
-            </p>
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Welcome Back</h1>
+            <p className="text-slate-600">Sign in to your Linka account</p>
           </div>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-white/30 shadow-xl">
+          <Card className="bg-white/85 backdrop-blur border-white/30 shadow-xl">
             <CardHeader>
               <CardTitle>Sign In</CardTitle>
-              <CardDescription>
-                Enter your credentials to access your account
-              </CardDescription>
+              <CardDescription>Use your email and password to continue</CardDescription>
             </CardHeader>
-            
+
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 gap-2 mb-4">
+                <Button aria-label="Continue with Google" variant="outline" className="w-full justify-center gap-2" onClick={() => social("google")}> 
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.6-6 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8.1 3.1l5.7-5.7C34.9 6.1 29.7 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.8 16.1 18.9 13 24 13c3.1 0 5.9 1.2 8.1 3.1l5.7-5.7C34.9 6.1 29.7 4 24 4c-7.7 0-14.3 4.3-17.7 10.7z"/><path fill="#4CAF50" d="M24 44c5.3 0 10.1-2 13.7-5.3l-6.3-5.2C29.1 35.6 26.7 36.5 24 36.5c-5.3 0-9.7-3.4-11.3-8H5.9l-6.4 5C3 39.5 12.7 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.7l.1.1l6.3 5.2C39 36.6 44 31.1 44 24c0-1.2-.1-2.3-.4-3.5z"/></svg>
+                  Continue with Google
+                </Button>
+                <Button aria-label="Continue with Facebook" variant="outline" className="w-full justify-center gap-2" onClick={() => social("facebook")}>
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.875 11.875v-8.4H7.078V12h3.047V9.356c0-3.007 1.793-4.667 4.533-4.667c1.313 0 2.686.235 2.686.235V7.86h-1.514c-1.492 0-1.956.927-1.956 1.875V12h3.328l-.532 3.475h-2.796v8.4A12.003 12.003 0 0 0 24 12"/><path fill="#fff" d="M16.844 15.475L17.375 12h-3.328V9.735c0-.948.463-1.875 1.956-1.875H17.5V4.924s-1.373-.235-2.686-.235c-2.74 0-4.533 1.66-4.533 4.667V12H7.234v3.475h3.047v8.4a12.103 12.103 0 0 0 3.766 0v-8.4z"/></svg>
+                  Continue with Facebook
+                </Button>
+              </div>
+
+              <div className="relative my-5">
+                <div className="absolute inset-0 flex items-center"><div className="w-full border-t" /></div>
+                <div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-slate-500">or</span></div>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <div className="relative">
@@ -127,12 +118,13 @@ export default function LoginPage() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="you@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10"
+                      className="pl-10 focus-visible:ring-[#0099cc]"
                       required
                       disabled={isLoading}
+                      autoComplete="email"
                     />
                   </div>
                 </div>
@@ -147,12 +139,14 @@ export default function LoginPage() {
                       placeholder="Enter your password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 pr-10"
+                      className="pl-10 pr-10 focus-visible:ring-[#0099cc]"
                       required
                       disabled={isLoading}
+                      autoComplete="current-password"
                     />
                     <button
                       type="button"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 disabled:opacity-50"
                       disabled={isLoading}
@@ -160,6 +154,19 @@ export default function LoginPage() {
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
+                </div>
+
+                <div className="flex items-center justify-between text-sm">
+                  <label className="inline-flex items-center gap-2 select-none">
+                    <input
+                      type="checkbox"
+                      className="h-4 w-4 rounded border-slate-300 text-[#0099cc] focus:ring-[#0099cc]"
+                      checked={remember}
+                      onChange={(e) => setRemember(e.target.checked)}
+                    />
+                    <span className="text-slate-600">Remember me</span>
+                  </label>
+                  <Link href="/forgot-password" className="text-[#0099cc] hover:underline">Forgot password?</Link>
                 </div>
 
                 {error && (
@@ -170,7 +177,7 @@ export default function LoginPage() {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+                  className="w-full bg-gradient-to-r from-[#0099cc] to-[#ff6600] hover:brightness-105 focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[#0099cc]"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -185,68 +192,20 @@ export default function LoginPage() {
                     </>
                   )}
                 </Button>
+
+                <p className="mt-2 text-xs text-slate-500 text-center">
+                  By continuing you agree to our{' '}
+                  <Link href="/terms" className="text-[#0099cc] hover:underline">Terms</Link> and{' '}
+                  <Link href="/privacy" className="text-[#0099cc] hover:underline">Privacy Policy</Link>.
+                </p>
+
+                <div className="text-center">
+                  <span className="text-sm text-slate-600">
+                    Don&apos;t have an account?{' '}
+                    <Link href="/signup" className="text-[#ff6600] hover:underline font-medium">Sign up</Link>
+                  </span>
+                </div>
               </form>
-
-              <div className="mt-6">
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-200" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="bg-white px-2 text-slate-500">Try Demo Accounts</span>
-                  </div>
-                </div>
-
-                <div className="mt-4 grid grid-cols-2 gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDemoLogin('customer')}
-                    disabled={isLoading}
-                    className="flex flex-col items-center py-3 h-auto"
-                  >
-                    <span className="text-lg mb-1">🛍️</span>
-                    <span className="text-xs">Customer</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDemoLogin('retailer')}
-                    disabled={isLoading}
-                    className="flex flex-col items-center py-3 h-auto"
-                  >
-                    <span className="text-lg mb-1">🏪</span>
-                    <span className="text-xs">Retailer</span>
-                  </Button>
-                </div>
-
-                <div className="mt-4 text-center">
-                  <p className="text-xs text-slate-500">
-                    Demo accounts redirect to role-specific dashboards
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                <Link 
-                  href="/forgot-password" 
-                  className="text-sm text-indigo-600 hover:text-indigo-700 hover:underline"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-
-              <div className="mt-4 text-center">
-                <span className="text-sm text-slate-600">
-                  Don't have an account?{" "}
-                  <Link 
-                    href="/signup" 
-                    className="text-indigo-600 hover:text-indigo-700 hover:underline font-medium"
-                  >
-                    Sign up
-                  </Link>
-                </span>
-              </div>
             </CardContent>
           </Card>
         </div>
