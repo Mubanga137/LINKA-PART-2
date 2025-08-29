@@ -89,8 +89,8 @@ export function DashboardLayout({ active, onSelect, title, subtitle, children }:
           </div>
         </aside>
 
-        <ResizablePanelGroup direction="horizontal" className="min-h-screen">
-          <ResizablePanel defaultSize={rightOpen ? 70 : 100} minSize={50}>
+        <PanelGroup direction="horizontal" className="min-h-screen">
+          <Panel defaultSize={rightOpen ? 70 : 100} minSize={50}>
             <header className="sticky top-0 z-20 backdrop-blur border-b bg-white/70">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3">
                 <div className="flex-1 flex items-center gap-3">
@@ -137,16 +137,16 @@ export function DashboardLayout({ active, onSelect, title, subtitle, children }:
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
               {children}
             </div>
-          </ResizablePanel>
-          <ResizableHandle className="hidden lg:block w-[1px] bg-slate-200" />
+          </Panel>
+          <PanelResizeHandle className="hidden lg:block w-[1px] bg-slate-200" />
           {rightOpen && (
-            <ResizablePanel defaultSize={30} minSize={18} collapsible>
+            <Panel defaultSize={30} minSize={18}>
               <div className="sticky top-0 h-screen overflow-y-auto border-l bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 p-4">
                 <ContextPanel />
               </div>
-            </ResizablePanel>
+            </Panel>
           )}
-        </ResizablePanelGroup>
+        </PanelGroup>
       </div>
     </div>
   );
