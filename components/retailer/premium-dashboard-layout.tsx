@@ -130,6 +130,14 @@ const navigationSections = [
     title: 'Marketing',
     items: [
       {
+        id: 'marketing',
+        title: 'Marketing Hub',
+        href: '/retailer/marketing',
+        icon: Globe,
+        description: 'Multi-channel tools',
+        badge: null
+      },
+      {
         id: 'promotions',
         title: 'Promotions & Discounts',
         href: '/retailer/promotions',
