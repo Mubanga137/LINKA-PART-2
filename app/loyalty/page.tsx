@@ -77,6 +77,11 @@ import {
 } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { NotificationsSystem, generateSampleNotifications, type Notification as LoyaltyNotification } from "@/components/loyalty/notifications-system"
+import { GiftTransferPoints } from "@/components/loyalty/gift-transfer-points"
+import { ThemeCustomization } from "@/components/loyalty/theme-customization"
+import { DragDropLayout } from "@/components/loyalty/drag-drop-layout"
+import { EnhancedMobilePullRefresh } from "@/components/loyalty/enhanced-mobile-pull-refresh"
 import { useAuth } from "@/contexts/auth-context"
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
 import Link from "next/link"
@@ -434,6 +439,75 @@ function LoyaltyPointsContent() {
     { id: 3, message: "Your Gold tier benefits are now active!", new: false }
   ])
 
+  const [themeModalOpen, setThemeModalOpen] = useState(false)
+  const [layoutModalOpen, setLayoutModalOpen] = useState(false)
+  const [giftModalOpen, setGiftModalOpen] = useState(false)
+  const [themeConfig, setThemeConfig] = useState<any>(null)
+  const [layoutConfig, setLayoutConfig] = useState<any[]>([])
+  const [notifList, setNotifList] = useState<LoyaltyNotification[]>(generateSampleNotifications())
+
+  const [friends] = useState([
+    { id: 'f1', name: 'Sarah M.', email: 'sarah@example.com', tier: 'Gold', lastActive: '2h ago', canReceivePoints: true, avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&q=80' },
+    { id: 'f2', name: 'David K.', email: 'david@example.com', tier: 'Silver', lastActive: '1d ago', canReceivePoints: true, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80' },
+    { id: 'f3', name: 'Grace P.', email: 'grace@example.com', tier: 'Bronze', lastActive: 'Just now', canReceivePoints: false, avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80' }
+  ])
+  const [transferHistory, setTransferHistory] = useState<any[]>([])
+
+  useEffect(() => {
+    const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('loyaltyTheme') : null
+    if (savedTheme) setThemeConfig(JSON.parse(savedTheme))
+    const savedLayout = typeof window !== 'undefined' ? localStorage.getItem('loyaltyDashboardLayout') : null
+    if (savedLayout) setLayoutConfig(JSON.parse(savedLayout))
+  }, [])
+
+  const handleRefresh = async () => {
+    await new Promise(r => setTimeout(r, 800))
+    setCurrentPoints(p => p + 10)
+    setNotifList(prev => [
+      {
+        id: `${Date.now()}`,
+        type: 'points',
+        title: 'Daily Refresh Bonus',
+        message: 'You earned a refresh bonus!',
+        points: 10,
+        timestamp: new Date(),
+        read: false,
+        priority: 'high'
+      },
+      ...prev
+    ])
+  }
+
+  const handleNotificationRead = (id: string) => {
+    setNotifList(prev => prev.map(n => n.id === id ? { ...n, read: true } : n))
+  }
+  const handleNotificationDismiss = (id: string) => {
+    setNotifList(prev => prev.filter(n => n.id !== id))
+  }
+  const handleNotificationAction = (n: LoyaltyNotification) => {
+    if (n.actionUrl) router.push(n.actionUrl)
+  }
+
+  const handleTransfer = async (recipientId: string, amount: number, message: string) => {
+    if (currentPoints < amount) return false
+    setCurrentPoints(p => p - amount)
+    setTransferHistory(prev => [{ id: `${Date.now()}`, recipient: friends.find(f => f.id === recipientId), amount, message, date: new Date(), status: 'completed' }, ...prev])
+    setNotifList(prev => [
+      {
+        id: `${Date.now()}-gift`,
+        type: 'reward',
+        title: 'Gift Sent',
+        message: `You gifted ${amount} points to a friend`,
+        timestamp: new Date(),
+        read: false,
+        priority: 'medium'
+      },
+      ...prev
+    ])
+    triggerConfetti()
+    return true
+  }
+
   const currentTierIndex = TIERS.findIndex(tier => tier.name === LOYALTY_DATA.currentTier)
   const nextTierIndex = currentTierIndex + 1 < TIERS.length ? currentTierIndex + 1 : currentTierIndex
   const tierProgress = ((LOYALTY_DATA.currentPoints - TIERS[currentTierIndex].minPoints) / 
@@ -614,6 +688,7 @@ function LoyaltyPointsContent() {
       <div className="relative z-10">
         <Header />
 
+        <EnhancedMobilePullRefresh onRefresh={handleRefresh}>
         <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
           {/* Breadcrumb & Settings */}
           <motion.div
@@ -632,14 +707,13 @@ function LoyaltyPointsContent() {
             
             <div className="flex items-center gap-3">
               {/* Notifications */}
-              <div className="relative">
-                <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 relative">
-                  <Bell className="h-5 w-5" />
-                  {notifications.some(n => n.new) && (
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full animate-pulse" />
-                  )}
-                </Button>
-              </div>
+              <NotificationsSystem
+                notifications={notifList}
+                onNotificationRead={handleNotificationRead}
+                onNotificationDismiss={handleNotificationDismiss}
+                onNotificationAction={handleNotificationAction}
+                maxVisible={6}
+              />
 
               {/* Settings Toggles */}
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-lg p-2">
@@ -658,6 +732,30 @@ function LoyaltyPointsContent() {
                   className={`text-white hover:bg-white/10 ${soundEnabled ? 'bg-white/20' : ''}`}
                 >
                   {soundEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setThemeModalOpen(true)}
+                  className="text-white hover:bg-white/10"
+                >
+                  <Palette className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setLayoutModalOpen(true)}
+                  className="text-white hover:bg-white/10"
+                >
+                  <Layout className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setGiftModalOpen(true)}
+                  className="text-white hover:bg-white/10"
+                >
+                  <Gift className="h-4 w-4" />
                 </Button>
               </div>
             </div>
@@ -1686,6 +1784,30 @@ function LoyaltyPointsContent() {
             </Card>
           </motion.div>
         </main>
+        </EnhancedMobilePullRefresh>
+
+        {/* Modals */}
+        <ThemeCustomization
+          isOpen={themeModalOpen}
+          onClose={() => setThemeModalOpen(false)}
+          onThemeChange={setThemeConfig}
+          currentTheme={themeConfig}
+        />
+        <DragDropLayout
+          isOpen={layoutModalOpen}
+          onClose={() => setLayoutModalOpen(false)}
+          onLayoutChange={setLayoutConfig}
+          currentLayout={layoutConfig as any}
+        />
+        <GiftTransferPoints
+          isOpen={giftModalOpen}
+          onClose={() => setGiftModalOpen(false)}
+          currentPoints={currentPoints}
+          friends={friends as any}
+          transferHistory={transferHistory as any}
+          onTransfer={handleTransfer}
+          onAddFriend={() => {}}
+        />
 
         <Footer />
       </div>
