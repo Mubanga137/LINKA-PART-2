@@ -33,7 +33,7 @@ const quickNavItems = [
     id: 'dashboard',
     title: 'Dashboard',
     icon: LayoutDashboard,
-    href: '/retailer-dashboard',
+    href: '/retailer/studio',
     color: 'blue'
   },
   {
