@@ -1001,7 +1001,7 @@ function LoyaltyPointsContent() {
             className="mb-12"
           >
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-5 bg-white/10 backdrop-blur-md border-0 h-14">
+              <TabsList className="grid w-full grid-cols-6 bg-white/10 backdrop-blur-md border-0 h-14">
                 <TabsTrigger value="dashboard" className="text-white data-[state=active]:bg-orange-500 data-[state=active]:text-white font-medium">
                   <Gauge className="h-5 w-5 mr-2" />
                   Dashboard
