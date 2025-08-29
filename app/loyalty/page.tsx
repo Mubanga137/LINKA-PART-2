@@ -86,6 +86,7 @@ import { useAuth } from "@/contexts/auth-context"
 import { AuthRedirectWrapper } from "@/components/auth-redirect-wrapper"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts"
 
 // Enhanced loyalty data with gamification elements
 const LOYALTY_DATA = {
