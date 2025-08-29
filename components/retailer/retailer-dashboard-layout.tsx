@@ -51,7 +51,7 @@ const sidebarSections = [
     items: [
       {
         title: 'Dashboard',
-        href: '/retailer/dashboard',
+        href: '/retailer/studio',
         icon: LayoutDashboard,
         badge: null,
         description: 'Business overview and metrics'
