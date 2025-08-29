@@ -621,13 +621,13 @@ export default function PremiumDashboardOverview() {
                     <span className="text-slate-600">Min Stock:</span>
                     <span className="font-medium">{item.minStock}</span>
                   </div>
-                  <Progress 
-                    value={(item.currentStock / item.minStock) * 100} 
+                  <Progress
+                    value={(item.currentStock / item.minStock) * 100}
                     className={`h-2 ${
-                      item.urgency === 'critical' ? 'bg-red-200' : 
-                      item.urgency === 'high' ? 'bg-orange-200' : 
+                      item.urgency === 'critical' ? 'bg-red-200' :
+                      item.urgency === 'high' ? 'bg-orange-200' :
                       item.urgency === 'medium' ? 'bg-yellow-200' : 'bg-blue-200'
-                    }`} 
+                    }`}
                   />
                 </div>
                 <Button size="sm" className="w-full mt-3 bg-teal-600 hover:bg-teal-700 text-white">
@@ -639,6 +639,212 @@ export default function PremiumDashboardOverview() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Dynamic Modules */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        {/* Inventory & Stock Management */}
+        <Card className="xl:col-span-2 border-0 shadow-lg">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+            <CardTitle className="text-xl font-bold flex items-center">
+              <Package className="h-5 w-5 mr-2 text-teal-600" />
+              Inventory & Stock
+            </CardTitle>
+            <div className="flex items-center gap-2">
+              <Input placeholder="Search products..." value={invSearch} onChange={e=>setInvSearch(e.target.value)} className="h-9 w-48" />
+              <select value={invCategory} onChange={e=>setInvCategory(e.target.value as any)} className="h-9 px-2 border rounded-md text-sm">
+                {['All','Phones','Laptops','Audio','Tablets'].map(c=>(<option key={c} value={c}>{c}</option>))}
+              </select>
+              <select value={invSort} onChange={e=>setInvSort(e.target.value as any)} className="h-9 px-2 border rounded-md text-sm">
+                <option value="stock">Sort: Stock</option>
+                <option value="price">Sort: Price</option>
+                <option value="sales">Sort: 7d Sales</option>
+              </select>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm">
+                <thead>
+                  <tr className="text-left text-slate-500 border-b">
+                    <th className="py-2 pr-4">SKU</th>
+                    <th className="py-2 pr-4">Product</th>
+                    <th className="py-2 pr-4">Category</th>
+                    <th className="py-2 pr-4">Price</th>
+                    <th className="py-2 pr-4">Stock</th>
+                    <th className="py-2 pr-4">7d Sales</th>
+                    <th className="py-2 pr-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {invFiltered.map(row => (
+                    <tr key={row.id} className="border-b last:border-0 hover:bg-slate-50">
+                      <td className="py-2 pr-4">{row.id}</td>
+                      <td className="py-2 pr-4 font-medium text-slate-900">{row.name}</td>
+                      <td className="py-2 pr-4">{row.category}</td>
+                      <td className="py-2 pr-4">
+                        <div className="flex items-center gap-2">
+                          <span>ZMW</span>
+                          <input type="number" value={row.price} onChange={(e)=>inlineEdit(row.id,'price', Number(e.target.value))} className="w-24 border rounded px-2 py-1" />
+                        </div>
+                      </td>
+                      <td className="py-2 pr-4">
+                        <div className="flex items-center gap-2">
+                          <input type="number" value={row.stock} onChange={(e)=>inlineEdit(row.id,'stock', Number(e.target.value))} className="w-20 border rounded px-2 py-1" />
+                          <div className="w-24 bg-slate-200 rounded-full h-2">
+                            <div className={`h-2 rounded-full ${row.stock<=row.minStock? 'bg-orange-500':'bg-teal-500'}`} style={{width: `${Math.min(100, (row.stock/Math.max(1,row.minStock))*100)}%`}} />
+                          </div>
+                          {row.stock<=row.minStock ? (
+                            <Badge className="bg-orange-100 text-orange-800">Low</Badge>
+                          ) : (
+                            <Badge className="bg-teal-100 text-teal-800">OK</Badge>
+                          )}
+                        </div>
+                      </td>
+                      <td className="py-2 pr-4">{row.sales7d}</td>
+                      <td className="py-2 pr-4 text-right">
+                        <div className="flex items-center gap-2 justify-end">
+                          <Button size="sm" variant="outline" onClick={()=>restock(row.id)} className="border-teal-200 text-teal-700">Restock</Button>
+                          <Button size="sm" variant="outline" onClick={()=>removeItem(row.id)} className="border-red-200 text-red-700">Remove</Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Messages & Chat */}
+        <Card className="border-0 shadow-lg">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-xl font-bold flex items-center">
+              <MessageSquare className="h-5 w-5 mr-2 text-blue-600" />
+              Messages & Chat
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-1 border rounded-lg overflow-hidden">
+                <div className="p-2 border-b bg-slate-50">
+                  <Input placeholder="Search..." className="h-8" />
+                </div>
+                <div className="max-h-72 overflow-y-auto">
+                  {conversations.map(conv => (
+                    <button key={conv.id} onClick={()=>setActiveConvId(conv.id)} className={`w-full text-left p-3 border-b hover:bg-slate-50 ${activeConvId===conv.id?'bg-blue-50':''}`}>
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-slate-900">{conv.customer}</span>
+                        {conv.unread>0 && <Badge className="bg-orange-500 text-white">{conv.unread}</Badge>}
+                      </div>
+                      <div className="text-xs text-slate-500 truncate">{conv.last}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="col-span-2 border rounded-lg flex flex-col">
+                <div className="flex-1 p-3 space-y-2 max-h-72 overflow-y-auto">
+                  {activeConv?.messages.map(m => (
+                    <div key={m.id} className={`max-w-[80%] px-3 py-2 rounded-lg ${m.from==='me'?'ml-auto bg-gradient-to-r from-teal-500 to-blue-600 text-white':'bg-slate-100 text-slate-900'}`}>
+                      <div className="text-xs opacity-75 mb-1">{m.time}</div>
+                      <div>{m.text}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-2 border-t flex items-center gap-2">
+                  <Input value={msgText} onChange={e=>setMsgText(e.target.value)} placeholder="Type a message..." className="flex-1" onKeyDown={(e)=>{ if(e.key==='Enter'){ e.preventDefault(); sendMessage(); } }} />
+                  <Button onClick={sendMessage} className="bg-gradient-to-r from-orange-500 to-teal-600 text-white">Send</Button>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Promotions & Discounts and Marketing Tools */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <Card className="xl:col-span-1 border-0 shadow-lg">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-xl font-bold flex items-center">
+              <Tag className="h-5 w-5 mr-2 text-orange-600" />
+              Promotions & Discounts
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Reorder.Group axis="y" values={campaigns} onReorder={setCampaigns} className="space-y-3">
+              {campaigns.map(c => (
+                <Reorder.Item key={c.id} value={c} className="border rounded-lg p-3 bg-white hover:shadow-md">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-semibold text-slate-900">{c.name}</div>
+                      <div className="text-xs text-slate-500 capitalize">{c.status}</div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge className="bg-teal-100 text-teal-800">{c.performance}%</Badge>
+                      <Button size="sm" variant="outline" onClick={()=>pauseCampaign(c.id)}>Pause</Button>
+                      <Button size="sm" variant="outline" onClick={()=>duplicateCampaign(c.id)}>Duplicate</Button>
+                      <Button size="sm" className="bg-gradient-to-r from-orange-500 to-teal-600 text-white" onClick={()=>optimizeCampaign(c.id)}>Optimize</Button>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 mt-2 text-xs text-slate-600">
+                    <div>Reach: <span className="font-semibold">{c.reach}</span></div>
+                    <div>Redemptions: <span className="font-semibold">{c.redemptions}</span></div>
+                    <div>Perf: <span className="font-semibold">{c.performance}%</span></div>
+                  </div>
+                </Reorder.Item>
+              ))}
+            </Reorder.Group>
+          </CardContent>
+        </Card>
+
+        <Card className="xl:col-span-2 border-0 shadow-lg">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-xl font-bold flex items-center">
+              <BarChart3 className="h-5 w-5 mr-2 text-teal-600" />
+              Marketing Analytics
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Tabs defaultValue="revenue">
+              <TabsList>
+                <TabsTrigger value="revenue">Revenue</TabsTrigger>
+                <TabsTrigger value="engagement">Engagement</TabsTrigger>
+              </TabsList>
+              <TabsContent value="revenue">
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={chartData}>
+                      <defs>
+                        <linearGradient id="revFill" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.7}/>
+                          <stop offset="95%" stopColor="#14b8a6" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Area type="monotone" dataKey="revenue" stroke="#14b8a6" fill="url(#revFill)" />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </TabsContent>
+              <TabsContent value="engagement">
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={chartData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Bar dataKey="engagement" fill="#f97316" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
