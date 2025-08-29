@@ -54,7 +54,7 @@ const navigationItems = [
     id: 'dashboard',
     title: 'Dashboard Home',
     icon: LayoutDashboard,
-    href: '/retailer-dashboard',
+    href: '/retailer/studio',
     description: 'Overview page',
     badge: null,
     section: 'main'
