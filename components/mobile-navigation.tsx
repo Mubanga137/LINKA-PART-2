@@ -129,7 +129,7 @@ export function MobileNavigation() {
 
     if (user.role === 'retailer') {
       return [
-        { name: "Dashboard", href: "/retailer-dashboard", icon: Settings },
+        { name: "Dashboard", href: "/retailer/studio", icon: Settings },
         ...baseItems.slice(1) // Remove Profile, keep others
       ]
     }
