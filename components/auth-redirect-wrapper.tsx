@@ -35,12 +35,6 @@ export function AuthRedirectWrapper({
       return
     }
 
-    // If user exists but accessing login/signup pages, redirect to dashboard
-    if (user && (pathname === '/login' || pathname === '/signup')) {
-      const redirectUrl = getRoleBasedRedirectUrl(user)
-      router.replace(redirectUrl)
-      return
-    }
   }, [user, isLoading, requiredRole, fallbackRoute, router, getRoleBasedRedirectUrl])
 
   // Show loading state while checking authentication
