@@ -55,7 +55,7 @@ const navigationSections = [
       {
         id: 'dashboard',
         title: 'Dashboard',
-        href: '/retailer/dashboard',
+        href: '/retailer/studio',
         icon: LayoutDashboard,
         description: 'Business overview and metrics',
         badge: null
