@@ -88,8 +88,8 @@ export default function LoginPage() {
       <Header />
 
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl" style={{background: "radial-gradient(closest-side, rgba(0,153,204,0.25), transparent)"}} />
-        <div className="absolute top-32 right-0 h-[28rem] w-[28rem] rounded-full blur-3xl" style={{background: "radial-gradient(closest-side, rgba(255,102,0,0.18), transparent)"}} />
+        <motion.div className="absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl" style={{background: "radial-gradient(closest-side, rgba(0,153,204,0.25), transparent)"}} animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 8 }} />
+        <motion.div className="absolute top-32 right-0 h-[28rem] w-[28rem] rounded-full blur-3xl" style={{background: "radial-gradient(closest-side, rgba(255,102,0,0.18), transparent)"}} animate={{ y: [0, 12, 0] }} transition={{ repeat: Infinity, duration: 10 }} />
       </div>
 
       <main className="py-16">
