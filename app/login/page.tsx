@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Header } from "@/components/header"
@@ -21,15 +21,8 @@ export default function LoginPage() {
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   
-  const { login, user, isLoading: authLoading, getRoleBasedRedirectUrl } = useAuth()
+  const { login, isLoading: authLoading, getRoleBasedRedirectUrl, signInDemo } = useAuth()
   const router = useRouter()
-
-  useEffect(() => {
-    if (!authLoading && user) {
-      const redirectUrl = getRoleBasedRedirectUrl(user)
-      router.replace(redirectUrl)
-    }
-  }, [user, authLoading, router, getRoleBasedRedirectUrl])
 
   if (authLoading) {
     return (
@@ -41,8 +34,6 @@ export default function LoginPage() {
       </div>
     )
   }
-
-  if (user) return null
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -60,6 +51,8 @@ export default function LoginPage() {
         } else {
           try { localStorage.removeItem("linka_remember") } catch {}
         }
+        const dest = getRoleBasedRedirectUrl(result.user!)
+        router.replace(dest)
       }
     } catch (err) {
       setError("An unexpected error occurred")
@@ -69,6 +62,20 @@ export default function LoginPage() {
 
   const social = (provider: "google" | "facebook") => {
     alert(`Social login with ${provider} is not configured in this environment.`)
+  }
+
+  const handleDemo = async (role: 'retailer' | 'customer') => {
+    setError("")
+    setIsLoading(true)
+    try {
+      const res = await signInDemo(role)
+      const dest = getRoleBasedRedirectUrl(res.user) + "?demo=1"
+      router.replace(dest)
+    } catch (e) {
+      setError("Demo sign-in failed")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -103,6 +110,17 @@ export default function LoginPage() {
                   <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.875 11.875v-8.4H7.078V12h3.047V9.356c0-3.007 1.793-4.667 4.533-4.667c1.313 0 2.686.235 2.686.235V7.86h-1.514c-1.492 0-1.956.927-1.956 1.875V12h3.328l-.532 3.475h-2.796v8.4A12.003 12.003 0 0 0 24 12"/><path fill="#fff" d="M16.844 15.475L17.375 12h-3.328V9.735c0-.948.463-1.875 1.956-1.875H17.5V4.924s-1.373-.235-2.686-.235c-2.74 0-4.533 1.66-4.533 4.667V12H7.234v3.475h3.047v8.4a12.103 12.103 0 0 0 3.766 0v-8.4z"/></svg>
                   Continue with Facebook
                 </Button>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 mb-6">
+                <div className="rounded-lg border p-4 bg-white/70">
+                  <div className="text-sm font-semibold mb-2">Demo Access</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <Button variant="outline" className="justify-center" disabled={isLoading} onClick={() => handleDemo('retailer')}>Sign in as Demo Retailer</Button>
+                    <Button variant="outline" className="justify-center" disabled={isLoading} onClick={() => handleDemo('customer')}>Sign in as Demo Customer</Button>
+                  </div>
+                  <p className="mt-2 text-xs text-slate-500">Preview access with sample data. Some actions are disabled.</p>
+                </div>
               </div>
 
               <div className="relative my-5">
