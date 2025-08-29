@@ -153,7 +153,7 @@ export default function LoginPage() {
                     <div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-slate-500">or sign in with email</span></div>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <form onSubmit={handleSubmit} className="space-y-4" noValidate aria-label="Login form">
                     <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="space-y-2">
                       <Label htmlFor="email">Email</Label>
                       <div className="relative">
