@@ -29,29 +29,31 @@ export function Header() {
           <LinkaLogo size="lg" />
 
           {/* Center Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/about"
-              className="font-medium transition-colors duration-200"
-              style={{ color: '#333333' }}
-            >
-              About
-            </Link>
-            <Link
-              href="/for-retailers"
-              className="font-medium transition-colors duration-200"
-              style={{ color: '#333333' }}
-            >
-              For Retailers
-            </Link>
-            <Link
-              href="/contact"
-              className="font-medium transition-colors duration-200"
-              style={{ color: '#333333' }}
-            >
-              Contact
-            </Link>
-          </nav>
+          {!hideCenterNav && (
+            <nav className="hidden md:flex items-center space-x-8">
+              <Link
+                href="/about"
+                className="font-medium transition-colors duration-200"
+                style={{ color: '#333333' }}
+              >
+                About
+              </Link>
+              <Link
+                href="/for-retailers"
+                className="font-medium transition-colors duration-200"
+                style={{ color: '#333333' }}
+              >
+                For Retailers
+              </Link>
+              <Link
+                href="/contact"
+                className="font-medium transition-colors duration-200"
+                style={{ color: '#333333' }}
+              >
+                Contact
+              </Link>
+            </nav>
+          )}
 
           {/* Right side - Auth-aware actions */}
           <div className="flex items-center space-x-4">
