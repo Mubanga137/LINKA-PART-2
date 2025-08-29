@@ -46,18 +46,34 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      const result = await login(email, password)
-      if (!result.success) {
-        setError(result.error || "Login failed")
-        setIsLoading(false)
-      } else {
-        if (remember) {
-          try { localStorage.setItem("linka_remember", "1") } catch {}
+      if (mode === 'login') {
+        const result = await login(email, password)
+        if (!result.success) {
+          setError(result.error || "Login failed")
+          setIsLoading(false)
         } else {
-          try { localStorage.removeItem("linka_remember") } catch {}
+          if (remember) {
+            try { localStorage.setItem("linka_remember", "1") } catch {}
+          } else {
+            try { localStorage.removeItem("linka_remember") } catch {}
+          }
+          const dest = getRoleBasedRedirectUrl(result.user!)
+          router.replace(dest)
         }
-        const dest = getRoleBasedRedirectUrl(result.user!)
-        router.replace(dest)
+      } else {
+        if (password !== confirmPassword) {
+          setError("Passwords do not match")
+          setIsLoading(false)
+          return
+        }
+        const result = await signup({ email, password, name: fullName || email.split('@')[0], role })
+        if (!result.success) {
+          setError(result.error || "Signup failed")
+          setIsLoading(false)
+        } else {
+          const dest = role === 'retailer' ? '/retailer/studio' : '/customer-dashboard'
+          router.replace(dest)
+        }
       }
     } catch (err) {
       setError("An unexpected error occurred")
