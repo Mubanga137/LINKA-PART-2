@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ResponsiveContainer,
   LineChart,
@@ -13,7 +13,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  BarChart,
   Bar,
   Legend,
   AreaChart,
