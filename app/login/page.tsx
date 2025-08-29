@@ -132,6 +132,25 @@ export default function LoginPage() {
                 </CardHeader>
 
                 <CardContent>
+                  {/* Role Cards */}
+                  <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.03 }} className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                    {(["customer","retailer"] as const).map(r => (
+                      <div key={r} className={`rounded-xl border p-4 bg-white/80 shadow-sm ${role===r? 'ring-2 ring-[#0099cc]':''}`}>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="text-sm font-semibold text-slate-800">{r==='customer'?'Customer':'Retailer'}</div>
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${r==='retailer'?'bg-[#ff66001a] text-[#ff6600]':'bg-[#0099cc1a] text-[#0099cc]'}`}>{r==='retailer'?'Business':'Shopping'}</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button type="button" variant="outline" className="justify-center" onClick={()=>{setRole(r); setMode('login')}}>Login</Button>
+                          <Button type="button" variant="outline" className="justify-center" onClick={()=>{setRole(r); setMode('signup')}}>Sign up</Button>
+                          <Button type="button" variant="outline" className="col-span-2 justify-center" onClick={()=>handleDemo(r)}>
+                            {r==='customer'?'Try as Customer':'Try as Retailer'}
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </motion.div>
+
                   <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="grid grid-cols-1 gap-2 mb-4">
                     <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
                       <Button aria-label="Continue with Google" variant="outline" className="w-full justify-center gap-2" onClick={() => social("google")}>
@@ -147,23 +166,22 @@ export default function LoginPage() {
                     </motion.div>
                   </motion.div>
 
-                  <div className="grid grid-cols-1 gap-3 mb-6">
-                    <div className="rounded-lg border p-4 bg-white/70">
-                      <div className="text-sm font-semibold mb-2">Demo Access</div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <Button variant="outline" className="justify-center" disabled={isLoading} onClick={() => handleDemo('retailer')}>Sign in as Demo Retailer</Button>
-                        <Button variant="outline" className="justify-center" disabled={isLoading} onClick={() => handleDemo('customer')}>Sign in as Demo Customer</Button>
-                      </div>
-                      <p className="mt-2 text-xs text-slate-500">Preview access with sample data. Some actions are disabled.</p>
-                    </div>
-                  </div>
 
                   <div className="relative my-5">
                     <div className="absolute inset-0 flex items-center"><div className="w-full border-t" /></div>
-                    <div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-slate-500">or sign in with email</span></div>
+                    <div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-slate-500">{mode==='login'?'or sign in with email':'or sign up with email'}</span></div>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-4" noValidate aria-label="Login form">
+                  <form onSubmit={handleSubmit} className="space-y-4" noValidate aria-label={mode==='login'?'Login form':'Sign up form'}>
+                    {mode==='signup' && (
+                      <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }} className="space-y-2">
+                        <Label htmlFor="fullName">Full name</Label>
+                        <div className="relative">
+                          <Input id="fullName" type="text" placeholder="Your name" value={fullName} onChange={(e)=>setFullName(e.target.value)} disabled={isLoading} className="focus-visible:ring-[#0099cc]" />
+                        </div>
+                      </motion.div>
+                    )}
+
                     <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="space-y-2">
                       <Label htmlFor="email">Email</Label>
                       <div className="relative">
@@ -189,13 +207,13 @@ export default function LoginPage() {
                         <Input
                           id="password"
                           type={showPassword ? "text" : "password"}
-                          placeholder="Enter your password"
+                          placeholder={mode==='login'?"Enter your password":"Create a password"}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          className="pl-10 pr-10 focus-visible:ring-[#0099cc]"
+                          className={`pl-10 pr-10 focus-visible:ring-[#0099cc] ${password.length>=6?'border-emerald-300':''}`}
                           required
                           disabled={isLoading}
-                          autoComplete="current-password"
+                          autoComplete={mode==='login'?"current-password":"new-password"}
                         />
                         <button
                           type="button"
@@ -208,6 +226,26 @@ export default function LoginPage() {
                         </button>
                       </div>
                     </motion.div>
+
+                    {mode==='signup' && (
+                      <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="space-y-2">
+                        <Label htmlFor="confirmPassword">Confirm password</Label>
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                          <Input
+                            id="confirmPassword"
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Re-enter your password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className={`pl-10 pr-10 focus-visible:ring-[#0099cc] ${confirmPassword && confirmPassword===password?'border-emerald-300':''}`}
+                            required
+                            disabled={isLoading}
+                            autoComplete="new-password"
+                          />
+                        </div>
+                      </motion.div>
+                    )}
 
                     <div className="flex items-center justify-between text-sm">
                       <label className="inline-flex items-center gap-2 select-none">
@@ -239,11 +277,11 @@ export default function LoginPage() {
                         {isLoading ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Signing In...
+                            {mode==='login'?'Signing In...':'Creating Account...'}
                           </>
                         ) : (
                           <>
-                            Sign In
+                            {mode==='login'?'Sign In':'Create Account'}
                             <ArrowRight className="ml-2 h-4 w-4" />
                           </>
                         )}
