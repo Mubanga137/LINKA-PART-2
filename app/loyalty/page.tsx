@@ -577,6 +577,48 @@ function LoyaltyPointsContent() {
 
   const categories = ["All", ...Array.from(new Set(REWARDS.map(r => r.category)))]
 
+  const closeRewards = REWARDS.filter(r => r.available && r.points > currentPoints && (r.points - currentPoints) <= 300)
+    .sort((a,b) => (a.points - currentPoints) - (b.points - currentPoints))
+    .slice(0,3)
+
+  const toggleWishlist = (id: string) => {
+    setWishlist(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id])
+  }
+
+  const allTransactions = React.useMemo(() => {
+    return RECENT_ACTIVITY.map(a => ({
+      id: a.id,
+      date: a.date,
+      action: a.action,
+      type: a.type,
+      points: a.points
+    }))
+  }, [])
+
+  const filteredTransactions = allTransactions.filter(t => {
+    const byType = typeFilter === 'all' || t.type === typeFilter
+    const bySearch = historySearch === '' || t.action.toLowerCase().includes(historySearch.toLowerCase())
+    return byType && bySearch
+  })
+
+  const historyCsv = React.useMemo(() => {
+    const header = 'Date,Action,Type,Points\n'
+    const rows = filteredTransactions.map(t => `${t.date},${t.action},${t.type},${t.points}`).join('\n')
+    return header + rows
+  }, [filteredTransactions])
+
+  const downloadCsv = () => {
+    const blob = new Blob([historyCsv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'loyalty-history.csv'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Premium Animated Background */}
