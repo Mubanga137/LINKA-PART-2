@@ -29,7 +29,7 @@ interface RetailerMobileNavProps {
 const mobileNavItems = [
   {
     title: 'Dashboard',
-    href: '/retailer/dashboard',
+    href: '/retailer/studio',
     icon: LayoutDashboard,
     badge: null
   },
