@@ -20,7 +20,9 @@ import {
   MoreHorizontal,
   Zap,
   Target,
-  Award
+  Award,
+  MessageSquare,
+  Tag
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -512,7 +514,7 @@ export default function PremiumDashboardOverview() {
                     </Avatar>
                     <div>
                       <p className="font-medium text-slate-900">{order.customer}</p>
-                      <p className="text-sm text-slate-500">{order.id} • {order.items} items</p>
+                      <p className="text-sm text-slate-500">{order.id} ��� {order.items} items</p>
                       <p className="text-xs text-slate-400">{order.time}</p>
                     </div>
                   </div>
