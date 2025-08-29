@@ -83,12 +83,6 @@ const recentOrders = [
   { id: "#10234", customer: "Agness Mbewe", items: "1× Dress, 1× Scarf", date: "2025-08-25", status: "Completed", value: 945 },
 ];
 
-const topProducts = [
-  { name: "Wireless Earbuds Pro", views: 921 },
-  { name: "4K Smart TV 50”", views: 854 },
-  { name: "Premium Hoodie", views: 803 },
-  { name: "Blender X200", views: 622 },
-];
 
 function StatusBadge({ status }: { status: string }) {
   const map: Record<string, string> = {
@@ -313,44 +307,8 @@ export function OverviewPanel() {
         </div>
       </div>
 
-      {/* Store Traffic & Engagement + Quick Actions + Gamified */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        {/* Traffic & Engagement */}
-        <div className="rounded-xl border bg-white p-4 shadow-sm">
-          <div className="mb-3 text-sm font-semibold">Store Traffic & Engagement</div>
-          <div className="grid grid-cols-3 gap-3 text-xs">
-            {[{t:'Today',v:1260},{t:'This Week',v:8400},{t:'This Month',v:26400}].map((x)=> (
-              <div key={x.t} className="rounded-md border p-3">
-                <div className="text-slate-600">{x.t}</div>
-                <div className="text-lg font-bold text-slate-900">{x.v.toLocaleString()}</div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-3 text-xs text-slate-600">Conversion Rate</div>
-          <div className="mt-1 h-2 rounded-full bg-slate-100 overflow-hidden">
-            <div className="h-full rounded-full bg-gradient-to-r from-[#ff6600] to-[#0099cc]" style={{ width: `${(trend[trend.length-1]?.conv ?? 4.5) * 15}%` }} />
-          </div>
-          <div className="mt-1 text-xs font-semibold text-slate-900">{(trend[trend.length-1]?.conv ?? 4.5).toFixed(1)}%</div>
-          <div className="mt-4">
-            <div className="text-xs text-slate-600 mb-2">Heatmap Preview</div>
-            <div className="grid grid-cols-6 gap-1">
-              {Array.from({ length: 30 }).map((_, i) => {
-                const intensity = 0.15 + (Math.sin(i * 1.7) + 1) / 2 * 0.65;
-                const color = `rgba(255,102,0,${intensity.toFixed(2)})`;
-                return <div key={i} className="h-3 rounded" style={{ background: `linear-gradient(90deg, ${color}, rgba(0,153,204,${(1-intensity).toFixed(2)}))` }} />
-              })}
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="text-xs text-slate-600 mb-1">Top Products Viewed</div>
-            <ul className="space-y-1 text-sm">
-              {topProducts.map((p)=> (
-                <li key={p.name} className="flex items-center justify-between"><span className="text-slate-700">{p.name}</span><span className="text-slate-900 font-semibold">{p.views}</span></li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
+      {/* Quick Actions + Gamified */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Quick Actions */}
         <div className="rounded-xl border bg-white p-4 shadow-sm">
           <div className="mb-3 text-sm font-semibold">Quick Actions</div>
