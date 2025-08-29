@@ -124,7 +124,7 @@ export default function ProtectedRoute({
               You don't have permission to access this feature. Please upgrade your plan to access this functionality.
             </p>
             <div className="space-y-3">
-              <Button onClick={() => router.push('/retailer/dashboard')} className="w-full">
+              <Button onClick={() => router.push('/retailer/studio')} className="w-full">
                 Return to Dashboard
               </Button>
               <Button variant="outline" onClick={() => router.push('/upgrade')} className="w-full">
@@ -165,7 +165,7 @@ export default function ProtectedRoute({
               <Button onClick={() => router.push('/upgrade')} className="w-full">
                 Upgrade to Access
               </Button>
-              <Button variant="outline" onClick={() => router.push('/retailer/dashboard')} className="w-full">
+              <Button variant="outline" onClick={() => router.push('/retailer/studio')} className="w-full">
                 Return to Dashboard
               </Button>
             </div>
