@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { motion } from "framer-motion";
 import { LinkaLogo } from "@/components/linka-logo";
 import {
@@ -13,8 +13,15 @@ import {
   Store,
   Bell,
   Settings,
+  Search as SearchIcon,
+  Plus,
+  Sparkles,
+  User as UserIcon,
 } from "lucide-react";
 import { StudioSection } from "@/app/retailer/studio/page";
+import { ResizablePanel, ResizablePanelGroup, ResizableHandle } from "react-resizable-panels";
+import { ContextPanel } from "./ContextPanel";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 interface DashboardLayoutProps {
   active: StudioSection;
@@ -37,6 +44,9 @@ const items: { key: StudioSection; label: string; Icon: any }[] = [
 ];
 
 export function DashboardLayout({ active, onSelect, title, subtitle, children }: DashboardLayoutProps) {
+  const [rightOpen, setRightOpen] = useState(true);
+  const [notifCount] = useState(3);
+
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="pointer-events-none fixed inset-0 -z-10 opacity-70">
@@ -56,12 +66,11 @@ export function DashboardLayout({ active, onSelect, title, subtitle, children }:
                 key={key}
                 onClick={() => onSelect(key)}
                 className={`group flex w-full items-center gap-3 px-5 py-3.5 text-sm font-medium transition-all ${
-                  active === key
-                    ? "text-slate-900"
-                    : "text-slate-600 hover:text-slate-900"
+                  active === key ? "text-slate-900" : "text-slate-600 hover:text-slate-900"
                 }`}
+                aria-current={active===key}
               >
-                <span className={`grid h-9 w-9 place-items-center rounded-lg border transition-all ${
+                <span className={`relative grid h-9 w-9 place-items-center rounded-lg border transition-all ${
                   active === key
                     ? "bg-gradient-to-br from-[#0099cc] to-[#ff6600] text-white border-transparent shadow"
                     : "border-slate-200 group-hover:border-slate-300"
@@ -80,31 +89,64 @@ export function DashboardLayout({ active, onSelect, title, subtitle, children }:
           </div>
         </aside>
 
-        <main className="min-h-screen">
-          <header className="sticky top-0 z-20 backdrop-blur border-b bg-white/70">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-              <div>
-                <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">{title}</h1>
-                {subtitle && (
-                  <p className="text-sm text-slate-600">{subtitle}</p>
-                )}
+        <ResizablePanelGroup direction="horizontal" className="min-h-screen">
+          <ResizablePanel defaultSize={rightOpen ? 70 : 100} minSize={50}>
+            <header className="sticky top-0 z-20 backdrop-blur border-b bg-white/70">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3">
+                <div className="flex-1 flex items-center gap-3">
+                  <div className="hidden lg:flex items-center gap-3">
+                    <LinkaLogo size="sm" />
+                    <span className="text-xs font-semibold bg-gradient-to-r from-[#0099cc] to-[#ff6600] bg-clip-text text-transparent">Studio</span>
+                  </div>
+                  <div className="relative flex-1 max-w-xl">
+                    <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <input aria-label="Search" placeholder="Search products, orders, campaigns..." className="w-full rounded-lg border bg-white px-9 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0099cc]" />
+                  </div>
+                </div>
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} onClick={() => onSelect("inventory")} className="hidden md:inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm bg-white hover:bg-slate-50"><Plus className="h-4 w-4"/> Add Product</motion.button>
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} onClick={() => onSelect("promotions")} className="hidden md:inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm bg-white hover:bg-slate-50"><Sparkles className="h-4 w-4 text-[#ff6600]"/> New Campaign</motion.button>
+                <button aria-label="Notifications" onClick={() => onSelect("notifications")} className="relative grid h-9 w-9 place-items-center rounded-lg border bg-white hover:bg-slate-50">
+                  <Bell className="h-4 w-4 text-[#0099cc]" />
+                  {notifCount>0 && <span className="absolute -top-1 -right-1 rounded-full bg-[#ff6600] text-white text-[10px] px-1.5 py-[2px] font-bold">{notifCount}</span>}
+                </button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="grid h-9 w-9 place-items-center rounded-full border bg-white hover:bg-slate-50"><UserIcon className="h-4 w-4"/></button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={()=>onSelect("settings")}>Profile & Settings</DropdownMenuItem>
+                    <DropdownMenuItem onClick={()=>onSelect("storefront")}>Storefront</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={()=>location.assign('/')}>Sign out</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
-              <motion.button
-                whileTap={{ scale: 0.98 }}
-                whileHover={{ scale: 1.02 }}
-                onClick={() => onSelect("notifications")}
-                className="inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium shadow-sm transition-colors bg-white hover:bg-slate-50"
-              >
-                <Bell className="h-4 w-4 text-[#0099cc]" />
-                Alerts
-              </motion.button>
-            </div>
-          </header>
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-3 flex items-center justify-between">
+                <div>
+                  <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">{title}</h1>
+                  {subtitle && <p className="text-sm text-slate-600">{subtitle}</p>}
+                </div>
+                <button onClick={() => setRightOpen(v=>!v)} className="inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm bg-white hover:bg-slate-50">
+                  {rightOpen ? 'Hide Insights' : 'Show Insights'}
+                </button>
+              </div>
+            </header>
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-            {children}
-          </div>
-        </main>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+              {children}
+            </div>
+          </ResizablePanel>
+          <ResizableHandle className="hidden lg:block w-[1px] bg-slate-200" />
+          {rightOpen && (
+            <ResizablePanel defaultSize={30} minSize={18} collapsible>
+              <div className="sticky top-0 h-screen overflow-y-auto border-l bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 p-4">
+                <ContextPanel />
+              </div>
+            </ResizablePanel>
+          )}
+        </ResizablePanelGroup>
       </div>
     </div>
   );
