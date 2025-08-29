@@ -179,7 +179,7 @@ export function SideNavigation({ variant = "marketplace", className = "" }: Side
     {
       id: "account",
       title: "My Account",
-      href: user?.role === 'retailer' ? '/retailer-dashboard' : user?.role === 'customer' ? '/customer-dashboard' : '/profile',
+      href: user?.role === 'retailer' ? '/retailer/studio' : user?.role === 'customer' ? '/customer-dashboard' : '/profile',
       icon: User,
       description: "Account settings",
       active: false
