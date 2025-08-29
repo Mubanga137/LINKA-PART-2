@@ -1754,6 +1754,103 @@ function LoyaltyPointsContent() {
                 </motion.div>
               </TabsContent>
 
+              {/* History Tab */}
+              <TabsContent value="history" className="mt-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <Card className="bg-white/95 backdrop-blur-md border-0 shadow-2xl">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3 text-gray-900">
+                        <Clock className="h-6 w-6 text-amber-500" />
+                        Points History
+                        <div className="ml-auto flex items-center gap-2">
+                          <Input
+                            placeholder="Search activity..."
+                            value={historySearch}
+                            onChange={(e) => setHistorySearch(e.target.value)}
+                            className="h-9 w-40"
+                          />
+                          <select
+                            value={typeFilter}
+                            onChange={(e) => setTypeFilter(e.target.value as any)}
+                            className="h-9 px-2 border rounded-md text-sm text-gray-700"
+                          >
+                            <option value="all">All</option>
+                            <option value="earned">Earned</option>
+                            <option value="redeemed">Redeemed</option>
+                          </select>
+                          <Button onClick={downloadCsv} size="sm" className="bg-gradient-to-r from-orange-500 to-teal-600 text-white">
+                            <Download className="h-4 w-4 mr-2" /> Export CSV
+                          </Button>
+                        </div>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div className="lg:col-span-2">
+                          <div className="overflow-x-auto">
+                            <table className="min-w-full text-sm">
+                              <thead>
+                                <tr className="text-left text-gray-500 border-b">
+                                  <th className="py-2 pr-4">Date</th>
+                                  <th className="py-2 pr-4">Action</th>
+                                  <th className="py-2 pr-4">Type</th>
+                                  <th className="py-2 pr-4 text-right">Points</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {filteredTransactions.map((t) => (
+                                  <tr key={t.id} className="border-b last:border-0">
+                                    <td className="py-2 pr-4 text-gray-600">{t.date}</td>
+                                    <td className="py-2 pr-4 text-gray-900">{t.action}</td>
+                                    <td className="py-2 pr-4">
+                                      <Badge className={t.type === 'earned' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'}>
+                                        {t.type}
+                                      </Badge>
+                                    </td>
+                                    <td className={`py-2 pr-4 text-right font-bold ${t.type === 'earned' ? 'text-green-600' : 'text-orange-600'}`}>
+                                      {t.type === 'earned' ? '+' : ''}{t.points}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div className="space-y-4">
+                          <h4 className="font-semibold text-gray-900">Earnings vs Redemptions</h4>
+                          <div className="h-48">
+                            <ResponsiveContainer width="100%" height="100%">
+                              <AreaChart data={RECENT_ACTIVITY.map((a, i) => ({ name: `${i+1}`, earned: a.type==='earned'?a.points:0, redeemed: a.type==='redeemed'?Math.abs(a.points):0 }))}>
+                                <defs>
+                                  <linearGradient id="colorEarned" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
+                                    <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                                  </linearGradient>
+                                  <linearGradient id="colorRedeemed" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#f97316" stopOpacity={0.8}/>
+                                    <stop offset="95%" stopColor="#f97316" stopOpacity={0}/>
+                                  </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                                <XAxis dataKey="name" stroke="#6b7280" />
+                                <YAxis stroke="#6b7280" />
+                                <Tooltip />
+                                <Area type="monotone" dataKey="earned" stroke="#10b981" fillOpacity={1} fill="url(#colorEarned)" />
+                                <Area type="monotone" dataKey="redeemed" stroke="#f97316" fillOpacity={1} fill="url(#colorRedeemed)" />
+                              </AreaChart>
+                            </ResponsiveContainer>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </TabsContent>
+
               {/* Leaderboard Tab */}
               <TabsContent value="leaderboard" className="mt-8">
                 <motion.div
