@@ -13,6 +13,7 @@ export interface User {
   businessName?: string
   verificationStatus?: 'pending' | 'verified' | 'rejected'
   joinedAt: string
+  isDemo?: boolean
 }
 
 interface AuthContextType {
@@ -23,6 +24,7 @@ interface AuthContextType {
   logout: () => void
   updateProfile: (data: Partial<User>) => Promise<{ success: boolean; error?: string }>
   getRoleBasedRedirectUrl: (user: User) => string
+  signInDemo: (role: 'customer' | 'retailer') => Promise<{ success: boolean; user: User }>
 }
 
 interface SignupData {
@@ -174,6 +176,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const signInDemo = async (role: 'customer' | 'retailer'): Promise<{ success: boolean; user: User }> => {
+    const demoUser: User = {
+      id: 'demo-' + role,
+      email: role === 'retailer' ? 'demo.retailer@linka.zm' : 'demo.customer@linka.zm',
+      name: role === 'retailer' ? 'Demo Retailer' : 'Demo Customer',
+      role,
+      avatar: '/placeholder.svg?height=100&width=100',
+      location: 'Zambia',
+      businessName: role === 'retailer' ? 'Demo Store' : undefined,
+      verificationStatus: 'verified',
+      joinedAt: new Date().toISOString(),
+      isDemo: true,
+    }
+    setUser(demoUser)
+    return { success: true, user: demoUser }
+  }
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -182,7 +201,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       signup,
       logout,
       updateProfile,
-      getRoleBasedRedirectUrl
+      getRoleBasedRedirectUrl,
+      signInDemo,
     }}>
       {children}
     </AuthContext.Provider>
