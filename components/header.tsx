@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import { LinkaLogo } from "@/components/linka-logo"
 import { User } from "lucide-react"
+import { useAuth } from "@/contexts/auth-context"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function Header() {
+  const { user, logout, getRoleBasedRedirectUrl } = useAuth()
 
   return (
     <>
@@ -47,16 +50,35 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* Right side - Login and Sell on Linka button */}
+          {/* Right side - Auth-aware actions */}
           <div className="flex items-center space-x-4">
-            <Link
-              href="/login"
-              className="flex items-center font-medium transition-colors duration-200"
-              style={{ color: '#333333' }}
-            >
-              <User className="h-4 w-4 mr-1" />
-              <span>Login</span>
-            </Link>
+            {!user ? (
+              <Link
+                href="/login"
+                className="flex items-center font-medium transition-colors duration-200"
+                style={{ color: '#333333' }}
+              >
+                <User className="h-4 w-4 mr-1" />
+                <span>Login</span>
+              </Link>
+            ) : (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="grid h-9 w-9 place-items-center rounded-full border bg-white hover:bg-slate-50">
+                    <User className="h-4 w-4" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href={getRoleBasedRedirectUrl(user)}>Go to Dashboard</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
 
             <Link href="/signup?role=retailer">
               <Button
