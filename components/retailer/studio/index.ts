@@ -7,3 +7,5 @@ export * from "./AnalyticsPanel";
 export * from "./StorefrontPanel";
 export * from "./NotificationsPanel";
 export * from "./ProfileSettingsPanel";
+export * from "./ContextPanel";
+export * from "./OverviewPanel";
