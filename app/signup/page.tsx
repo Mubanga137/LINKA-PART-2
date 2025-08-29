@@ -95,7 +95,7 @@ export default function SignupPage() {
       if (result.success) {
         // Redirect based on role
         if (formData.role === 'retailer') {
-          router.push('/retailer-dashboard?welcome=true')
+          router.push('/retailer/studio?welcome=true')
         } else {
           router.push('/customer-dashboard?welcome=true')
         }
