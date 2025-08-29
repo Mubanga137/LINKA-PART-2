@@ -46,7 +46,7 @@ export default function RetailerStudioPage() {
       case "settings":
         return "Profile & Settings";
       default:
-        return "Retailer Studio";
+        return "Dashboard Overview";
     }
   }, [active]);
 
