@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect, useCallback } from "react"
+import React, { useState, useRef, useEffect, useCallback } from "react"
 import { motion, PanInfo, useMotionValue, useTransform, AnimatePresence } from "framer-motion"
 import { RefreshCw, Coins, Sparkles, Star, Gift, Zap, Trophy } from "lucide-react"
 
