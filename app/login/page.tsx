@@ -29,7 +29,7 @@ export default function LoginPage() {
       <div className="min-h-screen bg-gradient-to-br from-[#0099cc0d] via-white to-[#ff66000d] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0099cc] mx-auto mb-4"></div>
-          <p className="text-slate-600">Checking authentication...</p>
+          <p className="text-slate-600">Preparing login...</p>
         </div>
       </div>
     )
