@@ -76,7 +76,7 @@ export function MarketplaceMainHeader() {
     if (!user) return '/'
     switch (user.role) {
       case 'retailer':
-        return '/retailer-dashboard'
+        return '/retailer/studio'
       case 'admin':
         return '/admin-dashboard'
       case 'customer':
