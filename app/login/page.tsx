@@ -17,12 +17,16 @@ import { useAuth } from "@/contexts/auth-context"
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [fullName, setFullName] = useState("")
+  const [mode, setMode] = useState<'login' | 'signup'>("login")
+  const [role, setRole] = useState<'customer' | 'retailer'>("customer")
   const [showPassword, setShowPassword] = useState(false)
   const [remember, setRemember] = useState(true)
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  
-  const { login, isLoading: authLoading, getRoleBasedRedirectUrl, signInDemo } = useAuth()
+
+  const { login, signup, isLoading: authLoading, getRoleBasedRedirectUrl, signInDemo } = useAuth()
   const router = useRouter()
 
   if (authLoading) {
