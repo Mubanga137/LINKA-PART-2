@@ -1437,6 +1437,13 @@ function LoyaltyPointsContent() {
                     </div>
                   </div>
 
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <Switch checked={showWishlistOnly} onCheckedChange={setShowWishlistOnly} id="wishlistOnly" />
+                      <Label htmlFor="wishlistOnly" className="text-white">Wishlist only</Label>
+                    </div>
+                  </div>
+
                   {/* Rewards Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredRewards.map((reward, index) => (
