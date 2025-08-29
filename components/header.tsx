@@ -7,9 +7,12 @@ import { LinkaLogo } from "@/components/linka-logo"
 import { User } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { usePathname } from "next/navigation"
 
 export function Header() {
   const { user, logout, getRoleBasedRedirectUrl } = useAuth()
+  const pathname = usePathname()
+  const hideCenterNav = pathname?.startsWith('/customer-dashboard')
 
   return (
     <>
