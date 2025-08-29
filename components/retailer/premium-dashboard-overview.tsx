@@ -22,7 +22,8 @@ import {
   Target,
   Award,
   MessageSquare,
-  Tag
+  Tag,
+  BarChart3
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -301,11 +302,20 @@ export default function PremiumDashboardOverview() {
   const optimizeCampaign = (id: string) => setCampaigns(prev => prev.map(c => c.id===id? { ...c, performance: Math.min(100, c.performance + 5) } : c))
 
   // Marketing Tools - charts
-  const chartData = Array.from({length: 12}).map((_, i) => ({
-    name: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i],
-    revenue: Math.round(200 + Math.random()*200) + (nowTick%3)*50,
-    engagement: Math.round(50 + Math.random()*100)
-  }))
+  const [chartData, setChartData] = useState(
+    Array.from({length: 12}).map((_, i) => ({
+      name: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i],
+      revenue: 0,
+      engagement: 0
+    }))
+  )
+  useEffect(() => {
+    setChartData(Array.from({length: 12}).map((_, i) => ({
+      name: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i],
+      revenue: Math.round(200 + Math.random()*200) + (nowTick%3)*50,
+      engagement: Math.round(50 + Math.random()*100)
+    })))
+  }, [nowTick])
 
   return (
     <div className="p-6 space-y-8">
@@ -514,7 +524,7 @@ export default function PremiumDashboardOverview() {
                     </Avatar>
                     <div>
                       <p className="font-medium text-slate-900">{order.customer}</p>
-                      <p className="text-sm text-slate-500">{order.id} ��� {order.items} items</p>
+                      <p className="text-sm text-slate-500">{order.id} • {order.items} items</p>
                       <p className="text-xs text-slate-400">{order.time}</p>
                     </div>
                   </div>
