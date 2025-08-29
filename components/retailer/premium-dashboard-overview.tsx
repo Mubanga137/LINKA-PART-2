@@ -214,6 +214,97 @@ const AnimatedCounter = ({ value, duration = 2000 }: { value: number; duration?:
 export default function PremiumDashboardOverview() {
   const [timeRange, setTimeRange] = useState('6M');
 
+  // Live update timers and demo state
+  const [nowTick, setNowTick] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setNowTick(t => t + 1), 5000)
+    return () => clearInterval(id)
+  }, [])
+
+  // Inventory & Stock
+  const [inventory, setInventory] = useState([
+    { id: 'SKU-1001', name: 'iPhone 15 Pro Max', category: 'Phones', price: 19999, stock: 15, minStock: 10, sales7d: 7 },
+    { id: 'SKU-1002', name: 'MacBook Pro M3', category: 'Laptops', price: 34999, stock: 8, minStock: 5, sales7d: 3 },
+    { id: 'SKU-1003', name: 'AirPods Pro 2', category: 'Audio', price: 3999, stock: 32, minStock: 20, sales7d: 12 },
+    { id: 'SKU-1004', name: 'Samsung S24', category: 'Phones', price: 14999, stock: 22, minStock: 10, sales7d: 5 },
+    { id: 'SKU-1005', name: 'iPad Air M2', category: 'Tablets', price: 9999, stock: 7, minStock: 15, sales7d: 4 }
+  ])
+  const [invSearch, setInvSearch] = useState('')
+  const [invCategory, setInvCategory] = useState<'All' | 'Phones' | 'Laptops' | 'Audio' | 'Tablets'>('All')
+  const [invSort, setInvSort] = useState<'stock'|'price'|'sales'>('stock')
+
+  const invFiltered = useMemo(() => {
+    let rows = inventory.filter(r => (
+      (invCategory === 'All' || r.category === invCategory) &&
+      (invSearch === '' || r.name.toLowerCase().includes(invSearch.toLowerCase()) || r.id.toLowerCase().includes(invSearch.toLowerCase()))
+    ))
+    rows.sort((a,b) => invSort==='stock'? a.stock-b.stock : invSort==='price'? a.price-b.price : a.sales7d-b.sales7d)
+    return rows
+  }, [inventory, invCategory, invSearch, invSort])
+
+  const restock = (id: string, amount = 5) => setInventory(prev => prev.map(p => p.id===id? {...p, stock: p.stock + amount}: p))
+  const inlineEdit = (id: string, key: 'price'|'stock', value: number) => setInventory(prev => prev.map(p => p.id===id? {...p, [key]: value}: p))
+  const removeItem = (id: string) => setInventory(prev => prev.filter(p => p.id !== id))
+
+  // Messages & Chat
+  type Msg = { id: string, from: 'me'|'customer', text: string, time: string }
+  const [conversations, setConversations] = useState([
+    { id: 'C-001', customer: 'Grace P.', unread: 2, last: 'Is this available for pickup?', messages: [
+      { id: 'm1', from: 'customer', text: 'Hi! Is the MacBook still in stock?', time: '09:15' },
+      { id: 'm2', from: 'me', text: 'Yes, we have 8 units left.', time: '09:16' },
+      { id: 'm3', from: 'customer', text: 'Great! Is this available for pickup?', time: '09:17' }
+    ] as Msg[] },
+    { id: 'C-002', customer: 'John S.', unread: 0, last: 'Thanks!', messages: [
+      { id: 'm1', from: 'customer', text: 'Can I get express delivery?', time: '08:40' },
+      { id: 'm2', from: 'me', text: 'Yes, available at checkout.', time: '08:41' },
+      { id: 'm3', from: 'customer', text: 'Thanks!', time: '08:42' }
+    ] as Msg[] }
+  ])
+  const [activeConvId, setActiveConvId] = useState('C-001')
+  const [msgText, setMsgText] = useState('')
+  const activeConv = conversations.find(c => c.id === activeConvId)
+  useEffect(() => {
+    const id = setInterval(() => {
+      // simulate incoming message occasionally
+      setConversations(prev => prev.map(c => {
+        if (c.id !== activeConvId) return c
+        if (Math.random() < 0.3) {
+          const newMsg = { id: `m${Date.now()}`, from: 'customer' as const, text: 'Got it, thanks!', time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) }
+          return { ...c, unread: c.unread + (document.hidden ? 1 : 0), messages: [...c.messages, newMsg] }
+        }
+        return c
+      }))
+    }, 8000)
+    return () => clearInterval(id)
+  }, [activeConvId])
+  const sendMessage = () => {
+    if (!msgText.trim() || !activeConv) return
+    const newMsg = { id: `m${Date.now()}`, from: 'me' as const, text: msgText.trim(), time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) }
+    setConversations(prev => prev.map(c => c.id===activeConv.id ? { ...c, messages: [...c.messages, newMsg], last: newMsg.text } : c))
+    setMsgText('')
+  }
+
+  // Promotions & Discounts
+  const [campaigns, setCampaigns] = useState([
+    { id: 'camp-1', name: 'Weekend Flash Sale', status: 'active', reach: 4200, redemptions: 310, performance: 92 },
+    { id: 'camp-2', name: 'Back To School', status: 'upcoming', reach: 0, redemptions: 0, performance: 0 },
+    { id: 'camp-3', name: 'VIP Loyalty Boost', status: 'active', reach: 2500, redemptions: 190, performance: 86 },
+    { id: 'camp-4', name: 'Clearance', status: 'expired', reach: 7800, redemptions: 520, performance: 74 }
+  ])
+  const pauseCampaign = (id: string) => setCampaigns(prev => prev.map(c => c.id===id? { ...c, status: c.status==='active' ? 'paused' : 'active' } : c))
+  const duplicateCampaign = (id: string) => setCampaigns(prev => {
+    const src = prev.find(c => c.id===id)!; const copy = { ...src, id: `camp-${Date.now()}`, name: `${src.name} (Copy)`, status: 'upcoming', reach: 0, redemptions: 0, performance: 0 }
+    return [copy, ...prev]
+  })
+  const optimizeCampaign = (id: string) => setCampaigns(prev => prev.map(c => c.id===id? { ...c, performance: Math.min(100, c.performance + 5) } : c))
+
+  // Marketing Tools - charts
+  const chartData = Array.from({length: 12}).map((_, i) => ({
+    name: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i],
+    revenue: Math.round(200 + Math.random()*200) + (nowTick%3)*50,
+    engagement: Math.round(50 + Math.random()*100)
+  }))
+
   return (
     <div className="p-6 space-y-8">
       {/* Welcome Section */}
