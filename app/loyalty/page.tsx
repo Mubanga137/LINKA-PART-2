@@ -1218,6 +1218,47 @@ function LoyaltyPointsContent() {
                       </Card>
                     </motion.div>
 
+                    {/* Personalized Recommendations */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.2 }}
+                    >
+                      <Card className="bg-white/95 backdrop-blur-md border-0 shadow-2xl">
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-3 text-gray-900">
+                            <Sparkles className="h-6 w-6 text-teal-500" />
+                            Recommendations
+                            <Badge className="bg-teal-100 text-teal-800 ml-auto">{closeRewards.length} Near</Badge>
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          {closeRewards.length === 0 ? (
+                            <p className="text-sm text-gray-600">You're all set! Browse rewards you can already redeem.</p>
+                          ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                              {closeRewards.map(r => (
+                                <div key={r.id} className="p-4 rounded-lg bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200">
+                                  <div className="flex items-center justify-between mb-2">
+                                    <h4 className="font-semibold text-gray-900 line-clamp-1">{r.title}</h4>
+                                    <Badge className="bg-orange-100 text-orange-800 text-xs">{r.points - currentPoints} pts away</Badge>
+                                  </div>
+                                  <div className="w-full bg-gray-200 rounded-full h-2">
+                                    <motion.div
+                                      className="bg-gradient-to-r from-orange-400 to-teal-600 rounded-full h-2"
+                                      initial={{ width: 0 }}
+                                      animate={{ width: `${(currentPoints / r.points) * 100}%` }}
+                                      transition={{ duration: 1.2 }}
+                                    />
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+
                     {/* Recent Activity */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
