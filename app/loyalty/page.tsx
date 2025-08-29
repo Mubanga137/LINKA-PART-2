@@ -1475,6 +1475,15 @@ function LoyaltyPointsContent() {
                               alt={reward.title}
                               className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                             />
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              onClick={() => toggleWishlist(reward.id)}
+                              className={`absolute top-2 right-2 h-9 w-9 rounded-full bg-white/80 hover:bg-white ${wishlist.includes(reward.id) ? 'text-red-500' : 'text-gray-700'}`}
+                              aria-label="Toggle wishlist"
+                            >
+                              <Heart className={`h-5 w-5 ${wishlist.includes(reward.id) ? 'fill-red-500' : ''}`} />
+                            </Button>
                             
                             {/* Labels */}
                             <div className="absolute top-3 left-3 flex flex-col gap-1">
