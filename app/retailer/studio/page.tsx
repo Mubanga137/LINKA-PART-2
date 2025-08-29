@@ -65,7 +65,7 @@ export default function RetailerStudioPage() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
           >
-            {active === "overview" && <AnalyticsPanel compact />}
+            {active === "overview" && <OverviewPanel />}
             {active === "inventory" && <InventoryPanel />}
             {active === "messages" && <MessagesPanel />}
             {active === "promotions" && <PromotionsPanel />}
