@@ -11,6 +11,7 @@ import { AnalyticsPanel } from "@/components/retailer/studio/AnalyticsPanel";
 import { StorefrontPanel } from "@/components/retailer/studio/StorefrontPanel";
 import { NotificationsPanel } from "@/components/retailer/studio/NotificationsPanel";
 import { ProfileSettingsPanel } from "@/components/retailer/studio/ProfileSettingsPanel";
+import { OverviewPanel } from "@/components/retailer/studio/OverviewPanel";
 
 export type StudioSection =
   | "overview"
