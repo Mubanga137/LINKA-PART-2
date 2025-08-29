@@ -18,6 +18,7 @@ import {
   Legend,
   AreaChart,
   Area,
+  ComposedChart,
 } from "recharts";
 import { useRetailerAuth } from "@/contexts/retailer-auth-context";
 import { TrendingUp, Users, Eye, ShoppingBag, ArrowUpRight, ArrowDownRight, Filter, ChevronRight } from "lucide-react";
@@ -253,7 +254,9 @@ export function OverviewPanel() {
           </div>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <ComposedChartLike data={trend} />
+              <ComposedChart data={trend}>
+                <ComposedChartLike data={trend} />
+              </ComposedChart>
             </ResponsiveContainer>
           </div>
         </div>
