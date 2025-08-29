@@ -571,7 +571,8 @@ function LoyaltyPointsContent() {
     const matchesCategory = selectedRewardCategory === "All" || reward.category === selectedRewardCategory
     const matchesSearch = reward.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          reward.description.toLowerCase().includes(searchTerm.toLowerCase())
-    return matchesCategory && matchesSearch
+    const matchesWishlist = showWishlistOnly ? wishlist.includes(reward.id) : true
+    return matchesCategory && matchesSearch && matchesWishlist
   })
 
   const categories = ["All", ...Array.from(new Set(REWARDS.map(r => r.category)))]
