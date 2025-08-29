@@ -52,7 +52,7 @@ export function MinimalHeader({
     if (!user) return '/';
     switch (user.role) {
       case 'retailer':
-        return '/retailer-dashboard';
+        return '/retailer/studio';
       default:
         return '/profile';
     }
@@ -197,7 +197,7 @@ export function MinimalHeader({
             {/* CTA Button - Role specific */}
             {user?.role === 'retailer' ? (
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="/retailer-dashboard">
+                <Link href="/retailer/studio">
                   <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg">
                     <span className="hidden md:inline">My Dashboard</span>
                     <span className="md:hidden">Dashboard</span>
